@@ -292,8 +292,7 @@ namespace Web.Venta
         }
 
         #endregion
-
-
+        
         #region  metodos
 
         /// <summary>
