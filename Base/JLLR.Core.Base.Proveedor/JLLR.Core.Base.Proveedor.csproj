@@ -1,0 +1,323 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7B02FF61-3C7A-4A7D-B1A8-C62710253A1B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JLLR.Core.Base.Proveedor</RootNamespace>
+    <AssemblyName>JLLR.Core.Base.Proveedor</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DAOs\BaseDAOs.cs" />
+    <Compile Include="Entidades\ACCESO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\ACCESO_PERFIL.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\AGENDA_VISITA.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\ARQUEO_CAJA.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\CABECERA_FACTURACION.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\CIUDAD.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\CLIENTE.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\COLOR.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\CONTROL_USUARIO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\Decisiones_Inteligentes_Modelo.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Decisiones_Inteligentes_Modelo.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\Decisiones_Inteligentes_Modelo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\Decisiones_Inteligentes_Modelo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Decisiones_Inteligentes_Modelo.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\DETALLE_ARQUEO_CAJA.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\DETALLE_ENTREGA_ORDEN_TRABAJO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\DETALLE_ORDEN_TRABAJO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\DETALLE_TRABAJO_FOTOGRAFIA.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\DIA.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\DIRECCION.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\EMPLEADO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\ENTREGA_ORDEN_TRABAJO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\ESPECIALIDAD_EMPLEADO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\ESTADO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\ESTADO_CIVIL.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\ESTADO_PAGO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\ETAPA_PROCESO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\E_MAIL.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\GRUPO_PRODUCTO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\HISTORIAL_PROCESO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\HISTORIAL_USUARIO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\IMPUESTO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\INDIVIDUO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\INDIVIDUO_BANCO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\LLEVA_CONTABILIDAD.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\MARCA.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\MATERIAL.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\MODELO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\MODULO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\MONEDA.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\NIVEL_EDUCACION.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\NUMERACION_ORDEN.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\ORDEN_TRABAJO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\PAIS.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\PARAMETRO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\PERFIL.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\PREGUNTA_SEGURIDAD.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\PRODUCTO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\PRODUCTO_PRECIO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\PRODUCTO_TALLA.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\PRODUCTO_VS_GRUPO_PRODUCTO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\PUNTO_VENTA.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\RUTA.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\SECUENCIALES_SRI.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\SUBMODULO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\SUCURSAL.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\TELEFONO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\TIPO_AMBIENTE.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\TIPO_CORREO_ELECTRONICO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\TIPO_CUENTA_BANCARIA.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\TIPO_DIRECCION.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\TIPO_EMISION.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\TIPO_GENERO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\TIPO_IDENTIFICACION.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\TIPO_INDIVIDUO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\TIPO_LAVADO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\TIPO_PRODUCTO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\TIPO_ROL_INDIVIDUO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\TIPO_TELEFONO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\UNIDAD_MEDIDA.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\USUARIO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\USUARIO_PERFIL.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\USUARIO_PREGUNTA_SEGURIDAD.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\USUARIO_SEGURIDAD.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\VENTA_COMISION.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\VISITA.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\ZONA.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <EntityDeploy Include="Entidades\Decisiones_Inteligentes_Modelo.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Decisiones_Inteligentes_Modelo.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Entidades\Decisiones_Inteligentes_Modelo.edmx.diagram">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Entidades\Decisiones_Inteligentes_Modelo.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Decisiones_Inteligentes_Modelo.edmx</DependentUpon>
+      <LastGenOutput>Decisiones_Inteligentes_Modelo.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Entidades\Decisiones_Inteligentes_Modelo.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Decisiones_Inteligentes_Modelo.edmx</DependentUpon>
+      <LastGenOutput>Decisiones_Inteligentes_Modelo.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

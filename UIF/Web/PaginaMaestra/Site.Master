@@ -1,0 +1,100 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Web.SiteMaster" %>
+<%@ Register TagPrefix="cc1" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=16.1.1.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
+<!DOCTYPE html>
+
+<html lang="es">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - <asp:Literal runat="server" Text="<%$ Resources:Web_es_Ec,Titulo_Sistema%>"></asp:Literal>  </title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+</head>
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--Para obtener más información sobre cómo agrupar scripts en ScriptManager, consulte http://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Scripts de marco--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="respond" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Scripts del sitio--%>
+            </Scripts>
+        </asp:ScriptManager>
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Always" > 
+                <ContentTemplate>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <img src="../Content/Imagen/Logo_Principal.png" id="_imagen"  />
+                </div>
+                <div class="navbar-collapse collapse">
+                    <%--<ul class="nav navbar-nav">
+                        <li><a runat="server" href="~/Venta/OrdenTrabajo/OrdenTrabajo.aspx">Venta</a></li>
+                        
+                    </ul>
+                     <ul class="nav navbar-nav">
+                        <li><asp:Literal ID="_usuario" runat="server"></asp:Literal></li>
+                        
+                    </ul>
+                     <ul class="nav navbar-nav">
+                        <li><a runat="server" href="~/Venta/OrdenTrabajo/OrdenTrabajo.aspx">Cerrar Sesión</a></li>
+                        
+                    </ul>--%>
+                    <br />
+                     <div class="navbar-collapse collapse">
+                             <asp:Menu ID="_menu" runat="server" Orientation="Horizontal" ItemWrap="True" PathSeparator="  "  ></asp:Menu>
+                       
+                </div>
+                   
+                </div>
+            </div>
+        </div>
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <hr />
+            <footer>
+                <p>&copy; <%: DateTime.Now.Year %> - <asp:Literal runat="server" Text="<%$ Resources:Web_es_Ec,Titulo_Pie_Pagina_Sistema%>"></asp:Literal></p>
+            </footer>
+        </div>
+        </ContentTemplate>
+                <Triggers>
+                    <asp:AsyncPostBackTrigger ControlID="_menu"  EventName="Load"  />
+                </Triggers>
+            </asp:UpdatePanel>
+           <asp:UpdateProgress ID="upGetDocs" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
+            <ProgressTemplate>
+            <div style="position:fixed;top:0px;bottom:0px;left:0;right:0;overflow:hidden;padding:0;margin:0;background-color:black;filter:alpha(opacity=80);opacity:0.8;z-index:100000;" id="Background">
+                <div id="Progress"  style="border-style: none;border-color: inherit;border-width: 0px;position:fixed;top:34%;left:40%;height:48%;width:20%;z-index:100001;background-color:#FFFFFF;background-repeat: no-repeat;background-position:center;background-image:url('../Content/Imagen/F25_.gif');" >
+                    <h7><p style="text-align:center" class="form-control"><b>Procesando, espere por favor...</b></p> </h7>
+                </div>
+            </div>
+        </ProgressTemplate>
+
+    </asp:UpdateProgress>
+    </form>
+</body>
+</html>

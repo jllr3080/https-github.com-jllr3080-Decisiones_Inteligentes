@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="JLLR.Core.Inventario.Servicio.ServicioInventario" CodeBehind="ServicioInventario.svc.cs" %>

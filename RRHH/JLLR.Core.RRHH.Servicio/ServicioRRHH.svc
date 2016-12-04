@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="JLLR.Core.RRHH.Servicio.ServicioRRHH" CodeBehind="ServicioRRHH.svc.cs" %>
