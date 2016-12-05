@@ -125,7 +125,7 @@
         </div>
         <br>
         <div class="panel panel-default" id="_datosDetalleOrdenTrabajo">
-           <div class="panel-heading"><asp:Literal runat="server" ID="_literalDetalleOrdenTrabajo" Text="<%$ Resources:Web_es_Ec,Panel_Detalle_Orden_Trabajo%>"/></div>
+        <div class="panel-heading"><asp:Literal runat="server" ID="_literalDetalleOrdenTrabajo" Text="<%$ Resources:Web_es_Ec,Panel_Detalle_Orden_Trabajo%>"/></div>
 
         <asp:Panel ID="_panelLavadoSeco" runat="server" Visible="False">
             
@@ -257,8 +257,11 @@
    
         
         </asp:Panel>
-           
-    </div>
+         
+        <asp:Panel runat="server" ID="_panelLavadoMojado" Visible="False">
+            
+        </asp:Panel>
+         </div>
      <br/>
          <div class="panel panel-default" id="_datosFormaPago">
            <div class="panel-heading">Datos de Pago</div>
