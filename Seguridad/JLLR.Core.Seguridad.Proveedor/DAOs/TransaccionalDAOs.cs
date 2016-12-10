@@ -70,7 +70,7 @@ namespace JLLR.Core.Seguridad.Proveedor.DAOs
                     join submodulo in entidad.SUBMODULO on acceso.SUBMODULO_ID equals submodulo.SUBMODULO_ID
                     where usuario.USUARIO_ID == usuarioId && usuario.HABILITADO == true
                     select new AccesoDTOs {AccesoId = acceso.ACCESO_ID,Acceso = acceso.DESCRIPCION,ModuloId =modulo.MODULO_ID,Modulo = modulo.DESCRIPCION,SubModulo = submodulo.DESCRIPCION,SubmoduloId = submodulo.SUBMODULO_ID,Url = acceso.URL};
-                return accesos;
+                return accesos.OrderBy(m =>m.Acceso);
             }
             catch (Exception ex)
             {

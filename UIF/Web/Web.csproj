@@ -248,6 +248,7 @@
     <Content Include="Global.asax" />
     <Content Include="Seguridad\Login\IngresoSistema.aspx" />
     <Content Include="PaginaMaestra\Site.Master" />
+    <Content Include="Venta\ConsultaOrdenTrabajo.aspx" />
     <Content Include="Venta\OrdenTrabajo.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -390,6 +391,13 @@
     <Compile Include="ServicioDelegado\ServicioDelegadoVenta.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Util\Enum.cs" />
+    <Compile Include="Venta\ConsultaOrdenTrabajo.aspx.cs">
+      <DependentUpon>ConsultaOrdenTrabajo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Venta\ConsultaOrdenTrabajo.aspx.designer.cs">
+      <DependentUpon>ConsultaOrdenTrabajo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Venta\OrdenTrabajo.aspx.cs">
       <DependentUpon>OrdenTrabajo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
