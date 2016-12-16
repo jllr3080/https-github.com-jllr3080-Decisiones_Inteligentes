@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Decisiones_Inteligentes_Modelo.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Decisiones_Inteligentes_Modelo.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CONTROL_USUARIO">
           <Key>
             <PropertyRef Name="CONTROL_USUARIO_ID" />
@@ -639,11 +639,21 @@
           <Property Name="MATERIAL_ID" Type="int" />
           <Property Name="VENTA_COMISION_ID" Type="int" />
         </EntityType>
+        <EntityType Name="DETALLE_ORDEN_TRABAJO_OBSERVACION">
+          <Key>
+            <PropertyRef Name="DETALLE_ORDEN_TRABAJO_OBSERVACION_ID" />
+          </Key>
+          <Property Name="DETALLE_ORDEN_TRABAJO_OBSERVACION_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DETALLE_ORDEN_TRABAJO_ID" Type="int" />
+          <Property Name="OBSERVACION" Type="varchar" MaxLength="100" />
+          <Property Name="FECHA_CREACION_OBSERVACION" Type="datetime" />
+          <Property Name="USUARIO_ID" Type="int" />
+        </EntityType>
         <EntityType Name="DETALLE_TRABAJO_FOTOGRAFIA">
           <Key>
             <PropertyRef Name="DETALLE_TRABAJO_FOTOGRAFIA_ID" />
           </Key>
-          <Property Name="DETALLE_TRABAJO_FOTOGRAFIA_ID" Type="int" Nullable="false" />
+          <Property Name="DETALLE_TRABAJO_FOTOGRAFIA_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DETALLE_ORDEN_TRABAJO_ID" Type="int" />
           <Property Name="DIRECCION_FOTOGRAFIA" Type="varchar" MaxLength="150" />
         </EntityType>
@@ -957,6 +967,18 @@
             </Principal>
             <Dependent Role="DETALLE_ORDEN_TRABAJO">
               <PropertyRef Name="VENTA_COMISION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE_OT_OBSERVACION_VS_DETALLE_OT">
+          <End Role="DETALLE_ORDEN_TRABAJO" Type="Self.DETALLE_ORDEN_TRABAJO" Multiplicity="0..1" />
+          <End Role="DETALLE_ORDEN_TRABAJO_OBSERVACION" Type="Self.DETALLE_ORDEN_TRABAJO_OBSERVACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DETALLE_ORDEN_TRABAJO">
+              <PropertyRef Name="DETALLE_ORDEN_TRABAJO_ID" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN_TRABAJO_OBSERVACION">
+              <PropertyRef Name="DETALLE_ORDEN_TRABAJO_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1712,6 +1734,7 @@
           <EntitySet Name="USUARIO_SEGURIDAD" EntityType="Self.USUARIO_SEGURIDAD" Schema="SEGURIDAD" store:Type="Tables" />
           <EntitySet Name="DETALLE_ENTREGA_ORDEN_TRABAJO" EntityType="Self.DETALLE_ENTREGA_ORDEN_TRABAJO" Schema="VENTA" store:Type="Tables" />
           <EntitySet Name="DETALLE_ORDEN_TRABAJO" EntityType="Self.DETALLE_ORDEN_TRABAJO" Schema="VENTA" store:Type="Tables" />
+          <EntitySet Name="DETALLE_ORDEN_TRABAJO_OBSERVACION" EntityType="Self.DETALLE_ORDEN_TRABAJO_OBSERVACION" Schema="VENTA" store:Type="Tables" />
           <EntitySet Name="DETALLE_TRABAJO_FOTOGRAFIA" EntityType="Self.DETALLE_TRABAJO_FOTOGRAFIA" Schema="VENTA" store:Type="Tables" />
           <EntitySet Name="ENTREGA_ORDEN_TRABAJO" EntityType="Self.ENTREGA_ORDEN_TRABAJO" Schema="VENTA" store:Type="Tables" />
           <EntitySet Name="NUMERACION_ORDEN" EntityType="Self.NUMERACION_ORDEN" Schema="VENTA" store:Type="Tables" />
@@ -1804,6 +1827,10 @@
           <AssociationSet Name="FK_DETALLE_ORDEN_TRABAJO_VS_VENTA_COMISION" Association="Self.FK_DETALLE_ORDEN_TRABAJO_VS_VENTA_COMISION">
             <End Role="VENTA_COMISION" EntitySet="VENTA_COMISION" />
             <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE_OT_OBSERVACION_VS_DETALLE_OT" Association="Self.FK_DETALLE_OT_OBSERVACION_VS_DETALLE_OT">
+            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
+            <End Role="DETALLE_ORDEN_TRABAJO_OBSERVACION" EntitySet="DETALLE_ORDEN_TRABAJO_OBSERVACION" />
           </AssociationSet>
           <AssociationSet Name="FK_DETALLE_OT_VS_COLOR" Association="Self.FK_DETALLE_OT_VS_COLOR">
             <End Role="COLOR" EntitySet="COLOR" />
@@ -2034,8 +2061,7 @@
             <End Role="VISITA" EntitySet="VISITA" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Decisiones_Inteligentes_Modelo" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -2818,16 +2844,8 @@
           <NavigationProperty Name="DETALLE_ENTREGA_ORDEN_TRABAJO" Relationship="Self.FK_DETALLE_ENTREGA_OT_VS_DETALLE_OT" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="DETALLE_ENTREGA_ORDEN_TRABAJO" />
           <NavigationProperty Name="ORDEN_TRABAJO" Relationship="Self.FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="ORDEN_TRABAJO" />
           <NavigationProperty Name="VENTA_COMISION" Relationship="Self.FK_DETALLE_ORDEN_TRABAJO_VS_VENTA_COMISION" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="VENTA_COMISION" />
-          <NavigationProperty Name="DETALLE_TRABAJO_FOTOGRAFIA" Relationship="Self.FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DETALLE_ORDEN_TRABAJO" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="DETALLE_TRABAJO_FOTOGRAFIA" />
-        </EntityType>
-        <EntityType Name="DETALLE_TRABAJO_FOTOGRAFIA">
-          <Key>
-            <PropertyRef Name="DETALLE_TRABAJO_FOTOGRAFIA_ID" />
-          </Key>
-          <Property Name="DETALLE_TRABAJO_FOTOGRAFIA_ID" Type="Int32" Nullable="false" />
-          <Property Name="DETALLE_ORDEN_TRABAJO_ID" Type="Int32" />
-          <Property Name="DIRECCION_FOTOGRAFIA" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="Self.FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DETALLE_ORDEN_TRABAJO" FromRole="DETALLE_TRABAJO_FOTOGRAFIA" ToRole="DETALLE_ORDEN_TRABAJO" />
+          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO_OBSERVACION" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_OT_OBSERVACION_VS_DETALLE_OT" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="DETALLE_ORDEN_TRABAJO_OBSERVACION" />
+          <NavigationProperty Name="DETALLE_TRABAJO_FOTOGRAFIA" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DETALLE_ORDEN_TRABAJO" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="DETALLE_TRABAJO_FOTOGRAFIA" />
         </EntityType>
         <EntityType Name="ENTREGA_ORDEN_TRABAJO">
           <Key>
@@ -3812,18 +3830,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DETALLE_ORDEN_TRABAJO">
-          <End Role="DETALLE_ORDEN_TRABAJO" Type="Self.DETALLE_ORDEN_TRABAJO" Multiplicity="0..1" />
-          <End Role="DETALLE_TRABAJO_FOTOGRAFIA" Type="Self.DETALLE_TRABAJO_FOTOGRAFIA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DETALLE_ORDEN_TRABAJO">
-              <PropertyRef Name="DETALLE_ORDEN_TRABAJO_ID" />
-            </Principal>
-            <Dependent Role="DETALLE_TRABAJO_FOTOGRAFIA">
-              <PropertyRef Name="DETALLE_ORDEN_TRABAJO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ENTREGA_OT_VS_OT">
           <End Role="ORDEN_TRABAJO" Type="Self.ORDEN_TRABAJO" Multiplicity="0..1" />
           <End Role="ENTREGA_ORDEN_TRABAJO" Type="Self.ENTREGA_ORDEN_TRABAJO" Multiplicity="*" />
@@ -3904,7 +3910,6 @@
           <EntitySet Name="USUARIO_SEGURIDAD" EntityType="Self.USUARIO_SEGURIDAD" />
           <EntitySet Name="DETALLE_ENTREGA_ORDEN_TRABAJO" EntityType="Self.DETALLE_ENTREGA_ORDEN_TRABAJO" />
           <EntitySet Name="DETALLE_ORDEN_TRABAJO" EntityType="Self.DETALLE_ORDEN_TRABAJO" />
-          <EntitySet Name="DETALLE_TRABAJO_FOTOGRAFIA" EntityType="Self.DETALLE_TRABAJO_FOTOGRAFIA" />
           <EntitySet Name="ENTREGA_ORDEN_TRABAJO" EntityType="Self.ENTREGA_ORDEN_TRABAJO" />
           <EntitySet Name="NUMERACION_ORDEN" EntityType="Self.NUMERACION_ORDEN" />
           <EntitySet Name="ORDEN_TRABAJO" EntityType="Self.ORDEN_TRABAJO" />
@@ -4217,15 +4222,65 @@
             <End Role="VENTA_COMISION" EntitySet="VENTA_COMISION" />
             <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
           </AssociationSet>
-          <AssociationSet Name="FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DETALLE_ORDEN_TRABAJO" Association="Self.FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DETALLE_ORDEN_TRABAJO">
-            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
-            <End Role="DETALLE_TRABAJO_FOTOGRAFIA" EntitySet="DETALLE_TRABAJO_FOTOGRAFIA" />
-          </AssociationSet>
           <AssociationSet Name="FK_ENTREGA_OT_VS_OT" Association="Self.FK_ENTREGA_OT_VS_OT">
             <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
             <End Role="ENTREGA_ORDEN_TRABAJO" EntitySet="ENTREGA_ORDEN_TRABAJO" />
           </AssociationSet>
+          <EntitySet Name="DETALLE_ORDEN_TRABAJO_OBSERVACION" EntityType="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO_OBSERVACION" />
+          <AssociationSet Name="FK_DETALLE_OT_OBSERVACION_VS_DETALLE_OT" Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_OT_OBSERVACION_VS_DETALLE_OT">
+            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
+            <End Role="DETALLE_ORDEN_TRABAJO_OBSERVACION" EntitySet="DETALLE_ORDEN_TRABAJO_OBSERVACION" />
+          </AssociationSet>
+          <EntitySet Name="DETALLE_TRABAJO_FOTOGRAFIA" EntityType="Decisiones_Inteligentes_Modelo.DETALLE_TRABAJO_FOTOGRAFIA" />
+          <AssociationSet Name="FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DETALLE_ORDEN_TRABAJO" Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DETALLE_ORDEN_TRABAJO">
+            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
+            <End Role="DETALLE_TRABAJO_FOTOGRAFIA" EntitySet="DETALLE_TRABAJO_FOTOGRAFIA" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="DETALLE_ORDEN_TRABAJO_OBSERVACION">
+          <Key>
+            <PropertyRef Name="DETALLE_ORDEN_TRABAJO_OBSERVACION_ID" />
+          </Key>
+          <Property Name="DETALLE_ORDEN_TRABAJO_OBSERVACION_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DETALLE_ORDEN_TRABAJO_ID" Type="Int32" />
+          <Property Name="OBSERVACION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA_CREACION_OBSERVACION" Type="DateTime" Precision="3" />
+          <Property Name="USUARIO_ID" Type="Int32" />
+          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_OT_OBSERVACION_VS_DETALLE_OT" FromRole="DETALLE_ORDEN_TRABAJO_OBSERVACION" ToRole="DETALLE_ORDEN_TRABAJO" />
+        </EntityType>
+        <Association Name="FK_DETALLE_OT_OBSERVACION_VS_DETALLE_OT">
+          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO" Role="DETALLE_ORDEN_TRABAJO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO_OBSERVACION" Role="DETALLE_ORDEN_TRABAJO_OBSERVACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DETALLE_ORDEN_TRABAJO">
+              <PropertyRef Name="DETALLE_ORDEN_TRABAJO_ID" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN_TRABAJO_OBSERVACION">
+              <PropertyRef Name="DETALLE_ORDEN_TRABAJO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DETALLE_TRABAJO_FOTOGRAFIA">
+          <Key>
+            <PropertyRef Name="DETALLE_TRABAJO_FOTOGRAFIA_ID" />
+          </Key>
+          <Property Name="DETALLE_TRABAJO_FOTOGRAFIA_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DETALLE_ORDEN_TRABAJO_ID" Type="Int32" />
+          <Property Name="DIRECCION_FOTOGRAFIA" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DETALLE_ORDEN_TRABAJO" FromRole="DETALLE_TRABAJO_FOTOGRAFIA" ToRole="DETALLE_ORDEN_TRABAJO" />
+        </EntityType>
+        <Association Name="FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DETALLE_ORDEN_TRABAJO">
+          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO" Role="DETALLE_ORDEN_TRABAJO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_TRABAJO_FOTOGRAFIA" Role="DETALLE_TRABAJO_FOTOGRAFIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DETALLE_ORDEN_TRABAJO">
+              <PropertyRef Name="DETALLE_ORDEN_TRABAJO_ID" />
+            </Principal>
+            <Dependent Role="DETALLE_TRABAJO_FOTOGRAFIA">
+              <PropertyRef Name="DETALLE_ORDEN_TRABAJO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4933,15 +4988,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DETALLE_TRABAJO_FOTOGRAFIA">
-            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.DETALLE_TRABAJO_FOTOGRAFIA">
-              <MappingFragment StoreEntitySet="DETALLE_TRABAJO_FOTOGRAFIA">
-                <ScalarProperty Name="DETALLE_TRABAJO_FOTOGRAFIA_ID" ColumnName="DETALLE_TRABAJO_FOTOGRAFIA_ID" />
-                <ScalarProperty Name="DETALLE_ORDEN_TRABAJO_ID" ColumnName="DETALLE_ORDEN_TRABAJO_ID" />
-                <ScalarProperty Name="DIRECCION_FOTOGRAFIA" ColumnName="DIRECCION_FOTOGRAFIA" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ENTREGA_ORDEN_TRABAJO">
             <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.ENTREGA_ORDEN_TRABAJO">
               <MappingFragment StoreEntitySet="ENTREGA_ORDEN_TRABAJO">
@@ -4992,6 +5038,26 @@
                 <ScalarProperty Name="SUCURSAL_ID" ColumnName="SUCURSAL_ID" />
                 <ScalarProperty Name="PUNTO_VENTA_ID" ColumnName="PUNTO_VENTA_ID" />
                 <ScalarProperty Name="PORCENTAJE_COMISION" ColumnName="PORCENTAJE_COMISION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLE_ORDEN_TRABAJO_OBSERVACION">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO_OBSERVACION">
+              <MappingFragment StoreEntitySet="DETALLE_ORDEN_TRABAJO_OBSERVACION">
+                <ScalarProperty Name="USUARIO_ID" ColumnName="USUARIO_ID" />
+                <ScalarProperty Name="FECHA_CREACION_OBSERVACION" ColumnName="FECHA_CREACION_OBSERVACION" />
+                <ScalarProperty Name="OBSERVACION" ColumnName="OBSERVACION" />
+                <ScalarProperty Name="DETALLE_ORDEN_TRABAJO_ID" ColumnName="DETALLE_ORDEN_TRABAJO_ID" />
+                <ScalarProperty Name="DETALLE_ORDEN_TRABAJO_OBSERVACION_ID" ColumnName="DETALLE_ORDEN_TRABAJO_OBSERVACION_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLE_TRABAJO_FOTOGRAFIA">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.DETALLE_TRABAJO_FOTOGRAFIA">
+              <MappingFragment StoreEntitySet="DETALLE_TRABAJO_FOTOGRAFIA">
+                <ScalarProperty Name="DIRECCION_FOTOGRAFIA" ColumnName="DIRECCION_FOTOGRAFIA" />
+                <ScalarProperty Name="DETALLE_ORDEN_TRABAJO_ID" ColumnName="DETALLE_ORDEN_TRABAJO_ID" />
+                <ScalarProperty Name="DETALLE_TRABAJO_FOTOGRAFIA_ID" ColumnName="DETALLE_TRABAJO_FOTOGRAFIA_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

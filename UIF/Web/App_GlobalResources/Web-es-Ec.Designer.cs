@@ -70,11 +70,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Actualizar Observaciones.
+        /// </summary>
+        internal static string Boton_Actualizar_Observacion {
+            get {
+                return ResourceManager.GetString("Boton_Actualizar_Observacion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a + Agregar Prenda.
         /// </summary>
         internal static string Boton_Agregar_Orden_Trabajo {
             get {
                 return ResourceManager.GetString("Boton_Agregar_Orden_Trabajo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Anular Orden de Trabajo.
+        /// </summary>
+        internal static string Boton_Anular_Orden_Trabajo {
+            get {
+                return ResourceManager.GetString("Boton_Anular_Orden_Trabajo", resourceCulture);
             }
         }
         
@@ -93,6 +111,15 @@ namespace Resources {
         internal static string Boton_Cancelar {
             get {
                 return ResourceManager.GetString("Boton_Cancelar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cerrar la Orden de  Trabajo.
+        /// </summary>
+        internal static string Boton_Cerrar_Orden_Trabajo {
+            get {
+                return ResourceManager.GetString("Boton_Cerrar_Orden_Trabajo", resourceCulture);
             }
         }
         
@@ -264,6 +291,24 @@ namespace Resources {
         internal static string Label_Fecha_Entrega {
             get {
                 return ResourceManager.GetString("Label_Fecha_Entrega", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Fecha de Entrega Efectiva.
+        /// </summary>
+        internal static string Label_Fecha_Entrega_Real {
+            get {
+                return ResourceManager.GetString("Label_Fecha_Entrega_Real", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Fecha de Entrega Propuesta.
+        /// </summary>
+        internal static string Label_Fecha_Entrega_Registrada {
+            get {
+                return ResourceManager.GetString("Label_Fecha_Entrega_Registrada", resourceCulture);
             }
         }
         
@@ -565,6 +610,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No existe información con esa  orden de trabajo.
+        /// </summary>
+        internal static string Mensaje_Orden_Trabajo_No_Existe {
+            get {
+                return ResourceManager.GetString("Mensaje_Orden_Trabajo_No_Existe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Mensaje del Sistema.
         /// </summary>
         internal static string Mensaje_Sistema {
@@ -579,6 +633,15 @@ namespace Resources {
         internal static string Panel_Busqueda_Cliente {
             get {
                 return ResourceManager.GetString("Panel_Busqueda_Cliente", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Busqueda Orden de Trabajo.
+        /// </summary>
+        internal static string Panel_Busqueda_Orden_Trabajo {
+            get {
+                return ResourceManager.GetString("Panel_Busqueda_Orden_Trabajo", resourceCulture);
             }
         }
         
@@ -655,6 +718,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Datos de la Orden de  Trabajo.
+        /// </summary>
+        internal static string Panel_Orden_Trabajo {
+            get {
+                return ResourceManager.GetString("Panel_Orden_Trabajo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Bienvenido al Sistema de la Química.
         /// </summary>
         internal static string Titulo_Ingreso_Sistema {
@@ -669,6 +741,15 @@ namespace Resources {
         internal static string Titulo_Pagina_Cliente {
             get {
                 return ResourceManager.GetString("Titulo_Pagina_Cliente", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Consulta Orden de Trabajo.
+        /// </summary>
+        internal static string Titulo_Pagina_Consulta_Orden_Trabajo {
+            get {
+                return ResourceManager.GetString("Titulo_Pagina_Consulta_Orden_Trabajo", resourceCulture);
             }
         }
         

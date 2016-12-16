@@ -103,6 +103,9 @@
     <Compile Include="Entidades\DETALLE_ORDEN_TRABAJO.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entidades\DETALLE_ORDEN_TRABAJO_OBSERVACION.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entidades\DETALLE_TRABAJO_FOTOGRAFIA.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>

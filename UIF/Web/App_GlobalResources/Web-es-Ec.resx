@@ -120,14 +120,23 @@
   <data name="Boton_Aceptar" xml:space="preserve">
     <value>Aceptar</value>
   </data>
+  <data name="Boton_Actualizar_Observacion" xml:space="preserve">
+    <value>Actualizar Observaciones</value>
+  </data>
   <data name="Boton_Agregar_Orden_Trabajo" xml:space="preserve">
     <value>+ Agregar Prenda</value>
+  </data>
+  <data name="Boton_Anular_Orden_Trabajo" xml:space="preserve">
+    <value>Anular Orden de Trabajo</value>
   </data>
   <data name="Boton_Buscar" xml:space="preserve">
     <value>Busqueda</value>
   </data>
   <data name="Boton_Cancelar" xml:space="preserve">
     <value>Cancelar</value>
+  </data>
+  <data name="Boton_Cerrar_Orden_Trabajo" xml:space="preserve">
+    <value>Cerrar la Orden de  Trabajo</value>
   </data>
   <data name="Boton_Crear_Cliente" xml:space="preserve">
     <value>Crear Cliente</value>
@@ -185,6 +194,12 @@
   </data>
   <data name="Label_Fecha_Entrega" xml:space="preserve">
     <value>Fecha de Entrega</value>
+  </data>
+  <data name="Label_Fecha_Entrega_Real" xml:space="preserve">
+    <value>Fecha de Entrega Efectiva</value>
+  </data>
+  <data name="Label_Fecha_Entrega_Registrada" xml:space="preserve">
+    <value>Fecha de Entrega Propuesta</value>
   </data>
   <data name="Label_Fecha_Ingreso_Orden_Trabajo" xml:space="preserve">
     <value>Fecha Orden de  Trabajo</value>
@@ -285,11 +300,17 @@
   <data name="Mensaje_Obligatorio" xml:space="preserve">
     <value>Dato Obligatorio</value>
   </data>
+  <data name="Mensaje_Orden_Trabajo_No_Existe" xml:space="preserve">
+    <value>No existe información con esa  orden de trabajo</value>
+  </data>
   <data name="Mensaje_Sistema" xml:space="preserve">
     <value>Mensaje del Sistema</value>
   </data>
   <data name="Panel_Busqueda_Cliente" xml:space="preserve">
     <value>Busqueda del Cliente Por  Numero de Identificación</value>
+  </data>
+  <data name="Panel_Busqueda_Orden_Trabajo" xml:space="preserve">
+    <value>Busqueda Orden de Trabajo</value>
   </data>
   <data name="Panel_Busqueda_Reporte_Diario_Fecha" xml:space="preserve">
     <value>Busqueda por Fecha </value>
@@ -315,11 +336,17 @@
   <data name="Panel_Ingreso_Sistema" xml:space="preserve">
     <value>Ingrese Sus Credenciales de Acceso</value>
   </data>
+  <data name="Panel_Orden_Trabajo" xml:space="preserve">
+    <value>Datos de la Orden de  Trabajo</value>
+  </data>
   <data name="Titulo_Ingreso_Sistema" xml:space="preserve">
     <value>Bienvenido al Sistema de la Química</value>
   </data>
   <data name="Titulo_Pagina_Cliente" xml:space="preserve">
     <value>Cliente</value>
+  </data>
+  <data name="Titulo_Pagina_Consulta_Orden_Trabajo" xml:space="preserve">
+    <value>Consulta Orden de Trabajo</value>
   </data>
   <data name="Titulo_Pagina_Orden_Trabajo" xml:space="preserve">
     <value>Orden de Trabajo</value>

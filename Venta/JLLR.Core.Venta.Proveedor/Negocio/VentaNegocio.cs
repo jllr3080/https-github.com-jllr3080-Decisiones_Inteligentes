@@ -42,6 +42,8 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
             }
         }
 
+
+
         #endregion
 
         #region REPORTES
@@ -57,6 +59,25 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
             {
                 return _transaccionalDaOs.ObtenerOrdenTrabajoPorFechaIngresoYPorSucursal(fechaDesde, sucursalId);
 
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene  la orden de  trabajo por  numero de  orden
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public IQueryable<ConsultaOrdenTrabajoDTOs> ObtenerOrdenTrabajoPorNumeroOrdenYPuntoVenta(string numeroOrden, int puntoVentaId)
+        {
+            try
+            {
+                return _transaccionalDaOs.ObtenerOrdenTrabajoPorNumeroOrdenYPuntoVenta(numeroOrden, puntoVentaId);
             }
             catch (Exception ex)
             {

@@ -55,9 +55,35 @@ namespace Web.ServicioDelegado
             }
         }
 
-       
+
         #endregion
         #region REPORTES
+
+        /// <summary>
+        /// Obtiene  la orden de  trabajo por  numero de  orden
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public List<ConsultaOrdenTrabajoVistaDTOs> ObtenerOrdenTrabajoPorNumeroOrdenYPuntoVenta(string numeroOrden, int puntoVentaId)
+        {
+            try
+            {
+
+                var clienteWeb = new WebClient();
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerOrdenTrabajoPorNumeroOrdenYPuntoVenta?numeroOrden=" + numeroOrden + "&puntoVentaId=" + puntoVentaId);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<ConsultaOrdenTrabajoVistaDTOs>>(json);
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
         /// <summary>
         /// Obtiene  
         /// </summary>

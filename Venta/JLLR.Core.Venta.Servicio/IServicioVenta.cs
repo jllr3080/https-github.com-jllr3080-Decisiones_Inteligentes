@@ -32,6 +32,20 @@ namespace JLLR.Core.Venta.Servicio
         #region REPORTES
 
         /// <summary>
+        /// Obtiene  la orden de  trabajo por  numero de  orden
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(
+             UriTemplate =
+                 "ObtenerOrdenTrabajoPorNumeroOrdenYPuntoVenta?numeroOrden={numeroOrden}&puntoVentaId={puntoVentaId}",
+             ResponseFormat = WebMessageFormat.Json)]
+        List<ConsultaOrdenTrabajoDTOs> ObtenerOrdenTrabajoPorNumeroOrdenYPuntoVenta(string numeroOrden, int puntoVentaId);
+
+
+        /// <summary>
         /// Obtiene  
         /// </summary>
         /// <param name="fechaDesde"></param>

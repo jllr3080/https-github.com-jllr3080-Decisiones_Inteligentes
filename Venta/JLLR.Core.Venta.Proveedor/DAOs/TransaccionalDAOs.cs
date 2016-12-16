@@ -62,9 +62,47 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
             }
         }
 
+
+
         #endregion
 
         #region REPORTES
+
+        /// <summary>
+        /// Obtiene  la orden de  trabajo por  numero de  orden
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public IQueryable<ConsultaOrdenTrabajoDTOs> ObtenerOrdenTrabajoPorNumeroOrdenYPuntoVenta(string numeroOrden, int puntoVentaId)
+        {
+            try
+            {
+                var ordenesTrabajo = from ordenTrabajo in _entidad.ORDEN_TRABAJO
+                                     join detalleOrdenTrabajo in _entidad.DETALLE_ORDEN_TRABAJO on ordenTrabajo.ORDEN_TRABAJO_ID equals
+                                     detalleOrdenTrabajo.ORDEN_TRABAJO_ID
+                                     join cliente in _entidad.CLIENTE on ordenTrabajo.CLIENTE_ID equals cliente.CLIENTE_ID
+                                     join individuo in _entidad.INDIVIDUO on cliente.INDIVIDUO_ID equals individuo.INDIVIDUO_ID
+                                     join tipoLavado in _entidad.TIPO_LAVADO on ordenTrabajo.TIPO_LAVADO_ID equals tipoLavado.TIPO_LAVADO_ID
+                                     join producto in _entidad.PRODUCTO on detalleOrdenTrabajo.PRODUCTO_ID equals producto.PRODUCTO_ID
+                                     join productoTalla in _entidad.PRODUCTO_TALLA on detalleOrdenTrabajo.PRODUCTO_TALLA_ID equals
+                                     productoTalla.PRODUCTO_TALLA_ID
+                                     join color in _entidad.COLOR on detalleOrdenTrabajo.COLOR_ID equals color.COLOR_ID
+                                     join marca in _entidad.MARCA on detalleOrdenTrabajo.MARCA_ID equals marca.MARCA_ID
+                                     join material in _entidad.MATERIAL on detalleOrdenTrabajo.MATERIAL_ID equals material.MATERIAL_ID
+                                     join estadoPago in _entidad.ESTADO_PAGO on ordenTrabajo.ESTADO_PAGO_ID equals estadoPago.ESTADO_PAGO_ID
+                                     where ordenTrabajo.NUMERO_ORDEN == numeroOrden && ordenTrabajo.PUNTO_VENTA_ID == puntoVentaId
+                                     select new ConsultaOrdenTrabajoDTOs { TipoLavado = tipoLavado.DESCRIPCION, EstadoPago = estadoPago.DESCRIPCION, Marca = marca.DESCRIPCION, NumeroOrden = ordenTrabajo.NUMERO_ORDEN, FechaIngreso = ordenTrabajo.FECHA_INGRESO, FechaEntrega = ordenTrabajo.FECHA_ENTREGA, ValorUnitario = detalleOrdenTrabajo.VALOR_UNITARIO, Cantidad = detalleOrdenTrabajo.CANTIDAD, Color = color.DESCRIPCION, ValorTotal = detalleOrdenTrabajo.VALOR_TOTAL, Observacion = detalleOrdenTrabajo.OBSERVACION, Prenda = producto.NOMBRE, NombreCliente = individuo.PRIMER_CAMPO + " " + individuo.SEGUNDO_CAMPO + " " + individuo.TERCER_CAMPO + " " + individuo.CUARTO_CAMPO };
+                return ordenesTrabajo;
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
 
         /// <summary>
         /// Obtiene  

@@ -95,7 +95,7 @@
                     </div>
                     <div class="col-md-3">
                         <asp:Label ID="_labelTipoLavado" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Tipo_Lavado%>"></asp:Label>
-                        <span id="MainContent__labelTipoLavado">Tipo de Lavado</span>
+                        
                     </div>
                     
             </div>

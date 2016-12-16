@@ -92,10 +92,11 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual DbSet<USUARIO_SEGURIDAD> USUARIO_SEGURIDAD { get; set; }
         public virtual DbSet<DETALLE_ENTREGA_ORDEN_TRABAJO> DETALLE_ENTREGA_ORDEN_TRABAJO { get; set; }
         public virtual DbSet<DETALLE_ORDEN_TRABAJO> DETALLE_ORDEN_TRABAJO { get; set; }
-        public virtual DbSet<DETALLE_TRABAJO_FOTOGRAFIA> DETALLE_TRABAJO_FOTOGRAFIA { get; set; }
         public virtual DbSet<ENTREGA_ORDEN_TRABAJO> ENTREGA_ORDEN_TRABAJO { get; set; }
         public virtual DbSet<NUMERACION_ORDEN> NUMERACION_ORDEN { get; set; }
         public virtual DbSet<ORDEN_TRABAJO> ORDEN_TRABAJO { get; set; }
         public virtual DbSet<VENTA_COMISION> VENTA_COMISION { get; set; }
+        public virtual DbSet<DETALLE_ORDEN_TRABAJO_OBSERVACION> DETALLE_ORDEN_TRABAJO_OBSERVACION { get; set; }
+        public virtual DbSet<DETALLE_TRABAJO_FOTOGRAFIA> DETALLE_TRABAJO_FOTOGRAFIA { get; set; }
     }
 }

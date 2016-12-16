@@ -69,7 +69,7 @@ namespace Web.Venta
             catch (Exception)
             {
 
-                throw;
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarOrdenTrabajo");
             }
 
         }
@@ -141,6 +141,7 @@ namespace Web.Venta
 
                     _valorUnitario.Text = String.Format("{0:0.00}", productoPrecioVistaModelo.Precio);
                 }
+              
                 _valorTotal.Text = String.Format("{0:0.00}", Convert.ToDecimal(_cantidad.Text) * Convert.ToDecimal(_valorUnitario.Text));
 
             }
@@ -536,7 +537,7 @@ namespace Web.Venta
                 _valorUnitario.Text = String.Empty;
                 _valorTotal.Text = String.Empty;
                 _observacion.Text = String.Empty;
-
+                _cantidad.Text = "1";
 
             }
             catch (Exception ex)

@@ -43,6 +43,29 @@ namespace JLLR.Core.Venta.Servicio
         #endregion
 
         #region REPORTES
+
+        /// <summary>
+        /// Obtiene  la orden de  trabajo por  numero de  orden
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public List<ConsultaOrdenTrabajoDTOs> ObtenerOrdenTrabajoPorNumeroOrdenYPuntoVenta(string numeroOrden, int puntoVentaId)
+        {
+            try
+            {
+
+                return _ventaTransformadorNegocio.ObtenerOrdenTrabajoPorNumeroOrdenYPuntoVenta(numeroOrden, puntoVentaId);
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
         /// <summary>
         /// Obtiene  
         /// </summary>

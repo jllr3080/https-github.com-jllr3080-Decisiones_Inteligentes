@@ -72,7 +72,6 @@
         <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.USUARIO_SEGURIDAD" Width="1.5" PointX="13.5" PointY="36.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DETALLE_ENTREGA_ORDEN_TRABAJO" Width="1.5" PointX="18" PointY="31" IsExpanded="true" />
         <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO" Width="1.5" PointX="15.75" PointY="20.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DETALLE_TRABAJO_FOTOGRAFIA" Width="1.5" PointX="18" PointY="24.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ENTREGA_ORDEN_TRABAJO" Width="1.5" PointX="12.75" PointY="39.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.NUMERACION_ORDEN" Width="1.5" PointX="10.5" PointY="53.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO" Width="1.5" PointX="10.5" PointY="20.5" IsExpanded="true" />
@@ -154,8 +153,11 @@
         <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_OT_VS_ENTREGA_OT" ManuallyRouted="false" />
         <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO" ManuallyRouted="false" />
         <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_VS_VENTA_COMISION" ManuallyRouted="false" />
-        <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DETALLE_ORDEN_TRABAJO" ManuallyRouted="false" />
         <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_ENTREGA_OT_VS_OT" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO_OBSERVACION" Width="1.5" PointX="18" PointY="20.625" />
+        <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_OT_OBSERVACION_VS_DETALLE_OT" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DETALLE_TRABAJO_FOTOGRAFIA" Width="1.5" PointX="18" PointY="23.875" />
+        <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DETALLE_ORDEN_TRABAJO" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
