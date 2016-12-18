@@ -20,6 +20,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<System.DateTime> FECHA_REGISTRO { get; set; }
         public Nullable<System.DateTime> FECHA_INICIO { get; set; }
         public Nullable<System.DateTime> FECHA_FIN { get; set; }
+        public string NUMERO_ORDEN { get; set; }
     
         public virtual ETAPA_PROCESO ETAPA_PROCESO { get; set; }
         public virtual ORDEN_TRABAJO ORDEN_TRABAJO { get; set; }

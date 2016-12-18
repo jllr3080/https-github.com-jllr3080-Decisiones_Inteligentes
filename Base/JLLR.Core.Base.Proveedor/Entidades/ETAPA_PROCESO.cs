@@ -23,6 +23,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public int ETAPA_PROCESO_ID { get; set; }
         public string DESCRIPCION { get; set; }
         public Nullable<bool> ESTA_HABILITADO { get; set; }
+        public Nullable<bool> HABILITA_ENVIO_MAIL { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HISTORIAL_PROCESO> HISTORIAL_PROCESO { get; set; }

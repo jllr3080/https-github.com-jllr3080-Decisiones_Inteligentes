@@ -16,9 +16,9 @@ namespace JLLR.Core.Venta.Servicio
     [ServiceContract]
     public interface IServicioVenta
     {
-        #region TRANSACCIONAL
-
         #region NEGOCIO
+
+        #region  TRANSACCIONAL
         /// <summary>
         /// Graba la orden  de trabajo de forma completa
         /// </summary>
@@ -27,6 +27,29 @@ namespace JLLR.Core.Venta.Servicio
         [OperationContract]
         [WebInvoke(UriTemplate = "GrabarOrdenTrabajoCompleta/*", RequestFormat = WebMessageFormat.Json,ResponseFormat = WebMessageFormat.Json, Method = "POST")]
         OrdenTrabajoModelo GrabarOrdenTrabajoCompleta(OrdenTrabajoDTOs ordenTrabajoDtOs);
+        #endregion
+
+        #region DETALLE DE  ORDEN DE TRABAJO OBSERVACIONES
+
+        /// <summary>
+        /// Graba todas las observaciones de  los detalles de la orden de trabajo
+        /// </summary>
+        /// <param name="detalleOrdenTrabajoObservacion"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabarDetalleOrdenTrabajoObservacion/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void GrabarDetalleOrdenTrabajoObservacion(DetalleOrdenTrabajoObservacionModelo detalleOrdenTrabajoObservacion);
+
+
+        /// <summary>
+        /// Obtiene las observaciones 
+        /// </summary>
+        /// <param name="detalleOrdenTrabajoId"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(
+            UriTemplate ="ObtenerDetalleOrdenTrabajoObservaciones?detalleOrdenTrabajoId={detalleOrdenTrabajoId}",ResponseFormat = WebMessageFormat.Json)]
+        List<DetalleOrdenTrabajoObservacionModelo> ObtenerDetalleOrdenTrabajoObservaciones(int detalleOrdenTrabajoId);
+       
         #endregion
 
         #region REPORTES

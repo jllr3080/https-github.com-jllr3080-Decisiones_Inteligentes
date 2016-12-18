@@ -48,6 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAOs\DetalleOrdenTrabajoDAOs.cs" />
+    <Compile Include="DAOs\DetalleOrdenTrabajoFotografiaDAOs.cs" />
+    <Compile Include="DAOs\DetalleOrdenTrabajoObservacionDAOs.cs" />
     <Compile Include="DAOs\NumeroOrdenDAOs.cs" />
     <Compile Include="DAOs\OrdenTrabajoDAOs.cs" />
     <Compile Include="DAOs\TransaccionalDAOs.cs" />

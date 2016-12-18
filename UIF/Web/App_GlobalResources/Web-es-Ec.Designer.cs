@@ -277,7 +277,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Fecha.
+        ///   Busca una cadena traducida similar a Fecha de Ingreso.
         /// </summary>
         internal static string Label_Fecha {
             get {

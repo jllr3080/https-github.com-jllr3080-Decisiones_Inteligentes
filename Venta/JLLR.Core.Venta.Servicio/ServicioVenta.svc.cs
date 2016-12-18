@@ -42,6 +42,45 @@ namespace JLLR.Core.Venta.Servicio
         }
         #endregion
 
+        #region DETALLE DE  ORDEN DE TRABAJO OBSERVACIONES
+        /// <summary>
+        /// Graba todas las observaciones de  los detalles de la orden de trabajo
+        /// </summary>
+        /// <param name="detalleOrdenTrabajoObservacion"></param>
+        public void GrabarDetalleOrdenTrabajoObservacion(DetalleOrdenTrabajoObservacionModelo detalleOrdenTrabajoObservacion)
+        {
+            try
+            {
+                _ventaTransformadorNegocio.GrabarDetalleOrdenTrabajoObservacion(detalleOrdenTrabajoObservacion);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene las observaciones 
+        /// </summary>
+        /// <param name="detalleOrdenTrabajoId"></param>
+        /// <returns></returns>
+        public List<DetalleOrdenTrabajoObservacionModelo> ObtenerDetalleOrdenTrabajoObservaciones(
+            int detalleOrdenTrabajoId)
+        {
+            try
+            {
+                return
+                    _ventaTransformadorNegocio.ObtenerDetalleOrdenTrabajoObservaciones(detalleOrdenTrabajoId);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
         #region REPORTES
 
         /// <summary>

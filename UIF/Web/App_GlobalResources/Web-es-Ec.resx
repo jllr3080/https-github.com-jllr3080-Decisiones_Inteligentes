@@ -190,7 +190,7 @@
     <value>Estado de Pago</value>
   </data>
   <data name="Label_Fecha" xml:space="preserve">
-    <value>Fecha</value>
+    <value>Fecha de Ingreso</value>
   </data>
   <data name="Label_Fecha_Entrega" xml:space="preserve">
     <value>Fecha de Entrega</value>

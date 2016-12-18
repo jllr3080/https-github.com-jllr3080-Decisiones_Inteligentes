@@ -35,10 +35,47 @@
             
            <br>
              <div class="row">
+                  <div class="col-md-3">
+                        <asp:Label ID="_labelNumeroOrden" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Numero_Orden%>"></asp:Label>
+                        
+                    </div>
                     <div class="col-md-3">
                         <asp:Label ID="_labelCliente" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Nombre_Cliente%>"></asp:Label>
                         
                     </div>
+                  <div class="col-md-3">
+                        <asp:Label ID="_labelTipoLavado" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Tipo_Lavado%>"></asp:Label>
+                       
+                    </div>
+                    
+                    <div class="col-md-3">
+                        <asp:Label ID="_labelEstadoPago" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Estado_Pago%>"></asp:Label>
+                        
+                    </div>
+                    
+            </div>
+           
+            <div class="row">
+                 <div class="col-md-3">
+                        <asp:TextBox ID="_numeroOrdenResultado" runat="server"  CssClass="form-control" ReadOnly="True" ></asp:TextBox>
+                        
+                    </div>
+                    <div class="col-md-3">
+                       <asp:TextBox ID="_cliente" runat="server"  CssClass="form-control" ReadOnly="True" ></asp:TextBox>
+                       
+                    </div>
+                <div class="col-md-3">
+                         <asp:TextBox ID="_tipoLavado" runat="server"  CssClass="form-control" ReadOnly="True" ></asp:TextBox>
+                    </div>
+                 <div class="col-md-3">
+                        <asp:TextBox ID="_estadoPago" runat="server"  CssClass="form-control" ReadOnly="True" ></asp:TextBox>
+                        
+                    </div>
+                   
+                    
+                </div>
+             <br/>
+             <div class="row">
                     <div class="col-md-3">
                         <asp:Label ID="_labelFechaIngreso" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Fecha%>"></asp:Label>
                         
@@ -47,39 +84,7 @@
                         <asp:Label ID="_labelFechaEntrega" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Fecha_Entrega%>"></asp:Label>
                         
                     </div>
-                    <div class="col-md-3">
-                        <asp:Label ID="_labelTipoLavado" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Tipo_Lavado%>"></asp:Label>
-                       
-                    </div>
-                    
-            </div>
-           
-            <div class="row">
-                    <div class="col-md-3">
-                       <asp:TextBox ID="_cliente" runat="server"  CssClass="form-control" ReadOnly="True" ></asp:TextBox>
-                       
-                    </div>
-                    <div class="col-md-3">
-                        <asp:TextBox ID="_fechaIngreso" runat="server"  CssClass="form-control" ReadOnly="True" ></asp:TextBox>
-                        
-                    </div>
-                    <div class="col-md-3">
-                         <asp:TextBox ID="_fechaEntrega" runat="server"  CssClass="form-control" ReadOnly="True" ></asp:TextBox>
-                    </div>
-                    <div class="col-md-3">
-                         <asp:TextBox ID="_tipoLavado" runat="server"  CssClass="form-control" ReadOnly="True" ></asp:TextBox>
-                    </div>
-                </div>
-             <br/>
-             <div class="row">
-                    <div class="col-md-3">
-                        <asp:Label ID="_labelNumeroOrden" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Numero_Orden%>"></asp:Label>
-                        
-                    </div>
-                    <div class="col-md-3">
-                        <asp:Label ID="_labelEstadoPago" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Estado_Pago%>"></asp:Label>
-                        
-                    </div>
+                   
                   <div class="col-md-3">
                         <asp:Label ID="_labelFechaEntregaEfectiva" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Fecha_Entrega_Real%>"></asp:Label>
                         
@@ -88,13 +93,14 @@
             </div>
              <div class="row">
                     <div class="col-md-3">
-                        <asp:TextBox ID="_numeroOrdenResultado" runat="server"  CssClass="form-control" ReadOnly="True" ></asp:TextBox>
+                        
+                        <asp:TextBox ID="_fechaIngreso" runat="server"  CssClass="form-control" ReadOnly="True" ></asp:TextBox>
                         
                     </div>
                     <div class="col-md-3">
-                        <asp:TextBox ID="_estadoPago" runat="server"  CssClass="form-control" ReadOnly="True" ></asp:TextBox>
-                        
+                         <asp:TextBox ID="_fechaEntrega" runat="server"  CssClass="form-control" ReadOnly="True" ></asp:TextBox>
                     </div>
+                   
                   <div class="col-md-3">
                         <asp:TextBox ID="_fechaEntregaEfectiva" runat="server"  CssClass="form-control" ReadOnly="True" ></asp:TextBox>
                         

@@ -27,8 +27,8 @@ namespace JLLR.Core.Venta.Servicio.Transformador
 
 
         #endregion
+        #region NEGOCIO 
         #region TRANSACCIONAL
-        #region NEGOCIO
         /// <summary>
         /// Graba la orden  de trabajo de forma completa
         /// </summary>
@@ -47,6 +47,47 @@ namespace JLLR.Core.Venta.Servicio.Transformador
             }
         }
         #endregion
+
+        #region DETALLE DE  ORDEN DE TRABAJO OBSERVACIONES
+        /// <summary>
+        /// Graba todas las observaciones de  los detalles de la orden de trabajo
+        /// </summary>
+        /// <param name="detalleOrdenTrabajoObservacion"></param>
+        public void GrabarDetalleOrdenTrabajoObservacion(DetalleOrdenTrabajoObservacionModelo detalleOrdenTrabajoObservacion)
+        {
+            try
+            {
+                _ventaNegocio.GrabarDetalleOrdenTrabajoObservacion(_ensambladorEntidad.CrearDetalleOrdenTrabajoObservacion(detalleOrdenTrabajoObservacion));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene las observaciones 
+        /// </summary>
+        /// <param name="detalleOrdenTrabajoId"></param>
+        /// <returns></returns>
+        public List<DetalleOrdenTrabajoObservacionModelo> ObtenerDetalleOrdenTrabajoObservaciones(
+            int detalleOrdenTrabajoId)
+        {
+            try
+            {
+                return
+                    _ensambladorModelo.CrearDetalleOrdenTrabajosObservacion(
+                        _ventaNegocio.ObtenerDetalleOrdenTrabajoObservaciones(detalleOrdenTrabajoId));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
 
         #region  REPORTES
 
@@ -94,6 +135,8 @@ namespace JLLR.Core.Venta.Servicio.Transformador
 
         #endregion
 
+
         #endregion
+
     }
 }

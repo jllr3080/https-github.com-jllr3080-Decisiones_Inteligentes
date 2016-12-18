@@ -82,6 +82,7 @@
     <Compile Include="Ensamblador\EnsambladorEntidad.cs" />
     <Compile Include="Ensamblador\EnsambladorModelo.cs" />
     <Compile Include="Modelo\DetalleOrdenTrabajoModelo.cs" />
+    <Compile Include="Modelo\DetalleOrdenTrabajoObservacionModelo.cs" />
     <Compile Include="Modelo\OrdenTrabajoModelo.cs" />
     <Compile Include="Modelo\Parametrizacion\NumeroOrdenModelo.cs" />
     <Compile Include="Modelo\Parametrizacion\VentaComisionModelo.cs" />

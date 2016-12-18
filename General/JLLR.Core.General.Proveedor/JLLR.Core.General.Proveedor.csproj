@@ -49,6 +49,7 @@
     <Compile Include="DAOs\CiudadDAOs.cs" />
     <Compile Include="DAOs\ColorDAOs.cs" />
     <Compile Include="DAOs\EstadoPagoDAOs.cs" />
+    <Compile Include="DAOs\EtapaProcesoDAOs.cs" />
     <Compile Include="DAOs\MarcaDAOs.cs" />
     <Compile Include="DAOs\MaterialDAOs.cs" />
     <Compile Include="DAOs\PaisDAOs.cs" />

@@ -184,10 +184,51 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
         }
 
         #endregion
+
+        #region DETALLE ORDEN TRABAJO OBSERVACION
+        /// <summary>
+        /// Convierte el DTO de entidad a modelo
+        /// </summary>
+        /// <param name="e">Entidad</param>
+        /// <returns></returns>
+        public modelo.DetalleOrdenTrabajoObservacionModelo CrearDetalleOrdenTrabajoObservacion(entidad.DETALLE_ORDEN_TRABAJO_OBSERVACION e)
+        {
+
+           
+            return new modelo.DetalleOrdenTrabajoObservacionModelo
+            {
+              DetalleOrdenTrabajoId = e.DETALLE_ORDEN_TRABAJO_ID,
+              DetalleOrdenTrabajoObservacionId = e.DETALLE_ORDEN_TRABAJO_OBSERVACION_ID,
+              Observacion = e.OBSERVACION,
+              UsuarioId = e.USUARIO_ID,
+              FechaCreacionObservacion = e.FECHA_CREACION_OBSERVACION
+
+            };
+
+        }
+
+        /// <summary>
+        /// Convierte un listado de DTO en listado de  modelos de DTO
+        /// </summary>
+        /// <param name="listadoEntidad">Listado de Entidades</param>
+        /// <returns></returns>
+        public List<modelo.DetalleOrdenTrabajoObservacionModelo> CrearDetalleOrdenTrabajosObservacion(IQueryable<entidad.DETALLE_ORDEN_TRABAJO_OBSERVACION> listadoEntidad)
+        {
+            List<modelo.DetalleOrdenTrabajoObservacionModelo> listaModelo = new List<modelo.DetalleOrdenTrabajoObservacionModelo>();
+
+            foreach (var entidad in listadoEntidad)
+            {
+                listaModelo.Add(CrearDetalleOrdenTrabajoObservacion(entidad));
+            }
+            return listaModelo;
+
+        }
+
+        #endregion
         #endregion
 
         #region PARAMETRIZACION
-       
+
         #region  NUMERO ORDEN
         /// <summary>
         /// Convierte el DTO de entidad a modelo

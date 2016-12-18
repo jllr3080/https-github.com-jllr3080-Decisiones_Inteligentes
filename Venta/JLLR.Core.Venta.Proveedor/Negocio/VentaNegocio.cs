@@ -20,10 +20,12 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
         private readonly OrdenTrabajoDAOs _ordenTrabajoDaOs= new OrdenTrabajoDAOs();
         private readonly  DetalleOrdenTrabajoDAOs _detalleOrdenTrabajoDaOs= new DetalleOrdenTrabajoDAOs();
         private readonly TransaccionalDAOs _transaccionalDaOs = new TransaccionalDAOs();
+        private readonly  DetalleOrdenTrabajoObservacionDAOs _detalleOrdenTrabajoObservacionDaOs= new DetalleOrdenTrabajoObservacionDAOs();
         #endregion
 
 
         #region NEGOCIO
+        #region  TRANSACCIONAL
         /// <summary>
         /// Graba la orden de trabajo 
         /// </summary>
@@ -41,10 +43,49 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
                 throw;
             }
         }
+        #endregion
 
+        #region DETALLE DE  ORDEN DE TRABAJO OBSERVACIONES
+        /// <summary>
+        /// Graba todas las observaciones de  los detalles de la orden de trabajo
+        /// </summary>
+        /// <param name="detalleOrdenTrabajoObservacion"></param>
+        public void GrabarDetalleOrdenTrabajoObservacion(DETALLE_ORDEN_TRABAJO_OBSERVACION detalleOrdenTrabajoObservacion)
+        {
+            try
+            {
+                _detalleOrdenTrabajoObservacionDaOs.GrabarDetalleOrdenTrabajoObservacion(detalleOrdenTrabajoObservacion);
+            }
+            catch (Exception ex)
+            {
 
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene las observaciones 
+        /// </summary>
+        /// <param name="detalleOrdenTrabajoId"></param>
+        /// <returns></returns>
+        public IQueryable<DETALLE_ORDEN_TRABAJO_OBSERVACION> ObtenerDetalleOrdenTrabajoObservaciones(
+            int detalleOrdenTrabajoId)
+        {
+            try
+            {
+                return _detalleOrdenTrabajoObservacionDaOs.ObtenerDetalleOrdenTrabajoObservaciones(detalleOrdenTrabajoId);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
 
         #endregion
+
+
 
         #region REPORTES
         /// <summary>

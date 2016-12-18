@@ -41,14 +41,12 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual DbSet<PAIS> PAIS { get; set; }
         public virtual DbSet<TELEFONO> TELEFONO { get; set; }
         public virtual DbSet<AGENDA_VISITA> AGENDA_VISITA { get; set; }
-        public virtual DbSet<HISTORIAL_PROCESO> HISTORIAL_PROCESO { get; set; }
         public virtual DbSet<VISITA> VISITA { get; set; }
         public virtual DbSet<COLOR> COLOR { get; set; }
         public virtual DbSet<DIA> DIA { get; set; }
         public virtual DbSet<ESPECIALIDAD_EMPLEADO> ESPECIALIDAD_EMPLEADO { get; set; }
         public virtual DbSet<ESTADO_CIVIL> ESTADO_CIVIL { get; set; }
         public virtual DbSet<ESTADO_PAGO> ESTADO_PAGO { get; set; }
-        public virtual DbSet<ETAPA_PROCESO> ETAPA_PROCESO { get; set; }
         public virtual DbSet<IMPUESTO> IMPUESTO { get; set; }
         public virtual DbSet<LLEVA_CONTABILIDAD> LLEVA_CONTABILIDAD { get; set; }
         public virtual DbSet<MARCA> MARCA { get; set; }
@@ -96,6 +94,8 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual DbSet<NUMERACION_ORDEN> NUMERACION_ORDEN { get; set; }
         public virtual DbSet<ORDEN_TRABAJO> ORDEN_TRABAJO { get; set; }
         public virtual DbSet<VENTA_COMISION> VENTA_COMISION { get; set; }
+        public virtual DbSet<HISTORIAL_PROCESO> HISTORIAL_PROCESO { get; set; }
+        public virtual DbSet<ETAPA_PROCESO> ETAPA_PROCESO { get; set; }
         public virtual DbSet<DETALLE_ORDEN_TRABAJO_OBSERVACION> DETALLE_ORDEN_TRABAJO_OBSERVACION { get; set; }
         public virtual DbSet<DETALLE_TRABAJO_FOTOGRAFIA> DETALLE_TRABAJO_FOTOGRAFIA { get; set; }
     }
