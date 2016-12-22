@@ -158,6 +158,9 @@
         <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_PROCESO_VS_ORDEN_TRABAJO" />
         <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_OT_OBSERVACION_VS_DETALLE_OT" />
         <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DETALLE_ORDEN_TRABAJO" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.CUENTA_POR_COBRAR" Width="1.5" PointX="5.375" PointY="1.125" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DETALLE_CUENTA_POR_COBRAR" Width="1.5" PointX="7.625" PointY="1" />
+        <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_CUENTAS_POR_COBRAR_VS_CUENTA_POR_COBRAR" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

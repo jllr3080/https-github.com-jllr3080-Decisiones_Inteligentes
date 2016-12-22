@@ -30,8 +30,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,12 +48,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAOs\CuentaPorCobrarDAOs.cs" />
+    <Compile Include="DAOs\DetallaCuentaPorCobrarDAOs.cs" />
+    <Compile Include="DAOs\TransaccionalDAOs.cs" />
+    <Compile Include="DTOs\CuentaPorCobrarDTOs.cs" />
+    <Compile Include="Negocio\ContabilidadNegocio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DAOs\" />
-    <Folder Include="DTOs\" />
-    <Folder Include="Negocio\" />
     <Folder Include="Validacion\" />
   </ItemGroup>
   <ItemGroup>
@@ -53,6 +63,9 @@
       <Project>{7b02ff61-3c7a-4a7d-b1a8-c62710253a1b}</Project>
       <Name>JLLR.Core.Base.Proveedor</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

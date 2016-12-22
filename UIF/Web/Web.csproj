@@ -194,6 +194,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Contabilidad\CuentasPorCobrar.aspx" />
+    <Content Include="Contabilidad\CuentasPorPagar.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Imagen\Ayuda.png" />
@@ -212,8 +214,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Individuo\Cliente.aspx" />
+    <Content Include="Logistica\EntregaRecepcionPrendas.aspx" />
     <Content Include="PaginaMaestra\Login.Master" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Reporte\ReporteCuentasPorCobrar.aspx" />
+    <Content Include="Reporte\ReporteCuentasPorPagar.aspx" />
     <Content Include="Reporte\ReporteDiario.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -284,8 +289,24 @@
     <Compile Include="Base\PaginaBaseMaestra.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Contabilidad\CuentasPorCobrar.aspx.cs">
+      <DependentUpon>CuentasPorCobrar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\CuentasPorCobrar.aspx.designer.cs">
+      <DependentUpon>CuentasPorCobrar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contabilidad\CuentasPorPagar.aspx.cs">
+      <DependentUpon>CuentasPorPagar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\CuentasPorPagar.aspx.designer.cs">
+      <DependentUpon>CuentasPorPagar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DTOs\Contabilidad\CuentaPorCobrarVistaDTOs .cs" />
     <Compile Include="DTOs\Individuo\ClienteGeneralVistaDTOs.cs" />
     <Compile Include="DTOs\Individuo\ClienteVistaDTOs.cs" />
+    <Compile Include="DTOs\Logistica\EntregaOrdenTrabajoVistaDTOs.cs" />
     <Compile Include="DTOs\Seguridad\AccesoVistaDTOs.cs" />
     <Compile Include="DTOs\Seguridad\UsuarioVistaDTOs.cs" />
     <Compile Include="DTOs\Venta\ConsultaOrdenTrabajoVistaDTOs.cs" />
@@ -309,10 +330,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Logistica\EntregaRecepcionPrendas.aspx.cs">
+      <DependentUpon>EntregaRecepcionPrendas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logistica\EntregaRecepcionPrendas.aspx.designer.cs">
+      <DependentUpon>EntregaRecepcionPrendas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Contabilidad\CuentaPorCobrarVistaModelo.cs" />
+    <Compile Include="Models\Contabilidad\DetalleCuentaPorCobrarVistaModelo.cs" />
+    <Compile Include="Models\FlujoProceso\HistorialProcesoVistaModelo.cs" />
     <Compile Include="Models\General\CiudadVistaModelo.cs" />
     <Compile Include="Models\General\ColorVistaModelo.cs" />
     <Compile Include="Models\General\EstadoVistaModelo.cs" />
     <Compile Include="Models\General\EstadoPagoVistaModelo.cs" />
+    <Compile Include="Models\General\EtapaProcesoVistaModelo.cs" />
     <Compile Include="Models\General\ImpuestoVistaModelo.cs" />
     <Compile Include="Models\General\MarcaVistaModelo.cs" />
     <Compile Include="Models\General\MaterialVistaModelo.cs" />
@@ -339,6 +371,8 @@
     <Compile Include="Models\Inventario\Parametrizacion\ProductoTallaVistaModelo.cs" />
     <Compile Include="Models\Inventario\Parametrizacion\ProductoVistaModelo.cs" />
     <Compile Include="Models\Inventario\Parametrizacion\TipoProductoVistaModelo.cs" />
+    <Compile Include="Models\Logistica\DetalleEntregaOrdenTrabajoVistaModelo.cs" />
+    <Compile Include="Models\Logistica\EntregaOrdenTrabajoVistaModelo.cs" />
     <Compile Include="Models\Seguridad\Negocio\UsuarioVistaModelo.cs" />
     <Compile Include="Models\Venta\Negocio\DetalleOrdenTrabajoVistaModelo.cs" />
     <Compile Include="Models\Venta\Negocio\OrdenTrabajoVistaModelo.cs" />
@@ -352,6 +386,20 @@
       <DependentUpon>Login.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reporte\ReporteCuentasPorCobrar.aspx.cs">
+      <DependentUpon>ReporteCuentasPorCobrar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reporte\ReporteCuentasPorCobrar.aspx.designer.cs">
+      <DependentUpon>ReporteCuentasPorCobrar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reporte\ReporteCuentasPorPagar.aspx.cs">
+      <DependentUpon>ReporteCuentasPorPagar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reporte\ReporteCuentasPorPagar.aspx.designer.cs">
+      <DependentUpon>ReporteCuentasPorPagar.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Reporte\ReporteDiario.aspx.cs">
       <DependentUpon>ReporteDiario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -382,6 +430,7 @@
     </Compile>
     <Compile Include="ServicioDelegado\ServicioDelegadoContabilidad.cs" />
     <Compile Include="ServicioDelegado\ServicioDelegadoFE.cs" />
+    <Compile Include="ServicioDelegado\ServicioDelegadoFlujoProceso.cs" />
     <Compile Include="ServicioDelegado\ServicioDelegadoGeneral.cs" />
     <Compile Include="ServicioDelegado\ServicioDelegadoIndividuo.cs" />
     <Compile Include="ServicioDelegado\ServicioDelegadoInventario.cs" />
@@ -417,14 +466,14 @@
   <ItemGroup>
     <Folder Include="Administracion\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Models\Contabilidad\" />
+    <Folder Include="DTOs\FlujoProceso\" />
     <Folder Include="Models\FE\" />
     <Folder Include="Models\Inventario\Negocio\" />
-    <Folder Include="Models\Logistica\" />
     <Folder Include="Models\Produccion\" />
     <Folder Include="Models\RRHH\" />
     <Folder Include="Models\Seguridad\Parametrizacion\" />
     <Folder Include="Parametrizacion\" />
+    <Folder Include="Reporte\Contabilidad\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\Web-es-Ec.resx">

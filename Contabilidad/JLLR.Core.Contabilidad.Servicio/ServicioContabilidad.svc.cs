@@ -6,6 +6,10 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using JLLR.Core.Contabilidad.Servicio.DTOs;
+using JLLR.Core.Contabilidad.Servicio.Modelo;
+using JLLR.Core.Contabilidad.Servicio.Transformador;
+
 #endregion
 
 namespace JLLR.Core.Contabilidad.Servicio
@@ -14,22 +18,28 @@ namespace JLLR.Core.Contabilidad.Servicio
     // NOTE: para iniciar el Cliente de prueba WCF para probar este servicio, seleccione Service1.svc o Service1.svc.cs en el Explorador de soluciones e inicie la depuración.
     public class ServicioContabilidad : IServicioContabilidad
     {
-        public string GetData(int value)
-        {
-            return string.Format("You entered: {0}", value);
-        }
+        #region  DECLARACIONES  E INSTANCIAS
+        private readonly ContabilidadTransformadorNegocio _contabilidadTransformadorNegocio = new ContabilidadTransformadorNegocio();
+        #endregion
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
+        #region TRANSACCIONAL
+        /// <summary>
+        /// Graba la cuenta por pagar  
+        /// </summary>
+        /// <param name="cuentaPorCobrarDtOs"></param>
+        /// <returns></returns>
+        public CuentaPorCobrarModelo GrabarCuentaPorCobrarCompleta(CuentaPorCobrarDTOs cuentaPorCobrarDtOs)
         {
-            if (composite == null)
+            try
             {
-                throw new ArgumentNullException("composite");
+                return _contabilidadTransformadorNegocio.GrabarCuentaPorCobrarCompleta(cuentaPorCobrarDtOs);
             }
-            if (composite.BoolValue)
+            catch (Exception ex)
             {
-                composite.StringValue += "Suffix";
+
+                throw;
             }
-            return composite;
         }
+        #endregion
     }
 }

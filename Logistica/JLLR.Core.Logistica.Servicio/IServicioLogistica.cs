@@ -6,6 +6,9 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using JLLR.Core.Logistica.Servicio.DTOs;
+using JLLR.Core.Logistica.Servicio.Modelo;
+
 #endregion
 
 namespace JLLR.Core.Logistica.Servicio
@@ -15,35 +18,21 @@ namespace JLLR.Core.Logistica.Servicio
     public interface IServicioLogistica
     {
 
-        [OperationContract]
-        string GetData(int value);
+        #region TRANSACCIONAL
 
+        /// <summary>
+        /// Graba la cuenta por pagar  
+        /// </summary>
+        /// <param name="cuentaPorCobrarDtOs"></param>
+        /// <returns></returns>
         [OperationContract]
-        CompositeType GetDataUsingDataContract(CompositeType composite);
+        [WebInvoke(UriTemplate = "GrabarCuentaPorCobrarCompleta/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        EntregaOrdenTrabajoModelo GrabarCuentaPorCobrarCompleta(EntregaOrdenTrabajoDTOs entregaOrdenTrabajoDtOs);
 
-        // TODO: agregue aquí sus operaciones de servicio
+        #endregion
     }
 
 
-    // Utilice un contrato de datos, como se ilustra en el ejemplo siguiente, para agregar tipos compuestos a las operaciones de servicio.
-    [DataContract]
-    public class CompositeType
-    {
-        bool boolValue = true;
-        string stringValue = "Hello ";
 
-        [DataMember]
-        public bool BoolValue
-        {
-            get { return boolValue; }
-            set { boolValue = value; }
-        }
 
-        [DataMember]
-        public string StringValue
-        {
-            get { return stringValue; }
-            set { stringValue = value; }
-        }
-    }
 }

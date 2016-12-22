@@ -41,6 +41,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -65,23 +71,26 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTOs\EntregaOrdenTrabajoDTOs.cs" />
     <Compile Include="EnsambladorDTOs\EnsambladorEntidadDTOs.cs" />
     <Compile Include="EnsambladorDTOs\EnsambladorModeloDTOs.cs" />
     <Compile Include="Ensamblador\EnsambladorEntidad.cs" />
     <Compile Include="Ensamblador\EnsambladorModelo.cs" />
+    <Compile Include="Modelo\DetalleEntregaOrdenTrabajoModelo.cs" />
+    <Compile Include="Modelo\EntregaOrdenTrabajoModelo.cs" />
     <Compile Include="ServicioLogistica.svc.cs">
       <DependentUpon>ServicioLogistica.svc</DependentUpon>
     </Compile>
     <Compile Include="IServicioLogistica.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transformador\LogisticaTransformadorNegocio.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Enums\" />
-    <Folder Include="Modelo\" />
-    <Folder Include="Transformador\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\PublishProfiles\Administrador.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -90,6 +99,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Base\JLLR.Core.Base.Proveedor\JLLR.Core.Base.Proveedor.csproj">
+      <Project>{7b02ff61-3c7a-4a7d-b1a8-c62710253a1b}</Project>
+      <Name>JLLR.Core.Base.Proveedor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JLLR.Core.Logistica.Proveedor\JLLR.Core.Logistica.Proveedor.csproj">
       <Project>{00bae955-c56d-40bf-9e91-75e4713f5727}</Project>
       <Name>JLLR.Core.Logistica.Proveedor</Name>

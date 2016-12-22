@@ -6,6 +6,10 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using JLLR.Core.Logistica.Servicio.DTOs;
+using JLLR.Core.Logistica.Servicio.Modelo;
+using JLLR.Core.Logistica.Servicio.Transformador;
+
 #endregion
 
 namespace JLLR.Core.Logistica.Servicio
@@ -14,22 +18,30 @@ namespace JLLR.Core.Logistica.Servicio
     // NOTE: para iniciar el Cliente de prueba WCF para probar este servicio, seleccione Service1.svc o Service1.svc.cs en el Explorador de soluciones e inicie la depuración.
     public class ServicioLogistica : IServicioLogistica
     {
-        public string GetData(int value)
-        {
-            return string.Format("You entered: {0}", value);
-        }
+        #region DECLARACIONES  E INSTANCIAS
+        private readonly  LogisticaTransformadorNegocio _logisticaTransformadorNegocio= new LogisticaTransformadorNegocio();
+        #endregion
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
+        #region TRANSACCIONAL
+        /// <summary>
+        /// Graba la cuenta por pagar  
+        /// </summary>
+        /// <param name="cuentaPorCobrarDtOs"></param>
+        /// <returns></returns>
+        public EntregaOrdenTrabajoModelo GrabarCuentaPorCobrarCompleta(EntregaOrdenTrabajoDTOs entregaOrdenTrabajoDtOs)
         {
-            if (composite == null)
+            try
             {
-                throw new ArgumentNullException("composite");
+                return _logisticaTransformadorNegocio.GrabarCuentaPorCobrarCompleta(entregaOrdenTrabajoDtOs);
             }
-            if (composite.BoolValue)
+            catch (Exception ex)
             {
-                composite.StringValue += "Suffix";
+
+                throw;
             }
-            return composite;
         }
+        #endregion
+
+
     }
 }

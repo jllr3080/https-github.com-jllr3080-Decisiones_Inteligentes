@@ -111,7 +111,11 @@ namespace Web
 
                 var emision = new MenuItem("VENTA") { Selectable = false };
                 var administracion = new MenuItem("ADMINISTRACION") { Selectable = false };
-                
+                var contabilidad= new MenuItem("CONTABILIDAD") { Selectable = false };
+                var logistica = new MenuItem("LOGISTICA") { Selectable = false };
+                var produccion = new MenuItem("PRODUCCION") { Selectable = false };
+                var rrhh = new MenuItem("RRHH") { Selectable = false };
+                var seguridades = new MenuItem("SEGURIDADES") { Selectable = false };
                 var usuario = new MenuItem("Usuario : " + User.NombreUsuario) { Selectable = true };
                 var cerrarSesion = new MenuItem("Cerrar Sesión") { NavigateUrl = "~/Seguridad/Login/IngresoSistema.aspx" };
                 foreach (var usuarioAccesoDTO in lista)
@@ -120,13 +124,28 @@ namespace Web
                         emision.ChildItems.Add(new MenuItem(usuarioAccesoDTO.SubModulo, usuarioAccesoDTO.SubModulo) { NavigateUrl = usuarioAccesoDTO.Url });
                     else if (usuarioAccesoDTO.Modulo == "ADMINISTRACION")
                         administracion.ChildItems.Add(new MenuItem(usuarioAccesoDTO.SubModulo, usuarioAccesoDTO.SubModulo) { NavigateUrl = usuarioAccesoDTO.Url });
-                    
+                    else if (usuarioAccesoDTO.Modulo == "CONTABILIDAD")
+                        contabilidad.ChildItems.Add(new MenuItem(usuarioAccesoDTO.SubModulo, usuarioAccesoDTO.SubModulo) { NavigateUrl = usuarioAccesoDTO.Url });
+                    else if (usuarioAccesoDTO.Modulo == "PRODUCCION")
+                        produccion.ChildItems.Add(new MenuItem(usuarioAccesoDTO.SubModulo, usuarioAccesoDTO.SubModulo) { NavigateUrl = usuarioAccesoDTO.Url });
+                    else if (usuarioAccesoDTO.Modulo == "RRHH")
+                        rrhh.ChildItems.Add(new MenuItem(usuarioAccesoDTO.SubModulo, usuarioAccesoDTO.SubModulo) { NavigateUrl = usuarioAccesoDTO.Url });
+                    else if (usuarioAccesoDTO.Modulo == "LOGISTICA")
+                        logistica.ChildItems.Add(new MenuItem(usuarioAccesoDTO.SubModulo, usuarioAccesoDTO.SubModulo) { NavigateUrl = usuarioAccesoDTO.Url });
+                    else if (usuarioAccesoDTO.Modulo == "SEGURIDADES")
+                        seguridades.ChildItems.Add(new MenuItem(usuarioAccesoDTO.SubModulo, usuarioAccesoDTO.SubModulo) { NavigateUrl = usuarioAccesoDTO.Url });
+
 
 
                 }
 
                 _menu.Items.Add(emision);
                 _menu.Items.Add(administracion);
+                _menu.Items.Add(contabilidad);
+                _menu.Items.Add(produccion);
+                _menu.Items.Add(rrhh);
+                _menu.Items.Add(logistica);
+                _menu.Items.Add(seguridades);
                 _menu.Items.Add(usuario);
                 _menu.Items.Add(cerrarSesion);
 

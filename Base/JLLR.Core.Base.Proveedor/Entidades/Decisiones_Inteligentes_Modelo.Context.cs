@@ -98,5 +98,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual DbSet<ETAPA_PROCESO> ETAPA_PROCESO { get; set; }
         public virtual DbSet<DETALLE_ORDEN_TRABAJO_OBSERVACION> DETALLE_ORDEN_TRABAJO_OBSERVACION { get; set; }
         public virtual DbSet<DETALLE_TRABAJO_FOTOGRAFIA> DETALLE_TRABAJO_FOTOGRAFIA { get; set; }
+        public virtual DbSet<CUENTA_POR_COBRAR> CUENTA_POR_COBRAR { get; set; }
+        public virtual DbSet<DETALLE_CUENTA_POR_COBRAR> DETALLE_CUENTA_POR_COBRAR { get; set; }
     }
 }
