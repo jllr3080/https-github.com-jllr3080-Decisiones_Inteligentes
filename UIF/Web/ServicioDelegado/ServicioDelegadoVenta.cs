@@ -57,6 +57,36 @@ namespace Web.ServicioDelegado
 
 
         #endregion
+
+        #region ORDEN TRABAJO
+
+        /// <summary>
+        /// Actualiza la orden de trabajo
+        /// </summary>
+        /// <param name=""></param>
+        public void ActualizarOrdenTrabajo(OrdenTrabajoVistaModelo ordenTrabajo)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(OrdenTrabajoVistaModelo));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, ordenTrabajo);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "ActualizarOrdenTrabajo", "POST", datos);
+                //var js = new JavaScriptSerializer();
+                //return js.Deserialize<OrdenTrabajoVistaModelo>(json);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        #endregion
         #region REPORTES
 
         /// <summary>

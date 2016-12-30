@@ -38,5 +38,24 @@ namespace JLLR.Core.General.Proveedor.DAOs
 
         }
 
+        /// <summary>
+        /// Obtiene la  etapas de proceso por id
+        /// </summary>
+        /// <param name="etapaProcesoId"></param>
+        /// <returns></returns>
+
+        public ETAPA_PROCESO ObtenerEtapaProcesoPorEtapaProcesoId(int etapaProcesoId)
+        {
+            try
+            {
+                return _entidad.ETAPA_PROCESO.Find(etapaProcesoId);
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
     }
 }

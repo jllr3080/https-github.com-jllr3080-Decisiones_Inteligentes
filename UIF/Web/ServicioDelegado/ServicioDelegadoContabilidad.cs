@@ -55,5 +55,239 @@ namespace Web.ServicioDelegado
             }
         }
         #endregion
+
+        #region CUENTA POR COBRAR
+
+        /// <summary>
+        /// Graba la cabecera de la cuenta por cobrar
+        /// </summary>
+        /// <param name="cuentaPorCobrar"></param>
+        /// <returns></returns>
+        public CuentaPorCobrarVistaModelo GrabarCuentaPorCobrar(CuentaPorCobrarVistaModelo cuentaPorCobrar)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(CuentaPorCobrarVistaModelo));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, cuentaPorCobrar);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "GrabarCuentaPorCobrar", "POST", datos);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<CuentaPorCobrarVistaModelo>(json);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Actualiza las  cuentas  por cobrar
+        /// </summary>
+        /// <param name="cuentaPorCobrar"></param>
+
+        public void ActualizaCuentaPorCobrar(CuentaPorCobrarVistaModelo cuentaPorCobrar)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(CuentaPorCobrarVistaModelo));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, cuentaPorCobrar);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "ActualizaCuentaPorCobrar", "POST", datos);
+                //var js = new JavaScriptSerializer();
+                //return js.Deserialize<CuentaPorCobrarVistaModelo>(json);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region HISTORIAL CUENTAS POR COBRAR
+        /// <summary>
+        /// Graba el  historial de los cobros
+        /// </summary>
+        /// <param name="historialCuentaPorCobrar"></param>
+        /// <returns></returns>
+
+        public HistorialCuentaPorCobrarVistaModelo GrabarHistorialCuentaPorCobrar(HistorialCuentaPorCobrarVistaModelo historialCuentaPorCobrar)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(HistorialCuentaPorCobrarVistaModelo));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, historialCuentaPorCobrar);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "GrabarHistorialCuentaPorCobrar", "POST", datos);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<HistorialCuentaPorCobrarVistaModelo>(json);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Actualiza  las  cuentas por cobrar
+        /// </summary>
+        /// <param name="historialCuentaPorCobrar"></param>
+        public void ActualizarHistorialCuentaPorCobrar(HistorialCuentaPorCobrarVistaModelo historialCuentaPorCobrar)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(HistorialCuentaPorCobrarVistaModelo));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, historialCuentaPorCobrar);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "ActualizarHistorialCuentaPorCobrar", "POST", datos);
+                //var js = new JavaScriptSerializer();
+                //return js.Deserialize<HistorialCuentaPorCobrarVistaModelo>(json);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        #endregion
+
+        #region CUENTA POR PAGAR
+        /// <summary>
+        /// Graba las cuentas  por  pagar
+        /// </summary>
+        /// <param name="cuentaPorPagar"></param>
+        /// <returns></returns>
+        public CuentaPorPagarVistaModelo GrabarCuentaPorPagar(CuentaPorPagarVistaModelo cuentaPorPagar)
+        {
+            try
+            {
+
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(CuentaPorPagarVistaModelo));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, cuentaPorPagar);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "GrabarCuentaPorPagar", "POST", datos);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<CuentaPorPagarVistaModelo>(json);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Graba las cuentas  por  pagar
+        /// </summary>
+        /// <param name="cuentaPorPagar"></param>
+        /// <returns></returns>
+        public void ActualizaCuentaPorPagar(CuentaPorPagarVistaModelo cuentaPorPagar)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(CuentaPorPagarVistaModelo));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, cuentaPorPagar);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "ActualizaCuentaPorPagar", "POST", datos);
+                //var js = new JavaScriptSerializer();
+                //return js.Deserialize<CuentaPorPagarVistaModelo>(json);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region HISTORIAL CUENTAS POR PAGAR
+        /// <summary>
+        /// Graba el historial de las cuentas por  pagar
+        /// </summary>
+        /// <param name="historialCuentaPorPagar"></param>
+        /// <returns></returns>
+        public HistorialCuentaPorPagarVistaModelo GrabarHistorialCuentaPorPagar(HistorialCuentaPorPagarVistaModelo historialCuentaPorPagar)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(HistorialCuentaPorPagarVistaModelo));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, historialCuentaPorPagar);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "GrabarHistorialCuentaPorPagar", "POST", datos);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<HistorialCuentaPorPagarVistaModelo>(json);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Actualiza el historial de cuentas  por pagar
+        /// </summary>
+        /// <param name="historialCuentaPorPagar"></param>
+
+        public void ActualizaHistorialCuentaPorPagar(HistorialCuentaPorPagarVistaModelo historialCuentaPorPagar)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(HistorialCuentaPorPagarVistaModelo));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, historialCuentaPorPagar);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "ActualizaHistorialCuentaPorPagar", "POST", datos);
+                //var js = new JavaScriptSerializer();
+                //return js.Deserialize<HistorialCuentaPorPagarVistaModelo>(json);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
     }
 }

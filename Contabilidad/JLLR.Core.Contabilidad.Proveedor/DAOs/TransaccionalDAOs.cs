@@ -18,7 +18,7 @@ namespace JLLR.Core.Contabilidad.Proveedor.DAOs
     {
         #region DECLARACIONES E INSTANCIAS
         private readonly CuentaPorCobrarDAOs _cuentaPorCobrarDaOs = new CuentaPorCobrarDAOs();
-        private readonly DetallaCuentaPorCobrarDAOs _detallaCuentaPorCobrarDaOs = new DetallaCuentaPorCobrarDAOs();
+        
         #endregion
 
 
@@ -38,13 +38,7 @@ namespace JLLR.Core.Contabilidad.Proveedor.DAOs
                         _cuentaPorCobrarDaOs.GrabarCuentaPorCobrar(cuentaPorCobrarDtOs.CuentaPorCobrar);
 
              
-
-                    foreach (var detalleCuentaPorCobrar in cuentaPorCobrarDtOs.DetalleCuentaPorCobrar)
-                    {
-                        detalleCuentaPorCobrar.CUENTA_POR_COBRAR_ID = cuentaPorCobrar.CUENTA_POR_COBRAR_ID;
-                        _detallaCuentaPorCobrarDaOs.GrabarDetalleCuentaPorCobrar(detalleCuentaPorCobrar);
-                    }
-
+                   
                     transaction.Complete();
 
                     return cuentaPorCobrarDtOs.CuentaPorCobrar;

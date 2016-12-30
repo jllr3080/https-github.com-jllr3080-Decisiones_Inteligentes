@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using JLLR.Core.FlujoProceso.Servicio.ServicioDelegado;
 using entidad = JLLR.Core.Base.Proveedor.Entidades;
 using modelo = JLLR.Core.FlujoProceso.Servicio.Modelo;
 using modeloGeneral=JLLR.Core.General.Servicio.Modelo;
@@ -15,6 +16,9 @@ namespace JLLR.Core.FlujoProceso.Servicio.Ensamblador
     /// </summary>
     public class EnsambladorModelo
     {
+        #region DECLARACIONES  E INSTANCIAS
+        private readonly  ServicioDelegadoGeneral _servicioDelegadoGeneral= new ServicioDelegadoGeneral();
+        #endregion          
 
         #region  HISTORIAL PROCESO
         /// <summary>
@@ -24,10 +28,9 @@ namespace JLLR.Core.FlujoProceso.Servicio.Ensamblador
         /// <returns></returns>
         public modelo.HistorialProcesoModelo CrearHistorialProceso(entidad.HISTORIAL_PROCESO e)
         {
-            modeloGeneral.EtapaProcesoModelo etapaProceso = new modeloGeneral.EtapaProcesoModelo()
-            {
-                EtapaProcesoId = Convert.ToInt32(e.ETAPA_PROCESO_ID)
-            };
+            modeloGeneral.EtapaProcesoModelo etapaProceso =
+                _servicioDelegadoGeneral.ObtenerEtapaProcesoPorEtapaProcesoId(Convert.ToInt32(e.ETAPA_PROCESO_ID));
+            
             return new modelo.HistorialProcesoModelo
             {
                 HistorialProcesoId = e.HISTORIAL_PROCESO_ID,

@@ -18,7 +18,7 @@ namespace Web.Models.Contabilidad
         /// IndividuoId
         /// </summary>
         
-        public Int64? IndividuoId { get; set; }
+        public Int64? ClienteId { get; set; }
 
         /// <summary>
         /// FechaCreacion
@@ -26,19 +26,32 @@ namespace Web.Models.Contabilidad
         
         public DateTime? FechaCreacion { get; set; }
 
+        /// <summary>
+        /// FechaCreacion
+        /// </summary>
+        
+        public DateTime? FechaModificacion { get; set; }
+
+        /// <summary>
+        /// FechaCreacion
+        /// </summary>
+        
+        public DateTime? FechaVencimiento { get; set; }
+
 
         /// <summary>
         /// UsuarioId
         /// </summary>
         
-        public int? UsuarioId { get; set; }
-
+        public int? UsuarioCreacionId { get; set; }
 
         /// <summary>
-        /// EstadoCuentaPorSucursal
+        /// UsuarioId
         /// </summary>
         
-        public bool? EstadoCuentaPorSucursal { get; set; }
+        public int? UsuarioModificacionId { get; set; }
+
+
 
         /// <summary>
         /// SucursalId
@@ -53,9 +66,33 @@ namespace Web.Models.Contabilidad
         public int? PuntoVentaId { get; set; }
 
         /// <summary>
-        /// EstadoCuentaPorPuntoVenta
+        /// Saldo
         /// </summary>
         
-        public bool? EstadoCuentaPorPuntoVenta { get; set; }
+        public decimal? Saldo { get; set; }
+
+        /// <summary>
+        /// Valor
+        /// </summary>
+        
+        public decimal? Valor { get; set; }
+
+        /// <summary>
+        /// NumeroFactura
+        /// </summary>
+        
+        public string NumeroFactura { get; set; }
+
+        /// <summary>
+        /// NumeroFactura
+        /// </summary>
+        
+        public string NumeroOrden { get; set; }
+
+        /// <summary>
+        /// EstadoPagoId
+        /// </summary>
+        
+        public int EstadoPagoId { get; set; }
     }
 }

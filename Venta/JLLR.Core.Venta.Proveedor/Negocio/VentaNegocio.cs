@@ -45,11 +45,32 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
         }
         #endregion
 
-        #region DETALLE DE  ORDEN DE TRABAJO OBSERVACIONES
+        #region ORDEN TRABAJO
+
         /// <summary>
-        /// Graba todas las observaciones de  los detalles de la orden de trabajo
+        /// Actualiza la orden de trabajo
         /// </summary>
-        /// <param name="detalleOrdenTrabajoObservacion"></param>
+        /// <param name=""></param>
+        public void ActualizarOrdenTrabajo(ORDEN_TRABAJO ordenTrabajo)
+        {
+            try
+            {
+                _ordenTrabajoDaOs.ActualizarOrdenTrabajo(ordenTrabajo);
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
+        #endregion
+
+        #region DETALLE DE  ORDEN DE TRABAJO OBSERVACIONES
+            /// <summary>
+            /// Graba todas las observaciones de  los detalles de la orden de trabajo
+            /// </summary>
+            /// <param name="detalleOrdenTrabajoObservacion"></param>
         public void GrabarDetalleOrdenTrabajoObservacion(DETALLE_ORDEN_TRABAJO_OBSERVACION detalleOrdenTrabajoObservacion)
         {
             try

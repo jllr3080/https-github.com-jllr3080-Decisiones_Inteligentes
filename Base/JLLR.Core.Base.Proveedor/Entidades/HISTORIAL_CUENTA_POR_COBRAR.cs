@@ -12,18 +12,13 @@ namespace JLLR.Core.Base.Proveedor.Entidades
     using System;
     using System.Collections.Generic;
     
-    public partial class DETALLE_CUENTA_POR_COBRAR
+    public partial class HISTORIAL_CUENTA_POR_COBRAR
     {
-        public long DETALLE_CUENTA_POR_COBRAR_ID { get; set; }
+        public int HISTORIAL_CUENTA_POR_COBRAR_ID { get; set; }
         public Nullable<long> CUENTA_POR_COBRAR_ID { get; set; }
-        public Nullable<System.DateTime> FECHA_CREACION { get; set; }
-        public Nullable<int> ESTADO_PAGO_ID { get; set; }
-        public Nullable<System.DateTime> FECHA_CANCELACION { get; set; }
-        public string NUMERO_FACTURA { get; set; }
+        public Nullable<System.DateTime> FECHA_COBRO { get; set; }
+        public Nullable<decimal> VALOR_COBRO { get; set; }
         public Nullable<int> USUARIO_ID { get; set; }
-        public string DESCRIPCION { get; set; }
-        public Nullable<decimal> DEBITO { get; set; }
-        public Nullable<decimal> CREDITO { get; set; }
     
         public virtual CUENTA_POR_COBRAR CUENTA_POR_COBRAR { get; set; }
     }

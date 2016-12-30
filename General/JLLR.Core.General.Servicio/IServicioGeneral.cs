@@ -185,6 +185,20 @@ namespace JLLR.Core.General.Servicio
         List<TipoTelefonoModelo> ObtenerTiposTelefonos();
 
         #endregion
+
+        #region ETAPA DE PROCESO
+
+        /// <summary>
+        /// Obtiene la  etapas de proceso por id
+        /// </summary>
+        /// <param name="etapaProcesoId"></param>
+        /// <returns></returns>
+
+        [OperationContract]
+        [WebGet(UriTemplate = "ObtenerEtapaProcesoPorEtapaProcesoId?etapaProcesoId={etapaProcesoId}", ResponseFormat = WebMessageFormat.Json)]
+        EtapaProcesoModelo ObtenerEtapaProcesoPorEtapaProcesoId(int etapaProcesoId);
+
+        #endregion
     }
 
 

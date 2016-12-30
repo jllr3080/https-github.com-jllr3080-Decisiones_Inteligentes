@@ -79,7 +79,9 @@
     <Compile Include="Ensamblador\EnsambladorEntidad.cs" />
     <Compile Include="Ensamblador\EnsambladorModelo.cs" />
     <Compile Include="Modelo\CuentaPorCobrarModelo.cs" />
-    <Compile Include="Modelo\DetalleCuentaPorCobrarModelo.cs" />
+    <Compile Include="Modelo\CuentaPorPagarModelo.cs" />
+    <Compile Include="Modelo\HistorialCuentaPorCobrarModelo.cs" />
+    <Compile Include="Modelo\HistorialCuentaPorPagarModelo.cs" />
     <Compile Include="ServicioContabilidad.svc.cs">
       <DependentUpon>ServicioContabilidad.svc</DependentUpon>
     </Compile>

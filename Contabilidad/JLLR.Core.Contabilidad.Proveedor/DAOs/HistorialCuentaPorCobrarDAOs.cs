@@ -4,36 +4,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using JLLR.Core.Base.Proveedor.DAOs;
 using JLLR.Core.Base.Proveedor.Entidades;
 
 #endregion
 namespace JLLR.Core.Contabilidad.Proveedor.DAOs
 {
     /// <summary>
-    /// Cabcecera  de las cuentas por  cobrar
+    /// Hisorial de  pagos
     /// </summary>
-    public class CuentaPorCobrarDAOs:BaseDAOs
+    public class HistorialCuentaPorCobrarDAOs
     {
         /// <summary>
         /// Declaraciones e instancias
         /// </summary>
         private readonly Decisiones_Inteligentes _entidad = new Decisiones_Inteligentes();
 
-
         /// <summary>
-        /// Graba la cabecera de la cuenta por cobrar
+        /// Graba el  historial de los cobros
         /// </summary>
-        /// <param name="cuentaPorCobrar"></param>
+        /// <param name="historialCuentaPorCobrar"></param>
         /// <returns></returns>
-        public CUENTA_POR_COBRAR GrabarCuentaPorCobrar(CUENTA_POR_COBRAR cuentaPorCobrar)
+
+        public HISTORIAL_CUENTA_POR_COBRAR GrabarHistorialCuentaPorCobrar(HISTORIAL_CUENTA_POR_COBRAR historialCuentaPorCobrar)
         {
             try
             {
-
-                _entidad.CUENTA_POR_COBRAR.Add(cuentaPorCobrar);
+                _entidad.HISTORIAL_CUENTA_POR_COBRAR.Add(historialCuentaPorCobrar);
                 _entidad.SaveChanges();
-                return cuentaPorCobrar;
+                return historialCuentaPorCobrar;
 
             }
             catch (Exception ex)
@@ -43,23 +41,22 @@ namespace JLLR.Core.Contabilidad.Proveedor.DAOs
             }
         }
 
-        /// <summary>
-        /// Actualiza las  cuentas  por cobrar
-        /// </summary>
-        /// <param name="cuentaPorCobrar"></param>
 
-        public void ActualizaCuentaPorCobrar(CUENTA_POR_COBRAR cuentaPorCobrar)
+        /// <summary>
+        /// Actualiza  las  cuentas por cobrar
+        /// </summary>
+        /// <param name="historialCuentaPorCobrar"></param>
+        public void ActualizarHistorialCuentaPorCobrar(HISTORIAL_CUENTA_POR_COBRAR historialCuentaPorCobrar)
         {
             try
             {
-                var original = _entidad.CUENTA_POR_COBRAR.Find(cuentaPorCobrar.CUENTA_POR_COBRAR_ID);
+                var original = _entidad.HISTORIAL_CUENTA_POR_COBRAR.Find(historialCuentaPorCobrar.HISTORIAL_CUENTA_POR_COBRAR_ID);
 
                 if (original != null)
                 {
-                    _entidad.Entry(original).CurrentValues.SetValues(cuentaPorCobrar);
+                    _entidad.Entry(original).CurrentValues.SetValues(historialCuentaPorCobrar);
                     _entidad.SaveChanges();
                 }
-
             }
             catch (Exception ex)
             {
@@ -67,10 +64,6 @@ namespace JLLR.Core.Contabilidad.Proveedor.DAOs
                 throw;
             }
         }
-
-
-
-
 
     }
 }

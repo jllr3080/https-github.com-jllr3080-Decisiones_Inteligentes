@@ -20,10 +20,7 @@ namespace JLLR.Core.Contabilidad.Proveedor.DTOs
         /// </summary>
         public CUENTA_POR_COBRAR CuentaPorCobrar { get; set; }
 
-        /// <summary>
-        /// Detalle de la cuenta por cobrar
-        /// </summary>
-        public List<DETALLE_CUENTA_POR_COBRAR> DetalleCuentaPorCobrar { get; set; }
+       
 
     }
 }

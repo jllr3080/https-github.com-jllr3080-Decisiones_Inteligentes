@@ -41,5 +41,167 @@ namespace JLLR.Core.Contabilidad.Servicio
             }
         }
         #endregion
+
+        #region CUENTA POR COBRAR
+
+        /// <summary>
+        /// Graba la cabecera de la cuenta por cobrar
+        /// </summary>
+        /// <param name="cuentaPorCobrar"></param>
+        /// <returns></returns>
+        public CuentaPorCobrarModelo GrabarCuentaPorCobrar(CuentaPorCobrarModelo cuentaPorCobrar)
+        {
+            try
+            {
+                return _contabilidadTransformadorNegocio.GrabarCuentaPorCobrar(cuentaPorCobrar);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Actualiza las  cuentas  por cobrar
+        /// </summary>
+        /// <param name="cuentaPorCobrar"></param>
+
+        public void ActualizaCuentaPorCobrar(CuentaPorCobrarModelo cuentaPorCobrar)
+        {
+            try
+            {
+               _contabilidadTransformadorNegocio.ActualizaCuentaPorCobrar(cuentaPorCobrar);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region HISTORIAL CUENTAS POR COBRAR
+        /// <summary>
+        /// Graba el  historial de los cobros
+        /// </summary>
+        /// <param name="historialCuentaPorCobrar"></param>
+        /// <returns></returns>
+
+        public HistorialCuentaPorCobrarModelo GrabarHistorialCuentaPorCobrar(HistorialCuentaPorCobrarModelo historialCuentaPorCobrar)
+        {
+            try
+            {
+                return _contabilidadTransformadorNegocio.GrabarHistorialCuentaPorCobrar(historialCuentaPorCobrar);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Actualiza  las  cuentas por cobrar
+        /// </summary>
+        /// <param name="historialCuentaPorCobrar"></param>
+        public void ActualizarHistorialCuentaPorCobrar(HistorialCuentaPorCobrarModelo historialCuentaPorCobrar)
+        {
+            try
+            {
+                _contabilidadTransformadorNegocio.ActualizarHistorialCuentaPorCobrar(historialCuentaPorCobrar);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        #endregion
+
+        #region CUENTA POR PAGAR
+        /// <summary>
+        /// Graba las cuentas  por  pagar
+        /// </summary>
+        /// <param name="cuentaPorPagar"></param>
+        /// <returns></returns>
+        public CuentaPorPagarModelo GrabarCuentaPorPagar(CuentaPorPagarModelo cuentaPorPagar)
+        {
+            try
+            {
+
+                return _contabilidadTransformadorNegocio.GrabarCuentaPorPagar(cuentaPorPagar);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Graba las cuentas  por  pagar
+        /// </summary>
+        /// <param name="cuentaPorPagar"></param>
+        /// <returns></returns>
+        public void ActualizaCuentaPorPagar(CuentaPorPagarModelo cuentaPorPagar)
+        {
+            try
+            {
+                _contabilidadTransformadorNegocio.ActualizaCuentaPorPagar(cuentaPorPagar);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region HISTORIAL CUENTAS POR PAGAR
+        /// <summary>
+        /// Graba el historial de las cuentas por  pagar
+        /// </summary>
+        /// <param name="historialCuentaPorPagar"></param>
+        /// <returns></returns>
+        public HistorialCuentaPorPagarModelo GrabarHistorialCuentaPorPagar(HistorialCuentaPorPagarModelo historialCuentaPorPagar)
+        {
+            try
+            {
+                return _contabilidadTransformadorNegocio.GrabarHistorialCuentaPorPagar(historialCuentaPorPagar);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Actualiza el historial de cuentas  por pagar
+        /// </summary>
+        /// <param name="historialCuentaPorPagar"></param>
+
+        public void ActualizaHistorialCuentaPorPagar(HistorialCuentaPorPagarModelo historialCuentaPorPagar)
+        {
+            try
+            {
+                _contabilidadTransformadorNegocio.ActualizaHistorialCuentaPorPagar(historialCuentaPorPagar);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
     }
 }

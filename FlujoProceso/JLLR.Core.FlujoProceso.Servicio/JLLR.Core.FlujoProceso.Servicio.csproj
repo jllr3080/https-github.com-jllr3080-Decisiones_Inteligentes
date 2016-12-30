@@ -77,6 +77,7 @@
     <Compile Include="Ensamblador\EnsambladorEntidad.cs" />
     <Compile Include="Ensamblador\EnsambladorModelo.cs" />
     <Compile Include="Modelo\HistorialProcesoModelo.cs" />
+    <Compile Include="ServicioDelegado\ServicioDelegadoGeneral.cs" />
     <Compile Include="ServicioFlujoProceso.svc.cs">
       <DependentUpon>ServicioFlujoProceso.svc</DependentUpon>
     </Compile>

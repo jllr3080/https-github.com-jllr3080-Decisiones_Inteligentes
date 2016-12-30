@@ -36,4 +36,23 @@ namespace Web.Util
         ArregloPrendas=4
     }
 
+    public enum EtapaProceso
+    {
+        EntregaClienteHaciaFranquicia=1,
+        EntregaFranquiciaHaciaTransporte=2,
+        EntregaTranporteHaciaMatriz=3,
+        ProcesoProduccionEtapa1=4,
+        ProcesoProduccionEtapa2=5,
+        EntregaMatrizHaciaTransporte=6,
+        EntregaTransporteHaciaFranquicia=7,
+        EntregaFranquiciaHaciaCliente=8,
+        AnulacionOrdenTrabajo=9
+    }
+
+    public enum EstadoPago
+    {
+        Cancelado=2,
+        Pendiente=1
+    }
+
 }

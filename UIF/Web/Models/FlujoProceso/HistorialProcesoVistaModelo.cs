@@ -20,7 +20,7 @@ namespace Web.Models.FlujoProceso
         /// OrdenTrabajoId
         /// </summary>
         
-        public int? OrdenTrabajoId { get; set; }
+        public Int64? OrdenTrabajoId { get; set; }
 
         /// <summary>
         /// EtapaProceso

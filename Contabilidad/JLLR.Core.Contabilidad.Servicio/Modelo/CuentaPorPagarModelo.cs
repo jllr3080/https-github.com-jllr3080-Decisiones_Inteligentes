@@ -7,29 +7,26 @@ using System.Web;
 #endregion
 namespace JLLR.Core.Contabilidad.Servicio.Modelo
 {
-    /// <summary>
-    /// Modelo de  cuenta por pagar
-    /// </summary>
     [DataContract]
-    public class CuentaPorCobrarModelo
+    public class CuentaPorPagarModelo
     {
         /// <summary>
         /// Id
         /// </summary>
         [DataMember]
-        public Int64 CuentaPorCobrarId { get; set; }
+        public Int64 CuentaPorPagarId { get; set; }
 
         /// <summary>
         /// IndividuoId
         /// </summary>
         [DataMember]
-        public Int64? ClienteId{ get; set; }
+        public Int64? ProveedorId { get; set; }
 
         /// <summary>
         /// FechaCreacion
         /// </summary>
         [DataMember]
-        public DateTime? FechaCreacion{ get; set; }
+        public DateTime? FechaCreacion { get; set; }
 
         /// <summary>
         /// FechaCreacion
@@ -57,12 +54,12 @@ namespace JLLR.Core.Contabilidad.Servicio.Modelo
         public int? UsuarioModificacionId { get; set; }
 
 
-        
+
         /// <summary>
         /// SucursalId
         /// </summary>
         [DataMember]
-        public int? SucursalId{ get; set; }
+        public int? SucursalId { get; set; }
 
         /// <summary>
         /// PuntoVentaId
@@ -74,7 +71,7 @@ namespace JLLR.Core.Contabilidad.Servicio.Modelo
         /// Saldo
         /// </summary>
         [DataMember]
-        public decimal? Saldo{ get; set; }
+        public decimal? Saldo { get; set; }
 
         /// <summary>
         /// Valor
@@ -86,18 +83,12 @@ namespace JLLR.Core.Contabilidad.Servicio.Modelo
         /// NumeroFactura
         /// </summary>
         [DataMember]
-        public string NumeroFactura{ get; set; }
+        public string NumeroFactura { get; set; }
 
         /// <summary>
         /// NumeroFactura
         /// </summary>
         [DataMember]
         public string NumeroOrden { get; set; }
-
-        /// <summary>
-        /// EstadoPagoId
-        /// </summary>
-        [DataMember]
-        public int? EstadoPagoId{ get; set; }
     }
 }

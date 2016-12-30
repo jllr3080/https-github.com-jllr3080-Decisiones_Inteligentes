@@ -35,13 +35,37 @@
             <PropertyRef Name="CUENTA_POR_COBRAR_ID" />
           </Key>
           <Property Name="CUENTA_POR_COBRAR_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="INDIVIDUO_ID" Type="bigint" />
+          <Property Name="CLIENTE_ID" Type="bigint" />
           <Property Name="FECHA_CREACION" Type="datetime" />
-          <Property Name="USUARIO_ID" Type="int" />
-          <Property Name="ESTADO_CUENTA_POR_SUCURSAL" Type="bit" />
+          <Property Name="FECHA_MODIFICACION" Type="datetime" />
+          <Property Name="USUARIO_CREACION_ID" Type="int" />
+          <Property Name="USUARIO_MODIFICACION_ID" Type="int" />
+          <Property Name="FECHA_VENCIMIENTO" Type="datetime" />
           <Property Name="SUCURSAL_ID" Type="int" />
           <Property Name="PUNTO_VENTA_ID" Type="int" />
-          <Property Name="ESTADO_CUENTA_POR_PUNTO_VENTA" Type="bit" />
+          <Property Name="SALDO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="VALOR" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NUMERO_FACTURA" Type="varchar" MaxLength="50" />
+          <Property Name="NUMERO_ORDEN" Type="varchar" MaxLength="20" />
+          <Property Name="ESTADO_PAGO_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="CUENTA_POR_PAGAR">
+          <Key>
+            <PropertyRef Name="CUENTA_POR_PAGAR_ID" />
+          </Key>
+          <Property Name="CUENTA_POR_PAGAR_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PROVEDOR_ID" Type="bigint" />
+          <Property Name="FECHA_CREACION" Type="datetime" />
+          <Property Name="FECHA_MODIFICACION" Type="datetime" />
+          <Property Name="USUARIO_CREACION_ID" Type="int" />
+          <Property Name="USUARIO_MODIFICACION_ID" Type="int" />
+          <Property Name="FECHA_VENCIMIENTO" Type="datetime" />
+          <Property Name="SUCURSAL_ID" Type="int" />
+          <Property Name="PUNTO_VENTA_ID" Type="int" />
+          <Property Name="SALDO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="VALOR" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NUMERO_FACTURA" Type="varchar" MaxLength="50" />
+          <Property Name="NUMERO_ORDEN" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="DETALLE_ARQUEO_CAJA">
           <Key>
@@ -53,20 +77,25 @@
           <Property Name="VALOR_TOTAL" Type="decimal" Precision="18" Scale="2" />
           <Property Name="TIPO_OPERACION" Type="int" />
         </EntityType>
-        <EntityType Name="DETALLE_CUENTA_POR_COBRAR">
+        <EntityType Name="HISTORIAL_CUENTA_POR_COBRAR">
           <Key>
-            <PropertyRef Name="DETALLE_CUENTA_POR_COBRAR_ID" />
+            <PropertyRef Name="HISTORIAL_CUENTA_POR_COBRAR_ID" />
           </Key>
-          <Property Name="DETALLE_CUENTA_POR_COBRAR_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HISTORIAL_CUENTA_POR_COBRAR_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CUENTA_POR_COBRAR_ID" Type="bigint" />
-          <Property Name="FECHA_CREACION" Type="datetime" />
-          <Property Name="ESTADO_PAGO_ID" Type="int" />
-          <Property Name="FECHA_CANCELACION" Type="datetime" />
-          <Property Name="NUMERO_FACTURA" Type="varchar" MaxLength="50" />
+          <Property Name="FECHA_COBRO" Type="datetime" />
+          <Property Name="VALOR_COBRO" Type="decimal" Precision="18" Scale="2" />
           <Property Name="USUARIO_ID" Type="int" />
-          <Property Name="DESCRIPCION" Type="varchar" MaxLength="100" />
-          <Property Name="DEBITO" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="CREDITO" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="HISTORIAL_CUENTA_POR_PAGAR">
+          <Key>
+            <PropertyRef Name="HISTORIAL_CUENTA_POR_PAGAR_ID" />
+          </Key>
+          <Property Name="HISTORIAL_CUENTA_POR_PAGAR_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CUENTA_POR_PAGAR_ID" Type="bigint" />
+          <Property Name="FECHA_PAGO" Type="datetime" />
+          <Property Name="VALOR_PAGO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="USUARIO_ID" Type="int" />
         </EntityType>
         <EntityType Name="CABECERA_FACTURACION">
           <Key>
@@ -954,18 +983,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DETALLE_CUENTAS_POR_COBRAR_VS_CUENTA_POR_COBRAR">
-          <End Role="CUENTA_POR_COBRAR" Type="Self.CUENTA_POR_COBRAR" Multiplicity="0..1" />
-          <End Role="DETALLE_CUENTA_POR_COBRAR" Type="Self.DETALLE_CUENTA_POR_COBRAR" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CUENTA_POR_COBRAR">
-              <PropertyRef Name="CUENTA_POR_COBRAR_ID" />
-            </Principal>
-            <Dependent Role="DETALLE_CUENTA_POR_COBRAR">
-              <PropertyRef Name="CUENTA_POR_COBRAR_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DETALLE_ENTREGA_OT_VS_DETALLE_OT">
           <End Role="DETALLE_ORDEN_TRABAJO" Type="Self.DETALLE_ORDEN_TRABAJO" Multiplicity="0..1" />
           <End Role="DETALLE_ENTREGA_ORDEN_TRABAJO" Type="Self.DETALLE_ENTREGA_ORDEN_TRABAJO" Multiplicity="*" />
@@ -1239,6 +1256,30 @@
             </Principal>
             <Dependent Role="HISTORIAL_USUARIO">
               <PropertyRef Name="USUARIO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HISTORIAL_CUENTA_POR_COBRAR_VS_CUENTA_POR_COBRAR">
+          <End Role="CUENTA_POR_COBRAR" Type="Self.CUENTA_POR_COBRAR" Multiplicity="0..1" />
+          <End Role="HISTORIAL_CUENTA_POR_COBRAR" Type="Self.HISTORIAL_CUENTA_POR_COBRAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUENTA_POR_COBRAR">
+              <PropertyRef Name="CUENTA_POR_COBRAR_ID" />
+            </Principal>
+            <Dependent Role="HISTORIAL_CUENTA_POR_COBRAR">
+              <PropertyRef Name="CUENTA_POR_COBRAR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HISTORIAL_CUENTA_POR_PAGAR_VS_CUENTA_POR_PAGAR">
+          <End Role="CUENTA_POR_PAGAR" Type="Self.CUENTA_POR_PAGAR" Multiplicity="0..1" />
+          <End Role="HISTORIAL_CUENTA_POR_PAGAR" Type="Self.HISTORIAL_CUENTA_POR_PAGAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUENTA_POR_PAGAR">
+              <PropertyRef Name="CUENTA_POR_PAGAR_ID" />
+            </Principal>
+            <Dependent Role="HISTORIAL_CUENTA_POR_PAGAR">
+              <PropertyRef Name="CUENTA_POR_PAGAR_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1714,8 +1755,10 @@
           <EntitySet Name="CONTROL_USUARIO" EntityType="Self.CONTROL_USUARIO" Schema="AUDITORIA" store:Type="Tables" />
           <EntitySet Name="ARQUEO_CAJA" EntityType="Self.ARQUEO_CAJA" Schema="CONTABILIDAD" store:Type="Tables" />
           <EntitySet Name="CUENTA_POR_COBRAR" EntityType="Self.CUENTA_POR_COBRAR" Schema="CONTABILIDAD" store:Type="Tables" />
+          <EntitySet Name="CUENTA_POR_PAGAR" EntityType="Self.CUENTA_POR_PAGAR" Schema="CONTABILIDAD" store:Type="Tables" />
           <EntitySet Name="DETALLE_ARQUEO_CAJA" EntityType="Self.DETALLE_ARQUEO_CAJA" Schema="CONTABILIDAD" store:Type="Tables" />
-          <EntitySet Name="DETALLE_CUENTA_POR_COBRAR" EntityType="Self.DETALLE_CUENTA_POR_COBRAR" Schema="CONTABILIDAD" store:Type="Tables" />
+          <EntitySet Name="HISTORIAL_CUENTA_POR_COBRAR" EntityType="Self.HISTORIAL_CUENTA_POR_COBRAR" Schema="CONTABILIDAD" store:Type="Tables" />
+          <EntitySet Name="HISTORIAL_CUENTA_POR_PAGAR" EntityType="Self.HISTORIAL_CUENTA_POR_PAGAR" Schema="CONTABILIDAD" store:Type="Tables" />
           <EntitySet Name="CABECERA_FACTURACION" EntityType="Self.CABECERA_FACTURACION" Schema="FE" store:Type="Tables" />
           <EntitySet Name="SECUENCIALES_SRI" EntityType="Self.SECUENCIALES_SRI" Schema="FE" store:Type="Tables" />
           <EntitySet Name="CIUDAD" EntityType="Self.CIUDAD" Schema="GENERAL" store:Type="Tables" />
@@ -1858,10 +1901,6 @@
             <End Role="ARQUEO_CAJA" EntitySet="ARQUEO_CAJA" />
             <End Role="DETALLE_ARQUEO_CAJA" EntitySet="DETALLE_ARQUEO_CAJA" />
           </AssociationSet>
-          <AssociationSet Name="FK_DETALLE_CUENTAS_POR_COBRAR_VS_CUENTA_POR_COBRAR" Association="Self.FK_DETALLE_CUENTAS_POR_COBRAR_VS_CUENTA_POR_COBRAR">
-            <End Role="CUENTA_POR_COBRAR" EntitySet="CUENTA_POR_COBRAR" />
-            <End Role="DETALLE_CUENTA_POR_COBRAR" EntitySet="DETALLE_CUENTA_POR_COBRAR" />
-          </AssociationSet>
           <AssociationSet Name="FK_DETALLE_ENTREGA_OT_VS_DETALLE_OT" Association="Self.FK_DETALLE_ENTREGA_OT_VS_DETALLE_OT">
             <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
             <End Role="DETALLE_ENTREGA_ORDEN_TRABAJO" EntitySet="DETALLE_ENTREGA_ORDEN_TRABAJO" />
@@ -1953,6 +1992,14 @@
           <AssociationSet Name="FK_HISTORIA_FK_HISTOR_USUARIO" Association="Self.FK_HISTORIA_FK_HISTOR_USUARIO">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="HISTORIAL_USUARIO" EntitySet="HISTORIAL_USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HISTORIAL_CUENTA_POR_COBRAR_VS_CUENTA_POR_COBRAR" Association="Self.FK_HISTORIAL_CUENTA_POR_COBRAR_VS_CUENTA_POR_COBRAR">
+            <End Role="CUENTA_POR_COBRAR" EntitySet="CUENTA_POR_COBRAR" />
+            <End Role="HISTORIAL_CUENTA_POR_COBRAR" EntitySet="HISTORIAL_CUENTA_POR_COBRAR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HISTORIAL_CUENTA_POR_PAGAR_VS_CUENTA_POR_PAGAR" Association="Self.FK_HISTORIAL_CUENTA_POR_PAGAR_VS_CUENTA_POR_PAGAR">
+            <End Role="CUENTA_POR_PAGAR" EntitySet="CUENTA_POR_PAGAR" />
+            <End Role="HISTORIAL_CUENTA_POR_PAGAR" EntitySet="HISTORIAL_CUENTA_POR_PAGAR" />
           </AssociationSet>
           <AssociationSet Name="FK_HISTORIAL_PROCESO_VS_ETAPA_PROCESO" Association="Self.FK_HISTORIAL_PROCESO_VS_ETAPA_PROCESO">
             <End Role="ETAPA_PROCESO" EntitySet="ETAPA_PROCESO" />
@@ -4241,10 +4288,16 @@
             <End Role="DETALLE_TRABAJO_FOTOGRAFIA" EntitySet="DETALLE_TRABAJO_FOTOGRAFIA" />
           </AssociationSet>
           <EntitySet Name="CUENTA_POR_COBRAR" EntityType="Decisiones_Inteligentes_Modelo.CUENTA_POR_COBRAR" />
-          <EntitySet Name="DETALLE_CUENTA_POR_COBRAR" EntityType="Decisiones_Inteligentes_Modelo.DETALLE_CUENTA_POR_COBRAR" />
-          <AssociationSet Name="FK_DETALLE_CUENTAS_POR_COBRAR_VS_CUENTA_POR_COBRAR" Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_CUENTAS_POR_COBRAR_VS_CUENTA_POR_COBRAR">
+          <EntitySet Name="CUENTA_POR_PAGAR" EntityType="Decisiones_Inteligentes_Modelo.CUENTA_POR_PAGAR" />
+          <EntitySet Name="HISTORIAL_CUENTA_POR_COBRAR" EntityType="Decisiones_Inteligentes_Modelo.HISTORIAL_CUENTA_POR_COBRAR" />
+          <AssociationSet Name="FK_HISTORIAL_CUENTA_POR_COBRAR_VS_CUENTA_POR_COBRAR" Association="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_CUENTA_POR_COBRAR_VS_CUENTA_POR_COBRAR">
             <End Role="CUENTA_POR_COBRAR" EntitySet="CUENTA_POR_COBRAR" />
-            <End Role="DETALLE_CUENTA_POR_COBRAR" EntitySet="DETALLE_CUENTA_POR_COBRAR" />
+            <End Role="HISTORIAL_CUENTA_POR_COBRAR" EntitySet="HISTORIAL_CUENTA_POR_COBRAR" />
+          </AssociationSet>
+          <EntitySet Name="HISTORIAL_CUENTA_POR_PAGAR" EntityType="Decisiones_Inteligentes_Modelo.HISTORIAL_CUENTA_POR_PAGAR" />
+          <AssociationSet Name="FK_HISTORIAL_CUENTA_POR_PAGAR_VS_CUENTA_POR_PAGAR" Association="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_CUENTA_POR_PAGAR_VS_CUENTA_POR_PAGAR">
+            <End Role="CUENTA_POR_PAGAR" EntitySet="CUENTA_POR_PAGAR" />
+            <End Role="HISTORIAL_CUENTA_POR_PAGAR" EntitySet="HISTORIAL_CUENTA_POR_PAGAR" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="HISTORIAL_PROCESO">
@@ -4346,40 +4399,83 @@
             <PropertyRef Name="CUENTA_POR_COBRAR_ID" />
           </Key>
           <Property Name="CUENTA_POR_COBRAR_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="INDIVIDUO_ID" Type="Int64" />
+          <Property Name="CLIENTE_ID" Type="Int64" />
           <Property Name="FECHA_CREACION" Type="DateTime" Precision="3" />
-          <Property Name="USUARIO_ID" Type="Int32" />
-          <Property Name="ESTADO_CUENTA_POR_SUCURSAL" Type="Boolean" />
+          <Property Name="FECHA_MODIFICACION" Type="DateTime" Precision="3" />
+          <Property Name="USUARIO_CREACION_ID" Type="Int32" />
+          <Property Name="USUARIO_MODIFICACION_ID" Type="Int32" />
+          <Property Name="FECHA_VENCIMIENTO" Type="DateTime" Precision="3" />
           <Property Name="SUCURSAL_ID" Type="Int32" />
           <Property Name="PUNTO_VENTA_ID" Type="Int32" />
-          <Property Name="ESTADO_CUENTA_POR_PUNTO_VENTA" Type="Boolean" />
-          <NavigationProperty Name="DETALLE_CUENTA_POR_COBRAR" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_CUENTAS_POR_COBRAR_VS_CUENTA_POR_COBRAR" FromRole="CUENTA_POR_COBRAR" ToRole="DETALLE_CUENTA_POR_COBRAR" />
-        </EntityType>
-        <EntityType Name="DETALLE_CUENTA_POR_COBRAR">
-          <Key>
-            <PropertyRef Name="DETALLE_CUENTA_POR_COBRAR_ID" />
-          </Key>
-          <Property Name="DETALLE_CUENTA_POR_COBRAR_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CUENTA_POR_COBRAR_ID" Type="Int64" />
-          <Property Name="FECHA_CREACION" Type="DateTime" Precision="3" />
-          <Property Name="ESTADO_PAGO_ID" Type="Int32" />
-          <Property Name="FECHA_CANCELACION" Type="DateTime" Precision="3" />
+          <Property Name="SALDO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="VALOR" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="NUMERO_FACTURA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="USUARIO_ID" Type="Int32" />
-          <Property Name="DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="DEBITO" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="CREDITO" Type="Decimal" Precision="18" Scale="2" />
-          <NavigationProperty Name="CUENTA_POR_COBRAR" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_CUENTAS_POR_COBRAR_VS_CUENTA_POR_COBRAR" FromRole="DETALLE_CUENTA_POR_COBRAR" ToRole="CUENTA_POR_COBRAR" />
+          <Property Name="NUMERO_ORDEN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="HISTORIAL_CUENTA_POR_COBRAR" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_CUENTA_POR_COBRAR_VS_CUENTA_POR_COBRAR" FromRole="CUENTA_POR_COBRAR" ToRole="HISTORIAL_CUENTA_POR_COBRAR" />
+          <Property Name="ESTADO_PAGO_ID" Type="Int32" />
         </EntityType>
-        <Association Name="FK_DETALLE_CUENTAS_POR_COBRAR_VS_CUENTA_POR_COBRAR">
+        <EntityType Name="CUENTA_POR_PAGAR">
+          <Key>
+            <PropertyRef Name="CUENTA_POR_PAGAR_ID" />
+          </Key>
+          <Property Name="CUENTA_POR_PAGAR_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PROVEDOR_ID" Type="Int64" />
+          <Property Name="FECHA_CREACION" Type="DateTime" Precision="3" />
+          <Property Name="FECHA_MODIFICACION" Type="DateTime" Precision="3" />
+          <Property Name="USUARIO_CREACION_ID" Type="Int32" />
+          <Property Name="USUARIO_MODIFICACION_ID" Type="Int32" />
+          <Property Name="FECHA_VENCIMIENTO" Type="DateTime" Precision="3" />
+          <Property Name="SUCURSAL_ID" Type="Int32" />
+          <Property Name="PUNTO_VENTA_ID" Type="Int32" />
+          <Property Name="SALDO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="VALOR" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NUMERO_FACTURA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NUMERO_ORDEN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="HISTORIAL_CUENTA_POR_PAGAR" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_CUENTA_POR_PAGAR_VS_CUENTA_POR_PAGAR" FromRole="CUENTA_POR_PAGAR" ToRole="HISTORIAL_CUENTA_POR_PAGAR" />
+        </EntityType>
+        <EntityType Name="HISTORIAL_CUENTA_POR_COBRAR">
+          <Key>
+            <PropertyRef Name="HISTORIAL_CUENTA_POR_COBRAR_ID" />
+          </Key>
+          <Property Name="HISTORIAL_CUENTA_POR_COBRAR_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CUENTA_POR_COBRAR_ID" Type="Int64" />
+          <Property Name="FECHA_COBRO" Type="DateTime" Precision="3" />
+          <Property Name="VALOR_COBRO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="USUARIO_ID" Type="Int32" />
+          <NavigationProperty Name="CUENTA_POR_COBRAR" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_CUENTA_POR_COBRAR_VS_CUENTA_POR_COBRAR" FromRole="HISTORIAL_CUENTA_POR_COBRAR" ToRole="CUENTA_POR_COBRAR" />
+        </EntityType>
+        <Association Name="FK_HISTORIAL_CUENTA_POR_COBRAR_VS_CUENTA_POR_COBRAR">
           <End Type="Decisiones_Inteligentes_Modelo.CUENTA_POR_COBRAR" Role="CUENTA_POR_COBRAR" Multiplicity="0..1" />
-          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_CUENTA_POR_COBRAR" Role="DETALLE_CUENTA_POR_COBRAR" Multiplicity="*" />
+          <End Type="Decisiones_Inteligentes_Modelo.HISTORIAL_CUENTA_POR_COBRAR" Role="HISTORIAL_CUENTA_POR_COBRAR" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CUENTA_POR_COBRAR">
               <PropertyRef Name="CUENTA_POR_COBRAR_ID" />
             </Principal>
-            <Dependent Role="DETALLE_CUENTA_POR_COBRAR">
+            <Dependent Role="HISTORIAL_CUENTA_POR_COBRAR">
               <PropertyRef Name="CUENTA_POR_COBRAR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="HISTORIAL_CUENTA_POR_PAGAR">
+          <Key>
+            <PropertyRef Name="HISTORIAL_CUENTA_POR_PAGAR_ID" />
+          </Key>
+          <Property Name="HISTORIAL_CUENTA_POR_PAGAR_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CUENTA_POR_PAGAR_ID" Type="Int64" />
+          <Property Name="FECHA_PAGO" Type="DateTime" Precision="3" />
+          <Property Name="VALOR_PAGO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="USUARIO_ID" Type="Int32" />
+          <NavigationProperty Name="CUENTA_POR_PAGAR" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_CUENTA_POR_PAGAR_VS_CUENTA_POR_PAGAR" FromRole="HISTORIAL_CUENTA_POR_PAGAR" ToRole="CUENTA_POR_PAGAR" />
+        </EntityType>
+        <Association Name="FK_HISTORIAL_CUENTA_POR_PAGAR_VS_CUENTA_POR_PAGAR">
+          <End Type="Decisiones_Inteligentes_Modelo.CUENTA_POR_PAGAR" Role="CUENTA_POR_PAGAR" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.HISTORIAL_CUENTA_POR_PAGAR" Role="HISTORIAL_CUENTA_POR_PAGAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUENTA_POR_PAGAR">
+              <PropertyRef Name="CUENTA_POR_PAGAR_ID" />
+            </Principal>
+            <Dependent Role="HISTORIAL_CUENTA_POR_PAGAR">
+              <PropertyRef Name="CUENTA_POR_PAGAR_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5170,30 +5266,61 @@
           <EntitySetMapping Name="CUENTA_POR_COBRAR">
             <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.CUENTA_POR_COBRAR">
               <MappingFragment StoreEntitySet="CUENTA_POR_COBRAR">
-                <ScalarProperty Name="ESTADO_CUENTA_POR_PUNTO_VENTA" ColumnName="ESTADO_CUENTA_POR_PUNTO_VENTA" />
+                <ScalarProperty Name="ESTADO_PAGO_ID" ColumnName="ESTADO_PAGO_ID" />
+                <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
+                <ScalarProperty Name="NUMERO_FACTURA" ColumnName="NUMERO_FACTURA" />
+                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+                <ScalarProperty Name="SALDO" ColumnName="SALDO" />
                 <ScalarProperty Name="PUNTO_VENTA_ID" ColumnName="PUNTO_VENTA_ID" />
                 <ScalarProperty Name="SUCURSAL_ID" ColumnName="SUCURSAL_ID" />
-                <ScalarProperty Name="ESTADO_CUENTA_POR_SUCURSAL" ColumnName="ESTADO_CUENTA_POR_SUCURSAL" />
-                <ScalarProperty Name="USUARIO_ID" ColumnName="USUARIO_ID" />
+                <ScalarProperty Name="FECHA_VENCIMIENTO" ColumnName="FECHA_VENCIMIENTO" />
+                <ScalarProperty Name="USUARIO_MODIFICACION_ID" ColumnName="USUARIO_MODIFICACION_ID" />
+                <ScalarProperty Name="USUARIO_CREACION_ID" ColumnName="USUARIO_CREACION_ID" />
+                <ScalarProperty Name="FECHA_MODIFICACION" ColumnName="FECHA_MODIFICACION" />
                 <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
-                <ScalarProperty Name="INDIVIDUO_ID" ColumnName="INDIVIDUO_ID" />
+                <ScalarProperty Name="CLIENTE_ID" ColumnName="CLIENTE_ID" />
                 <ScalarProperty Name="CUENTA_POR_COBRAR_ID" ColumnName="CUENTA_POR_COBRAR_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DETALLE_CUENTA_POR_COBRAR">
-            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.DETALLE_CUENTA_POR_COBRAR">
-              <MappingFragment StoreEntitySet="DETALLE_CUENTA_POR_COBRAR">
-                <ScalarProperty Name="CREDITO" ColumnName="CREDITO" />
-                <ScalarProperty Name="DEBITO" ColumnName="DEBITO" />
-                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
-                <ScalarProperty Name="USUARIO_ID" ColumnName="USUARIO_ID" />
+          <EntitySetMapping Name="CUENTA_POR_PAGAR">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.CUENTA_POR_PAGAR">
+              <MappingFragment StoreEntitySet="CUENTA_POR_PAGAR">
+                <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
                 <ScalarProperty Name="NUMERO_FACTURA" ColumnName="NUMERO_FACTURA" />
-                <ScalarProperty Name="FECHA_CANCELACION" ColumnName="FECHA_CANCELACION" />
-                <ScalarProperty Name="ESTADO_PAGO_ID" ColumnName="ESTADO_PAGO_ID" />
+                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+                <ScalarProperty Name="SALDO" ColumnName="SALDO" />
+                <ScalarProperty Name="PUNTO_VENTA_ID" ColumnName="PUNTO_VENTA_ID" />
+                <ScalarProperty Name="SUCURSAL_ID" ColumnName="SUCURSAL_ID" />
+                <ScalarProperty Name="FECHA_VENCIMIENTO" ColumnName="FECHA_VENCIMIENTO" />
+                <ScalarProperty Name="USUARIO_MODIFICACION_ID" ColumnName="USUARIO_MODIFICACION_ID" />
+                <ScalarProperty Name="USUARIO_CREACION_ID" ColumnName="USUARIO_CREACION_ID" />
+                <ScalarProperty Name="FECHA_MODIFICACION" ColumnName="FECHA_MODIFICACION" />
                 <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+                <ScalarProperty Name="PROVEDOR_ID" ColumnName="PROVEDOR_ID" />
+                <ScalarProperty Name="CUENTA_POR_PAGAR_ID" ColumnName="CUENTA_POR_PAGAR_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HISTORIAL_CUENTA_POR_COBRAR">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.HISTORIAL_CUENTA_POR_COBRAR">
+              <MappingFragment StoreEntitySet="HISTORIAL_CUENTA_POR_COBRAR">
+                <ScalarProperty Name="USUARIO_ID" ColumnName="USUARIO_ID" />
+                <ScalarProperty Name="VALOR_COBRO" ColumnName="VALOR_COBRO" />
+                <ScalarProperty Name="FECHA_COBRO" ColumnName="FECHA_COBRO" />
                 <ScalarProperty Name="CUENTA_POR_COBRAR_ID" ColumnName="CUENTA_POR_COBRAR_ID" />
-                <ScalarProperty Name="DETALLE_CUENTA_POR_COBRAR_ID" ColumnName="DETALLE_CUENTA_POR_COBRAR_ID" />
+                <ScalarProperty Name="HISTORIAL_CUENTA_POR_COBRAR_ID" ColumnName="HISTORIAL_CUENTA_POR_COBRAR_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HISTORIAL_CUENTA_POR_PAGAR">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.HISTORIAL_CUENTA_POR_PAGAR">
+              <MappingFragment StoreEntitySet="HISTORIAL_CUENTA_POR_PAGAR">
+                <ScalarProperty Name="USUARIO_ID" ColumnName="USUARIO_ID" />
+                <ScalarProperty Name="VALOR_PAGO" ColumnName="VALOR_PAGO" />
+                <ScalarProperty Name="FECHA_PAGO" ColumnName="FECHA_PAGO" />
+                <ScalarProperty Name="CUENTA_POR_PAGAR_ID" ColumnName="CUENTA_POR_PAGAR_ID" />
+                <ScalarProperty Name="HISTORIAL_CUENTA_POR_PAGAR_ID" ColumnName="HISTORIAL_CUENTA_POR_PAGAR_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

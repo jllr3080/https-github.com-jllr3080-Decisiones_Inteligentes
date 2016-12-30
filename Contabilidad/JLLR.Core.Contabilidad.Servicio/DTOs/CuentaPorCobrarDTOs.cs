@@ -21,10 +21,6 @@ namespace JLLR.Core.Contabilidad.Servicio.DTOs
         [DataMember]
         public CuentaPorCobrarModelo CuentaPorCobrar { get; set; }
 
-        /// <summary>
-        /// Detalle de la cuenta por cobrar
-        /// </summary>
-        [DataMember]
-        public List<DetalleCuentaPorCobrarModelo> DetalleCuentaPorCobrar { get; set; }
+       
     }
 }

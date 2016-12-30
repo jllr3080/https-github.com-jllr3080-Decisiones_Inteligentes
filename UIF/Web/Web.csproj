@@ -338,7 +338,9 @@
       <DependentUpon>EntregaRecepcionPrendas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\Contabilidad\CuentaPorCobrarVistaModelo.cs" />
-    <Compile Include="Models\Contabilidad\DetalleCuentaPorCobrarVistaModelo.cs" />
+    <Compile Include="Models\Contabilidad\CuentaPorPagarVistaModelo.cs" />
+    <Compile Include="Models\Contabilidad\HistorialCuentaPorCobrarVistaModelo.cs" />
+    <Compile Include="Models\Contabilidad\HistorialCuentaPorPagarVistaModelo.cs" />
     <Compile Include="Models\FlujoProceso\HistorialProcesoVistaModelo.cs" />
     <Compile Include="Models\General\CiudadVistaModelo.cs" />
     <Compile Include="Models\General\ColorVistaModelo.cs" />
@@ -483,6 +485,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Reporte\Venta\Rdlc\ReporteDiario.rdlc" />
+    <EmbeddedResource Include="Reporte\Venta\Rdlc\ReporteOrdenTrabajo.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

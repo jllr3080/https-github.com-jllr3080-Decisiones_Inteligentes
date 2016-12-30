@@ -721,5 +721,45 @@ namespace JLLR.Core.General.Servicio.Ensamblador
         }
 
         #endregion
+
+
+        #region  TIPO TELEFONO
+        /// <summary>
+        /// Convierte el DTO de entidad a modelo
+        /// </summary>
+        /// <param name="e">Entidad</param>
+        /// <returns></returns>
+        public modelo.EtapaProcesoModelo CrearEtapaProceso(entidad.ETAPA_PROCESO e)
+        {
+            return new modelo.EtapaProcesoModelo
+            {
+                EtapaProcesoId = e.ETAPA_PROCESO_ID,
+                Descripcion=e.DESCRIPCION,
+                EstaHabilitado = e.ESTA_HABILITADO,
+                HabilitaEnvioMail = e.HABILITA_ENVIO_MAIL
+
+            };
+
+        }
+
+        /// <summary>
+        /// Convierte un listado de DTO en listado de  modelos de DTO
+        /// </summary>
+        /// <param name="listadoEntidad">Listado de Entidades</param>
+        /// <returns></returns>
+        public List<modelo.EtapaProcesoModelo> CrearEtapasProceso(IQueryable<entidad.ETAPA_PROCESO> listadoEntidad)
+        {
+            List<modelo.EtapaProcesoModelo> listaModelo = new List<modelo.EtapaProcesoModelo>();
+
+            foreach (var entidad in listadoEntidad)
+            {
+                listaModelo.Add(CrearEtapaProceso(entidad));
+            }
+            return listaModelo;
+
+        }
+
+        #endregion
     }
+
 }

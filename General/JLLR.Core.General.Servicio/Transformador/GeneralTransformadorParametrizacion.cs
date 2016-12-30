@@ -297,5 +297,28 @@ namespace JLLR.Core.General.Servicio.Transformador
             }
         }
         #endregion
+
+        #region ETAPA DE PROCESO
+        /// <summary>
+        /// Obtiene la  etapas de proceso por id
+        /// </summary>
+        /// <param name="etapaProcesoId"></param>
+        /// <returns></returns>
+
+        public modelo.EtapaProcesoModelo ObtenerEtapaProcesoPorEtapaProcesoId(int etapaProcesoId)
+        {
+            try
+            {
+                return
+                    _ensambladorModelo.CrearEtapaProceso(
+                        _generalParametrizacion.ObtenerEtapaProcesoPorEtapaProcesoId(etapaProcesoId));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
     }
 }

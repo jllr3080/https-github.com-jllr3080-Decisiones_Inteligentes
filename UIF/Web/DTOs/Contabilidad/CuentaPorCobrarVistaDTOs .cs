@@ -16,9 +16,6 @@ namespace Web.DTOs.Contabilidad
         /// </summary>
         public CuentaPorCobrarVistaModelo CuentaPorCobrar { get; set; }
 
-        /// <summary>
-        /// Detalle de la cuenta por cobrar
-        /// </summary>
-        public List<DetalleCuentaPorCobrarVistaModelo> DetalleCuentaPorCobrar { get; set; }
+       
     }
 }

@@ -46,7 +46,6 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                     foreach (var detalleOrdenTrabajo in ordenTrabajoDtOs.DetalleOrdenTrabajos)
                     {
                         detalleOrdenTrabajo.ORDEN_TRABAJO_ID = ordenTrabajo.ORDEN_TRABAJO_ID;
-
                         _detalleOrdenTrabajoDaOs.GrabarDetelleOrdenTrabajo(detalleOrdenTrabajo);
                     }
 
@@ -92,7 +91,7 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                                      join material in _entidad.MATERIAL on detalleOrdenTrabajo.MATERIAL_ID equals material.MATERIAL_ID
                                      join estadoPago in _entidad.ESTADO_PAGO on ordenTrabajo.ESTADO_PAGO_ID equals estadoPago.ESTADO_PAGO_ID
                                      where ordenTrabajo.NUMERO_ORDEN == numeroOrden && ordenTrabajo.PUNTO_VENTA_ID == puntoVentaId
-                                     select new ConsultaOrdenTrabajoDTOs { TipoLavado = tipoLavado.DESCRIPCION, EstadoPago = estadoPago.DESCRIPCION, Marca = marca.DESCRIPCION, NumeroOrden = ordenTrabajo.NUMERO_ORDEN, FechaIngreso = ordenTrabajo.FECHA_INGRESO, FechaEntrega = ordenTrabajo.FECHA_ENTREGA, ValorUnitario = detalleOrdenTrabajo.VALOR_UNITARIO, Cantidad = detalleOrdenTrabajo.CANTIDAD, Color = color.DESCRIPCION, ValorTotal = detalleOrdenTrabajo.VALOR_TOTAL, Observacion = detalleOrdenTrabajo.OBSERVACION, Prenda = producto.NOMBRE, NombreCliente = individuo.PRIMER_CAMPO + " " + individuo.SEGUNDO_CAMPO + " " + individuo.TERCER_CAMPO + " " + individuo.CUARTO_CAMPO };
+                                     select new ConsultaOrdenTrabajoDTOs { TipoLavado = tipoLavado.DESCRIPCION, EstadoPago = estadoPago.DESCRIPCION, Marca = marca.DESCRIPCION, NumeroOrden = ordenTrabajo.NUMERO_ORDEN, FechaIngreso = ordenTrabajo.FECHA_INGRESO, FechaEntrega = ordenTrabajo.FECHA_ENTREGA, ValorUnitario = detalleOrdenTrabajo.VALOR_UNITARIO, Cantidad = detalleOrdenTrabajo.CANTIDAD, Color = color.DESCRIPCION, ValorTotal = detalleOrdenTrabajo.VALOR_TOTAL, Observacion = detalleOrdenTrabajo.OBSERVACION, Prenda = producto.NOMBRE, NombreCliente = individuo.PRIMER_CAMPO + " " + individuo.SEGUNDO_CAMPO + " " + individuo.TERCER_CAMPO + " " + individuo.CUARTO_CAMPO,EstadoPagoId = ordenTrabajo.ESTADO_PAGO_ID, OrdenTrabajoId = ordenTrabajo.ORDEN_TRABAJO_ID,DetalleOrdenTrabajoId = detalleOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID};
                 return ordenesTrabajo;
 
 

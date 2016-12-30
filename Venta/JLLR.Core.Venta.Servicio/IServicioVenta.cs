@@ -29,6 +29,19 @@ namespace JLLR.Core.Venta.Servicio
         OrdenTrabajoModelo GrabarOrdenTrabajoCompleta(OrdenTrabajoDTOs ordenTrabajoDtOs);
         #endregion
 
+        #region ORDEN TRABAJO
+
+        /// <summary>
+        /// Actualiza  la orden de trabajo
+        /// </summary>
+        /// <param name="ordenTrabajo"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "ActualizarOrdenTrabajo/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void ActualizarOrdenTrabajo(OrdenTrabajoModelo ordenTrabajo);
+       
+
+        #endregion
+
         #region DETALLE DE  ORDEN DE TRABAJO OBSERVACIONES
 
         /// <summary>

@@ -37,9 +37,12 @@ namespace Web.ServicioDelegado
             try
             {
                 var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
                 var json = clienteWeb.DownloadString(direccionUrl + "ObtenerDatosClientePorNumeroIdentificacion?numeroIdentificacion=" + numeroIdentificacion);
                 var js = new JavaScriptSerializer();
                 return js.Deserialize<ClienteVistaDTOs>(json);
+
             }
             catch (Exception ex)
             {

@@ -22,7 +22,7 @@ namespace JLLR.Core.FlujoProceso.Servicio.Modelo
         /// OrdenTrabajoId
         /// </summary>
         [DataMember]
-        public int? OrdenTrabajoId { get; set; }
+        public Int64? OrdenTrabajoId { get; set; }
 
         /// <summary>
         /// EtapaProceso

@@ -231,6 +231,9 @@
   <data name="Label_Observacion" xml:space="preserve">
     <value>Observación</value>
   </data>
+  <data name="Label_Observaciones_Anulacion" xml:space="preserve">
+    <value>Porque la anulación ?</value>
+  </data>
   <data name="Label_Pais" xml:space="preserve">
     <value>Pais (*)</value>
   </data>
@@ -282,6 +285,12 @@
   <data name="Label_Valor_Unitario" xml:space="preserve">
     <value>Valor Unitario</value>
   </data>
+  <data name="Literal_Anular_Orden" xml:space="preserve">
+    <value>Anular Orden</value>
+  </data>
+  <data name="Literal_Cerrar_Orden" xml:space="preserve">
+    <value>Cerrar la Orden</value>
+  </data>
   <data name="Marca_Agua_Fecha" xml:space="preserve">
     <value>dd/mm/yyyy</value>
   </data>
@@ -296,6 +305,9 @@
   </data>
   <data name="Mensaje_Exitoso" xml:space="preserve">
     <value>Operación exitosa</value>
+  </data>
+  <data name="Mensaje_Numero_Orden_Existe" xml:space="preserve">
+    <value>Número de orden existe, no puede ingresar</value>
   </data>
   <data name="Mensaje_Obligatorio" xml:space="preserve">
     <value>Dato Obligatorio</value>
@@ -315,6 +327,9 @@
   <data name="Panel_Busqueda_Reporte_Diario_Fecha" xml:space="preserve">
     <value>Busqueda por Fecha </value>
   </data>
+  <data name="Panel_Cabecera_Cuenta_Por_Cobrar" xml:space="preserve">
+    <value>Busqueda de  Cuentas  Por Cobrar</value>
+  </data>
   <data name="Panel_Cabecera_Orden_Trabajo" xml:space="preserve">
     <value>Encabezado Orden de Trabajo</value>
   </data>
@@ -333,6 +348,9 @@
   <data name="Panel_Forma_Pago" xml:space="preserve">
     <value>Datos de Pago</value>
   </data>
+  <data name="Panel_Historial_Proceso" xml:space="preserve">
+    <value>Historial Proceso</value>
+  </data>
   <data name="Panel_Ingreso_Sistema" xml:space="preserve">
     <value>Ingrese Sus Credenciales de Acceso</value>
   </data>
@@ -347,6 +365,9 @@
   </data>
   <data name="Titulo_Pagina_Consulta_Orden_Trabajo" xml:space="preserve">
     <value>Consulta Orden de Trabajo</value>
+  </data>
+  <data name="Titulo_Pagina_Cuenta_Por_Cobrar" xml:space="preserve">
+    <value>Cuentas Por Cobrar</value>
   </data>
   <data name="Titulo_Pagina_Orden_Trabajo" xml:space="preserve">
     <value>Orden de Trabajo</value>

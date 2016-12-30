@@ -82,6 +82,9 @@
     <Compile Include="Entidades\CUENTA_POR_COBRAR.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entidades\CUENTA_POR_PAGAR.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entidades\Decisiones_Inteligentes_Modelo.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -98,9 +101,6 @@
       <DependentUpon>Decisiones_Inteligentes_Modelo.edmx</DependentUpon>
     </Compile>
     <Compile Include="Entidades\DETALLE_ARQUEO_CAJA.cs">
-      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entidades\DETALLE_CUENTA_POR_COBRAR.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\DETALLE_ENTREGA_ORDEN_TRABAJO.cs">
@@ -146,6 +146,12 @@
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\GRUPO_PRODUCTO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\HISTORIAL_CUENTA_POR_COBRAR.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\HISTORIAL_CUENTA_POR_PAGAR.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\HISTORIAL_PROCESO.cs">

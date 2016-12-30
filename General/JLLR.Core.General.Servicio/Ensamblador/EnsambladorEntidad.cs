@@ -702,5 +702,42 @@ namespace JLLR.Core.General.Servicio.Ensamblador
 
         }
         #endregion
+
+        #region ETAPA PROCESO
+        /// <summary>
+        /// Convierte el modelo en una entidad
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public entidad.ETAPA_PROCESO CrearEtapaProceso(modelo.EtapaProcesoModelo m)
+        {
+            return new entidad.ETAPA_PROCESO()
+            {
+             ETAPA_PROCESO_ID = m.EtapaProcesoId,
+             DESCRIPCION = m.Descripcion,
+             ESTA_HABILITADO = m.EstaHabilitado,
+             HABILITA_ENVIO_MAIL = m.HabilitaEnvioMail
+             
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<entidad.ETAPA_PROCESO> CrearEtapasProceso(List<modelo.EtapaProcesoModelo> listadoModelo)
+        {
+            List<entidad.ETAPA_PROCESO> listaEntidad = new List<entidad.ETAPA_PROCESO>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearEtapaProceso(modelo));
+            }
+            return listaEntidad;
+
+        }
+        #endregion
     }
 }

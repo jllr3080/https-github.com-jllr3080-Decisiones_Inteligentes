@@ -4,37 +4,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using JLLR.Core.Base.Proveedor.DAOs;
 using JLLR.Core.Base.Proveedor.Entidades;
 
 #endregion
 namespace JLLR.Core.Contabilidad.Proveedor.DAOs
 {
     /// <summary>
-    /// Cabcecera  de las cuentas por  cobrar
+    /// Cuentas por  Pagar
     /// </summary>
-    public class CuentaPorCobrarDAOs:BaseDAOs
+    public class CuentaPorPagarDAOs
     {
+
         /// <summary>
         /// Declaraciones e instancias
         /// </summary>
         private readonly Decisiones_Inteligentes _entidad = new Decisiones_Inteligentes();
 
-
         /// <summary>
-        /// Graba la cabecera de la cuenta por cobrar
+        /// Graba las cuentas  por  pagar
         /// </summary>
-        /// <param name="cuentaPorCobrar"></param>
+        /// <param name="cuentaPorPagar"></param>
         /// <returns></returns>
-        public CUENTA_POR_COBRAR GrabarCuentaPorCobrar(CUENTA_POR_COBRAR cuentaPorCobrar)
+        public CUENTA_POR_PAGAR GrabarCuentaPorPagar(CUENTA_POR_PAGAR cuentaPorPagar)
         {
             try
             {
-
-                _entidad.CUENTA_POR_COBRAR.Add(cuentaPorCobrar);
+                _entidad.CUENTA_POR_PAGAR.Add(cuentaPorPagar);
                 _entidad.SaveChanges();
-                return cuentaPorCobrar;
-
+                return cuentaPorPagar;
             }
             catch (Exception ex)
             {
@@ -44,33 +41,28 @@ namespace JLLR.Core.Contabilidad.Proveedor.DAOs
         }
 
         /// <summary>
-        /// Actualiza las  cuentas  por cobrar
+        /// Graba las cuentas  por  pagar
         /// </summary>
-        /// <param name="cuentaPorCobrar"></param>
-
-        public void ActualizaCuentaPorCobrar(CUENTA_POR_COBRAR cuentaPorCobrar)
+        /// <param name="cuentaPorPagar"></param>
+        /// <returns></returns>
+        public void ActualizaCuentaPorPagar(CUENTA_POR_PAGAR cuentaPorPagar)
         {
             try
             {
-                var original = _entidad.CUENTA_POR_COBRAR.Find(cuentaPorCobrar.CUENTA_POR_COBRAR_ID);
+                var original = _entidad.CUENTA_POR_PAGAR.Find(cuentaPorPagar.CUENTA_POR_PAGAR_ID);
 
                 if (original != null)
                 {
-                    _entidad.Entry(original).CurrentValues.SetValues(cuentaPorCobrar);
+                    _entidad.Entry(original).CurrentValues.SetValues(cuentaPorPagar);
                     _entidad.SaveChanges();
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                
+
                 throw;
             }
         }
-
-
-
-
-
     }
 }

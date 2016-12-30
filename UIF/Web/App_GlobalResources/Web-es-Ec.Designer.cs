@@ -403,6 +403,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Porque la anulación ?.
+        /// </summary>
+        internal static string Label_Observaciones_Anulacion {
+            get {
+                return ResourceManager.GetString("Label_Observaciones_Anulacion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Pais (*).
         /// </summary>
         internal static string Label_Pais {
@@ -556,6 +565,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Anular Orden.
+        /// </summary>
+        internal static string Literal_Anular_Orden {
+            get {
+                return ResourceManager.GetString("Literal_Anular_Orden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cerrar la Orden.
+        /// </summary>
+        internal static string Literal_Cerrar_Orden {
+            get {
+                return ResourceManager.GetString("Literal_Cerrar_Orden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a dd/mm/yyyy.
         /// </summary>
         internal static string Marca_Agua_Fecha {
@@ -597,6 +624,15 @@ namespace Resources {
         internal static string Mensaje_Exitoso {
             get {
                 return ResourceManager.GetString("Mensaje_Exitoso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Número de orden existe, no puede ingresar.
+        /// </summary>
+        internal static string Mensaje_Numero_Orden_Existe {
+            get {
+                return ResourceManager.GetString("Mensaje_Numero_Orden_Existe", resourceCulture);
             }
         }
         
@@ -655,6 +691,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Busqueda de  Cuentas  Por Cobrar.
+        /// </summary>
+        internal static string Panel_Cabecera_Cuenta_Por_Cobrar {
+            get {
+                return ResourceManager.GetString("Panel_Cabecera_Cuenta_Por_Cobrar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Encabezado Orden de Trabajo.
         /// </summary>
         internal static string Panel_Cabecera_Orden_Trabajo {
@@ -709,6 +754,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Historial Proceso.
+        /// </summary>
+        internal static string Panel_Historial_Proceso {
+            get {
+                return ResourceManager.GetString("Panel_Historial_Proceso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Ingrese Sus Credenciales de Acceso.
         /// </summary>
         internal static string Panel_Ingreso_Sistema {
@@ -750,6 +804,15 @@ namespace Resources {
         internal static string Titulo_Pagina_Consulta_Orden_Trabajo {
             get {
                 return ResourceManager.GetString("Titulo_Pagina_Consulta_Orden_Trabajo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cuentas Por Cobrar.
+        /// </summary>
+        internal static string Titulo_Pagina_Cuenta_Por_Cobrar {
+            get {
+                return ResourceManager.GetString("Titulo_Pagina_Cuenta_Por_Cobrar", resourceCulture);
             }
         }
         

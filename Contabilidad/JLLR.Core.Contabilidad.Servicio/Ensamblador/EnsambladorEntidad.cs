@@ -14,7 +14,7 @@ namespace JLLR.Core.Contabilidad.Servicio.Ensamblador
     /// </summary>
 	public class EnsambladorEntidad
 	{
-        #region CUENTA POR PAGAR
+        #region CUENTA POR COBRAR
         /// <summary>
         /// Convierte el modelo en una entidad
         /// </summary>
@@ -26,12 +26,19 @@ namespace JLLR.Core.Contabilidad.Servicio.Ensamblador
             {
                CUENTA_POR_COBRAR_ID = m.CuentaPorCobrarId,
                FECHA_CREACION = m.FechaCreacion,
-               INDIVIDUO_ID = m.IndividuoId,
+               NUMERO_FACTURA = m.NumeroFactura,
                PUNTO_VENTA_ID = m.PuntoVentaId,
                SUCURSAL_ID = m.SucursalId,
-               ESTADO_CUENTA_POR_SUCURSAL = m.EstadoCuentaPorSucursal,
-               ESTADO_CUENTA_POR_PUNTO_VENTA = m.EstadoCuentaPorPuntoVenta,
-               USUARIO_ID = m.UsuarioId
+               CLIENTE_ID = m.ClienteId,
+               FECHA_MODIFICACION = m.FechaModificacion,
+               FECHA_VENCIMIENTO = m.FechaVencimiento,
+               USUARIO_CREACION_ID = m.UsuarioCreacionId,
+               USUARIO_MODIFICACION_ID = m.UsuarioModificacionId,
+               NUMERO_ORDEN = m.NumeroOrden,
+               SALDO = m.Saldo,
+               VALOR = m.Valor,
+               ESTADO_PAGO_ID = m.EstadoPagoId
+                
 
             };
         }
@@ -55,27 +62,22 @@ namespace JLLR.Core.Contabilidad.Servicio.Ensamblador
         }
         #endregion
 
+        #region HISTORIAL CUENTA  POR COBRAR
 
-        #region DETALLE CUENTA POR PAGAR
         /// <summary>
         /// Convierte el modelo en una entidad
         /// </summary>
         /// <param name="m"></param>
         /// <returns></returns>
-        public entidad.DETALLE_CUENTA_POR_COBRAR CrearDetalleCuentaPorCobrar(modelo.DetalleCuentaPorCobrarModelo m)
+        public entidad.HISTORIAL_CUENTA_POR_COBRAR CrearHistorialCuentaPorCobrar(modelo.HistorialCuentaPorCobrarModelo m)
         {
-            return new entidad.DETALLE_CUENTA_POR_COBRAR()
+            return new entidad.HISTORIAL_CUENTA_POR_COBRAR()
             {
-               DETALLE_CUENTA_POR_COBRAR_ID = m.DetalleCuentaPorCobrarId,
-               CUENTA_POR_COBRAR_ID = m.CuentaPorCobrarId,
-               FECHA_CREACION = m.FechaCreacion,
-               ESTADO_PAGO_ID = m.EstadoPagoId,
-               FECHA_CANCELACION = m.FechaCancelacion,
-               NUMERO_FACTURA = m.NumeroFactura,
-               CREDITO = m.Credito,
-               DESCRIPCION = m.Descripcion,
-               DEBITO = m.Debito,
-               USUARIO_ID = m.UsuarioId
+                CUENTA_POR_COBRAR_ID = m.CuentaPorCobrarId,
+                FECHA_COBRO = m.FechaCobro,
+                HISTORIAL_CUENTA_POR_COBRAR_ID = m.HistorialCuentaPorCobrarId,
+                USUARIO_ID = m.UsuarioId,
+                VALOR_COBRO = m.ValorCobro
             };
         }
 
@@ -85,17 +87,104 @@ namespace JLLR.Core.Contabilidad.Servicio.Ensamblador
         /// </summary>
         /// <param name="listadoModelo">Listado de Modelos</param>
         /// <returns></returns>z|
-        public List<entidad.DETALLE_CUENTA_POR_COBRAR> CrearDetalleCuentasPorCobrar(List<Modelo.DetalleCuentaPorCobrarModelo> listadoModelo)
+        public List<entidad.HISTORIAL_CUENTA_POR_COBRAR> CrearHistorialCuentasPorCobrar(List<Modelo.HistorialCuentaPorCobrarModelo> listadoModelo)
         {
-            List<entidad.DETALLE_CUENTA_POR_COBRAR> listaEntidad = new List<entidad.DETALLE_CUENTA_POR_COBRAR>();
+            List<entidad.HISTORIAL_CUENTA_POR_COBRAR> listaEntidad = new List<entidad.HISTORIAL_CUENTA_POR_COBRAR>();
 
             foreach (var modelo in listadoModelo)
             {
-                listaEntidad.Add(CrearDetalleCuentaPorCobrar(modelo));
+                listaEntidad.Add(CrearHistorialCuentaPorCobrar(modelo));
             }
             return listaEntidad;
 
         }
         #endregion
+
+        #region CUENTA POR PAGAR
+        /// <summary>
+        /// Convierte el modelo en una entidad
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public entidad.CUENTA_POR_PAGAR CrearCuentaPorPagar(modelo.CuentaPorPagarModelo m)
+        {
+            return new entidad.CUENTA_POR_PAGAR()
+            {
+                CUENTA_POR_PAGAR_ID = m.CuentaPorPagarId,
+                FECHA_CREACION = m.FechaCreacion,
+                NUMERO_FACTURA = m.NumeroFactura,
+                PUNTO_VENTA_ID = m.PuntoVentaId,
+                SUCURSAL_ID = m.SucursalId,
+                PROVEDOR_ID = m.ProveedorId,
+                FECHA_MODIFICACION = m.FechaModificacion,
+                FECHA_VENCIMIENTO = m.FechaVencimiento,
+                USUARIO_CREACION_ID = m.UsuarioCreacionId,
+                USUARIO_MODIFICACION_ID = m.UsuarioModificacionId,
+                NUMERO_ORDEN = m.NumeroOrden,
+                SALDO = m.Saldo,
+                VALOR = m.Valor
+
+
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<entidad.CUENTA_POR_PAGAR> CrearCuentasPorPagar(List<Modelo.CuentaPorPagarModelo> listadoModelo)
+        {
+            List<entidad.CUENTA_POR_PAGAR> listaEntidad = new List<entidad.CUENTA_POR_PAGAR>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearCuentaPorPagar(modelo));
+            }
+            return listaEntidad;
+
+        }
+        #endregion
+
+        #region HISTORIAL CUENTA  POR PAGAR
+
+        /// <summary>
+        /// Convierte el modelo en una entidad
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public entidad.HISTORIAL_CUENTA_POR_PAGAR CrearHistorialCuentaPorPagar(modelo.HistorialCuentaPorPagarModelo m)
+        {
+            return new entidad.HISTORIAL_CUENTA_POR_PAGAR()
+            {
+               HISTORIAL_CUENTA_POR_PAGAR_ID = m.HistorialCuentaPorPagarId,
+               CUENTA_POR_PAGAR_ID = m.CuentaPorPagarId,
+               VALOR_PAGO = m.ValorPago,
+               USUARIO_ID = m.UsuarioId,
+               FECHA_PAGO = m.FechaPago
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<entidad.HISTORIAL_CUENTA_POR_PAGAR> CrearHistorialCuentasPorPagar(List<Modelo.HistorialCuentaPorPagarModelo> listadoModelo)
+        {
+            List<entidad.HISTORIAL_CUENTA_POR_PAGAR> listaEntidad = new List<entidad.HISTORIAL_CUENTA_POR_PAGAR>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearHistorialCuentaPorPagar(modelo));
+            }
+            return listaEntidad;
+
+        }
+        #endregion
+
+
     }
 }

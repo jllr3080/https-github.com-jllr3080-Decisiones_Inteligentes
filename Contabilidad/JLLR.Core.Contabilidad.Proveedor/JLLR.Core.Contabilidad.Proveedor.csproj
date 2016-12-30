@@ -49,7 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAOs\CuentaPorCobrarDAOs.cs" />
-    <Compile Include="DAOs\DetallaCuentaPorCobrarDAOs.cs" />
+    <Compile Include="DAOs\CuentaPorPagarDAOs.cs" />
+    <Compile Include="DAOs\HistorialCuentaPorCobrarDAOs.cs" />
+    <Compile Include="DAOs\HistorialCuentaPorPagarDAOs.cs" />
     <Compile Include="DAOs\TransaccionalDAOs.cs" />
     <Compile Include="DTOs\CuentaPorCobrarDTOs.cs" />
     <Compile Include="Negocio\ContabilidadNegocio.cs" />

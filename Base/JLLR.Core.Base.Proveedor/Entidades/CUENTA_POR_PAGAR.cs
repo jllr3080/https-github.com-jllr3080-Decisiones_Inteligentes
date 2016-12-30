@@ -12,16 +12,16 @@ namespace JLLR.Core.Base.Proveedor.Entidades
     using System;
     using System.Collections.Generic;
     
-    public partial class CUENTA_POR_COBRAR
+    public partial class CUENTA_POR_PAGAR
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CUENTA_POR_COBRAR()
+        public CUENTA_POR_PAGAR()
         {
-            this.HISTORIAL_CUENTA_POR_COBRAR = new HashSet<HISTORIAL_CUENTA_POR_COBRAR>();
+            this.HISTORIAL_CUENTA_POR_PAGAR = new HashSet<HISTORIAL_CUENTA_POR_PAGAR>();
         }
     
-        public long CUENTA_POR_COBRAR_ID { get; set; }
-        public Nullable<long> CLIENTE_ID { get; set; }
+        public long CUENTA_POR_PAGAR_ID { get; set; }
+        public Nullable<long> PROVEDOR_ID { get; set; }
         public Nullable<System.DateTime> FECHA_CREACION { get; set; }
         public Nullable<System.DateTime> FECHA_MODIFICACION { get; set; }
         public Nullable<int> USUARIO_CREACION_ID { get; set; }
@@ -33,9 +33,8 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<decimal> VALOR { get; set; }
         public string NUMERO_FACTURA { get; set; }
         public string NUMERO_ORDEN { get; set; }
-        public Nullable<int> ESTADO_PAGO_ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HISTORIAL_CUENTA_POR_COBRAR> HISTORIAL_CUENTA_POR_COBRAR { get; set; }
+        public virtual ICollection<HISTORIAL_CUENTA_POR_PAGAR> HISTORIAL_CUENTA_POR_PAGAR { get; set; }
     }
 }

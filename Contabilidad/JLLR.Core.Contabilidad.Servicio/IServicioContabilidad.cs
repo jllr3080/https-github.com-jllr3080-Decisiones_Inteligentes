@@ -30,6 +30,103 @@ namespace JLLR.Core.Contabilidad.Servicio
         CuentaPorCobrarModelo GrabarCuentaPorCobrarCompleta(CuentaPorCobrarDTOs cuentaPorCobrarDtOs);
 
         #endregion
+
+        #region CUENTA POR COBRAR
+
+        /// <summary>
+        /// Graba la cabecera de la cuenta por cobrar
+        /// </summary>
+        /// <param name="cuentaPorCobrar"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabarCuentaPorCobrar/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        CuentaPorCobrarModelo GrabarCuentaPorCobrar(CuentaPorCobrarModelo cuentaPorCobrar);
+
+
+        /// <summary>
+        /// Actualiza las  cuentas  por cobrar
+        /// </summary>
+        /// <param name="cuentaPorCobrar"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "ActualizaCuentaPorCobrar/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void ActualizaCuentaPorCobrar(CuentaPorCobrarModelo cuentaPorCobrar);
+
+        #endregion
+
+        #region HISTORIAL CUENTAS POR COBRAR
+
+        /// <summary>
+        /// Graba el  historial de los cobros
+        /// </summary>
+        /// <param name="historialCuentaPorCobrar"></param>
+        /// <returns></returns>
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabarHistorialCuentaPorCobrar/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        HistorialCuentaPorCobrarModelo GrabarHistorialCuentaPorCobrar(
+            HistorialCuentaPorCobrarModelo historialCuentaPorCobrar);
+
+
+
+        /// <summary>
+        /// Actualiza  las  cuentas por cobrar
+        /// </summary>
+        /// <param name="historialCuentaPorCobrar"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "ActualizarHistorialCuentaPorCobrar/*", RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+
+        void ActualizarHistorialCuentaPorCobrar(HistorialCuentaPorCobrarModelo historialCuentaPorCobrar);
+        
+        #endregion
+
+        #region CUENTA POR PAGAR
+
+        /// <summary>
+        /// Graba las cuentas  por  pagar
+        /// </summary>
+        /// <param name="cuentaPorPagar"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabarCuentaPorPagar/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        CuentaPorPagarModelo GrabarCuentaPorPagar(CuentaPorPagarModelo cuentaPorPagar);
+
+
+        /// <summary>
+        /// Graba las cuentas  por  pagar
+        /// </summary>
+        /// <param name="cuentaPorPagar"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "ActualizaCuentaPorPagar/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void ActualizaCuentaPorPagar(CuentaPorPagarModelo cuentaPorPagar);
+
+        #endregion
+
+        #region HISTORIAL CUENTAS POR PAGAR
+
+        /// <summary>
+        /// Graba el historial de las cuentas por  pagar
+        /// </summary>
+        /// <param name="historialCuentaPorPagar"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabarHistorialCuentaPorPagar/*", RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        HistorialCuentaPorPagarModelo GrabarHistorialCuentaPorPagar(
+            HistorialCuentaPorPagarModelo historialCuentaPorPagar);
+
+        /// <summary>
+        /// Actualiza el historial de cuentas  por pagar
+        /// </summary>
+        /// <param name="historialCuentaPorPagar"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "ActualizaHistorialCuentaPorPagar/*", RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+
+        void ActualizaHistorialCuentaPorPagar(HistorialCuentaPorPagarModelo historialCuentaPorPagar);
+
+        #endregion
     }
 
 

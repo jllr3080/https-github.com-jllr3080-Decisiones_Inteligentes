@@ -29,6 +29,8 @@ namespace JLLR.Core.General.Proveedor.Negocio
         private readonly  TipoIdentificacionDAOs _tipoIdentificacionDaOs= new TipoIdentificacionDAOs();
         private readonly  TipoRolIndividuoDAOs _tipoRolIndividuoDaOs=  new TipoRolIndividuoDAOs();
         private readonly  TipoTelefonoDAOs _tipoTelefonoDaOs= new TipoTelefonoDAOs();
+        private readonly  EtapaProcesoDAOs _etpaEtapaProcesoDaOs= new EtapaProcesoDAOs();
+
 
         #endregion
 
@@ -310,6 +312,26 @@ namespace JLLR.Core.General.Proveedor.Negocio
         }
         #endregion
 
+        #region ETAPA DE PROCESO
+        /// <summary>
+        /// Obtiene la  etapas de proceso por id
+        /// </summary>
+        /// <param name="etapaProcesoId"></param>
+        /// <returns></returns>
+
+        public ETAPA_PROCESO ObtenerEtapaProcesoPorEtapaProcesoId(int etapaProcesoId)
+        {
+            try
+            {
+                return _etpaEtapaProcesoDaOs.ObtenerEtapaProcesoPorEtapaProcesoId(etapaProcesoId);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
 
 
     }

@@ -48,6 +48,27 @@ namespace JLLR.Core.Venta.Servicio.Transformador
         }
         #endregion
 
+        #region ORDEN TRABAJO
+
+        /// <summary>
+        /// Actualiza la orden de trabajo
+        /// </summary>
+        /// <param name=""></param>
+        public void ActualizarOrdenTrabajo(OrdenTrabajoModelo ordenTrabajo)
+        {
+            try
+            {
+                _ventaNegocio.ActualizarOrdenTrabajo(_ensambladorEntidad.CrearOrdenTrabajo(ordenTrabajo));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        #endregion
+
         #region DETALLE DE  ORDEN DE TRABAJO OBSERVACIONES
         /// <summary>
         /// Graba todas las observaciones de  los detalles de la orden de trabajo

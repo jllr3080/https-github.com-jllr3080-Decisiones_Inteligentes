@@ -214,7 +214,7 @@
                     <div class="col-md-3">
                          <asp:TextBox ID="_valorTotal" runat="server" class="form-control" ValidationGroup="GrabarDetalleOrdenTrabajo"  ></asp:TextBox>
                         <asp:RequiredFieldValidator ID="_valorTotalValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GrabarDetalleOrdenTrabajo" ControlToValidate="_valorTotal" ></asp:RequiredFieldValidator>
-                         <cc1:MaskedEditExtender ID="_valorTotalMascara" runat="server" TargetControlID="_valorUnitario" Mask="999.99" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus" OnInvalidCssClass="MaskedEditError" MaskType="Number" InputDirection="RightToLeft" AcceptNegative="Left" DisplayMoney="Left" ErrorTooltipEnabled="True" />
+                         <cc1:MaskedEditExtender ID="_valorTotalMascara" runat="server" TargetControlID="_valorTotal" Mask="999.99" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus" OnInvalidCssClass="MaskedEditError" MaskType="Number" InputDirection="RightToLeft" AcceptNegative="Left" DisplayMoney="Left" ErrorTooltipEnabled="True" />
 
                     </div>
                     
@@ -283,7 +283,7 @@
 
                     </div>
                        <div class="col-md-3">
-                        <asp:TextBox ID="_numeroOrden" runat="server" class="form-control" ValidationGroup="GuardarOrden"  ></asp:TextBox>
+                        <asp:TextBox ID="_numeroOrden" runat="server" class="form-control" ValidationGroup="GuardarOrden" AutoPostBack="True" OnTextChanged="_numeroOrden_TextChanged"  ></asp:TextBox>
                         <asp:RequiredFieldValidator ID="_numeroOrdenValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GuardarOrden" ControlToValidate="_numeroOrden" ></asp:RequiredFieldValidator>
                          
                     </div>
