@@ -10,6 +10,7 @@ using Web.Base;
 using Web.DTOs.Venta;
 using Web.Models.FlujoProceso;
 using Web.Models.General;
+using Web.Models.Venta.Negocio;
 using Web.ServicioDelegado;
 
 #endregion
@@ -21,11 +22,52 @@ namespace Web.Venta
         #region Declaraciones  e Instancias
         private readonly ServicioDelegadoVenta _servicioDelegadoVenta= new ServicioDelegadoVenta();
         private readonly  ServicioDelegadoFlujoProceso _servicioDelegadoFlujoProceso= new ServicioDelegadoFlujoProceso();
+        private readonly  ServicioDelegadoContabilidad _servicioDelegadoContabilidad= new ServicioDelegadoContabilidad();
         private readonly ServicioDelegadoGeneral _servicioDelegadoGeneral = new  ServicioDelegadoGeneral();
         private static List<ConsultaOrdenTrabajoVistaDTOs> _listaConsultaOrdenTrabajoVistaDtOses =null;
+        private static List<HistorialProcesoVistaModelo> _lisaHistorialProcesoVistaModelos = null;
         #endregion
 
         #region Eventos
+
+        /// <summary>
+        /// Abonar valor
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _abonarValor_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Abona a un numero de  orden
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _abonar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _btnAbonar_ModalPopupExtender.TargetControlID = "_btnBuscar";
+                _btnAbonar_ModalPopupExtender.Show();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
 
         /// <summary>
         /// Agrega Observaciones
@@ -36,7 +78,13 @@ namespace Web.Venta
         {
             try
             {
-                
+                DetalleOrdenTrabajoObservacionVistaModelo _detalleOrdenTrabajoObservacion =new DetalleOrdenTrabajoObservacionVistaModelo();
+                _detalleOrdenTrabajoObservacion.UsuarioId = User.Id;
+                _detalleOrdenTrabajoObservacion.DetalleOrdenTrabajoId = Convert.ToInt32(_detalleOrdenTrabajoId.Value);
+                _detalleOrdenTrabajoObservacion.FechaCreacionObservacion = DateTime.Now;
+                _detalleOrdenTrabajoObservacion.Observacion = _observacion.Text;
+                _servicioDelegadoVenta.GrabarDetalleOrdenTrabajoObservacion(_detalleOrdenTrabajoObservacion);
+                _observacion.Text=String.Empty;
 
             }
             catch (Exception ex)
@@ -55,7 +103,20 @@ namespace Web.Venta
         {
             try
             {
-                string ups = "asdasda";
+                //GUarda el proceso inicial que es la entrega del cliente hacia  la franquicia
+                HistorialProcesoVistaModelo _historialProcesoVista = new HistorialProcesoVistaModelo();
+                _historialProcesoVista.OrdenTrabajoId = _listaConsultaOrdenTrabajoVistaDtOses.Select(m => m.OrdenTrabajoId).First(); ;
+                EtapaProcesoVistaModelo _etapaProcesoVistaModelo = new EtapaProcesoVistaModelo();
+                _etapaProcesoVistaModelo.EtapaProcesoId = Convert.ToInt32(Util.EtapaProceso.EntregaFranquiciaHaciaCliente);
+                _historialProcesoVista.EtapaProceso = _etapaProcesoVistaModelo;
+                _historialProcesoVista.FechaRegistro = DateTime.Now;
+                _historialProcesoVista.FechaInicio = DateTime.Now;
+                _historialProcesoVista.FechaFin = DateTime.Now;
+                _historialProcesoVista.NumeroOrden = _listaConsultaOrdenTrabajoVistaDtOses.Select(m => m.NumeroOrden).First().ToString();
+                _servicioDelegadoFlujoProceso.GrabarHistorialProceso(_historialProcesoVista);
+                _lisaHistorialProcesoVistaModelos = _servicioDelegadoFlujoProceso.ObtenerHIstorialProcesosPorNumeroOrden(_numeroOrden.Text);
+                _datosHistorial.DataSource = _lisaHistorialProcesoVistaModelos;
+                _datosHistorial.DataBind();
             }
             catch (Exception ex)
             {
@@ -74,7 +135,21 @@ namespace Web.Venta
         {
             try
             {
-
+                //GUarda el proceso inicial que es la entrega del cliente hacia  la franquicia
+                HistorialProcesoVistaModelo _historialProcesoVista = new HistorialProcesoVistaModelo();
+                _historialProcesoVista.OrdenTrabajoId = _listaConsultaOrdenTrabajoVistaDtOses.Select(m => m.OrdenTrabajoId).First(); ;
+                EtapaProcesoVistaModelo _etapaProcesoVistaModelo = new EtapaProcesoVistaModelo();
+                _etapaProcesoVistaModelo.EtapaProcesoId = Convert.ToInt32(Util.EtapaProceso.AnulacionOrdenTrabajo);
+                _historialProcesoVista.EtapaProceso = _etapaProcesoVistaModelo;
+                _historialProcesoVista.FechaRegistro = DateTime.Now;
+                _historialProcesoVista.FechaInicio = DateTime.Now;
+                _historialProcesoVista.FechaFin = DateTime.Now;
+                _historialProcesoVista.NumeroOrden = _listaConsultaOrdenTrabajoVistaDtOses.Select(m => m.NumeroOrden).First().ToString();
+                _historialProcesoVista.Texto = _observacionAnularOrden.Text;
+                _servicioDelegadoFlujoProceso.GrabarHistorialProceso(_historialProcesoVista);
+                _lisaHistorialProcesoVistaModelos = _servicioDelegadoFlujoProceso.ObtenerHIstorialProcesosPorNumeroOrden(_numeroOrden.Text);
+                _datosHistorial.DataSource = _lisaHistorialProcesoVistaModelos;
+                _datosHistorial.DataBind();
             }
             catch (Exception ex)
             {
@@ -92,9 +167,34 @@ namespace Web.Venta
             try
             {
                 if (e.CommandName == "Observacion")
+
                 {
+                    _observacion.Text = String.Empty;
                     _btnObservaciones_ModalPopupExtender.TargetControlID = "_btnBuscar";
                     _btnObservaciones_ModalPopupExtender.Show();
+                    int index = Convert.ToInt32(e.CommandArgument);
+                    _datosObservaciones.DataSource = _servicioDelegadoVenta.ObtenerDetalleOrdenTrabajoObservaciones(Convert.ToInt32(_datos.Rows[index].Cells[0].Text));
+                    _datosObservaciones.DataBind();
+
+                    int ordenCerrada = Convert.ToInt32(_lisaHistorialProcesoVistaModelos.Where(a => a.EtapaProceso.EtapaProcesoId.Equals(Convert.ToInt32(Util.EtapaProceso.EntregaFranquiciaHaciaCliente))).Select(b => b.EtapaProceso.EtapaProcesoId).FirstOrDefault().ToString());
+                    int ordenAnulada = Convert.ToInt32(_lisaHistorialProcesoVistaModelos.Where(a => a.EtapaProceso.EtapaProcesoId.Equals(Convert.ToInt32(Util.EtapaProceso.AnulacionOrdenTrabajo))).Select(b => b.EtapaProceso.EtapaProcesoId).FirstOrDefault().ToString());
+
+                    if (ordenCerrada == Convert.ToInt32(Util.EtapaProceso.EntregaFranquiciaHaciaCliente) ||
+                        ordenAnulada == Convert.ToInt32(Util.EtapaProceso.AnulacionOrdenTrabajo))
+                    {
+                        
+                        _observacion.ReadOnly = true;
+                        _btnAceptaAnulacionOrden.Enabled = false;
+                    }
+                    else
+                    {
+
+                        _observacion.ReadOnly = false;
+                        _btnAceptaAnulacionOrden.Enabled = true;
+                        _detalleOrdenTrabajoId.Value = _datos.Rows[index].Cells[0].Text;
+                    }
+
+                    
                 }
             }
             catch (Exception)
@@ -114,14 +214,29 @@ namespace Web.Venta
         {
             try
             {
-                _btnAnularOrden_ModalPopupExtender.TargetControlID = "_btnBuscar";
-                _btnAnularOrden_ModalPopupExtender.Show();
-                _valorTotalAnularOrden.Text = String.Format("{0:0.00}", _listaConsultaOrdenTrabajoVistaDtOses.Sum(m => m.ValorTotal));
-
-                foreach (ConsultaOrdenTrabajoVistaDTOs consultaOrdenTrabajoVista in _listaConsultaOrdenTrabajoVistaDtOses)
+                int ordenCerrada = Convert.ToInt32(_lisaHistorialProcesoVistaModelos.Where(a => a.EtapaProceso.EtapaProcesoId.Equals(Convert.ToInt32(Util.EtapaProceso.EntregaFranquiciaHaciaCliente))).Select(b => b.EtapaProceso.EtapaProcesoId).FirstOrDefault().ToString());
+                int ordenAnulada = Convert.ToInt32(_lisaHistorialProcesoVistaModelos.Where(a => a.EtapaProceso.EtapaProcesoId.Equals(Convert.ToInt32(Util.EtapaProceso.AnulacionOrdenTrabajo))).Select(b => b.EtapaProceso.EtapaProcesoId).FirstOrDefault().ToString());
+                _observacionAnularOrden.Text=String.Empty;
+                if (ordenCerrada == Convert.ToInt32(Util.EtapaProceso.EntregaFranquiciaHaciaCliente) ||
+                    ordenAnulada == Convert.ToInt32(Util.EtapaProceso.AnulacionOrdenTrabajo))
+                    Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Orden_Cerrada").ToString(), "_btnBuscar");
+                else
                 {
-                    _estadoPagoAnularOrden.Text = consultaOrdenTrabajoVista.EstadoPago;
+
+                    _btnAnularOrden_ModalPopupExtender.TargetControlID = "_btnBuscar";
+                    _btnAnularOrden_ModalPopupExtender.Show();
+                    _valorTotalAnularOrden.Text = String.Format("{0:0.00}",
+                        _listaConsultaOrdenTrabajoVistaDtOses.Sum(m => m.ValorTotal));
+
+                    foreach (
+                        ConsultaOrdenTrabajoVistaDTOs consultaOrdenTrabajoVista in _listaConsultaOrdenTrabajoVistaDtOses
+                        )
+                    {
+                        _estadoPagoAnularOrden.Text = consultaOrdenTrabajoVista.EstadoPago;
+                    }
                 }
+
+
             }
             catch (Exception ex)
             {
@@ -138,21 +253,20 @@ namespace Web.Venta
         {
             try
             {
-                //VDOCS.Where(a => a.NODOC.Equals(sNumeroDocumento)).Select(b => b.CLAVEACCESO).First().ToString();
-                _btnCerrarOrden_ModalPopupExtender.TargetControlID = "_btnBuscar";
-                _btnCerrarOrden_ModalPopupExtender.Show();
-                CargarDatos();
-                //GUarda el proceso inicial que es la entrega del cliente hacia  la franquicia
-                HistorialProcesoVistaModelo _historialProcesoVista = new HistorialProcesoVistaModelo();
-                _historialProcesoVista.OrdenTrabajoId = 123;
-                EtapaProcesoVistaModelo _etapaProcesoVistaModelo = new EtapaProcesoVistaModelo();
-                _etapaProcesoVistaModelo.EtapaProcesoId =Convert.ToInt32(Util.EtapaProceso.EntregaFranquiciaHaciaCliente);
-                _historialProcesoVista.EtapaProceso = _etapaProcesoVistaModelo;
-                _historialProcesoVista.FechaRegistro = DateTime.Now;
-                _historialProcesoVista.FechaInicio = DateTime.Now;
-                _historialProcesoVista.FechaFin = DateTime.Now;
-                _historialProcesoVista.NumeroOrden = _listaConsultaOrdenTrabajoVistaDtOses.Select(m=>m.NumeroOrden).First().ToString();
-                _servicioDelegadoFlujoProceso.GrabarHistorialProceso(_historialProcesoVista);
+                int ordenCerrada = Convert.ToInt32(_lisaHistorialProcesoVistaModelos.Where(a => a.EtapaProceso.EtapaProcesoId.Equals(Convert.ToInt32(Util.EtapaProceso.EntregaFranquiciaHaciaCliente))).Select(b => b.EtapaProceso.EtapaProcesoId).FirstOrDefault().ToString());
+                int ordenAnulada = Convert.ToInt32(_lisaHistorialProcesoVistaModelos.Where(a => a.EtapaProceso.EtapaProcesoId.Equals(Convert.ToInt32(Util.EtapaProceso.AnulacionOrdenTrabajo))).Select(b => b.EtapaProceso.EtapaProcesoId).FirstOrDefault().ToString());
+
+                if (ordenCerrada == Convert.ToInt32(Util.EtapaProceso.EntregaFranquiciaHaciaCliente) || ordenAnulada== Convert.ToInt32(Util.EtapaProceso.AnulacionOrdenTrabajo))
+                    Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Orden_Cerrada").ToString(), "_btnBuscar");
+                else
+                {
+                    //VDOCS.Where(a => a.NODOC.Equals(sNumeroDocumento)).Select(b => b.CLAVEACCESO).First().ToString();
+                    _btnCerrarOrden_ModalPopupExtender.TargetControlID = "_btnBuscar";
+                    _btnCerrarOrden_ModalPopupExtender.Show();
+                    CargarDatos();
+                }
+                
+              
             }
             catch (Exception ex)
             {
@@ -188,6 +302,16 @@ namespace Web.Venta
         /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                if (!IsPostBack)
+                BloquearControles();
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
 
         }
 
@@ -218,17 +342,20 @@ namespace Web.Venta
                     }
                     _datos.DataSource = _listaConsultaOrdenTrabajoVistaDtOses;
                     _datos.DataBind();
-                    
-                    _datosHistorial.DataSource =_servicioDelegadoFlujoProceso.ObtenerHIstorialProcesosPorNumeroOrden(_numeroOrden.Text);
+                    _lisaHistorialProcesoVistaModelos= _servicioDelegadoFlujoProceso.ObtenerHIstorialProcesosPorNumeroOrden(_numeroOrden.Text);
+                    _datosHistorial.DataSource = _lisaHistorialProcesoVistaModelos;
                     _datosHistorial.DataBind();
-                    // String.Format("{0:0.00}", productoPrecioVistaModelo.Precio);
-                    
+                    _datosPago.DataSource =
+                        _servicioDelegadoContabilidad.ObtenerHistorialCuentaPorCobrarPorNumeroOrden(_numeroOrden.Text);
+                    _datosPago.DataBind();
                     _valorTotal.Text =String.Format("{0:0.00}", _listaConsultaOrdenTrabajoVistaDtOses.Sum(m => m.ValorTotal));
+                    DesbloquearControles();
                    
                 }
                 else
                 {
-                   
+                    BloquearControles();
+                    LimpiarControles();
                     Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Orden_Trabajo_No_Existe").ToString(), "_btnBuscar");
                 }
             }
@@ -269,8 +396,18 @@ namespace Web.Venta
             _tipoLavado.Text = string.Empty;
             _estadoPago.Text = string.Empty;
             _numeroOrdenResultado.Text = string.Empty;
+            _fechaEntregaEfectiva.Text=String.Empty;
+            _datosHistorial.DataSource = null;
+            _datosHistorial.DataBind();
+            _datosObservaciones.DataSource = null;
+            _datosObservaciones.DataBind();
+            _valorTotal.Text=String.Empty;
+            _observacionAnularOrden.Text=String.Empty;
+            _observacion.Text=String.Empty;
             _listaConsultaOrdenTrabajoVistaDtOses = null;
-        }
+            _lisaHistorialProcesoVistaModelos = null;
+
+    }
 
         /// <summary>
         /// Bloquea los controles
@@ -310,6 +447,8 @@ namespace Web.Venta
                 throw;
             }
         }
+
+
 
 
         #endregion

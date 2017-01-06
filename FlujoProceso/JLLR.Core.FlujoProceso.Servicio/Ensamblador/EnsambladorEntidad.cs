@@ -31,7 +31,8 @@ namespace JLLR.Core.FlujoProceso.Servicio.Ensamblador
                ETAPA_PROCESO_ID = m.EtapaProceso.EtapaProcesoId,
                FECHA_FIN = m.FechaFin,
                FECHA_INICIO = m.FechaInicio,
-               FECHA_REGISTRO = m.FechaRegistro
+               FECHA_REGISTRO = m.FechaRegistro,
+               TEXTO = m.Texto
             };
         }
 

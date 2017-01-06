@@ -50,6 +50,24 @@
              </div>
         </div>
     </div>
+         
+     <br />
+     <div class="panel panel-default" id="_datosHistorialPago">
+           <div class="panel-heading"><asp:Literal runat="server" ID="_literalHistorialPago" Text="<%$ Resources:Web_es_Ec,Panel_Historial_Pago%>"/></div>
+        <div class="panel-body">
+            
+             <div class="row">
+                
+                    <div class="row">
+                            <div class="col-md-12">
+                                <asp:GridView ID="_datosPago" runat="server"  CssClass="tableCabecera" AutoGenerateColumns="True">
+                                 
+                                </asp:GridView> 
+                            </div>
+                    </div>
+             </div>
+        </div>
+    </div>
           <br/>
     <div class="panel panel-default" id="_datoOrdenTrabajo">
            <div class="panel-heading"><asp:Literal runat="server" ID="Literal1" Text="<%$ Resources:Web_es_Ec,Panel_Orden_Trabajo%>"/></div>
@@ -134,6 +152,7 @@
                     <div class="col-md-12">
                         <asp:GridView ID="_datos" runat="server" AutoGenerateColumns="False" CssClass="tableCabecera" OnRowCommand="_datos_RowCommand">
                             <Columns>
+                                <asp:BoundField DataField="DetalleOrdenTrabajoId" HeaderText="Código de la Orden de  Trabajo" />
                                 <asp:BoundField DataField="Cantidad" HeaderText="Cantidad de Prenda" />
                                 <asp:BoundField HeaderText="Prenda" DataField="Prenda" />
                                 <asp:BoundField HeaderText="Color" DataField="Color" />
@@ -157,7 +176,9 @@
      </section>
  <nav>
         <asp:Button ID="_cerrarOrdenTrabajo" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Cerrar_Orden_Trabajo%>"  ValidationGroup="GuardarOrden" class="btn btn-primary" OnClick="_cerrarOrdenTrabajo_Click" />
-     <asp:Button ID="_anularOrden" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Anular_Orden_Trabajo%>"  ValidationGroup="GuardarOrden" class="btn btn-primary" OnClick="_anularOrden_Click"  />
+        <asp:Button ID="_anularOrden" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Anular_Orden_Trabajo%>"  ValidationGroup="GuardarOrden" class="btn btn-primary" OnClick="_anularOrden_Click"  />
+        
+        <asp:Button ID="_abonar" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Abonar%>"  ValidationGroup="AbonarOrden" class="btn btn-primary" OnClick="_abonar_Click"  />
         <asp:Button ID="_cancelar" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Cancelar%>"  class="btn btn-primary" OnClick="_cancelar_Click" />
 
     </nav>
@@ -226,7 +247,7 @@
                         </div>
                         <div class="modal-footer">
                             <asp:Button ID="_btnAceptaAnulacionOrden" runat="server" Text="Anular Orden" class="btn btn-primary" data-dismiss="modal" OnClick="_btnAceptaAnulacionOrden_Click" ValidationGroup="AnularOrden" />
-                            <asp:Button ID="_btnCancelaAnulacionrOrden" runat="server" Text="Cancelar" class="btn btn-primary" data-dismiss="modal" />
+                            <asp:Button ID="_btnCancelaAnulacionrOrden" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Cancelar%>"  class="btn btn-primary" data-dismiss="modal" />
                         </div>
                     </asp:Panel>
      </div>
@@ -268,7 +289,7 @@
                         </div>
                         <div class="modal-footer">
                             <asp:Button ID="_btnAceptarCerrarOrden" runat="server" Text="Cerrar Orden" class="btn btn-primary" data-dismiss="modal" OnClick="_btnAceptarCerrarOrden_Click"  />
-                            <asp:Button ID="_btnCancelarCerrarOrden" runat="server" Text="Cancelar" class="btn btn-primary" data-dismiss="modal" />
+                            <asp:Button ID="_btnCancelarCerrarOrden" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Cancelar%>"  class="btn btn-primary" data-dismiss="modal" />
                         </div>
                     </asp:Panel>
      </div>
@@ -280,18 +301,73 @@
                 <asp:Button ID="_btnObservaciones" runat="server" Text="" Visible="false" />
                     <cc1:ModalPopupExtender ID="_btnObservaciones_ModalPopupExtender" PopupControlID="_panelObservacion" runat="server" BehaviorID="_btnObservaciones_ModalPopupExtender" TargetControlID="_btnObservaciones" BackgroundCssClass="modal-Backgoround" X="500" OnCancelScript="_btnCancelarObservaciones" OnOkScript="_btnAceptarObservaciones" Y="300">
                     </cc1:ModalPopupExtender>
-                    <asp:Panel ID="_panelObservacion" runat="server" Style="display: none; background-color: white; width: 20%; height: auto;align-content:center ">
+                    <asp:Panel ID="_panelObservacion" runat="server" Style="display: none; background-color: white; width: 60%; height: auto;align-content:center ">
                         <div class="modal-header">
                             <h4 class="modal-title">Observaciones</h4>
                         </div>
                         <div class="modal-body">
-                            <asp:Label ID="Label3" runat="server" Text=""></asp:Label>
+                             <div class="row">
+                                    <div class="col-md-6">
+                                        <asp:GridView ID="_datosObservaciones" runat="server"></asp:GridView>     
+                                    </div>
+                                    
+                              </div>
+                             <div class="row">
+                                    <div class="col-md-3">
+                                        <asp:Label ID="_labelObservacion" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Observacion%>"></asp:Label>
+                                        <asp:HiddenField ID="_detalleOrdenTrabajoId" runat="server" />
+                                    </div>
+                                    
+                              </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <asp:TextBox ID="_observacion" runat="server" class="form-control" ValidationGroup="AgregarObservacion"  ></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="_observacionValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="AgregarObservacion" ControlToValidate="_observacion" ></asp:RequiredFieldValidator>
+
+                                    </div>
+                                    
+                                </div>
                         </div>
                         <div class="modal-footer">
-                            <asp:Button ID="_btnAceptarObservaciones" runat="server" Text="Agregar Observacion" class="btn btn-primary" data-dismiss="modal" OnClick="_btnAceptarObservaciones_Click" />
-                            <asp:Button ID="_btnCancelarObservaciones" runat="server" Text="Cancelar" class="btn btn-primary" data-dismiss="modal" />
+                            <asp:Button ID="_btnAceptarObservaciones" runat="server" Text="Agregar Observacion" class="btn btn-primary" data-dismiss="modal" OnClick="_btnAceptarObservaciones_Click" ValidationGroup="AgregarObservacion" />
+                            <asp:Button ID="_btnCancelarObservaciones" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Cancelar%>" class="btn btn-primary" data-dismiss="modal" />
                         </div>
                     </asp:Panel>
      </div>
      </div>
-</asp:Content>
+    
+     <br />
+    <div class="row" >
+                  <div class="col-md-12" >
+                <asp:Button ID="_btnAbonar" runat="server" Text="" Visible="false" />
+                    <cc1:ModalPopupExtender ID="_btnAbonar_ModalPopupExtender" PopupControlID="_panelAbonar" runat="server" BehaviorID="_btnAbonar_ModalPopupExtender" TargetControlID="_btnAbonar" BackgroundCssClass="modal-Backgoround" X="500" OnCancelScript="_cancelarValorAbonar" OnOkScript="_abonarValor" Y="300">
+                    </cc1:ModalPopupExtender>
+                    <asp:Panel ID="_panelAbonar" runat="server" Style="display: none; background-color: white; width: 60%; height: auto;align-content:center ">
+                        <div class="modal-header">
+                            <h4 class="modal-title"><asp:Literal ID="_literalAbono" runat="server" Text="<%$ Resources:Web_es_Ec,Literal_Agregar_Abono%>"></asp:Literal></h4>
+                        </div>
+                        <div class="modal-body">
+                             <div class="row">
+                                    <div class="col-md-3">
+                                        <asp:Label ID="_labelValorAbonar" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Valor_Abonar%>"></asp:Label>
+                                    </div>
+                                    
+                              </div>
+                              <div class="row">
+                                    <div class="col-md-3">
+                                        <asp:TextBox ID="_valorAbonar" runat="server" class="form-control" ValidationGroup="Abonar"  ></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="_valorAbonarValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="Abonar" ControlToValidate="_valorAbonar" ></asp:RequiredFieldValidator>
+                                     <cc1:MaskedEditExtender ID="_valorAbonarExtensor" runat="server" TargetControlID="_valorAbonar" Mask="999.99" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus" OnInvalidCssClass="MaskedEditError" MaskType="Number" InputDirection="RightToLeft" AcceptNegative="Left" DisplayMoney="Left" ErrorTooltipEnabled="True" />
+
+                                    </div>
+                                    
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <asp:Button ID="_abonarValor" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Agregar_Abono%>" class="btn btn-primary" data-dismiss="modal"  ValidationGroup="Abonar" OnClick="_abonarValor_Click" />
+                            <asp:Button ID="_cancelarValorAbonar" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Cancelar%>"  class="btn btn-primary" data-dismiss="modal" />
+                        </div>
+                    </asp:Panel>
+     </div>
+     </div>
+ </asp:Content>

@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Agregar Abono.
+        /// </summary>
+        internal static string Boton_Abonar {
+            get {
+                return ResourceManager.GetString("Boton_Abonar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Aceptar.
         /// </summary>
         internal static string Boton_Aceptar {
@@ -75,6 +84,15 @@ namespace Resources {
         internal static string Boton_Actualizar_Observacion {
             get {
                 return ResourceManager.GetString("Boton_Actualizar_Observacion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Agregar Abono.
+        /// </summary>
+        internal static string Boton_Agregar_Abono {
+            get {
+                return ResourceManager.GetString("Boton_Agregar_Abono", resourceCulture);
             }
         }
         
@@ -547,6 +565,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Valor del Abono.
+        /// </summary>
+        internal static string Label_Valor_Abonar {
+            get {
+                return ResourceManager.GetString("Label_Valor_Abonar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Valor Total.
         /// </summary>
         internal static string Label_Valor_Total {
@@ -561,6 +588,15 @@ namespace Resources {
         internal static string Label_Valor_Unitario {
             get {
                 return ResourceManager.GetString("Label_Valor_Unitario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Agregar Abono.
+        /// </summary>
+        internal static string Literal_Agregar_Abono {
+            get {
+                return ResourceManager.GetString("Literal_Agregar_Abono", resourceCulture);
             }
         }
         
@@ -642,6 +678,15 @@ namespace Resources {
         internal static string Mensaje_Obligatorio {
             get {
                 return ResourceManager.GetString("Mensaje_Obligatorio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La orden se encuentra cerrada  o anulada, la orden solo esta disponible como consulta.
+        /// </summary>
+        internal static string Mensaje_Orden_Cerrada {
+            get {
+                return ResourceManager.GetString("Mensaje_Orden_Cerrada", resourceCulture);
             }
         }
         
@@ -750,6 +795,15 @@ namespace Resources {
         internal static string Panel_Forma_Pago {
             get {
                 return ResourceManager.GetString("Panel_Forma_Pago", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Historial Pago.
+        /// </summary>
+        internal static string Panel_Historial_Pago {
+            get {
+                return ResourceManager.GetString("Panel_Historial_Pago", resourceCulture);
             }
         }
         

@@ -54,6 +54,45 @@ namespace Web.ServicioDelegado
                 throw;
             }
         }
+
+        /// <summary>
+        /// Obtiene el historial por numero de  orden
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        public List<CuentaPorCobrarVistaDTOs> ObtenerHistorialCuentaPorCobrarPorNumeroOrden(string numeroOrden)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerHistorialCuentaPorCobrarPorNumeroOrden?numeroOrden=" + numeroOrden );
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<CuentaPorCobrarVistaDTOs>>(json);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene  el historial de cuenta por cobrar  por numero de identificacion
+        /// </summary>
+        public List<CuentaPorCobrarVistaDTOs> ObtenerHistorialCuentaPorCobrarPorNumeroidentificacion(string numeroIdentificacion)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerHistorialCuentaPorCobrarPorNumeroidentificacion?numeroIdentificacion=" + numeroIdentificacion);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<CuentaPorCobrarVistaDTOs>>(json);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
         #region CUENTA POR COBRAR

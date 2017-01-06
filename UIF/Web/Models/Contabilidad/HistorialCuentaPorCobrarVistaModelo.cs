@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using modeloVistaGeneral= Web.Models.General;
 #endregion
 namespace Web.Models.Contabilidad
 {
@@ -40,5 +41,11 @@ namespace Web.Models.Contabilidad
         /// </summary>
         
         public int? UsuarioId { get; set; }
+
+        /// <summary>
+        /// FormaPago
+        /// </summary>
+
+        public modeloVistaGeneral.FormaPagoVistaModelo FormaPago { get; set; }
     }
 }

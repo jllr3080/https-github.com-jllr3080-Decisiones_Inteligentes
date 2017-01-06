@@ -23,7 +23,7 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
         private Decisiones_Inteligentes _entidad = new Decisiones_Inteligentes();
         private readonly OrdenTrabajoDAOs _ordenTrabajoDaOs = new OrdenTrabajoDAOs();
         private readonly DetalleOrdenTrabajoDAOs _detalleOrdenTrabajoDaOs = new DetalleOrdenTrabajoDAOs();
-
+        private readonly  DetalleOrdenTrabajoObservacionDAOs _detalleOrdenTrabajoObservacionDaOs= new DetalleOrdenTrabajoObservacionDAOs();
         #endregion
 
 
@@ -46,7 +46,15 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                     foreach (var detalleOrdenTrabajo in ordenTrabajoDtOs.DetalleOrdenTrabajos)
                     {
                         detalleOrdenTrabajo.ORDEN_TRABAJO_ID = ordenTrabajo.ORDEN_TRABAJO_ID;
-                        _detalleOrdenTrabajoDaOs.GrabarDetelleOrdenTrabajo(detalleOrdenTrabajo);
+                        DETALLE_ORDEN_TRABAJO _detalleOrdenTrabajo=  _detalleOrdenTrabajoDaOs.GrabarDetelleOrdenTrabajo(detalleOrdenTrabajo);
+                        foreach (var detalleOrdenTrabajoObservacion in detalleOrdenTrabajo.DETALLE_ORDEN_TRABAJO_OBSERVACION)
+                        {
+                            detalleOrdenTrabajoObservacion.DETALLE_ORDEN_TRABAJO_ID =_detalleOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID;
+                            _detalleOrdenTrabajoObservacionDaOs.GrabarDetalleOrdenTrabajoObservacion(detalleOrdenTrabajoObservacion);
+
+                        }
+
+                        
                     }
 
                     transaction.Complete();

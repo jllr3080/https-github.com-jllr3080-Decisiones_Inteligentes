@@ -29,12 +29,7 @@ namespace Web.Models.Individuo
         
         public modeloVistaGeneral.TipoIndividuoVistaModelo TipoIndividuo { get; set; }
 
-        /// <summary>
-        /// Tipo de rol individuo
-        /// </summary>
-        
-        public modeloVistaGeneral.TipoRolIndividuoVistaModelo TipoRolIndividuo { get; set; }
-
+     
         /// <summary>
         /// PrimerCampo
         /// </summary>

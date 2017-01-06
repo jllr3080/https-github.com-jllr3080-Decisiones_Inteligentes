@@ -24,8 +24,8 @@ namespace JLLR.Core.Base.Proveedor.Entidades
     
         public virtual CIUDAD CIUDAD { get; set; }
         public virtual ESTADO ESTADO { get; set; }
-        public virtual INDIVIDUO INDIVIDUO { get; set; }
         public virtual PAIS PAIS { get; set; }
         public virtual TIPO_DIRECCION TIPO_DIRECCION { get; set; }
+        public virtual INDIVIDUO INDIVIDUO { get; set; }
     }
 }

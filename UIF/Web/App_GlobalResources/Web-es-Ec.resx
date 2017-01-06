@@ -117,11 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Boton_Abonar" xml:space="preserve">
+    <value>Agregar Abono</value>
+  </data>
   <data name="Boton_Aceptar" xml:space="preserve">
     <value>Aceptar</value>
   </data>
   <data name="Boton_Actualizar_Observacion" xml:space="preserve">
     <value>Actualizar Observaciones</value>
+  </data>
+  <data name="Boton_Agregar_Abono" xml:space="preserve">
+    <value>Agregar Abono</value>
   </data>
   <data name="Boton_Agregar_Orden_Trabajo" xml:space="preserve">
     <value>+ Agregar Prenda</value>
@@ -279,11 +285,17 @@
   <data name="Label_Usuario_No_Obligatorio" xml:space="preserve">
     <value>Usuario</value>
   </data>
+  <data name="Label_Valor_Abonar" xml:space="preserve">
+    <value>Valor del Abono</value>
+  </data>
   <data name="Label_Valor_Total" xml:space="preserve">
     <value>Valor Total</value>
   </data>
   <data name="Label_Valor_Unitario" xml:space="preserve">
     <value>Valor Unitario</value>
+  </data>
+  <data name="Literal_Agregar_Abono" xml:space="preserve">
+    <value>Agregar Abono</value>
   </data>
   <data name="Literal_Anular_Orden" xml:space="preserve">
     <value>Anular Orden</value>
@@ -311,6 +323,9 @@
   </data>
   <data name="Mensaje_Obligatorio" xml:space="preserve">
     <value>Dato Obligatorio</value>
+  </data>
+  <data name="Mensaje_Orden_Cerrada" xml:space="preserve">
+    <value>La orden se encuentra cerrada  o anulada, la orden solo esta disponible como consulta</value>
   </data>
   <data name="Mensaje_Orden_Trabajo_No_Existe" xml:space="preserve">
     <value>No existe información con esa  orden de trabajo</value>
@@ -347,6 +362,9 @@
   </data>
   <data name="Panel_Forma_Pago" xml:space="preserve">
     <value>Datos de Pago</value>
+  </data>
+  <data name="Panel_Historial_Pago" xml:space="preserve">
+    <value>Historial Pago</value>
   </data>
   <data name="Panel_Historial_Proceso" xml:space="preserve">
     <value>Historial Proceso</value>

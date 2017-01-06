@@ -19,6 +19,9 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
     /// </summary>
     public class EnsambladorModelo
     {
+        #region DECLARACIONES  E INSTANCIAS
+        
+        #endregion
 
         #region NEGOCIO
 
@@ -143,6 +146,7 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                  VentaComisionId= Convert.ToInt32(e.VENTA_COMISION_ID)
 
             };
+            List<modelo.DetalleOrdenTrabajoObservacionModelo> _detalleOrdenTrabajoObservaciones =CrearDetalleOrdenTrabajosObservacion(e.DETALLE_ORDEN_TRABAJO_OBSERVACION);
             return new modelo.DetalleOrdenTrabajoModelo
             {
                 DetalleOrdenTrabajoId = e.DETALLE_ORDEN_TRABAJO_ID,
@@ -158,8 +162,9 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                 ProductoTalla = _productoTalla,
                 Marca = _marca,
                 Material = _material,
-                VentaComision = _vetComisionModelo
-               
+                VentaComision = _vetComisionModelo,
+                DetalleOrdenTrabajoObservacion = _detalleOrdenTrabajoObservaciones
+
 
 
             };
@@ -213,6 +218,23 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
         /// <param name="listadoEntidad">Listado de Entidades</param>
         /// <returns></returns>
         public List<modelo.DetalleOrdenTrabajoObservacionModelo> CrearDetalleOrdenTrabajosObservacion(IQueryable<entidad.DETALLE_ORDEN_TRABAJO_OBSERVACION> listadoEntidad)
+        {
+            List<modelo.DetalleOrdenTrabajoObservacionModelo> listaModelo = new List<modelo.DetalleOrdenTrabajoObservacionModelo>();
+
+            foreach (var entidad in listadoEntidad)
+            {
+                listaModelo.Add(CrearDetalleOrdenTrabajoObservacion(entidad));
+            }
+            return listaModelo;
+
+        }
+
+        /// <summary>
+        /// Convierte un listado de DTO en listado de  modelos de DTO
+        /// </summary>
+        /// <param name="listadoEntidad">Listado de Entidades</param>
+        /// <returns></returns>
+        public List<modelo.DetalleOrdenTrabajoObservacionModelo> CrearDetalleOrdenTrabajosObservacion(ICollection<entidad.DETALLE_ORDEN_TRABAJO_OBSERVACION> listadoEntidad)
         {
             List<modelo.DetalleOrdenTrabajoObservacionModelo> listaModelo = new List<modelo.DetalleOrdenTrabajoObservacionModelo>();
 

@@ -26,11 +26,13 @@ namespace JLLR.Core.Contabilidad.Servicio.EnsambladorDTOs
         /// </summary>
         /// <param name="m"></param>
         /// <returns></returns>
-        public entidadDTOs.CuentaPorCobrarDTOs CreaCuentaPorCobrarDtOs(modeloDTOs.CuentaPorCobrarDTOs m)
+        public modeloDTOs.CuentaPorCobrarDTOs CreaCuentaPorCobrarDtOs(entidadDTOs.CuentaPorCobrarDTOs e)
         {
-            return new entidadDTOs.CuentaPorCobrarDTOs()
+            return new modeloDTOs.CuentaPorCobrarDTOs()
             {
-                CuentaPorCobrar = _ensambladorEntidad.CrearCuentaPorCobrar(m.CuentaPorCobrar)
+                CuentaPorCobrar = _ensambladorModelo.CrearCuentaPorCobrar(e.CuentaPorCobrar),
+                HistorialCuentaPorCobrar = _ensambladorModelo.CrearHistorialCuentaPorCobrar(e.HistorialCuentaPorCobrar),
+                Cliente = e.Cliente
                 
             };
         }
@@ -41,9 +43,9 @@ namespace JLLR.Core.Contabilidad.Servicio.EnsambladorDTOs
         /// </summary>
         /// <param name="listadoModelo">Listado de Modelos</param>
         /// <returns></returns>z|
-        public List<entidadDTOs.CuentaPorCobrarDTOs> CreaCuentasPorCobrarDtOs(List<modeloDTOs.CuentaPorCobrarDTOs> listadoModelo)
+        public List<modeloDTOs.CuentaPorCobrarDTOs> CreaCuentasPorCobrarDtOs(List<entidadDTOs.CuentaPorCobrarDTOs> listadoModelo)
         {
-            List<entidadDTOs.CuentaPorCobrarDTOs> listaEntidad = new List<entidadDTOs.CuentaPorCobrarDTOs>();
+            List<modeloDTOs.CuentaPorCobrarDTOs> listaEntidad = new List<modeloDTOs.CuentaPorCobrarDTOs>();
 
             foreach (var modelo in listadoModelo)
             {

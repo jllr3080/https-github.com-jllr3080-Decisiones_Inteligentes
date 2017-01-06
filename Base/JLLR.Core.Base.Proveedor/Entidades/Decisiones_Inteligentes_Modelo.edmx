@@ -86,6 +86,7 @@
           <Property Name="FECHA_COBRO" Type="datetime" />
           <Property Name="VALOR_COBRO" Type="decimal" Precision="18" Scale="2" />
           <Property Name="USUARIO_ID" Type="int" />
+          <Property Name="FORMA_PAGO_ID" Type="int" />
         </EntityType>
         <EntityType Name="HISTORIAL_CUENTA_POR_PAGAR">
           <Key>
@@ -201,7 +202,6 @@
           <Property Name="FECHA_CREACION" Type="datetime" />
           <Property Name="FECHA_MODIFICACION" Type="datetime" />
           <Property Name="USUARIO_ID" Type="int" />
-          <Property Name="TIPO_ROL_INDIVIDUO_ID" Type="int" />
         </EntityType>
         <EntityType Name="INDIVIDUO_BANCO">
           <Key>
@@ -214,6 +214,14 @@
           <Property Name="NUMERO_CUENTA" Type="varchar" MaxLength="20" />
           <Property Name="ES_PRINCIPAL" Type="bit" />
           <Property Name="ES_PROPIA" Type="bit" />
+        </EntityType>
+        <EntityType Name="INDIVIDUO_ROL">
+          <Key>
+            <PropertyRef Name="INDIVIDUO_ROL_ID" />
+          </Key>
+          <Property Name="INDIVIDUO_ROL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TIPO_ROL_INDIVIDUO_ID" Type="int" />
+          <Property Name="INDIVIDUO_ID" Type="int" />
         </EntityType>
         <EntityType Name="PAIS">
           <Key>
@@ -253,6 +261,7 @@
           <Property Name="FECHA_INICIO" Type="datetime" />
           <Property Name="FECHA_FIN" Type="datetime" />
           <Property Name="NUMERO_ORDEN" Type="varchar" MaxLength="20" />
+          <Property Name="TEXTO" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="VISITA">
           <Key>
@@ -314,6 +323,14 @@
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="100" />
           <Property Name="ESTA_HABILITADO" Type="bit" />
           <Property Name="HABILITA_ENVIO_MAIL" Type="bit" />
+        </EntityType>
+        <EntityType Name="FORMA_PAGO">
+          <Key>
+            <PropertyRef Name="FORMA_PAGO_ID" />
+          </Key>
+          <Property Name="FORMA_PAGO_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="50" />
+          <Property Name="ESTA_HABILITADO" Type="bit" />
         </EntityType>
         <EntityType Name="IMPUESTO">
           <Key>
@@ -384,6 +401,15 @@
           <Property Name="NUMERO_ENTERO" Type="int" />
           <Property Name="FECHA" Type="datetime" />
           <Property Name="BOOLEANO" Type="bit" />
+        </EntityType>
+        <EntityType Name="PRUEBA">
+          <Key>
+            <PropertyRef Name="PRUEBA_ID" />
+          </Key>
+          <Property Name="PRUEBA_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="50" />
+          <Property Name="ESTA_HABILITADO" Type="bit" />
+          <Property Name="FECHA" Type="datetime" />
         </EntityType>
         <EntityType Name="PUNTO_VENTA">
           <Key>
@@ -1259,6 +1285,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_HISTORIAL_CUENTA_COBRAR_VS_FORMA_PAGO">
+          <End Role="FORMA_PAGO" Type="Self.FORMA_PAGO" Multiplicity="0..1" />
+          <End Role="HISTORIAL_CUENTA_POR_COBRAR" Type="Self.HISTORIAL_CUENTA_POR_COBRAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FORMA_PAGO">
+              <PropertyRef Name="FORMA_PAGO_ID" />
+            </Principal>
+            <Dependent Role="HISTORIAL_CUENTA_POR_COBRAR">
+              <PropertyRef Name="FORMA_PAGO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_HISTORIAL_CUENTA_POR_COBRAR_VS_CUENTA_POR_COBRAR">
           <End Role="CUENTA_POR_COBRAR" Type="Self.CUENTA_POR_COBRAR" Multiplicity="0..1" />
           <End Role="HISTORIAL_CUENTA_POR_COBRAR" Type="Self.HISTORIAL_CUENTA_POR_COBRAR" Multiplicity="*" />
@@ -1307,6 +1345,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_INDIVIDO_ROL_VS_INDIVIDUO">
+          <End Role="INDIVIDUO" Type="Self.INDIVIDUO" Multiplicity="0..1" />
+          <End Role="INDIVIDUO_ROL" Type="Self.INDIVIDUO_ROL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INDIVIDUO">
+              <PropertyRef Name="INDIVIDUO_ID" />
+            </Principal>
+            <Dependent Role="INDIVIDUO_ROL">
+              <PropertyRef Name="INDIVIDUO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_INDIVIDUO_BANCO_VS_PERSONA">
           <End Role="INDIVIDUO" Type="Self.INDIVIDUO" Multiplicity="0..1" />
           <End Role="INDIVIDUO_BANCO" Type="Self.INDIVIDUO_BANCO" Multiplicity="*" />
@@ -1331,6 +1381,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_INDIVIDUO_ROL_VS_TIPO_ROL_INDIVIDUO">
+          <End Role="TIPO_ROL_INDIVIDUO" Type="Self.TIPO_ROL_INDIVIDUO" Multiplicity="0..1" />
+          <End Role="INDIVIDUO_ROL" Type="Self.INDIVIDUO_ROL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_ROL_INDIVIDUO">
+              <PropertyRef Name="TIPO_ROL_INDIVIDUO_ID" />
+            </Principal>
+            <Dependent Role="INDIVIDUO_ROL">
+              <PropertyRef Name="TIPO_ROL_INDIVIDUO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_INDIVIDUO_VS_TIPO_IDENTIFICACION">
           <End Role="TIPO_IDENTIFICACION" Type="Self.TIPO_IDENTIFICACION" Multiplicity="0..1" />
           <End Role="INDIVIDUO" Type="Self.INDIVIDUO" Multiplicity="*" />
@@ -1352,18 +1414,6 @@
             </Principal>
             <Dependent Role="INDIVIDUO">
               <PropertyRef Name="TIPO_INDIVIDUO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_INDIVIDUO_VS_TIPO_ROL_INDIVIDUO">
-          <End Role="TIPO_ROL_INDIVIDUO" Type="Self.TIPO_ROL_INDIVIDUO" Multiplicity="0..1" />
-          <End Role="INDIVIDUO" Type="Self.INDIVIDUO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TIPO_ROL_INDIVIDUO">
-              <PropertyRef Name="TIPO_ROL_INDIVIDUO_ID" />
-            </Principal>
-            <Dependent Role="INDIVIDUO">
-              <PropertyRef Name="TIPO_ROL_INDIVIDUO_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1769,6 +1819,7 @@
           <EntitySet Name="ESTADO" EntityType="Self.ESTADO" Schema="GENERAL" store:Type="Tables" />
           <EntitySet Name="INDIVIDUO" EntityType="Self.INDIVIDUO" Schema="GENERAL" store:Type="Tables" />
           <EntitySet Name="INDIVIDUO_BANCO" EntityType="Self.INDIVIDUO_BANCO" Schema="GENERAL" store:Type="Tables" />
+          <EntitySet Name="INDIVIDUO_ROL" EntityType="Self.INDIVIDUO_ROL" Schema="GENERAL" store:Type="Tables" />
           <EntitySet Name="PAIS" EntityType="Self.PAIS" Schema="GENERAL" store:Type="Tables" />
           <EntitySet Name="TELEFONO" EntityType="Self.TELEFONO" Schema="GENERAL" store:Type="Tables" />
           <EntitySet Name="AGENDA_VISITA" EntityType="Self.AGENDA_VISITA" Schema="NEGOCIO" store:Type="Tables" />
@@ -1780,6 +1831,7 @@
           <EntitySet Name="ESTADO_CIVIL" EntityType="Self.ESTADO_CIVIL" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="ESTADO_PAGO" EntityType="Self.ESTADO_PAGO" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="ETAPA_PROCESO" EntityType="Self.ETAPA_PROCESO" Schema="PARAMETRO" store:Type="Tables" />
+          <EntitySet Name="FORMA_PAGO" EntityType="Self.FORMA_PAGO" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="IMPUESTO" EntityType="Self.IMPUESTO" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="LLEVA_CONTABILIDAD" EntityType="Self.LLEVA_CONTABILIDAD" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="MARCA" EntityType="Self.MARCA" Schema="PARAMETRO" store:Type="Tables" />
@@ -1788,6 +1840,7 @@
           <EntitySet Name="MONEDA" EntityType="Self.MONEDA" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="NIVEL_EDUCACION" EntityType="Self.NIVEL_EDUCACION" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="PARAMETRO" EntityType="Self.PARAMETRO" Schema="PARAMETRO" store:Type="Tables" />
+          <EntitySet Name="PRUEBA" EntityType="Self.PRUEBA" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="PUNTO_VENTA" EntityType="Self.PUNTO_VENTA" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="RUTA" EntityType="Self.RUTA" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="SUCURSAL" EntityType="Self.SUCURSAL" Schema="PARAMETRO" store:Type="Tables" />
@@ -1993,6 +2046,10 @@
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="HISTORIAL_USUARIO" EntitySet="HISTORIAL_USUARIO" />
           </AssociationSet>
+          <AssociationSet Name="FK_HISTORIAL_CUENTA_COBRAR_VS_FORMA_PAGO" Association="Self.FK_HISTORIAL_CUENTA_COBRAR_VS_FORMA_PAGO">
+            <End Role="FORMA_PAGO" EntitySet="FORMA_PAGO" />
+            <End Role="HISTORIAL_CUENTA_POR_COBRAR" EntitySet="HISTORIAL_CUENTA_POR_COBRAR" />
+          </AssociationSet>
           <AssociationSet Name="FK_HISTORIAL_CUENTA_POR_COBRAR_VS_CUENTA_POR_COBRAR" Association="Self.FK_HISTORIAL_CUENTA_POR_COBRAR_VS_CUENTA_POR_COBRAR">
             <End Role="CUENTA_POR_COBRAR" EntitySet="CUENTA_POR_COBRAR" />
             <End Role="HISTORIAL_CUENTA_POR_COBRAR" EntitySet="HISTORIAL_CUENTA_POR_COBRAR" />
@@ -2009,6 +2066,10 @@
             <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
             <End Role="HISTORIAL_PROCESO" EntitySet="HISTORIAL_PROCESO" />
           </AssociationSet>
+          <AssociationSet Name="FK_INDIVIDO_ROL_VS_INDIVIDUO" Association="Self.FK_INDIVIDO_ROL_VS_INDIVIDUO">
+            <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
+            <End Role="INDIVIDUO_ROL" EntitySet="INDIVIDUO_ROL" />
+          </AssociationSet>
           <AssociationSet Name="FK_INDIVIDUO_BANCO_VS_PERSONA" Association="Self.FK_INDIVIDUO_BANCO_VS_PERSONA">
             <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
             <End Role="INDIVIDUO_BANCO" EntitySet="INDIVIDUO_BANCO" />
@@ -2017,16 +2078,16 @@
             <End Role="TIPO_CUENTA_BANCARIA" EntitySet="TIPO_CUENTA_BANCARIA" />
             <End Role="INDIVIDUO_BANCO" EntitySet="INDIVIDUO_BANCO" />
           </AssociationSet>
+          <AssociationSet Name="FK_INDIVIDUO_ROL_VS_TIPO_ROL_INDIVIDUO" Association="Self.FK_INDIVIDUO_ROL_VS_TIPO_ROL_INDIVIDUO">
+            <End Role="TIPO_ROL_INDIVIDUO" EntitySet="TIPO_ROL_INDIVIDUO" />
+            <End Role="INDIVIDUO_ROL" EntitySet="INDIVIDUO_ROL" />
+          </AssociationSet>
           <AssociationSet Name="FK_INDIVIDUO_VS_TIPO_IDENTIFICACION" Association="Self.FK_INDIVIDUO_VS_TIPO_IDENTIFICACION">
             <End Role="TIPO_IDENTIFICACION" EntitySet="TIPO_IDENTIFICACION" />
             <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
           </AssociationSet>
           <AssociationSet Name="FK_INDIVIDUO_VS_TIPO_PERSONA" Association="Self.FK_INDIVIDUO_VS_TIPO_PERSONA">
             <End Role="TIPO_INDIVIDUO" EntitySet="TIPO_INDIVIDUO" />
-            <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_INDIVIDUO_VS_TIPO_ROL_INDIVIDUO" Association="Self.FK_INDIVIDUO_VS_TIPO_ROL_INDIVIDUO">
-            <End Role="TIPO_ROL_INDIVIDUO" EntitySet="TIPO_ROL_INDIVIDUO" />
             <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
           </AssociationSet>
           <AssociationSet Name="FK_MODELO_VS_MARCA" Association="Self.FK_MODELO_VS_MARCA">
@@ -2253,9 +2314,9 @@
           <Property Name="TIPO_GENERO_ID" Type="Int32" />
           <Property Name="INDIVIDUO_ID" Type="Int32" />
           <Property Name="FECHA_NACIMIENTO" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="INDIVIDUO" Relationship="Self.FK_CLIENTE_VS_INDIVIDUO" FromRole="CLIENTE" ToRole="INDIVIDUO" />
           <NavigationProperty Name="TIPO_GENERO" Relationship="Self.FK_CLIENTE_VS_TIPO_GENERO" FromRole="CLIENTE" ToRole="TIPO_GENERO" />
           <NavigationProperty Name="ORDEN_TRABAJO" Relationship="Self.FK_ORDEN_TRABAJO_VS_CLIENTE" FromRole="CLIENTE" ToRole="ORDEN_TRABAJO" />
+          <NavigationProperty Name="INDIVIDUO" Relationship="Decisiones_Inteligentes_Modelo.FK_CLIENTE_VS_INDIVIDUO" FromRole="CLIENTE" ToRole="INDIVIDUO" />
         </EntityType>
         <EntityType Name="DIRECCION">
           <Key>
@@ -2270,9 +2331,9 @@
           <Property Name="DESCRIPCION_DIRECCION" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CIUDAD" Relationship="Self.FK_DIRECCION_VS_CIUDAD" FromRole="DIRECCION" ToRole="CIUDAD" />
           <NavigationProperty Name="ESTADO" Relationship="Self.FK_DIRECCION_VS_ESTADO" FromRole="DIRECCION" ToRole="ESTADO" />
-          <NavigationProperty Name="INDIVIDUO" Relationship="Self.FK_DIRECCION_VS_INDIVIDUO" FromRole="DIRECCION" ToRole="INDIVIDUO" />
           <NavigationProperty Name="PAIS" Relationship="Self.FK_DIRECCION_VS_PAIS" FromRole="DIRECCION" ToRole="PAIS" />
           <NavigationProperty Name="TIPO_DIRECCION" Relationship="Self.FK_DIRECCION_VS_TIPO_DIRECCION" FromRole="DIRECCION" ToRole="TIPO_DIRECCION" />
+          <NavigationProperty Name="INDIVIDUO" Relationship="Decisiones_Inteligentes_Modelo.FK_DIRECCION_VS_INDIVIDUO" FromRole="DIRECCION" ToRole="INDIVIDUO" />
         </EntityType>
         <EntityType Name="E_MAIL">
           <Key>
@@ -2282,8 +2343,8 @@
           <Property Name="INDIVIDUO_ID" Type="Int32" />
           <Property Name="TIPO_CORREO_ELECTRONICO_ID" Type="Int32" />
           <Property Name="DIRECCION_CORREO_ELECTRONICO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="INDIVIDUO" Relationship="Self.FK_E_MAIL_VS_INDIVIDUO" FromRole="E_MAIL" ToRole="INDIVIDUO" />
           <NavigationProperty Name="TIPO_CORREO_ELECTRONICO" Relationship="Self.FK_E_MAIL_VS_TIPO_CORREO_ELECTRONICO" FromRole="E_MAIL" ToRole="TIPO_CORREO_ELECTRONICO" />
+          <NavigationProperty Name="INDIVIDUO" Relationship="Decisiones_Inteligentes_Modelo.FK_E_MAIL_VS_INDIVIDUO" FromRole="E_MAIL" ToRole="INDIVIDUO" />
         </EntityType>
         <EntityType Name="EMPLEADO">
           <Key>
@@ -2302,8 +2363,8 @@
           <Property Name="TIEMPO_TRABAJO" Type="Int32" />
           <NavigationProperty Name="ESPECIALIDAD_EMPLEADO" Relationship="Self.FK_EMPLEADO_VS_ESPECIALIDAD_EMPLEADO" FromRole="EMPLEADO" ToRole="ESPECIALIDAD_EMPLEADO" />
           <NavigationProperty Name="ESTADO_CIVIL" Relationship="Self.FK_EMPLEADO_VS_ESTADO_CIVIL" FromRole="EMPLEADO" ToRole="ESTADO_CIVIL" />
-          <NavigationProperty Name="INDIVIDUO" Relationship="Self.FK_EMPLEADO_VS_INDIVIDUO" FromRole="EMPLEADO" ToRole="INDIVIDUO" />
           <NavigationProperty Name="NIVEL_EDUCACION" Relationship="Self.FK_EMPLEADO_VS_NIVEL_EDUCACION" FromRole="EMPLEADO" ToRole="NIVEL_EDUCACION" />
+          <NavigationProperty Name="INDIVIDUO" Relationship="Decisiones_Inteligentes_Modelo.FK_EMPLEADO_VS_INDIVIDUO" FromRole="EMPLEADO" ToRole="INDIVIDUO" />
         </EntityType>
         <EntityType Name="ESTADO">
           <Key>
@@ -2316,34 +2377,6 @@
           <NavigationProperty Name="DIRECCION" Relationship="Self.FK_DIRECCION_VS_ESTADO" FromRole="ESTADO" ToRole="DIRECCION" />
           <NavigationProperty Name="PAIS" Relationship="Self.FK_ESTADO_VS_PAIS" FromRole="ESTADO" ToRole="PAIS" />
         </EntityType>
-        <EntityType Name="INDIVIDUO">
-          <Key>
-            <PropertyRef Name="INDIVIDUO_ID" />
-          </Key>
-          <Property Name="INDIVIDUO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TIPO_IDENTIFICACION_ID" Type="Int32" />
-          <Property Name="TIPO_INDIVIDUO_ID" Type="Int32" />
-          <Property Name="PRIMER_CAMPO" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
-          <Property Name="SEGUNDO_CAMPO" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
-          <Property Name="TERCER_CAMPO" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
-          <Property Name="CUARTO_CAMPO" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
-          <Property Name="NUMERO_IDENTIFICACION" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="HABILITADO" Type="Boolean" />
-          <Property Name="FECHA_CREACION" Type="DateTime" Precision="3" />
-          <Property Name="FECHA_MODIFICACION" Type="DateTime" Precision="3" />
-          <Property Name="USUARIO_ID" Type="Int32" />
-          <Property Name="TIPO_ROL_INDIVIDUO_ID" Type="Int32" />
-          <NavigationProperty Name="CLIENTE" Relationship="Self.FK_CLIENTE_VS_INDIVIDUO" FromRole="INDIVIDUO" ToRole="CLIENTE" />
-          <NavigationProperty Name="DIRECCION" Relationship="Self.FK_DIRECCION_VS_INDIVIDUO" FromRole="INDIVIDUO" ToRole="DIRECCION" />
-          <NavigationProperty Name="E_MAIL" Relationship="Self.FK_E_MAIL_VS_INDIVIDUO" FromRole="INDIVIDUO" ToRole="E_MAIL" />
-          <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_EMPLEADO_VS_INDIVIDUO" FromRole="INDIVIDUO" ToRole="EMPLEADO" />
-          <NavigationProperty Name="INDIVIDUO_BANCO" Relationship="Self.FK_INDIVIDUO_BANCO_VS_PERSONA" FromRole="INDIVIDUO" ToRole="INDIVIDUO_BANCO" />
-          <NavigationProperty Name="TIPO_IDENTIFICACION" Relationship="Self.FK_INDIVIDUO_VS_TIPO_IDENTIFICACION" FromRole="INDIVIDUO" ToRole="TIPO_IDENTIFICACION" />
-          <NavigationProperty Name="TIPO_INDIVIDUO" Relationship="Self.FK_INDIVIDUO_VS_TIPO_PERSONA" FromRole="INDIVIDUO" ToRole="TIPO_INDIVIDUO" />
-          <NavigationProperty Name="TIPO_ROL_INDIVIDUO" Relationship="Self.FK_INDIVIDUO_VS_TIPO_ROL_INDIVIDUO" FromRole="INDIVIDUO" ToRole="TIPO_ROL_INDIVIDUO" />
-          <NavigationProperty Name="TELEFONO" Relationship="Self.FK_TELEFONO_VS_INDIVIDUO" FromRole="INDIVIDUO" ToRole="TELEFONO" />
-          <NavigationProperty Name="USUARIO" Relationship="Self.FK_USUARIO_INDIVIDUO" FromRole="INDIVIDUO" ToRole="USUARIO" />
-        </EntityType>
         <EntityType Name="INDIVIDUO_BANCO">
           <Key>
             <PropertyRef Name="PERSONA_BANCO_ID" />
@@ -2355,8 +2388,8 @@
           <Property Name="NUMERO_CUENTA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="ES_PRINCIPAL" Type="Boolean" />
           <Property Name="ES_PROPIA" Type="Boolean" />
-          <NavigationProperty Name="INDIVIDUO" Relationship="Self.FK_INDIVIDUO_BANCO_VS_PERSONA" FromRole="INDIVIDUO_BANCO" ToRole="INDIVIDUO" />
           <NavigationProperty Name="TIPO_CUENTA_BANCARIA" Relationship="Self.FK_INDIVIDUO_BANCO_VS_TIPO_CUENTA_BANCARIA" FromRole="INDIVIDUO_BANCO" ToRole="TIPO_CUENTA_BANCARIA" />
+          <NavigationProperty Name="INDIVIDUO" Relationship="Decisiones_Inteligentes_Modelo.FK_INDIVIDUO_BANCO_VS_PERSONA" FromRole="INDIVIDUO_BANCO" ToRole="INDIVIDUO" />
         </EntityType>
         <EntityType Name="PAIS">
           <Key>
@@ -2377,8 +2410,8 @@
           <Property Name="INDIVIDUO_ID" Type="Int32" />
           <Property Name="TIPO_TELEFONO_ID" Type="Int32" />
           <Property Name="NUMERO_TELEFONO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="INDIVIDUO" Relationship="Self.FK_TELEFONO_VS_INDIVIDUO" FromRole="TELEFONO" ToRole="INDIVIDUO" />
           <NavigationProperty Name="TIPO_TELEFONO" Relationship="Self.FK_TELEFONO_VS_TIPO_TELEFONO" FromRole="TELEFONO" ToRole="TIPO_TELEFONO" />
+          <NavigationProperty Name="INDIVIDUO" Relationship="Decisiones_Inteligentes_Modelo.FK_TELEFONO_VS_INDIVIDUO" FromRole="TELEFONO" ToRole="INDIVIDUO" />
         </EntityType>
         <EntityType Name="AGENDA_VISITA">
           <Key>
@@ -2629,7 +2662,7 @@
           <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="POR_DEFECTO" Type="Boolean" />
           <Property Name="TIPO_IDENTIFICACION_SRI_ID" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="INDIVIDUO" Relationship="Self.FK_INDIVIDUO_VS_TIPO_IDENTIFICACION" FromRole="TIPO_IDENTIFICACION" ToRole="INDIVIDUO" />
+          <NavigationProperty Name="INDIVIDUO" Relationship="Decisiones_Inteligentes_Modelo.FK_INDIVIDUO_VS_TIPO_IDENTIFICACION" FromRole="TIPO_IDENTIFICACION" ToRole="INDIVIDUO" />
         </EntityType>
         <EntityType Name="TIPO_INDIVIDUO">
           <Key>
@@ -2638,7 +2671,7 @@
           <Property Name="TIPO_INDIVIDUO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="POR_DEFECTO" Type="Boolean" />
-          <NavigationProperty Name="INDIVIDUO" Relationship="Self.FK_INDIVIDUO_VS_TIPO_PERSONA" FromRole="TIPO_INDIVIDUO" ToRole="INDIVIDUO" />
+          <NavigationProperty Name="INDIVIDUO" Relationship="Decisiones_Inteligentes_Modelo.FK_INDIVIDUO_VS_TIPO_PERSONA" FromRole="TIPO_INDIVIDUO" ToRole="INDIVIDUO" />
         </EntityType>
         <EntityType Name="TIPO_LAVADO">
           <Key>
@@ -2649,14 +2682,6 @@
           <Property Name="ESTA_HABILITADO" Type="Boolean" />
           <NavigationProperty Name="NUMERACION_ORDEN" Relationship="Self.FK_NUMERACION_ORDEN_VS_TIPO_LAVADO" FromRole="TIPO_LAVADO" ToRole="NUMERACION_ORDEN" />
           <NavigationProperty Name="ORDEN_TRABAJO" Relationship="Self.FK_ORDEN_TRABAJO_VS_TIPO_LAVADO" FromRole="TIPO_LAVADO" ToRole="ORDEN_TRABAJO" />
-        </EntityType>
-        <EntityType Name="TIPO_ROL_INDIVIDUO">
-          <Key>
-            <PropertyRef Name="TIPO_ROL_INDIVIDUO_ID" />
-          </Key>
-          <Property Name="TIPO_ROL_INDIVIDUO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="INDIVIDUO" Relationship="Self.FK_INDIVIDUO_VS_TIPO_ROL_INDIVIDUO" FromRole="TIPO_ROL_INDIVIDUO" ToRole="INDIVIDUO" />
         </EntityType>
         <EntityType Name="TIPO_TELEFONO">
           <Key>
@@ -2846,13 +2871,13 @@
           <Property Name="HABILITADO" Type="Boolean" />
           <Property Name="HABILITADO_SEGURIDAD" Type="Boolean" />
           <NavigationProperty Name="CONTROL_USUARIO" Relationship="Self.FK_CONTROL_USUARIO_VS_USUARIO" FromRole="USUARIO" ToRole="CONTROL_USUARIO" />
-          <NavigationProperty Name="INDIVIDUO" Relationship="Self.FK_USUARIO_INDIVIDUO" FromRole="USUARIO" ToRole="INDIVIDUO" />
           <NavigationProperty Name="PUNTO_VENTA" Relationship="Self.FK_USUARIO_VS_PUNTO_VENTA" FromRole="USUARIO" ToRole="PUNTO_VENTA" />
           <NavigationProperty Name="SUCURSAL" Relationship="Self.FK_USUARIO_VS_SUCURSAL" FromRole="USUARIO" ToRole="SUCURSAL" />
           <NavigationProperty Name="HISTORIAL_USUARIO" Relationship="Self.FK_HISTORIA_FK_HISTOR_USUARIO" FromRole="USUARIO" ToRole="HISTORIAL_USUARIO" />
           <NavigationProperty Name="USUARIO_PERFIL" Relationship="Self.FK_USUARIO_PERFIL_VS_USUARIO" FromRole="USUARIO" ToRole="USUARIO_PERFIL" />
           <NavigationProperty Name="USUARIO_PREGUNTA_SEGURIDAD" Relationship="Self.FK_USUARIO_PS_VS_USUARIO" FromRole="USUARIO" ToRole="USUARIO_PREGUNTA_SEGURIDAD" />
           <NavigationProperty Name="USUARIO_SEGURIDAD" Relationship="Self.FK_USUARIO_SEGURIDAD_VS_USUARIO" FromRole="USUARIO" ToRole="USUARIO_SEGURIDAD" />
+          <NavigationProperty Name="INDIVIDUO" Relationship="Decisiones_Inteligentes_Modelo.FK_USUARIO_INDIVIDUO" FromRole="USUARIO" ToRole="INDIVIDUO" />
         </EntityType>
         <EntityType Name="USUARIO_PERFIL">
           <Key>
@@ -3137,18 +3162,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CLIENTE_VS_INDIVIDUO">
-          <End Role="INDIVIDUO" Type="Self.INDIVIDUO" Multiplicity="0..1" />
-          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="INDIVIDUO">
-              <PropertyRef Name="INDIVIDUO_ID" />
-            </Principal>
-            <Dependent Role="CLIENTE">
-              <PropertyRef Name="INDIVIDUO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CLIENTE_VS_TIPO_GENERO">
           <End Role="TIPO_GENERO" Type="Self.TIPO_GENERO" Multiplicity="0..1" />
           <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
@@ -3185,18 +3198,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DIRECCION_VS_INDIVIDUO">
-          <End Role="INDIVIDUO" Type="Self.INDIVIDUO" Multiplicity="0..1" />
-          <End Role="DIRECCION" Type="Self.DIRECCION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="INDIVIDUO">
-              <PropertyRef Name="INDIVIDUO_ID" />
-            </Principal>
-            <Dependent Role="DIRECCION">
-              <PropertyRef Name="INDIVIDUO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DIRECCION_VS_PAIS">
           <End Role="PAIS" Type="Self.PAIS" Multiplicity="0..1" />
           <End Role="DIRECCION" Type="Self.DIRECCION" Multiplicity="*" />
@@ -3218,18 +3219,6 @@
             </Principal>
             <Dependent Role="DIRECCION">
               <PropertyRef Name="TIPO_DIRECCION_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_E_MAIL_VS_INDIVIDUO">
-          <End Role="INDIVIDUO" Type="Self.INDIVIDUO" Multiplicity="0..1" />
-          <End Role="E_MAIL" Type="Self.E_MAIL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="INDIVIDUO">
-              <PropertyRef Name="INDIVIDUO_ID" />
-            </Principal>
-            <Dependent Role="E_MAIL">
-              <PropertyRef Name="INDIVIDUO_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3269,18 +3258,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_EMPLEADO_VS_INDIVIDUO">
-          <End Role="INDIVIDUO" Type="Self.INDIVIDUO" Multiplicity="0..1" />
-          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="INDIVIDUO">
-              <PropertyRef Name="INDIVIDUO_ID" />
-            </Principal>
-            <Dependent Role="EMPLEADO">
-              <PropertyRef Name="INDIVIDUO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_EMPLEADO_VS_NIVEL_EDUCACION">
           <End Role="NIVEL_EDUCACION" Type="Self.NIVEL_EDUCACION" Multiplicity="0..1" />
           <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="*" />
@@ -3302,78 +3279,6 @@
             </Principal>
             <Dependent Role="ESTADO">
               <PropertyRef Name="PAIS_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_INDIVIDUO_BANCO_VS_PERSONA">
-          <End Role="INDIVIDUO" Type="Self.INDIVIDUO" Multiplicity="0..1" />
-          <End Role="INDIVIDUO_BANCO" Type="Self.INDIVIDUO_BANCO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="INDIVIDUO">
-              <PropertyRef Name="INDIVIDUO_ID" />
-            </Principal>
-            <Dependent Role="INDIVIDUO_BANCO">
-              <PropertyRef Name="INDIVIDUO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_INDIVIDUO_VS_TIPO_IDENTIFICACION">
-          <End Role="TIPO_IDENTIFICACION" Type="Self.TIPO_IDENTIFICACION" Multiplicity="0..1" />
-          <End Role="INDIVIDUO" Type="Self.INDIVIDUO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TIPO_IDENTIFICACION">
-              <PropertyRef Name="TIPO_IDENTIFICACION_ID" />
-            </Principal>
-            <Dependent Role="INDIVIDUO">
-              <PropertyRef Name="TIPO_IDENTIFICACION_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_INDIVIDUO_VS_TIPO_PERSONA">
-          <End Role="TIPO_INDIVIDUO" Type="Self.TIPO_INDIVIDUO" Multiplicity="0..1" />
-          <End Role="INDIVIDUO" Type="Self.INDIVIDUO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TIPO_INDIVIDUO">
-              <PropertyRef Name="TIPO_INDIVIDUO_ID" />
-            </Principal>
-            <Dependent Role="INDIVIDUO">
-              <PropertyRef Name="TIPO_INDIVIDUO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_INDIVIDUO_VS_TIPO_ROL_INDIVIDUO">
-          <End Role="TIPO_ROL_INDIVIDUO" Type="Self.TIPO_ROL_INDIVIDUO" Multiplicity="0..1" />
-          <End Role="INDIVIDUO" Type="Self.INDIVIDUO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TIPO_ROL_INDIVIDUO">
-              <PropertyRef Name="TIPO_ROL_INDIVIDUO_ID" />
-            </Principal>
-            <Dependent Role="INDIVIDUO">
-              <PropertyRef Name="TIPO_ROL_INDIVIDUO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TELEFONO_VS_INDIVIDUO">
-          <End Role="INDIVIDUO" Type="Self.INDIVIDUO" Multiplicity="0..1" />
-          <End Role="TELEFONO" Type="Self.TELEFONO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="INDIVIDUO">
-              <PropertyRef Name="INDIVIDUO_ID" />
-            </Principal>
-            <Dependent Role="TELEFONO">
-              <PropertyRef Name="INDIVIDUO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_USUARIO_INDIVIDUO">
-          <End Role="INDIVIDUO" Type="Self.INDIVIDUO" Multiplicity="0..1" />
-          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="INDIVIDUO">
-              <PropertyRef Name="INDIVIDUO_ID" />
-            </Principal>
-            <Dependent Role="USUARIO">
-              <PropertyRef Name="INDIVIDUO_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3905,7 +3810,6 @@
           <EntitySet Name="E_MAIL" EntityType="Self.E_MAIL" />
           <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" />
           <EntitySet Name="ESTADO" EntityType="Self.ESTADO" />
-          <EntitySet Name="INDIVIDUO" EntityType="Self.INDIVIDUO" />
           <EntitySet Name="INDIVIDUO_BANCO" EntityType="Self.INDIVIDUO_BANCO" />
           <EntitySet Name="PAIS" EntityType="Self.PAIS" />
           <EntitySet Name="TELEFONO" EntityType="Self.TELEFONO" />
@@ -3936,7 +3840,6 @@
           <EntitySet Name="TIPO_IDENTIFICACION" EntityType="Self.TIPO_IDENTIFICACION" />
           <EntitySet Name="TIPO_INDIVIDUO" EntityType="Self.TIPO_INDIVIDUO" />
           <EntitySet Name="TIPO_LAVADO" EntityType="Self.TIPO_LAVADO" />
-          <EntitySet Name="TIPO_ROL_INDIVIDUO" EntityType="Self.TIPO_ROL_INDIVIDUO" />
           <EntitySet Name="TIPO_TELEFONO" EntityType="Self.TIPO_TELEFONO" />
           <EntitySet Name="UNIDAD_MEDIDA" EntityType="Self.UNIDAD_MEDIDA" />
           <EntitySet Name="ZONA" EntityType="Self.ZONA" />
@@ -4015,10 +3918,6 @@
             <End Role="CIUDAD" EntitySet="CIUDAD" />
             <End Role="DIRECCION" EntitySet="DIRECCION" />
           </AssociationSet>
-          <AssociationSet Name="FK_CLIENTE_VS_INDIVIDUO" Association="Self.FK_CLIENTE_VS_INDIVIDUO">
-            <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
-            <End Role="CLIENTE" EntitySet="CLIENTE" />
-          </AssociationSet>
           <AssociationSet Name="FK_CLIENTE_VS_TIPO_GENERO" Association="Self.FK_CLIENTE_VS_TIPO_GENERO">
             <End Role="TIPO_GENERO" EntitySet="TIPO_GENERO" />
             <End Role="CLIENTE" EntitySet="CLIENTE" />
@@ -4031,10 +3930,6 @@
             <End Role="ESTADO" EntitySet="ESTADO" />
             <End Role="DIRECCION" EntitySet="DIRECCION" />
           </AssociationSet>
-          <AssociationSet Name="FK_DIRECCION_VS_INDIVIDUO" Association="Self.FK_DIRECCION_VS_INDIVIDUO">
-            <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
-            <End Role="DIRECCION" EntitySet="DIRECCION" />
-          </AssociationSet>
           <AssociationSet Name="FK_DIRECCION_VS_PAIS" Association="Self.FK_DIRECCION_VS_PAIS">
             <End Role="PAIS" EntitySet="PAIS" />
             <End Role="DIRECCION" EntitySet="DIRECCION" />
@@ -4042,10 +3937,6 @@
           <AssociationSet Name="FK_DIRECCION_VS_TIPO_DIRECCION" Association="Self.FK_DIRECCION_VS_TIPO_DIRECCION">
             <End Role="TIPO_DIRECCION" EntitySet="TIPO_DIRECCION" />
             <End Role="DIRECCION" EntitySet="DIRECCION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_E_MAIL_VS_INDIVIDUO" Association="Self.FK_E_MAIL_VS_INDIVIDUO">
-            <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
-            <End Role="E_MAIL" EntitySet="E_MAIL" />
           </AssociationSet>
           <AssociationSet Name="FK_E_MAIL_VS_TIPO_CORREO_ELECTRONICO" Association="Self.FK_E_MAIL_VS_TIPO_CORREO_ELECTRONICO">
             <End Role="TIPO_CORREO_ELECTRONICO" EntitySet="TIPO_CORREO_ELECTRONICO" />
@@ -4059,10 +3950,6 @@
             <End Role="ESTADO_CIVIL" EntitySet="ESTADO_CIVIL" />
             <End Role="EMPLEADO" EntitySet="EMPLEADO" />
           </AssociationSet>
-          <AssociationSet Name="FK_EMPLEADO_VS_INDIVIDUO" Association="Self.FK_EMPLEADO_VS_INDIVIDUO">
-            <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
-            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
-          </AssociationSet>
           <AssociationSet Name="FK_EMPLEADO_VS_NIVEL_EDUCACION" Association="Self.FK_EMPLEADO_VS_NIVEL_EDUCACION">
             <End Role="NIVEL_EDUCACION" EntitySet="NIVEL_EDUCACION" />
             <End Role="EMPLEADO" EntitySet="EMPLEADO" />
@@ -4070,30 +3957,6 @@
           <AssociationSet Name="FK_ESTADO_VS_PAIS" Association="Self.FK_ESTADO_VS_PAIS">
             <End Role="PAIS" EntitySet="PAIS" />
             <End Role="ESTADO" EntitySet="ESTADO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_INDIVIDUO_BANCO_VS_PERSONA" Association="Self.FK_INDIVIDUO_BANCO_VS_PERSONA">
-            <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
-            <End Role="INDIVIDUO_BANCO" EntitySet="INDIVIDUO_BANCO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_INDIVIDUO_VS_TIPO_IDENTIFICACION" Association="Self.FK_INDIVIDUO_VS_TIPO_IDENTIFICACION">
-            <End Role="TIPO_IDENTIFICACION" EntitySet="TIPO_IDENTIFICACION" />
-            <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_INDIVIDUO_VS_TIPO_PERSONA" Association="Self.FK_INDIVIDUO_VS_TIPO_PERSONA">
-            <End Role="TIPO_INDIVIDUO" EntitySet="TIPO_INDIVIDUO" />
-            <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_INDIVIDUO_VS_TIPO_ROL_INDIVIDUO" Association="Self.FK_INDIVIDUO_VS_TIPO_ROL_INDIVIDUO">
-            <End Role="TIPO_ROL_INDIVIDUO" EntitySet="TIPO_ROL_INDIVIDUO" />
-            <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TELEFONO_VS_INDIVIDUO" Association="Self.FK_TELEFONO_VS_INDIVIDUO">
-            <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
-            <End Role="TELEFONO" EntitySet="TELEFONO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_USUARIO_INDIVIDUO" Association="Self.FK_USUARIO_INDIVIDUO">
-            <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
-            <End Role="USUARIO" EntitySet="USUARIO" />
           </AssociationSet>
           <AssociationSet Name="FK_INDIVIDUO_BANCO_VS_TIPO_CUENTA_BANCARIA" Association="Self.FK_INDIVIDUO_BANCO_VS_TIPO_CUENTA_BANCARIA">
             <End Role="TIPO_CUENTA_BANCARIA" EntitySet="TIPO_CUENTA_BANCARIA" />
@@ -4299,6 +4162,59 @@
             <End Role="CUENTA_POR_PAGAR" EntitySet="CUENTA_POR_PAGAR" />
             <End Role="HISTORIAL_CUENTA_POR_PAGAR" EntitySet="HISTORIAL_CUENTA_POR_PAGAR" />
           </AssociationSet>
+          <EntitySet Name="FORMA_PAGO" EntityType="Decisiones_Inteligentes_Modelo.FORMA_PAGO" />
+          <AssociationSet Name="FK_HISTORIAL_CUENTA_COBRAR_VS_FORMA_PAGO" Association="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_CUENTA_COBRAR_VS_FORMA_PAGO">
+            <End Role="FORMA_PAGO" EntitySet="FORMA_PAGO" />
+            <End Role="HISTORIAL_CUENTA_POR_COBRAR" EntitySet="HISTORIAL_CUENTA_POR_COBRAR" />
+          </AssociationSet>
+          <EntitySet Name="PRUEBA" EntityType="Decisiones_Inteligentes_Modelo.PRUEBA" />
+          <EntitySet Name="INDIVIDUO_ROL" EntityType="Decisiones_Inteligentes_Modelo.INDIVIDUO_ROL" />
+          <EntitySet Name="TIPO_ROL_INDIVIDUO" EntityType="Decisiones_Inteligentes_Modelo.TIPO_ROL_INDIVIDUO" />
+          <AssociationSet Name="FK_INDIVIDUO_ROL_VS_TIPO_ROL_INDIVIDUO" Association="Decisiones_Inteligentes_Modelo.FK_INDIVIDUO_ROL_VS_TIPO_ROL_INDIVIDUO">
+            <End Role="TIPO_ROL_INDIVIDUO" EntitySet="TIPO_ROL_INDIVIDUO" />
+            <End Role="INDIVIDUO_ROL" EntitySet="INDIVIDUO_ROL" />
+          </AssociationSet>
+          <EntitySet Name="INDIVIDUO" EntityType="Decisiones_Inteligentes_Modelo.INDIVIDUO" />
+          <AssociationSet Name="FK_CLIENTE_VS_INDIVIDUO" Association="Decisiones_Inteligentes_Modelo.FK_CLIENTE_VS_INDIVIDUO">
+            <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DIRECCION_VS_INDIVIDUO" Association="Decisiones_Inteligentes_Modelo.FK_DIRECCION_VS_INDIVIDUO">
+            <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
+            <End Role="DIRECCION" EntitySet="DIRECCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_E_MAIL_VS_INDIVIDUO" Association="Decisiones_Inteligentes_Modelo.FK_E_MAIL_VS_INDIVIDUO">
+            <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
+            <End Role="E_MAIL" EntitySet="E_MAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLEADO_VS_INDIVIDUO" Association="Decisiones_Inteligentes_Modelo.FK_EMPLEADO_VS_INDIVIDUO">
+            <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INDIVIDO_ROL_VS_INDIVIDUO" Association="Decisiones_Inteligentes_Modelo.FK_INDIVIDO_ROL_VS_INDIVIDUO">
+            <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
+            <End Role="INDIVIDUO_ROL" EntitySet="INDIVIDUO_ROL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INDIVIDUO_BANCO_VS_PERSONA" Association="Decisiones_Inteligentes_Modelo.FK_INDIVIDUO_BANCO_VS_PERSONA">
+            <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
+            <End Role="INDIVIDUO_BANCO" EntitySet="INDIVIDUO_BANCO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INDIVIDUO_VS_TIPO_IDENTIFICACION" Association="Decisiones_Inteligentes_Modelo.FK_INDIVIDUO_VS_TIPO_IDENTIFICACION">
+            <End Role="TIPO_IDENTIFICACION" EntitySet="TIPO_IDENTIFICACION" />
+            <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INDIVIDUO_VS_TIPO_PERSONA" Association="Decisiones_Inteligentes_Modelo.FK_INDIVIDUO_VS_TIPO_PERSONA">
+            <End Role="TIPO_INDIVIDUO" EntitySet="TIPO_INDIVIDUO" />
+            <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TELEFONO_VS_INDIVIDUO" Association="Decisiones_Inteligentes_Modelo.FK_TELEFONO_VS_INDIVIDUO">
+            <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
+            <End Role="TELEFONO" EntitySet="TELEFONO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_INDIVIDUO" Association="Decisiones_Inteligentes_Modelo.FK_USUARIO_INDIVIDUO">
+            <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="HISTORIAL_PROCESO">
           <Key>
@@ -4313,6 +4229,7 @@
           <Property Name="NUMERO_ORDEN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ETAPA_PROCESO" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_PROCESO_VS_ETAPA_PROCESO" FromRole="HISTORIAL_PROCESO" ToRole="ETAPA_PROCESO" />
           <NavigationProperty Name="ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_PROCESO_VS_ORDEN_TRABAJO" FromRole="HISTORIAL_PROCESO" ToRole="ORDEN_TRABAJO" />
+          <Property Name="TEXTO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ETAPA_PROCESO">
           <Key>
@@ -4443,6 +4360,8 @@
           <Property Name="VALOR_COBRO" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="USUARIO_ID" Type="Int32" />
           <NavigationProperty Name="CUENTA_POR_COBRAR" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_CUENTA_POR_COBRAR_VS_CUENTA_POR_COBRAR" FromRole="HISTORIAL_CUENTA_POR_COBRAR" ToRole="CUENTA_POR_COBRAR" />
+          <Property Name="FORMA_PAGO_ID" Type="Int32" />
+          <NavigationProperty Name="FORMA_PAGO" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_CUENTA_COBRAR_VS_FORMA_PAGO" FromRole="HISTORIAL_CUENTA_POR_COBRAR" ToRole="FORMA_PAGO" />
         </EntityType>
         <Association Name="FK_HISTORIAL_CUENTA_POR_COBRAR_VS_CUENTA_POR_COBRAR">
           <End Type="Decisiones_Inteligentes_Modelo.CUENTA_POR_COBRAR" Role="CUENTA_POR_COBRAR" Multiplicity="0..1" />
@@ -4476,6 +4395,213 @@
             </Principal>
             <Dependent Role="HISTORIAL_CUENTA_POR_PAGAR">
               <PropertyRef Name="CUENTA_POR_PAGAR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="FORMA_PAGO">
+          <Key>
+            <PropertyRef Name="FORMA_PAGO_ID" />
+          </Key>
+          <Property Name="FORMA_PAGO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ESTA_HABILITADO" Type="Boolean" />
+          <NavigationProperty Name="HISTORIAL_CUENTA_POR_COBRAR" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_CUENTA_COBRAR_VS_FORMA_PAGO" FromRole="FORMA_PAGO" ToRole="HISTORIAL_CUENTA_POR_COBRAR" />
+        </EntityType>
+        <Association Name="FK_HISTORIAL_CUENTA_COBRAR_VS_FORMA_PAGO">
+          <End Type="Decisiones_Inteligentes_Modelo.FORMA_PAGO" Role="FORMA_PAGO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.HISTORIAL_CUENTA_POR_COBRAR" Role="HISTORIAL_CUENTA_POR_COBRAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FORMA_PAGO">
+              <PropertyRef Name="FORMA_PAGO_ID" />
+            </Principal>
+            <Dependent Role="HISTORIAL_CUENTA_POR_COBRAR">
+              <PropertyRef Name="FORMA_PAGO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PRUEBA">
+          <Key>
+            <PropertyRef Name="PRUEBA_ID" />
+          </Key>
+          <Property Name="PRUEBA_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ESTA_HABILITADO" Type="Boolean" />
+          <Property Name="FECHA" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="INDIVIDUO_ROL">
+          <Key>
+            <PropertyRef Name="INDIVIDUO_ROL_ID" />
+          </Key>
+          <Property Name="INDIVIDUO_ROL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TIPO_ROL_INDIVIDUO_ID" Type="Int32" />
+          <Property Name="INDIVIDUO_ID" Type="Int32" />
+          <NavigationProperty Name="TIPO_ROL_INDIVIDUO" Relationship="Decisiones_Inteligentes_Modelo.FK_INDIVIDUO_ROL_VS_TIPO_ROL_INDIVIDUO" FromRole="INDIVIDUO_ROL" ToRole="TIPO_ROL_INDIVIDUO" />
+          <NavigationProperty Name="INDIVIDUO" Relationship="Decisiones_Inteligentes_Modelo.FK_INDIVIDO_ROL_VS_INDIVIDUO" FromRole="INDIVIDUO_ROL" ToRole="INDIVIDUO" />
+        </EntityType>
+        <EntityType Name="TIPO_ROL_INDIVIDUO">
+          <Key>
+            <PropertyRef Name="TIPO_ROL_INDIVIDUO_ID" />
+          </Key>
+          <Property Name="TIPO_ROL_INDIVIDUO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="INDIVIDUO_ROL" Relationship="Decisiones_Inteligentes_Modelo.FK_INDIVIDUO_ROL_VS_TIPO_ROL_INDIVIDUO" FromRole="TIPO_ROL_INDIVIDUO" ToRole="INDIVIDUO_ROL" />
+        </EntityType>
+        <Association Name="FK_INDIVIDUO_ROL_VS_TIPO_ROL_INDIVIDUO">
+          <End Type="Decisiones_Inteligentes_Modelo.TIPO_ROL_INDIVIDUO" Role="TIPO_ROL_INDIVIDUO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.INDIVIDUO_ROL" Role="INDIVIDUO_ROL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_ROL_INDIVIDUO">
+              <PropertyRef Name="TIPO_ROL_INDIVIDUO_ID" />
+            </Principal>
+            <Dependent Role="INDIVIDUO_ROL">
+              <PropertyRef Name="TIPO_ROL_INDIVIDUO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="INDIVIDUO">
+          <Key>
+            <PropertyRef Name="INDIVIDUO_ID" />
+          </Key>
+          <Property Name="INDIVIDUO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TIPO_IDENTIFICACION_ID" Type="Int32" />
+          <Property Name="TIPO_INDIVIDUO_ID" Type="Int32" />
+          <Property Name="PRIMER_CAMPO" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="SEGUNDO_CAMPO" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="TERCER_CAMPO" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="CUARTO_CAMPO" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="NUMERO_IDENTIFICACION" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="HABILITADO" Type="Boolean" />
+          <Property Name="FECHA_CREACION" Type="DateTime" Precision="3" />
+          <Property Name="FECHA_MODIFICACION" Type="DateTime" Precision="3" />
+          <Property Name="USUARIO_ID" Type="Int32" />
+          <NavigationProperty Name="CLIENTE" Relationship="Decisiones_Inteligentes_Modelo.FK_CLIENTE_VS_INDIVIDUO" FromRole="INDIVIDUO" ToRole="CLIENTE" />
+          <NavigationProperty Name="DIRECCION" Relationship="Decisiones_Inteligentes_Modelo.FK_DIRECCION_VS_INDIVIDUO" FromRole="INDIVIDUO" ToRole="DIRECCION" />
+          <NavigationProperty Name="E_MAIL" Relationship="Decisiones_Inteligentes_Modelo.FK_E_MAIL_VS_INDIVIDUO" FromRole="INDIVIDUO" ToRole="E_MAIL" />
+          <NavigationProperty Name="EMPLEADO" Relationship="Decisiones_Inteligentes_Modelo.FK_EMPLEADO_VS_INDIVIDUO" FromRole="INDIVIDUO" ToRole="EMPLEADO" />
+          <NavigationProperty Name="INDIVIDUO_ROL" Relationship="Decisiones_Inteligentes_Modelo.FK_INDIVIDO_ROL_VS_INDIVIDUO" FromRole="INDIVIDUO" ToRole="INDIVIDUO_ROL" />
+          <NavigationProperty Name="INDIVIDUO_BANCO" Relationship="Decisiones_Inteligentes_Modelo.FK_INDIVIDUO_BANCO_VS_PERSONA" FromRole="INDIVIDUO" ToRole="INDIVIDUO_BANCO" />
+          <NavigationProperty Name="TIPO_IDENTIFICACION" Relationship="Decisiones_Inteligentes_Modelo.FK_INDIVIDUO_VS_TIPO_IDENTIFICACION" FromRole="INDIVIDUO" ToRole="TIPO_IDENTIFICACION" />
+          <NavigationProperty Name="TIPO_INDIVIDUO" Relationship="Decisiones_Inteligentes_Modelo.FK_INDIVIDUO_VS_TIPO_PERSONA" FromRole="INDIVIDUO" ToRole="TIPO_INDIVIDUO" />
+          <NavigationProperty Name="TELEFONO" Relationship="Decisiones_Inteligentes_Modelo.FK_TELEFONO_VS_INDIVIDUO" FromRole="INDIVIDUO" ToRole="TELEFONO" />
+          <NavigationProperty Name="USUARIO" Relationship="Decisiones_Inteligentes_Modelo.FK_USUARIO_INDIVIDUO" FromRole="INDIVIDUO" ToRole="USUARIO" />
+        </EntityType>
+        <Association Name="FK_CLIENTE_VS_INDIVIDUO">
+          <End Type="Decisiones_Inteligentes_Modelo.INDIVIDUO" Role="INDIVIDUO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.CLIENTE" Role="CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INDIVIDUO">
+              <PropertyRef Name="INDIVIDUO_ID" />
+            </Principal>
+            <Dependent Role="CLIENTE">
+              <PropertyRef Name="INDIVIDUO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DIRECCION_VS_INDIVIDUO">
+          <End Type="Decisiones_Inteligentes_Modelo.INDIVIDUO" Role="INDIVIDUO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.DIRECCION" Role="DIRECCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INDIVIDUO">
+              <PropertyRef Name="INDIVIDUO_ID" />
+            </Principal>
+            <Dependent Role="DIRECCION">
+              <PropertyRef Name="INDIVIDUO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_E_MAIL_VS_INDIVIDUO">
+          <End Type="Decisiones_Inteligentes_Modelo.INDIVIDUO" Role="INDIVIDUO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.E_MAIL" Role="E_MAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INDIVIDUO">
+              <PropertyRef Name="INDIVIDUO_ID" />
+            </Principal>
+            <Dependent Role="E_MAIL">
+              <PropertyRef Name="INDIVIDUO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLEADO_VS_INDIVIDUO">
+          <End Type="Decisiones_Inteligentes_Modelo.INDIVIDUO" Role="INDIVIDUO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.EMPLEADO" Role="EMPLEADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INDIVIDUO">
+              <PropertyRef Name="INDIVIDUO_ID" />
+            </Principal>
+            <Dependent Role="EMPLEADO">
+              <PropertyRef Name="INDIVIDUO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INDIVIDO_ROL_VS_INDIVIDUO">
+          <End Type="Decisiones_Inteligentes_Modelo.INDIVIDUO" Role="INDIVIDUO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.INDIVIDUO_ROL" Role="INDIVIDUO_ROL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INDIVIDUO">
+              <PropertyRef Name="INDIVIDUO_ID" />
+            </Principal>
+            <Dependent Role="INDIVIDUO_ROL">
+              <PropertyRef Name="INDIVIDUO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INDIVIDUO_BANCO_VS_PERSONA">
+          <End Type="Decisiones_Inteligentes_Modelo.INDIVIDUO" Role="INDIVIDUO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.INDIVIDUO_BANCO" Role="INDIVIDUO_BANCO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INDIVIDUO">
+              <PropertyRef Name="INDIVIDUO_ID" />
+            </Principal>
+            <Dependent Role="INDIVIDUO_BANCO">
+              <PropertyRef Name="INDIVIDUO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INDIVIDUO_VS_TIPO_IDENTIFICACION">
+          <End Type="Decisiones_Inteligentes_Modelo.TIPO_IDENTIFICACION" Role="TIPO_IDENTIFICACION" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.INDIVIDUO" Role="INDIVIDUO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_IDENTIFICACION">
+              <PropertyRef Name="TIPO_IDENTIFICACION_ID" />
+            </Principal>
+            <Dependent Role="INDIVIDUO">
+              <PropertyRef Name="TIPO_IDENTIFICACION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INDIVIDUO_VS_TIPO_PERSONA">
+          <End Type="Decisiones_Inteligentes_Modelo.TIPO_INDIVIDUO" Role="TIPO_INDIVIDUO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.INDIVIDUO" Role="INDIVIDUO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_INDIVIDUO">
+              <PropertyRef Name="TIPO_INDIVIDUO_ID" />
+            </Principal>
+            <Dependent Role="INDIVIDUO">
+              <PropertyRef Name="TIPO_INDIVIDUO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TELEFONO_VS_INDIVIDUO">
+          <End Type="Decisiones_Inteligentes_Modelo.INDIVIDUO" Role="INDIVIDUO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.TELEFONO" Role="TELEFONO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INDIVIDUO">
+              <PropertyRef Name="INDIVIDUO_ID" />
+            </Principal>
+            <Dependent Role="TELEFONO">
+              <PropertyRef Name="INDIVIDUO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_INDIVIDUO">
+          <End Type="Decisiones_Inteligentes_Modelo.INDIVIDUO" Role="INDIVIDUO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.USUARIO" Role="USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INDIVIDUO">
+              <PropertyRef Name="INDIVIDUO_ID" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="INDIVIDUO_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4616,25 +4742,6 @@
                 <ScalarProperty Name="ESTADO_ID" ColumnName="ESTADO_ID" />
                 <ScalarProperty Name="PAIS_ID" ColumnName="PAIS_ID" />
                 <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="INDIVIDUO">
-            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.INDIVIDUO">
-              <MappingFragment StoreEntitySet="INDIVIDUO">
-                <ScalarProperty Name="INDIVIDUO_ID" ColumnName="INDIVIDUO_ID" />
-                <ScalarProperty Name="TIPO_IDENTIFICACION_ID" ColumnName="TIPO_IDENTIFICACION_ID" />
-                <ScalarProperty Name="TIPO_INDIVIDUO_ID" ColumnName="TIPO_INDIVIDUO_ID" />
-                <ScalarProperty Name="PRIMER_CAMPO" ColumnName="PRIMER_CAMPO" />
-                <ScalarProperty Name="SEGUNDO_CAMPO" ColumnName="SEGUNDO_CAMPO" />
-                <ScalarProperty Name="TERCER_CAMPO" ColumnName="TERCER_CAMPO" />
-                <ScalarProperty Name="CUARTO_CAMPO" ColumnName="CUARTO_CAMPO" />
-                <ScalarProperty Name="NUMERO_IDENTIFICACION" ColumnName="NUMERO_IDENTIFICACION" />
-                <ScalarProperty Name="HABILITADO" ColumnName="HABILITADO" />
-                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
-                <ScalarProperty Name="FECHA_MODIFICACION" ColumnName="FECHA_MODIFICACION" />
-                <ScalarProperty Name="USUARIO_ID" ColumnName="USUARIO_ID" />
-                <ScalarProperty Name="TIPO_ROL_INDIVIDUO_ID" ColumnName="TIPO_ROL_INDIVIDUO_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4928,14 +5035,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TIPO_ROL_INDIVIDUO">
-            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.TIPO_ROL_INDIVIDUO">
-              <MappingFragment StoreEntitySet="TIPO_ROL_INDIVIDUO">
-                <ScalarProperty Name="TIPO_ROL_INDIVIDUO_ID" ColumnName="TIPO_ROL_INDIVIDUO_ID" />
-                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TIPO_TELEFONO">
             <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.TIPO_TELEFONO">
               <MappingFragment StoreEntitySet="TIPO_TELEFONO">
@@ -5221,6 +5320,7 @@
           <EntitySetMapping Name="HISTORIAL_PROCESO">
             <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.HISTORIAL_PROCESO">
               <MappingFragment StoreEntitySet="HISTORIAL_PROCESO">
+                <ScalarProperty Name="TEXTO" ColumnName="TEXTO" />
                 <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
                 <ScalarProperty Name="FECHA_FIN" ColumnName="FECHA_FIN" />
                 <ScalarProperty Name="FECHA_INICIO" ColumnName="FECHA_INICIO" />
@@ -5305,6 +5405,7 @@
           <EntitySetMapping Name="HISTORIAL_CUENTA_POR_COBRAR">
             <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.HISTORIAL_CUENTA_POR_COBRAR">
               <MappingFragment StoreEntitySet="HISTORIAL_CUENTA_POR_COBRAR">
+                <ScalarProperty Name="FORMA_PAGO_ID" ColumnName="FORMA_PAGO_ID" />
                 <ScalarProperty Name="USUARIO_ID" ColumnName="USUARIO_ID" />
                 <ScalarProperty Name="VALOR_COBRO" ColumnName="VALOR_COBRO" />
                 <ScalarProperty Name="FECHA_COBRO" ColumnName="FECHA_COBRO" />
@@ -5321,6 +5422,60 @@
                 <ScalarProperty Name="FECHA_PAGO" ColumnName="FECHA_PAGO" />
                 <ScalarProperty Name="CUENTA_POR_PAGAR_ID" ColumnName="CUENTA_POR_PAGAR_ID" />
                 <ScalarProperty Name="HISTORIAL_CUENTA_POR_PAGAR_ID" ColumnName="HISTORIAL_CUENTA_POR_PAGAR_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FORMA_PAGO">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.FORMA_PAGO">
+              <MappingFragment StoreEntitySet="FORMA_PAGO">
+                <ScalarProperty Name="ESTA_HABILITADO" ColumnName="ESTA_HABILITADO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="FORMA_PAGO_ID" ColumnName="FORMA_PAGO_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRUEBA">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.PRUEBA">
+              <MappingFragment StoreEntitySet="PRUEBA">
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="ESTA_HABILITADO" ColumnName="ESTA_HABILITADO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="PRUEBA_ID" ColumnName="PRUEBA_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INDIVIDUO_ROL">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.INDIVIDUO_ROL">
+              <MappingFragment StoreEntitySet="INDIVIDUO_ROL">
+                <ScalarProperty Name="INDIVIDUO_ID" ColumnName="INDIVIDUO_ID" />
+                <ScalarProperty Name="TIPO_ROL_INDIVIDUO_ID" ColumnName="TIPO_ROL_INDIVIDUO_ID" />
+                <ScalarProperty Name="INDIVIDUO_ROL_ID" ColumnName="INDIVIDUO_ROL_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_ROL_INDIVIDUO">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.TIPO_ROL_INDIVIDUO">
+              <MappingFragment StoreEntitySet="TIPO_ROL_INDIVIDUO">
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="TIPO_ROL_INDIVIDUO_ID" ColumnName="TIPO_ROL_INDIVIDUO_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INDIVIDUO">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.INDIVIDUO">
+              <MappingFragment StoreEntitySet="INDIVIDUO">
+                <ScalarProperty Name="USUARIO_ID" ColumnName="USUARIO_ID" />
+                <ScalarProperty Name="FECHA_MODIFICACION" ColumnName="FECHA_MODIFICACION" />
+                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+                <ScalarProperty Name="HABILITADO" ColumnName="HABILITADO" />
+                <ScalarProperty Name="NUMERO_IDENTIFICACION" ColumnName="NUMERO_IDENTIFICACION" />
+                <ScalarProperty Name="CUARTO_CAMPO" ColumnName="CUARTO_CAMPO" />
+                <ScalarProperty Name="TERCER_CAMPO" ColumnName="TERCER_CAMPO" />
+                <ScalarProperty Name="SEGUNDO_CAMPO" ColumnName="SEGUNDO_CAMPO" />
+                <ScalarProperty Name="PRIMER_CAMPO" ColumnName="PRIMER_CAMPO" />
+                <ScalarProperty Name="TIPO_INDIVIDUO_ID" ColumnName="TIPO_INDIVIDUO_ID" />
+                <ScalarProperty Name="TIPO_IDENTIFICACION_ID" ColumnName="TIPO_IDENTIFICACION_ID" />
+                <ScalarProperty Name="INDIVIDUO_ID" ColumnName="INDIVIDUO_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

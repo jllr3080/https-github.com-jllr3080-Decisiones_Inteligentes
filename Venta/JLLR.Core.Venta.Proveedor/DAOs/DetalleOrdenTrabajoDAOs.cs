@@ -27,12 +27,13 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
         /// </summary>
         /// <param name="detalleOrdenTrabajo"></param>
         /// <returns></returns>
-        public void GrabarDetelleOrdenTrabajo(DETALLE_ORDEN_TRABAJO detalleOrdenTrabajo)
+        public DETALLE_ORDEN_TRABAJO GrabarDetelleOrdenTrabajo(DETALLE_ORDEN_TRABAJO detalleOrdenTrabajo)
         {
             try
             {
                 _entidad.DETALLE_ORDEN_TRABAJO.Add(detalleOrdenTrabajo);
                 _entidad.SaveChanges();
+                return detalleOrdenTrabajo;
 
             }
             catch (Exception ex)

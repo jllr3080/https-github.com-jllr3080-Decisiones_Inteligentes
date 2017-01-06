@@ -107,6 +107,14 @@
       <Project>{7b02ff61-3c7a-4a7d-b1a8-c62710253a1b}</Project>
       <Name>JLLR.Core.Base.Proveedor</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\General\JLLR.Core.General.Servicio\JLLR.Core.General.Servicio.csproj">
+      <Project>{fa1cb8ee-77d8-41c6-bb31-fee6716b8cf8}</Project>
+      <Name>JLLR.Core.General.Servicio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Individuo\JLLR.Core.Individuo.Servicio\JLLR.Core.Individuo.Servicio.csproj">
+      <Project>{01c917b9-f3b5-4e6f-b98a-5f16ceb8b59c}</Project>
+      <Name>JLLR.Core.Individuo.Servicio</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JLLR.Core.Contabilidad.Proveedor\JLLR.Core.Contabilidad.Proveedor.csproj">
       <Project>{15f85319-533e-42b4-8779-83435b28257f}</Project>
       <Name>JLLR.Core.Contabilidad.Proveedor</Name>

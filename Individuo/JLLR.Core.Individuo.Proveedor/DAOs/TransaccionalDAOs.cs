@@ -23,6 +23,7 @@ namespace JLLR.Core.Individuo.Proveedor.DAOs
         private readonly  IndividuoDAOs _individuoDaOs= new IndividuoDAOs();
         private readonly  DireccionDAOs _direccionDaOs= new DireccionDAOs();
         private readonly  TelefonoDAOs _telefonoDaOs= new TelefonoDAOs();
+        private readonly  IndividuoRolDAOs _individuoRolDaOs= new IndividuoRolDAOs();
         private readonly  CorreoElectronicoDAOs _correoElectronicoDaOs= new CorreoElectronicoDAOs();
         #endregion
         #region CLIENTE
@@ -97,6 +98,10 @@ namespace JLLR.Core.Individuo.Proveedor.DAOs
                     //Graba el correo electronico
                     clienteGeneralDtOs.CorreoElectronico.INDIVIDUO_ID = individuo.INDIVIDUO_ID;
                     _correoElectronicoDaOs.GrabarCorreoElectronico(clienteGeneralDtOs.CorreoElectronico);
+
+                    //Graba el correo electronico
+                    clienteGeneralDtOs.IndividuoRol.INDIVIDUO_ID = individuo.INDIVIDUO_ID;
+                    _individuoRolDaOs.GrabarIndividuoRol(clienteGeneralDtOs.IndividuoRol);
 
                     transaction.Complete();
                     return cliente;

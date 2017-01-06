@@ -246,7 +246,15 @@
                     <div class="col-md-12" style="text-align: center">
                        
 
-                            <asp:GridView ID="_datos" AutoGenerateColumns="True" runat="server" CssClass="tableCabecera">
+                            <asp:GridView ID="_datos" runat="server" CssClass="tableCabecera">
+                                
+                                <Columns>
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/Content/Imagen/Borrar.png" />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
                                 
                             </asp:GridView>
 		

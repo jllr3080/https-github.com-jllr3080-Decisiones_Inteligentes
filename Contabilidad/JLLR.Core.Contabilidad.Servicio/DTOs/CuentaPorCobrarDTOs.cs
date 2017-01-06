@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
 using JLLR.Core.Contabilidad.Servicio.Modelo;
-
+using  modeloIndividuo= JLLR.Core.Individuo.Servicio.Modelo;
 #endregion
 namespace JLLR.Core.Contabilidad.Servicio.DTOs
 {
@@ -21,6 +21,18 @@ namespace JLLR.Core.Contabilidad.Servicio.DTOs
         [DataMember]
         public CuentaPorCobrarModelo CuentaPorCobrar { get; set; }
 
-       
+        /// <summary>
+        /// HistorialCuentaPorCobrar
+        /// </summary>
+        [DataMember]
+        public HistorialCuentaPorCobrarModelo HistorialCuentaPorCobrar { get; set; }
+
+        /// <summary>
+        /// Cliente
+        /// </summary>
+        [DataMember]
+        public string Cliente { get; set; }
+
+        
     }
 }

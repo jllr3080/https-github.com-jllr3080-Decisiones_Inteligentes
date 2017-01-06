@@ -79,7 +79,10 @@ namespace JLLR.Core.Venta.Servicio.EnsambladorDTOs
                Prenda = m.Prenda,
                ValorTotal = m.ValorTotal,
                NombreCliente = m.NombreCliente,
-               Observacion = m.Observacion
+               Observacion = m.Observacion,
+                EstadoPagoId = m.EstadoPagoId,
+                DetalleOrdenTrabajoId = m.DetalleOrdenTrabajoId,
+                OrdenTrabajoId = m.OrdenTrabajoId
               
             };
         }

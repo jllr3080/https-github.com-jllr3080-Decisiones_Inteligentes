@@ -21,6 +21,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
             this.DIRECCION = new HashSet<DIRECCION>();
             this.E_MAIL = new HashSet<E_MAIL>();
             this.EMPLEADO = new HashSet<EMPLEADO>();
+            this.INDIVIDUO_ROL = new HashSet<INDIVIDUO_ROL>();
             this.INDIVIDUO_BANCO = new HashSet<INDIVIDUO_BANCO>();
             this.TELEFONO = new HashSet<TELEFONO>();
             this.USUARIO = new HashSet<USUARIO>();
@@ -38,7 +39,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<System.DateTime> FECHA_CREACION { get; set; }
         public Nullable<System.DateTime> FECHA_MODIFICACION { get; set; }
         public Nullable<int> USUARIO_ID { get; set; }
-        public Nullable<int> TIPO_ROL_INDIVIDUO_ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CLIENTE> CLIENTE { get; set; }
@@ -49,10 +49,11 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EMPLEADO> EMPLEADO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<INDIVIDUO_ROL> INDIVIDUO_ROL { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<INDIVIDUO_BANCO> INDIVIDUO_BANCO { get; set; }
         public virtual TIPO_IDENTIFICACION TIPO_IDENTIFICACION { get; set; }
         public virtual TIPO_INDIVIDUO TIPO_INDIVIDUO { get; set; }
-        public virtual TIPO_ROL_INDIVIDUO TIPO_ROL_INDIVIDUO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TELEFONO> TELEFONO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

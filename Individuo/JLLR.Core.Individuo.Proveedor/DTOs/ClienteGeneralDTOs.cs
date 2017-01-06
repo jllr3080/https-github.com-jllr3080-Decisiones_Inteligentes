@@ -38,5 +38,10 @@ namespace JLLR.Core.Individuo.Proveedor.DTOs
         /// Correo electronico del cliente 
         /// </summary>
         public E_MAIL CorreoElectronico { get; set; }
+
+        /// <summary>
+        /// IndividuoRol
+        /// </summary>
+        public INDIVIDUO_ROL IndividuoRol { get; set; }
     }
 }

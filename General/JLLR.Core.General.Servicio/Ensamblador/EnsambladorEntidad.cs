@@ -739,5 +739,41 @@ namespace JLLR.Core.General.Servicio.Ensamblador
 
         }
         #endregion
+
+        #region FORMA DE  PAGO
+        /// <summary>
+        /// Convierte el modelo en una entidad
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public entidad.FORMA_PAGO CrearFormaPago(modelo.FormaPagoModelo m)
+        {
+            return new entidad.FORMA_PAGO()
+            {
+                FORMA_PAGO_ID = m.FormaPagoId,
+                DESCRIPCION = m.Descripcion,
+                ESTA_HABILITADO = m.EstaHabilitado
+
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<entidad.FORMA_PAGO> CrearFormasPago(List<modelo.FormaPagoModelo> listadoModelo)
+        {
+            List<entidad.FORMA_PAGO> listaEntidad = new List<entidad.FORMA_PAGO>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearFormaPago(modelo));
+            }
+            return listaEntidad;
+
+        }
+        #endregion
     }
 }

@@ -14,6 +14,11 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
     /// </summary>
     public class EnsambladorEntidad
     {
+        #region DECLARACIONES  E INSTANCIAS
+        
+        
+        #endregion
+
         #region NEGOCIO
         #region ORDEN TRABAJO
         /// <summary>
@@ -66,6 +71,8 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
         /// <returns></returns>
         public entidad.DETALLE_ORDEN_TRABAJO CrearDetalleOrdenTrabajo(modelo.DetalleOrdenTrabajoModelo m)
         {
+            List<entidad.DETALLE_ORDEN_TRABAJO_OBSERVACION> _lisaDetalleOrdenTrabajoObservacion =
+                CrearDetalleOrdenTrabajosObservacion(m.DetalleOrdenTrabajoObservacion);
             return new entidad.DETALLE_ORDEN_TRABAJO()
             {
                 DETALLE_ORDEN_TRABAJO_ID = m.DetalleOrdenTrabajoId,
@@ -81,9 +88,10 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                 VENTA_COMISION_ID = m.VentaComision.VentaComisionId,
                 PRODUCTO_TALLA_ID = m.ProductoTalla.ProductoTallaId,
                 MARCA_ID = m.Marca.MarcaId,
-                MATERIAL_ID = m.Material.MaterialId
-                
-                
+                MATERIAL_ID = m.Material.MaterialId,
+                DETALLE_ORDEN_TRABAJO_OBSERVACION = _lisaDetalleOrdenTrabajoObservacion
+
+
             };
         }
 

@@ -30,14 +30,12 @@ namespace JLLR.Core.Individuo.Servicio.Ensamblador
             modeloGeneral.TipoIdentificacionModelo _tipoIdentificacion = new modeloGeneral.TipoIdentificacionModelo();
             _tipoIdentificacion.TipoIdentificacionId = Convert.ToInt32(e.TIPO_IDENTIFICACION_ID);
 
-            modeloGeneral.TipoRolIndividuoModelo _tipoRolIndividuo = new modeloGeneral.TipoRolIndividuoModelo();
-            _tipoRolIndividuo.TipoRolIndividuoId = Convert.ToInt32(e.TIPO_ROL_INDIVIDUO_ID);
+         
 
             return new modelo.IndividuoModelo
             {
                 IndividuoId = e.INDIVIDUO_ID,
                 TipoIndividuo = _tipoIndividuo,
-                TipoRolIndividuo = _tipoRolIndividuo,
                 TipoIdentificacion = _tipoIdentificacion,
                 PrimerCampo = e.PRIMER_CAMPO,
                 SegundoCampo = e.SEGUNDO_CAMPO,
@@ -66,6 +64,48 @@ namespace JLLR.Core.Individuo.Servicio.Ensamblador
             foreach (var entidad in listadoEntidad)
             {
                 listaModelo.Add(CrearIndividuo(entidad));
+            }
+            return listaModelo;
+
+        }
+
+        #endregion
+
+        #region  INDIVIDUO ROL
+        /// <summary>
+        /// Convierte el DTO de entidad a modelo
+        /// </summary>
+        /// <param name="e">Entidad</param>
+        /// <returns></returns>
+        public modelo.IndividuoRolModelo CrearIndividuoRol(entidad.INDIVIDUO_ROL e)
+        {
+            modeloGeneral.TipoRolIndividuoModelo _tipoRolIndividuo = new modeloGeneral.TipoRolIndividuoModelo()
+            {
+                TipoRolIndividuoId = Convert.ToInt32(e.TIPO_ROL_INDIVIDUO_ID)
+            };
+
+            return new modelo.IndividuoRolModelo()
+            {
+                IndividuoId = e.INDIVIDUO_ID,
+                IndividuoRolId = e.INDIVIDUO_ROL_ID,
+                TipoRolIndividuo = _tipoRolIndividuo
+
+            };
+
+        }
+
+        /// <summary>
+        /// Convierte un listado de DTO en listado de  modelos de DTO
+        /// </summary>
+        /// <param name="listadoEntidad">Listado de Entidades</param>
+        /// <returns></returns>
+        public List<modelo.IndividuoRolModelo> CrearIndividuoRoles(IQueryable<entidad.INDIVIDUO_ROL> listadoEntidad)
+        {
+            List<modelo.IndividuoRolModelo> listaModelo = new List<modelo.IndividuoRolModelo>();
+
+            foreach (var entidad in listadoEntidad)
+            {
+                listaModelo.Add(CrearIndividuoRol(entidad));
             }
             return listaModelo;
 

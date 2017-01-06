@@ -29,6 +29,29 @@ namespace JLLR.Core.Contabilidad.Servicio
         [WebInvoke(UriTemplate = "GrabarCuentaPorCobrarCompleta/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
         CuentaPorCobrarModelo GrabarCuentaPorCobrarCompleta(CuentaPorCobrarDTOs cuentaPorCobrarDtOs);
 
+
+        /// <summary>
+        /// Obtiene el historial por numero de  orden
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        [OperationContract]
+        [WebGet(
+            UriTemplate = "ObtenerHistorialCuentaPorCobrarPorNumeroOrden?numeroOrden={numeroOrden}",
+            ResponseFormat = WebMessageFormat.Json)]
+
+        List<CuentaPorCobrarDTOs> ObtenerHistorialCuentaPorCobrarPorNumeroOrden(string numeroOrden);
+
+
+        /// <summary>
+        /// Obtiene  el historial de cuenta por cobrar  por numero de identificacion
+        /// </summary>
+        [OperationContract]
+        [WebGet(
+            UriTemplate =
+                "ObtenerHistorialCuentaPorCobrarPorNumeroidentificacion?numeroIdentificacion={numeroIdentificacion}",
+            ResponseFormat = WebMessageFormat.Json)]
+        List<CuentaPorCobrarDTOs> ObtenerHistorialCuentaPorCobrarPorNumeroidentificacion(string numeroIdentificacion);
+       
         #endregion
 
         #region CUENTA POR COBRAR

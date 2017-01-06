@@ -86,5 +86,23 @@ namespace Web.DTOs.Venta
         /// </summary>
         
         public string Observacion { get; set; }
+
+        /// <summary>
+        /// EstadoPagoId
+        /// </summary>
+        
+        public int? EstadoPagoId { get; set; }
+
+
+        /// <summary>
+        /// OrdenTrabajoId
+        /// </summary>
+        public Int64? OrdenTrabajoId { get; set; }
+
+
+        /// <summary>
+        /// DetalleOrdenTrabajoId
+        /// </summary>
+        public Int64? DetalleOrdenTrabajoId { get; set; }
     }
 }

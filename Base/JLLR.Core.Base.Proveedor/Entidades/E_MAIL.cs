@@ -19,7 +19,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<int> TIPO_CORREO_ELECTRONICO_ID { get; set; }
         public string DIRECCION_CORREO_ELECTRONICO { get; set; }
     
-        public virtual INDIVIDUO INDIVIDUO { get; set; }
         public virtual TIPO_CORREO_ELECTRONICO TIPO_CORREO_ELECTRONICO { get; set; }
+        public virtual INDIVIDUO INDIVIDUO { get; set; }
     }
 }

@@ -12,18 +12,19 @@ namespace JLLR.Core.Base.Proveedor.Entidades
     using System;
     using System.Collections.Generic;
     
-    public partial class TIPO_ROL_INDIVIDUO
+    public partial class FORMA_PAGO
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TIPO_ROL_INDIVIDUO()
+        public FORMA_PAGO()
         {
-            this.INDIVIDUO_ROL = new HashSet<INDIVIDUO_ROL>();
+            this.HISTORIAL_CUENTA_POR_COBRAR = new HashSet<HISTORIAL_CUENTA_POR_COBRAR>();
         }
     
-        public int TIPO_ROL_INDIVIDUO_ID { get; set; }
+        public int FORMA_PAGO_ID { get; set; }
         public string DESCRIPCION { get; set; }
+        public Nullable<bool> ESTA_HABILITADO { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<INDIVIDUO_ROL> INDIVIDUO_ROL { get; set; }
+        public virtual ICollection<HISTORIAL_CUENTA_POR_COBRAR> HISTORIAL_CUENTA_POR_COBRAR { get; set; }
     }
 }

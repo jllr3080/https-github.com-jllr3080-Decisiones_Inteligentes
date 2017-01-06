@@ -98,5 +98,11 @@ namespace Web.Models.Venta.Negocio
         /// </summary>
         
         public VentaComisionVistaModelo VentaComision { get; set; }
+
+        /// <summary>
+        /// DetalleOrdenTrabajoObservacion
+        /// </summary>
+        
+        public List<DetalleOrdenTrabajoObservacionVistaModelo> DetalleOrdenTrabajoObservacion { get; set; }
     }
 }

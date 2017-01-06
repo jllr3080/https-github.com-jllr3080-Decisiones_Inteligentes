@@ -1,4 +1,6 @@
 ﻿#region  using
+
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using JLLR.Core.General.Servicio.Modelo;
 using JLLR.Core.Inventario.Servicio.Modelo.Parametrizacion;
@@ -98,7 +100,10 @@ namespace JLLR.Core.Venta.Servicio.Modelo
         [DataMember]
         public VentaComisionModelo VentaComision { get; set; }
 
-
-
+        /// <summary>
+        /// DetalleOrdenTrabajoObservacion
+        /// </summary>
+        [DataMember]
+        public List<DetalleOrdenTrabajoObservacionModelo> DetalleOrdenTrabajoObservacion { get; set;  }
     }
 }

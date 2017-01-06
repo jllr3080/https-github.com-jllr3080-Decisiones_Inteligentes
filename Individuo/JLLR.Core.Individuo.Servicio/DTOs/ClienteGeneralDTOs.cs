@@ -44,5 +44,11 @@ namespace JLLR.Core.Individuo.Servicio.DTOs
         /// </summary>
         [DataMember]
         public CorreoElectronicoModelo CorreoElectronico { get; set; }
+
+        /// <summary>
+        /// IndividuoRol
+        /// </summary>
+        [DataMember]
+        public IndividuoRolModelo IndividuoRol { get; set; }
     }
 }

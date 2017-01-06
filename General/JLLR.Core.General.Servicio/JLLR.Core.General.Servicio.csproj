@@ -82,6 +82,7 @@
     <Compile Include="Modelo\EstadoModelo.cs" />
     <Compile Include="Modelo\EstadoPagoModelo.cs" />
     <Compile Include="Modelo\EtapaProcesoModelo.cs" />
+    <Compile Include="Modelo\FormaPagoModelo.cs" />
     <Compile Include="Modelo\ImpuestoModelo.cs" />
     <Compile Include="Modelo\MarcaModelo.cs" />
     <Compile Include="Modelo\MaterialModelo.cs" />

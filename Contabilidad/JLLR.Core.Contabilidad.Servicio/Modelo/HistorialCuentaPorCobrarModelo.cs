@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
+using  modeloGeneral=JLLR.Core.General.Servicio.Modelo;
 #endregion
 
 namespace JLLR.Core.Contabilidad.Servicio.Modelo
@@ -44,6 +45,12 @@ namespace JLLR.Core.Contabilidad.Servicio.Modelo
         /// </summary>
         [DataMember]
         public int? UsuarioId{ get; set; }
+
+        /// <summary>
+        /// FormaPago
+        /// </summary>
+        [DataMember]
+        public modeloGeneral.FormaPagoModelo FormaPago { get; set; }
 
     }
 }

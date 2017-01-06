@@ -347,6 +347,7 @@
     <Compile Include="Models\General\EstadoVistaModelo.cs" />
     <Compile Include="Models\General\EstadoPagoVistaModelo.cs" />
     <Compile Include="Models\General\EtapaProcesoVistaModelo.cs" />
+    <Compile Include="Models\General\FormaPagoVistaModelo.cs" />
     <Compile Include="Models\General\ImpuestoVistaModelo.cs" />
     <Compile Include="Models\General\MarcaVistaModelo.cs" />
     <Compile Include="Models\General\MaterialVistaModelo.cs" />
@@ -367,6 +368,7 @@
     <Compile Include="Models\Individuo\ClienteVistaModelo.cs" />
     <Compile Include="Models\Individuo\CorreoElectronicoVistaModelo.cs" />
     <Compile Include="Models\Individuo\DireccionVistaModelo.cs" />
+    <Compile Include="Models\Individuo\IndividuoRolVistaModelo.cs" />
     <Compile Include="Models\Individuo\IndividuoVistaModelo.cs" />
     <Compile Include="Models\Individuo\TelefonoVistaModelo.cs" />
     <Compile Include="Models\Inventario\Parametrizacion\ProductoPrecioVistaModelo.cs" />
@@ -376,6 +378,7 @@
     <Compile Include="Models\Logistica\DetalleEntregaOrdenTrabajoVistaModelo.cs" />
     <Compile Include="Models\Logistica\EntregaOrdenTrabajoVistaModelo.cs" />
     <Compile Include="Models\Seguridad\Negocio\UsuarioVistaModelo.cs" />
+    <Compile Include="Models\Venta\Negocio\DetalleOrdenTrabajoObservacionVistaModelo.cs" />
     <Compile Include="Models\Venta\Negocio\DetalleOrdenTrabajoVistaModelo.cs" />
     <Compile Include="Models\Venta\Negocio\OrdenTrabajoVistaModelo.cs" />
     <Compile Include="Models\Venta\Parametrizacion\NumeroOrdenVistaModelo.cs" />

@@ -27,7 +27,6 @@ namespace JLLR.Core.Individuo.Servicio.Ensamblador
                 INDIVIDUO_ID = m.IndividuoId,
                 TIPO_IDENTIFICACION_ID = m.TipoIdentificacion.TipoIdentificacionId,
                 TIPO_INDIVIDUO_ID = m.TipoIndividuo.TipoIndividuoId,
-                TIPO_ROL_INDIVIDUO_ID = m.TipoRolIndividuo.TipoRolIndividuoId,
                 PRIMER_CAMPO = m.PrimerCampo,
                 SEGUNDO_CAMPO = m.SegundoCampo,
                 TERCER_CAMPO = m.TercerCampo,
@@ -54,6 +53,42 @@ namespace JLLR.Core.Individuo.Servicio.Ensamblador
             foreach (var modelo in listadoModelo)
             {
                 listaEntidad.Add(CrearIndividuo(modelo));
+            }
+            return listaEntidad;
+
+        }
+        #endregion
+
+        #region INDIVIDUO ROL
+        /// <summary>
+        /// Convierte el modelo en una entidad
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public entidad.INDIVIDUO_ROL CrearIndividuoRol(modelo.IndividuoRolModelo m)
+        {
+            return new entidad.INDIVIDUO_ROL()
+            {
+                INDIVIDUO_ID = m.IndividuoId,
+                INDIVIDUO_ROL_ID = m.IndividuoRolId,
+                TIPO_ROL_INDIVIDUO_ID = m.TipoRolIndividuo.TipoRolIndividuoId
+
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<entidad.INDIVIDUO_ROL> CrearIndividuoRoles(List<modelo.IndividuoRolModelo> listadoModelo)
+        {
+            List<entidad.INDIVIDUO_ROL> listaEntidad = new List<entidad.INDIVIDUO_ROL>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearIndividuoRol(modelo));
             }
             return listaEntidad;
 

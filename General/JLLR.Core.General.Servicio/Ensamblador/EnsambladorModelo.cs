@@ -722,8 +722,7 @@ namespace JLLR.Core.General.Servicio.Ensamblador
 
         #endregion
 
-
-        #region  TIPO TELEFONO
+        #region  ETAPA DE PROCESO
         /// <summary>
         /// Convierte el DTO de entidad a modelo
         /// </summary>
@@ -754,6 +753,43 @@ namespace JLLR.Core.General.Servicio.Ensamblador
             foreach (var entidad in listadoEntidad)
             {
                 listaModelo.Add(CrearEtapaProceso(entidad));
+            }
+            return listaModelo;
+
+        }
+
+        #endregion
+
+        #region  FORMA PAGO
+        /// <summary>
+        /// Convierte el DTO de entidad a modelo
+        /// </summary>
+        /// <param name="e">Entidad</param>
+        /// <returns></returns>
+        public modelo.FormaPagoModelo CrearFormaPago(entidad.FORMA_PAGO e)
+        {
+            return new modelo.FormaPagoModelo
+            {
+              FormaPagoId = e.FORMA_PAGO_ID,
+              Descripcion = e.DESCRIPCION,
+              EstaHabilitado = e.ESTA_HABILITADO
+
+            };
+
+        }
+
+        /// <summary>
+        /// Convierte un listado de DTO en listado de  modelos de DTO
+        /// </summary>
+        /// <param name="listadoEntidad">Listado de Entidades</param>
+        /// <returns></returns>
+        public List<modelo.FormaPagoModelo> CrearFormasPago(IQueryable<entidad.FORMA_PAGO> listadoEntidad)
+        {
+            List<modelo.FormaPagoModelo> listaModelo = new List<modelo.FormaPagoModelo>();
+
+            foreach (var entidad in listadoEntidad)
+            {
+                listaModelo.Add(CrearFormaPago(entidad));
             }
             return listaModelo;
 

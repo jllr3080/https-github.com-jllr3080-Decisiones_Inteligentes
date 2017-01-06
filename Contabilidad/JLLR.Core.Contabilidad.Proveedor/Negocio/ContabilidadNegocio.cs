@@ -44,6 +44,38 @@ namespace JLLR.Core.Contabilidad.Proveedor.Negocio
             }
         }
 
+        /// <summary>
+        /// Obtiene el historial por numero de  orden
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        public List<CuentaPorCobrarDTOs> ObtenerHistorialCuentaPorCobrarPorNumeroOrden(string numeroOrden)
+        {
+            try
+            {
+                return _transaccionalDaOs.ObtenerHistorialCuentaPorCobrarPorNumeroOrden(numeroOrden);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene  el historial de cuenta por cobrar  por numero de identificacion
+        /// </summary>
+        public List<CuentaPorCobrarDTOs> ObtenerHistorialCuentaPorCobrarPorNumeroidentificacion(string numeroIdentificacion)
+        {
+            try
+            {
+                return _transaccionalDaOs.ObtenerHistorialCuentaPorCobrarPorNumeroidentificacion(numeroIdentificacion);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
         #region CUENTA POR COBRAR

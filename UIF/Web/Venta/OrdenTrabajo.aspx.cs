@@ -165,15 +165,18 @@ namespace Web.Venta
                     _cuentaPorCobrarVista.UsuarioModificacionId = User.Id;
                     _cuentaPorCobrarVista.UsuarioCreacionId = User.Id;
                     _cuentaPorCobrarVista.EstadoPagoId = _ordenTrabajoVistaModelo.EstadoPago.EstadoPagoId;
-
+                    
                     _cuentaPorCobrarVista = _servicioDelegadoContabilidad.GrabarCuentaPorCobrar(_cuentaPorCobrarVista);
 
-                    if (_ordenTrabajoVistaModelo.EstadoPago.EstadoPagoId == Convert.ToInt32(Util.EstadoPago.Cancelado))
+                    if (_ordenTrabajoVistaModelo.EstadoPago.EstadoPagoId == Convert.ToInt32(Util.EstadoPago.Cancelado) || _ordenTrabajoVistaModelo.EstadoPago.EstadoPagoId == Convert.ToInt32(Util.EstadoPago.Abonado))
                     {
                         HistorialCuentaPorCobrarVistaModelo _historialCuentaPorCobrar = new HistorialCuentaPorCobrarVistaModelo();
                         _historialCuentaPorCobrar.UsuarioId = User.Id;
                         _historialCuentaPorCobrar.CuentaPorCobrarId = _cuentaPorCobrarVista.CuentaPorCobrarId;
                         _historialCuentaPorCobrar.FechaCobro=DateTime.Now;
+                        FormaPagoVistaModelo _formaPago= new FormaPagoVistaModelo();
+                        _formaPago.FormaPagoId=Convert.ToInt32(Util.FormaPago.Efectivo);
+                        _historialCuentaPorCobrar.FormaPago = _formaPago;
                         _historialCuentaPorCobrar.ValorCobro= _ordenTrabajoVistaDtOs.DetalleOrdenTrabajo.Sum(m => m.ValorTotal);
 
                         _historialCuentaPorCobrar =
@@ -591,6 +594,12 @@ namespace Web.Venta
                 {
                     VentaComisionId = 1
                 };
+                List<DetalleOrdenTrabajoObservacionVistaModelo> _listaDetalleOrdenTrabajoObservacion= new List<DetalleOrdenTrabajoObservacionVistaModelo>();
+                DetalleOrdenTrabajoObservacionVistaModelo _detalleOrdenTrabajoObservacion= new DetalleOrdenTrabajoObservacionVistaModelo();
+                _detalleOrdenTrabajoObservacion.UsuarioId = User.Id;
+                _detalleOrdenTrabajoObservacion.FechaCreacionObservacion = DateTime.Now;
+                _detalleOrdenTrabajoObservacion.Observacion = _observacion.Text;
+                _listaDetalleOrdenTrabajoObservacion.Add(_detalleOrdenTrabajoObservacion);
                 _detalleOrdenTrabajoVista.Producto = _productoVista;
                 _detalleOrdenTrabajoVista.ProductoTalla = _productoTallaVista;
                 _detalleOrdenTrabajoVista.Marca = _marcaVista;
@@ -604,6 +613,7 @@ namespace Web.Venta
                 _detalleOrdenTrabajoVista.OrdenTrabajo = _ordenTrabajoVista;
                 _detalleOrdenTrabajoVista.VentaComision = _ventaComisionVista;
                 _detalleOrdenTrabajoVista.PorcentajeImpuesto = 14;
+                _detalleOrdenTrabajoVista.DetalleOrdenTrabajoObservacion = _listaDetalleOrdenTrabajoObservacion;
                 _listaTrabajoVistaDtOs.Add(_detalleOrdenTrabajoVista);
                 _ordenTrabajoVistaDtOs.DetalleOrdenTrabajo = _listaTrabajoVistaDtOs;
 

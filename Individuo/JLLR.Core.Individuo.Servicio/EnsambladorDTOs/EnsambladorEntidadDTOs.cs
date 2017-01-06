@@ -70,7 +70,8 @@ namespace JLLR.Core.Individuo.Servicio.EnsambladorDTOs
                Direccion = _ensambladorEntidad.CrearDireccion(m.Direccion),
                Telefono = _ensambladorEntidad.CrearTelefono(m.Telefono),
                CorreoElectronico = _ensambladorEntidad.CrearCorreoElectronico(m.CorreoElectronico),
-               Cliente = _ensambladorEntidad.CrearCliente(m.Cliente)
+               Cliente = _ensambladorEntidad.CrearCliente(m.Cliente),
+               IndividuoRol = _ensambladorEntidad.CrearIndividuoRol(m.IndividuoRol)
 
             };
         }

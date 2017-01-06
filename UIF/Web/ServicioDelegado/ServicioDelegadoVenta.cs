@@ -87,6 +87,7 @@ namespace Web.ServicioDelegado
         }
 
         #endregion
+        
         #region REPORTES
 
         /// <summary>
@@ -128,6 +129,56 @@ namespace Web.ServicioDelegado
                 var json = clienteWeb.DownloadString(direccionUrl + "ObtenerOrdenTrabajoPorFechaIngresoYPorSucursal?fechaDesde=" + fechaDesde+ "&sucursalId="+ sucursalId);
                 var js = new JavaScriptSerializer();
                 return js.Deserialize<List<ConsultaOrdenTrabajoVistaDTOs>>(json);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+
+        #region DETALLE DE  ORDEN DE TRABAJO OBSERVACIONES
+        /// <summary>
+        /// Graba todas las observaciones de  los detalles de la orden de trabajo
+        /// </summary>
+        /// <param name="detalleOrdenTrabajoObservacion"></param>
+        public void GrabarDetalleOrdenTrabajoObservacion(DetalleOrdenTrabajoObservacionVistaModelo detalleOrdenTrabajoObservacion)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(DetalleOrdenTrabajoObservacionVistaModelo));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, detalleOrdenTrabajoObservacion);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "GrabarDetalleOrdenTrabajoObservacion", "POST", datos);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene las observaciones 
+        /// </summary>
+        /// <param name="detalleOrdenTrabajoId"></param>
+        /// <returns></returns>
+        public List<DetalleOrdenTrabajoObservacionVistaModelo> ObtenerDetalleOrdenTrabajoObservaciones(
+            int detalleOrdenTrabajoId)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerDetalleOrdenTrabajoObservaciones?detalleOrdenTrabajoId=" + detalleOrdenTrabajoId );
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<DetalleOrdenTrabajoObservacionVistaModelo>>(json);
 
             }
             catch (Exception ex)

@@ -54,5 +54,11 @@ namespace JLLR.Core.FlujoProceso.Servicio.Modelo
         /// </summary>
         [DataMember]
         public string NumeroOrden{ get; set; }
+
+        /// <summary>
+        /// Texto
+        /// </summary>
+        [DataMember]
+        public string Texto { get; set; }
     }
 }

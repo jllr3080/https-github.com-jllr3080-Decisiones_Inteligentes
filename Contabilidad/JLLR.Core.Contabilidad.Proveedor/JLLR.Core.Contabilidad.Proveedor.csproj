@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAOs\PruebaDAOs.cs" />
     <Compile Include="DAOs\CuentaPorCobrarDAOs.cs" />
     <Compile Include="DAOs\CuentaPorPagarDAOs.cs" />
     <Compile Include="DAOs\HistorialCuentaPorCobrarDAOs.cs" />

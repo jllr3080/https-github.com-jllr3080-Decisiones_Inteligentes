@@ -52,5 +52,10 @@ namespace Web.Models.FlujoProceso
         /// </summary>
         
         public string NumeroOrden { get; set; }
+
+        /// <summary>
+        /// Texto
+        /// </summary>
+        public string Texto { get; set; }
     }
 }

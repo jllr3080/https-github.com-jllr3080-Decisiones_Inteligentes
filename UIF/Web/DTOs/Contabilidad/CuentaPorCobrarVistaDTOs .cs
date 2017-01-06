@@ -16,6 +16,15 @@ namespace Web.DTOs.Contabilidad
         /// </summary>
         public CuentaPorCobrarVistaModelo CuentaPorCobrar { get; set; }
 
-       
+        /// <summary>
+        /// HistorialCuentaPorCobrar
+        /// </summary>
+        public HistorialCuentaPorCobrarVistaModelo HistorialCuentaPorCobrar { get; set; }
+
+
+        /// <summary>
+        /// Cliente
+        /// </summary>
+        public string Cliente { get; set; }
     }
 }

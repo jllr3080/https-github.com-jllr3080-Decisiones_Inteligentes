@@ -38,5 +38,11 @@ namespace Web.DTOs.Individuo
         /// </summary>
         
         public CorreoElectronicoVistaModelo CorreoElectronico { get; set; }
+
+        /// <summary>
+        /// IndividuoRol
+        /// </summary>
+
+        public IndividuoRolVistaModelo IndividuoRol { get; set; }
     }
 }

@@ -36,7 +36,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual DbSet<E_MAIL> E_MAIL { get; set; }
         public virtual DbSet<EMPLEADO> EMPLEADO { get; set; }
         public virtual DbSet<ESTADO> ESTADO { get; set; }
-        public virtual DbSet<INDIVIDUO> INDIVIDUO { get; set; }
         public virtual DbSet<INDIVIDUO_BANCO> INDIVIDUO_BANCO { get; set; }
         public virtual DbSet<PAIS> PAIS { get; set; }
         public virtual DbSet<TELEFONO> TELEFONO { get; set; }
@@ -67,7 +66,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual DbSet<TIPO_IDENTIFICACION> TIPO_IDENTIFICACION { get; set; }
         public virtual DbSet<TIPO_INDIVIDUO> TIPO_INDIVIDUO { get; set; }
         public virtual DbSet<TIPO_LAVADO> TIPO_LAVADO { get; set; }
-        public virtual DbSet<TIPO_ROL_INDIVIDUO> TIPO_ROL_INDIVIDUO { get; set; }
         public virtual DbSet<TIPO_TELEFONO> TIPO_TELEFONO { get; set; }
         public virtual DbSet<UNIDAD_MEDIDA> UNIDAD_MEDIDA { get; set; }
         public virtual DbSet<ZONA> ZONA { get; set; }
@@ -102,5 +100,10 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual DbSet<CUENTA_POR_PAGAR> CUENTA_POR_PAGAR { get; set; }
         public virtual DbSet<HISTORIAL_CUENTA_POR_COBRAR> HISTORIAL_CUENTA_POR_COBRAR { get; set; }
         public virtual DbSet<HISTORIAL_CUENTA_POR_PAGAR> HISTORIAL_CUENTA_POR_PAGAR { get; set; }
+        public virtual DbSet<FORMA_PAGO> FORMA_PAGO { get; set; }
+        public virtual DbSet<PRUEBA> PRUEBA { get; set; }
+        public virtual DbSet<INDIVIDUO_ROL> INDIVIDUO_ROL { get; set; }
+        public virtual DbSet<TIPO_ROL_INDIVIDUO> TIPO_ROL_INDIVIDUO { get; set; }
+        public virtual DbSet<INDIVIDUO> INDIVIDUO { get; set; }
     }
 }

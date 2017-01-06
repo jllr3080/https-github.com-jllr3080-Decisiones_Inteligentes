@@ -77,7 +77,8 @@ namespace JLLR.Core.Contabilidad.Servicio.Ensamblador
                 FECHA_COBRO = m.FechaCobro,
                 HISTORIAL_CUENTA_POR_COBRAR_ID = m.HistorialCuentaPorCobrarId,
                 USUARIO_ID = m.UsuarioId,
-                VALOR_COBRO = m.ValorCobro
+                VALOR_COBRO = m.ValorCobro,
+                FORMA_PAGO_ID = m.FormaPago.FormaPagoId
             };
         }
 

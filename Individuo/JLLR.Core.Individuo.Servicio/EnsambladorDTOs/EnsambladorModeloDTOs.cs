@@ -78,8 +78,8 @@ namespace JLLR.Core.Individuo.Servicio.EnsambladorDTOs
                Direccion = _ensambladorModelo.CrearDireccion(e.Direccion),
                Telefono = _ensambladorModelo.CrearTelefono(e.Telefono),
                Cliente = _ensambladorModelo.CrearCliente(e.Cliente),
-               CorreoElectronico = _ensambladorModelo.CrearCorreoElectronico(e.CorreoElectronico)
-
+               CorreoElectronico = _ensambladorModelo.CrearCorreoElectronico(e.CorreoElectronico),
+               IndividuoRol = _ensambladorModelo.CrearIndividuoRol(e.IndividuoRol)
             };
 
         }

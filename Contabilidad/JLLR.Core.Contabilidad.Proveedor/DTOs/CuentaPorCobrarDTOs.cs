@@ -20,7 +20,17 @@ namespace JLLR.Core.Contabilidad.Proveedor.DTOs
         /// </summary>
         public CUENTA_POR_COBRAR CuentaPorCobrar { get; set; }
 
-       
+        /// <summary>
+        /// HistorialCuentaPorCobrar
+        /// </summary>
+        public HISTORIAL_CUENTA_POR_COBRAR HistorialCuentaPorCobrar{ get; set; }
 
+
+        /// <summary>
+        /// Cliente
+        /// </summary>
+        public string Cliente { get; set; }
+
+      
     }
 }

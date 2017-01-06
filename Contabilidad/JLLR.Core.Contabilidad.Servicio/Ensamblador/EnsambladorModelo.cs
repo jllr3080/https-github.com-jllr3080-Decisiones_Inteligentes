@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using entidad = JLLR.Core.Base.Proveedor.Entidades;
 using modelo = JLLR.Core.Contabilidad.Servicio.Modelo;
+using modeloGeneral = JLLR.Core.General.Servicio.Modelo;
 #endregion
 namespace JLLR.Core.Contabilidad.Servicio.Ensamblador
 {
@@ -73,6 +74,11 @@ namespace JLLR.Core.Contabilidad.Servicio.Ensamblador
         /// <returns></returns>
         public modelo.HistorialCuentaPorCobrarModelo CrearHistorialCuentaPorCobrar(entidad.HISTORIAL_CUENTA_POR_COBRAR e)
         {
+            modeloGeneral.FormaPagoModelo _formaPago = new modeloGeneral.FormaPagoModelo()
+            {
+                FormaPagoId = Convert.ToInt32( e.FORMA_PAGO_ID)
+            };
+
 
             return new modelo.HistorialCuentaPorCobrarModelo
             {
@@ -80,7 +86,8 @@ namespace JLLR.Core.Contabilidad.Servicio.Ensamblador
                 CuentaPorCobrarId = e.CUENTA_POR_COBRAR_ID,
                 HistorialCuentaPorCobrarId = e.HISTORIAL_CUENTA_POR_COBRAR_ID,
                 FechaCobro = e.FECHA_COBRO,
-                ValorCobro = e.VALOR_COBRO
+                ValorCobro = e.VALOR_COBRO,
+                FormaPago = _formaPago
 
             };
 

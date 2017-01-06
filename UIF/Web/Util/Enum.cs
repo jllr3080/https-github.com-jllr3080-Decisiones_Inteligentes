@@ -52,7 +52,13 @@ namespace Web.Util
     public enum EstadoPago
     {
         Cancelado=2,
-        Pendiente=1
+        Pendiente=1,
+        Abonado=3
+    }
+
+    public enum FormaPago
+    {
+       Efectivo=1
     }
 
 }

@@ -36,7 +36,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONTROL_USUARIO> CONTROL_USUARIO { get; set; }
-        public virtual INDIVIDUO INDIVIDUO { get; set; }
         public virtual PUNTO_VENTA PUNTO_VENTA { get; set; }
         public virtual SUCURSAL SUCURSAL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -46,5 +45,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USUARIO_PREGUNTA_SEGURIDAD> USUARIO_PREGUNTA_SEGURIDAD { get; set; }
         public virtual USUARIO_SEGURIDAD USUARIO_SEGURIDAD { get; set; }
+        public virtual INDIVIDUO INDIVIDUO { get; set; }
     }
 }

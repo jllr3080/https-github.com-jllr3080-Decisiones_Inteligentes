@@ -74,11 +74,7 @@ namespace Web.Individuo
                 _tipoIndividuoVistaModelo.TipoIndividuoId = Convert.ToInt32(Util.TipoIndividuo.PersonaNatural);
                 _individuoVistaModelo.TipoIndividuo = _tipoIndividuoVistaModelo;
 
-                TipoRolIndividuoVistaModelo _tipoRolIndividuoVistaModelo= new TipoRolIndividuoVistaModelo();
-                _tipoRolIndividuoVistaModelo.TipoRolIndividuoId = Convert.ToInt32(Util.TipoRolIndividuo.Cliente);
-                _individuoVistaModelo.TipoRolIndividuo = _tipoRolIndividuoVistaModelo;
-
-
+              
                 _individuoVistaModelo.PrimerCampo = _apellidoPaterno.Text;
                 _individuoVistaModelo.SegundoCampo = _apellidoMaterno.Text;
                 _individuoVistaModelo.TercerCampo= _primerNombre.Text;
@@ -144,6 +140,7 @@ namespace Web.Individuo
 
 
                 #endregion
+
                 #region Cliente
                 ClienteVistaModelo _clienteVistaModelo= new ClienteVistaModelo();
                 TipoGeneroVistaModelo _tipoGeneroVistaModelo= new TipoGeneroVistaModelo();
@@ -153,7 +150,16 @@ namespace Web.Individuo
                 _clienteVistaModelo.FechaNacimiento = Convert.ToDateTime(_fechaNacimiento.Text);
                 _clienteGeneralVistaDtOs.Cliente = _clienteVistaModelo;
 
-                #endregion  
+                #endregion
+
+                #region Individuo Rol
+                IndividuoRolVistaModelo _individuoRolVistaModelo= new IndividuoRolVistaModelo();
+                TipoRolIndividuoVistaModelo _tipoRolIndividuoVistaModelo= new TipoRolIndividuoVistaModelo();
+                _tipoRolIndividuoVistaModelo.TipoRolIndividuoId = Convert.ToInt32(Util.TipoRolIndividuo.Cliente);
+                _individuoRolVistaModelo.TipoRolIndividuo = _tipoRolIndividuoVistaModelo;
+                _clienteGeneralVistaDtOs.IndividuoRol = _individuoRolVistaModelo;
+                
+                #endregion
 
                 _servicioDelegadoIndividuo.GrabarCliente(_clienteGeneralVistaDtOs);
                 LimpiarControles();

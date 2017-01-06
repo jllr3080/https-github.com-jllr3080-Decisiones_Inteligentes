@@ -30,11 +30,7 @@ namespace JLLR.Core.Individuo.Servicio.Modelo
         [DataMember]
         public modeloGeneral.TipoIndividuoModelo TipoIndividuo { get; set; }
 
-        /// <summary>
-        /// Tipo de rol individuo
-        /// </summary>
-        [DataMember]
-        public modeloGeneral.TipoRolIndividuoModelo TipoRolIndividuo { get; set; }
+      
 
         /// <summary>
         /// PrimerCampo
@@ -89,6 +85,12 @@ namespace JLLR.Core.Individuo.Servicio.Modelo
         /// </summary>
         [DataMember]
         public int? UsuarioId { get; set; }
+
+        /// <summary>
+        /// individuoRol
+        /// </summary>
+        [DataMember]
+        public IndividuoRolModelo individuoRol { get; set; }
 
     }
 }

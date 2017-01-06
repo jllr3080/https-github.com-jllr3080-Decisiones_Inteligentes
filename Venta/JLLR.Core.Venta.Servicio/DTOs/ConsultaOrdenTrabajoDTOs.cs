@@ -92,5 +92,25 @@ namespace JLLR.Core.Venta.Servicio.DTOs
         /// </summary>
         [DataMember]
         public string Observacion { get; set; }
+
+        /// <summary>
+        /// EstadoPagoId
+        /// </summary>
+        [DataMember]
+        public int? EstadoPagoId { get; set; }
+
+
+        /// <summary>
+        /// OrdenTrabajoId
+        /// </summary>
+        [DataMember]
+        public Int64? OrdenTrabajoId { get; set; }
+
+
+        /// <summary>
+        /// DetalleOrdenTrabajoId
+        /// </summary>
+        [DataMember]
+        public Int64? DetalleOrdenTrabajoId { get; set; }
     }
 }

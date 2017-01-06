@@ -22,7 +22,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<bool> ES_PRINCIPAL { get; set; }
         public Nullable<bool> ES_PROPIA { get; set; }
     
-        public virtual INDIVIDUO INDIVIDUO { get; set; }
         public virtual TIPO_CUENTA_BANCARIA TIPO_CUENTA_BANCARIA { get; set; }
+        public virtual INDIVIDUO INDIVIDUO { get; set; }
     }
 }
