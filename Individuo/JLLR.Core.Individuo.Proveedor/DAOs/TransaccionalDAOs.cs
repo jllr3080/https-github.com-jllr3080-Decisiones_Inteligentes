@@ -25,6 +25,7 @@ namespace JLLR.Core.Individuo.Proveedor.DAOs
         private readonly  TelefonoDAOs _telefonoDaOs= new TelefonoDAOs();
         private readonly  IndividuoRolDAOs _individuoRolDaOs= new IndividuoRolDAOs();
         private readonly  CorreoElectronicoDAOs _correoElectronicoDaOs= new CorreoElectronicoDAOs();
+        private readonly  Decisiones_Inteligentes _entidad= new Decisiones_Inteligentes();
         #endregion
         #region CLIENTE
 
@@ -113,6 +114,95 @@ namespace JLLR.Core.Individuo.Proveedor.DAOs
 
                     throw;
                 }
+            }
+        }
+
+
+        /// <summary>
+        /// Actualza  el  cliente
+        /// </summary>
+        /// <param name="clienteGeneralDtOs"></param>
+        /// <returns></returns>
+        public void ActualizarCliente(ClienteGeneralDTOs clienteGeneralDtOs)
+        {
+
+            using (System.Transactions.TransactionScope transaction = new System.Transactions.TransactionScope())
+            {
+                try
+                {
+                    //Graba el  individuo
+                     _individuoDaOs.Actualizaindividuo(clienteGeneralDtOs.Individuo);
+
+                    //Graba el cliente
+                    
+                    _clienteDaOs.ActualizaCliente(clienteGeneralDtOs.Cliente);
+
+                    //Graba la direccion
+                        
+                    _direccionDaOs.ActualizaDireccion(clienteGeneralDtOs.Direccion);
+
+                    //Graba el telefono
+                    
+                    _telefonoDaOs.ActualizaTelefono(clienteGeneralDtOs.Telefono);
+
+
+                    //Graba el correo electronico
+                    
+                    _correoElectronicoDaOs.ActualizaCorreoElectronico(clienteGeneralDtOs.CorreoElectronico);
+
+                    //Graba el correo electronico
+                    
+                    _individuoRolDaOs.ActualizaIndividuoRol(clienteGeneralDtOs.IndividuoRol);
+
+                    transaction.Complete();
+                    
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    throw;
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Obtiene el cliente completo por  numero  de documento
+        /// </summary>
+        /// <param name="numeroIdentificacion"></param>
+        /// <returns></returns>
+        public ClienteGeneralDTOs ObtenerClientePorNumeroIdentificacion(string numeroIdentificacion)
+        {
+            try
+            {
+                var clientes = from cliente in _entidad.CLIENTE
+                    join individuo in _entidad.INDIVIDUO on cliente.INDIVIDUO_ID equals individuo.INDIVIDUO_ID
+                    join direccion in _entidad.DIRECCION on individuo.INDIVIDUO_ID equals direccion.INDIVIDUO_ID
+                    join telefono in _entidad.TELEFONO on individuo.INDIVIDUO_ID equals telefono.INDIVIDUO_ID
+                    join email in _entidad.E_MAIL on individuo.INDIVIDUO_ID equals email.INDIVIDUO_ID
+                    join individuoRol in _entidad.INDIVIDUO_ROL on individuo.INDIVIDUO_ID equals
+                        individuoRol.INDIVIDUO_ID
+                    where
+                        individuo.NUMERO_IDENTIFICACION == numeroIdentificacion &&
+                        individuoRol.TIPO_ROL_INDIVIDUO_ID == 1
+                    select new ClienteGeneralDTOs()
+                    {
+                        Cliente = cliente,
+                        Individuo = individuo,
+                        IndividuoRol = individuoRol,
+                        CorreoElectronico = email,
+                        Direccion = direccion,
+                        Telefono = telefono
+                    };
+
+                return clientes.FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
             }
         }
 

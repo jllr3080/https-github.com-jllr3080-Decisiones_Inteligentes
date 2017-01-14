@@ -67,7 +67,15 @@ namespace JLLR.Core.Contabilidad.Proveedor.DAOs
                                        where individuo.NUMERO_IDENTIFICACION == numeroIdentificacion
                                        select new CuentaPorCobrarDTOs() { HistorialCuentaPorCobrar = historialCuentaPorCobrar, CuentaPorCobrar = cuentaPorCobrar ,Cliente = individuo.PRIMER_CAMPO + individuo.SEGUNDO_CAMPO+ individuo.TERCER_CAMPO+ individuo.CUARTO_CAMPO};
 
-                return (List<CuentaPorCobrarDTOs>)(cuentasPorCobrar);
+                List<CuentaPorCobrarDTOs> _listaCuentaPorCobrarDtOses = new List<CuentaPorCobrarDTOs>();
+
+                foreach (var objetoCuentaPorCobrar in cuentasPorCobrar)
+                {
+                    _listaCuentaPorCobrarDtOses.Add(objetoCuentaPorCobrar);
+
+                }
+
+                return _listaCuentaPorCobrarDtOses;
             }
             catch (Exception ex)
             {

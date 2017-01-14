@@ -33,6 +33,8 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<int> SUCURSAL_ID { get; set; }
         public Nullable<int> ESTADO_PAGO_ID { get; set; }
         public string NUMERO_ORDEN { get; set; }
+        public Nullable<bool> ENVIO_MATRIZ { get; set; }
+        public Nullable<bool> SE_ENVIO { get; set; }
     
         public virtual CLIENTE CLIENTE { get; set; }
         public virtual ESTADO_PAGO ESTADO_PAGO { get; set; }

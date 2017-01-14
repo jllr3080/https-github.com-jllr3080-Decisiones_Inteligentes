@@ -1,6 +1,7 @@
 ﻿#region using
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Web;
 using JLLR.Core.General.Servicio.Modelo;
@@ -74,7 +75,9 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                 FechaIngreso = e.FECHA_INGRESO,
                 FechaEntrega = e.FECHA_ENTREGA,
                 NumeroOrden = e.NUMERO_ORDEN,
-                EstadoPago = _estadoPago
+                EstadoPago = _estadoPago,
+                SeEnvio = e.SE_ENVIO,
+                EnvioMatriz = e.ENVIO_MATRIZ
 
             };
 
@@ -96,6 +99,8 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
             return listaModelo;
 
         }
+
+       
 
         #endregion
 
@@ -177,6 +182,23 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
         /// <param name="listadoEntidad">Listado de Entidades</param>
         /// <returns></returns>
         public List<modelo.DetalleOrdenTrabajoModelo> CrearDetalleOrdenesTrabajo(IQueryable<entidad.DETALLE_ORDEN_TRABAJO> listadoEntidad)
+        {
+            List<modelo.DetalleOrdenTrabajoModelo> listaModelo = new List<modelo.DetalleOrdenTrabajoModelo>();
+
+            foreach (var entidad in listadoEntidad)
+            {
+                listaModelo.Add(CrearDetalleOrdenTrabajo(entidad));
+            }
+            return listaModelo;
+
+        }
+
+        /// <summary>
+        /// Convierte un listado de DTO en listado de  modelos de DTO
+        /// </summary>
+        /// <param name="listadoEntidad">Listado de Entidades</param>
+        /// <returns></returns>
+        public List<modelo.DetalleOrdenTrabajoModelo> CrearColeecionDetalleOrdenesTrabajo(List<entidad.DETALLE_ORDEN_TRABAJO> listadoEntidad)
         {
             List<modelo.DetalleOrdenTrabajoModelo> listaModelo = new List<modelo.DetalleOrdenTrabajoModelo>();
 

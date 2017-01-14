@@ -79,5 +79,18 @@ namespace Web.Models.Venta.Negocio
         /// </summary>
         
         public string NumeroOrden { get; set; }
+
+
+        /// <summary>
+        /// envio a matriz la orden
+        /// </summary>
+        
+        public bool? EnvioMatriz { get; set; }
+
+        /// <summary>
+        /// Se envio la orden 
+        /// </summary>
+        
+        public bool? SeEnvio { get; set; }
     }
 }

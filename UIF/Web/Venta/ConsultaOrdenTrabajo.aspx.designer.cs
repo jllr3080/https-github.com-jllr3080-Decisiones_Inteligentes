@@ -94,6 +94,15 @@ namespace Web.Venta {
         protected global::System.Web.UI.WebControls.Literal _literalHistorialPago;
         
         /// <summary>
+        /// Control _cuentaPorCobrarId.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField _cuentaPorCobrarId;
+        
+        /// <summary>
         /// Control _datosPago.
         /// </summary>
         /// <remarks>

@@ -160,6 +160,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Guardar Entrega/Recepción Prenda.
+        /// </summary>
+        internal static string Boton_Entrega_Recepcion_Prenda {
+            get {
+                return ResourceManager.GetString("Boton_Entrega_Recepcion_Prenda", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Guardar Orden de  Trabajo.
         /// </summary>
         internal static string Boton_Guardar_Orden_Trabajo {
@@ -210,6 +219,204 @@ namespace Resources {
         internal static string Label_Apellido_Paterno {
             get {
                 return ResourceManager.GetString("Label_Apellido_Paterno", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cantidad.
+        /// </summary>
+        internal static string Label_Cabecera_Grid_Cantidad {
+            get {
+                return ResourceManager.GetString("Label_Cabecera_Grid_Cantidad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cliente.
+        /// </summary>
+        internal static string Label_Cabecera_Grid_Cliente {
+            get {
+                return ResourceManager.GetString("Label_Cabecera_Grid_Cliente", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Código de la Orden de  Trabajo.
+        /// </summary>
+        internal static string Label_Cabecera_Grid_Codigo_Orden_Trabajo {
+            get {
+                return ResourceManager.GetString("Label_Cabecera_Grid_Codigo_Orden_Trabajo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Color.
+        /// </summary>
+        internal static string Label_Cabecera_Grid_Color {
+            get {
+                return ResourceManager.GetString("Label_Cabecera_Grid_Color", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cuenta  Por Cobrar Id.
+        /// </summary>
+        internal static string Label_Cabecera_Grid_Cuenta_Por_Cobrar_Id {
+            get {
+                return ResourceManager.GetString("Label_Cabecera_Grid_Cuenta_Por_Cobrar_Id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Fecha Creación.
+        /// </summary>
+        internal static string Label_Cabecera_Grid_Fecha_Creacion {
+            get {
+                return ResourceManager.GetString("Label_Cabecera_Grid_Fecha_Creacion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Fecha de Entrega Orden.
+        /// </summary>
+        internal static string Label_Cabecera_Grid_Fecha_Entrega {
+            get {
+                return ResourceManager.GetString("Label_Cabecera_Grid_Fecha_Entrega", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Fecha Modificación.
+        /// </summary>
+        internal static string Label_Cabecera_Grid_Fecha_Modificacion {
+            get {
+                return ResourceManager.GetString("Label_Cabecera_Grid_Fecha_Modificacion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Fecha de Recepción Orden.
+        /// </summary>
+        internal static string Label_Cabecera_Grid_Fecha_Recepcion {
+            get {
+                return ResourceManager.GetString("Label_Cabecera_Grid_Fecha_Recepcion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Marca.
+        /// </summary>
+        internal static string Label_Cabecera_Grid_Marca {
+            get {
+                return ResourceManager.GetString("Label_Cabecera_Grid_Marca", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Material.
+        /// </summary>
+        internal static string Label_Cabecera_Grid_Material {
+            get {
+                return ResourceManager.GetString("Label_Cabecera_Grid_Material", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Mostrar Observaciones.
+        /// </summary>
+        internal static string Label_Cabecera_Grid_Mostrar_Observaciones {
+            get {
+                return ResourceManager.GetString("Label_Cabecera_Grid_Mostrar_Observaciones", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Número de Factura.
+        /// </summary>
+        internal static string Label_Cabecera_Grid_Numero_Factura {
+            get {
+                return ResourceManager.GetString("Label_Cabecera_Grid_Numero_Factura", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Número de  Orden.
+        /// </summary>
+        internal static string Label_Cabecera_Grid_Numero_Orden {
+            get {
+                return ResourceManager.GetString("Label_Cabecera_Grid_Numero_Orden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Numero de Prendas.
+        /// </summary>
+        internal static string Label_Cabecera_Grid_Numero_Prendas {
+            get {
+                return ResourceManager.GetString("Label_Cabecera_Grid_Numero_Prendas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Prenda.
+        /// </summary>
+        internal static string Label_Cabecera_Grid_Prenda {
+            get {
+                return ResourceManager.GetString("Label_Cabecera_Grid_Prenda", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Resumen Cobro.
+        /// </summary>
+        internal static string Label_Cabecera_Grid_Resumen_Cobro {
+            get {
+                return ResourceManager.GetString("Label_Cabecera_Grid_Resumen_Cobro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Saldo.
+        /// </summary>
+        internal static string Label_Cabecera_Grid_Saldo {
+            get {
+                return ResourceManager.GetString("Label_Cabecera_Grid_Saldo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Talla.
+        /// </summary>
+        internal static string Label_Cabecera_Grid_Talla {
+            get {
+                return ResourceManager.GetString("Label_Cabecera_Grid_Talla", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Valor.
+        /// </summary>
+        internal static string Label_Cabecera_Grid_Valor {
+            get {
+                return ResourceManager.GetString("Label_Cabecera_Grid_Valor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Valor Total.
+        /// </summary>
+        internal static string Label_Cabecera_Grid_Valor_Total {
+            get {
+                return ResourceManager.GetString("Label_Cabecera_Grid_Valor_Total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Valor Unitario.
+        /// </summary>
+        internal static string Label_Cabecera_Grid_Valor_Unitario {
+            get {
+                return ResourceManager.GetString("Label_Cabecera_Grid_Valor_Unitario", resourceCulture);
             }
         }
         
@@ -619,6 +826,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Datos de Pago.
+        /// </summary>
+        internal static string Literal_Datos_Pago {
+            get {
+                return ResourceManager.GetString("Literal_Datos_Pago", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a dd/mm/yyyy.
         /// </summary>
         internal static string Marca_Agua_Fecha {
@@ -660,6 +876,24 @@ namespace Resources {
         internal static string Mensaje_Exitoso {
             get {
                 return ResourceManager.GetString("Mensaje_Exitoso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No existe información.
+        /// </summary>
+        internal static string Mensaje_Informacion_No_existe {
+            get {
+                return ResourceManager.GetString("Mensaje_Informacion_No_existe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La orden de  trabajo no debe de  tener más de 20 prendas.
+        /// </summary>
+        internal static string Mensaje_Mayor_Veinte_Prendas {
+            get {
+                return ResourceManager.GetString("Mensaje_Mayor_Veinte_Prendas", resourceCulture);
             }
         }
         
@@ -790,6 +1024,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Ingrese los accesos  para la recepción de la mercaderia.
+        /// </summary>
+        internal static string Panel_Entrega_Recepcion_Seguridad {
+            get {
+                return ResourceManager.GetString("Panel_Entrega_Recepcion_Seguridad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Datos de Pago.
         /// </summary>
         internal static string Panel_Forma_Pago {
@@ -826,11 +1069,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Listado de  Prendas.
+        /// </summary>
+        internal static string Panel_Listado_Prenda {
+            get {
+                return ResourceManager.GetString("Panel_Listado_Prenda", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Datos de la Orden de  Trabajo.
         /// </summary>
         internal static string Panel_Orden_Trabajo {
             get {
                 return ResourceManager.GetString("Panel_Orden_Trabajo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Impresión Orden.
+        /// </summary>
+        internal static string Titulo_Impresion_Orden {
+            get {
+                return ResourceManager.GetString("Titulo_Impresion_Orden", resourceCulture);
             }
         }
         
@@ -867,6 +1128,15 @@ namespace Resources {
         internal static string Titulo_Pagina_Cuenta_Por_Cobrar {
             get {
                 return ResourceManager.GetString("Titulo_Pagina_Cuenta_Por_Cobrar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Entrega/Recepción de Prendas.
+        /// </summary>
+        internal static string Titulo_Pagina_Entrega_Recepcion {
+            get {
+                return ResourceManager.GetString("Titulo_Pagina_Entrega_Recepcion", resourceCulture);
             }
         }
         

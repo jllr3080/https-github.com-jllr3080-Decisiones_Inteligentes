@@ -46,6 +46,25 @@ namespace JLLR.Core.Venta.Servicio.Transformador
                 throw;
             }
         }
+
+        /// <summary>
+        /// Obtiene todas las  ordenes  que estan lista para enviarse  a matriz
+        /// </summary>
+        /// <returns></returns>
+        public List<OrdenTrabajoDTOs> ObtenerOrdenTrabajoPorEnvioMatriz()
+        {
+            try
+            {
+                return _ensambladorModeloDTOs.CrearOrdenesTrabajotOs(_ventaNegocio.ObtenerOrdenTrabajoPorEnvioMatriz());
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
         #endregion
 
         #region ORDEN TRABAJO

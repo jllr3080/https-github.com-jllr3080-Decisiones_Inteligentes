@@ -7,10 +7,10 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Web.Contabilidad {
+namespace Web.Reporte {
     
     
-    public partial class CuentasPorCobrar {
+    public partial class ReporteImpresionOrden {
         
         /// <summary>
         /// Control _literalTitulo.
@@ -22,58 +22,58 @@ namespace Web.Contabilidad {
         protected global::System.Web.UI.WebControls.Literal _literalTitulo;
         
         /// <summary>
-        /// Control _literalEncabezado.
+        /// Control _litearlBusquedaPorFecha.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal _literalEncabezado;
+        protected global::System.Web.UI.WebControls.Literal _litearlBusquedaPorFecha;
         
         /// <summary>
-        /// Control _labelNumeroDocumento.
+        /// Control _labelNumeroOrden.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label _labelNumeroDocumento;
+        protected global::System.Web.UI.WebControls.Label _labelNumeroOrden;
         
         /// <summary>
-        /// Control _numeroDocumento.
+        /// Control _numeroOrden.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _numeroDocumento;
+        protected global::System.Web.UI.WebControls.TextBox _numeroOrden;
         
         /// <summary>
-        /// Control _numeroDocumentoValidador.
+        /// Control _numeroOrdenValidador.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator _numeroDocumentoValidador;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator _numeroOrdenValidador;
         
         /// <summary>
-        /// Control _btnBusquedaCliente.
+        /// Control _generarReporte.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button _btnBusquedaCliente;
+        protected global::System.Web.UI.WebControls.Button _generarReporte;
         
         /// <summary>
-        /// Control _datos.
+        /// Control _impresion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView _datos;
+        protected global::Microsoft.Reporting.WebForms.ReportViewer _impresion;
         
         /// <summary>
         /// Control _btnMensaje.
@@ -103,15 +103,6 @@ namespace Web.Contabilidad {
         protected global::System.Web.UI.WebControls.Panel _panelMensaje;
         
         /// <summary>
-        /// Control _literalMensajesistema.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal _literalMensajesistema;
-        
-        /// <summary>
         /// Control _labelMensaje.
         /// </summary>
         /// <remarks>
@@ -128,59 +119,5 @@ namespace Web.Contabilidad {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button _btnAceptar;
-        
-        /// <summary>
-        /// Control _btnHistorialPago.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button _btnHistorialPago;
-        
-        /// <summary>
-        /// Control _btnHistorialPago_ModalPopupExtender.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender _btnHistorialPago_ModalPopupExtender;
-        
-        /// <summary>
-        /// Control _panelHistorialCobro.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel _panelHistorialCobro;
-        
-        /// <summary>
-        /// Control _literalAbono.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal _literalAbono;
-        
-        /// <summary>
-        /// Control _datosPago.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView _datosPago;
-        
-        /// <summary>
-        /// Control _aceptarHistorial.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button _aceptarHistorial;
     }
 }

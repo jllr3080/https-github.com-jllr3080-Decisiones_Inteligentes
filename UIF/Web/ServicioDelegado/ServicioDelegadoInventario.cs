@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Script.Serialization;
 using Web.DTOs.Individuo;
@@ -35,6 +36,8 @@ namespace Web.ServicioDelegado
             try
             {
                 var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
                 var json = clienteWeb.DownloadString(direccionUrl + "ObtenerProductoPorTipoProductoId?tipoProductoId="+ tipoProductoId);
                 var js = new JavaScriptSerializer();
                 return js.Deserialize<List<ProductoVistaModelo>>(json);
@@ -63,6 +66,8 @@ namespace Web.ServicioDelegado
             try
             {
                 var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
                 var json = clienteWeb.DownloadString(direccionUrl + "ObtenerProductoPrecioPorProductoIdYProductoTallaId?productoId=" + productoId+ "&productoTallaId="+ productoTallaId);
                 var js = new JavaScriptSerializer();
                 return js.Deserialize<List<ProductoPrecioVistaModelo>>(json);

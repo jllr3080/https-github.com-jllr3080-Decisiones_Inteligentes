@@ -79,6 +79,58 @@ namespace Web.ServicioDelegado
                 }
             
         }
+
+        /// <summary>
+        /// Actualza  el  cliente
+        /// </summary>
+        /// <param name="clienteGeneralDtOs"></param>
+        /// <returns></returns>
+        public void ActualizarCliente(ClienteGeneralVistaDTOs clienteGeneralDtOs)
+        {
+
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ClienteGeneralVistaDTOs));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, clienteGeneralDtOs);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "ActualizarCliente", "POST", datos);
+                var js = new JavaScriptSerializer();
+                
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        /// Obtiene el cliente completo por  numero  de documento
+        /// </summary>
+        /// <param name="numeroIdentificacion"></param>
+        /// <returns></returns>
+        public ClienteGeneralVistaDTOs ObtenerClientePorNumeroIdentificacion(string numeroIdentificacion)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerClientePorNumeroIdentificacion?numeroIdentificacion=" + numeroIdentificacion);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<ClienteGeneralVistaDTOs>(json);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
         #region VALIDACIONES

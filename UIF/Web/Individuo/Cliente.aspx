@@ -18,11 +18,11 @@
             </div>
             <div class="row">
                     <div class="col-md-3">
-                          <asp:TextBox ID="_numeroDocumentoBusqueda" runat="server" ValidationGroup="BusquedaCliente" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox>
+                          <asp:TextBox ID="_numeroDocumentoBusqueda" runat="server" ValidationGroup="BusquedaCliente" CssClass="form-control" AutoCompleteType="Disabled" MaxLength="13"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="_numeroDocumentoBusquedaValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="BusquedaCliente" ControlToValidate="_numeroDocumentoBusqueda" ></asp:RequiredFieldValidator>
                     </div>
                      <div class="col-md-3">
-                        <asp:Button ID="_btnBusquedaCliente" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Buscar%>" ValidationGroup="BusquedaCliente"  CssClass="btn btn-primary" />
+                        <asp:Button ID="_btnBusquedaCliente" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Buscar%>" ValidationGroup="BusquedaCliente"  CssClass="btn btn-primary" OnClick="_btnBusquedaCliente_Click" />
                     </div>
             </div>
         </div>

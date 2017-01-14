@@ -40,5 +40,29 @@ namespace JLLR.Core.Individuo.Proveedor.DAOs
                 throw;
             }
         }
+
+
+        /// <summary>
+        /// Actualiza la  direccion de  domicilio
+        /// </summary>
+        /// <param name="direccion"></param>
+        public void ActualizaDireccion(DIRECCION direccion)
+        {
+            try
+            {
+                var original = _entidad.DIRECCION.Find(direccion.DIRECCION_ID);
+
+                if (original != null)
+                {
+                    _entidad.Entry(original).CurrentValues.SetValues(direccion);
+                    _entidad.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
     }
 }

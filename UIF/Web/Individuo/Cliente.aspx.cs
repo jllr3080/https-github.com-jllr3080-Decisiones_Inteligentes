@@ -27,6 +27,42 @@ namespace Web.Individuo
         #endregion
 
         #region Eventos
+        /// <summary>
+        /// busca  un cliente
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _btnBusquedaCliente_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ClienteGeneralVistaDTOs _clienteGeneralVistaDtOs =
+                    _servicioDelegadoIndividuo.ObtenerClientePorNumeroIdentificacion(_numeroDocumentoBusqueda.Text);
+
+                if (_clienteGeneralVistaDtOs != null)
+                {
+
+                    _apellidoPaterno.Text = _clienteGeneralVistaDtOs.Individuo.PrimerCampo;
+                    _apellidoMaterno.Text = _clienteGeneralVistaDtOs.Individuo.SegundoCampo;
+                    _primerNombre.Text = _clienteGeneralVistaDtOs.Individuo.TercerCampo;
+                    _segundoNombre.Text = _clienteGeneralVistaDtOs.Individuo.CuartoCampo;
+                    _numeroDocumento.Text= _clienteGeneralVistaDtOs.Individuo.NumeroIdentificacion;
+                    _fechaNacimiento.Text = _clienteGeneralVistaDtOs.Cliente.FechaNacimiento.ToString();
+                    _direccion.Text = _clienteGeneralVistaDtOs.Direccion.DescripcionDireccion;
+                    _email.Text = _clienteGeneralVistaDtOs.CorreoElectronico.DireccionCorreoElectronico;
+                    _telefono.Text = _clienteGeneralVistaDtOs.Telefono.NumeroTelefono;
+
+                }
+                else
+                    Mensajes(GetGlobalResourceObject("Web_es_Ec", "No existe información").ToString(), "_grabarCliente");
+
+            }
+            catch (Exception ex)
+            {
+
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarCliente");
+            }
+        }
 
         /// <summary>
         ///  Valida si el numero de documento existe
@@ -169,7 +205,7 @@ namespace Web.Individuo
             catch (Exception ex)
             {
 
-                throw;
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarCliente");
             }
 
         }
@@ -192,7 +228,7 @@ namespace Web.Individuo
             catch (Exception ex)
             {
 
-                throw;
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarCliente");
             }
         }
 
@@ -227,6 +263,7 @@ namespace Web.Individuo
             }
             catch (Exception ex)
             {
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarCliente");
             }
 
         }
@@ -265,7 +302,7 @@ namespace Web.Individuo
             catch (Exception ex)
             {
 
-                throw;
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarCliente");
             }
 
         }
@@ -304,8 +341,10 @@ namespace Web.Individuo
         }
 
 
+
         #endregion
 
-       
+
+        
     }
 }

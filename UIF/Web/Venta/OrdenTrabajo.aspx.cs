@@ -3,6 +3,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using Web.Base;
 using Web.DTOs.Individuo;
 using Web.DTOs.Venta;
@@ -37,33 +39,111 @@ namespace Web.Venta
 
         #region Eventos
 
+
         /// <summary>
-        /// valida  si la orden de trabajo ya fue  ingresada
+        /// depende  de la forma de pago 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        protected void _numeroOrden_TextChanged(object sender, EventArgs e)
+        protected void _estadoPago_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
-
-                List<ConsultaOrdenTrabajoVistaDTOs> _listaConsultaOrdenTrabajoVistaDtOses =
-                    _servicioDelegadoVenta.ObtenerOrdenTrabajoPorNumeroOrdenYPuntoVenta(_numeroOrden.Text,
-                        Convert.ToInt32(User.PuntoVentaId));
-                if (_listaConsultaOrdenTrabajoVistaDtOses.Count > 0)
-                { 
-                    Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Numero_Orden_Existe").ToString(), "_grabarOrdenTrabajo");
-                    _numeroOrden.Text=String.Empty;
-                    _numeroOrden.Focus();
-
+                //Pendiente
+                if (_estadoPago.SelectedItem.Value.ToString() == "1")
+                {
+                    _valorPago.Visible = false;
+                    _labelValorPago.Visible = false;
+                    _valorPago.Text=String.Empty;
+                    _valorPago.ReadOnly = false;
                 }
-
+                //Cancelado
+                else if (_estadoPago.SelectedItem.Value.ToString() == "2")
+                {
+                    _valorPago.Visible = true;
+                    _labelValorPago.Visible = true;
+                    _valorPago.ReadOnly = true;
+                    _valorPago.Text = String.Format("{0:0.00}", _listaTrabajoVistaDtOs.Sum(m => m.ValorTotal));
+                }
+                //Abonado
+                else if (_estadoPago.SelectedItem.Value.ToString() == "3")
+                {
+                    _valorPago.Visible = true;
+                    _labelValorPago.Visible = true;
+                    _valorPago.ReadOnly = false;
+                    _valorPago.Text = String.Empty;
+                }
 
             }
             catch (Exception ex)
             {
+
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarOrdenTrabajo");
+            }
+
+        }
+
+        /// <summary>
+        /// Totales  en el pie  de la grilla
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private decimal _montoTotal = 0;
+        private int _cantidadTotal = 0;
+
+        protected void _datos_RowDataBound(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
+        {
+            try
+            {
+                if (e.Row.RowType == DataControlRowType.DataRow)
+                {
+                    _montoTotal += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ValorUnitario"));
+                    _cantidadTotal += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "Cantidad"));
+                }
+                else if (e.Row.RowType == DataControlRowType.Footer)
+                {
+                    e.Row.Cells[2].Text = "Totales:";
+                    e.Row.Cells[3].Text = _cantidadTotal.ToString();
+                    e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Right;
+
+                    e.Row.Cells[7].Text = _montoTotal.ToString();
+                    e.Row.Cells[7].HorizontalAlign = HorizontalAlign.Right;
+                    e.Row.Font.Bold = true;
+                }
                 
+
+            }
+            catch (Exception ex)
+            {
+
                 throw;
+            }
+
+
+        }
+
+        /// <summary>
+        /// Elimina el item seleccionado
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _datos_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)
+        {
+            try
+            {
+                if (e.CommandName == "Eliminar")
+                {
+                  int index = Convert.ToInt32(e.CommandArgument);
+                  _listaTrabajoVistaDtOs.RemoveAt(index);
+                  _datos.DataSource = _listaTrabajoVistaDtOs;
+                  _datos.DataBind();
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarOrdenTrabajo");
             }
         }
 
@@ -119,23 +199,19 @@ namespace Web.Venta
         {
             try
             {
-
-                List<ConsultaOrdenTrabajoVistaDTOs> _listaConsultaOrdenTrabajoVistaDtOses =
-                   _servicioDelegadoVenta.ObtenerOrdenTrabajoPorNumeroOrdenYPuntoVenta(_numeroOrden.Text,
-                       Convert.ToInt32(User.PuntoVentaId));
-                if (_listaConsultaOrdenTrabajoVistaDtOses.Count > 0)
+                if (_ordenTrabajoVistaDtOs.DetalleOrdenTrabajo.Count <= 20)
                 {
-                    Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Numero_Orden_Existe").ToString(), "_grabarOrdenTrabajo");
-                    _numeroOrden.Text = String.Empty;
-                    _numeroOrden.Focus();
 
-                }
-                else
-                {
-                    _ordenTrabajoVistaDtOs.OrdenTrabajo.NumeroOrden = _numeroOrden.Text;
-
+                    EstadoPagoVistaModelo _estadoPagoVista = new EstadoPagoVistaModelo
+                    {
+                        EstadoPagoId = Convert.ToInt32(_estadoPago.SelectedItem.Value)
+                    };
+                    _ordenTrabajoVistaDtOs.OrdenTrabajo.EstadoPago = _estadoPagoVista;
+                    _ordenTrabajoVistaDtOs.OrdenTrabajo.SeEnvio = false;
+                    _ordenTrabajoVistaDtOs.OrdenTrabajo.EnvioMatriz = true;
                     //Graba la Orden de trabajo
-                    OrdenTrabajoVistaModelo _ordenTrabajoVistaModelo = _servicioDelegadoVenta.GrabarOrdenTrabajoCompleta(_ordenTrabajoVistaDtOs);
+                    OrdenTrabajoVistaModelo _ordenTrabajoVistaModelo =
+                        _servicioDelegadoVenta.GrabarOrdenTrabajoCompleta(_ordenTrabajoVistaDtOs);
 
                     //GUarda el proceso inicial que es la entrega del cliente hacia  la franquicia
                     HistorialProcesoVistaModelo _historialProcesoVista = new HistorialProcesoVistaModelo();
@@ -151,42 +227,49 @@ namespace Web.Venta
                     _servicioDelegadoFlujoProceso.GrabarHistorialProceso(_historialProcesoVista);
 
 
-                    CuentaPorCobrarVistaModelo _cuentaPorCobrarVista= new CuentaPorCobrarVistaModelo();
+                    CuentaPorCobrarVistaModelo _cuentaPorCobrarVista = new CuentaPorCobrarVistaModelo();
                     _cuentaPorCobrarVista.SucursalId = User.SucursalId;
                     _cuentaPorCobrarVista.PuntoVentaId = User.PuntoVentaId;
                     _cuentaPorCobrarVista.ClienteId = _ordenTrabajoVistaModelo.ClienteModelo.ClienteId;
-                    _cuentaPorCobrarVista.FechaCreacion= DateTime.Now;
-                    _cuentaPorCobrarVista.FechaModificacion= DateTime.Now;
+                    _cuentaPorCobrarVista.FechaCreacion = DateTime.Now;
+                    _cuentaPorCobrarVista.FechaModificacion = DateTime.Now;
                     _cuentaPorCobrarVista.FechaVencimiento = _ordenTrabajoVistaModelo.FechaEntrega;
-                    _cuentaPorCobrarVista.NumeroFactura= String.Empty;
+                    _cuentaPorCobrarVista.NumeroFactura = String.Empty;
                     _cuentaPorCobrarVista.NumeroOrden = _ordenTrabajoVistaModelo.NumeroOrden;
                     _cuentaPorCobrarVista.Saldo = 0;
                     _cuentaPorCobrarVista.Valor = _ordenTrabajoVistaDtOs.DetalleOrdenTrabajo.Sum(m => m.ValorTotal);
                     _cuentaPorCobrarVista.UsuarioModificacionId = User.Id;
                     _cuentaPorCobrarVista.UsuarioCreacionId = User.Id;
                     _cuentaPorCobrarVista.EstadoPagoId = _ordenTrabajoVistaModelo.EstadoPago.EstadoPagoId;
-                    
+
                     _cuentaPorCobrarVista = _servicioDelegadoContabilidad.GrabarCuentaPorCobrar(_cuentaPorCobrarVista);
 
-                    if (_ordenTrabajoVistaModelo.EstadoPago.EstadoPagoId == Convert.ToInt32(Util.EstadoPago.Cancelado) || _ordenTrabajoVistaModelo.EstadoPago.EstadoPagoId == Convert.ToInt32(Util.EstadoPago.Abonado))
+                    if (_ordenTrabajoVistaModelo.EstadoPago.EstadoPagoId == Convert.ToInt32(Util.EstadoPago.Cancelado) ||
+                        _ordenTrabajoVistaModelo.EstadoPago.EstadoPagoId == Convert.ToInt32(Util.EstadoPago.Abonado))
                     {
-                        HistorialCuentaPorCobrarVistaModelo _historialCuentaPorCobrar = new HistorialCuentaPorCobrarVistaModelo();
+                        HistorialCuentaPorCobrarVistaModelo _historialCuentaPorCobrar =
+                            new HistorialCuentaPorCobrarVistaModelo();
                         _historialCuentaPorCobrar.UsuarioId = User.Id;
                         _historialCuentaPorCobrar.CuentaPorCobrarId = _cuentaPorCobrarVista.CuentaPorCobrarId;
-                        _historialCuentaPorCobrar.FechaCobro=DateTime.Now;
-                        FormaPagoVistaModelo _formaPago= new FormaPagoVistaModelo();
-                        _formaPago.FormaPagoId=Convert.ToInt32(Util.FormaPago.Efectivo);
+                        _historialCuentaPorCobrar.FechaCobro = DateTime.Now;
+                        FormaPagoVistaModelo _formaPago = new FormaPagoVistaModelo();
+                        _formaPago.FormaPagoId = Convert.ToInt32(Util.FormaPago.Efectivo);
                         _historialCuentaPorCobrar.FormaPago = _formaPago;
-                        _historialCuentaPorCobrar.ValorCobro= _ordenTrabajoVistaDtOs.DetalleOrdenTrabajo.Sum(m => m.ValorTotal);
+                        _historialCuentaPorCobrar.ValorCobro = Convert.ToDecimal(_valorPago.Text);
 
                         _historialCuentaPorCobrar =
                             _servicioDelegadoContabilidad.GrabarHistorialCuentaPorCobrar(_historialCuentaPorCobrar);
 
                     }
                     //Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Exitoso").ToString(), "_grabarOrdenTrabajo");
-                    Response.Redirect("~/Inicio/Default.aspx");
+                    Session["OrdenTrabajoId"] = _ordenTrabajoVistaModelo.NumeroOrden;
+                    Response.Redirect("~/Reporte/ReporteImpresionOrden.aspx");
                 }
+                else
+                    Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Mayor_Veinte_Prendas").ToString(), "_grabarOrdenTrabajo");
                 
+
+
 
             }
             catch (Exception ex)
@@ -494,7 +577,9 @@ namespace Web.Venta
                 _tipoLavado.DataBind();
                 _estadoPago.DataSource = _servicioDelegadoGeneral.ObtenerEstadosPago();
                 _estadoPago.DataBind();
-
+                _estadoPago.SelectedIndex = _estadoPago.Items.IndexOf(_estadoPago.Items.FindByValue("1"));
+                _labelValorPago.Visible = false;
+                _valorPago.Visible = false;
             }
             catch (Exception ex)
             {
@@ -542,15 +627,15 @@ namespace Web.Venta
                 };
                 OrdenTrabajoVistaModelo _ordenTrabajoVista = new OrdenTrabajoVistaModelo
                 {
-                    FechaEntrega = DateTime.Now,
-                    FechaIngreso = DateTime.Now,
+                    FechaEntrega = Convert.ToDateTime(_fechaEntrega.Text),
+                    FechaIngreso = Convert.ToDateTime(_fecha.Text),
                     EstadoPago = _estadoPagoVista,
                     TipoLavado = _tipoLavadoVista,
                     Usuario = _usuarioVista,
                     Sucursal = _sucursalVista,
                     PuntoVenta = _puntoVentaVista,
                     ClienteModelo = _clienteVista,
-                    NumeroOrden = _numeroOrden.Text
+                    NumeroOrden = "0"
 
 
                 };
@@ -671,6 +756,9 @@ namespace Web.Venta
                 throw;
             }
         }
+
+
+
 
 
 

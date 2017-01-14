@@ -56,6 +56,7 @@ namespace Web.Reporte.Venta.Reporte
             }
         }
         #endregion
+
         #region Metodos
 
         #endregion

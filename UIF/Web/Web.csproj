@@ -220,6 +220,7 @@
     <Content Include="Reporte\ReporteCuentasPorCobrar.aspx" />
     <Content Include="Reporte\ReporteCuentasPorPagar.aspx" />
     <Content Include="Reporte\ReporteDiario.aspx" />
+    <Content Include="Reporte\ReporteImpresionOrden.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -312,6 +313,7 @@
     <Compile Include="DTOs\Venta\ConsultaOrdenTrabajoVistaDTOs.cs" />
     <Compile Include="DTOs\Venta\DetalleOrdenTrabajoVistaDTOs.cs" />
     <Compile Include="DTOs\Venta\CabeceraOrdenTrabajoVistaDTOs.cs" />
+    <Compile Include="DTOs\Venta\HerenciaOrdenTrabajoVistaDTOs.cs" />
     <Compile Include="DTOs\Venta\OrdenTrabajoVistaDTOs.cs" />
     <Compile Include="Individuo\Cliente.aspx.cs">
       <DependentUpon>Cliente.aspx</DependentUpon>
@@ -411,6 +413,13 @@
     </Compile>
     <Compile Include="Reporte\ReporteDiario.aspx.designer.cs">
       <DependentUpon>ReporteDiario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reporte\ReporteImpresionOrden.aspx.cs">
+      <DependentUpon>ReporteImpresionOrden.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reporte\ReporteImpresionOrden.aspx.designer.cs">
+      <DependentUpon>ReporteImpresionOrden.aspx</DependentUpon>
     </Compile>
     <Compile Include="Seguridad\Login\IngresoSistema.aspx.cs">
       <DependentUpon>IngresoSistema.aspx</DependentUpon>

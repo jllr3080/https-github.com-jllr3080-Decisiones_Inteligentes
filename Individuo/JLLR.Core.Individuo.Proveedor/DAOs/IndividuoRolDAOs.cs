@@ -43,5 +43,28 @@ namespace JLLR.Core.Individuo.Proveedor.DAOs
             }
         }
 
+        /// <summary>
+        /// Actualiza el rol del individuo
+        /// </summary>
+        /// <param name="individuoRol"></param>
+        public void ActualizaIndividuoRol(INDIVIDUO_ROL individuoRol)
+        {
+            try
+            {
+                var original = _entidad.INDIVIDUO_ROL.Find(individuoRol.INDIVIDUO_ROL_ID);
+
+                if (original != null)
+                {
+                    _entidad.Entry(original).CurrentValues.SetValues(individuoRol);
+                    _entidad.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
     }
 }

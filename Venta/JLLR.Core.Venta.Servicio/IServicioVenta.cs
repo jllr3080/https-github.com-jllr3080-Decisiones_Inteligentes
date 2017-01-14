@@ -27,6 +27,15 @@ namespace JLLR.Core.Venta.Servicio
         [OperationContract]
         [WebInvoke(UriTemplate = "GrabarOrdenTrabajoCompleta/*", RequestFormat = WebMessageFormat.Json,ResponseFormat = WebMessageFormat.Json, Method = "POST")]
         OrdenTrabajoModelo GrabarOrdenTrabajoCompleta(OrdenTrabajoDTOs ordenTrabajoDtOs);
+
+        /// <summary>
+        /// Obtiene todas las  ordenes  que estan lista para enviarse  a matriz
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(UriTemplate ="ObtenerOrdenTrabajoPorEnvioMatriz",ResponseFormat = WebMessageFormat.Json)]
+        List<OrdenTrabajoDTOs> ObtenerOrdenTrabajoPorEnvioMatriz();
+        
         #endregion
 
         #region ORDEN TRABAJO

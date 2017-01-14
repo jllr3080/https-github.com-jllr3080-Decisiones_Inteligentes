@@ -55,6 +55,27 @@ namespace Web.ServicioDelegado
             }
         }
 
+        /// <summary>
+        /// Obtiene todas las  ordenes  que estan lista para enviarse  a matriz
+        /// </summary>
+        /// <returns></returns>
+        public List<OrdenTrabajoVistaDTOs> ObtenerOrdenTrabajoPorEnvioMatriz()
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerOrdenTrabajoPorEnvioMatriz");
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<OrdenTrabajoVistaDTOs>>(json);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
 
         #endregion
 

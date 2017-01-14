@@ -39,6 +39,26 @@ namespace JLLR.Core.Individuo.Servicio
         [OperationContract]
         [WebInvoke(UriTemplate = "GrabarCliente/*",RequestFormat = WebMessageFormat.Json,ResponseFormat = WebMessageFormat.Json, Method = "POST")]
         ClienteModelo GrabarCliente(ClienteGeneralDTOs clienteGeneralDtOs);
+
+        /// <summary>
+        /// Actualza  el  cliente
+        /// </summary>
+        /// <param name="clienteGeneralDtOs"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "ActualizarCliente/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void ActualizarCliente(ClienteGeneralDTOs clienteGeneralDtOs);
+
+        /// <summary>
+        /// Obtiene el cliente completo por  numero  de documento
+        /// </summary>
+        /// <param name="numeroIdentificacion"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(
+             UriTemplate = "ObtenerClientePorNumeroIdentificacion?numeroIdentificacion={numeroIdentificacion}",
+             ResponseFormat = WebMessageFormat.Json)]
+        ClienteGeneralDTOs ObtenerClientePorNumeroIdentificacion(string numeroIdentificacion);
         #endregion
         #endregion
 

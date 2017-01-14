@@ -16,6 +16,45 @@ namespace JLLR.Core.Venta.Servicio.EnsambladorDTOs
     /// </summary>
     public class EnsambladorModeloDTOs
     {
+        #region  DECLARACIONES  E INSTANCIAS
+        private readonly ensamblador.EnsambladorEntidad _ensambladorEntidad = new ensamblador.EnsambladorEntidad();
+        private readonly ensamblador.EnsambladorModelo _ensambladorModelo = new ensamblador.EnsambladorModelo();
+        #endregion
+
+        #region ORDEN TRABAJO DTO
+        /// <summary>
+        /// Convierte el modelo DTO en una entidad DTO
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public modeloDTOs.OrdenTrabajoDTOs CrearOrdenTrabajotOs(entidadDTOs.OrdenTrabajoDTOs e)
+        {
+            return new modeloDTOs.OrdenTrabajoDTOs()
+            {
+              OrdenTrabajo =_ensambladorModelo.CrearOrdenTrabajo(e.OrdenTrabajo),
+              DetalleOrdenTrabajo =_ensambladorModelo.CrearColeecionDetalleOrdenesTrabajo(e.DetalleOrdenTrabajos)
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos  Usuario en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<modeloDTOs.OrdenTrabajoDTOs> CrearOrdenesTrabajotOs(List<entidadDTOs.OrdenTrabajoDTOs> listadoModelo)
+        {
+            List<modeloDTOs.OrdenTrabajoDTOs> listaEntidad = new List<modeloDTOs.OrdenTrabajoDTOs>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearOrdenTrabajotOs(modelo));
+            }
+            return listaEntidad;
+
+        }
+
+        #endregion
 
         #region  CONSULTA ORDEN DE TRABJO
         /// <summary>
@@ -67,5 +106,7 @@ namespace JLLR.Core.Venta.Servicio.EnsambladorDTOs
         }
 
         #endregion
+
+        
     }
 }

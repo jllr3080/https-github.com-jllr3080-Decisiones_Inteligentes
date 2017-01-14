@@ -30,20 +30,22 @@
         </div>
     </div>
     <br />
-     <div class="panel panel-default" id="_datoOrdenTrabajo">
+     <div class="panel panel-default" id="_datoOrdenTrabajo" data-toggle="collapse" data-target="#_divHistorial">
            <div class="panel-heading"><asp:Literal runat="server" ID="_literalDetallaHistorial" Text="<%$ Resources:Web_es_Ec,Panel_Historial_Proceso%>"/></div>
-        <div class="panel-body">
+        <div class="panel-body" id="_divHistorial" >
             
              <div class="row">
                 
                     <div class="row">
                             <div class="col-md-12">
-                                <asp:GridView ID="_datosHistorial" runat="server"  CssClass="tableCabecera" AutoGenerateColumns="False">
+                                <asp:GridView ID="_datosHistorial" runat="server" AutoGenerateColumns="False">
                                     <Columns>
                                         <asp:BoundField DataField="NumeroOrden" HeaderText="Numero de Orden" />
                                         <asp:BoundField DataField="FechaRegistro" HeaderText="Fecha" />
                                         <asp:BoundField DataField="EtapaProceso.Descripcion" HeaderText="Etapa Proceso" />
                                     </Columns>
+                                     <HeaderStyle CssClass="tableCabecera" ></HeaderStyle>
+                                       <FooterStyle CssClass="tablePiePagina"></FooterStyle>
                                 </asp:GridView> 
                             </div>
                     </div>
@@ -52,16 +54,23 @@
     </div>
          
      <br />
-     <div class="panel panel-default" id="_datosHistorialPago">
+     <div class="panel panel-default" id="_datosHistorialPago" data-toggle="collapse" data-target="#_divHistorialPago">
            <div class="panel-heading"><asp:Literal runat="server" ID="_literalHistorialPago" Text="<%$ Resources:Web_es_Ec,Panel_Historial_Pago%>"/></div>
-        <div class="panel-body">
+        <div class="panel-body" id="_divHistorialPago">
             
              <div class="row">
                 
                     <div class="row">
                             <div class="col-md-12">
-                                <asp:GridView ID="_datosPago" runat="server"  CssClass="tableCabecera" AutoGenerateColumns="True">
-                                 
+                                <asp:HiddenField ID="_cuentaPorCobrarId" runat="server" />
+                                <asp:GridView ID="_datosPago" runat="server"   AutoGenerateColumns="False">
+                                    <Columns>
+                                          <asp:BoundField DataField="HistorialCuentaPorCobrar.FechaCobro" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Fecha_Creacion%>"/>
+                                        <asp:BoundField DataField="HistorialCuentaPorCobrar.ValorCobro" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Valor%>" DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" ItemStyle-VerticalAlign="Middle" />
+                                        
+                                    </Columns>
+                                  <HeaderStyle CssClass="tableCabecera" ></HeaderStyle>
+                                <FooterStyle CssClass="tablePiePagina"></FooterStyle>
                                 </asp:GridView> 
                             </div>
                     </div>
@@ -69,9 +78,9 @@
         </div>
     </div>
           <br/>
-    <div class="panel panel-default" id="_datoOrdenTrabajo">
-           <div class="panel-heading"><asp:Literal runat="server" ID="Literal1" Text="<%$ Resources:Web_es_Ec,Panel_Orden_Trabajo%>"/></div>
-        <div class="panel-body">
+    <div class="panel panel-default" id="_datoOrdenTrabajo" data-toggle="collapse" data-target="#_divOrdenTrabajo">
+           <div class="panel-heading"><asp:Literal runat="server" ID="Literal1" Text="<%$ Resources:Web_es_Ec,Panel_Orden_Trabajo%>" /></div>
+        <div class="panel-body" id="_divOrdenTrabajo">
             
            
              <div class="row">
@@ -150,22 +159,23 @@
             <br/>
             <div class="row">
                     <div class="col-md-12">
-                        <asp:GridView ID="_datos" runat="server" AutoGenerateColumns="False" CssClass="tableCabecera" OnRowCommand="_datos_RowCommand">
+                        <asp:GridView ID="_datos" runat="server" AutoGenerateColumns="False" OnRowCommand="_datos_RowCommand" Width="100%">
                             <Columns>
-                                <asp:BoundField DataField="DetalleOrdenTrabajoId" HeaderText="Código de la Orden de  Trabajo" />
-                                <asp:BoundField DataField="Cantidad" HeaderText="Cantidad de Prenda" />
-                                <asp:BoundField HeaderText="Prenda" DataField="Prenda" />
-                                <asp:BoundField HeaderText="Color" DataField="Color" />
-                                <asp:BoundField HeaderText="Marca" DataField="Marca" />
-                                <asp:BoundField HeaderText="Valor Unitario" DataField="ValorUnitario" />
-                                <asp:BoundField HeaderText="Valor Total" DataField="ValorTotal" />
-                                <asp:TemplateField HeaderText="Mostrar Observaciones">
+                                <asp:BoundField DataField="DetalleOrdenTrabajoId" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Codigo_Orden_Trabajo%>" />
+                                <asp:BoundField DataField="Cantidad" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Cantidad%>"/>
+                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Prenda%>" DataField="Prenda" />
+                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Color%>" DataField="Color" />
+                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Marca%>" DataField="Marca" />
+                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Valor_Unitario%>" DataField="ValorUnitario" DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" ItemStyle-VerticalAlign="Middle"  />
+                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Valor_Total%>" DataField="ValorTotal"  DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" ItemStyle-VerticalAlign="Middle" />
+                                <asp:TemplateField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Mostrar_Observaciones%>">
                                     <ItemTemplate>
-                                        <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/Content/Imagen/Observar.png"  CommandName="Observacion" CommandArgument="<%# ((GridViewRow)Container).RowIndex %>" />
+                                        <asp:ImageButton ID="_imgObservaciones" runat="server" ImageUrl="~/Content/Imagen/Observar.png"  CommandName="Observacion" CommandArgument="<%# ((GridViewRow)Container).RowIndex %>" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
-                            
+                             <HeaderStyle CssClass="tableCabecera" ></HeaderStyle>
+                             <FooterStyle CssClass="tablePiePagina"></FooterStyle>
                         </asp:GridView>
                     </div>
                     
@@ -308,7 +318,10 @@
                         <div class="modal-body">
                              <div class="row">
                                     <div class="col-md-6">
-                                        <asp:GridView ID="_datosObservaciones" runat="server"></asp:GridView>     
+                                        <asp:GridView ID="_datosObservaciones" runat="server" Width="100%">
+                                             <HeaderStyle CssClass="tableCabecera" ></HeaderStyle>
+                                             <FooterStyle CssClass="tablePiePagina"></FooterStyle>
+                                        </asp:GridView>     
                                     </div>
                                     
                               </div>
@@ -342,19 +355,19 @@
                 <asp:Button ID="_btnAbonar" runat="server" Text="" Visible="false" />
                     <cc1:ModalPopupExtender ID="_btnAbonar_ModalPopupExtender" PopupControlID="_panelAbonar" runat="server" BehaviorID="_btnAbonar_ModalPopupExtender" TargetControlID="_btnAbonar" BackgroundCssClass="modal-Backgoround" X="500" OnCancelScript="_cancelarValorAbonar" OnOkScript="_abonarValor" Y="300">
                     </cc1:ModalPopupExtender>
-                    <asp:Panel ID="_panelAbonar" runat="server" Style="display: none; background-color: white; width: 60%; height: auto;align-content:center ">
+                    <asp:Panel ID="_panelAbonar" runat="server" Style="display: none; background-color: white; width: 30%; height: auto;align-content:center ">
                         <div class="modal-header">
                             <h4 class="modal-title"><asp:Literal ID="_literalAbono" runat="server" Text="<%$ Resources:Web_es_Ec,Literal_Agregar_Abono%>"></asp:Literal></h4>
                         </div>
                         <div class="modal-body">
                              <div class="row">
-                                    <div class="col-md-3">
+                                    <div class="col-md-6">
                                         <asp:Label ID="_labelValorAbonar" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Valor_Abonar%>"></asp:Label>
                                     </div>
                                     
                               </div>
                               <div class="row">
-                                    <div class="col-md-3">
+                                    <div class="col-md-6">
                                         <asp:TextBox ID="_valorAbonar" runat="server" class="form-control" ValidationGroup="Abonar"  ></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="_valorAbonarValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="Abonar" ControlToValidate="_valorAbonar" ></asp:RequiredFieldValidator>
                                      <cc1:MaskedEditExtender ID="_valorAbonarExtensor" runat="server" TargetControlID="_valorAbonar" Mask="999.99" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus" OnInvalidCssClass="MaskedEditError" MaskType="Number" InputDirection="RightToLeft" AcceptNegative="Left" DisplayMoney="Left" ErrorTooltipEnabled="True" />

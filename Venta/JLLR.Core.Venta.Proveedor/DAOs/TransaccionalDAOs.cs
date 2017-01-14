@@ -23,6 +23,7 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
         private Decisiones_Inteligentes _entidad = new Decisiones_Inteligentes();
         private readonly OrdenTrabajoDAOs _ordenTrabajoDaOs = new OrdenTrabajoDAOs();
         private readonly DetalleOrdenTrabajoDAOs _detalleOrdenTrabajoDaOs = new DetalleOrdenTrabajoDAOs();
+        private readonly  NumeroOrdenDAOs _numeroOrdenDaOs= new  NumeroOrdenDAOs();
         private readonly  DetalleOrdenTrabajoObservacionDAOs _detalleOrdenTrabajoObservacionDaOs= new DetalleOrdenTrabajoObservacionDAOs();
         #endregion
 
@@ -40,6 +41,12 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
             {
                 try
                 {
+                    NUMERACION_ORDEN _numeracionOrden =
+                        _numeroOrdenDaOs.ObtenerNumeroOrdenPorVariosParametros(
+                            Convert.ToInt32(ordenTrabajoDtOs.OrdenTrabajo.TIPO_LAVADO_ID),
+                            Convert.ToInt32(ordenTrabajoDtOs.OrdenTrabajo.SUCURSAL_ID),
+                            Convert.ToInt32(ordenTrabajoDtOs.OrdenTrabajo.PUNTO_VENTA_ID));
+                    ordenTrabajoDtOs.OrdenTrabajo.NUMERO_ORDEN =Convert.ToString(_numeracionOrden.NUMERO);
 
                     ORDEN_TRABAJO ordenTrabajo = _ordenTrabajoDaOs.GrabarOrdenTrabajo(ordenTrabajoDtOs.OrdenTrabajo);
 
@@ -47,16 +54,17 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                     {
                         detalleOrdenTrabajo.ORDEN_TRABAJO_ID = ordenTrabajo.ORDEN_TRABAJO_ID;
                         DETALLE_ORDEN_TRABAJO _detalleOrdenTrabajo=  _detalleOrdenTrabajoDaOs.GrabarDetelleOrdenTrabajo(detalleOrdenTrabajo);
-                        foreach (var detalleOrdenTrabajoObservacion in detalleOrdenTrabajo.DETALLE_ORDEN_TRABAJO_OBSERVACION)
-                        {
-                            detalleOrdenTrabajoObservacion.DETALLE_ORDEN_TRABAJO_ID =_detalleOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID;
-                            _detalleOrdenTrabajoObservacionDaOs.GrabarDetalleOrdenTrabajoObservacion(detalleOrdenTrabajoObservacion);
+                        //foreach (var detalleOrdenTrabajoObservacion in detalleOrdenTrabajo.DETALLE_ORDEN_TRABAJO_OBSERVACION)
+                        //{
+                        //    detalleOrdenTrabajoObservacion.DETALLE_ORDEN_TRABAJO_ID =_detalleOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID;
+                        //    _detalleOrdenTrabajoObservacionDaOs.GrabarDetalleOrdenTrabajoObservacion(detalleOrdenTrabajoObservacion);
 
-                        }
+                        //}
 
                         
                     }
-
+                    _numeracionOrden.NUMERO += 1;
+                    _numeroOrdenDaOs.ActualizarNumeroOrden(_numeracionOrden);
                     transaction.Complete();
 
                     return ordenTrabajo;
@@ -70,6 +78,39 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
         }
 
 
+        /// <summary>
+        /// Obtiene todas las  ordenes  que estan lista para enviarse  a matriz
+        /// </summary>
+        /// <returns></returns>
+        public List<OrdenTrabajoDTOs> ObtenerOrdenTrabajoPorEnvioMatriz()
+        {
+            try
+            {
+                var ordenesTrabajo = from ordenTrabajo in _entidad.ORDEN_TRABAJO
+                    //join detalleOrdenTrabajo in _entidad.DETALLE_ORDEN_TRABAJO on ordenTrabajo.ORDEN_TRABAJO_ID equals detalleOrdenTrabajo.ORDEN_TRABAJO_ID
+                    where ordenTrabajo.SE_ENVIO == false
+                    select new OrdenTrabajoDTOs()
+                    {
+                        OrdenTrabajo = ordenTrabajo,
+                        DetalleOrdenTrabajos = (List<DETALLE_ORDEN_TRABAJO>)(ordenTrabajo.DETALLE_ORDEN_TRABAJO)
+                    };
+
+                List <OrdenTrabajoDTOs > _ordenTrabajoDtOses = new List<OrdenTrabajoDTOs>();
+                foreach (var objetoOrdenTrabajoDTOs in ordenesTrabajo)
+                {
+                    _ordenTrabajoDtOses.Add(objetoOrdenTrabajoDTOs);
+                }
+
+                return _ordenTrabajoDtOses;
+
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+
+        }
 
         #endregion
 
@@ -99,7 +140,25 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                                      join material in _entidad.MATERIAL on detalleOrdenTrabajo.MATERIAL_ID equals material.MATERIAL_ID
                                      join estadoPago in _entidad.ESTADO_PAGO on ordenTrabajo.ESTADO_PAGO_ID equals estadoPago.ESTADO_PAGO_ID
                                      where ordenTrabajo.NUMERO_ORDEN == numeroOrden && ordenTrabajo.PUNTO_VENTA_ID == puntoVentaId
-                                     select new ConsultaOrdenTrabajoDTOs { TipoLavado = tipoLavado.DESCRIPCION, EstadoPago = estadoPago.DESCRIPCION, Marca = marca.DESCRIPCION, NumeroOrden = ordenTrabajo.NUMERO_ORDEN, FechaIngreso = ordenTrabajo.FECHA_INGRESO, FechaEntrega = ordenTrabajo.FECHA_ENTREGA, ValorUnitario = detalleOrdenTrabajo.VALOR_UNITARIO, Cantidad = detalleOrdenTrabajo.CANTIDAD, Color = color.DESCRIPCION, ValorTotal = detalleOrdenTrabajo.VALOR_TOTAL, Observacion = detalleOrdenTrabajo.OBSERVACION, Prenda = producto.NOMBRE, NombreCliente = individuo.PRIMER_CAMPO + " " + individuo.SEGUNDO_CAMPO + " " + individuo.TERCER_CAMPO + " " + individuo.CUARTO_CAMPO,EstadoPagoId = ordenTrabajo.ESTADO_PAGO_ID, OrdenTrabajoId = ordenTrabajo.ORDEN_TRABAJO_ID,DetalleOrdenTrabajoId = detalleOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID};
+                                     select new ConsultaOrdenTrabajoDTOs
+                                     {
+                                         TipoLavado = tipoLavado.DESCRIPCION,
+                                         EstadoPago = estadoPago.DESCRIPCION,
+                                         Marca = marca.DESCRIPCION,
+                                         NumeroOrden = ordenTrabajo.NUMERO_ORDEN,
+                                         FechaIngreso = ordenTrabajo.FECHA_INGRESO,
+                                         FechaEntrega = ordenTrabajo.FECHA_ENTREGA,
+                                         ValorUnitario = detalleOrdenTrabajo.VALOR_UNITARIO,
+                                         Cantidad = detalleOrdenTrabajo.CANTIDAD,
+                                         Color = color.DESCRIPCION,
+                                         ValorTotal = detalleOrdenTrabajo.VALOR_TOTAL,
+                                         Observacion = detalleOrdenTrabajo.OBSERVACION,
+                                         Prenda = producto.NOMBRE,
+                                         NombreCliente = individuo.PRIMER_CAMPO + " " + individuo.SEGUNDO_CAMPO + " " + individuo.TERCER_CAMPO + " " + individuo.CUARTO_CAMPO,
+                                         EstadoPagoId = ordenTrabajo.ESTADO_PAGO_ID,
+                                         OrdenTrabajoId = ordenTrabajo.ORDEN_TRABAJO_ID,
+                                         DetalleOrdenTrabajoId = detalleOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID
+                                     };
                 return ordenesTrabajo;
 
 

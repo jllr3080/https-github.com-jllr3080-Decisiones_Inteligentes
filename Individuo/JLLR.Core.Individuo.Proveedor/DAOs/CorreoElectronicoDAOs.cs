@@ -41,5 +41,29 @@ namespace JLLR.Core.Individuo.Proveedor.DAOs
                 throw;
             }
         }
+
+        /// <summary>
+        /// Actualiza  el correo  electronico
+        /// </summary>
+        /// <param name="eMail"></param>
+        public void ActualizaCorreoElectronico(E_MAIL eMail)
+        {
+            try
+            {
+                var original = _entidad.E_MAIL.Find(eMail.E_MAIL_ID);
+
+                if (original != null)
+                {
+                    _entidad.Entry(original).CurrentValues.SetValues(eMail);
+                    _entidad.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+
+        }
     }
 }

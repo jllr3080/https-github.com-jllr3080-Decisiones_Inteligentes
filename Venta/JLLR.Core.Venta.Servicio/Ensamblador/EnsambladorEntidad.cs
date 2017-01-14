@@ -40,7 +40,9 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                FECHA_INGRESO = m.FechaIngreso,
                NRO_IMPRESION = m.NumeroImpresion,
                NUMERO_ORDEN = m.NumeroOrden,
-               ESTADO_PAGO_ID = m.EstadoPago.EstadoPagoId
+               ESTADO_PAGO_ID = m.EstadoPago.EstadoPagoId,
+               SE_ENVIO = m.SeEnvio,
+               ENVIO_MATRIZ = m.EnvioMatriz
             };
         }
 

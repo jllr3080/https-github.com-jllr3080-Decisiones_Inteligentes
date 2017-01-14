@@ -66,6 +66,46 @@ namespace JLLR.Core.Individuo.Proveedor.Negocio
             }
         }
 
+
+        /// <summary>
+        /// Actualza  el  cliente
+        /// </summary>
+        /// <param name="clienteGeneralDtOs"></param>
+        /// <returns></returns>
+        public void ActualizarCliente(ClienteGeneralDTOs clienteGeneralDtOs)
+        {
+
+           
+                try
+                {
+                    _transaccionalDaOs.ActualizarCliente(clienteGeneralDtOs);
+            
+                }
+                catch (Exception ex)
+                {
+
+                    throw;
+                }
+           
+        }
+
+        /// <summary>
+        /// Obtiene el cliente completo por  numero  de documento
+        /// </summary>
+        /// <param name="numeroIdentificacion"></param>
+        /// <returns></returns>
+        public ClienteGeneralDTOs ObtenerClientePorNumeroIdentificacion(string numeroIdentificacion)
+        {
+            try
+            {
+                return _transaccionalDaOs.ObtenerClientePorNumeroIdentificacion(numeroIdentificacion);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
 

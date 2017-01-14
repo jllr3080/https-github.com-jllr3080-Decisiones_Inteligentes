@@ -150,6 +150,9 @@
   <data name="Boton_Crear_Modificar_Cliente" xml:space="preserve">
     <value>Crear o Modiicar Cliente </value>
   </data>
+  <data name="Boton_Entrega_Recepcion_Prenda" xml:space="preserve">
+    <value>Guardar Entrega/Recepción Prenda</value>
+  </data>
   <data name="Boton_Guardar_Orden_Trabajo" xml:space="preserve">
     <value>Guardar Orden de  Trabajo</value>
   </data>
@@ -167,6 +170,72 @@
   </data>
   <data name="Label_Apellido_Paterno" xml:space="preserve">
     <value>Apellido Paterno (*)</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Cantidad" xml:space="preserve">
+    <value>Cantidad</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Cliente" xml:space="preserve">
+    <value>Cliente</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Codigo_Orden_Trabajo" xml:space="preserve">
+    <value>Código de la Orden de  Trabajo</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Color" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Cuenta_Por_Cobrar_Id" xml:space="preserve">
+    <value>Cuenta  Por Cobrar Id</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Fecha_Creacion" xml:space="preserve">
+    <value>Fecha Creación</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Fecha_Entrega" xml:space="preserve">
+    <value>Fecha de Entrega Orden</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Fecha_Modificacion" xml:space="preserve">
+    <value>Fecha Modificación</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Fecha_Recepcion" xml:space="preserve">
+    <value>Fecha de Recepción Orden</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Marca" xml:space="preserve">
+    <value>Marca</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Material" xml:space="preserve">
+    <value>Material</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Mostrar_Observaciones" xml:space="preserve">
+    <value>Mostrar Observaciones</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Numero_Factura" xml:space="preserve">
+    <value>Número de Factura</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Numero_Orden" xml:space="preserve">
+    <value>Número de  Orden</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Numero_Prendas" xml:space="preserve">
+    <value>Numero de Prendas</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Prenda" xml:space="preserve">
+    <value>Prenda</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Resumen_Cobro" xml:space="preserve">
+    <value>Resumen Cobro</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Saldo" xml:space="preserve">
+    <value>Saldo</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Talla" xml:space="preserve">
+    <value>Talla</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Valor" xml:space="preserve">
+    <value>Valor</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Valor_Total" xml:space="preserve">
+    <value>Valor Total</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Valor_Unitario" xml:space="preserve">
+    <value>Valor Unitario</value>
   </data>
   <data name="Label_Cantidad" xml:space="preserve">
     <value>Cantidad</value>
@@ -303,6 +372,9 @@
   <data name="Literal_Cerrar_Orden" xml:space="preserve">
     <value>Cerrar la Orden</value>
   </data>
+  <data name="Literal_Datos_Pago" xml:space="preserve">
+    <value>Datos de Pago</value>
+  </data>
   <data name="Marca_Agua_Fecha" xml:space="preserve">
     <value>dd/mm/yyyy</value>
   </data>
@@ -317,6 +389,12 @@
   </data>
   <data name="Mensaje_Exitoso" xml:space="preserve">
     <value>Operación exitosa</value>
+  </data>
+  <data name="Mensaje_Informacion_No_existe" xml:space="preserve">
+    <value>No existe información</value>
+  </data>
+  <data name="Mensaje_Mayor_Veinte_Prendas" xml:space="preserve">
+    <value>La orden de  trabajo no debe de  tener más de 20 prendas</value>
   </data>
   <data name="Mensaje_Numero_Orden_Existe" xml:space="preserve">
     <value>Número de orden existe, no puede ingresar</value>
@@ -360,6 +438,9 @@
   <data name="Panel_Detalle_Orden_Trabajo" xml:space="preserve">
     <value>Detalle Orden de  Trabajo</value>
   </data>
+  <data name="Panel_Entrega_Recepcion_Seguridad" xml:space="preserve">
+    <value>Ingrese los accesos  para la recepción de la mercaderia</value>
+  </data>
   <data name="Panel_Forma_Pago" xml:space="preserve">
     <value>Datos de Pago</value>
   </data>
@@ -372,8 +453,14 @@
   <data name="Panel_Ingreso_Sistema" xml:space="preserve">
     <value>Ingrese Sus Credenciales de Acceso</value>
   </data>
+  <data name="Panel_Listado_Prenda" xml:space="preserve">
+    <value>Listado de  Prendas</value>
+  </data>
   <data name="Panel_Orden_Trabajo" xml:space="preserve">
     <value>Datos de la Orden de  Trabajo</value>
+  </data>
+  <data name="Titulo_Impresion_Orden" xml:space="preserve">
+    <value>Impresión Orden</value>
   </data>
   <data name="Titulo_Ingreso_Sistema" xml:space="preserve">
     <value>Bienvenido al Sistema de la Química</value>
@@ -386,6 +473,9 @@
   </data>
   <data name="Titulo_Pagina_Cuenta_Por_Cobrar" xml:space="preserve">
     <value>Cuentas Por Cobrar</value>
+  </data>
+  <data name="Titulo_Pagina_Entrega_Recepcion" xml:space="preserve">
+    <value>Entrega/Recepción de Prendas</value>
   </data>
   <data name="Titulo_Pagina_Orden_Trabajo" xml:space="preserve">
     <value>Orden de Trabajo</value>

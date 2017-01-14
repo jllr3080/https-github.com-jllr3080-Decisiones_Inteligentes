@@ -44,7 +44,31 @@ namespace JLLR.Core.Individuo.Proveedor.DAOs
             }
         }
 
-        
+        /// <summary>
+        /// Actualiza  el individuo
+        /// </summary>
+        /// <param name="individuo"></param>
+
+        public void Actualizaindividuo(INDIVIDUO individuo)
+        {
+            try
+            {
+                var original = _entidad.INDIVIDUO.Find(individuo.INDIVIDUO_ID);
+
+                if (original != null)
+                {
+                    _entidad.Entry(original).CurrentValues.SetValues(individuo);
+                    _entidad.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
+
 
     }
 }

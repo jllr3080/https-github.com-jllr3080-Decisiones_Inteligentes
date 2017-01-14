@@ -780,6 +780,8 @@
           <Property Name="SUCURSAL_ID" Type="int" />
           <Property Name="ESTADO_PAGO_ID" Type="int" />
           <Property Name="NUMERO_ORDEN" Type="varchar" MaxLength="20" />
+          <Property Name="ENVIO_MATRIZ" Type="bit" />
+          <Property Name="SE_ENVIO" Type="bit" />
         </EntityType>
         <EntityType Name="VENTA_COMISION">
           <Key>
@@ -2992,6 +2994,8 @@
           <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="Self.FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO" FromRole="ORDEN_TRABAJO" ToRole="DETALLE_ORDEN_TRABAJO" />
           <NavigationProperty Name="ENTREGA_ORDEN_TRABAJO" Relationship="Self.FK_ENTREGA_OT_VS_OT" FromRole="ORDEN_TRABAJO" ToRole="ENTREGA_ORDEN_TRABAJO" />
           <NavigationProperty Name="HISTORIAL_PROCESO" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_PROCESO_VS_ORDEN_TRABAJO" FromRole="ORDEN_TRABAJO" ToRole="HISTORIAL_PROCESO" />
+          <Property Name="ENVIO_MATRIZ" Type="Boolean" />
+          <Property Name="SE_ENVIO" Type="Boolean" />
         </EntityType>
         <EntityType Name="VENTA_COMISION">
           <Key>
@@ -5290,6 +5294,8 @@
           <EntitySetMapping Name="ORDEN_TRABAJO">
             <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO">
               <MappingFragment StoreEntitySet="ORDEN_TRABAJO">
+                <ScalarProperty Name="SE_ENVIO" ColumnName="SE_ENVIO" />
+                <ScalarProperty Name="ENVIO_MATRIZ" ColumnName="ENVIO_MATRIZ" />
                 <ScalarProperty Name="ORDEN_TRABAJO_ID" ColumnName="ORDEN_TRABAJO_ID" />
                 <ScalarProperty Name="CLIENTE_ID" ColumnName="CLIENTE_ID" />
                 <ScalarProperty Name="TIPO_LAVADO_ID" ColumnName="TIPO_LAVADO_ID" />

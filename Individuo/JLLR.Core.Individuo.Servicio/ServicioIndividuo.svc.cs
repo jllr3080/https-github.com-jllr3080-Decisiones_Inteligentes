@@ -60,6 +60,45 @@ namespace JLLR.Core.Individuo.Servicio
                 throw;
             }
         }
+
+        /// <summary>
+        /// Actualza  el  cliente
+        /// </summary>
+        /// <param name="clienteGeneralDtOs"></param>
+        /// <returns></returns>
+        public void ActualizarCliente(ClienteGeneralDTOs clienteGeneralDtOs)
+        {
+
+            try
+            {
+                _individuoTransformadorNegocio.ActualizarCliente(clienteGeneralDtOs);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        /// Obtiene el cliente completo por  numero  de documento
+        /// </summary>
+        /// <param name="numeroIdentificacion"></param>
+        /// <returns></returns>
+        public ClienteGeneralDTOs ObtenerClientePorNumeroIdentificacion(string numeroIdentificacion)
+        {
+            try
+            {
+                return _individuoTransformadorNegocio.ObtenerClientePorNumeroIdentificacion(numeroIdentificacion);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
         #endregion
 

@@ -40,5 +40,28 @@ namespace JLLR.Core.Individuo.Proveedor.DAOs
                 throw;
             }
         }
+
+        /// <summary>
+        /// Actualiza el telefono
+        /// </summary>
+        /// <param name="telefono"></param>
+        public void ActualizaTelefono(TELEFONO telefono)
+        {
+            try
+            {
+                var original = _entidad.TELEFONO.Find(telefono.TELEFONO_ID);
+
+                if (original != null)
+                {
+                    _entidad.Entry(original).CurrentValues.SetValues(telefono);
+                    _entidad.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
     }
 }

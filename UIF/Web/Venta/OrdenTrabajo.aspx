@@ -246,16 +246,25 @@
                     <div class="col-md-12" style="text-align: center">
                        
 
-                            <asp:GridView ID="_datos" runat="server" CssClass="tableCabecera">
+                            <asp:GridView ID="_datos" runat="server" AutoGenerateColumns="False" OnRowCommand="_datos_RowCommand"  Width="100%" OnRowDataBound="_datos_RowDataBound" ShowFooter="True" >
                                 
                                 <Columns>
                                     <asp:TemplateField>
                                         <ItemTemplate>
-                                            <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/Content/Imagen/Borrar.png" />
+                                            <asp:ImageButton ID="_eliminarPrenda" runat="server" ImageUrl="~/Content/Imagen/Borrar.png"  CommandName="Eliminar" CommandArgument="<%# ((GridViewRow)Container).RowIndex %>"/>
                                         </ItemTemplate>
                                     </asp:TemplateField>
+                                    <asp:BoundField DataField="Producto.Nombre" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Prenda%>" />
+                                    <asp:BoundField DataField="ProductoTalla.Descripcion"  HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Talla%>"  />
+                                    <asp:BoundField DataField="Cantidad" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Cantidad%>"   ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle"  />
+                                    <asp:BoundField DataField="Marca.Descripcion" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Marca%>"  />
+                                    <asp:BoundField DataField="Material.Descripcion" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Material%>"  />
+                                    <asp:BoundField DataField="Color.Descripcion"  HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Color%>" />
+                                    <asp:BoundField DataField="ValorUnitario"  HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Valor_Unitario%>"  DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" ItemStyle-VerticalAlign="Middle" />
+                                    <asp:BoundField DataField="ValorTotal" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Valor_Total%>"   DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" ItemStyle-VerticalAlign="Middle" />
                                 </Columns>
-                                
+                                <HeaderStyle CssClass="tableCabecera" ></HeaderStyle>
+                                <FooterStyle CssClass="tablePiePagina"></FooterStyle>
                             </asp:GridView>
 		
                     </div>    
@@ -272,29 +281,31 @@
          </div>
      <br/>
          <div class="panel panel-default" id="_datosFormaPago">
-           <div class="panel-heading">Datos de Pago</div>
+           <div class="panel-heading">
+               <asp:Literal ID="_literaldatosPago" runat="server"  Text="<%$ Resources:Web_es_Ec,Literal_Datos_Pago%>"></asp:Literal></div>
         <div class="panel-body">
             <div class="row">
                     <div class="col-md-3">
                         <asp:Label ID="_labelEstadoPago" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Estado_Pago%>"></asp:Label>
                     </div>
-                     <div class="col-md-3">
-                          <asp:Label ID="_labelNumeroOrden" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Numero_Orden%>"></asp:Label>
-                        
+                    <div class="col-md-3">
+                        <asp:Label ID="_labelValorPago" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Valor_Abonar%>"></asp:Label>
                     </div>
-                    
+                   
             </div>
              <div class="row">
                     <div class="col-md-3">
-                         <asp:DropDownList ID="_estadoPago" runat="server" CssClass="form-control" ValidationGroup="GuardarOrden" DataTextField="Descripcion" DataValueField="EstadoPagoId" ></asp:DropDownList>
+                         <asp:DropDownList ID="_estadoPago" runat="server" CssClass="form-control" ValidationGroup="GuardarOrden" DataTextField="Descripcion" DataValueField="EstadoPagoId" AutoPostBack="True" OnSelectedIndexChanged="_estadoPago_SelectedIndexChanged" ></asp:DropDownList>
                         <asp:RequiredFieldValidator ID="_estadoPagoValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GuardarOrden" ControlToValidate="_estadoPago" ></asp:RequiredFieldValidator>
 
                     </div>
-                       <div class="col-md-3">
-                        <asp:TextBox ID="_numeroOrden" runat="server" class="form-control" ValidationGroup="GuardarOrden" AutoPostBack="True" OnTextChanged="_numeroOrden_TextChanged"  ></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="_numeroOrdenValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GuardarOrden" ControlToValidate="_numeroOrden" ></asp:RequiredFieldValidator>
-                         
+                  <div class="col-md-3">
+                         <asp:TextBox ID="_valorPago" runat="server" class="form-control" ValidationGroup="GuardarOrden"  ></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="_valorPagoValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GuardarOrden" ControlToValidate="_valorPago" ></asp:RequiredFieldValidator>
+                         <cc1:MaskedEditExtender ID="_valorPagoMascara" runat="server" TargetControlID="_valorPago" Mask="999.99" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus" OnInvalidCssClass="MaskedEditError" MaskType="Number" InputDirection="RightToLeft" AcceptNegative="Left" DisplayMoney="Left" ErrorTooltipEnabled="True" />
+
                     </div>
+                       
             </div>
 
         </div>
@@ -303,6 +314,7 @@
         <nav>
         <asp:Button ID="_grabarOrdenTrabajo" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Guardar_Orden_Trabajo%>"  ValidationGroup="GuardarOrden" class="btn btn-primary" OnClick="_grabarOrdenTrabajo_Click"/>
         <asp:Button ID="_cancelar" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Cancelar%>"  class="btn btn-primary" OnClick="_cancelar_Click"/>
+      
 
     </nav>
     <div class="row" >
@@ -312,7 +324,8 @@
                     </cc1:ModalPopupExtender>
                     <asp:Panel ID="_panelMensaje" runat="server" Style="display: none; background-color: white; width: 20%; height: auto;align-content:center ">
                         <div class="modal-header">
-                            <h4 class="modal-title">Mensaje del Sistema</h4>
+                            <h4 class="modal-title">
+                                <asp:Literal ID="_literalMensajesistema" runat="server"  Text="<%$ Resources:Web_es_Ec,Mensaje_Sistema%>"></asp:Literal></h4>
                         </div>
                         <div class="modal-body">
                             <asp:Label ID="_labelMensaje" runat="server" Text=""></asp:Label>

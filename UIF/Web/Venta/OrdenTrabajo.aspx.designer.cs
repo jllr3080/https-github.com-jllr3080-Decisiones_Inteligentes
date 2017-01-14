@@ -580,6 +580,15 @@ namespace Web.Venta {
         protected global::System.Web.UI.WebControls.Panel _panelLavadoMojado;
         
         /// <summary>
+        /// Control _literaldatosPago.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal _literaldatosPago;
+        
+        /// <summary>
         /// Control _labelEstadoPago.
         /// </summary>
         /// <remarks>
@@ -589,13 +598,13 @@ namespace Web.Venta {
         protected global::System.Web.UI.WebControls.Label _labelEstadoPago;
         
         /// <summary>
-        /// Control _labelNumeroOrden.
+        /// Control _labelValorPago.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label _labelNumeroOrden;
+        protected global::System.Web.UI.WebControls.Label _labelValorPago;
         
         /// <summary>
         /// Control _estadoPago.
@@ -616,22 +625,31 @@ namespace Web.Venta {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator _estadoPagoValidador;
         
         /// <summary>
-        /// Control _numeroOrden.
+        /// Control _valorPago.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _numeroOrden;
+        protected global::System.Web.UI.WebControls.TextBox _valorPago;
         
         /// <summary>
-        /// Control _numeroOrdenValidador.
+        /// Control _valorPagoValidador.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator _numeroOrdenValidador;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator _valorPagoValidador;
+        
+        /// <summary>
+        /// Control _valorPagoMascara.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.MaskedEditExtender _valorPagoMascara;
         
         /// <summary>
         /// Control _grabarOrdenTrabajo.
@@ -677,6 +695,15 @@ namespace Web.Venta {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel _panelMensaje;
+        
+        /// <summary>
+        /// Control _literalMensajesistema.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal _literalMensajesistema;
         
         /// <summary>
         /// Control _labelMensaje.

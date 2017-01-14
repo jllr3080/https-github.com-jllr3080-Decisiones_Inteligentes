@@ -81,6 +81,18 @@ namespace JLLR.Core.Venta.Servicio.Modelo
         [DataMember]
         public string NumeroOrden { get; set; }
 
+        /// <summary>
+        /// envio a matriz la orden
+        /// </summary>
+        [DataMember]
+        public bool? EnvioMatriz{ get; set; }
+
+        /// <summary>
+        /// Se envio la orden 
+        /// </summary>
+        [DataMember]
+        public bool? SeEnvio { get; set; }
+
 
     }
 }

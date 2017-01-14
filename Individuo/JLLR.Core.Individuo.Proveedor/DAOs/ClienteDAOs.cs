@@ -41,5 +41,32 @@ namespace JLLR.Core.Individuo.Proveedor.DAOs
             }
         }
 
+
+        /// <summary>
+        /// Actualiza  el  cliente
+        /// </summary>
+        /// <param name="cliente"></param>
+        /// <returns></returns>
+        public void ActualizaCliente(CLIENTE cliente)
+        {
+            try
+            {
+                var original = _entidad.CLIENTE.Find(cliente.CLIENTE_ID);
+
+                if (original != null)
+                {
+                    _entidad.Entry(original).CurrentValues.SetValues(cliente);
+                    _entidad.SaveChanges();
+                }
+
+                
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
     }
 }
