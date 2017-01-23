@@ -161,6 +161,8 @@ namespace Web.Venta
                 _historialProcesoVista.FechaRegistro = DateTime.Now;
                 _historialProcesoVista.FechaInicio = DateTime.Now;
                 _historialProcesoVista.FechaFin = DateTime.Now;
+                _historialProcesoVista.SucursalId = User.SucursalId;
+                _historialProcesoVista.PuntoVentaId = User.PuntoVentaId;
                 _historialProcesoVista.NumeroOrden = _listaConsultaOrdenTrabajoVistaDtOses.Select(m => m.NumeroOrden).First().ToString();
                 _servicioDelegadoFlujoProceso.GrabarHistorialProceso(_historialProcesoVista);
                 _listaHistorialProcesoVistaModelos = _servicioDelegadoFlujoProceso.ObtenerHIstorialProcesosPorNumeroOrden(_numeroOrden.Text);
@@ -193,6 +195,8 @@ namespace Web.Venta
                 _historialProcesoVista.FechaRegistro = DateTime.Now;
                 _historialProcesoVista.FechaInicio = DateTime.Now;
                 _historialProcesoVista.FechaFin = DateTime.Now;
+                _historialProcesoVista.SucursalId = User.SucursalId;
+                _historialProcesoVista.PuntoVentaId = User.PuntoVentaId;
                 _historialProcesoVista.NumeroOrden = _listaConsultaOrdenTrabajoVistaDtOses.Select(m => m.NumeroOrden).First().ToString();
                 _historialProcesoVista.Texto = _observacionAnularOrden.Text;
                 _servicioDelegadoFlujoProceso.GrabarHistorialProceso(_historialProcesoVista);
@@ -238,6 +242,7 @@ namespace Web.Venta
                         
                         _observacion.ReadOnly = true;
                         _btnAceptaAnulacionOrden.Enabled = false;
+                        _btnAceptaAnulacionOrden.CssClass= "btn btn-primary";
                     }
                     else
                     {
@@ -474,6 +479,11 @@ namespace Web.Venta
             _cerrarOrdenTrabajo.Enabled = false;
             _anularOrden.Enabled = false;
             _btnAceptarObservaciones.Enabled = false;
+            _abonar.Enabled = false;
+            _cerrarOrdenTrabajo.CssClass= "btn btn-primary";
+            _anularOrden.CssClass= "btn btn-primary";
+            _btnAceptarObservaciones.CssClass= "btn btn-primary";
+            _abonar.CssClass= "btn btn-primary";
         }
 
         /// <summary>

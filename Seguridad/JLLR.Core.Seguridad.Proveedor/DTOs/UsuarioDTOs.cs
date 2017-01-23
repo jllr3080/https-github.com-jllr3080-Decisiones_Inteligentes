@@ -54,7 +54,19 @@ namespace JLLR.Core.Seguridad.Proveedor.DTOs
         /// <summary>
         /// Horario de atencion del punto de  venta
         /// </summary>
-       
-        public string HoraFinPuntoVenta { get; set; }
+       public string HoraFinPuntoVenta { get; set; }
+
+
+        /// <summary>
+        /// id del rol
+        /// </summary>
+        public int? PerfilId { get; set; }
+
+        /// <summary>
+        /// NombrePerfil
+        /// </summary>
+        public string NombrePerfil{ get; set; }
+
+
     }
 }

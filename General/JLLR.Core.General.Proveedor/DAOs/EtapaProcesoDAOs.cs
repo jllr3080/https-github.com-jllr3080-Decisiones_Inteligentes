@@ -29,7 +29,7 @@ namespace JLLR.Core.General.Proveedor.DAOs
             {
                 var etapasProceso=  from  etapaProceso in  _entidad.ETAPA_PROCESO
                                     select etapaProceso;
-                return etapasProceso;
+                return etapasProceso.OrderBy(m=>m.DESCRIPCION) ;
             }
             catch(Exception ex)
             {

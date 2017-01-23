@@ -64,5 +64,61 @@ namespace JLLR.Core.FlujoProceso.Proveedor.DAOs
             }
         }
 
+        /// <summary>
+        /// Obtiene todas las prendas  para  la logistica
+        /// </summary>
+        /// <param name="etapaProcesoId"></param>
+        /// <param name="sucursalId"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public IQueryable<HISTORIAL_PROCESO> ObtenerHistorialProcesoPorFlujoProceso(int etapaProcesoId, int sucursalId,
+            int puntoVentaId)
+        {
+            try
+            {
+                var historialProcesos = from historialProceso in _entidad.HISTORIAL_PROCESO
+                    where
+                        historialProceso.ETAPA_PROCESO_ID == etapaProcesoId &&
+                        historialProceso.SUCURSAL_ID == sucursalId && historialProceso.PUNTO_VENTA_ID == puntoVentaId &&
+                        historialProceso.PASO_ESTA_ETAPA == false
+                                        select  historialProceso
+                ;
+
+                return historialProcesos;
+
+
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Actualiza  el historial de proceso
+        /// </summary>
+        /// <param name="historialProceso"></param>
+        public void ActualizarHistorialProceso(HISTORIAL_PROCESO  historialProceso)
+        {
+            try
+            {
+                var original = _entidad.HISTORIAL_PROCESO.Find(historialProceso.HISTORIAL_PROCESO_ID);
+
+                if (original != null)
+                {
+                    _entidad.Entry(original).CurrentValues.SetValues(historialProceso);
+                    _entidad.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
+
     }
 }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using JLLR.Core.Base.Proveedor.DAOs;
 using JLLR.Core.Base.Proveedor.Entidades;
+using JLLR.Core.Venta.Proveedor.DTOs;
 
 #endregion
 namespace JLLR.Core.Venta.Proveedor.DAOs
@@ -65,8 +66,40 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
             }
         }
 
+        /// <summary>
+        /// Obtiene  por  id de la orden de trabajo
+        /// </summary>
+        /// <param name="ordenTrabajoId"></param>
+        /// <returns></returns>
+        public OrdenTrabajoDTOs ObtenerOrdenTrabajoPorOrdenTrabajoId(int ordenTrabajoId)
+        {
+            try
+            {
+                var ordenesTrabajo = from ordenTrabajo in _entidad.ORDEN_TRABAJO
+                                     where ordenTrabajo.ORDEN_TRABAJO_ID==ordenTrabajoId
+                                     select new OrdenTrabajoDTOs()
+                                     {
+                                         OrdenTrabajo = ordenTrabajo,
+                                         DetalleOrdenTrabajos = (List<DETALLE_ORDEN_TRABAJO>)(ordenTrabajo.DETALLE_ORDEN_TRABAJO)
+                                     };
 
-        
+                List<OrdenTrabajoDTOs> _ordenTrabajoDtOses = new List<OrdenTrabajoDTOs>();
+                foreach (var objetoOrdenTrabajoDTOs in ordenesTrabajo)
+                {
+                    _ordenTrabajoDtOses.Add(objetoOrdenTrabajoDTOs);
+                }
+
+                return _ordenTrabajoDtOses.FirstOrDefault();
+                
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
+
 
     }
 }

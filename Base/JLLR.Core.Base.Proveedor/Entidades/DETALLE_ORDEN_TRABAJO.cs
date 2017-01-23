@@ -17,7 +17,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DETALLE_ORDEN_TRABAJO()
         {
-            this.DETALLE_ENTREGA_ORDEN_TRABAJO = new HashSet<DETALLE_ENTREGA_ORDEN_TRABAJO>();
             this.DETALLE_ORDEN_TRABAJO_OBSERVACION = new HashSet<DETALLE_ORDEN_TRABAJO_OBSERVACION>();
             this.DETALLE_TRABAJO_FOTOGRAFIA = new HashSet<DETALLE_TRABAJO_FOTOGRAFIA>();
         }
@@ -40,8 +39,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual COLOR COLOR { get; set; }
         public virtual IMPUESTO IMPUESTO { get; set; }
         public virtual PRODUCTO PRODUCTO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DETALLE_ENTREGA_ORDEN_TRABAJO> DETALLE_ENTREGA_ORDEN_TRABAJO { get; set; }
         public virtual ORDEN_TRABAJO ORDEN_TRABAJO { get; set; }
         public virtual VENTA_COMISION VENTA_COMISION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

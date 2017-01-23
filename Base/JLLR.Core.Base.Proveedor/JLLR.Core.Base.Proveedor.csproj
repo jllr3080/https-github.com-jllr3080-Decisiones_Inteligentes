@@ -103,9 +103,6 @@
     <Compile Include="Entidades\DETALLE_ARQUEO_CAJA.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entidades\DETALLE_ENTREGA_ORDEN_TRABAJO.cs">
-      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
-    </Compile>
     <Compile Include="Entidades\DETALLE_ORDEN_TRABAJO.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
@@ -122,9 +119,6 @@
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\EMPLEADO.cs">
-      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entidades\ENTREGA_ORDEN_TRABAJO.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\ESPECIALIDAD_EMPLEADO.cs">
@@ -224,9 +218,6 @@
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\PRODUCTO_VS_GRUPO_PRODUCTO.cs">
-      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entidades\PRUEBA.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\PUNTO_VENTA.cs">

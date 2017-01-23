@@ -22,6 +22,8 @@ namespace JLLR.Core.Seguridad.Servicio.EnsambladorDTOs
         /// <returns></returns>
         public entidadDTOs.UsuarioDTOs CrearUsuarioDTOS(modeloDTOs.UsuarioDTOs m)
         {
+            if (m == null)
+                return null;
             return new entidadDTOs.UsuarioDTOs()
             {
                 HoraFinPuntoVenta = m.HoraFinPuntoVenta,
@@ -31,7 +33,9 @@ namespace JLLR.Core.Seguridad.Servicio.EnsambladorDTOs
                 SucursalId = m.SucursalId,
                 HoraInicioPuntoVenta = m.HoraInicioPuntoVenta,
                 NombreUsuario = m.NombreUsuario,
-                UsuarioId = m.UsuarioId
+                UsuarioId = m.UsuarioId,
+                PerfilId = m.PerfilId,
+                NombrePerfil = m.NombrePerfil
             };
         }
 

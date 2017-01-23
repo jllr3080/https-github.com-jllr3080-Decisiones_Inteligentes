@@ -22,6 +22,13 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<System.DateTime> FECHA_FIN { get; set; }
         public string NUMERO_ORDEN { get; set; }
         public string TEXTO { get; set; }
+        public Nullable<int> SUCURSAL_ID { get; set; }
+        public Nullable<int> PUNTO_VENTA_ID { get; set; }
+        public Nullable<int> USUARIO_ENTREGA_ID { get; set; }
+        public Nullable<int> USUARIO_RECIBE_ID { get; set; }
+        public Nullable<int> DETALLE_ORDEN_TRABAJO_ID { get; set; }
+        public Nullable<int> PERFIL_ID { get; set; }
+        public Nullable<bool> PASO_ESTA_ETAPA { get; set; }
     
         public virtual ETAPA_PROCESO ETAPA_PROCESO { get; set; }
         public virtual ORDEN_TRABAJO ORDEN_TRABAJO { get; set; }

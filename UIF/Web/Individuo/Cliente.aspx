@@ -1,6 +1,25 @@
 ﻿<%@ Page Title="<%$ Resources:Web_es_Ec,Titulo_Pagina_Cliente%>" Language="C#" MasterPageFile="~/PaginaMaestra/Site.Master" AutoEventWireup="true" CodeBehind="Cliente.aspx.cs" Inherits="Web.Individuo.Cliente"  MaintainScrollPositionOnPostback="true"%>
 <%@ Register TagPrefix="cc1" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=16.1.1.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+     <script>
+        function validarNumerosParaFecha(e) {
+            key = e.keyCode || e.which;
+            tecla = String.fromCharCode(key).toString();
+            letras = "1234567890/";//Se define todos los números que se quiere que se muestre.
+            especiales = [8, 37, 39, 46, 6, 9]; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
+
+            tecla_especial = false
+            for (var i in especiales) {
+                if (key == especiales[i]) {
+                    tecla_especial = true;
+                    break;
+                }
+            }
+
+            if (letras.indexOf(tecla) == -1 && !tecla_especial)
+                return false;
+        }
+    </script>
      <br/>
     <br/>
     <br/>
@@ -47,19 +66,19 @@
             </div>
             <div class="row">
                     <div class="col-md-3">
-                          <asp:TextBox ID="_apellidoPaterno" runat="server" ValidationGroup="CrearModificarCliente" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox>
+                          <asp:TextBox ID="_apellidoPaterno" runat="server" ValidationGroup="CrearModificarCliente" CssClass="form-control" AutoCompleteType="Disabled" MaxLength="20" ></asp:TextBox>
                           <asp:RequiredFieldValidator ID="_apellidoPaternoValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CrearModificarCliente" ControlToValidate="_apellidoPaterno" ></asp:RequiredFieldValidator>
                     </div>
                      <div class="col-md-3">
-                         <asp:TextBox ID="_apellidoMaterno" runat="server" ValidationGroup="CrearModificarCliente" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox>
+                         <asp:TextBox ID="_apellidoMaterno" runat="server" ValidationGroup="CrearModificarCliente" CssClass="form-control" AutoCompleteType="Disabled" MaxLength="20"></asp:TextBox>
                           <asp:RequiredFieldValidator ID="_apellidoMaternoValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CrearModificarCliente" ControlToValidate="_apellidoMaterno" ></asp:RequiredFieldValidator>
                        </div>
                     <div class="col-md-3">
-                         <asp:TextBox ID="_primerNombre" runat="server" ValidationGroup="CrearModificarCliente" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox>
+                         <asp:TextBox ID="_primerNombre" runat="server" ValidationGroup="CrearModificarCliente" CssClass="form-control" AutoCompleteType="Disabled" MaxLength="20"></asp:TextBox>
                           <asp:RequiredFieldValidator ID="_primerNombreValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CrearModificarCliente" ControlToValidate="_primerNombre" ></asp:RequiredFieldValidator>
                     </div>
                     <div class="col-md-3">
-                         <asp:TextBox ID="_segundoNombre" runat="server" ValidationGroup="CrearModificarCliente" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox>
+                         <asp:TextBox ID="_segundoNombre" runat="server" ValidationGroup="CrearModificarCliente" CssClass="form-control" AutoCompleteType="Disabled" MaxLength="20"></asp:TextBox>
                           <asp:RequiredFieldValidator ID="_segundoNombreValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CrearModificarCliente" ControlToValidate="_segundoNombre" ></asp:RequiredFieldValidator>
                     </div>
             </div>
@@ -84,15 +103,20 @@
                           <asp:DropDownList ID="_tipoDocumento" runat="server" CssClass="form-control" ValidationGroup="CrearModificarCliente" DataTextField="Descripcion" DataValueField="TipoIdentificacionId"></asp:DropDownList>
                     </div>
                      <div class="col-md-3">
-                         <asp:TextBox ID="_numeroDocumento" runat="server" ValidationGroup="CrearModificarCliente" CssClass="form-control" AutoCompleteType="Disabled" AutoPostBack="True" OnTextChanged="_numeroDocumento_TextChanged"></asp:TextBox>
+                         <asp:TextBox ID="_numeroDocumento" runat="server" ValidationGroup="CrearModificarCliente" CssClass="form-control" AutoCompleteType="Disabled" AutoPostBack="True" OnTextChanged="_numeroDocumento_TextChanged" MaxLength="13"></asp:TextBox>
                           <asp:RequiredFieldValidator ID="_numeroDocumentoValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CrearModificarCliente" ControlToValidate="_numeroDocumento" ></asp:RequiredFieldValidator>
                        </div>
                     <div class="col-md-3">
                          <asp:DropDownList ID="_genero" runat="server" CssClass="form-control" ValidationGroup="CrearModificarCliente" DataTextField="Descripcion" DataValueField="TipoGeneroId"></asp:DropDownList>
                     </div>
                     <div class="col-md-3">
-                         <asp:TextBox ID="_fechaNacimiento" runat="server" ValidationGroup="CrearModificarCliente" CssClass="form-control" AutoCompleteType="Disabled" TextMode="Date"></asp:TextBox>
-                          <asp:RequiredFieldValidator ID="_fechaNacimientoValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CrearModificarCliente" ControlToValidate="_fechaNacimiento" ></asp:RequiredFieldValidator>
+                         <asp:TextBox ID="_fechaNacimiento" runat="server"  AutoCompleteType="Disabled" CssClass="form-control" onkeypress="return validarNumerosParaFecha(event)" MaxLength="10" ValidationGroup="CrearModificarCliente"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="_fechaNacimientoValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CrearModificarCliente" ControlToValidate="_fechaNacimiento" ></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="_fechaNacimientoRegular" runat="server" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationExpression="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" ControlToValidate="_fechaNacimiento" ValidationGroup="CrearModificarCliente"/>
+                            <ajaxToolkit:CalendarExtender ID="_fechaNacimientoExtensor" runat="server" BehaviorID="_fecha_CalendarExtender" TargetControlID="_fechaNacimiento" Format="dd/MM/yyyy" />
+                            <ajaxToolkit:TextBoxWatermarkExtender id="_fechaNacimientoMarcaAgua" runat="server" targetcontrolid="_fechaNacimiento" enabled="True" watermarktext="<%$ Resources:Web_es_Ec,WaterMarke_Fecha%>"></ajaxToolkit:TextBoxWatermarkExtender>  
+
+                         
                     </div>
             </div>
 

@@ -10,7 +10,7 @@ namespace JLLR.Core.General.Servicio.Ensamblador
 {
     public class EnsambladorEntidad
     {
-
+        
 
         #region COLOR
         /// <summary>
@@ -775,5 +775,7 @@ namespace JLLR.Core.General.Servicio.Ensamblador
 
         }
         #endregion
+
+        
     }
 }

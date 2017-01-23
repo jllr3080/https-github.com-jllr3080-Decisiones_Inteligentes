@@ -220,6 +220,7 @@
     <Content Include="Reporte\ReporteCuentasPorCobrar.aspx" />
     <Content Include="Reporte\ReporteCuentasPorPagar.aspx" />
     <Content Include="Reporte\ReporteDiario.aspx" />
+    <Content Include="Reporte\ReporteEntregaRecepcionPrendas.aspx" />
     <Content Include="Reporte\ReporteImpresionOrden.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -305,6 +306,7 @@
       <DependentUpon>CuentasPorPagar.aspx</DependentUpon>
     </Compile>
     <Compile Include="DTOs\Contabilidad\CuentaPorCobrarVistaDTOs .cs" />
+    <Compile Include="DTOs\FlujoProceso\HistorialProcesoVistaDTOs.cs" />
     <Compile Include="DTOs\Individuo\ClienteGeneralVistaDTOs.cs" />
     <Compile Include="DTOs\Individuo\ClienteVistaDTOs.cs" />
     <Compile Include="DTOs\Logistica\EntregaOrdenTrabajoVistaDTOs.cs" />
@@ -350,6 +352,7 @@
     <Compile Include="Models\General\EstadoPagoVistaModelo.cs" />
     <Compile Include="Models\General\EtapaProcesoVistaModelo.cs" />
     <Compile Include="Models\General\FormaPagoVistaModelo.cs" />
+    <Compile Include="Models\General\HerenciaEtapaProcesoPerfilVistaModelo.cs" />
     <Compile Include="Models\General\ImpuestoVistaModelo.cs" />
     <Compile Include="Models\General\MarcaVistaModelo.cs" />
     <Compile Include="Models\General\MaterialVistaModelo.cs" />
@@ -377,8 +380,6 @@
     <Compile Include="Models\Inventario\Parametrizacion\ProductoTallaVistaModelo.cs" />
     <Compile Include="Models\Inventario\Parametrizacion\ProductoVistaModelo.cs" />
     <Compile Include="Models\Inventario\Parametrizacion\TipoProductoVistaModelo.cs" />
-    <Compile Include="Models\Logistica\DetalleEntregaOrdenTrabajoVistaModelo.cs" />
-    <Compile Include="Models\Logistica\EntregaOrdenTrabajoVistaModelo.cs" />
     <Compile Include="Models\Seguridad\Negocio\UsuarioVistaModelo.cs" />
     <Compile Include="Models\Venta\Negocio\DetalleOrdenTrabajoObservacionVistaModelo.cs" />
     <Compile Include="Models\Venta\Negocio\DetalleOrdenTrabajoVistaModelo.cs" />
@@ -413,6 +414,13 @@
     </Compile>
     <Compile Include="Reporte\ReporteDiario.aspx.designer.cs">
       <DependentUpon>ReporteDiario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reporte\ReporteEntregaRecepcionPrendas.aspx.cs">
+      <DependentUpon>ReporteEntregaRecepcionPrendas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reporte\ReporteEntregaRecepcionPrendas.aspx.designer.cs">
+      <DependentUpon>ReporteEntregaRecepcionPrendas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reporte\ReporteImpresionOrden.aspx.cs">
       <DependentUpon>ReporteImpresionOrden.aspx</DependentUpon>
@@ -480,9 +488,9 @@
   <ItemGroup>
     <Folder Include="Administracion\" />
     <Folder Include="App_Data\" />
-    <Folder Include="DTOs\FlujoProceso\" />
     <Folder Include="Models\FE\" />
     <Folder Include="Models\Inventario\Negocio\" />
+    <Folder Include="Models\Logistica\" />
     <Folder Include="Models\Produccion\" />
     <Folder Include="Models\RRHH\" />
     <Folder Include="Models\Seguridad\Parametrizacion\" />
@@ -496,6 +504,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reporte\FlujoProceso\ReporteEntregaRecepcioPrendas.rdlc" />
     <EmbeddedResource Include="Reporte\Venta\Rdlc\ReporteDiario.rdlc" />
     <EmbeddedResource Include="Reporte\Venta\Rdlc\ReporteOrdenTrabajo.rdlc" />
   </ItemGroup>

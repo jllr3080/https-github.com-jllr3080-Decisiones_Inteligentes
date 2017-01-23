@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using JLLR.Core.Base.Proveedor.Entidades;
 using JLLR.Core.Venta.Proveedor.DTOs;
+using Web.DTOs.Venta;
 
 #endregion
 
@@ -82,20 +83,20 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
         /// Obtiene todas las  ordenes  que estan lista para enviarse  a matriz
         /// </summary>
         /// <returns></returns>
-        public List<OrdenTrabajoDTOs> ObtenerOrdenTrabajoPorEnvioMatriz()
+        public List<OrdenTrabajoDTOs> ObtenerOrdenTrabajoPorEnvioMatriz(int puntoVentaId,int sucursalId)
         {
             try
             {
                 var ordenesTrabajo = from ordenTrabajo in _entidad.ORDEN_TRABAJO
                     //join detalleOrdenTrabajo in _entidad.DETALLE_ORDEN_TRABAJO on ordenTrabajo.ORDEN_TRABAJO_ID equals detalleOrdenTrabajo.ORDEN_TRABAJO_ID
-                    where ordenTrabajo.SE_ENVIO == false
-                    select new OrdenTrabajoDTOs()
+                    where ordenTrabajo.SE_ENVIO == false && ordenTrabajo.PUNTO_VENTA_ID== puntoVentaId && ordenTrabajo.SUCURSAL_ID==sucursalId
+                                     select new OrdenTrabajoDTOs()
                     {
                         OrdenTrabajo = ordenTrabajo,
                         DetalleOrdenTrabajos = (List<DETALLE_ORDEN_TRABAJO>)(ordenTrabajo.DETALLE_ORDEN_TRABAJO)
                     };
 
-                List <OrdenTrabajoDTOs > _ordenTrabajoDtOses = new List<OrdenTrabajoDTOs>();
+                List <OrdenTrabajoDTOs> _ordenTrabajoDtOses = new List<OrdenTrabajoDTOs>();
                 foreach (var objetoOrdenTrabajoDTOs in ordenesTrabajo)
                 {
                     _ordenTrabajoDtOses.Add(objetoOrdenTrabajoDTOs);
@@ -111,6 +112,9 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
             }
 
         }
+
+
+        
 
         #endregion
 

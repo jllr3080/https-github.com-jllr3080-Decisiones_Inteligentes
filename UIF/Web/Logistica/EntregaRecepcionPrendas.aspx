@@ -14,6 +14,33 @@
            <div class="panel-heading"><asp:Literal runat="server" ID="_literalEncabezado" Text="<%$ Resources:Web_es_Ec,Panel_Listado_Prenda%>"/></div>
             <div class="panel-body">
             
+                 <div class="row">
+                        <div class="col-md-3">
+                            <asp:Label ID="_labelNombrePerfil" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Nombre_Perfil%>" ></asp:Label>
+                        </div>
+                        <div class="col-md-3">
+                            <asp:Label ID="_labelEtapaProceso" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Etapa_Proceso%>" ></asp:Label>
+                        </div>
+                        <div class="col-md-3">
+                            <asp:Label ID="_labelEtapaProcesoDestino" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Etapa_Proceso_Destino%>"></asp:Label>
+                         </div>
+                </div>
+                 <div class="row">
+                        <div class="col-md-3">
+                            <asp:TextBox ID="_nombrePerfil" runat="server" ValidationGroup="BusquedaPrenda" CssClass="form-control" AutoCompleteType="Disabled"  ReadOnly="True"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="_nombrePerfilValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="BusquedaPrenda" ControlToValidate="_nombrePerfil" ></asp:RequiredFieldValidator>
+                        </div>
+                        <div class="col-md-3">
+                            
+                            <asp:DropDownList ID="_etapaProceso" runat="server" CssClass="form-control" ValidationGroup="BusquedaPrenda" DataTextField="Descripcion" DataValueField="EtapaProcesoId" AutoPostBack="True" OnSelectedIndexChanged="_etapaProceso_SelectedIndexChanged"></asp:DropDownList>
+                          <asp:RequiredFieldValidator ID="_etapaProcesoValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="BusquedaPrenda" ControlToValidate="_etapaProceso" InitialValue="-1" ></asp:RequiredFieldValidator>
+                        </div>
+                     <div class="col-md-3">
+                            <asp:DropDownList ID="_etapaProcesoDestino" runat="server" CssClass="form-control" ValidationGroup="GuardarPrenda" DataTextField="Descripcion" DataValueField="EtapaProcesoId"></asp:DropDownList>
+                          <asp:RequiredFieldValidator ID="_etapaProcesoDestinoValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GuardarPrenda" ControlToValidate="_etapaProcesoDestino" InitialValue="-1" ></asp:RequiredFieldValidator>
+                         </div>
+                        
+                </div>
                 <div class="row">
                         <div class="col-md-12">
                             <asp:GridView ID="_datos" runat="server" Width="100%" AutoGenerateColumns="False" OnRowCommand="_datos_RowCommand">
@@ -28,6 +55,11 @@
                                             <asp:ImageButton ID="_imgDetalleOrden" runat="server" ImageUrl="~/Content/Imagen/Editar.png"  CommandName="DetalleOrden" CommandArgument="<%# ((GridViewRow)Container).RowIndex%>" />
                                         </ItemTemplate>
                                     </asp:TemplateField>
+                                     <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <asp:CheckBox ID="_aceptarEntrega" class="form-control" runat="server" />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
                                     
 
                                 </Columns>
@@ -37,11 +69,13 @@
                              
                         </div>
                 </div>
+                
+               
             </div>
             </div>
     </section>
      <nav>
-        <asp:Button ID="_grabarEntregaRecepcionPrenda" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Entrega_Recepcion_Prenda%>"  class="btn btn-primary" OnClick="_grabarEntregaRecepcionPrenda_Click"/>
+        <asp:Button ID="_grabarEntregaRecepcionPrenda" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Entrega_Recepcion_Prenda%>"  class="btn btn-primary" OnClick="_grabarEntregaRecepcionPrenda_Click" ValidationGroup="GuardarPrenda"/>
         <asp:Button ID="_cancelar" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Cancelar%>"  class="btn btn-primary" OnClick="_cancelar_Click" />
       
 

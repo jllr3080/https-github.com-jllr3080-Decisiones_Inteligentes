@@ -32,7 +32,14 @@ namespace JLLR.Core.FlujoProceso.Servicio.Ensamblador
                FECHA_FIN = m.FechaFin,
                FECHA_INICIO = m.FechaInicio,
                FECHA_REGISTRO = m.FechaRegistro,
-               TEXTO = m.Texto
+               TEXTO = m.Texto,
+               SUCURSAL_ID = m.SucursalId,
+               PUNTO_VENTA_ID = m.PuntoVentaId,
+               USUARIO_ENTREGA_ID = m.UsuarioEntregaId,
+               USUARIO_RECIBE_ID = m.UsuarioRecibeId,
+               PERFIL_ID = m.PerfilId,
+               DETALLE_ORDEN_TRABAJO_ID = m.DetalleOrdenTrabajoId,
+               PASO_ESTA_ETAPA = m.PasoPorEstaEtapa
             };
         }
 

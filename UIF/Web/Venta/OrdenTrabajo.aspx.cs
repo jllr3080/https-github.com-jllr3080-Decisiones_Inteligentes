@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Web.Base;
 using Web.DTOs.Individuo;
+using Web.DTOs.Logistica;
 using Web.DTOs.Venta;
 using Web.Models.Contabilidad;
 using Web.Models.FlujoProceso;
@@ -23,7 +24,7 @@ namespace Web.Venta
     public partial class OrdenTrabajo : PaginaBase
     {
         #region DECLARACIONES  E INSTANCIAS
-
+        private readonly ServicioDelegadoLogistica _servicioDelegadoLogistica = new ServicioDelegadoLogistica();
         private readonly  ServicioDelegadoContabilidad _servicioDelegadoContabilidad= new ServicioDelegadoContabilidad();
         private readonly ServicioDelegadoIndividuo _servicioDelegadoIndividuo = new ServicioDelegadoIndividuo();
         private readonly ServicioDelegadoInventario _servicioDelegadoInventario = new ServicioDelegadoInventario();
@@ -34,6 +35,7 @@ namespace Web.Venta
         private static ClienteVistaDTOs clienteVistaDtOs = new ClienteVistaDTOs();
         private static List<DetalleOrdenTrabajoVistaModelo> _listaTrabajoVistaDtOs =
             new List<DetalleOrdenTrabajoVistaModelo>();
+        
 
         #endregion
 
@@ -201,73 +203,90 @@ namespace Web.Venta
             {
                 if (_ordenTrabajoVistaDtOs.DetalleOrdenTrabajo.Count <= 20)
                 {
-
-                    EstadoPagoVistaModelo _estadoPagoVista = new EstadoPagoVistaModelo
+                    if (_listaTrabajoVistaDtOs.Sum(m => m.ValorTotal) >Convert.ToDecimal(_valorPago.Text)  )
                     {
-                        EstadoPagoId = Convert.ToInt32(_estadoPago.SelectedItem.Value)
-                    };
-                    _ordenTrabajoVistaDtOs.OrdenTrabajo.EstadoPago = _estadoPagoVista;
-                    _ordenTrabajoVistaDtOs.OrdenTrabajo.SeEnvio = false;
-                    _ordenTrabajoVistaDtOs.OrdenTrabajo.EnvioMatriz = true;
-                    //Graba la Orden de trabajo
-                    OrdenTrabajoVistaModelo _ordenTrabajoVistaModelo =
-                        _servicioDelegadoVenta.GrabarOrdenTrabajoCompleta(_ordenTrabajoVistaDtOs);
 
-                    //GUarda el proceso inicial que es la entrega del cliente hacia  la franquicia
-                    HistorialProcesoVistaModelo _historialProcesoVista = new HistorialProcesoVistaModelo();
-                    _historialProcesoVista.OrdenTrabajoId = _ordenTrabajoVistaModelo.OrdenTrabajoId;
-                    EtapaProcesoVistaModelo _etapaProcesoVistaModelo = new EtapaProcesoVistaModelo();
-                    _etapaProcesoVistaModelo.EtapaProcesoId =
-                        Convert.ToInt32(Util.EtapaProceso.EntregaClienteHaciaFranquicia);
-                    _historialProcesoVista.EtapaProceso = _etapaProcesoVistaModelo;
-                    _historialProcesoVista.FechaRegistro = DateTime.Now;
-                    _historialProcesoVista.FechaInicio = DateTime.Now;
-                    _historialProcesoVista.FechaFin = DateTime.Now;
-                    _historialProcesoVista.NumeroOrden = _ordenTrabajoVistaModelo.NumeroOrden;
-                    _servicioDelegadoFlujoProceso.GrabarHistorialProceso(_historialProcesoVista);
+                        EstadoPagoVistaModelo _estadoPagoVista = new EstadoPagoVistaModelo
+                        {
+                            EstadoPagoId = Convert.ToInt32(_estadoPago.SelectedItem.Value)
+                        };
+                        _ordenTrabajoVistaDtOs.OrdenTrabajo.EstadoPago = _estadoPagoVista;
+                        _ordenTrabajoVistaDtOs.OrdenTrabajo.SeEnvio = false;
+                        _ordenTrabajoVistaDtOs.OrdenTrabajo.EnvioMatriz = true;
+                        //Graba la Orden de trabajo
+                        OrdenTrabajoVistaModelo _ordenTrabajoVistaModelo =
+                            _servicioDelegadoVenta.GrabarOrdenTrabajoCompleta(_ordenTrabajoVistaDtOs);
+
+                        //GUarda el proceso inicial que es la entrega del cliente hacia  la franquicia
+                        HistorialProcesoVistaModelo _historialProcesoVista = new HistorialProcesoVistaModelo();
+                        _historialProcesoVista.OrdenTrabajoId = _ordenTrabajoVistaModelo.OrdenTrabajoId;
+                        EtapaProcesoVistaModelo _etapaProcesoVistaModelo = new EtapaProcesoVistaModelo();
+                        _etapaProcesoVistaModelo.EtapaProcesoId =
+                            Convert.ToInt32(Util.EtapaProceso.EntregaClienteHaciaFranquicia);
+                        _historialProcesoVista.EtapaProceso = _etapaProcesoVistaModelo;
+                        _historialProcesoVista.FechaRegistro = DateTime.Now;
+                        _historialProcesoVista.FechaInicio = DateTime.Now;
+                        _historialProcesoVista.FechaFin = DateTime.Now;
+                        _historialProcesoVista.SucursalId = User.SucursalId;
+                        _historialProcesoVista.PuntoVentaId = User.PuntoVentaId;
+                        _historialProcesoVista.NumeroOrden = _ordenTrabajoVistaModelo.NumeroOrden;
+                        _historialProcesoVista.UsuarioRecibeId = User.Id;
+                        _historialProcesoVista.UsuarioEntregaId = User.Id;
+                        _historialProcesoVista.PerfilId = User.PerfilId;
+                        _historialProcesoVista.PasoPorEstaEtapa = false;
+                        _servicioDelegadoFlujoProceso.GrabarHistorialProceso(_historialProcesoVista);
+
+                        //Graba las cuentas por cobrar
+                        CuentaPorCobrarVistaModelo _cuentaPorCobrarVista = new CuentaPorCobrarVistaModelo();
+                        _cuentaPorCobrarVista.SucursalId = User.SucursalId;
+                        _cuentaPorCobrarVista.PuntoVentaId = User.PuntoVentaId;
+                        _cuentaPorCobrarVista.ClienteId = _ordenTrabajoVistaModelo.ClienteModelo.ClienteId;
+                        _cuentaPorCobrarVista.FechaCreacion = DateTime.Now;
+                        _cuentaPorCobrarVista.FechaModificacion = DateTime.Now;
+                        _cuentaPorCobrarVista.FechaVencimiento = _ordenTrabajoVistaModelo.FechaEntrega;
+                        _cuentaPorCobrarVista.NumeroFactura = String.Empty;
+                        _cuentaPorCobrarVista.NumeroOrden = _ordenTrabajoVistaModelo.NumeroOrden;
+                        _cuentaPorCobrarVista.Saldo = 0;
+                        _cuentaPorCobrarVista.Valor = _ordenTrabajoVistaDtOs.DetalleOrdenTrabajo.Sum(m => m.ValorTotal);
+                        _cuentaPorCobrarVista.UsuarioModificacionId = User.Id;
+                        _cuentaPorCobrarVista.UsuarioCreacionId = User.Id;
+                        _cuentaPorCobrarVista.EstadoPagoId = _ordenTrabajoVistaModelo.EstadoPago.EstadoPagoId;
+
+                        _cuentaPorCobrarVista =
+                            _servicioDelegadoContabilidad.GrabarCuentaPorCobrar(_cuentaPorCobrarVista);
+
+                        if (_ordenTrabajoVistaModelo.EstadoPago.EstadoPagoId ==
+                            Convert.ToInt32(Util.EstadoPago.Cancelado) ||
+                            _ordenTrabajoVistaModelo.EstadoPago.EstadoPagoId == Convert.ToInt32(Util.EstadoPago.Abonado))
+                        {
+                            HistorialCuentaPorCobrarVistaModelo _historialCuentaPorCobrar =
+                                new HistorialCuentaPorCobrarVistaModelo();
+                            _historialCuentaPorCobrar.UsuarioId = User.Id;
+                            _historialCuentaPorCobrar.CuentaPorCobrarId = _cuentaPorCobrarVista.CuentaPorCobrarId;
+                            _historialCuentaPorCobrar.FechaCobro = DateTime.Now;
+                            FormaPagoVistaModelo _formaPago = new FormaPagoVistaModelo();
+                            _formaPago.FormaPagoId = Convert.ToInt32(Util.FormaPago.Efectivo);
+                            _historialCuentaPorCobrar.FormaPago = _formaPago;
+                            _historialCuentaPorCobrar.ValorCobro = Convert.ToDecimal(_valorPago.Text);
+
+                            _historialCuentaPorCobrar =
+                                _servicioDelegadoContabilidad.GrabarHistorialCuentaPorCobrar(_historialCuentaPorCobrar);
+
+                        }
 
 
-                    CuentaPorCobrarVistaModelo _cuentaPorCobrarVista = new CuentaPorCobrarVistaModelo();
-                    _cuentaPorCobrarVista.SucursalId = User.SucursalId;
-                    _cuentaPorCobrarVista.PuntoVentaId = User.PuntoVentaId;
-                    _cuentaPorCobrarVista.ClienteId = _ordenTrabajoVistaModelo.ClienteModelo.ClienteId;
-                    _cuentaPorCobrarVista.FechaCreacion = DateTime.Now;
-                    _cuentaPorCobrarVista.FechaModificacion = DateTime.Now;
-                    _cuentaPorCobrarVista.FechaVencimiento = _ordenTrabajoVistaModelo.FechaEntrega;
-                    _cuentaPorCobrarVista.NumeroFactura = String.Empty;
-                    _cuentaPorCobrarVista.NumeroOrden = _ordenTrabajoVistaModelo.NumeroOrden;
-                    _cuentaPorCobrarVista.Saldo = 0;
-                    _cuentaPorCobrarVista.Valor = _ordenTrabajoVistaDtOs.DetalleOrdenTrabajo.Sum(m => m.ValorTotal);
-                    _cuentaPorCobrarVista.UsuarioModificacionId = User.Id;
-                    _cuentaPorCobrarVista.UsuarioCreacionId = User.Id;
-                    _cuentaPorCobrarVista.EstadoPagoId = _ordenTrabajoVistaModelo.EstadoPago.EstadoPagoId;
-
-                    _cuentaPorCobrarVista = _servicioDelegadoContabilidad.GrabarCuentaPorCobrar(_cuentaPorCobrarVista);
-
-                    if (_ordenTrabajoVistaModelo.EstadoPago.EstadoPagoId == Convert.ToInt32(Util.EstadoPago.Cancelado) ||
-                        _ordenTrabajoVistaModelo.EstadoPago.EstadoPagoId == Convert.ToInt32(Util.EstadoPago.Abonado))
-                    {
-                        HistorialCuentaPorCobrarVistaModelo _historialCuentaPorCobrar =
-                            new HistorialCuentaPorCobrarVistaModelo();
-                        _historialCuentaPorCobrar.UsuarioId = User.Id;
-                        _historialCuentaPorCobrar.CuentaPorCobrarId = _cuentaPorCobrarVista.CuentaPorCobrarId;
-                        _historialCuentaPorCobrar.FechaCobro = DateTime.Now;
-                        FormaPagoVistaModelo _formaPago = new FormaPagoVistaModelo();
-                        _formaPago.FormaPagoId = Convert.ToInt32(Util.FormaPago.Efectivo);
-                        _historialCuentaPorCobrar.FormaPago = _formaPago;
-                        _historialCuentaPorCobrar.ValorCobro = Convert.ToDecimal(_valorPago.Text);
-
-                        _historialCuentaPorCobrar =
-                            _servicioDelegadoContabilidad.GrabarHistorialCuentaPorCobrar(_historialCuentaPorCobrar);
-
+                        //Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Exitoso").ToString(), "_grabarOrdenTrabajo");
+                        Session["OrdenTrabajoId"] = _ordenTrabajoVistaModelo.NumeroOrden;
+                        Response.Redirect("~/Reporte/ReporteImpresionOrden.aspx");
                     }
-                    //Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Exitoso").ToString(), "_grabarOrdenTrabajo");
-                    Session["OrdenTrabajoId"] = _ordenTrabajoVistaModelo.NumeroOrden;
-                    Response.Redirect("~/Reporte/ReporteImpresionOrden.aspx");
+                    else
+                        Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Valor_Abono_Mayo_PagoTotal").ToString(),
+                           "_grabarOrdenTrabajo");
                 }
                 else
-                    Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Mayor_Veinte_Prendas").ToString(), "_grabarOrdenTrabajo");
-                
+                    Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Mayor_Veinte_Prendas").ToString(),
+                        "_grabarOrdenTrabajo");
+
 
 
 

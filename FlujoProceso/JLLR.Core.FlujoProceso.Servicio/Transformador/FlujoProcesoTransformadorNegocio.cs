@@ -8,6 +8,7 @@ using JLLR.Core.FlujoProceso.Proveedor.Negocio;
 using JLLR.Core.FlujoProceso.Servicio.Modelo;
 using  JLLR.Core.FlujoProceso.Servicio.Ensamblador;
 using JLLR.Core.FlujoProceso.Servicio.EnsambladorDTOs;
+using  JLLR.Core.FlujoProceso.Servicio.DTOs;
 #endregion
 
 
@@ -62,6 +63,81 @@ namespace JLLR.Core.FlujoProceso.Servicio.Transformador
                 throw;
             }
         }
+
+        /// <summary>
+        /// Obtiene todas las prendas  para  la logistica
+        /// </summary>
+        /// <param name="etapaProcesoId"></param>
+        /// <param name="sucursalId"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public List<HistorialProcesoModelo> ObtenerHistorialProcesoPorFlujoProceso(int etapaProcesoId, int sucursalId,
+            int puntoVentaId)
+        {
+            try
+            {
+
+                return _ensambladorModelo.CrearHistorialProcesos(_flujoProcesoNegocio.ObtenerHistorialProcesoPorFlujoProceso(etapaProcesoId, sucursalId, puntoVentaId));
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Actualiza  el historial de proceso
+        /// </summary>
+        /// <param name="historialProceso"></param>
+        public void ActualizarHistorialProceso(HistorialProcesoModelo historialProceso)
+        {
+            try
+            {
+                _flujoProcesoNegocio.ActualizarHistorialProceso(_ensambladorEntidad.CrearHistorialProceso(historialProceso));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region TRANSACCIONAL
+
+        #region REPORTES
+
+        /// <summary>
+        /// Obtiene el historial de prendas 
+        /// </summary>
+        /// <param name="sucursalId"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <param name="fechaRegistro"></param>
+        /// <param name="etapaProcesoId"></param>
+        /// <returns></returns>
+        public List<HistorialProcesoDTOs> ObtenerHistorialProcesoPrendasPorVariosParametros(int sucursalId,
+            int puntoVentaId, DateTime fechaRegistro, int etapaProcesoId)
+        {
+            try
+            {
+
+                return
+                    _ensambladorModeloDTOs.CrearConsultaHistorialProcesosDtOs(
+                        _flujoProcesoNegocio.ObtenerHistorialProcesoPrendasPorVariosParametros(sucursalId, puntoVentaId,
+                            fechaRegistro, etapaProcesoId));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        #endregion
+
         #endregion
     }
 }

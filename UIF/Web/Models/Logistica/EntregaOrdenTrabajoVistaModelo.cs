@@ -38,5 +38,35 @@ namespace Web.Models.Logistica
         /// </summary>
         
         public int? UsuarioRecibeId { get; set; }
+
+        /// <summary>
+        /// EtapaProcesoPerfilId 
+        /// </summary>
+        
+        public int? EtapaProcesoPerfilId { get; set; }
+
+        /// <summary>
+        /// Etapa Actual 
+        /// </summary>
+        
+        public int? EtapaActual { get; set; }
+
+        /// <summary>
+        /// Etapa Actual 
+        /// </summary>
+        
+        public int? SiguienteEtapa { get; set; }
+
+        /// <summary>
+        /// SucursalId
+        /// </summary>
+        
+        public int? SucursalId { get; set; }
+
+        /// <summary>
+        /// PuntoVentaId
+        /// </summary>
+        
+        public int? PuntoVentaId { get; set; }
     }
 }

@@ -61,4 +61,8 @@ namespace Web.Util
        Efectivo=1
     }
 
+    public enum Sucursal
+    {
+        Quito=1
+    }
 }

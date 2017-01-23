@@ -48,11 +48,11 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
         /// Obtiene todas las  ordenes  que estan lista para enviarse  a matriz
         /// </summary>
         /// <returns></returns>
-        public List<OrdenTrabajoDTOs> ObtenerOrdenTrabajoPorEnvioMatriz()
+        public List<OrdenTrabajoDTOs> ObtenerOrdenTrabajoPorEnvioMatriz(int puntoVentaId, int sucursalId)
         {
             try
             {
-                return _transaccionalDaOs.ObtenerOrdenTrabajoPorEnvioMatriz();
+                return _transaccionalDaOs.ObtenerOrdenTrabajoPorEnvioMatriz(puntoVentaId,sucursalId);
 
             }
             catch (Exception ex)
@@ -62,6 +62,8 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
             }
 
         }
+
+       
         #endregion
 
         #region ORDEN TRABAJO
@@ -83,13 +85,30 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
             }
         }
 
+        /// <summary>
+        /// Obtiene  por  id de la orden de trabajo
+        /// </summary>
+        /// <param name="ordenTrabajoId"></param>
+        /// <returns></returns>
+        public OrdenTrabajoDTOs ObtenerOrdenTrabajoPorOrdenTrabajoId(int ordenTrabajoId)
+        {
+            try
+            {
+                return _ordenTrabajoDaOs.ObtenerOrdenTrabajoPorOrdenTrabajoId(ordenTrabajoId);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
         #region DETALLE DE  ORDEN DE TRABAJO OBSERVACIONES
-            /// <summary>
-            /// Graba todas las observaciones de  los detalles de la orden de trabajo
-            /// </summary>
-            /// <param name="detalleOrdenTrabajoObservacion"></param>
+        /// <summary>
+        /// Graba todas las observaciones de  los detalles de la orden de trabajo
+        /// </summary>
+        /// <param name="detalleOrdenTrabajoObservacion"></param>
         public void GrabarDetalleOrdenTrabajoObservacion(DETALLE_ORDEN_TRABAJO_OBSERVACION detalleOrdenTrabajoObservacion)
         {
             try

@@ -138,6 +138,9 @@
   <data name="Boton_Buscar" xml:space="preserve">
     <value>Busqueda</value>
   </data>
+  <data name="Boton_Buscar_Prendas" xml:space="preserve">
+    <value>Busqueda de Prendas </value>
+  </data>
   <data name="Boton_Cancelar" xml:space="preserve">
     <value>Cancelar</value>
   </data>
@@ -264,6 +267,12 @@
   <data name="Label_Estado_Pago" xml:space="preserve">
     <value>Estado de Pago</value>
   </data>
+  <data name="Label_Etapa_Proceso" xml:space="preserve">
+    <value>Etapa de Proceso</value>
+  </data>
+  <data name="Label_Etapa_Proceso_Destino" xml:space="preserve">
+    <value>Etapa de Proceso Destino</value>
+  </data>
   <data name="Label_Fecha" xml:space="preserve">
     <value>Fecha de Ingreso</value>
   </data>
@@ -293,6 +302,9 @@
   </data>
   <data name="Label_Nombre_Cliente" xml:space="preserve">
     <value>Nombre del Cliente</value>
+  </data>
+  <data name="Label_Nombre_Perfil" xml:space="preserve">
+    <value>Nombre del Perfil </value>
   </data>
   <data name="Label_Numero_Documento" xml:space="preserve">
     <value>Numero de Documento</value>
@@ -411,6 +423,9 @@
   <data name="Mensaje_Sistema" xml:space="preserve">
     <value>Mensaje del Sistema</value>
   </data>
+  <data name="Mensaje_Valor_Abono_Mayo_PagoTotal" xml:space="preserve">
+    <value>El valor de abono es mayor que el valor total, revise los valores</value>
+  </data>
   <data name="Panel_Busqueda_Cliente" xml:space="preserve">
     <value>Busqueda del Cliente Por  Numero de Identificación</value>
   </data>
@@ -480,6 +495,9 @@
   <data name="Titulo_Pagina_Orden_Trabajo" xml:space="preserve">
     <value>Orden de Trabajo</value>
   </data>
+  <data name="Titulo_Pagina_Reporte_Entrega_Recepcion_Prendas" xml:space="preserve">
+    <value>Reporte Entrega/Recepción de Prendas</value>
+  </data>
   <data name="Titulo_Pie_Pagina_Sistema" xml:space="preserve">
     <value>Sistema Decisiones Inteligentes Desarrollado por Rodrigo Utreras y Jorge López</value>
   </data>
@@ -488,5 +506,8 @@
   </data>
   <data name="Titulo_Sistema" xml:space="preserve">
     <value>Decisiones Inteligentes</value>
+  </data>
+  <data name="WaterMarke_Fecha" xml:space="preserve">
+    <value>dd/mm/yyyy</value>
   </data>
 </root>

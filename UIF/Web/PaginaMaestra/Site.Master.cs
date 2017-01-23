@@ -103,7 +103,7 @@ namespace Web
             try
             {
                 _menu.Items.Clear();
-
+                _menu.Font.Size = 8;
 
                 List<AccesoVistaDTOs> lista = servicioDelegadoSeguridad.GenerarMenu(Convert.ToInt32(User.Id));
 
@@ -116,6 +116,8 @@ namespace Web
                 var produccion = new MenuItem("PRODUCCION") { Selectable = false };
                 var rrhh = new MenuItem("RRHH") { Selectable = false };
                 var seguridades = new MenuItem("SEGURIDADES") { Selectable = false };
+                var inventario = new MenuItem("INVENTARIO") { Selectable = false };
+                var fe = new MenuItem("FE") { Selectable = false };
                 var usuario = new MenuItem("Usuario : " + User.NombreUsuario) { Selectable = true };
                 var cerrarSesion = new MenuItem("Cerrar Sesión") { NavigateUrl = "~/Seguridad/Login/IngresoSistema.aspx" };
                 foreach (var usuarioAccesoDTO in lista)
@@ -134,6 +136,10 @@ namespace Web
                         logistica.ChildItems.Add(new MenuItem(usuarioAccesoDTO.SubModulo, usuarioAccesoDTO.SubModulo) { NavigateUrl = usuarioAccesoDTO.Url });
                     else if (usuarioAccesoDTO.Modulo == "SEGURIDADES")
                         seguridades.ChildItems.Add(new MenuItem(usuarioAccesoDTO.SubModulo, usuarioAccesoDTO.SubModulo) { NavigateUrl = usuarioAccesoDTO.Url });
+                    else if (usuarioAccesoDTO.Modulo == "INVENTARIO")
+                        inventario.ChildItems.Add(new MenuItem(usuarioAccesoDTO.SubModulo, usuarioAccesoDTO.SubModulo) { NavigateUrl = usuarioAccesoDTO.Url });
+                    else if (usuarioAccesoDTO.Modulo == "FE")
+                        fe.ChildItems.Add(new MenuItem(usuarioAccesoDTO.SubModulo, usuarioAccesoDTO.SubModulo) { NavigateUrl = usuarioAccesoDTO.Url });
 
 
 
@@ -146,11 +152,10 @@ namespace Web
                 _menu.Items.Add(rrhh);
                 _menu.Items.Add(logistica);
                 _menu.Items.Add(seguridades);
+                _menu.Items.Add(inventario);
+                _menu.Items.Add(fe);
                 _menu.Items.Add(usuario);
                 _menu.Items.Add(cerrarSesion);
-
-
-
 
             }
             catch (Exception ex)

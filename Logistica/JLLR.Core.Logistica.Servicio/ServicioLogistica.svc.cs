@@ -6,8 +6,6 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
-using JLLR.Core.Logistica.Servicio.DTOs;
-using JLLR.Core.Logistica.Servicio.Modelo;
 using JLLR.Core.Logistica.Servicio.Transformador;
 
 #endregion
@@ -22,25 +20,7 @@ namespace JLLR.Core.Logistica.Servicio
         private readonly  LogisticaTransformadorNegocio _logisticaTransformadorNegocio= new LogisticaTransformadorNegocio();
         #endregion
 
-        #region TRANSACCIONAL
-        /// <summary>
-        /// Graba la cuenta por pagar  
-        /// </summary>
-        /// <param name="cuentaPorCobrarDtOs"></param>
-        /// <returns></returns>
-        public EntregaOrdenTrabajoModelo GrabarCuentaPorCobrarCompleta(EntregaOrdenTrabajoDTOs entregaOrdenTrabajoDtOs)
-        {
-            try
-            {
-                return _logisticaTransformadorNegocio.GrabarCuentaPorCobrarCompleta(entregaOrdenTrabajoDtOs);
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
-        }
-        #endregion
+      
 
 
     }

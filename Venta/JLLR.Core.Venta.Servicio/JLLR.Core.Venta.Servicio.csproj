@@ -123,6 +123,10 @@
       <Project>{a3ee7799-0761-4e63-a4ab-ec4cf44e4a7c}</Project>
       <Name>JLLR.Core.Inventario.Servicio</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Logistica\JLLR.Core.Logistica.Servicio\JLLR.Core.Logistica.Servicio.csproj">
+      <Project>{6c8fda01-a91f-42f0-902b-0e2ce0f362b4}</Project>
+      <Name>JLLR.Core.Logistica.Servicio</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Seguridad\JLLR.Core.Seguridad.Servicio\JLLR.Core.Seguridad.Servicio.csproj">
       <Project>{5bd7a3af-b149-42de-ab94-bf2959ffa5f5}</Project>
       <Name>JLLR.Core.Seguridad.Servicio</Name>

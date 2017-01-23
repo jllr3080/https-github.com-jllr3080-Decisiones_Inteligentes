@@ -68,6 +68,10 @@
       <Project>{7b02ff61-3c7a-4a7d-b1a8-c62710253a1b}</Project>
       <Name>JLLR.Core.Base.Proveedor</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\UIF\Web\Web.csproj">
+      <Project>{B7153EEB-C0D4-45A7-B8B0-E4540FC849BC}</Project>
+      <Name>Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

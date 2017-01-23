@@ -265,6 +265,33 @@ namespace Web.Individuo {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator _fechaNacimientoValidador;
         
         /// <summary>
+        /// Control _fechaNacimientoRegular.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator _fechaNacimientoRegular;
+        
+        /// <summary>
+        /// Control _fechaNacimientoExtensor.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender _fechaNacimientoExtensor;
+        
+        /// <summary>
+        /// Control _fechaNacimientoMarcaAgua.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TextBoxWatermarkExtender _fechaNacimientoMarcaAgua;
+        
+        /// <summary>
         /// Control _literalDireccion.
         /// </summary>
         /// <remarks>

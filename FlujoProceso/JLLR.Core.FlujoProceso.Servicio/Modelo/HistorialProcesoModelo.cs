@@ -60,5 +60,48 @@ namespace JLLR.Core.FlujoProceso.Servicio.Modelo
         /// </summary>
         [DataMember]
         public string Texto { get; set; }
+
+        /// <summary>
+        /// SucursalId
+        /// </summary>
+        [DataMember]
+        public int? SucursalId{ get; set; }
+
+        /// <summary>
+        /// PuntoVentaId
+        /// </summary>
+        [DataMember]
+        public int? PuntoVentaId { get; set; }
+
+        /// <summary>
+        /// usuarioRecibeId
+        /// </summary>
+        [DataMember]
+        public int? UsuarioRecibeId { get; set; }
+
+        /// <summary>
+        /// usuarioEntregaId
+        /// </summary>
+        [DataMember]
+        public int? UsuarioEntregaId { get; set; }
+
+        /// <summary>
+        /// PerfilId
+        /// </summary>
+        [DataMember]
+        public int? PerfilId { get; set; }
+
+        /// <summary>
+        /// DetalleOrdenTrabajoId
+        /// </summary>
+        [DataMember]
+        public int? DetalleOrdenTrabajoId { get; set; }
+
+        /// <summary>
+        /// PasoPorEstaEtapa
+        /// </summary>
+        [DataMember]
+        public bool? PasoPorEstaEtapa { get; set; }
     }
+
 }

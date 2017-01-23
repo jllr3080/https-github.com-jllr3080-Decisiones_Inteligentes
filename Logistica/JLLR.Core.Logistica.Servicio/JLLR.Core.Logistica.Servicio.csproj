@@ -71,13 +71,10 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTOs\EntregaOrdenTrabajoDTOs.cs" />
     <Compile Include="EnsambladorDTOs\EnsambladorEntidadDTOs.cs" />
     <Compile Include="EnsambladorDTOs\EnsambladorModeloDTOs.cs" />
     <Compile Include="Ensamblador\EnsambladorEntidad.cs" />
     <Compile Include="Ensamblador\EnsambladorModelo.cs" />
-    <Compile Include="Modelo\DetalleEntregaOrdenTrabajoModelo.cs" />
-    <Compile Include="Modelo\EntregaOrdenTrabajoModelo.cs" />
     <Compile Include="ServicioLogistica.svc.cs">
       <DependentUpon>ServicioLogistica.svc</DependentUpon>
     </Compile>
@@ -87,7 +84,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="DTOs\" />
     <Folder Include="Enums\" />
+    <Folder Include="Modelo\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\Administrador.pubxml" />

@@ -57,5 +57,47 @@ namespace Web.Models.FlujoProceso
         /// Texto
         /// </summary>
         public string Texto { get; set; }
+
+        /// <summary>
+        /// SucursalId
+        /// </summary>
+        
+        public int? SucursalId { get; set; }
+
+        /// <summary>
+        /// PuntoVentaId
+        /// </summary>
+        
+        public int? PuntoVentaId { get; set; }
+
+        /// <summary>
+        /// usuarioRecibeId
+        /// </summary>
+        
+        public int? UsuarioRecibeId { get; set; }
+
+        /// <summary>
+        /// usuarioEntregaId
+        /// </summary>
+        
+        public int? UsuarioEntregaId { get; set; }
+
+        /// <summary>
+        /// PerfilId
+        /// </summary>
+        
+        public int? PerfilId { get; set; }
+
+        /// <summary>
+        /// DetalleOrdenTrabajoId
+        /// </summary>
+        
+        public int? DetalleOrdenTrabajoId { get; set; }
+
+        /// <summary>
+        /// PasoPorEstaEtapa
+        /// </summary>
+        
+        public bool? PasoPorEstaEtapa { get; set; }
     }
 }

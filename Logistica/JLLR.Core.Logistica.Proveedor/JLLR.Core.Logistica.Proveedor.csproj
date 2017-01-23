@@ -48,14 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAOs\DetalleEntregaOrdenTrabajoDAOs.cs" />
-    <Compile Include="DAOs\EntregaOrdenTrabajoDAOs.cs" />
     <Compile Include="DAOs\TransaccionalDAOs.cs" />
-    <Compile Include="DTOs\EntregaOrdenTrabajoDTOs.cs" />
     <Compile Include="Negocio\LogisticaNegocio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="DTOs\" />
     <Folder Include="Validacion\" />
   </ItemGroup>
   <ItemGroup>

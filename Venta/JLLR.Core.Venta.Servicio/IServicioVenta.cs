@@ -8,6 +8,7 @@ using System.ServiceModel.Web;
 using System.Text;
 using JLLR.Core.Venta.Servicio.DTOs;
 using JLLR.Core.Venta.Servicio.Modelo;
+
 #endregion
 
 namespace JLLR.Core.Venta.Servicio
@@ -33,9 +34,11 @@ namespace JLLR.Core.Venta.Servicio
         /// </summary>
         /// <returns></returns>
         [OperationContract]
-        [WebGet(UriTemplate ="ObtenerOrdenTrabajoPorEnvioMatriz",ResponseFormat = WebMessageFormat.Json)]
-        List<OrdenTrabajoDTOs> ObtenerOrdenTrabajoPorEnvioMatriz();
-        
+        [WebGet(UriTemplate = "ObtenerOrdenTrabajoPorEnvioMatriz?puntoVentaId={puntoVentaId}&sucursalId={sucursalId}", ResponseFormat = WebMessageFormat.Json)]
+        List<OrdenTrabajoDTOs> ObtenerOrdenTrabajoPorEnvioMatriz(int puntoVentaId, int sucursalId);
+
+
+       
         #endregion
 
         #region ORDEN TRABAJO
@@ -47,8 +50,18 @@ namespace JLLR.Core.Venta.Servicio
         [OperationContract]
         [WebInvoke(UriTemplate = "ActualizarOrdenTrabajo/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
         void ActualizarOrdenTrabajo(OrdenTrabajoModelo ordenTrabajo);
-       
 
+        /// <summary>
+        /// Obtiene  por  id de la orden de trabajo
+        /// </summary>
+        /// <param name="ordenTrabajoId"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(
+             UriTemplate =
+                 "ObtenerOrdenTrabajoPorOrdenTrabajoId?ordenTrabajoId={ordenTrabajoId}",
+             ResponseFormat = WebMessageFormat.Json)]
+        OrdenTrabajoDTOs ObtenerOrdenTrabajoPorOrdenTrabajoId(int ordenTrabajoId);
         #endregion
 
         #region DETALLE DE  ORDEN DE TRABAJO OBSERVACIONES

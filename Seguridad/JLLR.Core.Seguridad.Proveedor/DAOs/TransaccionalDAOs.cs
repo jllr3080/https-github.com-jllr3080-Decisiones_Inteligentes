@@ -43,7 +43,7 @@ namespace JLLR.Core.Seguridad.Proveedor.DAOs
                                join sucursal in entidad.SUCURSAL on usuario.SUCURSAL_ID equals sucursal.SUCURSAL_ID
                                join puntoVenta in entidad.PUNTO_VENTA on usuario.PUNTO_VENTA_ID equals puntoVenta.PUNTO_VENTA_ID
                                where usuario.NOMBRE_USUARIO==nombreusuario && usuario.CLAVE_USUARIO== claveUsuario
-                               select new UsuarioDTOs {UsuarioId = usuario.USUARIO_ID,SucursalId = usuario.SUCURSAL_ID,PuntoVentaId = usuario.PUNTO_VENTA_ID,NombreUsuario = usuario.NOMBRE_USUARIO, NombreSucursal = sucursal.DESCRIPCION,NombrePuntoVenta = puntoVenta.DESCRIPCION,HoraFinPuntoVenta = puntoVenta.HORA_FIN, HoraInicioPuntoVenta = puntoVenta.HORA_INICIO};
+                               select new UsuarioDTOs {UsuarioId = usuario.USUARIO_ID,SucursalId = usuario.SUCURSAL_ID,PuntoVentaId = usuario.PUNTO_VENTA_ID,NombreUsuario = usuario.NOMBRE_USUARIO, NombreSucursal = sucursal.DESCRIPCION,NombrePuntoVenta = puntoVenta.DESCRIPCION,HoraFinPuntoVenta = puntoVenta.HORA_FIN, HoraInicioPuntoVenta = puntoVenta.HORA_INICIO,PerfilId = perfil.PERFIL_ID,NombrePerfil = perfil.DESCRIPCION};
                 return usuarios.FirstOrDefault();
             }
             catch (Exception ex)

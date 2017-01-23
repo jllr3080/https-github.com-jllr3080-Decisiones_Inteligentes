@@ -315,6 +315,45 @@ namespace JLLR.Core.General.Servicio
                 throw;
             }
         }
+
+        /// <summary>
+        /// Obtiene todas las etapdas  de proceso
+        /// </summary>
+        /// <returns></returns>
+        public List<EtapaProcesoModelo> ObtenerEtapasProceso()
+        {
+            try
+            {
+                return _generalTransformadorParametrizacion.ObtenerEtapasProceso();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
         #endregion
+        #region PUNTO VENTA
+        /// <summary>
+        /// Obtiene los puntos de  venta por sucursal Id
+        /// </summary>
+        /// <param name="sucursalId"></param>
+        /// <returns></returns>
+        public List<PuntoVentaModelo> ObtenerPuntosVentaPorSucursalId(int sucursalId)
+        {
+            try
+            {
+                return _generalTransformadorParametrizacion.ObtenerPuntosVentaPorSucursalId(sucursalId);
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
     }
 }

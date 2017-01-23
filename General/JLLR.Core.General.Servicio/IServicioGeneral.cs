@@ -198,7 +198,32 @@ namespace JLLR.Core.General.Servicio
         [WebGet(UriTemplate = "ObtenerEtapaProcesoPorEtapaProcesoId?etapaProcesoId={etapaProcesoId}", ResponseFormat = WebMessageFormat.Json)]
         EtapaProcesoModelo ObtenerEtapaProcesoPorEtapaProcesoId(int etapaProcesoId);
 
+
+        /// <summary>
+        /// Obtiene todas las etapdas  de proceso
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(UriTemplate = "ObtenerEtapasProceso", ResponseFormat = WebMessageFormat.Json)]
+
+        List<EtapaProcesoModelo> ObtenerEtapasProceso();
+
         #endregion
+
+        #region PUNTO VENTA
+
+        /// <summary>
+        /// Obtiene los puntos de  venta por sucursal Id
+        /// </summary>
+        /// <param name="sucursalId"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(UriTemplate = "ObtenerPuntosVentaPorSucursalId?sucursalId={sucursalId}", ResponseFormat = WebMessageFormat.Json)]
+        List<PuntoVentaModelo> ObtenerPuntosVentaPorSucursalId(int sucursalId);
+
+        #endregion
+
+
     }
 
 

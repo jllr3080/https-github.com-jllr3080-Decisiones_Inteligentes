@@ -54,5 +54,17 @@ namespace Web.DTOs.Seguridad
         /// </summary>
 
         public string HoraFinPuntoVenta { get; set; }
+
+        /// <summary>
+        /// id del rol
+        /// </summary>
+        
+        public int? PerfilId { get; set; }
+
+        /// <summary>
+        /// NombrePerfil
+        /// </summary>
+        public string NombrePerfil { get; set; }
     }
+
 }

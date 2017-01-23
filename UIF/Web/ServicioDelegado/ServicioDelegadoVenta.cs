@@ -9,8 +9,10 @@ using System.Text;
 using System.Web;
 using System.Web.Script.Serialization;
 using Web.DTOs.Individuo;
+using Web.DTOs.Logistica;
 using Web.DTOs.Venta;
 using Web.Models.Individuo;
+
 using Web.Models.Venta.Negocio;
 
 #endregion
@@ -59,12 +61,39 @@ namespace Web.ServicioDelegado
         /// Obtiene todas las  ordenes  que estan lista para enviarse  a matriz
         /// </summary>
         /// <returns></returns>
-        public List<OrdenTrabajoVistaDTOs> ObtenerOrdenTrabajoPorEnvioMatriz()
+        public List<OrdenTrabajoVistaDTOs> ObtenerOrdenTrabajoPorEnvioMatriz(int puntoVentaId, int sucursalId)
         {
             try
             {
                 var clienteWeb = new WebClient();
-                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerOrdenTrabajoPorEnvioMatriz");
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerOrdenTrabajoPorEnvioMatriz?puntoVentaId="+ puntoVentaId+ "&sucursalId="+ sucursalId);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<OrdenTrabajoVistaDTOs>>(json);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+
+        
+        /// <summary>
+        /// Obtiene las ordenes de trabajo por etapa de proceso del perfil en el que se encuentra
+        /// </summary>
+        /// <param name="etapaProcesoPerfilId"></param>
+        /// <returns></returns>
+        public List<OrdenTrabajoVistaDTOs> ObtenerOrdenTrabajoPorEtapaProcesoPerfilId(int etapaProcesoPerfilId)
+        {
+            try
+            {
+
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerOrdenTrabajoPorEtapaProcesoPerfilId?etapaProcesoPerfilId=" + etapaProcesoPerfilId );
                 var js = new JavaScriptSerializer();
                 return js.Deserialize<List<OrdenTrabajoVistaDTOs>>(json);
 
@@ -80,6 +109,28 @@ namespace Web.ServicioDelegado
         #endregion
 
         #region ORDEN TRABAJO
+        /// <summary>
+        /// Obtiene  por  id de la orden de trabajo
+        /// </summary>
+        /// <param name="ordenTrabajoId"></param>
+        /// <returns></returns>
+        public OrdenTrabajoVistaDTOs ObtenerOrdenTrabajoPorOrdenTrabajoId(int ordenTrabajoId)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerOrdenTrabajoPorOrdenTrabajoId?ordenTrabajoId=" + ordenTrabajoId);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<OrdenTrabajoVistaDTOs>(json);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
 
         /// <summary>
         /// Actualiza la orden de trabajo

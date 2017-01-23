@@ -18,7 +18,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public ORDEN_TRABAJO()
         {
             this.DETALLE_ORDEN_TRABAJO = new HashSet<DETALLE_ORDEN_TRABAJO>();
-            this.ENTREGA_ORDEN_TRABAJO = new HashSet<ENTREGA_ORDEN_TRABAJO>();
             this.HISTORIAL_PROCESO = new HashSet<HISTORIAL_PROCESO>();
         }
     
@@ -41,8 +40,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual TIPO_LAVADO TIPO_LAVADO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETALLE_ORDEN_TRABAJO> DETALLE_ORDEN_TRABAJO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ENTREGA_ORDEN_TRABAJO> ENTREGA_ORDEN_TRABAJO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HISTORIAL_PROCESO> HISTORIAL_PROCESO { get; set; }
     }

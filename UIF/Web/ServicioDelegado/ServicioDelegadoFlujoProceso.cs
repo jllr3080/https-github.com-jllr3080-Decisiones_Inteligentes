@@ -9,6 +9,7 @@ using System.Text;
 using System.Web;
 using System.Web.Script.Serialization;
 using Web.DTOs.Contabilidad;
+using Web.DTOs.FlujoProceso;
 using Web.DTOs.Individuo;
 using Web.Models.Contabilidad;
 using Web.Models.FlujoProceso;
@@ -71,6 +72,96 @@ namespace Web.ServicioDelegado
                 throw;
             }
         }
+
+        /// <summary>
+        /// Obtiene todas las prendas  para  la logistica
+        /// </summary>
+        /// <param name="etapaProcesoId"></param>
+        /// <param name="sucursalId"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public List<HistorialProcesoVistaModelo> ObtenerHistorialProcesoPorFlujoProceso(int etapaProcesoId, int sucursalId,
+            int puntoVentaId)
+        {
+            try
+            {
+
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerHistorialProcesoPorFlujoProceso?etapaProcesoId=" + etapaProcesoId+ "&sucursalId="+ sucursalId+ "&puntoVentaId="+ puntoVentaId);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<HistorialProcesoVistaModelo>>(json);
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Actualiza  el historial de proceso
+        /// </summary>
+        /// <param name="historialProceso"></param>
+        public void ActualizarHistorialProceso(HistorialProcesoVistaModelo historialProceso)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(HistorialProcesoVistaModelo));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, historialProceso);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "ActualizarHistorialProceso", "POST", datos);
+                var js = new JavaScriptSerializer();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region TRANSACCIONAL
+
+        #region REPORTES
+
+        /// <summary>
+        /// Obtiene el historial de prendas 
+        /// </summary>
+        /// <param name="sucursalId"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <param name="fechaRegistro"></param>
+        /// <param name="etapaProcesoId"></param>
+        /// <returns></returns>
+        public List<HistorialProcesoVistaDTOs> ObtenerHistorialProcesoPrendasPorVariosParametros(int sucursalId,
+            int puntoVentaId, string fechaRegistro, int etapaProcesoId)
+        {
+            try
+            {
+
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerHistorialProcesoPrendasPorVariosParametros?sucursalId=" + sucursalId + "&puntoVentaId=" + puntoVentaId + "&fechaRegistro=" + fechaRegistro + "&etapaProcesoId="+ etapaProcesoId);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<HistorialProcesoVistaDTOs>>(json);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        #endregion
+
         #endregion
     }
 }

@@ -61,6 +61,17 @@ namespace Web.Base
 
         public string HoraFinPuntoVenta { get; set; }
 
+        /// <summary>
+        /// perfil  Id
+        /// </summary>
+
+        public int? PerfilId { get; set; }
+
+        /// <summary>
+        /// NombrePerfil
+        /// </summary>
+        public string NombrePerfil { get; set; }
+
 
 
     }

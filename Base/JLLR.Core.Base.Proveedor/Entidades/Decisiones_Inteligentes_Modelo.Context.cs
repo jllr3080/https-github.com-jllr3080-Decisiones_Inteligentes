@@ -86,9 +86,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual DbSet<USUARIO_PERFIL> USUARIO_PERFIL { get; set; }
         public virtual DbSet<USUARIO_PREGUNTA_SEGURIDAD> USUARIO_PREGUNTA_SEGURIDAD { get; set; }
         public virtual DbSet<USUARIO_SEGURIDAD> USUARIO_SEGURIDAD { get; set; }
-        public virtual DbSet<DETALLE_ENTREGA_ORDEN_TRABAJO> DETALLE_ENTREGA_ORDEN_TRABAJO { get; set; }
         public virtual DbSet<DETALLE_ORDEN_TRABAJO> DETALLE_ORDEN_TRABAJO { get; set; }
-        public virtual DbSet<ENTREGA_ORDEN_TRABAJO> ENTREGA_ORDEN_TRABAJO { get; set; }
         public virtual DbSet<NUMERACION_ORDEN> NUMERACION_ORDEN { get; set; }
         public virtual DbSet<ORDEN_TRABAJO> ORDEN_TRABAJO { get; set; }
         public virtual DbSet<VENTA_COMISION> VENTA_COMISION { get; set; }
@@ -101,7 +99,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual DbSet<HISTORIAL_CUENTA_POR_COBRAR> HISTORIAL_CUENTA_POR_COBRAR { get; set; }
         public virtual DbSet<HISTORIAL_CUENTA_POR_PAGAR> HISTORIAL_CUENTA_POR_PAGAR { get; set; }
         public virtual DbSet<FORMA_PAGO> FORMA_PAGO { get; set; }
-        public virtual DbSet<PRUEBA> PRUEBA { get; set; }
         public virtual DbSet<INDIVIDUO_ROL> INDIVIDUO_ROL { get; set; }
         public virtual DbSet<TIPO_ROL_INDIVIDUO> TIPO_ROL_INDIVIDUO { get; set; }
         public virtual DbSet<INDIVIDUO> INDIVIDUO { get; set; }

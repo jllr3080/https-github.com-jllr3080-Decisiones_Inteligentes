@@ -40,7 +40,14 @@ namespace JLLR.Core.FlujoProceso.Servicio.Ensamblador
                 FechaInicio = e.FECHA_INICIO,
                 FechaFin = e.FECHA_FIN,
                 EtapaProceso = etapaProceso,
-                Texto = e.TEXTO
+                Texto = e.TEXTO,
+                PuntoVentaId = e.PUNTO_VENTA_ID,
+                SucursalId = e.SUCURSAL_ID,
+                DetalleOrdenTrabajoId = e.DETALLE_ORDEN_TRABAJO_ID,
+                PerfilId = e.PERFIL_ID,
+                UsuarioRecibeId = e.USUARIO_RECIBE_ID,
+                UsuarioEntregaId = e.USUARIO_ENTREGA_ID,
+                PasoPorEstaEtapa = e.PASO_ESTA_ETAPA
 
 
             };

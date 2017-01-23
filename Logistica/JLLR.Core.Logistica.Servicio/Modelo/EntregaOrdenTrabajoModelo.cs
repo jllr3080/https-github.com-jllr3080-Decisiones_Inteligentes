@@ -42,5 +42,37 @@ namespace JLLR.Core.Logistica.Servicio.Modelo
         /// </summary>
         [DataMember]
         public int? UsuarioRecibeId { get; set; }
+
+
+        /// <summary>
+        /// EtapaProcesoPerfilId 
+        /// </summary>
+        [DataMember]
+        public int? EtapaProcesoPerfilId { get; set; }
+
+        /// <summary>
+        /// Etapa Actual 
+        /// </summary>
+        [DataMember]
+        public int? EtapaActual { get; set; }
+
+        /// <summary>
+        /// Etapa Actual 
+        /// </summary>
+        [DataMember]
+        public int? SiguienteEtapa { get; set; }
+
+        /// <summary>
+        /// SucursalId 
+        /// </summary>
+        [DataMember]
+        public int? SucursalId { get; set; }
+
+
+        /// <summary>
+        /// PuntoVentaId 
+        /// </summary>
+        [DataMember]
+        public int? PuntoVentaId { get; set; }
     }
 }

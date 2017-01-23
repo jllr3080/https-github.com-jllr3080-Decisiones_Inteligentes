@@ -8,6 +8,7 @@ using JLLR.Core.Venta.Servicio.DTOs;
 using JLLR.Core.Venta.Servicio.Modelo;
 using JLLR.Core.Venta.Servicio.EnsambladorDTOs;
 using JLLR.Core.Venta.Servicio.Ensamblador;
+using  ensambladorLogistica=JLLR.Core.Logistica.Servicio.Ensamblador;
 #endregion
 namespace JLLR.Core.Venta.Servicio.Transformador
 {
@@ -24,7 +25,8 @@ namespace JLLR.Core.Venta.Servicio.Transformador
         private readonly EnsambladorModeloDTOs _ensambladorModeloDTOs = new EnsambladorModeloDTOs();
         private readonly EnsambladorEntidad _ensambladorEntidad = new EnsambladorEntidad();
         private readonly EnsambladorModelo _ensambladorModelo = new EnsambladorModelo();
-
+        private readonly  ensambladorLogistica.EnsambladorModelo _ensambladorModeloLogistica= new ensambladorLogistica.EnsambladorModelo();
+        private  readonly ensambladorLogistica.EnsambladorEntidad _ensambladorEntidadLogistica= new ensambladorLogistica.EnsambladorEntidad();
 
         #endregion
         #region NEGOCIO 
@@ -51,11 +53,11 @@ namespace JLLR.Core.Venta.Servicio.Transformador
         /// Obtiene todas las  ordenes  que estan lista para enviarse  a matriz
         /// </summary>
         /// <returns></returns>
-        public List<OrdenTrabajoDTOs> ObtenerOrdenTrabajoPorEnvioMatriz()
+        public List<OrdenTrabajoDTOs> ObtenerOrdenTrabajoPorEnvioMatriz(int puntoVentaId, int sucursalId)
         {
             try
             {
-                return _ensambladorModeloDTOs.CrearOrdenesTrabajotOs(_ventaNegocio.ObtenerOrdenTrabajoPorEnvioMatriz());
+                return _ensambladorModeloDTOs.CrearOrdenesTrabajotOs(_ventaNegocio.ObtenerOrdenTrabajoPorEnvioMatriz(puntoVentaId,sucursalId));
 
             }
             catch (Exception ex)
@@ -65,6 +67,8 @@ namespace JLLR.Core.Venta.Servicio.Transformador
             }
 
         }
+
+       
         #endregion
 
         #region ORDEN TRABAJO
@@ -78,6 +82,26 @@ namespace JLLR.Core.Venta.Servicio.Transformador
             try
             {
                 _ventaNegocio.ActualizarOrdenTrabajo(_ensambladorEntidad.CrearOrdenTrabajo(ordenTrabajo));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene  por  id de la orden de trabajo
+        /// </summary>
+        /// <param name="ordenTrabajoId"></param>
+        /// <returns></returns>
+        public OrdenTrabajoDTOs ObtenerOrdenTrabajoPorOrdenTrabajoId(int ordenTrabajoId)
+        {
+            try
+            {
+                return
+                    _ensambladorModeloDTOs.CrearOrdenTrabajotOs(
+                        _ventaNegocio.ObtenerOrdenTrabajoPorOrdenTrabajoId(ordenTrabajoId));
             }
             catch (Exception ex)
             {

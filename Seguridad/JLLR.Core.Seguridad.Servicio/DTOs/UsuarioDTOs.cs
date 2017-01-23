@@ -62,5 +62,18 @@ namespace JLLR.Core.Seguridad.Servicio.DTOs
         public string HoraFinPuntoVenta { get; set; }
 
 
+
+        /// <summary>
+        /// id del rol
+        /// </summary>
+        [DataMember]
+        public int? PerfilId { get; set; }
+
+        /// <summary>
+        /// NombrePerfil
+        /// </summary>
+        [DataMember]
+        public string NombrePerfil { get; set; }
+
     }
 }

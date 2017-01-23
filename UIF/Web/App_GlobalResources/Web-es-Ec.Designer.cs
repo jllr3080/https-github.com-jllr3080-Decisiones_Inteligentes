@@ -124,6 +124,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Busqueda de Prendas .
+        /// </summary>
+        internal static string Boton_Buscar_Prendas {
+            get {
+                return ResourceManager.GetString("Boton_Buscar_Prendas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Cancelar.
         /// </summary>
         internal static string Boton_Cancelar {
@@ -502,6 +511,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Etapa de Proceso.
+        /// </summary>
+        internal static string Label_Etapa_Proceso {
+            get {
+                return ResourceManager.GetString("Label_Etapa_Proceso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Etapa de Proceso Destino.
+        /// </summary>
+        internal static string Label_Etapa_Proceso_Destino {
+            get {
+                return ResourceManager.GetString("Label_Etapa_Proceso_Destino", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Fecha de Ingreso.
         /// </summary>
         internal static string Label_Fecha {
@@ -588,6 +615,15 @@ namespace Resources {
         internal static string Label_Nombre_Cliente {
             get {
                 return ResourceManager.GetString("Label_Nombre_Cliente", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nombre del Perfil .
+        /// </summary>
+        internal static string Label_Nombre_Perfil {
+            get {
+                return ResourceManager.GetString("Label_Nombre_Perfil", resourceCulture);
             }
         }
         
@@ -943,6 +979,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a El valor de abono es mayor que el valor total, revise los valores.
+        /// </summary>
+        internal static string Mensaje_Valor_Abono_Mayo_PagoTotal {
+            get {
+                return ResourceManager.GetString("Mensaje_Valor_Abono_Mayo_PagoTotal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Busqueda del Cliente Por  Numero de Identificación.
         /// </summary>
         internal static string Panel_Busqueda_Cliente {
@@ -1150,6 +1195,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Reporte Entrega/Recepción de Prendas.
+        /// </summary>
+        internal static string Titulo_Pagina_Reporte_Entrega_Recepcion_Prendas {
+            get {
+                return ResourceManager.GetString("Titulo_Pagina_Reporte_Entrega_Recepcion_Prendas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Sistema Decisiones Inteligentes Desarrollado por Rodrigo Utreras y Jorge López.
         /// </summary>
         internal static string Titulo_Pie_Pagina_Sistema {
@@ -1173,6 +1227,15 @@ namespace Resources {
         internal static string Titulo_Sistema {
             get {
                 return ResourceManager.GetString("Titulo_Sistema", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a dd/mm/yyyy.
+        /// </summary>
+        internal static string WaterMarke_Fecha {
+            get {
+                return ResourceManager.GetString("WaterMarke_Fecha", resourceCulture);
             }
         }
     }

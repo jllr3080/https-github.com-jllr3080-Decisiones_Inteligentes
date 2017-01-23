@@ -9,6 +9,7 @@ using System.Text;
 using JLLR.Core.Venta.Servicio.DTOs;
 using JLLR.Core.Venta.Servicio.Modelo;
 using JLLR.Core.Venta.Servicio.Transformador;
+
 #endregion
 
 namespace JLLR.Core.Venta.Servicio
@@ -45,11 +46,11 @@ namespace JLLR.Core.Venta.Servicio
         /// Obtiene todas las  ordenes  que estan lista para enviarse  a matriz
         /// </summary>
         /// <returns></returns>
-        public List<OrdenTrabajoDTOs> ObtenerOrdenTrabajoPorEnvioMatriz()
+        public List<OrdenTrabajoDTOs> ObtenerOrdenTrabajoPorEnvioMatriz(int puntoVentaId, int sucursalId)
         {
             try
             {
-                return _ventaTransformadorNegocio.ObtenerOrdenTrabajoPorEnvioMatriz();
+                return _ventaTransformadorNegocio.ObtenerOrdenTrabajoPorEnvioMatriz(puntoVentaId,sucursalId);
 
             }
             catch (Exception ex)
@@ -59,6 +60,8 @@ namespace JLLR.Core.Venta.Servicio
             }
 
         }
+
+       
         #endregion
 
         #region ORDEN TRABAJO
@@ -80,6 +83,24 @@ namespace JLLR.Core.Venta.Servicio
             }
         }
 
+        /// <summary>
+        /// Obtiene  por  id de la orden de trabajo
+        /// </summary>
+        /// <param name="ordenTrabajoId"></param>
+        /// <returns></returns>
+        public OrdenTrabajoDTOs ObtenerOrdenTrabajoPorOrdenTrabajoId(int ordenTrabajoId)
+        {
+            try
+            {
+                return _ventaTransformadorNegocio.ObtenerOrdenTrabajoPorOrdenTrabajoId(ordenTrabajoId);
+                    
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
         #region DETALLE DE  ORDEN DE TRABAJO OBSERVACIONES

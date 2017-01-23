@@ -47,11 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAOs\HistorialProcesoDAOs.cs" />
+    <Compile Include="DAOs\TransaccionalDAOs.cs" />
+    <Compile Include="DTOs\HistorialProcesoDTOs.cs" />
     <Compile Include="Negocio\FlujoProcesoNegocio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DTOs\" />
     <Folder Include="Validacion\" />
   </ItemGroup>
   <ItemGroup>

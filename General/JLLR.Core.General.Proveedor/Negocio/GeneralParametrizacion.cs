@@ -29,7 +29,9 @@ namespace JLLR.Core.General.Proveedor.Negocio
         private readonly  TipoIdentificacionDAOs _tipoIdentificacionDaOs= new TipoIdentificacionDAOs();
         private readonly  TipoRolIndividuoDAOs _tipoRolIndividuoDaOs=  new TipoRolIndividuoDAOs();
         private readonly  TipoTelefonoDAOs _tipoTelefonoDaOs= new TipoTelefonoDAOs();
-        private readonly  EtapaProcesoDAOs _etpaEtapaProcesoDaOs= new EtapaProcesoDAOs();
+        private readonly  EtapaProcesoDAOs _etapaProcesoDaOs= new EtapaProcesoDAOs();
+        private readonly  PuntoVentaDAOs _puntoVentaDaOs= new PuntoVentaDAOs();
+        
 
 
         #endregion
@@ -323,7 +325,45 @@ namespace JLLR.Core.General.Proveedor.Negocio
         {
             try
             {
-                return _etpaEtapaProcesoDaOs.ObtenerEtapaProcesoPorEtapaProcesoId(etapaProcesoId);
+                return _etapaProcesoDaOs.ObtenerEtapaProcesoPorEtapaProcesoId(etapaProcesoId);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene todas las etapdas  de proceso
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<ETAPA_PROCESO> ObtenerEtapasProceso()
+        {
+            try
+            {
+                return _etapaProcesoDaOs.ObtenerEtapasProceso();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+        #endregion
+
+        #region PUNTO VENTA
+        /// <summary>
+        /// Obtiene los puntos de  venta por sucursal Id
+        /// </summary>
+        /// <param name="sucursalId"></param>
+        /// <returns></returns>
+        public IQueryable<PUNTO_VENTA> ObtenerPuntosVentaPorSucursalId(int sucursalId)
+        {
+            try
+            {
+                return _puntoVentaDaOs.ObtenerPuntosVentaPorSucursalId(sucursalId);
+
             }
             catch (Exception ex)
             {

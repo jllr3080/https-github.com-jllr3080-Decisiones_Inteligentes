@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Script.Serialization;
 using Web.DTOs.Individuo;
@@ -335,6 +336,56 @@ namespace Web.ServicioDelegado
                 var json = clienteWeb.DownloadString(direccionUrl + "ObtenerTiposTelefonos");
                 var js = new JavaScriptSerializer();
                 return js.Deserialize<List<TipoTelefonoVistaModelo>>(json);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region ETAPA DE PROCESO
+        /// <summary>
+        /// Obtiene todas las etapdas  de proceso
+        /// </summary>
+        /// <returns></returns>
+        public List<EtapaProcesoVistaModelo> ObtenerEtapasProceso()
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerEtapasProceso");
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<EtapaProcesoVistaModelo>>(json);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+        #endregion
+        #region PUNTO VENTA
+        /// <summary>
+        /// Obtiene los puntos de  venta por sucursal Id
+        /// </summary>
+        /// <param name="sucursalId"></param>
+        /// <returns></returns>
+        public List<PuntoVentaVistaModelo> ObtenerPuntosVentaPorSucursalId(int sucursalId)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerPuntosVentaPorSucursalId?sucursalId="+ sucursalId);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<PuntoVentaVistaModelo>>(json);
+
+
             }
             catch (Exception ex)
             {
