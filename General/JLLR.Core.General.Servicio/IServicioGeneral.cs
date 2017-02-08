@@ -224,6 +224,19 @@ namespace JLLR.Core.General.Servicio
         #endregion
 
 
+        #region FORMA PAGO
+
+        /// <summary>
+        /// Obtiene  todas las   formas  de  pago
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(UriTemplate = "ObtenerFormaPagos", ResponseFormat = WebMessageFormat.Json)]
+        List<FormaPagoModelo> ObtenerFormaPagos();
+
+        #endregion
+
+
     }
 
 

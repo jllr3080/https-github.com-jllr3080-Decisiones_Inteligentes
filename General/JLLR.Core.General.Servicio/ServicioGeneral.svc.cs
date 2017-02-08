@@ -355,5 +355,26 @@ namespace JLLR.Core.General.Servicio
         }
         #endregion
 
+        #region FORMA PAGO
+        /// <summary>
+        /// Obtiene  todas las   formas  de  pago
+        /// </summary>
+        /// <returns></returns>
+        public List<FormaPagoModelo> ObtenerFormaPagos()
+        {
+
+            try
+            {
+                return _generalTransformadorParametrizacion.ObtenerFormaPagos();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
     }
 }

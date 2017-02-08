@@ -394,5 +394,31 @@ namespace Web.ServicioDelegado
             }
         }
         #endregion
+
+        #region FORMA PAGO
+        /// <summary>
+        /// Obtiene  todas las   formas  de  pago
+        /// </summary>
+        /// <returns></returns>
+        public List<FormaPagoVistaModelo> ObtenerFormaPagos()
+        {
+
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerFormaPagos");
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<FormaPagoVistaModelo>>(json);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
     }
 }

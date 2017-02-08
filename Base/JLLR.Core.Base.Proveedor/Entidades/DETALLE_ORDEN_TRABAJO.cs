@@ -24,7 +24,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public int DETALLE_ORDEN_TRABAJO_ID { get; set; }
         public Nullable<long> ORDEN_TRABAJO_ID { get; set; }
         public Nullable<int> PRODUCTO_ID { get; set; }
-        public Nullable<int> IMPUESTO_ID { get; set; }
         public Nullable<int> COLOR_ID { get; set; }
         public Nullable<int> CANTIDAD { get; set; }
         public Nullable<decimal> VALOR_UNITARIO { get; set; }
@@ -34,13 +33,11 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<int> PRODUCTO_TALLA_ID { get; set; }
         public Nullable<int> MARCA_ID { get; set; }
         public Nullable<int> MATERIAL_ID { get; set; }
-        public Nullable<int> VENTA_COMISION_ID { get; set; }
+        public Nullable<int> PORCENTAJE_IMPUESTO_SUCURSAL_ID { get; set; }
     
         public virtual COLOR COLOR { get; set; }
-        public virtual IMPUESTO IMPUESTO { get; set; }
         public virtual PRODUCTO PRODUCTO { get; set; }
         public virtual ORDEN_TRABAJO ORDEN_TRABAJO { get; set; }
-        public virtual VENTA_COMISION VENTA_COMISION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETALLE_ORDEN_TRABAJO_OBSERVACION> DETALLE_ORDEN_TRABAJO_OBSERVACION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -21,6 +21,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
             this.HISTORIAL_USUARIO = new HashSet<HISTORIAL_USUARIO>();
             this.USUARIO_PERFIL = new HashSet<USUARIO_PERFIL>();
             this.USUARIO_PREGUNTA_SEGURIDAD = new HashSet<USUARIO_PREGUNTA_SEGURIDAD>();
+            this.CABECERA_MOVIMIENTO_FE = new HashSet<CABECERA_MOVIMIENTO_FE>();
         }
     
         public int USUARIO_ID { get; set; }
@@ -46,5 +47,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual ICollection<USUARIO_PREGUNTA_SEGURIDAD> USUARIO_PREGUNTA_SEGURIDAD { get; set; }
         public virtual USUARIO_SEGURIDAD USUARIO_SEGURIDAD { get; set; }
         public virtual INDIVIDUO INDIVIDUO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CABECERA_MOVIMIENTO_FE> CABECERA_MOVIMIENTO_FE { get; set; }
     }
 }

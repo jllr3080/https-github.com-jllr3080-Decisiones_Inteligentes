@@ -15,7 +15,7 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
     /// <summary>
     /// Metodos de los numero de  orden
     /// </summary>
-    public class NumeroOrdenDAOs
+    public class NumeroOrdenDAOs:BaseDAOs
     {
 
         /// <summary>

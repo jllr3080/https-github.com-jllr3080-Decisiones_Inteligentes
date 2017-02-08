@@ -74,6 +74,7 @@ namespace Web.Venta
                     _labelValorPago.Visible = true;
                     _valorPago.ReadOnly = false;
                     _valorPago.Text = String.Empty;
+                    _valorPago.Focus();
                 }
 
             }
@@ -99,7 +100,7 @@ namespace Web.Venta
             {
                 if (e.Row.RowType == DataControlRowType.DataRow)
                 {
-                    _montoTotal += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ValorUnitario"));
+                    _montoTotal += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ValorTotal"));
                     _cantidadTotal += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "Cantidad"));
                 }
                 else if (e.Row.RowType == DataControlRowType.Footer)
@@ -108,8 +109,8 @@ namespace Web.Venta
                     e.Row.Cells[3].Text = _cantidadTotal.ToString();
                     e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Right;
 
-                    e.Row.Cells[7].Text = _montoTotal.ToString();
-                    e.Row.Cells[7].HorizontalAlign = HorizontalAlign.Right;
+                    e.Row.Cells[8].Text = _montoTotal.ToString();
+                    e.Row.Cells[8].HorizontalAlign = HorizontalAlign.Right;
                     e.Row.Font.Bold = true;
                 }
                 
@@ -203,7 +204,10 @@ namespace Web.Venta
             {
                 if (_ordenTrabajoVistaDtOs.DetalleOrdenTrabajo.Count <= 20)
                 {
-                    if (_listaTrabajoVistaDtOs.Sum(m => m.ValorTotal) >Convert.ToDecimal(_valorPago.Text)  )
+                    if (_valorPago.Text == String.Empty)
+                        _valorPago.Text = "0";
+
+                    if (_listaTrabajoVistaDtOs.Sum(m => m.ValorTotal) >=Convert.ToDecimal(_valorPago.Text)  )
                     {
 
                         EstadoPagoVistaModelo _estadoPagoVista = new EstadoPagoVistaModelo
@@ -246,7 +250,7 @@ namespace Web.Venta
                         _cuentaPorCobrarVista.FechaVencimiento = _ordenTrabajoVistaModelo.FechaEntrega;
                         _cuentaPorCobrarVista.NumeroFactura = String.Empty;
                         _cuentaPorCobrarVista.NumeroOrden = _ordenTrabajoVistaModelo.NumeroOrden;
-                        _cuentaPorCobrarVista.Saldo = 0;
+                        _cuentaPorCobrarVista.Saldo = Convert.ToDecimal(_valorPago.Text);
                         _cuentaPorCobrarVista.Valor = _ordenTrabajoVistaDtOs.DetalleOrdenTrabajo.Sum(m => m.ValorTotal);
                         _cuentaPorCobrarVista.UsuarioModificacionId = User.Id;
                         _cuentaPorCobrarVista.UsuarioCreacionId = User.Id;
@@ -255,10 +259,10 @@ namespace Web.Venta
                         _cuentaPorCobrarVista =
                             _servicioDelegadoContabilidad.GrabarCuentaPorCobrar(_cuentaPorCobrarVista);
 
-                        if (_ordenTrabajoVistaModelo.EstadoPago.EstadoPagoId ==
-                            Convert.ToInt32(Util.EstadoPago.Cancelado) ||
-                            _ordenTrabajoVistaModelo.EstadoPago.EstadoPagoId == Convert.ToInt32(Util.EstadoPago.Abonado))
-                        {
+                        //if (_ordenTrabajoVistaModelo.EstadoPago.EstadoPagoId ==
+                        //    Convert.ToInt32(Util.EstadoPago.Cancelado) ||
+                        //    _ordenTrabajoVistaModelo.EstadoPago.EstadoPagoId == Convert.ToInt32(Util.EstadoPago.Abonado))
+                        //{
                             HistorialCuentaPorCobrarVistaModelo _historialCuentaPorCobrar =
                                 new HistorialCuentaPorCobrarVistaModelo();
                             _historialCuentaPorCobrar.UsuarioId = User.Id;
@@ -269,10 +273,9 @@ namespace Web.Venta
                             _historialCuentaPorCobrar.FormaPago = _formaPago;
                             _historialCuentaPorCobrar.ValorCobro = Convert.ToDecimal(_valorPago.Text);
 
-                            _historialCuentaPorCobrar =
-                                _servicioDelegadoContabilidad.GrabarHistorialCuentaPorCobrar(_historialCuentaPorCobrar);
+                            _historialCuentaPorCobrar =_servicioDelegadoContabilidad.GrabarHistorialCuentaPorCobrar(_historialCuentaPorCobrar);
 
-                        }
+                        //}
 
 
                         //Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Exitoso").ToString(), "_grabarOrdenTrabajo");

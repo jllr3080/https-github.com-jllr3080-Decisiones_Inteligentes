@@ -25,6 +25,8 @@ namespace JLLR.Core.Base.Proveedor.Entidades
             this.INDIVIDUO_BANCO = new HashSet<INDIVIDUO_BANCO>();
             this.TELEFONO = new HashSet<TELEFONO>();
             this.USUARIO = new HashSet<USUARIO>();
+            this.PROVEEDOR = new HashSet<PROVEEDOR>();
+            this.VENDEDOR = new HashSet<VENDEDOR>();
         }
     
         public int INDIVIDUO_ID { get; set; }
@@ -58,5 +60,9 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual ICollection<TELEFONO> TELEFONO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USUARIO> USUARIO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PROVEEDOR> PROVEEDOR { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VENDEDOR> VENDEDOR { get; set; }
     }
 }

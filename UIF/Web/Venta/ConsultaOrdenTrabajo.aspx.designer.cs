@@ -67,51 +67,6 @@ namespace Web.Venta {
         protected global::System.Web.UI.WebControls.Button _btnBuscar;
         
         /// <summary>
-        /// Control _literalDetallaHistorial.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal _literalDetallaHistorial;
-        
-        /// <summary>
-        /// Control _datosHistorial.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView _datosHistorial;
-        
-        /// <summary>
-        /// Control _literalHistorialPago.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal _literalHistorialPago;
-        
-        /// <summary>
-        /// Control _cuentaPorCobrarId.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField _cuentaPorCobrarId;
-        
-        /// <summary>
-        /// Control _datosPago.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView _datosPago;
-        
-        /// <summary>
         /// Control Literal1.
         /// </summary>
         /// <remarks>
@@ -254,6 +209,42 @@ namespace Web.Venta {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView _datos;
+        
+        /// <summary>
+        /// Control _literalDetallaHistorial.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal _literalDetallaHistorial;
+        
+        /// <summary>
+        /// Control _datosHistorial.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView _datosHistorial;
+        
+        /// <summary>
+        /// Control _cuentaPorCobrarId.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField _cuentaPorCobrarId;
+        
+        /// <summary>
+        /// Control _datosPago.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView _datosPago;
         
         /// <summary>
         /// Control _cerrarOrdenTrabajo.

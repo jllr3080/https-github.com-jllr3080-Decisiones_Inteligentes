@@ -28,7 +28,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual DbSet<CONTROL_USUARIO> CONTROL_USUARIO { get; set; }
         public virtual DbSet<ARQUEO_CAJA> ARQUEO_CAJA { get; set; }
         public virtual DbSet<DETALLE_ARQUEO_CAJA> DETALLE_ARQUEO_CAJA { get; set; }
-        public virtual DbSet<CABECERA_FACTURACION> CABECERA_FACTURACION { get; set; }
         public virtual DbSet<SECUENCIALES_SRI> SECUENCIALES_SRI { get; set; }
         public virtual DbSet<CIUDAD> CIUDAD { get; set; }
         public virtual DbSet<CLIENTE> CLIENTE { get; set; }
@@ -46,8 +45,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual DbSet<ESPECIALIDAD_EMPLEADO> ESPECIALIDAD_EMPLEADO { get; set; }
         public virtual DbSet<ESTADO_CIVIL> ESTADO_CIVIL { get; set; }
         public virtual DbSet<ESTADO_PAGO> ESTADO_PAGO { get; set; }
-        public virtual DbSet<IMPUESTO> IMPUESTO { get; set; }
-        public virtual DbSet<LLEVA_CONTABILIDAD> LLEVA_CONTABILIDAD { get; set; }
         public virtual DbSet<MARCA> MARCA { get; set; }
         public virtual DbSet<MATERIAL> MATERIAL { get; set; }
         public virtual DbSet<MODELO> MODELO { get; set; }
@@ -86,7 +83,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual DbSet<USUARIO_PERFIL> USUARIO_PERFIL { get; set; }
         public virtual DbSet<USUARIO_PREGUNTA_SEGURIDAD> USUARIO_PREGUNTA_SEGURIDAD { get; set; }
         public virtual DbSet<USUARIO_SEGURIDAD> USUARIO_SEGURIDAD { get; set; }
-        public virtual DbSet<DETALLE_ORDEN_TRABAJO> DETALLE_ORDEN_TRABAJO { get; set; }
         public virtual DbSet<NUMERACION_ORDEN> NUMERACION_ORDEN { get; set; }
         public virtual DbSet<ORDEN_TRABAJO> ORDEN_TRABAJO { get; set; }
         public virtual DbSet<VENTA_COMISION> VENTA_COMISION { get; set; }
@@ -102,5 +98,25 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual DbSet<INDIVIDUO_ROL> INDIVIDUO_ROL { get; set; }
         public virtual DbSet<TIPO_ROL_INDIVIDUO> TIPO_ROL_INDIVIDUO { get; set; }
         public virtual DbSet<INDIVIDUO> INDIVIDUO { get; set; }
+        public virtual DbSet<PROVEEDOR> PROVEEDOR { get; set; }
+        public virtual DbSet<VENDEDOR> VENDEDOR { get; set; }
+        public virtual DbSet<BANCO> BANCO { get; set; }
+        public virtual DbSet<CONDICION_IMPUESTO> CONDICION_IMPUESTO { get; set; }
+        public virtual DbSet<GRUPO_IMPUESTO> GRUPO_IMPUESTO { get; set; }
+        public virtual DbSet<PORCENTAJE_IMPUESTO> PORCENTAJE_IMPUESTO { get; set; }
+        public virtual DbSet<PORCENTAJE_IMPUESTO_SUCURSAL> PORCENTAJE_IMPUESTO_SUCURSAL { get; set; }
+        public virtual DbSet<IMPUESTO> IMPUESTO { get; set; }
+        public virtual DbSet<CABECERA_MOVIMIENTO_FACTURA> CABECERA_MOVIMIENTO_FACTURA { get; set; }
+        public virtual DbSet<CABECERA_MOVIMIENTO_FE> CABECERA_MOVIMIENTO_FE { get; set; }
+        public virtual DbSet<CABECERA_MOVIMIENTO_TRIBUTARIO> CABECERA_MOVIMIENTO_TRIBUTARIO { get; set; }
+        public virtual DbSet<DETALLE_MOVIMIENTO_FACTURA> DETALLE_MOVIMIENTO_FACTURA { get; set; }
+        public virtual DbSet<PROVEEDOR_IMPUESTO> PROVEEDOR_IMPUESTO { get; set; }
+        public virtual DbSet<ESTADO_COMPROBANTE_ELECTRONICO> ESTADO_COMPROBANTE_ELECTRONICO { get; set; }
+        public virtual DbSet<MENSAJE> MENSAJE { get; set; }
+        public virtual DbSet<TIPO_COMPROBANTE> TIPO_COMPROBANTE { get; set; }
+        public virtual DbSet<TIPO_MENSAJE> TIPO_MENSAJE { get; set; }
+        public virtual DbSet<CABECERA_FACTURACION> CABECERA_FACTURACION { get; set; }
+        public virtual DbSet<ORDEN_TRABAJO_COMISION> ORDEN_TRABAJO_COMISION { get; set; }
+        public virtual DbSet<DETALLE_ORDEN_TRABAJO> DETALLE_ORDEN_TRABAJO { get; set; }
     }
 }

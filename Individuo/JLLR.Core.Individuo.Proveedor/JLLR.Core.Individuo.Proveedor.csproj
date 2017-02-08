@@ -57,10 +57,12 @@
     <Compile Include="DAOs\DireccionDAOs.cs" />
     <Compile Include="DAOs\IndividuoDAOs.cs" />
     <Compile Include="DAOs\IndividuoRolDAOs.cs" />
+    <Compile Include="DAOs\ProveedorDAOs.cs" />
     <Compile Include="DAOs\TelefonoDAOs.cs" />
     <Compile Include="DAOs\TransaccionalDAOs.cs" />
     <Compile Include="DTOs\ClienteDTOs.cs" />
     <Compile Include="DTOs\ClienteGeneralDTOs.cs" />
+    <Compile Include="DTOs\ProveedorDTOs.cs" />
     <Compile Include="Negocio\IndividuoNegocio.cs" />
     <Compile Include="Negocio\IndividuoParametrizacion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

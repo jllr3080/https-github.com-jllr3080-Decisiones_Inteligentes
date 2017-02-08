@@ -64,7 +64,19 @@
     <Compile Include="Entidades\ARQUEO_CAJA.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entidades\BANCO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entidades\CABECERA_FACTURACION.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\CABECERA_MOVIMIENTO_FACTURA.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\CABECERA_MOVIMIENTO_FE.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\CABECERA_MOVIMIENTO_TRIBUTARIO.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\CIUDAD.cs">
@@ -74,6 +86,9 @@
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\COLOR.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\CONDICION_IMPUESTO.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\CONTROL_USUARIO.cs">
@@ -103,6 +118,9 @@
     <Compile Include="Entidades\DETALLE_ARQUEO_CAJA.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entidades\DETALLE_MOVIMIENTO_FACTURA.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entidades\DETALLE_ORDEN_TRABAJO.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
@@ -130,6 +148,9 @@
     <Compile Include="Entidades\ESTADO_CIVIL.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entidades\ESTADO_COMPROBANTE_ELECTRONICO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entidades\ESTADO_PAGO.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
@@ -140,6 +161,9 @@
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\FORMA_PAGO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\GRUPO_IMPUESTO.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\GRUPO_PRODUCTO.cs">
@@ -169,13 +193,13 @@
     <Compile Include="Entidades\INDIVIDUO_ROL.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entidades\LLEVA_CONTABILIDAD.cs">
-      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
-    </Compile>
     <Compile Include="Entidades\MARCA.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\MATERIAL.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\MENSAJE.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\MODELO.cs">
@@ -196,6 +220,9 @@
     <Compile Include="Entidades\ORDEN_TRABAJO.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entidades\ORDEN_TRABAJO_COMISION.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entidades\PAIS.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
@@ -203,6 +230,12 @@
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\PERFIL.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\PORCENTAJE_IMPUESTO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\PORCENTAJE_IMPUESTO_SUCURSAL.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\PREGUNTA_SEGURIDAD.cs">
@@ -218,6 +251,12 @@
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\PRODUCTO_VS_GRUPO_PRODUCTO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\PROVEEDOR.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\PROVEEDOR_IMPUESTO.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\PUNTO_VENTA.cs">
@@ -239,6 +278,9 @@
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\TIPO_AMBIENTE.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\TIPO_COMPROBANTE.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\TIPO_CORREO_ELECTRONICO.cs">
@@ -265,6 +307,9 @@
     <Compile Include="Entidades\TIPO_LAVADO.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entidades\TIPO_MENSAJE.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entidades\TIPO_PRODUCTO.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
@@ -287,6 +332,9 @@
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\USUARIO_SEGURIDAD.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\VENDEDOR.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\VENTA_COMISION.cs">

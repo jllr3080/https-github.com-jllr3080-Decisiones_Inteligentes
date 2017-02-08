@@ -105,10 +105,70 @@
           <Property Name="CABECERA_FACTURACION_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PUNTO_VENTA_ID" Type="int" />
           <Property Name="SUCURSAL_ID" Type="int" />
-          <Property Name="LLEVA_CONTABILIDAD_ID" Type="int" />
           <Property Name="TIPO_AMBIENTE_ID" Type="int" />
           <Property Name="TIPO_EMISION_ID" Type="int" />
+          <Property Name="RAZON_SOCIAL" Type="varchar" MaxLength="100" />
+          <Property Name="NOMBRE_COMERCIAL" Type="varchar" MaxLength="100" />
+          <Property Name="RUC" Type="varchar" MaxLength="13" />
+          <Property Name="ESTABLECIMIENTO" Type="varchar" MaxLength="10" />
+          <Property Name="DIRECCION_MATRIZ" Type="varchar" MaxLength="150" />
+          <Property Name="LLEVA_CONTABILIDAD" Type="bit" />
+        </EntityType>
+        <EntityType Name="CABECERA_MOVIMIENTO_FACTURA">
+          <Key>
+            <PropertyRef Name="CABECERA_MOVIMIENTO_FACTURA_ID" />
+          </Key>
+          <Property Name="CABECERA_MOVIMIENTO_FACTURA_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CABECERA_MOVIMIENTO_TRIBUTARIO_ID" Type="bigint" />
+          <Property Name="FECHA_EMISION" Type="datetime" />
+          <Property Name="DIRECCION" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="CABECERA_MOVIMIENTO_FE">
+          <Key>
+            <PropertyRef Name="CABECERA_MOVIMIENTO_FE_ID" />
+          </Key>
+          <Property Name="CABECERA_MOVIMIENTO_FE_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TIPO_COMPROBANTE_ID" Type="int" />
+          <Property Name="TIPO_IDENTIFICACION_ID" Type="int" />
+          <Property Name="ESTADO_COMPROBANTE_ELECTRONICO_ID" Type="int" />
+          <Property Name="USUARIO_ID" Type="int" />
           <Property Name="MONEDA_ID" Type="int" />
+          <Property Name="INDIVIDUO_ROL_ID" Type="int" />
+          <Property Name="MENSAJE_ID" Type="int" />
+          <Property Name="CABECERA_MOVIMIENTO_TRIBUTARIO_ID" Type="bigint" />
+          <Property Name="FECHA_EMISION" Type="datetime" />
+          <Property Name="CORREO_ELECTRONICO" Type="varchar" MaxLength="150" />
+          <Property Name="FECHA_ENVIO" Type="datetime" />
+          <Property Name="DIRECCION" Type="varchar" MaxLength="250" />
+          <Property Name="TELEFONO" Type="varchar" MaxLength="20" />
+          <Property Name="FAX" Type="varchar" MaxLength="20" />
+          <Property Name="NUMERO_COMPROBANTE" Type="bigint" />
+          <Property Name="COMPRA_O_VENTA" Type="bit" />
+          <Property Name="CLAVE_ACCESO" Type="varchar" MaxLength="50" />
+          <Property Name="NUMERO_AUTORIZACION" Type="varchar" MaxLength="50" />
+          <Property Name="FECHA_AUTORIZACION" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CABECERA_MOVIMIENTO_TRIBUTARIO">
+          <Key>
+            <PropertyRef Name="CABECERA_MOVIMIENTO_TRIBUTARIO_ID" />
+          </Key>
+          <Property Name="CABECERA_MOVIMIENTO_TRIBUTARIO_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CABECERA_FACTURACION_ID" Type="int" />
+          <Property Name="ESTABLECIMIENTO" Type="varchar" MaxLength="3" />
+          <Property Name="PUNTO_EMISION" Type="varchar" MaxLength="3" />
+          <Property Name="SECUENCIAL" Type="varchar" MaxLength="9" />
+        </EntityType>
+        <EntityType Name="DETALLE_MOVIMIENTO_FACTURA">
+          <Key>
+            <PropertyRef Name="DETALLE_MOVIMIENTO_FACTURA_ID" />
+          </Key>
+          <Property Name="DETALLE_MOVIMIENTO_FACTURA_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CABECERA_MOVIMIENTO_FACTURA_ID" Type="bigint" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="250" />
+          <Property Name="CANTIDAD" Type="int" />
+          <Property Name="PRECIO_UNITARIO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DESCUENTO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TOTAL_SIN_IMPUESTOS" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="SECUENCIALES_SRI">
           <Key>
@@ -117,6 +177,7 @@
           <Property Name="SECUENCIALES_SRI_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PUNTO_VENTA_ID" Type="int" />
           <Property Name="SUCURSAL_ID" Type="int" />
+          <Property Name="TIPO_COMPROBANTE_ID" Type="int" />
           <Property Name="SECUENCIAL_TEXTO" Type="varchar" MaxLength="9" />
           <Property Name="SECUENCIAL_NUMERO" Type="int" />
           <Property Name="ESTABLECIMIENTO" Type="varchar" MaxLength="3" />
@@ -231,6 +292,27 @@
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="75" />
           <Property Name="POR_DEFECTO" Type="bit" />
         </EntityType>
+        <EntityType Name="PROVEEDOR">
+          <Key>
+            <PropertyRef Name="PROVEEDOR_ID" />
+          </Key>
+          <Property Name="PROVEEDOR_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="INDIVIDUO_ID" Type="int" />
+          <Property Name="FORMA_PAGO_ID" Type="int" />
+          <Property Name="DIAS_CREDITO" Type="int" />
+          <Property Name="NOMBRE_REPRESENTANTE" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="PROVEEDOR_IMPUESTO">
+          <Key>
+            <PropertyRef Name="PROVEEDOR_IMPUESTO_ID" />
+          </Key>
+          <Property Name="PROVEEDOR_IMPUESTO_ID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CONDICION_IMPUESTO_ID" Type="int" />
+          <Property Name="GRUPO_IMPUESTO_ID" Type="int" />
+          <Property Name="IMPUESTO_ID" Type="int" />
+          <Property Name="PORCENTAJE_IMPUESTO_ID" Type="int" />
+          <Property Name="PROVEEDOR_ID" Type="int" />
+        </EntityType>
         <EntityType Name="TELEFONO">
           <Key>
             <PropertyRef Name="TELEFONO_ID" />
@@ -239,6 +321,15 @@
           <Property Name="INDIVIDUO_ID" Type="int" />
           <Property Name="TIPO_TELEFONO_ID" Type="int" />
           <Property Name="NUMERO_TELEFONO" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="VENDEDOR">
+          <Key>
+            <PropertyRef Name="VENDEDOR_ID" />
+          </Key>
+          <Property Name="VENDEDOR_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="INDIVIDUO_ID" Type="int" />
+          <Property Name="ES_EMPLEADO" Type="bit" />
+          <Property Name="HABILITADO" Type="bit" />
         </EntityType>
         <EntityType Name="AGENDA_VISITA">
           <Key>
@@ -283,6 +374,15 @@
           <Property Name="VISITA_JUEVES" Type="bit" />
           <Property Name="VISITA_VIERNES" Type="bit" />
         </EntityType>
+        <EntityType Name="BANCO">
+          <Key>
+            <PropertyRef Name="BANCO_ID" />
+          </Key>
+          <Property Name="BANCO_ID" Type="int" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="150" />
+          <Property Name="HABILITADO" Type="bit" />
+          <Property Name="CODIGO_SIB" Type="varchar" MaxLength="4" />
+        </EntityType>
         <EntityType Name="COLOR">
           <Key>
             <PropertyRef Name="COLOR_ID" />
@@ -290,6 +390,15 @@
           <Property Name="COLOR_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="100" />
           <Property Name="ESTA_HABILITADO" Type="bit" />
+        </EntityType>
+        <EntityType Name="CONDICION_IMPUESTO">
+          <Key>
+            <PropertyRef Name="CONDICION_IMPUESTO_ID" />
+          </Key>
+          <Property Name="CONDICION_IMPUESTO_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IMPUESTO_ID" Type="int" />
+          <Property Name="HABILITADO" Type="bit" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="DIA">
           <Key>
@@ -315,6 +424,14 @@
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="100" />
           <Property Name="ESTA_HABILITADO" Type="bit" />
         </EntityType>
+        <EntityType Name="ESTADO_COMPROBANTE_ELECTRONICO">
+          <Key>
+            <PropertyRef Name="ESTADO_COMPROBANTE_ELECTRONICO_ID" />
+          </Key>
+          <Property Name="ESTADO_COMPROBANTE_ELECTRONICO_ID" Type="int" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="50" />
+          <Property Name="ABREVIATURA" Type="char" MaxLength="3" />
+        </EntityType>
         <EntityType Name="ESTADO_PAGO">
           <Key>
             <PropertyRef Name="ESTADO_PAGO_ID" />
@@ -339,23 +456,25 @@
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="50" />
           <Property Name="ESTA_HABILITADO" Type="bit" />
         </EntityType>
+        <EntityType Name="GRUPO_IMPUESTO">
+          <Key>
+            <PropertyRef Name="GRUPO_IMPUESTO_ID" />
+          </Key>
+          <Property Name="GRUPO_IMPUESTO_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IMPUESTO_ID" Type="int" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="100" />
+          <Property Name="HABILITADO" Type="bit" />
+        </EntityType>
         <EntityType Name="IMPUESTO">
           <Key>
             <PropertyRef Name="IMPUESTO_ID" />
           </Key>
           <Property Name="IMPUESTO_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="75" />
-          <Property Name="PORCENTAJE" Type="decimal" Precision="8" Scale="4" />
           <Property Name="ESTA_HABILITADO" Type="bit" />
           <Property Name="FECHA_CREACION" Type="datetime" />
-        </EntityType>
-        <EntityType Name="LLEVA_CONTABILIDAD">
-          <Key>
-            <PropertyRef Name="LLEVA_CONTABILIDAD_ID" />
-          </Key>
-          <Property Name="LLEVA_CONTABILIDAD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DESCRIPCION" Type="varchar" MaxLength="50" />
-          <Property Name="ESTA_HABILITADO" Type="bit" />
+          <Property Name="FECHA_FIN_VIGENCIA" Type="int" />
+          <Property Name="TIENE_RETENCION" Type="bit" />
         </EntityType>
         <EntityType Name="MARCA">
           <Key>
@@ -373,6 +492,15 @@
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="75" />
           <Property Name="ESTA_HABILITADO" Type="bit" />
         </EntityType>
+        <EntityType Name="MENSAJE">
+          <Key>
+            <PropertyRef Name="MENSAJE_ID" />
+          </Key>
+          <Property Name="MENSAJE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TIPO_MENSAJE_ID" Type="int" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="200" />
+          <Property Name="ABREVIATURA" Type="char" MaxLength="3" />
+        </EntityType>
         <EntityType Name="MODELO">
           <Key>
             <PropertyRef Name="MODELO_ID" />
@@ -389,6 +517,7 @@
           <Property Name="MONEDA_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="50" />
           <Property Name="ESTA_HABILITADO" Type="bit" />
+          <Property Name="ABREVITURA" Type="varchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="NIVEL_EDUCACION">
           <Key>
@@ -408,6 +537,26 @@
           <Property Name="NUMERO_ENTERO" Type="int" />
           <Property Name="FECHA" Type="datetime" />
           <Property Name="BOOLEANO" Type="bit" />
+        </EntityType>
+        <EntityType Name="PORCENTAJE_IMPUESTO">
+          <Key>
+            <PropertyRef Name="PORCENTAJE_IMPUESTO_ID" />
+          </Key>
+          <Property Name="PORCENTAJE_IMPUESTO_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IMPUESTO_ID" Type="int" />
+          <Property Name="GRUPO_IMPUESTO_ID" Type="int" />
+          <Property Name="CONDICION_IMPUESTO_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="PORCENTAJE_IMPUESTO_SUCURSAL">
+          <Key>
+            <PropertyRef Name="PORCENTAJE_IMPUESTO_SUCURSAL_ID" />
+          </Key>
+          <Property Name="PORCENTAJE_IMPUESTO_SUCURSAL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PORCENTAJE_IMPUESTO_ID" Type="int" />
+          <Property Name="PORCENTAJE" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="BASE_MINIMA" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="BASE_MAXIMA" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="SUCURSAL_ID" Type="int" />
         </EntityType>
         <EntityType Name="PUNTO_VENTA">
           <Key>
@@ -443,6 +592,14 @@
           <Property Name="TIPO_AMBIENTE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="50" />
           <Property Name="ESTA_HABILITADO" Type="bit" />
+        </EntityType>
+        <EntityType Name="TIPO_COMPROBANTE">
+          <Key>
+            <PropertyRef Name="TIPO_COMPROBANTE_ID" />
+          </Key>
+          <Property Name="TIPO_COMPROBANTE_ID" Type="int" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="30" />
+          <Property Name="CODIGO_SRI" Type="char" MaxLength="2" />
         </EntityType>
         <EntityType Name="TIPO_CORREO_ELECTRONICO">
           <Key>
@@ -507,6 +664,13 @@
           <Property Name="TIPO_LAVADO_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="75" />
           <Property Name="ESTA_HABILITADO" Type="bit" />
+        </EntityType>
+        <EntityType Name="TIPO_MENSAJE">
+          <Key>
+            <PropertyRef Name="TIPO_MENSAJE_ID" />
+          </Key>
+          <Property Name="TIPO_MENSAJE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="TIPO_ROL_INDIVIDUO">
           <Key>
@@ -702,7 +866,6 @@
           <Property Name="DETALLE_ORDEN_TRABAJO_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ORDEN_TRABAJO_ID" Type="bigint" />
           <Property Name="PRODUCTO_ID" Type="int" />
-          <Property Name="IMPUESTO_ID" Type="int" />
           <Property Name="COLOR_ID" Type="int" />
           <Property Name="CANTIDAD" Type="int" />
           <Property Name="VALOR_UNITARIO" Type="decimal" Precision="18" Scale="4" />
@@ -712,7 +875,7 @@
           <Property Name="PRODUCTO_TALLA_ID" Type="int" />
           <Property Name="MARCA_ID" Type="int" />
           <Property Name="MATERIAL_ID" Type="int" />
-          <Property Name="VENTA_COMISION_ID" Type="int" />
+          <Property Name="PORCENTAJE_IMPUESTO_SUCURSAL_ID" Type="int" />
         </EntityType>
         <EntityType Name="DETALLE_ORDEN_TRABAJO_OBSERVACION">
           <Key>
@@ -762,6 +925,17 @@
           <Property Name="NUMERO_ORDEN" Type="varchar" MaxLength="20" />
           <Property Name="ENVIO_MATRIZ" Type="bit" />
           <Property Name="SE_ENVIO" Type="bit" />
+        </EntityType>
+        <EntityType Name="ORDEN_TRABAJO_COMISION">
+          <Key>
+            <PropertyRef Name="ORDEN_TRABAJO_COMISION_ID" />
+          </Key>
+          <Property Name="ORDEN_TRABAJO_COMISION_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ORDEN_TRABAJO_ID" Type="bigint" />
+          <Property Name="VENTA_COMISION_ID" Type="int" />
+          <Property Name="FECHA_GENERACION_COMISION" Type="datetime" />
+          <Property Name="USUARIO_ID" Type="int" />
+          <Property Name="VALOR" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="VENTA_COMISION">
           <Key>
@@ -847,30 +1021,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CABECERA_FACTURACION_VS_LLEVA_CONTABILIDAD">
-          <End Role="LLEVA_CONTABILIDAD" Type="Self.LLEVA_CONTABILIDAD" Multiplicity="0..1" />
-          <End Role="CABECERA_FACTURACION" Type="Self.CABECERA_FACTURACION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LLEVA_CONTABILIDAD">
-              <PropertyRef Name="LLEVA_CONTABILIDAD_ID" />
-            </Principal>
-            <Dependent Role="CABECERA_FACTURACION">
-              <PropertyRef Name="LLEVA_CONTABILIDAD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CABECERA_FACTURACION_VS_MONEDA">
-          <End Role="MONEDA" Type="Self.MONEDA" Multiplicity="0..1" />
-          <End Role="CABECERA_FACTURACION" Type="Self.CABECERA_FACTURACION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MONEDA">
-              <PropertyRef Name="MONEDA_ID" />
-            </Principal>
-            <Dependent Role="CABECERA_FACTURACION">
-              <PropertyRef Name="MONEDA_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CABECERA_FACTURACION_VS_PUNTO_VENTA">
           <End Role="PUNTO_VENTA" Type="Self.PUNTO_VENTA" Multiplicity="0..1" />
           <End Role="CABECERA_FACTURACION" Type="Self.CABECERA_FACTURACION" Multiplicity="*" />
@@ -916,6 +1066,126 @@
             </Principal>
             <Dependent Role="CABECERA_FACTURACION">
               <PropertyRef Name="TIPO_EMISION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CABECERA_MOV_FACTURA_VS_CABECERA_MOV_TRIB">
+          <End Role="CABECERA_MOVIMIENTO_TRIBUTARIO" Type="Self.CABECERA_MOVIMIENTO_TRIBUTARIO" Multiplicity="0..1" />
+          <End Role="CABECERA_MOVIMIENTO_FACTURA" Type="Self.CABECERA_MOVIMIENTO_FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CABECERA_MOVIMIENTO_TRIBUTARIO">
+              <PropertyRef Name="CABECERA_MOVIMIENTO_TRIBUTARIO_ID" />
+            </Principal>
+            <Dependent Role="CABECERA_MOVIMIENTO_FACTURA">
+              <PropertyRef Name="CABECERA_MOVIMIENTO_TRIBUTARIO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CABECERA_MOV_FE_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="CABECERA_MOVIMIENTO_FE" Type="Self.CABECERA_MOVIMIENTO_FE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="USUARIO_ID" />
+            </Principal>
+            <Dependent Role="CABECERA_MOVIMIENTO_FE">
+              <PropertyRef Name="USUARIO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CABECERA_MOV_FE_VS_ESTADO_COMPROBANTE_ELECTRONICO">
+          <End Role="ESTADO_COMPROBANTE_ELECTRONICO" Type="Self.ESTADO_COMPROBANTE_ELECTRONICO" Multiplicity="0..1" />
+          <End Role="CABECERA_MOVIMIENTO_FE" Type="Self.CABECERA_MOVIMIENTO_FE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO_COMPROBANTE_ELECTRONICO">
+              <PropertyRef Name="ESTADO_COMPROBANTE_ELECTRONICO_ID" />
+            </Principal>
+            <Dependent Role="CABECERA_MOVIMIENTO_FE">
+              <PropertyRef Name="ESTADO_COMPROBANTE_ELECTRONICO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CABECERA_MOV_FE_VS_INDIVIDUO_ROL">
+          <End Role="INDIVIDUO_ROL" Type="Self.INDIVIDUO_ROL" Multiplicity="0..1" />
+          <End Role="CABECERA_MOVIMIENTO_FE" Type="Self.CABECERA_MOVIMIENTO_FE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INDIVIDUO_ROL">
+              <PropertyRef Name="INDIVIDUO_ROL_ID" />
+            </Principal>
+            <Dependent Role="CABECERA_MOVIMIENTO_FE">
+              <PropertyRef Name="INDIVIDUO_ROL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CABECERA_MOV_FE_VS_MONEDA">
+          <End Role="MONEDA" Type="Self.MONEDA" Multiplicity="0..1" />
+          <End Role="CABECERA_MOVIMIENTO_FE" Type="Self.CABECERA_MOVIMIENTO_FE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MONEDA">
+              <PropertyRef Name="MONEDA_ID" />
+            </Principal>
+            <Dependent Role="CABECERA_MOVIMIENTO_FE">
+              <PropertyRef Name="MONEDA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CABECERA_MOV_TRIBUTARIO_VS_CABECERA_FACTURACION">
+          <End Role="CABECERA_FACTURACION" Type="Self.CABECERA_FACTURACION" Multiplicity="0..1" />
+          <End Role="CABECERA_MOVIMIENTO_TRIBUTARIO" Type="Self.CABECERA_MOVIMIENTO_TRIBUTARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CABECERA_FACTURACION">
+              <PropertyRef Name="CABECERA_FACTURACION_ID" />
+            </Principal>
+            <Dependent Role="CABECERA_MOVIMIENTO_TRIBUTARIO">
+              <PropertyRef Name="CABECERA_FACTURACION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CABECERA_MOVIMIENTO_FE_CABECERA_MOV_TRIBUTARIO">
+          <End Role="CABECERA_MOVIMIENTO_TRIBUTARIO" Type="Self.CABECERA_MOVIMIENTO_TRIBUTARIO" Multiplicity="0..1" />
+          <End Role="CABECERA_MOVIMIENTO_FE" Type="Self.CABECERA_MOVIMIENTO_FE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CABECERA_MOVIMIENTO_TRIBUTARIO">
+              <PropertyRef Name="CABECERA_MOVIMIENTO_TRIBUTARIO_ID" />
+            </Principal>
+            <Dependent Role="CABECERA_MOVIMIENTO_FE">
+              <PropertyRef Name="CABECERA_MOVIMIENTO_TRIBUTARIO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CABECERA_MOVIMIENTO_FE_VS_MENSAJE">
+          <End Role="MENSAJE" Type="Self.MENSAJE" Multiplicity="0..1" />
+          <End Role="CABECERA_MOVIMIENTO_FE" Type="Self.CABECERA_MOVIMIENTO_FE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MENSAJE">
+              <PropertyRef Name="MENSAJE_ID" />
+            </Principal>
+            <Dependent Role="CABECERA_MOVIMIENTO_FE">
+              <PropertyRef Name="MENSAJE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CABECERA_MOVIMIENTO_FE_VS_TIPO_COMPROBANTE">
+          <End Role="TIPO_COMPROBANTE" Type="Self.TIPO_COMPROBANTE" Multiplicity="0..1" />
+          <End Role="CABECERA_MOVIMIENTO_FE" Type="Self.CABECERA_MOVIMIENTO_FE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_COMPROBANTE">
+              <PropertyRef Name="TIPO_COMPROBANTE_ID" />
+            </Principal>
+            <Dependent Role="CABECERA_MOVIMIENTO_FE">
+              <PropertyRef Name="TIPO_COMPROBANTE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CABECERA_MOVIMIENTO_FE_VS_TIPO_IDENTIFICACION">
+          <End Role="TIPO_IDENTIFICACION" Type="Self.TIPO_IDENTIFICACION" Multiplicity="0..1" />
+          <End Role="CABECERA_MOVIMIENTO_FE" Type="Self.CABECERA_MOVIMIENTO_FE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_IDENTIFICACION">
+              <PropertyRef Name="TIPO_IDENTIFICACION_ID" />
+            </Principal>
+            <Dependent Role="CABECERA_MOVIMIENTO_FE">
+              <PropertyRef Name="TIPO_IDENTIFICACION_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -967,6 +1237,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CONDICION_IMPUESTO_VS_IMPUESTO">
+          <End Role="IMPUESTO" Type="Self.IMPUESTO" Multiplicity="0..1" />
+          <End Role="CONDICION_IMPUESTO" Type="Self.CONDICION_IMPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IMPUESTO">
+              <PropertyRef Name="IMPUESTO_ID" />
+            </Principal>
+            <Dependent Role="CONDICION_IMPUESTO">
+              <PropertyRef Name="IMPUESTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CONTROL_USUARIO_VS_USUARIO">
           <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
           <End Role="CONTROL_USUARIO" Type="Self.CONTROL_USUARIO" Multiplicity="*" />
@@ -988,6 +1270,18 @@
             </Principal>
             <Dependent Role="DETALLE_ARQUEO_CAJA">
               <PropertyRef Name="ARQUEO_CAJA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE_MOV_FACTURA_VS_CABECERA_MOV_FACT">
+          <End Role="CABECERA_MOVIMIENTO_FACTURA" Type="Self.CABECERA_MOVIMIENTO_FACTURA" Multiplicity="0..1" />
+          <End Role="DETALLE_MOVIMIENTO_FACTURA" Type="Self.DETALLE_MOVIMIENTO_FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CABECERA_MOVIMIENTO_FACTURA">
+              <PropertyRef Name="CABECERA_MOVIMIENTO_FACTURA_ID" />
+            </Principal>
+            <Dependent Role="DETALLE_MOVIMIENTO_FACTURA">
+              <PropertyRef Name="CABECERA_MOVIMIENTO_FACTURA_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1015,18 +1309,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DETALLE_ORDEN_TRABAJO_VS_VENTA_COMISION">
-          <End Role="VENTA_COMISION" Type="Self.VENTA_COMISION" Multiplicity="0..1" />
-          <End Role="DETALLE_ORDEN_TRABAJO" Type="Self.DETALLE_ORDEN_TRABAJO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VENTA_COMISION">
-              <PropertyRef Name="VENTA_COMISION_ID" />
-            </Principal>
-            <Dependent Role="DETALLE_ORDEN_TRABAJO">
-              <PropertyRef Name="VENTA_COMISION_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DETALLE_OT_OBSERVACION_VS_DETALLE_OT">
           <End Role="DETALLE_ORDEN_TRABAJO" Type="Self.DETALLE_ORDEN_TRABAJO" Multiplicity="0..1" />
           <End Role="DETALLE_ORDEN_TRABAJO_OBSERVACION" Type="Self.DETALLE_ORDEN_TRABAJO_OBSERVACION" Multiplicity="*" />
@@ -1048,18 +1330,6 @@
             </Principal>
             <Dependent Role="DETALLE_ORDEN_TRABAJO">
               <PropertyRef Name="COLOR_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DETALLE_OT_VS_IMPUESTO">
-          <End Role="IMPUESTO" Type="Self.IMPUESTO" Multiplicity="0..1" />
-          <End Role="DETALLE_ORDEN_TRABAJO" Type="Self.DETALLE_ORDEN_TRABAJO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="IMPUESTO">
-              <PropertyRef Name="IMPUESTO_ID" />
-            </Principal>
-            <Dependent Role="DETALLE_ORDEN_TRABAJO">
-              <PropertyRef Name="IMPUESTO_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1219,6 +1489,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_GRUPO_IMPUESTO_VS_IMPUESTO">
+          <End Role="IMPUESTO" Type="Self.IMPUESTO" Multiplicity="0..1" />
+          <End Role="GRUPO_IMPUESTO" Type="Self.GRUPO_IMPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IMPUESTO">
+              <PropertyRef Name="IMPUESTO_ID" />
+            </Principal>
+            <Dependent Role="GRUPO_IMPUESTO">
+              <PropertyRef Name="IMPUESTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_HISTORIA_FK_HISTOR_USUARIO">
           <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
           <End Role="HISTORIAL_USUARIO" Type="Self.HISTORIAL_USUARIO" Multiplicity="*" />
@@ -1363,6 +1645,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_MENSAJE_VS_TIPO_MENSAJE">
+          <End Role="TIPO_MENSAJE" Type="Self.TIPO_MENSAJE" Multiplicity="0..1" />
+          <End Role="MENSAJE" Type="Self.MENSAJE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_MENSAJE">
+              <PropertyRef Name="TIPO_MENSAJE_ID" />
+            </Principal>
+            <Dependent Role="MENSAJE">
+              <PropertyRef Name="TIPO_MENSAJE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_MODELO_VS_MARCA">
           <End Role="MARCA" Type="Self.MARCA" Multiplicity="0..1" />
           <End Role="MODELO" Type="Self.MODELO" Multiplicity="*" />
@@ -1411,6 +1705,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ORDEN_TRABAJO_VS_ORDEN_TRABAJO">
+          <End Role="ORDEN_TRABAJO" Type="Self.ORDEN_TRABAJO" Multiplicity="0..1" />
+          <End Role="ORDEN_TRABAJO_COMISION" Type="Self.ORDEN_TRABAJO_COMISION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN_TRABAJO">
+              <PropertyRef Name="ORDEN_TRABAJO_ID" />
+            </Principal>
+            <Dependent Role="ORDEN_TRABAJO_COMISION">
+              <PropertyRef Name="ORDEN_TRABAJO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ORDEN_TRABAJO_VS_TIPO_LAVADO">
           <End Role="TIPO_LAVADO" Type="Self.TIPO_LAVADO" Multiplicity="0..1" />
           <End Role="ORDEN_TRABAJO" Type="Self.ORDEN_TRABAJO" Multiplicity="*" />
@@ -1420,6 +1726,78 @@
             </Principal>
             <Dependent Role="ORDEN_TRABAJO">
               <PropertyRef Name="TIPO_LAVADO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDEN_TRABAJO_VS_VENTA_COMISION">
+          <End Role="VENTA_COMISION" Type="Self.VENTA_COMISION" Multiplicity="0..1" />
+          <End Role="ORDEN_TRABAJO_COMISION" Type="Self.ORDEN_TRABAJO_COMISION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTA_COMISION">
+              <PropertyRef Name="VENTA_COMISION_ID" />
+            </Principal>
+            <Dependent Role="ORDEN_TRABAJO_COMISION">
+              <PropertyRef Name="VENTA_COMISION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PORCENTAJE_IMPUESTO_SUCURSAL_VS_PROCENTAJE_IMPUESTO">
+          <End Role="PORCENTAJE_IMPUESTO" Type="Self.PORCENTAJE_IMPUESTO" Multiplicity="0..1" />
+          <End Role="PORCENTAJE_IMPUESTO_SUCURSAL" Type="Self.PORCENTAJE_IMPUESTO_SUCURSAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PORCENTAJE_IMPUESTO">
+              <PropertyRef Name="PORCENTAJE_IMPUESTO_ID" />
+            </Principal>
+            <Dependent Role="PORCENTAJE_IMPUESTO_SUCURSAL">
+              <PropertyRef Name="PORCENTAJE_IMPUESTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PORCENTAJE_IMPUESTO_SUCURSAL_VS_SUCURSAL">
+          <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="0..1" />
+          <End Role="PORCENTAJE_IMPUESTO_SUCURSAL" Type="Self.PORCENTAJE_IMPUESTO_SUCURSAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUCURSAL">
+              <PropertyRef Name="SUCURSAL_ID" />
+            </Principal>
+            <Dependent Role="PORCENTAJE_IMPUESTO_SUCURSAL">
+              <PropertyRef Name="SUCURSAL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PORCENTAJE_IMPUESTO_VS_CONDICION_IMPUESTO">
+          <End Role="CONDICION_IMPUESTO" Type="Self.CONDICION_IMPUESTO" Multiplicity="0..1" />
+          <End Role="PORCENTAJE_IMPUESTO" Type="Self.PORCENTAJE_IMPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONDICION_IMPUESTO">
+              <PropertyRef Name="CONDICION_IMPUESTO_ID" />
+            </Principal>
+            <Dependent Role="PORCENTAJE_IMPUESTO">
+              <PropertyRef Name="CONDICION_IMPUESTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PORCENTAJE_IMPUESTO_VS_GRUPO_IMPUESTO">
+          <End Role="GRUPO_IMPUESTO" Type="Self.GRUPO_IMPUESTO" Multiplicity="0..1" />
+          <End Role="PORCENTAJE_IMPUESTO" Type="Self.PORCENTAJE_IMPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRUPO_IMPUESTO">
+              <PropertyRef Name="GRUPO_IMPUESTO_ID" />
+            </Principal>
+            <Dependent Role="PORCENTAJE_IMPUESTO">
+              <PropertyRef Name="GRUPO_IMPUESTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PORCENTAJE_IMPUESTO_VS_IMPUESTO">
+          <End Role="IMPUESTO" Type="Self.IMPUESTO" Multiplicity="0..1" />
+          <End Role="PORCENTAJE_IMPUESTO" Type="Self.PORCENTAJE_IMPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IMPUESTO">
+              <PropertyRef Name="IMPUESTO_ID" />
+            </Principal>
+            <Dependent Role="PORCENTAJE_IMPUESTO">
+              <PropertyRef Name="IMPUESTO_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1543,6 +1921,90 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PROVEEDOR_FORMA_PAGO">
+          <End Role="FORMA_PAGO" Type="Self.FORMA_PAGO" Multiplicity="0..1" />
+          <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FORMA_PAGO">
+              <PropertyRef Name="FORMA_PAGO_ID" />
+            </Principal>
+            <Dependent Role="PROVEEDOR">
+              <PropertyRef Name="FORMA_PAGO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROVEEDOR_IMPUESTO_GRUPO_IMPUESTO">
+          <End Role="GRUPO_IMPUESTO" Type="Self.GRUPO_IMPUESTO" Multiplicity="0..1" />
+          <End Role="PROVEEDOR_IMPUESTO" Type="Self.PROVEEDOR_IMPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRUPO_IMPUESTO">
+              <PropertyRef Name="GRUPO_IMPUESTO_ID" />
+            </Principal>
+            <Dependent Role="PROVEEDOR_IMPUESTO">
+              <PropertyRef Name="GRUPO_IMPUESTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROVEEDOR_IMPUESTO_IMPUESTO">
+          <End Role="IMPUESTO" Type="Self.IMPUESTO" Multiplicity="0..1" />
+          <End Role="PROVEEDOR_IMPUESTO" Type="Self.PROVEEDOR_IMPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IMPUESTO">
+              <PropertyRef Name="IMPUESTO_ID" />
+            </Principal>
+            <Dependent Role="PROVEEDOR_IMPUESTO">
+              <PropertyRef Name="IMPUESTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROVEEDOR_IMPUESTO_VS_CONDICION_IMPUESTO">
+          <End Role="CONDICION_IMPUESTO" Type="Self.CONDICION_IMPUESTO" Multiplicity="0..1" />
+          <End Role="PROVEEDOR_IMPUESTO" Type="Self.PROVEEDOR_IMPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONDICION_IMPUESTO">
+              <PropertyRef Name="CONDICION_IMPUESTO_ID" />
+            </Principal>
+            <Dependent Role="PROVEEDOR_IMPUESTO">
+              <PropertyRef Name="CONDICION_IMPUESTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROVEEDOR_IMPUESTO_VS_PORCENTAJE_IMPUESTO">
+          <End Role="PORCENTAJE_IMPUESTO" Type="Self.PORCENTAJE_IMPUESTO" Multiplicity="0..1" />
+          <End Role="PROVEEDOR_IMPUESTO" Type="Self.PROVEEDOR_IMPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PORCENTAJE_IMPUESTO">
+              <PropertyRef Name="PORCENTAJE_IMPUESTO_ID" />
+            </Principal>
+            <Dependent Role="PROVEEDOR_IMPUESTO">
+              <PropertyRef Name="PORCENTAJE_IMPUESTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROVEEDOR_IMPUESTO_VS_PROVEDEOR">
+          <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="0..1" />
+          <End Role="PROVEEDOR_IMPUESTO" Type="Self.PROVEEDOR_IMPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVEEDOR">
+              <PropertyRef Name="PROVEEDOR_ID" />
+            </Principal>
+            <Dependent Role="PROVEEDOR_IMPUESTO">
+              <PropertyRef Name="PROVEEDOR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROVEEDOR_VS_INDIVIDUO">
+          <End Role="INDIVIDUO" Type="Self.INDIVIDUO" Multiplicity="0..1" />
+          <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INDIVIDUO">
+              <PropertyRef Name="INDIVIDUO_ID" />
+            </Principal>
+            <Dependent Role="PROVEEDOR">
+              <PropertyRef Name="INDIVIDUO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PUNTO_VENTA_VS_SUCURSAL">
           <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="0..1" />
           <End Role="PUNTO_VENTA" Type="Self.PUNTO_VENTA" Multiplicity="*" />
@@ -1588,6 +2050,18 @@
             </Principal>
             <Dependent Role="SECUENCIALES_SRI">
               <PropertyRef Name="SUCURSAL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SECUENCIALES_SRI_VS_TIPO_COMPROBANTE">
+          <End Role="TIPO_COMPROBANTE" Type="Self.TIPO_COMPROBANTE" Multiplicity="0..1" />
+          <End Role="SECUENCIALES_SRI" Type="Self.SECUENCIALES_SRI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_COMPROBANTE">
+              <PropertyRef Name="TIPO_COMPROBANTE_ID" />
+            </Principal>
+            <Dependent Role="SECUENCIALES_SRI">
+              <PropertyRef Name="TIPO_COMPROBANTE_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1723,6 +2197,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_VENDEDOR_VS_INDIVIDUO">
+          <End Role="INDIVIDUO" Type="Self.INDIVIDUO" Multiplicity="0..1" />
+          <End Role="VENDEDOR" Type="Self.VENDEDOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INDIVIDUO">
+              <PropertyRef Name="INDIVIDUO_ID" />
+            </Principal>
+            <Dependent Role="VENDEDOR">
+              <PropertyRef Name="INDIVIDUO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENTA_COMISION_VS_VENDEDOR">
+          <End Role="VENDEDOR" Type="Self.VENDEDOR" Multiplicity="0..1" />
+          <End Role="VENTA_COMISION" Type="Self.VENTA_COMISION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENDEDOR">
+              <PropertyRef Name="VENDEDOR_ID" />
+            </Principal>
+            <Dependent Role="VENTA_COMISION">
+              <PropertyRef Name="VENDEDOR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_VISITA_VS_RUTA">
           <End Role="RUTA" Type="Self.RUTA" Multiplicity="0..1" />
           <End Role="VISITA" Type="Self.VISITA" Multiplicity="*" />
@@ -1756,6 +2254,10 @@
           <EntitySet Name="HISTORIAL_CUENTA_POR_COBRAR" EntityType="Self.HISTORIAL_CUENTA_POR_COBRAR" Schema="CONTABILIDAD" store:Type="Tables" />
           <EntitySet Name="HISTORIAL_CUENTA_POR_PAGAR" EntityType="Self.HISTORIAL_CUENTA_POR_PAGAR" Schema="CONTABILIDAD" store:Type="Tables" />
           <EntitySet Name="CABECERA_FACTURACION" EntityType="Self.CABECERA_FACTURACION" Schema="FE" store:Type="Tables" />
+          <EntitySet Name="CABECERA_MOVIMIENTO_FACTURA" EntityType="Self.CABECERA_MOVIMIENTO_FACTURA" Schema="FE" store:Type="Tables" />
+          <EntitySet Name="CABECERA_MOVIMIENTO_FE" EntityType="Self.CABECERA_MOVIMIENTO_FE" Schema="FE" store:Type="Tables" />
+          <EntitySet Name="CABECERA_MOVIMIENTO_TRIBUTARIO" EntityType="Self.CABECERA_MOVIMIENTO_TRIBUTARIO" Schema="FE" store:Type="Tables" />
+          <EntitySet Name="DETALLE_MOVIMIENTO_FACTURA" EntityType="Self.DETALLE_MOVIMIENTO_FACTURA" Schema="FE" store:Type="Tables" />
           <EntitySet Name="SECUENCIALES_SRI" EntityType="Self.SECUENCIALES_SRI" Schema="FE" store:Type="Tables" />
           <EntitySet Name="CIUDAD" EntityType="Self.CIUDAD" Schema="GENERAL" store:Type="Tables" />
           <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="GENERAL" store:Type="Tables" />
@@ -1767,29 +2269,39 @@
           <EntitySet Name="INDIVIDUO_BANCO" EntityType="Self.INDIVIDUO_BANCO" Schema="GENERAL" store:Type="Tables" />
           <EntitySet Name="INDIVIDUO_ROL" EntityType="Self.INDIVIDUO_ROL" Schema="GENERAL" store:Type="Tables" />
           <EntitySet Name="PAIS" EntityType="Self.PAIS" Schema="GENERAL" store:Type="Tables" />
+          <EntitySet Name="PROVEEDOR" EntityType="Self.PROVEEDOR" Schema="GENERAL" store:Type="Tables" />
+          <EntitySet Name="PROVEEDOR_IMPUESTO" EntityType="Self.PROVEEDOR_IMPUESTO" Schema="GENERAL" store:Type="Tables" />
           <EntitySet Name="TELEFONO" EntityType="Self.TELEFONO" Schema="GENERAL" store:Type="Tables" />
+          <EntitySet Name="VENDEDOR" EntityType="Self.VENDEDOR" Schema="GENERAL" store:Type="Tables" />
           <EntitySet Name="AGENDA_VISITA" EntityType="Self.AGENDA_VISITA" Schema="NEGOCIO" store:Type="Tables" />
           <EntitySet Name="HISTORIAL_PROCESO" EntityType="Self.HISTORIAL_PROCESO" Schema="NEGOCIO" store:Type="Tables" />
           <EntitySet Name="VISITA" EntityType="Self.VISITA" Schema="NEGOCIO" store:Type="Tables" />
+          <EntitySet Name="BANCO" EntityType="Self.BANCO" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="COLOR" EntityType="Self.COLOR" Schema="PARAMETRO" store:Type="Tables" />
+          <EntitySet Name="CONDICION_IMPUESTO" EntityType="Self.CONDICION_IMPUESTO" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="DIA" EntityType="Self.DIA" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="ESPECIALIDAD_EMPLEADO" EntityType="Self.ESPECIALIDAD_EMPLEADO" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="ESTADO_CIVIL" EntityType="Self.ESTADO_CIVIL" Schema="PARAMETRO" store:Type="Tables" />
+          <EntitySet Name="ESTADO_COMPROBANTE_ELECTRONICO" EntityType="Self.ESTADO_COMPROBANTE_ELECTRONICO" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="ESTADO_PAGO" EntityType="Self.ESTADO_PAGO" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="ETAPA_PROCESO" EntityType="Self.ETAPA_PROCESO" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="FORMA_PAGO" EntityType="Self.FORMA_PAGO" Schema="PARAMETRO" store:Type="Tables" />
+          <EntitySet Name="GRUPO_IMPUESTO" EntityType="Self.GRUPO_IMPUESTO" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="IMPUESTO" EntityType="Self.IMPUESTO" Schema="PARAMETRO" store:Type="Tables" />
-          <EntitySet Name="LLEVA_CONTABILIDAD" EntityType="Self.LLEVA_CONTABILIDAD" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="MARCA" EntityType="Self.MARCA" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="MATERIAL" EntityType="Self.MATERIAL" Schema="PARAMETRO" store:Type="Tables" />
+          <EntitySet Name="MENSAJE" EntityType="Self.MENSAJE" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="MODELO" EntityType="Self.MODELO" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="MONEDA" EntityType="Self.MONEDA" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="NIVEL_EDUCACION" EntityType="Self.NIVEL_EDUCACION" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="PARAMETRO" EntityType="Self.PARAMETRO" Schema="PARAMETRO" store:Type="Tables" />
+          <EntitySet Name="PORCENTAJE_IMPUESTO" EntityType="Self.PORCENTAJE_IMPUESTO" Schema="PARAMETRO" store:Type="Tables" />
+          <EntitySet Name="PORCENTAJE_IMPUESTO_SUCURSAL" EntityType="Self.PORCENTAJE_IMPUESTO_SUCURSAL" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="PUNTO_VENTA" EntityType="Self.PUNTO_VENTA" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="RUTA" EntityType="Self.RUTA" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="SUCURSAL" EntityType="Self.SUCURSAL" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="TIPO_AMBIENTE" EntityType="Self.TIPO_AMBIENTE" Schema="PARAMETRO" store:Type="Tables" />
+          <EntitySet Name="TIPO_COMPROBANTE" EntityType="Self.TIPO_COMPROBANTE" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="TIPO_CORREO_ELECTRONICO" EntityType="Self.TIPO_CORREO_ELECTRONICO" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="TIPO_CUENTA_BANCARIA" EntityType="Self.TIPO_CUENTA_BANCARIA" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="TIPO_DIRECCION" EntityType="Self.TIPO_DIRECCION" Schema="PARAMETRO" store:Type="Tables" />
@@ -1798,6 +2310,7 @@
           <EntitySet Name="TIPO_IDENTIFICACION" EntityType="Self.TIPO_IDENTIFICACION" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="TIPO_INDIVIDUO" EntityType="Self.TIPO_INDIVIDUO" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="TIPO_LAVADO" EntityType="Self.TIPO_LAVADO" Schema="PARAMETRO" store:Type="Tables" />
+          <EntitySet Name="TIPO_MENSAJE" EntityType="Self.TIPO_MENSAJE" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="TIPO_ROL_INDIVIDUO" EntityType="Self.TIPO_ROL_INDIVIDUO" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="TIPO_TELEFONO" EntityType="Self.TIPO_TELEFONO" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="UNIDAD_MEDIDA" EntityType="Self.UNIDAD_MEDIDA" Schema="PARAMETRO" store:Type="Tables" />
@@ -1824,6 +2337,7 @@
           <EntitySet Name="DETALLE_TRABAJO_FOTOGRAFIA" EntityType="Self.DETALLE_TRABAJO_FOTOGRAFIA" Schema="VENTA" store:Type="Tables" />
           <EntitySet Name="NUMERACION_ORDEN" EntityType="Self.NUMERACION_ORDEN" Schema="VENTA" store:Type="Tables" />
           <EntitySet Name="ORDEN_TRABAJO" EntityType="Self.ORDEN_TRABAJO" Schema="VENTA" store:Type="Tables" />
+          <EntitySet Name="ORDEN_TRABAJO_COMISION" EntityType="Self.ORDEN_TRABAJO_COMISION" Schema="VENTA" store:Type="Tables" />
           <EntitySet Name="VENTA_COMISION" EntityType="Self.VENTA_COMISION" Schema="VENTA" store:Type="Tables" />
           <AssociationSet Name="FK_ACCESO_PERFIL_VS_ACCESO" Association="Self.FK_ACCESO_PERFIL_VS_ACCESO">
             <End Role="ACCESO" EntitySet="ACCESO" />
@@ -1849,14 +2363,6 @@
             <End Role="VISITA" EntitySet="VISITA" />
             <End Role="AGENDA_VISITA" EntitySet="AGENDA_VISITA" />
           </AssociationSet>
-          <AssociationSet Name="FK_CABECERA_FACTURACION_VS_LLEVA_CONTABILIDAD" Association="Self.FK_CABECERA_FACTURACION_VS_LLEVA_CONTABILIDAD">
-            <End Role="LLEVA_CONTABILIDAD" EntitySet="LLEVA_CONTABILIDAD" />
-            <End Role="CABECERA_FACTURACION" EntitySet="CABECERA_FACTURACION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CABECERA_FACTURACION_VS_MONEDA" Association="Self.FK_CABECERA_FACTURACION_VS_MONEDA">
-            <End Role="MONEDA" EntitySet="MONEDA" />
-            <End Role="CABECERA_FACTURACION" EntitySet="CABECERA_FACTURACION" />
-          </AssociationSet>
           <AssociationSet Name="FK_CABECERA_FACTURACION_VS_PUNTO_VENTA" Association="Self.FK_CABECERA_FACTURACION_VS_PUNTO_VENTA">
             <End Role="PUNTO_VENTA" EntitySet="PUNTO_VENTA" />
             <End Role="CABECERA_FACTURACION" EntitySet="CABECERA_FACTURACION" />
@@ -1872,6 +2378,46 @@
           <AssociationSet Name="FK_CABECERA_FACTURACION_VS_TIPO_EMISION" Association="Self.FK_CABECERA_FACTURACION_VS_TIPO_EMISION">
             <End Role="TIPO_EMISION" EntitySet="TIPO_EMISION" />
             <End Role="CABECERA_FACTURACION" EntitySet="CABECERA_FACTURACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CABECERA_MOV_FACTURA_VS_CABECERA_MOV_TRIB" Association="Self.FK_CABECERA_MOV_FACTURA_VS_CABECERA_MOV_TRIB">
+            <End Role="CABECERA_MOVIMIENTO_TRIBUTARIO" EntitySet="CABECERA_MOVIMIENTO_TRIBUTARIO" />
+            <End Role="CABECERA_MOVIMIENTO_FACTURA" EntitySet="CABECERA_MOVIMIENTO_FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CABECERA_MOV_FE_USUARIO" Association="Self.FK_CABECERA_MOV_FE_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="CABECERA_MOVIMIENTO_FE" EntitySet="CABECERA_MOVIMIENTO_FE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CABECERA_MOV_FE_VS_ESTADO_COMPROBANTE_ELECTRONICO" Association="Self.FK_CABECERA_MOV_FE_VS_ESTADO_COMPROBANTE_ELECTRONICO">
+            <End Role="ESTADO_COMPROBANTE_ELECTRONICO" EntitySet="ESTADO_COMPROBANTE_ELECTRONICO" />
+            <End Role="CABECERA_MOVIMIENTO_FE" EntitySet="CABECERA_MOVIMIENTO_FE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CABECERA_MOV_FE_VS_INDIVIDUO_ROL" Association="Self.FK_CABECERA_MOV_FE_VS_INDIVIDUO_ROL">
+            <End Role="INDIVIDUO_ROL" EntitySet="INDIVIDUO_ROL" />
+            <End Role="CABECERA_MOVIMIENTO_FE" EntitySet="CABECERA_MOVIMIENTO_FE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CABECERA_MOV_FE_VS_MONEDA" Association="Self.FK_CABECERA_MOV_FE_VS_MONEDA">
+            <End Role="MONEDA" EntitySet="MONEDA" />
+            <End Role="CABECERA_MOVIMIENTO_FE" EntitySet="CABECERA_MOVIMIENTO_FE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CABECERA_MOV_TRIBUTARIO_VS_CABECERA_FACTURACION" Association="Self.FK_CABECERA_MOV_TRIBUTARIO_VS_CABECERA_FACTURACION">
+            <End Role="CABECERA_FACTURACION" EntitySet="CABECERA_FACTURACION" />
+            <End Role="CABECERA_MOVIMIENTO_TRIBUTARIO" EntitySet="CABECERA_MOVIMIENTO_TRIBUTARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CABECERA_MOVIMIENTO_FE_CABECERA_MOV_TRIBUTARIO" Association="Self.FK_CABECERA_MOVIMIENTO_FE_CABECERA_MOV_TRIBUTARIO">
+            <End Role="CABECERA_MOVIMIENTO_TRIBUTARIO" EntitySet="CABECERA_MOVIMIENTO_TRIBUTARIO" />
+            <End Role="CABECERA_MOVIMIENTO_FE" EntitySet="CABECERA_MOVIMIENTO_FE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CABECERA_MOVIMIENTO_FE_VS_MENSAJE" Association="Self.FK_CABECERA_MOVIMIENTO_FE_VS_MENSAJE">
+            <End Role="MENSAJE" EntitySet="MENSAJE" />
+            <End Role="CABECERA_MOVIMIENTO_FE" EntitySet="CABECERA_MOVIMIENTO_FE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CABECERA_MOVIMIENTO_FE_VS_TIPO_COMPROBANTE" Association="Self.FK_CABECERA_MOVIMIENTO_FE_VS_TIPO_COMPROBANTE">
+            <End Role="TIPO_COMPROBANTE" EntitySet="TIPO_COMPROBANTE" />
+            <End Role="CABECERA_MOVIMIENTO_FE" EntitySet="CABECERA_MOVIMIENTO_FE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CABECERA_MOVIMIENTO_FE_VS_TIPO_IDENTIFICACION" Association="Self.FK_CABECERA_MOVIMIENTO_FE_VS_TIPO_IDENTIFICACION">
+            <End Role="TIPO_IDENTIFICACION" EntitySet="TIPO_IDENTIFICACION" />
+            <End Role="CABECERA_MOVIMIENTO_FE" EntitySet="CABECERA_MOVIMIENTO_FE" />
           </AssociationSet>
           <AssociationSet Name="FK_CIUDAD_VS_ESTADO" Association="Self.FK_CIUDAD_VS_ESTADO">
             <End Role="ESTADO" EntitySet="ESTADO" />
@@ -1889,6 +2435,10 @@
             <End Role="TIPO_GENERO" EntitySet="TIPO_GENERO" />
             <End Role="CLIENTE" EntitySet="CLIENTE" />
           </AssociationSet>
+          <AssociationSet Name="FK_CONDICION_IMPUESTO_VS_IMPUESTO" Association="Self.FK_CONDICION_IMPUESTO_VS_IMPUESTO">
+            <End Role="IMPUESTO" EntitySet="IMPUESTO" />
+            <End Role="CONDICION_IMPUESTO" EntitySet="CONDICION_IMPUESTO" />
+          </AssociationSet>
           <AssociationSet Name="FK_CONTROL_USUARIO_VS_USUARIO" Association="Self.FK_CONTROL_USUARIO_VS_USUARIO">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="CONTROL_USUARIO" EntitySet="CONTROL_USUARIO" />
@@ -1896,6 +2446,10 @@
           <AssociationSet Name="FK_DETALLE_ARQUEO_CAJA_VS_ARQUEO_CAJA" Association="Self.FK_DETALLE_ARQUEO_CAJA_VS_ARQUEO_CAJA">
             <End Role="ARQUEO_CAJA" EntitySet="ARQUEO_CAJA" />
             <End Role="DETALLE_ARQUEO_CAJA" EntitySet="DETALLE_ARQUEO_CAJA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE_MOV_FACTURA_VS_CABECERA_MOV_FACT" Association="Self.FK_DETALLE_MOV_FACTURA_VS_CABECERA_MOV_FACT">
+            <End Role="CABECERA_MOVIMIENTO_FACTURA" EntitySet="CABECERA_MOVIMIENTO_FACTURA" />
+            <End Role="DETALLE_MOVIMIENTO_FACTURA" EntitySet="DETALLE_MOVIMIENTO_FACTURA" />
           </AssociationSet>
           <AssociationSet Name="FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO" Association="Self.FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO">
             <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
@@ -1905,20 +2459,12 @@
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
             <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
           </AssociationSet>
-          <AssociationSet Name="FK_DETALLE_ORDEN_TRABAJO_VS_VENTA_COMISION" Association="Self.FK_DETALLE_ORDEN_TRABAJO_VS_VENTA_COMISION">
-            <End Role="VENTA_COMISION" EntitySet="VENTA_COMISION" />
-            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
-          </AssociationSet>
           <AssociationSet Name="FK_DETALLE_OT_OBSERVACION_VS_DETALLE_OT" Association="Self.FK_DETALLE_OT_OBSERVACION_VS_DETALLE_OT">
             <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
             <End Role="DETALLE_ORDEN_TRABAJO_OBSERVACION" EntitySet="DETALLE_ORDEN_TRABAJO_OBSERVACION" />
           </AssociationSet>
           <AssociationSet Name="FK_DETALLE_OT_VS_COLOR" Association="Self.FK_DETALLE_OT_VS_COLOR">
             <End Role="COLOR" EntitySet="COLOR" />
-            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DETALLE_OT_VS_IMPUESTO" Association="Self.FK_DETALLE_OT_VS_IMPUESTO">
-            <End Role="IMPUESTO" EntitySet="IMPUESTO" />
             <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
           </AssociationSet>
           <AssociationSet Name="FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DETALLE_ORDEN_TRABAJO" Association="Self.FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DETALLE_ORDEN_TRABAJO">
@@ -1973,6 +2519,10 @@
             <End Role="PAIS" EntitySet="PAIS" />
             <End Role="ESTADO" EntitySet="ESTADO" />
           </AssociationSet>
+          <AssociationSet Name="FK_GRUPO_IMPUESTO_VS_IMPUESTO" Association="Self.FK_GRUPO_IMPUESTO_VS_IMPUESTO">
+            <End Role="IMPUESTO" EntitySet="IMPUESTO" />
+            <End Role="GRUPO_IMPUESTO" EntitySet="GRUPO_IMPUESTO" />
+          </AssociationSet>
           <AssociationSet Name="FK_HISTORIA_FK_HISTOR_USUARIO" Association="Self.FK_HISTORIA_FK_HISTOR_USUARIO">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="HISTORIAL_USUARIO" EntitySet="HISTORIAL_USUARIO" />
@@ -2021,6 +2571,10 @@
             <End Role="TIPO_INDIVIDUO" EntitySet="TIPO_INDIVIDUO" />
             <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
           </AssociationSet>
+          <AssociationSet Name="FK_MENSAJE_VS_TIPO_MENSAJE" Association="Self.FK_MENSAJE_VS_TIPO_MENSAJE">
+            <End Role="TIPO_MENSAJE" EntitySet="TIPO_MENSAJE" />
+            <End Role="MENSAJE" EntitySet="MENSAJE" />
+          </AssociationSet>
           <AssociationSet Name="FK_MODELO_VS_MARCA" Association="Self.FK_MODELO_VS_MARCA">
             <End Role="MARCA" EntitySet="MARCA" />
             <End Role="MODELO" EntitySet="MODELO" />
@@ -2037,9 +2591,37 @@
             <End Role="ESTADO_PAGO" EntitySet="ESTADO_PAGO" />
             <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
           </AssociationSet>
+          <AssociationSet Name="FK_ORDEN_TRABAJO_VS_ORDEN_TRABAJO" Association="Self.FK_ORDEN_TRABAJO_VS_ORDEN_TRABAJO">
+            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
+            <End Role="ORDEN_TRABAJO_COMISION" EntitySet="ORDEN_TRABAJO_COMISION" />
+          </AssociationSet>
           <AssociationSet Name="FK_ORDEN_TRABAJO_VS_TIPO_LAVADO" Association="Self.FK_ORDEN_TRABAJO_VS_TIPO_LAVADO">
             <End Role="TIPO_LAVADO" EntitySet="TIPO_LAVADO" />
             <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDEN_TRABAJO_VS_VENTA_COMISION" Association="Self.FK_ORDEN_TRABAJO_VS_VENTA_COMISION">
+            <End Role="VENTA_COMISION" EntitySet="VENTA_COMISION" />
+            <End Role="ORDEN_TRABAJO_COMISION" EntitySet="ORDEN_TRABAJO_COMISION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PORCENTAJE_IMPUESTO_SUCURSAL_VS_PROCENTAJE_IMPUESTO" Association="Self.FK_PORCENTAJE_IMPUESTO_SUCURSAL_VS_PROCENTAJE_IMPUESTO">
+            <End Role="PORCENTAJE_IMPUESTO" EntitySet="PORCENTAJE_IMPUESTO" />
+            <End Role="PORCENTAJE_IMPUESTO_SUCURSAL" EntitySet="PORCENTAJE_IMPUESTO_SUCURSAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PORCENTAJE_IMPUESTO_SUCURSAL_VS_SUCURSAL" Association="Self.FK_PORCENTAJE_IMPUESTO_SUCURSAL_VS_SUCURSAL">
+            <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+            <End Role="PORCENTAJE_IMPUESTO_SUCURSAL" EntitySet="PORCENTAJE_IMPUESTO_SUCURSAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PORCENTAJE_IMPUESTO_VS_CONDICION_IMPUESTO" Association="Self.FK_PORCENTAJE_IMPUESTO_VS_CONDICION_IMPUESTO">
+            <End Role="CONDICION_IMPUESTO" EntitySet="CONDICION_IMPUESTO" />
+            <End Role="PORCENTAJE_IMPUESTO" EntitySet="PORCENTAJE_IMPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PORCENTAJE_IMPUESTO_VS_GRUPO_IMPUESTO" Association="Self.FK_PORCENTAJE_IMPUESTO_VS_GRUPO_IMPUESTO">
+            <End Role="GRUPO_IMPUESTO" EntitySet="GRUPO_IMPUESTO" />
+            <End Role="PORCENTAJE_IMPUESTO" EntitySet="PORCENTAJE_IMPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PORCENTAJE_IMPUESTO_VS_IMPUESTO" Association="Self.FK_PORCENTAJE_IMPUESTO_VS_IMPUESTO">
+            <End Role="IMPUESTO" EntitySet="IMPUESTO" />
+            <End Role="PORCENTAJE_IMPUESTO" EntitySet="PORCENTAJE_IMPUESTO" />
           </AssociationSet>
           <AssociationSet Name="FK_PRODUCTO_GRUPO_VS_PRODUCTO" Association="Self.FK_PRODUCTO_GRUPO_VS_PRODUCTO">
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
@@ -2081,6 +2663,34 @@
             <End Role="UNIDAD_MEDIDA" EntitySet="UNIDAD_MEDIDA" />
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
           </AssociationSet>
+          <AssociationSet Name="FK_PROVEEDOR_FORMA_PAGO" Association="Self.FK_PROVEEDOR_FORMA_PAGO">
+            <End Role="FORMA_PAGO" EntitySet="FORMA_PAGO" />
+            <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROVEEDOR_IMPUESTO_GRUPO_IMPUESTO" Association="Self.FK_PROVEEDOR_IMPUESTO_GRUPO_IMPUESTO">
+            <End Role="GRUPO_IMPUESTO" EntitySet="GRUPO_IMPUESTO" />
+            <End Role="PROVEEDOR_IMPUESTO" EntitySet="PROVEEDOR_IMPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROVEEDOR_IMPUESTO_IMPUESTO" Association="Self.FK_PROVEEDOR_IMPUESTO_IMPUESTO">
+            <End Role="IMPUESTO" EntitySet="IMPUESTO" />
+            <End Role="PROVEEDOR_IMPUESTO" EntitySet="PROVEEDOR_IMPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROVEEDOR_IMPUESTO_VS_CONDICION_IMPUESTO" Association="Self.FK_PROVEEDOR_IMPUESTO_VS_CONDICION_IMPUESTO">
+            <End Role="CONDICION_IMPUESTO" EntitySet="CONDICION_IMPUESTO" />
+            <End Role="PROVEEDOR_IMPUESTO" EntitySet="PROVEEDOR_IMPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROVEEDOR_IMPUESTO_VS_PORCENTAJE_IMPUESTO" Association="Self.FK_PROVEEDOR_IMPUESTO_VS_PORCENTAJE_IMPUESTO">
+            <End Role="PORCENTAJE_IMPUESTO" EntitySet="PORCENTAJE_IMPUESTO" />
+            <End Role="PROVEEDOR_IMPUESTO" EntitySet="PROVEEDOR_IMPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROVEEDOR_IMPUESTO_VS_PROVEDEOR" Association="Self.FK_PROVEEDOR_IMPUESTO_VS_PROVEDEOR">
+            <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+            <End Role="PROVEEDOR_IMPUESTO" EntitySet="PROVEEDOR_IMPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROVEEDOR_VS_INDIVIDUO" Association="Self.FK_PROVEEDOR_VS_INDIVIDUO">
+            <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
+            <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+          </AssociationSet>
           <AssociationSet Name="FK_PUNTO_VENTA_VS_SUCURSAL" Association="Self.FK_PUNTO_VENTA_VS_SUCURSAL">
             <End Role="SUCURSAL" EntitySet="SUCURSAL" />
             <End Role="PUNTO_VENTA" EntitySet="PUNTO_VENTA" />
@@ -2095,6 +2705,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_SECUENCIALES_SRI_VS_SUCURSAL" Association="Self.FK_SECUENCIALES_SRI_VS_SUCURSAL">
             <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+            <End Role="SECUENCIALES_SRI" EntitySet="SECUENCIALES_SRI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SECUENCIALES_SRI_VS_TIPO_COMPROBANTE" Association="Self.FK_SECUENCIALES_SRI_VS_TIPO_COMPROBANTE">
+            <End Role="TIPO_COMPROBANTE" EntitySet="TIPO_COMPROBANTE" />
             <End Role="SECUENCIALES_SRI" EntitySet="SECUENCIALES_SRI" />
           </AssociationSet>
           <AssociationSet Name="FK_SUBMODULO_VS_MODULO" Association="Self.FK_SUBMODULO_VS_MODULO">
@@ -2140,6 +2754,14 @@
           <AssociationSet Name="FK_USUARIO_VS_SUCURSAL" Association="Self.FK_USUARIO_VS_SUCURSAL">
             <End Role="SUCURSAL" EntitySet="SUCURSAL" />
             <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENDEDOR_VS_INDIVIDUO" Association="Self.FK_VENDEDOR_VS_INDIVIDUO">
+            <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
+            <End Role="VENDEDOR" EntitySet="VENDEDOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENTA_COMISION_VS_VENDEDOR" Association="Self.FK_VENTA_COMISION_VS_VENDEDOR">
+            <End Role="VENDEDOR" EntitySet="VENDEDOR" />
+            <End Role="VENTA_COMISION" EntitySet="VENTA_COMISION" />
           </AssociationSet>
           <AssociationSet Name="FK_VISITA_VS_RUTA" Association="Self.FK_VISITA_VS_RUTA">
             <End Role="RUTA" EntitySet="RUTA" />
@@ -2192,24 +2814,6 @@
           <Property Name="TIPO_OPERACION" Type="Int32" />
           <NavigationProperty Name="ARQUEO_CAJA" Relationship="Self.FK_DETALLE_ARQUEO_CAJA_VS_ARQUEO_CAJA" FromRole="DETALLE_ARQUEO_CAJA" ToRole="ARQUEO_CAJA" />
         </EntityType>
-        <EntityType Name="CABECERA_FACTURACION">
-          <Key>
-            <PropertyRef Name="CABECERA_FACTURACION_ID" />
-          </Key>
-          <Property Name="CABECERA_FACTURACION_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PUNTO_VENTA_ID" Type="Int32" />
-          <Property Name="SUCURSAL_ID" Type="Int32" />
-          <Property Name="LLEVA_CONTABILIDAD_ID" Type="Int32" />
-          <Property Name="TIPO_AMBIENTE_ID" Type="Int32" />
-          <Property Name="TIPO_EMISION_ID" Type="Int32" />
-          <Property Name="MONEDA_ID" Type="Int32" />
-          <NavigationProperty Name="LLEVA_CONTABILIDAD" Relationship="Self.FK_CABECERA_FACTURACION_VS_LLEVA_CONTABILIDAD" FromRole="CABECERA_FACTURACION" ToRole="LLEVA_CONTABILIDAD" />
-          <NavigationProperty Name="MONEDA" Relationship="Self.FK_CABECERA_FACTURACION_VS_MONEDA" FromRole="CABECERA_FACTURACION" ToRole="MONEDA" />
-          <NavigationProperty Name="PUNTO_VENTA" Relationship="Self.FK_CABECERA_FACTURACION_VS_PUNTO_VENTA" FromRole="CABECERA_FACTURACION" ToRole="PUNTO_VENTA" />
-          <NavigationProperty Name="SUCURSAL" Relationship="Self.FK_CABECERA_FACTURACION_VS_SUCURSAL" FromRole="CABECERA_FACTURACION" ToRole="SUCURSAL" />
-          <NavigationProperty Name="TIPO_AMBIENTE" Relationship="Self.FK_CABECERA_FACTURACION_VS_TIPO_AMBIENTE" FromRole="CABECERA_FACTURACION" ToRole="TIPO_AMBIENTE" />
-          <NavigationProperty Name="TIPO_EMISION" Relationship="Self.FK_CABECERA_FACTURACION_VS_TIPO_EMISION" FromRole="CABECERA_FACTURACION" ToRole="TIPO_EMISION" />
-        </EntityType>
         <EntityType Name="SECUENCIALES_SRI">
           <Key>
             <PropertyRef Name="SECUENCIALES_SRI_ID" />
@@ -2224,6 +2828,8 @@
           <Property Name="TIPO_OPERACION_SRI" Type="Int32" />
           <NavigationProperty Name="PUNTO_VENTA" Relationship="Self.FK_SECUENCIAL_VS_PUNTO_VENTA" FromRole="SECUENCIALES_SRI" ToRole="PUNTO_VENTA" />
           <NavigationProperty Name="SUCURSAL" Relationship="Self.FK_SECUENCIALES_SRI_VS_SUCURSAL" FromRole="SECUENCIALES_SRI" ToRole="SUCURSAL" />
+          <Property Name="TIPO_COMPROBANTE_ID" Type="Int32" />
+          <NavigationProperty Name="TIPO_COMPROBANTE" Relationship="Decisiones_Inteligentes_Modelo.FK_SECUENCIALES_SRI_VS_TIPO_COMPROBANTE" FromRole="SECUENCIALES_SRI" ToRole="TIPO_COMPROBANTE" />
         </EntityType>
         <EntityType Name="CIUDAD">
           <Key>
@@ -2379,7 +2985,7 @@
           <Property Name="COLOR_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="ESTA_HABILITADO" Type="Boolean" />
-          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="Self.FK_DETALLE_OT_VS_COLOR" FromRole="COLOR" ToRole="DETALLE_ORDEN_TRABAJO" />
+          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_OT_VS_COLOR" FromRole="COLOR" ToRole="DETALLE_ORDEN_TRABAJO" />
         </EntityType>
         <EntityType Name="DIA">
           <Key>
@@ -2415,26 +3021,6 @@
           <Property Name="ESTADO_PAGO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ORDEN_TRABAJO" Relationship="Self.FK_ORDEN_TRABAJO_VS_ESTADO_PAGO" FromRole="ESTADO_PAGO" ToRole="ORDEN_TRABAJO" />
-        </EntityType>
-        <EntityType Name="IMPUESTO">
-          <Key>
-            <PropertyRef Name="IMPUESTO_ID" />
-          </Key>
-          <Property Name="IMPUESTO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DESCRIPCION" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
-          <Property Name="PORCENTAJE" Type="Decimal" Precision="8" Scale="4" />
-          <Property Name="ESTA_HABILITADO" Type="Boolean" />
-          <Property Name="FECHA_CREACION" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="Self.FK_DETALLE_OT_VS_IMPUESTO" FromRole="IMPUESTO" ToRole="DETALLE_ORDEN_TRABAJO" />
-        </EntityType>
-        <EntityType Name="LLEVA_CONTABILIDAD">
-          <Key>
-            <PropertyRef Name="LLEVA_CONTABILIDAD_ID" />
-          </Key>
-          <Property Name="LLEVA_CONTABILIDAD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ESTA_HABILITADO" Type="Boolean" />
-          <NavigationProperty Name="CABECERA_FACTURACION" Relationship="Self.FK_CABECERA_FACTURACION_VS_LLEVA_CONTABILIDAD" FromRole="LLEVA_CONTABILIDAD" ToRole="CABECERA_FACTURACION" />
         </EntityType>
         <EntityType Name="MARCA">
           <Key>
@@ -2473,7 +3059,8 @@
           <Property Name="MONEDA_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ESTA_HABILITADO" Type="Boolean" />
-          <NavigationProperty Name="CABECERA_FACTURACION" Relationship="Self.FK_CABECERA_FACTURACION_VS_MONEDA" FromRole="MONEDA" ToRole="CABECERA_FACTURACION" />
+          <Property Name="ABREVITURA" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CABECERA_MOVIMIENTO_FE" Relationship="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOV_FE_VS_MONEDA" FromRole="MONEDA" ToRole="CABECERA_MOVIMIENTO_FE" />
         </EntityType>
         <EntityType Name="NIVEL_EDUCACION">
           <Key>
@@ -2504,10 +3091,10 @@
           <Property Name="DESCRIPCION" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
           <Property Name="HORA_INICIO" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="HORA_FIN" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="CABECERA_FACTURACION" Relationship="Self.FK_CABECERA_FACTURACION_VS_PUNTO_VENTA" FromRole="PUNTO_VENTA" ToRole="CABECERA_FACTURACION" />
           <NavigationProperty Name="SECUENCIALES_SRI" Relationship="Self.FK_SECUENCIAL_VS_PUNTO_VENTA" FromRole="PUNTO_VENTA" ToRole="SECUENCIALES_SRI" />
           <NavigationProperty Name="SUCURSAL" Relationship="Self.FK_PUNTO_VENTA_VS_SUCURSAL" FromRole="PUNTO_VENTA" ToRole="SUCURSAL" />
           <NavigationProperty Name="USUARIO" Relationship="Self.FK_USUARIO_VS_PUNTO_VENTA" FromRole="PUNTO_VENTA" ToRole="USUARIO" />
+          <NavigationProperty Name="CABECERA_FACTURACION" Relationship="Decisiones_Inteligentes_Modelo.FK_CABECERA_FACTURACION_VS_PUNTO_VENTA" FromRole="PUNTO_VENTA" ToRole="CABECERA_FACTURACION" />
         </EntityType>
         <EntityType Name="RUTA">
           <Key>
@@ -2527,10 +3114,11 @@
           <Property Name="SUCURSAL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="ESTA_HABILITADO" Type="Boolean" />
-          <NavigationProperty Name="CABECERA_FACTURACION" Relationship="Self.FK_CABECERA_FACTURACION_VS_SUCURSAL" FromRole="SUCURSAL" ToRole="CABECERA_FACTURACION" />
           <NavigationProperty Name="SECUENCIALES_SRI" Relationship="Self.FK_SECUENCIALES_SRI_VS_SUCURSAL" FromRole="SUCURSAL" ToRole="SECUENCIALES_SRI" />
           <NavigationProperty Name="PUNTO_VENTA" Relationship="Self.FK_PUNTO_VENTA_VS_SUCURSAL" FromRole="SUCURSAL" ToRole="PUNTO_VENTA" />
           <NavigationProperty Name="USUARIO" Relationship="Self.FK_USUARIO_VS_SUCURSAL" FromRole="SUCURSAL" ToRole="USUARIO" />
+          <NavigationProperty Name="PORCENTAJE_IMPUESTO_SUCURSAL" Relationship="Decisiones_Inteligentes_Modelo.FK_PORCENTAJE_IMPUESTO_SUCURSAL_VS_SUCURSAL" FromRole="SUCURSAL" ToRole="PORCENTAJE_IMPUESTO_SUCURSAL" />
+          <NavigationProperty Name="CABECERA_FACTURACION" Relationship="Decisiones_Inteligentes_Modelo.FK_CABECERA_FACTURACION_VS_SUCURSAL" FromRole="SUCURSAL" ToRole="CABECERA_FACTURACION" />
         </EntityType>
         <EntityType Name="TIPO_AMBIENTE">
           <Key>
@@ -2539,7 +3127,7 @@
           <Property Name="TIPO_AMBIENTE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ESTA_HABILITADO" Type="Boolean" />
-          <NavigationProperty Name="CABECERA_FACTURACION" Relationship="Self.FK_CABECERA_FACTURACION_VS_TIPO_AMBIENTE" FromRole="TIPO_AMBIENTE" ToRole="CABECERA_FACTURACION" />
+          <NavigationProperty Name="CABECERA_FACTURACION" Relationship="Decisiones_Inteligentes_Modelo.FK_CABECERA_FACTURACION_VS_TIPO_AMBIENTE" FromRole="TIPO_AMBIENTE" ToRole="CABECERA_FACTURACION" />
         </EntityType>
         <EntityType Name="TIPO_CORREO_ELECTRONICO">
           <Key>
@@ -2575,7 +3163,7 @@
           <Property Name="TIPO_EMISION_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ESTA_HABILITADO" Type="Boolean" />
-          <NavigationProperty Name="CABECERA_FACTURACION" Relationship="Self.FK_CABECERA_FACTURACION_VS_TIPO_EMISION" FromRole="TIPO_EMISION" ToRole="CABECERA_FACTURACION" />
+          <NavigationProperty Name="CABECERA_FACTURACION" Relationship="Decisiones_Inteligentes_Modelo.FK_CABECERA_FACTURACION_VS_TIPO_EMISION" FromRole="TIPO_EMISION" ToRole="CABECERA_FACTURACION" />
         </EntityType>
         <EntityType Name="TIPO_GENERO">
           <Key>
@@ -2594,6 +3182,7 @@
           <Property Name="POR_DEFECTO" Type="Boolean" />
           <Property Name="TIPO_IDENTIFICACION_SRI_ID" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="INDIVIDUO" Relationship="Decisiones_Inteligentes_Modelo.FK_INDIVIDUO_VS_TIPO_IDENTIFICACION" FromRole="TIPO_IDENTIFICACION" ToRole="INDIVIDUO" />
+          <NavigationProperty Name="CABECERA_MOVIMIENTO_FE" Relationship="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOVIMIENTO_FE_VS_TIPO_IDENTIFICACION" FromRole="TIPO_IDENTIFICACION" ToRole="CABECERA_MOVIMIENTO_FE" />
         </EntityType>
         <EntityType Name="TIPO_INDIVIDUO">
           <Key>
@@ -2668,11 +3257,11 @@
           <NavigationProperty Name="MATERIAL" Relationship="Self.FK_PRODUCTO_VS_MATERIAL" FromRole="PRODUCTO" ToRole="MATERIAL" />
           <NavigationProperty Name="MODELO" Relationship="Self.FK_PRODUCTO_VS_MODELO" FromRole="PRODUCTO" ToRole="MODELO" />
           <NavigationProperty Name="UNIDAD_MEDIDA" Relationship="Self.FK_PRODUCTO_VS_UNIDAD_MEDIDA" FromRole="PRODUCTO" ToRole="UNIDAD_MEDIDA" />
-          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="Self.FK_DETALLE_ORDEN_TRABAJO_VS_PRODUCTO" FromRole="PRODUCTO" ToRole="DETALLE_ORDEN_TRABAJO" />
           <NavigationProperty Name="PRODUCTO_VS_GRUPO_PRODUCTO" Relationship="Self.FK_PRODUCTO_GRUPO_VS_PRODUCTO" FromRole="PRODUCTO" ToRole="PRODUCTO_VS_GRUPO_PRODUCTO" />
           <NavigationProperty Name="PRODUCTO_PRECIO" Relationship="Self.FK_PRODUCTO_PRECIO_VS_PRODUCTO" FromRole="PRODUCTO" ToRole="PRODUCTO_PRECIO" />
           <NavigationProperty Name="PRODUCTO_TALLA" Relationship="Self.FK_PRODUCTO_TALLA_VS_PRODUCTO" FromRole="PRODUCTO" ToRole="PRODUCTO_TALLA" />
           <NavigationProperty Name="TIPO_PRODUCTO" Relationship="Self.FK_PRODUCTO_VS_TIPO_PRODUCTO" FromRole="PRODUCTO" ToRole="TIPO_PRODUCTO" />
+          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_VS_PRODUCTO" FromRole="PRODUCTO" ToRole="DETALLE_ORDEN_TRABAJO" />
         </EntityType>
         <EntityType Name="PRODUCTO_PRECIO">
           <Key>
@@ -2809,6 +3398,7 @@
           <NavigationProperty Name="USUARIO_PREGUNTA_SEGURIDAD" Relationship="Self.FK_USUARIO_PS_VS_USUARIO" FromRole="USUARIO" ToRole="USUARIO_PREGUNTA_SEGURIDAD" />
           <NavigationProperty Name="USUARIO_SEGURIDAD" Relationship="Self.FK_USUARIO_SEGURIDAD_VS_USUARIO" FromRole="USUARIO" ToRole="USUARIO_SEGURIDAD" />
           <NavigationProperty Name="INDIVIDUO" Relationship="Decisiones_Inteligentes_Modelo.FK_USUARIO_INDIVIDUO" FromRole="USUARIO" ToRole="INDIVIDUO" />
+          <NavigationProperty Name="CABECERA_MOVIMIENTO_FE" Relationship="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOV_FE_USUARIO" FromRole="USUARIO" ToRole="CABECERA_MOVIMIENTO_FE" />
         </EntityType>
         <EntityType Name="USUARIO_PERFIL">
           <Key>
@@ -2841,32 +3431,6 @@
           <Property Name="NOMBRE_IP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="USUARIO" Relationship="Self.FK_USUARIO_SEGURIDAD_VS_USUARIO" FromRole="USUARIO_SEGURIDAD" ToRole="USUARIO" />
         </EntityType>
-        <EntityType Name="DETALLE_ORDEN_TRABAJO">
-          <Key>
-            <PropertyRef Name="DETALLE_ORDEN_TRABAJO_ID" />
-          </Key>
-          <Property Name="DETALLE_ORDEN_TRABAJO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ORDEN_TRABAJO_ID" Type="Int64" />
-          <Property Name="PRODUCTO_ID" Type="Int32" />
-          <Property Name="IMPUESTO_ID" Type="Int32" />
-          <Property Name="COLOR_ID" Type="Int32" />
-          <Property Name="CANTIDAD" Type="Int32" />
-          <Property Name="VALOR_UNITARIO" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="PORCENTAJE_IMPUESTO" Type="Decimal" Precision="8" Scale="4" />
-          <Property Name="VALOR_TOTAL" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="OBSERVACION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="PRODUCTO_TALLA_ID" Type="Int32" />
-          <Property Name="MARCA_ID" Type="Int32" />
-          <Property Name="MATERIAL_ID" Type="Int32" />
-          <Property Name="VENTA_COMISION_ID" Type="Int32" />
-          <NavigationProperty Name="COLOR" Relationship="Self.FK_DETALLE_OT_VS_COLOR" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="COLOR" />
-          <NavigationProperty Name="IMPUESTO" Relationship="Self.FK_DETALLE_OT_VS_IMPUESTO" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="IMPUESTO" />
-          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK_DETALLE_ORDEN_TRABAJO_VS_PRODUCTO" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="PRODUCTO" />
-          <NavigationProperty Name="ORDEN_TRABAJO" Relationship="Self.FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="ORDEN_TRABAJO" />
-          <NavigationProperty Name="VENTA_COMISION" Relationship="Self.FK_DETALLE_ORDEN_TRABAJO_VS_VENTA_COMISION" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="VENTA_COMISION" />
-          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO_OBSERVACION" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_OT_OBSERVACION_VS_DETALLE_OT" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="DETALLE_ORDEN_TRABAJO_OBSERVACION" />
-          <NavigationProperty Name="DETALLE_TRABAJO_FOTOGRAFIA" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DETALLE_ORDEN_TRABAJO" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="DETALLE_TRABAJO_FOTOGRAFIA" />
-        </EntityType>
         <EntityType Name="NUMERACION_ORDEN">
           <Key>
             <PropertyRef Name="NUMERACION_ORDEN_ID" />
@@ -2897,10 +3461,11 @@
           <NavigationProperty Name="CLIENTE" Relationship="Self.FK_ORDEN_TRABAJO_VS_CLIENTE" FromRole="ORDEN_TRABAJO" ToRole="CLIENTE" />
           <NavigationProperty Name="ESTADO_PAGO" Relationship="Self.FK_ORDEN_TRABAJO_VS_ESTADO_PAGO" FromRole="ORDEN_TRABAJO" ToRole="ESTADO_PAGO" />
           <NavigationProperty Name="TIPO_LAVADO" Relationship="Self.FK_ORDEN_TRABAJO_VS_TIPO_LAVADO" FromRole="ORDEN_TRABAJO" ToRole="TIPO_LAVADO" />
-          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="Self.FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO" FromRole="ORDEN_TRABAJO" ToRole="DETALLE_ORDEN_TRABAJO" />
           <NavigationProperty Name="HISTORIAL_PROCESO" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_PROCESO_VS_ORDEN_TRABAJO" FromRole="ORDEN_TRABAJO" ToRole="HISTORIAL_PROCESO" />
           <Property Name="ENVIO_MATRIZ" Type="Boolean" />
           <Property Name="SE_ENVIO" Type="Boolean" />
+          <NavigationProperty Name="ORDEN_TRABAJO_COMISION" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_ORDEN_TRABAJO" FromRole="ORDEN_TRABAJO" ToRole="ORDEN_TRABAJO_COMISION" />
+          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO" FromRole="ORDEN_TRABAJO" ToRole="DETALLE_ORDEN_TRABAJO" />
         </EntityType>
         <EntityType Name="VENTA_COMISION">
           <Key>
@@ -2913,7 +3478,8 @@
           <Property Name="SUCURSAL_ID" Type="Int32" />
           <Property Name="PUNTO_VENTA_ID" Type="Int32" />
           <Property Name="PORCENTAJE_COMISION" Type="Decimal" Precision="8" Scale="2" />
-          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="Self.FK_DETALLE_ORDEN_TRABAJO_VS_VENTA_COMISION" FromRole="VENTA_COMISION" ToRole="DETALLE_ORDEN_TRABAJO" />
+          <NavigationProperty Name="VENDEDOR" Relationship="Decisiones_Inteligentes_Modelo.FK_VENTA_COMISION_VS_VENDEDOR" FromRole="VENTA_COMISION" ToRole="VENDEDOR" />
+          <NavigationProperty Name="ORDEN_TRABAJO_COMISION" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_VENTA_COMISION" FromRole="VENTA_COMISION" ToRole="ORDEN_TRABAJO_COMISION" />
         </EntityType>
         <Association Name="FK_CONTROL_USUARIO_VS_USUARIO">
           <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
@@ -2936,78 +3502,6 @@
             </Principal>
             <Dependent Role="DETALLE_ARQUEO_CAJA">
               <PropertyRef Name="ARQUEO_CAJA_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CABECERA_FACTURACION_VS_LLEVA_CONTABILIDAD">
-          <End Role="LLEVA_CONTABILIDAD" Type="Self.LLEVA_CONTABILIDAD" Multiplicity="0..1" />
-          <End Role="CABECERA_FACTURACION" Type="Self.CABECERA_FACTURACION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LLEVA_CONTABILIDAD">
-              <PropertyRef Name="LLEVA_CONTABILIDAD_ID" />
-            </Principal>
-            <Dependent Role="CABECERA_FACTURACION">
-              <PropertyRef Name="LLEVA_CONTABILIDAD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CABECERA_FACTURACION_VS_MONEDA">
-          <End Role="MONEDA" Type="Self.MONEDA" Multiplicity="0..1" />
-          <End Role="CABECERA_FACTURACION" Type="Self.CABECERA_FACTURACION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MONEDA">
-              <PropertyRef Name="MONEDA_ID" />
-            </Principal>
-            <Dependent Role="CABECERA_FACTURACION">
-              <PropertyRef Name="MONEDA_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CABECERA_FACTURACION_VS_PUNTO_VENTA">
-          <End Role="PUNTO_VENTA" Type="Self.PUNTO_VENTA" Multiplicity="0..1" />
-          <End Role="CABECERA_FACTURACION" Type="Self.CABECERA_FACTURACION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PUNTO_VENTA">
-              <PropertyRef Name="PUNTO_VENTA_ID" />
-            </Principal>
-            <Dependent Role="CABECERA_FACTURACION">
-              <PropertyRef Name="PUNTO_VENTA_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CABECERA_FACTURACION_VS_SUCURSAL">
-          <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="0..1" />
-          <End Role="CABECERA_FACTURACION" Type="Self.CABECERA_FACTURACION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SUCURSAL">
-              <PropertyRef Name="SUCURSAL_ID" />
-            </Principal>
-            <Dependent Role="CABECERA_FACTURACION">
-              <PropertyRef Name="SUCURSAL_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CABECERA_FACTURACION_VS_TIPO_AMBIENTE">
-          <End Role="TIPO_AMBIENTE" Type="Self.TIPO_AMBIENTE" Multiplicity="0..1" />
-          <End Role="CABECERA_FACTURACION" Type="Self.CABECERA_FACTURACION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TIPO_AMBIENTE">
-              <PropertyRef Name="TIPO_AMBIENTE_ID" />
-            </Principal>
-            <Dependent Role="CABECERA_FACTURACION">
-              <PropertyRef Name="TIPO_AMBIENTE_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CABECERA_FACTURACION_VS_TIPO_EMISION">
-          <End Role="TIPO_EMISION" Type="Self.TIPO_EMISION" Multiplicity="0..1" />
-          <End Role="CABECERA_FACTURACION" Type="Self.CABECERA_FACTURACION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TIPO_EMISION">
-              <PropertyRef Name="TIPO_EMISION_ID" />
-            </Principal>
-            <Dependent Role="CABECERA_FACTURACION">
-              <PropertyRef Name="TIPO_EMISION_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3263,18 +3757,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DETALLE_OT_VS_COLOR">
-          <End Role="COLOR" Type="Self.COLOR" Multiplicity="0..1" />
-          <End Role="DETALLE_ORDEN_TRABAJO" Type="Self.DETALLE_ORDEN_TRABAJO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="COLOR">
-              <PropertyRef Name="COLOR_ID" />
-            </Principal>
-            <Dependent Role="DETALLE_ORDEN_TRABAJO">
-              <PropertyRef Name="COLOR_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ORDEN_TRABAJO_VS_ESTADO_PAGO">
           <End Role="ESTADO_PAGO" Type="Self.ESTADO_PAGO" Multiplicity="0..1" />
           <End Role="ORDEN_TRABAJO" Type="Self.ORDEN_TRABAJO" Multiplicity="*" />
@@ -3284,18 +3766,6 @@
             </Principal>
             <Dependent Role="ORDEN_TRABAJO">
               <PropertyRef Name="ESTADO_PAGO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DETALLE_OT_VS_IMPUESTO">
-          <End Role="IMPUESTO" Type="Self.IMPUESTO" Multiplicity="0..1" />
-          <End Role="DETALLE_ORDEN_TRABAJO" Type="Self.DETALLE_ORDEN_TRABAJO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="IMPUESTO">
-              <PropertyRef Name="IMPUESTO_ID" />
-            </Principal>
-            <Dependent Role="DETALLE_ORDEN_TRABAJO">
-              <PropertyRef Name="IMPUESTO_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3440,18 +3910,6 @@
             </Principal>
             <Dependent Role="PRODUCTO_VS_GRUPO_PRODUCTO">
               <PropertyRef Name="GRUPO_PRODUCTO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DETALLE_ORDEN_TRABAJO_VS_PRODUCTO">
-          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="0..1" />
-          <End Role="DETALLE_ORDEN_TRABAJO" Type="Self.DETALLE_ORDEN_TRABAJO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PRODUCTO">
-              <PropertyRef Name="PRODUCTO_ID" />
-            </Principal>
-            <Dependent Role="DETALLE_ORDEN_TRABAJO">
-              <PropertyRef Name="PRODUCTO_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3647,35 +4105,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO">
-          <End Role="ORDEN_TRABAJO" Type="Self.ORDEN_TRABAJO" Multiplicity="0..1" />
-          <End Role="DETALLE_ORDEN_TRABAJO" Type="Self.DETALLE_ORDEN_TRABAJO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ORDEN_TRABAJO">
-              <PropertyRef Name="ORDEN_TRABAJO_ID" />
-            </Principal>
-            <Dependent Role="DETALLE_ORDEN_TRABAJO">
-              <PropertyRef Name="ORDEN_TRABAJO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DETALLE_ORDEN_TRABAJO_VS_VENTA_COMISION">
-          <End Role="VENTA_COMISION" Type="Self.VENTA_COMISION" Multiplicity="0..1" />
-          <End Role="DETALLE_ORDEN_TRABAJO" Type="Self.DETALLE_ORDEN_TRABAJO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VENTA_COMISION">
-              <PropertyRef Name="VENTA_COMISION_ID" />
-            </Principal>
-            <Dependent Role="DETALLE_ORDEN_TRABAJO">
-              <PropertyRef Name="VENTA_COMISION_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Decisiones_Inteligentes" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CONTROL_USUARIO" EntityType="Self.CONTROL_USUARIO" />
           <EntitySet Name="ARQUEO_CAJA" EntityType="Self.ARQUEO_CAJA" />
           <EntitySet Name="DETALLE_ARQUEO_CAJA" EntityType="Self.DETALLE_ARQUEO_CAJA" />
-          <EntitySet Name="CABECERA_FACTURACION" EntityType="Self.CABECERA_FACTURACION" />
           <EntitySet Name="SECUENCIALES_SRI" EntityType="Self.SECUENCIALES_SRI" />
           <EntitySet Name="CIUDAD" EntityType="Self.CIUDAD" />
           <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" />
@@ -3693,8 +4126,6 @@
           <EntitySet Name="ESPECIALIDAD_EMPLEADO" EntityType="Self.ESPECIALIDAD_EMPLEADO" />
           <EntitySet Name="ESTADO_CIVIL" EntityType="Self.ESTADO_CIVIL" />
           <EntitySet Name="ESTADO_PAGO" EntityType="Self.ESTADO_PAGO" />
-          <EntitySet Name="IMPUESTO" EntityType="Self.IMPUESTO" />
-          <EntitySet Name="LLEVA_CONTABILIDAD" EntityType="Self.LLEVA_CONTABILIDAD" />
           <EntitySet Name="MARCA" EntityType="Self.MARCA" />
           <EntitySet Name="MATERIAL" EntityType="Self.MATERIAL" />
           <EntitySet Name="MODELO" EntityType="Self.MODELO" />
@@ -3733,7 +4164,6 @@
           <EntitySet Name="USUARIO_PERFIL" EntityType="Self.USUARIO_PERFIL" />
           <EntitySet Name="USUARIO_PREGUNTA_SEGURIDAD" EntityType="Self.USUARIO_PREGUNTA_SEGURIDAD" />
           <EntitySet Name="USUARIO_SEGURIDAD" EntityType="Self.USUARIO_SEGURIDAD" />
-          <EntitySet Name="DETALLE_ORDEN_TRABAJO" EntityType="Self.DETALLE_ORDEN_TRABAJO" />
           <EntitySet Name="NUMERACION_ORDEN" EntityType="Self.NUMERACION_ORDEN" />
           <EntitySet Name="ORDEN_TRABAJO" EntityType="Self.ORDEN_TRABAJO" />
           <EntitySet Name="VENTA_COMISION" EntityType="Self.VENTA_COMISION" />
@@ -3744,30 +4174,6 @@
           <AssociationSet Name="FK_DETALLE_ARQUEO_CAJA_VS_ARQUEO_CAJA" Association="Self.FK_DETALLE_ARQUEO_CAJA_VS_ARQUEO_CAJA">
             <End Role="ARQUEO_CAJA" EntitySet="ARQUEO_CAJA" />
             <End Role="DETALLE_ARQUEO_CAJA" EntitySet="DETALLE_ARQUEO_CAJA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CABECERA_FACTURACION_VS_LLEVA_CONTABILIDAD" Association="Self.FK_CABECERA_FACTURACION_VS_LLEVA_CONTABILIDAD">
-            <End Role="LLEVA_CONTABILIDAD" EntitySet="LLEVA_CONTABILIDAD" />
-            <End Role="CABECERA_FACTURACION" EntitySet="CABECERA_FACTURACION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CABECERA_FACTURACION_VS_MONEDA" Association="Self.FK_CABECERA_FACTURACION_VS_MONEDA">
-            <End Role="MONEDA" EntitySet="MONEDA" />
-            <End Role="CABECERA_FACTURACION" EntitySet="CABECERA_FACTURACION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CABECERA_FACTURACION_VS_PUNTO_VENTA" Association="Self.FK_CABECERA_FACTURACION_VS_PUNTO_VENTA">
-            <End Role="PUNTO_VENTA" EntitySet="PUNTO_VENTA" />
-            <End Role="CABECERA_FACTURACION" EntitySet="CABECERA_FACTURACION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CABECERA_FACTURACION_VS_SUCURSAL" Association="Self.FK_CABECERA_FACTURACION_VS_SUCURSAL">
-            <End Role="SUCURSAL" EntitySet="SUCURSAL" />
-            <End Role="CABECERA_FACTURACION" EntitySet="CABECERA_FACTURACION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CABECERA_FACTURACION_VS_TIPO_AMBIENTE" Association="Self.FK_CABECERA_FACTURACION_VS_TIPO_AMBIENTE">
-            <End Role="TIPO_AMBIENTE" EntitySet="TIPO_AMBIENTE" />
-            <End Role="CABECERA_FACTURACION" EntitySet="CABECERA_FACTURACION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CABECERA_FACTURACION_VS_TIPO_EMISION" Association="Self.FK_CABECERA_FACTURACION_VS_TIPO_EMISION">
-            <End Role="TIPO_EMISION" EntitySet="TIPO_EMISION" />
-            <End Role="CABECERA_FACTURACION" EntitySet="CABECERA_FACTURACION" />
           </AssociationSet>
           <AssociationSet Name="FK_SECUENCIAL_VS_PUNTO_VENTA" Association="Self.FK_SECUENCIAL_VS_PUNTO_VENTA">
             <End Role="PUNTO_VENTA" EntitySet="PUNTO_VENTA" />
@@ -3853,17 +4259,9 @@
             <End Role="ZONA" EntitySet="ZONA" />
             <End Role="VISITA" EntitySet="VISITA" />
           </AssociationSet>
-          <AssociationSet Name="FK_DETALLE_OT_VS_COLOR" Association="Self.FK_DETALLE_OT_VS_COLOR">
-            <End Role="COLOR" EntitySet="COLOR" />
-            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
-          </AssociationSet>
           <AssociationSet Name="FK_ORDEN_TRABAJO_VS_ESTADO_PAGO" Association="Self.FK_ORDEN_TRABAJO_VS_ESTADO_PAGO">
             <End Role="ESTADO_PAGO" EntitySet="ESTADO_PAGO" />
             <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DETALLE_OT_VS_IMPUESTO" Association="Self.FK_DETALLE_OT_VS_IMPUESTO">
-            <End Role="IMPUESTO" EntitySet="IMPUESTO" />
-            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
           </AssociationSet>
           <AssociationSet Name="FK_MODELO_VS_MARCA" Association="Self.FK_MODELO_VS_MARCA">
             <End Role="MARCA" EntitySet="MARCA" />
@@ -3912,10 +4310,6 @@
           <AssociationSet Name="FK_PRODUCTO_VS_GRUPO_PODUCTO_1" Association="Self.FK_PRODUCTO_VS_GRUPO_PODUCTO_1">
             <End Role="GRUPO_PRODUCTO" EntitySet="GRUPO_PRODUCTO" />
             <End Role="PRODUCTO_VS_GRUPO_PRODUCTO" EntitySet="PRODUCTO_VS_GRUPO_PRODUCTO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DETALLE_ORDEN_TRABAJO_VS_PRODUCTO" Association="Self.FK_DETALLE_ORDEN_TRABAJO_VS_PRODUCTO">
-            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
-            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
           </AssociationSet>
           <AssociationSet Name="FK_PRODUCTO_GRUPO_VS_PRODUCTO" Association="Self.FK_PRODUCTO_GRUPO_VS_PRODUCTO">
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
@@ -3981,14 +4375,6 @@
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="USUARIO_SEGURIDAD" EntitySet="USUARIO_SEGURIDAD" />
           </AssociationSet>
-          <AssociationSet Name="FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO" Association="Self.FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO">
-            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
-            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DETALLE_ORDEN_TRABAJO_VS_VENTA_COMISION" Association="Self.FK_DETALLE_ORDEN_TRABAJO_VS_VENTA_COMISION">
-            <End Role="VENTA_COMISION" EntitySet="VENTA_COMISION" />
-            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
-          </AssociationSet>
           <EntitySet Name="HISTORIAL_PROCESO" EntityType="Decisiones_Inteligentes_Modelo.HISTORIAL_PROCESO" />
           <EntitySet Name="ETAPA_PROCESO" EntityType="Decisiones_Inteligentes_Modelo.ETAPA_PROCESO" />
           <EntitySet Name="DETALLE_ORDEN_TRABAJO_OBSERVACION" EntityType="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO_OBSERVACION" />
@@ -4000,14 +4386,6 @@
           <AssociationSet Name="FK_HISTORIAL_PROCESO_VS_ORDEN_TRABAJO" Association="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_PROCESO_VS_ORDEN_TRABAJO">
             <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
             <End Role="HISTORIAL_PROCESO" EntitySet="HISTORIAL_PROCESO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DETALLE_OT_OBSERVACION_VS_DETALLE_OT" Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_OT_OBSERVACION_VS_DETALLE_OT">
-            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
-            <End Role="DETALLE_ORDEN_TRABAJO_OBSERVACION" EntitySet="DETALLE_ORDEN_TRABAJO_OBSERVACION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DETALLE_ORDEN_TRABAJO" Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DETALLE_ORDEN_TRABAJO">
-            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
-            <End Role="DETALLE_TRABAJO_FOTOGRAFIA" EntitySet="DETALLE_TRABAJO_FOTOGRAFIA" />
           </AssociationSet>
           <EntitySet Name="CUENTA_POR_COBRAR" EntityType="Decisiones_Inteligentes_Modelo.CUENTA_POR_COBRAR" />
           <EntitySet Name="CUENTA_POR_PAGAR" EntityType="Decisiones_Inteligentes_Modelo.CUENTA_POR_PAGAR" />
@@ -4072,6 +4450,186 @@
           <AssociationSet Name="FK_USUARIO_INDIVIDUO" Association="Decisiones_Inteligentes_Modelo.FK_USUARIO_INDIVIDUO">
             <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
             <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <EntitySet Name="PROVEEDOR" EntityType="Decisiones_Inteligentes_Modelo.PROVEEDOR" />
+          <AssociationSet Name="FK_PROVEEDOR_VS_INDIVIDUO" Association="Decisiones_Inteligentes_Modelo.FK_PROVEEDOR_VS_INDIVIDUO">
+            <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
+            <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROVEEDOR_FORMA_PAGO" Association="Decisiones_Inteligentes_Modelo.FK_PROVEEDOR_FORMA_PAGO">
+            <End Role="FORMA_PAGO" EntitySet="FORMA_PAGO" />
+            <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+          </AssociationSet>
+          <EntitySet Name="VENDEDOR" EntityType="Decisiones_Inteligentes_Modelo.VENDEDOR" />
+          <EntitySet Name="BANCO" EntityType="Decisiones_Inteligentes_Modelo.BANCO" />
+          <AssociationSet Name="FK_VENDEDOR_VS_INDIVIDUO" Association="Decisiones_Inteligentes_Modelo.FK_VENDEDOR_VS_INDIVIDUO">
+            <End Role="INDIVIDUO" EntitySet="INDIVIDUO" />
+            <End Role="VENDEDOR" EntitySet="VENDEDOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENTA_COMISION_VS_VENDEDOR" Association="Decisiones_Inteligentes_Modelo.FK_VENTA_COMISION_VS_VENDEDOR">
+            <End Role="VENDEDOR" EntitySet="VENDEDOR" />
+            <End Role="VENTA_COMISION" EntitySet="VENTA_COMISION" />
+          </AssociationSet>
+          <EntitySet Name="CONDICION_IMPUESTO" EntityType="Decisiones_Inteligentes_Modelo.CONDICION_IMPUESTO" />
+          <EntitySet Name="GRUPO_IMPUESTO" EntityType="Decisiones_Inteligentes_Modelo.GRUPO_IMPUESTO" />
+          <EntitySet Name="PORCENTAJE_IMPUESTO" EntityType="Decisiones_Inteligentes_Modelo.PORCENTAJE_IMPUESTO" />
+          <EntitySet Name="PORCENTAJE_IMPUESTO_SUCURSAL" EntityType="Decisiones_Inteligentes_Modelo.PORCENTAJE_IMPUESTO_SUCURSAL" />
+          <AssociationSet Name="FK_PORCENTAJE_IMPUESTO_VS_CONDICION_IMPUESTO" Association="Decisiones_Inteligentes_Modelo.FK_PORCENTAJE_IMPUESTO_VS_CONDICION_IMPUESTO">
+            <End Role="CONDICION_IMPUESTO" EntitySet="CONDICION_IMPUESTO" />
+            <End Role="PORCENTAJE_IMPUESTO" EntitySet="PORCENTAJE_IMPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PORCENTAJE_IMPUESTO_VS_GRUPO_IMPUESTO" Association="Decisiones_Inteligentes_Modelo.FK_PORCENTAJE_IMPUESTO_VS_GRUPO_IMPUESTO">
+            <End Role="GRUPO_IMPUESTO" EntitySet="GRUPO_IMPUESTO" />
+            <End Role="PORCENTAJE_IMPUESTO" EntitySet="PORCENTAJE_IMPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PORCENTAJE_IMPUESTO_SUCURSAL_VS_PROCENTAJE_IMPUESTO" Association="Decisiones_Inteligentes_Modelo.FK_PORCENTAJE_IMPUESTO_SUCURSAL_VS_PROCENTAJE_IMPUESTO">
+            <End Role="PORCENTAJE_IMPUESTO" EntitySet="PORCENTAJE_IMPUESTO" />
+            <End Role="PORCENTAJE_IMPUESTO_SUCURSAL" EntitySet="PORCENTAJE_IMPUESTO_SUCURSAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PORCENTAJE_IMPUESTO_SUCURSAL_VS_SUCURSAL" Association="Decisiones_Inteligentes_Modelo.FK_PORCENTAJE_IMPUESTO_SUCURSAL_VS_SUCURSAL">
+            <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+            <End Role="PORCENTAJE_IMPUESTO_SUCURSAL" EntitySet="PORCENTAJE_IMPUESTO_SUCURSAL" />
+          </AssociationSet>
+          <EntitySet Name="IMPUESTO" EntityType="Decisiones_Inteligentes_Modelo.IMPUESTO" />
+          <AssociationSet Name="FK_CONDICION_IMPUESTO_VS_IMPUESTO" Association="Decisiones_Inteligentes_Modelo.FK_CONDICION_IMPUESTO_VS_IMPUESTO">
+            <End Role="IMPUESTO" EntitySet="IMPUESTO" />
+            <End Role="CONDICION_IMPUESTO" EntitySet="CONDICION_IMPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GRUPO_IMPUESTO_VS_IMPUESTO" Association="Decisiones_Inteligentes_Modelo.FK_GRUPO_IMPUESTO_VS_IMPUESTO">
+            <End Role="IMPUESTO" EntitySet="IMPUESTO" />
+            <End Role="GRUPO_IMPUESTO" EntitySet="GRUPO_IMPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PORCENTAJE_IMPUESTO_VS_IMPUESTO" Association="Decisiones_Inteligentes_Modelo.FK_PORCENTAJE_IMPUESTO_VS_IMPUESTO">
+            <End Role="IMPUESTO" EntitySet="IMPUESTO" />
+            <End Role="PORCENTAJE_IMPUESTO" EntitySet="PORCENTAJE_IMPUESTO" />
+          </AssociationSet>
+          <EntitySet Name="CABECERA_MOVIMIENTO_FACTURA" EntityType="Decisiones_Inteligentes_Modelo.CABECERA_MOVIMIENTO_FACTURA" />
+          <EntitySet Name="CABECERA_MOVIMIENTO_FE" EntityType="Decisiones_Inteligentes_Modelo.CABECERA_MOVIMIENTO_FE" />
+          <EntitySet Name="CABECERA_MOVIMIENTO_TRIBUTARIO" EntityType="Decisiones_Inteligentes_Modelo.CABECERA_MOVIMIENTO_TRIBUTARIO" />
+          <EntitySet Name="DETALLE_MOVIMIENTO_FACTURA" EntityType="Decisiones_Inteligentes_Modelo.DETALLE_MOVIMIENTO_FACTURA" />
+          <EntitySet Name="PROVEEDOR_IMPUESTO" EntityType="Decisiones_Inteligentes_Modelo.PROVEEDOR_IMPUESTO" />
+          <EntitySet Name="ESTADO_COMPROBANTE_ELECTRONICO" EntityType="Decisiones_Inteligentes_Modelo.ESTADO_COMPROBANTE_ELECTRONICO" />
+          <EntitySet Name="MENSAJE" EntityType="Decisiones_Inteligentes_Modelo.MENSAJE" />
+          <EntitySet Name="TIPO_COMPROBANTE" EntityType="Decisiones_Inteligentes_Modelo.TIPO_COMPROBANTE" />
+          <EntitySet Name="TIPO_MENSAJE" EntityType="Decisiones_Inteligentes_Modelo.TIPO_MENSAJE" />
+          <AssociationSet Name="FK_CABECERA_MOV_FACTURA_VS_CABECERA_MOV_TRIB" Association="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOV_FACTURA_VS_CABECERA_MOV_TRIB">
+            <End Role="CABECERA_MOVIMIENTO_TRIBUTARIO" EntitySet="CABECERA_MOVIMIENTO_TRIBUTARIO" />
+            <End Role="CABECERA_MOVIMIENTO_FACTURA" EntitySet="CABECERA_MOVIMIENTO_FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE_MOV_FACTURA_VS_CABECERA_MOV_FACT" Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_MOV_FACTURA_VS_CABECERA_MOV_FACT">
+            <End Role="CABECERA_MOVIMIENTO_FACTURA" EntitySet="CABECERA_MOVIMIENTO_FACTURA" />
+            <End Role="DETALLE_MOVIMIENTO_FACTURA" EntitySet="DETALLE_MOVIMIENTO_FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CABECERA_MOV_FE_USUARIO" Association="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOV_FE_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="CABECERA_MOVIMIENTO_FE" EntitySet="CABECERA_MOVIMIENTO_FE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CABECERA_MOV_FE_VS_ESTADO_COMPROBANTE_ELECTRONICO" Association="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOV_FE_VS_ESTADO_COMPROBANTE_ELECTRONICO">
+            <End Role="ESTADO_COMPROBANTE_ELECTRONICO" EntitySet="ESTADO_COMPROBANTE_ELECTRONICO" />
+            <End Role="CABECERA_MOVIMIENTO_FE" EntitySet="CABECERA_MOVIMIENTO_FE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CABECERA_MOV_FE_VS_INDIVIDUO_ROL" Association="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOV_FE_VS_INDIVIDUO_ROL">
+            <End Role="INDIVIDUO_ROL" EntitySet="INDIVIDUO_ROL" />
+            <End Role="CABECERA_MOVIMIENTO_FE" EntitySet="CABECERA_MOVIMIENTO_FE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CABECERA_MOV_FE_VS_MONEDA" Association="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOV_FE_VS_MONEDA">
+            <End Role="MONEDA" EntitySet="MONEDA" />
+            <End Role="CABECERA_MOVIMIENTO_FE" EntitySet="CABECERA_MOVIMIENTO_FE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CABECERA_MOVIMIENTO_FE_CABECERA_MOV_TRIBUTARIO" Association="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOVIMIENTO_FE_CABECERA_MOV_TRIBUTARIO">
+            <End Role="CABECERA_MOVIMIENTO_TRIBUTARIO" EntitySet="CABECERA_MOVIMIENTO_TRIBUTARIO" />
+            <End Role="CABECERA_MOVIMIENTO_FE" EntitySet="CABECERA_MOVIMIENTO_FE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CABECERA_MOVIMIENTO_FE_VS_MENSAJE" Association="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOVIMIENTO_FE_VS_MENSAJE">
+            <End Role="MENSAJE" EntitySet="MENSAJE" />
+            <End Role="CABECERA_MOVIMIENTO_FE" EntitySet="CABECERA_MOVIMIENTO_FE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CABECERA_MOVIMIENTO_FE_VS_TIPO_COMPROBANTE" Association="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOVIMIENTO_FE_VS_TIPO_COMPROBANTE">
+            <End Role="TIPO_COMPROBANTE" EntitySet="TIPO_COMPROBANTE" />
+            <End Role="CABECERA_MOVIMIENTO_FE" EntitySet="CABECERA_MOVIMIENTO_FE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CABECERA_MOVIMIENTO_FE_VS_TIPO_IDENTIFICACION" Association="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOVIMIENTO_FE_VS_TIPO_IDENTIFICACION">
+            <End Role="TIPO_IDENTIFICACION" EntitySet="TIPO_IDENTIFICACION" />
+            <End Role="CABECERA_MOVIMIENTO_FE" EntitySet="CABECERA_MOVIMIENTO_FE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SECUENCIALES_SRI_VS_TIPO_COMPROBANTE" Association="Decisiones_Inteligentes_Modelo.FK_SECUENCIALES_SRI_VS_TIPO_COMPROBANTE">
+            <End Role="TIPO_COMPROBANTE" EntitySet="TIPO_COMPROBANTE" />
+            <End Role="SECUENCIALES_SRI" EntitySet="SECUENCIALES_SRI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROVEEDOR_IMPUESTO_VS_PROVEDEOR" Association="Decisiones_Inteligentes_Modelo.FK_PROVEEDOR_IMPUESTO_VS_PROVEDEOR">
+            <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+            <End Role="PROVEEDOR_IMPUESTO" EntitySet="PROVEEDOR_IMPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROVEEDOR_IMPUESTO_GRUPO_IMPUESTO" Association="Decisiones_Inteligentes_Modelo.FK_PROVEEDOR_IMPUESTO_GRUPO_IMPUESTO">
+            <End Role="GRUPO_IMPUESTO" EntitySet="GRUPO_IMPUESTO" />
+            <End Role="PROVEEDOR_IMPUESTO" EntitySet="PROVEEDOR_IMPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROVEEDOR_IMPUESTO_IMPUESTO" Association="Decisiones_Inteligentes_Modelo.FK_PROVEEDOR_IMPUESTO_IMPUESTO">
+            <End Role="IMPUESTO" EntitySet="IMPUESTO" />
+            <End Role="PROVEEDOR_IMPUESTO" EntitySet="PROVEEDOR_IMPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROVEEDOR_IMPUESTO_VS_CONDICION_IMPUESTO" Association="Decisiones_Inteligentes_Modelo.FK_PROVEEDOR_IMPUESTO_VS_CONDICION_IMPUESTO">
+            <End Role="CONDICION_IMPUESTO" EntitySet="CONDICION_IMPUESTO" />
+            <End Role="PROVEEDOR_IMPUESTO" EntitySet="PROVEEDOR_IMPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROVEEDOR_IMPUESTO_VS_PORCENTAJE_IMPUESTO" Association="Decisiones_Inteligentes_Modelo.FK_PROVEEDOR_IMPUESTO_VS_PORCENTAJE_IMPUESTO">
+            <End Role="PORCENTAJE_IMPUESTO" EntitySet="PORCENTAJE_IMPUESTO" />
+            <End Role="PROVEEDOR_IMPUESTO" EntitySet="PROVEEDOR_IMPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENSAJE_VS_TIPO_MENSAJE" Association="Decisiones_Inteligentes_Modelo.FK_MENSAJE_VS_TIPO_MENSAJE">
+            <End Role="TIPO_MENSAJE" EntitySet="TIPO_MENSAJE" />
+            <End Role="MENSAJE" EntitySet="MENSAJE" />
+          </AssociationSet>
+          <EntitySet Name="CABECERA_FACTURACION" EntityType="Decisiones_Inteligentes_Modelo.CABECERA_FACTURACION" />
+          <AssociationSet Name="FK_CABECERA_FACTURACION_VS_PUNTO_VENTA" Association="Decisiones_Inteligentes_Modelo.FK_CABECERA_FACTURACION_VS_PUNTO_VENTA">
+            <End Role="PUNTO_VENTA" EntitySet="PUNTO_VENTA" />
+            <End Role="CABECERA_FACTURACION" EntitySet="CABECERA_FACTURACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CABECERA_FACTURACION_VS_SUCURSAL" Association="Decisiones_Inteligentes_Modelo.FK_CABECERA_FACTURACION_VS_SUCURSAL">
+            <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+            <End Role="CABECERA_FACTURACION" EntitySet="CABECERA_FACTURACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CABECERA_FACTURACION_VS_TIPO_AMBIENTE" Association="Decisiones_Inteligentes_Modelo.FK_CABECERA_FACTURACION_VS_TIPO_AMBIENTE">
+            <End Role="TIPO_AMBIENTE" EntitySet="TIPO_AMBIENTE" />
+            <End Role="CABECERA_FACTURACION" EntitySet="CABECERA_FACTURACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CABECERA_FACTURACION_VS_TIPO_EMISION" Association="Decisiones_Inteligentes_Modelo.FK_CABECERA_FACTURACION_VS_TIPO_EMISION">
+            <End Role="TIPO_EMISION" EntitySet="TIPO_EMISION" />
+            <End Role="CABECERA_FACTURACION" EntitySet="CABECERA_FACTURACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CABECERA_MOV_TRIBUTARIO_VS_CABECERA_FACTURACION" Association="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOV_TRIBUTARIO_VS_CABECERA_FACTURACION">
+            <End Role="CABECERA_FACTURACION" EntitySet="CABECERA_FACTURACION" />
+            <End Role="CABECERA_MOVIMIENTO_TRIBUTARIO" EntitySet="CABECERA_MOVIMIENTO_TRIBUTARIO" />
+          </AssociationSet>
+          <EntitySet Name="ORDEN_TRABAJO_COMISION" EntityType="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO_COMISION" />
+          <AssociationSet Name="FK_ORDEN_TRABAJO_VS_ORDEN_TRABAJO" Association="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_ORDEN_TRABAJO">
+            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
+            <End Role="ORDEN_TRABAJO_COMISION" EntitySet="ORDEN_TRABAJO_COMISION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDEN_TRABAJO_VS_VENTA_COMISION" Association="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_VENTA_COMISION">
+            <End Role="VENTA_COMISION" EntitySet="VENTA_COMISION" />
+            <End Role="ORDEN_TRABAJO_COMISION" EntitySet="ORDEN_TRABAJO_COMISION" />
+          </AssociationSet>
+          <EntitySet Name="DETALLE_ORDEN_TRABAJO" EntityType="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO" />
+          <AssociationSet Name="FK_DETALLE_OT_VS_COLOR" Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_OT_VS_COLOR">
+            <End Role="COLOR" EntitySet="COLOR" />
+            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE_ORDEN_TRABAJO_VS_PRODUCTO" Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_VS_PRODUCTO">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO" Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO">
+            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
+            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE_OT_OBSERVACION_VS_DETALLE_OT" Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_OT_OBSERVACION_VS_DETALLE_OT">
+            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
+            <End Role="DETALLE_ORDEN_TRABAJO_OBSERVACION" EntitySet="DETALLE_ORDEN_TRABAJO_OBSERVACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DETALLE_ORDEN_TRABAJO" Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DETALLE_ORDEN_TRABAJO">
+            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
+            <End Role="DETALLE_TRABAJO_FOTOGRAFIA" EntitySet="DETALLE_TRABAJO_FOTOGRAFIA" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="HISTORIAL_PROCESO">
@@ -4149,30 +4707,6 @@
             </Principal>
             <Dependent Role="HISTORIAL_PROCESO">
               <PropertyRef Name="ORDEN_TRABAJO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DETALLE_OT_OBSERVACION_VS_DETALLE_OT">
-          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO" Role="DETALLE_ORDEN_TRABAJO" Multiplicity="0..1" />
-          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO_OBSERVACION" Role="DETALLE_ORDEN_TRABAJO_OBSERVACION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DETALLE_ORDEN_TRABAJO">
-              <PropertyRef Name="DETALLE_ORDEN_TRABAJO_ID" />
-            </Principal>
-            <Dependent Role="DETALLE_ORDEN_TRABAJO_OBSERVACION">
-              <PropertyRef Name="DETALLE_ORDEN_TRABAJO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DETALLE_ORDEN_TRABAJO">
-          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO" Role="DETALLE_ORDEN_TRABAJO" Multiplicity="0..1" />
-          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_TRABAJO_FOTOGRAFIA" Role="DETALLE_TRABAJO_FOTOGRAFIA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DETALLE_ORDEN_TRABAJO">
-              <PropertyRef Name="DETALLE_ORDEN_TRABAJO_ID" />
-            </Principal>
-            <Dependent Role="DETALLE_TRABAJO_FOTOGRAFIA">
-              <PropertyRef Name="DETALLE_ORDEN_TRABAJO_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4271,6 +4805,7 @@
           <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ESTA_HABILITADO" Type="Boolean" />
           <NavigationProperty Name="HISTORIAL_CUENTA_POR_COBRAR" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_CUENTA_COBRAR_VS_FORMA_PAGO" FromRole="FORMA_PAGO" ToRole="HISTORIAL_CUENTA_POR_COBRAR" />
+          <NavigationProperty Name="PROVEEDOR" Relationship="Decisiones_Inteligentes_Modelo.FK_PROVEEDOR_FORMA_PAGO" FromRole="FORMA_PAGO" ToRole="PROVEEDOR" />
         </EntityType>
         <Association Name="FK_HISTORIAL_CUENTA_COBRAR_VS_FORMA_PAGO">
           <End Type="Decisiones_Inteligentes_Modelo.FORMA_PAGO" Role="FORMA_PAGO" Multiplicity="0..1" />
@@ -4293,6 +4828,7 @@
           <Property Name="INDIVIDUO_ID" Type="Int32" />
           <NavigationProperty Name="TIPO_ROL_INDIVIDUO" Relationship="Decisiones_Inteligentes_Modelo.FK_INDIVIDUO_ROL_VS_TIPO_ROL_INDIVIDUO" FromRole="INDIVIDUO_ROL" ToRole="TIPO_ROL_INDIVIDUO" />
           <NavigationProperty Name="INDIVIDUO" Relationship="Decisiones_Inteligentes_Modelo.FK_INDIVIDO_ROL_VS_INDIVIDUO" FromRole="INDIVIDUO_ROL" ToRole="INDIVIDUO" />
+          <NavigationProperty Name="CABECERA_MOVIMIENTO_FE" Relationship="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOV_FE_VS_INDIVIDUO_ROL" FromRole="INDIVIDUO_ROL" ToRole="CABECERA_MOVIMIENTO_FE" />
         </EntityType>
         <EntityType Name="TIPO_ROL_INDIVIDUO">
           <Key>
@@ -4340,6 +4876,8 @@
           <NavigationProperty Name="TIPO_INDIVIDUO" Relationship="Decisiones_Inteligentes_Modelo.FK_INDIVIDUO_VS_TIPO_PERSONA" FromRole="INDIVIDUO" ToRole="TIPO_INDIVIDUO" />
           <NavigationProperty Name="TELEFONO" Relationship="Decisiones_Inteligentes_Modelo.FK_TELEFONO_VS_INDIVIDUO" FromRole="INDIVIDUO" ToRole="TELEFONO" />
           <NavigationProperty Name="USUARIO" Relationship="Decisiones_Inteligentes_Modelo.FK_USUARIO_INDIVIDUO" FromRole="INDIVIDUO" ToRole="USUARIO" />
+          <NavigationProperty Name="PROVEEDOR" Relationship="Decisiones_Inteligentes_Modelo.FK_PROVEEDOR_VS_INDIVIDUO" FromRole="INDIVIDUO" ToRole="PROVEEDOR" />
+          <NavigationProperty Name="VENDEDOR" Relationship="Decisiones_Inteligentes_Modelo.FK_VENDEDOR_VS_INDIVIDUO" FromRole="INDIVIDUO" ToRole="VENDEDOR" />
         </EntityType>
         <Association Name="FK_CLIENTE_VS_INDIVIDUO">
           <End Type="Decisiones_Inteligentes_Modelo.INDIVIDUO" Role="INDIVIDUO" Multiplicity="0..1" />
@@ -4461,6 +4999,765 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PROVEEDOR">
+          <Key>
+            <PropertyRef Name="PROVEEDOR_ID" />
+          </Key>
+          <Property Name="PROVEEDOR_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="INDIVIDUO_ID" Type="Int32" />
+          <Property Name="FORMA_PAGO_ID" Type="Int32" />
+          <Property Name="DIAS_CREDITO" Type="Int32" />
+          <Property Name="NOMBRE_REPRESENTANTE" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="INDIVIDUO" Relationship="Decisiones_Inteligentes_Modelo.FK_PROVEEDOR_VS_INDIVIDUO" FromRole="PROVEEDOR" ToRole="INDIVIDUO" />
+          <NavigationProperty Name="FORMA_PAGO" Relationship="Decisiones_Inteligentes_Modelo.FK_PROVEEDOR_FORMA_PAGO" FromRole="PROVEEDOR" ToRole="FORMA_PAGO" />
+          <NavigationProperty Name="PROVEEDOR_IMPUESTO" Relationship="Decisiones_Inteligentes_Modelo.FK_PROVEEDOR_IMPUESTO_VS_PROVEDEOR" FromRole="PROVEEDOR" ToRole="PROVEEDOR_IMPUESTO" />
+        </EntityType>
+        <Association Name="FK_PROVEEDOR_VS_INDIVIDUO">
+          <End Type="Decisiones_Inteligentes_Modelo.INDIVIDUO" Role="INDIVIDUO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.PROVEEDOR" Role="PROVEEDOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INDIVIDUO">
+              <PropertyRef Name="INDIVIDUO_ID" />
+            </Principal>
+            <Dependent Role="PROVEEDOR">
+              <PropertyRef Name="INDIVIDUO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROVEEDOR_FORMA_PAGO">
+          <End Type="Decisiones_Inteligentes_Modelo.FORMA_PAGO" Role="FORMA_PAGO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.PROVEEDOR" Role="PROVEEDOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FORMA_PAGO">
+              <PropertyRef Name="FORMA_PAGO_ID" />
+            </Principal>
+            <Dependent Role="PROVEEDOR">
+              <PropertyRef Name="FORMA_PAGO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="VENDEDOR">
+          <Key>
+            <PropertyRef Name="VENDEDOR_ID" />
+          </Key>
+          <Property Name="VENDEDOR_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="INDIVIDUO_ID" Type="Int32" />
+          <Property Name="ES_EMPLEADO" Type="Boolean" />
+          <Property Name="HABILITADO" Type="Boolean" />
+          <NavigationProperty Name="INDIVIDUO" Relationship="Decisiones_Inteligentes_Modelo.FK_VENDEDOR_VS_INDIVIDUO" FromRole="VENDEDOR" ToRole="INDIVIDUO" />
+          <NavigationProperty Name="VENTA_COMISION" Relationship="Decisiones_Inteligentes_Modelo.FK_VENTA_COMISION_VS_VENDEDOR" FromRole="VENDEDOR" ToRole="VENTA_COMISION" />
+        </EntityType>
+        <EntityType Name="BANCO">
+          <Key>
+            <PropertyRef Name="BANCO_ID" />
+          </Key>
+          <Property Name="BANCO_ID" Type="Int32" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="HABILITADO" Type="Boolean" />
+          <Property Name="CODIGO_SIB" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_VENDEDOR_VS_INDIVIDUO">
+          <End Type="Decisiones_Inteligentes_Modelo.INDIVIDUO" Role="INDIVIDUO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.VENDEDOR" Role="VENDEDOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INDIVIDUO">
+              <PropertyRef Name="INDIVIDUO_ID" />
+            </Principal>
+            <Dependent Role="VENDEDOR">
+              <PropertyRef Name="INDIVIDUO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENTA_COMISION_VS_VENDEDOR">
+          <End Type="Decisiones_Inteligentes_Modelo.VENDEDOR" Role="VENDEDOR" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.VENTA_COMISION" Role="VENTA_COMISION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENDEDOR">
+              <PropertyRef Name="VENDEDOR_ID" />
+            </Principal>
+            <Dependent Role="VENTA_COMISION">
+              <PropertyRef Name="VENDEDOR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CONDICION_IMPUESTO">
+          <Key>
+            <PropertyRef Name="CONDICION_IMPUESTO_ID" />
+          </Key>
+          <Property Name="CONDICION_IMPUESTO_ID" Type="Int32" Nullable="false" />
+          <Property Name="IMPUESTO_ID" Type="Int32" />
+          <Property Name="HABILITADO" Type="Boolean" />
+          <NavigationProperty Name="PORCENTAJE_IMPUESTO" Relationship="Decisiones_Inteligentes_Modelo.FK_PORCENTAJE_IMPUESTO_VS_CONDICION_IMPUESTO" FromRole="CONDICION_IMPUESTO" ToRole="PORCENTAJE_IMPUESTO" />
+          <NavigationProperty Name="IMPUESTO" Relationship="Decisiones_Inteligentes_Modelo.FK_CONDICION_IMPUESTO_VS_IMPUESTO" FromRole="CONDICION_IMPUESTO" ToRole="IMPUESTO" />
+          <NavigationProperty Name="PROVEEDOR_IMPUESTO" Relationship="Decisiones_Inteligentes_Modelo.FK_PROVEEDOR_IMPUESTO_VS_CONDICION_IMPUESTO" FromRole="CONDICION_IMPUESTO" ToRole="PROVEEDOR_IMPUESTO" />
+        </EntityType>
+        <EntityType Name="GRUPO_IMPUESTO">
+          <Key>
+            <PropertyRef Name="GRUPO_IMPUESTO_ID" />
+          </Key>
+          <Property Name="GRUPO_IMPUESTO_ID" Type="Int32" Nullable="false" />
+          <Property Name="IMPUESTO_ID" Type="Int32" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="HABILITADO" Type="Boolean" />
+          <NavigationProperty Name="PORCENTAJE_IMPUESTO" Relationship="Decisiones_Inteligentes_Modelo.FK_PORCENTAJE_IMPUESTO_VS_GRUPO_IMPUESTO" FromRole="GRUPO_IMPUESTO" ToRole="PORCENTAJE_IMPUESTO" />
+          <NavigationProperty Name="IMPUESTO" Relationship="Decisiones_Inteligentes_Modelo.FK_GRUPO_IMPUESTO_VS_IMPUESTO" FromRole="GRUPO_IMPUESTO" ToRole="IMPUESTO" />
+          <NavigationProperty Name="PROVEEDOR_IMPUESTO" Relationship="Decisiones_Inteligentes_Modelo.FK_PROVEEDOR_IMPUESTO_GRUPO_IMPUESTO" FromRole="GRUPO_IMPUESTO" ToRole="PROVEEDOR_IMPUESTO" />
+        </EntityType>
+        <EntityType Name="PORCENTAJE_IMPUESTO">
+          <Key>
+            <PropertyRef Name="PORCENTAJE_IMPUESTO_ID" />
+          </Key>
+          <Property Name="PORCENTAJE_IMPUESTO_ID" Type="Int32" Nullable="false" />
+          <Property Name="IMPUESTO_ID" Type="Int32" />
+          <Property Name="GRUPO_IMPUESTO_ID" Type="Int32" />
+          <Property Name="CONDICION_IMPUESTO_ID" Type="Int32" />
+          <NavigationProperty Name="CONDICION_IMPUESTO" Relationship="Decisiones_Inteligentes_Modelo.FK_PORCENTAJE_IMPUESTO_VS_CONDICION_IMPUESTO" FromRole="PORCENTAJE_IMPUESTO" ToRole="CONDICION_IMPUESTO" />
+          <NavigationProperty Name="GRUPO_IMPUESTO" Relationship="Decisiones_Inteligentes_Modelo.FK_PORCENTAJE_IMPUESTO_VS_GRUPO_IMPUESTO" FromRole="PORCENTAJE_IMPUESTO" ToRole="GRUPO_IMPUESTO" />
+          <NavigationProperty Name="PORCENTAJE_IMPUESTO_SUCURSAL" Relationship="Decisiones_Inteligentes_Modelo.FK_PORCENTAJE_IMPUESTO_SUCURSAL_VS_PROCENTAJE_IMPUESTO" FromRole="PORCENTAJE_IMPUESTO" ToRole="PORCENTAJE_IMPUESTO_SUCURSAL" />
+          <NavigationProperty Name="IMPUESTO" Relationship="Decisiones_Inteligentes_Modelo.FK_PORCENTAJE_IMPUESTO_VS_IMPUESTO" FromRole="PORCENTAJE_IMPUESTO" ToRole="IMPUESTO" />
+          <NavigationProperty Name="PROVEEDOR_IMPUESTO" Relationship="Decisiones_Inteligentes_Modelo.FK_PROVEEDOR_IMPUESTO_VS_PORCENTAJE_IMPUESTO" FromRole="PORCENTAJE_IMPUESTO" ToRole="PROVEEDOR_IMPUESTO" />
+        </EntityType>
+        <EntityType Name="PORCENTAJE_IMPUESTO_SUCURSAL">
+          <Key>
+            <PropertyRef Name="PORCENTAJE_IMPUESTO_SUCURSAL_ID" />
+          </Key>
+          <Property Name="PORCENTAJE_IMPUESTO_SUCURSAL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PORCENTAJE_IMPUESTO_ID" Type="Int32" />
+          <Property Name="PORCENTAJE" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="BASE_MINIMA" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="BASE_MAXIMA" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="SUCURSAL_ID" Type="Int32" />
+          <NavigationProperty Name="PORCENTAJE_IMPUESTO" Relationship="Decisiones_Inteligentes_Modelo.FK_PORCENTAJE_IMPUESTO_SUCURSAL_VS_PROCENTAJE_IMPUESTO" FromRole="PORCENTAJE_IMPUESTO_SUCURSAL" ToRole="PORCENTAJE_IMPUESTO" />
+          <NavigationProperty Name="SUCURSAL" Relationship="Decisiones_Inteligentes_Modelo.FK_PORCENTAJE_IMPUESTO_SUCURSAL_VS_SUCURSAL" FromRole="PORCENTAJE_IMPUESTO_SUCURSAL" ToRole="SUCURSAL" />
+        </EntityType>
+        <Association Name="FK_PORCENTAJE_IMPUESTO_VS_CONDICION_IMPUESTO">
+          <End Type="Decisiones_Inteligentes_Modelo.CONDICION_IMPUESTO" Role="CONDICION_IMPUESTO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.PORCENTAJE_IMPUESTO" Role="PORCENTAJE_IMPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONDICION_IMPUESTO">
+              <PropertyRef Name="CONDICION_IMPUESTO_ID" />
+            </Principal>
+            <Dependent Role="PORCENTAJE_IMPUESTO">
+              <PropertyRef Name="CONDICION_IMPUESTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PORCENTAJE_IMPUESTO_VS_GRUPO_IMPUESTO">
+          <End Type="Decisiones_Inteligentes_Modelo.GRUPO_IMPUESTO" Role="GRUPO_IMPUESTO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.PORCENTAJE_IMPUESTO" Role="PORCENTAJE_IMPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRUPO_IMPUESTO">
+              <PropertyRef Name="GRUPO_IMPUESTO_ID" />
+            </Principal>
+            <Dependent Role="PORCENTAJE_IMPUESTO">
+              <PropertyRef Name="GRUPO_IMPUESTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PORCENTAJE_IMPUESTO_SUCURSAL_VS_PROCENTAJE_IMPUESTO">
+          <End Type="Decisiones_Inteligentes_Modelo.PORCENTAJE_IMPUESTO" Role="PORCENTAJE_IMPUESTO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.PORCENTAJE_IMPUESTO_SUCURSAL" Role="PORCENTAJE_IMPUESTO_SUCURSAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PORCENTAJE_IMPUESTO">
+              <PropertyRef Name="PORCENTAJE_IMPUESTO_ID" />
+            </Principal>
+            <Dependent Role="PORCENTAJE_IMPUESTO_SUCURSAL">
+              <PropertyRef Name="PORCENTAJE_IMPUESTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PORCENTAJE_IMPUESTO_SUCURSAL_VS_SUCURSAL">
+          <End Type="Decisiones_Inteligentes_Modelo.SUCURSAL" Role="SUCURSAL" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.PORCENTAJE_IMPUESTO_SUCURSAL" Role="PORCENTAJE_IMPUESTO_SUCURSAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUCURSAL">
+              <PropertyRef Name="SUCURSAL_ID" />
+            </Principal>
+            <Dependent Role="PORCENTAJE_IMPUESTO_SUCURSAL">
+              <PropertyRef Name="SUCURSAL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="IMPUESTO">
+          <Key>
+            <PropertyRef Name="IMPUESTO_ID" />
+          </Key>
+          <Property Name="IMPUESTO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="ESTA_HABILITADO" Type="Boolean" />
+          <Property Name="FECHA_CREACION" Type="DateTime" Precision="3" />
+          <Property Name="FECHA_FIN_VIGENCIA" Type="Int32" />
+          <Property Name="TIENE_RETENCION" Type="Boolean" />
+          <NavigationProperty Name="CONDICION_IMPUESTO" Relationship="Decisiones_Inteligentes_Modelo.FK_CONDICION_IMPUESTO_VS_IMPUESTO" FromRole="IMPUESTO" ToRole="CONDICION_IMPUESTO" />
+          <NavigationProperty Name="GRUPO_IMPUESTO" Relationship="Decisiones_Inteligentes_Modelo.FK_GRUPO_IMPUESTO_VS_IMPUESTO" FromRole="IMPUESTO" ToRole="GRUPO_IMPUESTO" />
+          <NavigationProperty Name="PORCENTAJE_IMPUESTO" Relationship="Decisiones_Inteligentes_Modelo.FK_PORCENTAJE_IMPUESTO_VS_IMPUESTO" FromRole="IMPUESTO" ToRole="PORCENTAJE_IMPUESTO" />
+          <NavigationProperty Name="PROVEEDOR_IMPUESTO" Relationship="Decisiones_Inteligentes_Modelo.FK_PROVEEDOR_IMPUESTO_IMPUESTO" FromRole="IMPUESTO" ToRole="PROVEEDOR_IMPUESTO" />
+        </EntityType>
+        <Association Name="FK_CONDICION_IMPUESTO_VS_IMPUESTO">
+          <End Type="Decisiones_Inteligentes_Modelo.IMPUESTO" Role="IMPUESTO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.CONDICION_IMPUESTO" Role="CONDICION_IMPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IMPUESTO">
+              <PropertyRef Name="IMPUESTO_ID" />
+            </Principal>
+            <Dependent Role="CONDICION_IMPUESTO">
+              <PropertyRef Name="IMPUESTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GRUPO_IMPUESTO_VS_IMPUESTO">
+          <End Type="Decisiones_Inteligentes_Modelo.IMPUESTO" Role="IMPUESTO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.GRUPO_IMPUESTO" Role="GRUPO_IMPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IMPUESTO">
+              <PropertyRef Name="IMPUESTO_ID" />
+            </Principal>
+            <Dependent Role="GRUPO_IMPUESTO">
+              <PropertyRef Name="IMPUESTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PORCENTAJE_IMPUESTO_VS_IMPUESTO">
+          <End Type="Decisiones_Inteligentes_Modelo.IMPUESTO" Role="IMPUESTO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.PORCENTAJE_IMPUESTO" Role="PORCENTAJE_IMPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IMPUESTO">
+              <PropertyRef Name="IMPUESTO_ID" />
+            </Principal>
+            <Dependent Role="PORCENTAJE_IMPUESTO">
+              <PropertyRef Name="IMPUESTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CABECERA_MOVIMIENTO_FACTURA">
+          <Key>
+            <PropertyRef Name="CABECERA_MOVIMIENTO_FACTURA_ID" />
+          </Key>
+          <Property Name="CABECERA_MOVIMIENTO_FACTURA_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CABECERA_MOVIMIENTO_TRIBUTARIO_ID" Type="Int64" />
+          <Property Name="FECHA_EMISION" Type="DateTime" Precision="3" />
+          <Property Name="DIRECCION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CABECERA_MOVIMIENTO_TRIBUTARIO" Relationship="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOV_FACTURA_VS_CABECERA_MOV_TRIB" FromRole="CABECERA_MOVIMIENTO_FACTURA" ToRole="CABECERA_MOVIMIENTO_TRIBUTARIO" />
+          <NavigationProperty Name="DETALLE_MOVIMIENTO_FACTURA" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_MOV_FACTURA_VS_CABECERA_MOV_FACT" FromRole="CABECERA_MOVIMIENTO_FACTURA" ToRole="DETALLE_MOVIMIENTO_FACTURA" />
+        </EntityType>
+        <EntityType Name="CABECERA_MOVIMIENTO_FE">
+          <Key>
+            <PropertyRef Name="CABECERA_MOVIMIENTO_FE_ID" />
+          </Key>
+          <Property Name="CABECERA_MOVIMIENTO_FE_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TIPO_COMPROBANTE_ID" Type="Int32" />
+          <Property Name="TIPO_IDENTIFICACION_ID" Type="Int32" />
+          <Property Name="ESTADO_COMPROBANTE_ELECTRONICO_ID" Type="Int32" />
+          <Property Name="USUARIO_ID" Type="Int32" />
+          <Property Name="MONEDA_ID" Type="Int32" />
+          <Property Name="INDIVIDUO_ROL_ID" Type="Int32" />
+          <Property Name="MENSAJE_ID" Type="Int32" />
+          <Property Name="CABECERA_MOVIMIENTO_TRIBUTARIO_ID" Type="Int64" />
+          <Property Name="FECHA_EMISION" Type="DateTime" Precision="3" />
+          <Property Name="CORREO_ELECTRONICO" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA_ENVIO" Type="DateTime" Precision="3" />
+          <Property Name="DIRECCION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFONO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FAX" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NUMERO_COMPROBANTE" Type="Int64" />
+          <Property Name="COMPRA_O_VENTA" Type="Boolean" />
+          <Property Name="CLAVE_ACCESO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NUMERO_AUTORIZACION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA_AUTORIZACION" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="USUARIO" Relationship="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOV_FE_USUARIO" FromRole="CABECERA_MOVIMIENTO_FE" ToRole="USUARIO" />
+          <NavigationProperty Name="ESTADO_COMPROBANTE_ELECTRONICO" Relationship="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOV_FE_VS_ESTADO_COMPROBANTE_ELECTRONICO" FromRole="CABECERA_MOVIMIENTO_FE" ToRole="ESTADO_COMPROBANTE_ELECTRONICO" />
+          <NavigationProperty Name="INDIVIDUO_ROL" Relationship="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOV_FE_VS_INDIVIDUO_ROL" FromRole="CABECERA_MOVIMIENTO_FE" ToRole="INDIVIDUO_ROL" />
+          <NavigationProperty Name="MONEDA" Relationship="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOV_FE_VS_MONEDA" FromRole="CABECERA_MOVIMIENTO_FE" ToRole="MONEDA" />
+          <NavigationProperty Name="CABECERA_MOVIMIENTO_TRIBUTARIO" Relationship="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOVIMIENTO_FE_CABECERA_MOV_TRIBUTARIO" FromRole="CABECERA_MOVIMIENTO_FE" ToRole="CABECERA_MOVIMIENTO_TRIBUTARIO" />
+          <NavigationProperty Name="MENSAJE" Relationship="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOVIMIENTO_FE_VS_MENSAJE" FromRole="CABECERA_MOVIMIENTO_FE" ToRole="MENSAJE" />
+          <NavigationProperty Name="TIPO_COMPROBANTE" Relationship="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOVIMIENTO_FE_VS_TIPO_COMPROBANTE" FromRole="CABECERA_MOVIMIENTO_FE" ToRole="TIPO_COMPROBANTE" />
+          <NavigationProperty Name="TIPO_IDENTIFICACION" Relationship="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOVIMIENTO_FE_VS_TIPO_IDENTIFICACION" FromRole="CABECERA_MOVIMIENTO_FE" ToRole="TIPO_IDENTIFICACION" />
+        </EntityType>
+        <EntityType Name="CABECERA_MOVIMIENTO_TRIBUTARIO">
+          <Key>
+            <PropertyRef Name="CABECERA_MOVIMIENTO_TRIBUTARIO_ID" />
+          </Key>
+          <Property Name="CABECERA_MOVIMIENTO_TRIBUTARIO_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CABECERA_FACTURACION_ID" Type="Int32" />
+          <Property Name="ESTABLECIMIENTO" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="PUNTO_EMISION" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="SECUENCIAL" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CABECERA_MOVIMIENTO_FACTURA" Relationship="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOV_FACTURA_VS_CABECERA_MOV_TRIB" FromRole="CABECERA_MOVIMIENTO_TRIBUTARIO" ToRole="CABECERA_MOVIMIENTO_FACTURA" />
+          <NavigationProperty Name="CABECERA_MOVIMIENTO_FE" Relationship="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOVIMIENTO_FE_CABECERA_MOV_TRIBUTARIO" FromRole="CABECERA_MOVIMIENTO_TRIBUTARIO" ToRole="CABECERA_MOVIMIENTO_FE" />
+          <NavigationProperty Name="CABECERA_FACTURACION" Relationship="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOV_TRIBUTARIO_VS_CABECERA_FACTURACION" FromRole="CABECERA_MOVIMIENTO_TRIBUTARIO" ToRole="CABECERA_FACTURACION" />
+        </EntityType>
+        <EntityType Name="DETALLE_MOVIMIENTO_FACTURA">
+          <Key>
+            <PropertyRef Name="DETALLE_MOVIMIENTO_FACTURA_ID" />
+          </Key>
+          <Property Name="DETALLE_MOVIMIENTO_FACTURA_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CABECERA_MOVIMIENTO_FACTURA_ID" Type="Int64" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CANTIDAD" Type="Int32" />
+          <Property Name="PRECIO_UNITARIO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DESCUENTO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TOTAL_SIN_IMPUESTOS" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="CABECERA_MOVIMIENTO_FACTURA" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_MOV_FACTURA_VS_CABECERA_MOV_FACT" FromRole="DETALLE_MOVIMIENTO_FACTURA" ToRole="CABECERA_MOVIMIENTO_FACTURA" />
+        </EntityType>
+        <EntityType Name="PROVEEDOR_IMPUESTO">
+          <Key>
+            <PropertyRef Name="PROVEEDOR_IMPUESTO_ID" />
+          </Key>
+          <Property Name="PROVEEDOR_IMPUESTO_ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CONDICION_IMPUESTO_ID" Type="Int32" />
+          <Property Name="GRUPO_IMPUESTO_ID" Type="Int32" />
+          <Property Name="IMPUESTO_ID" Type="Int32" />
+          <Property Name="PORCENTAJE_IMPUESTO_ID" Type="Int32" />
+          <Property Name="PROVEEDOR_ID" Type="Int32" />
+          <NavigationProperty Name="PROVEEDOR" Relationship="Decisiones_Inteligentes_Modelo.FK_PROVEEDOR_IMPUESTO_VS_PROVEDEOR" FromRole="PROVEEDOR_IMPUESTO" ToRole="PROVEEDOR" />
+          <NavigationProperty Name="GRUPO_IMPUESTO" Relationship="Decisiones_Inteligentes_Modelo.FK_PROVEEDOR_IMPUESTO_GRUPO_IMPUESTO" FromRole="PROVEEDOR_IMPUESTO" ToRole="GRUPO_IMPUESTO" />
+          <NavigationProperty Name="IMPUESTO" Relationship="Decisiones_Inteligentes_Modelo.FK_PROVEEDOR_IMPUESTO_IMPUESTO" FromRole="PROVEEDOR_IMPUESTO" ToRole="IMPUESTO" />
+          <NavigationProperty Name="CONDICION_IMPUESTO" Relationship="Decisiones_Inteligentes_Modelo.FK_PROVEEDOR_IMPUESTO_VS_CONDICION_IMPUESTO" FromRole="PROVEEDOR_IMPUESTO" ToRole="CONDICION_IMPUESTO" />
+          <NavigationProperty Name="PORCENTAJE_IMPUESTO" Relationship="Decisiones_Inteligentes_Modelo.FK_PROVEEDOR_IMPUESTO_VS_PORCENTAJE_IMPUESTO" FromRole="PROVEEDOR_IMPUESTO" ToRole="PORCENTAJE_IMPUESTO" />
+        </EntityType>
+        <EntityType Name="ESTADO_COMPROBANTE_ELECTRONICO">
+          <Key>
+            <PropertyRef Name="ESTADO_COMPROBANTE_ELECTRONICO_ID" />
+          </Key>
+          <Property Name="ESTADO_COMPROBANTE_ELECTRONICO_ID" Type="Int32" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ABREVIATURA" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="CABECERA_MOVIMIENTO_FE" Relationship="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOV_FE_VS_ESTADO_COMPROBANTE_ELECTRONICO" FromRole="ESTADO_COMPROBANTE_ELECTRONICO" ToRole="CABECERA_MOVIMIENTO_FE" />
+        </EntityType>
+        <EntityType Name="MENSAJE">
+          <Key>
+            <PropertyRef Name="MENSAJE_ID" />
+          </Key>
+          <Property Name="MENSAJE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TIPO_MENSAJE_ID" Type="Int32" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ABREVIATURA" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="CABECERA_MOVIMIENTO_FE" Relationship="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOVIMIENTO_FE_VS_MENSAJE" FromRole="MENSAJE" ToRole="CABECERA_MOVIMIENTO_FE" />
+          <NavigationProperty Name="TIPO_MENSAJE" Relationship="Decisiones_Inteligentes_Modelo.FK_MENSAJE_VS_TIPO_MENSAJE" FromRole="MENSAJE" ToRole="TIPO_MENSAJE" />
+        </EntityType>
+        <EntityType Name="TIPO_COMPROBANTE">
+          <Key>
+            <PropertyRef Name="TIPO_COMPROBANTE_ID" />
+          </Key>
+          <Property Name="TIPO_COMPROBANTE_ID" Type="Int32" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="CODIGO_SRI" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="CABECERA_MOVIMIENTO_FE" Relationship="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOVIMIENTO_FE_VS_TIPO_COMPROBANTE" FromRole="TIPO_COMPROBANTE" ToRole="CABECERA_MOVIMIENTO_FE" />
+          <NavigationProperty Name="SECUENCIALES_SRI" Relationship="Decisiones_Inteligentes_Modelo.FK_SECUENCIALES_SRI_VS_TIPO_COMPROBANTE" FromRole="TIPO_COMPROBANTE" ToRole="SECUENCIALES_SRI" />
+        </EntityType>
+        <EntityType Name="TIPO_MENSAJE">
+          <Key>
+            <PropertyRef Name="TIPO_MENSAJE_ID" />
+          </Key>
+          <Property Name="TIPO_MENSAJE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MENSAJE" Relationship="Decisiones_Inteligentes_Modelo.FK_MENSAJE_VS_TIPO_MENSAJE" FromRole="TIPO_MENSAJE" ToRole="MENSAJE" />
+        </EntityType>
+        <Association Name="FK_CABECERA_MOV_FACTURA_VS_CABECERA_MOV_TRIB">
+          <End Type="Decisiones_Inteligentes_Modelo.CABECERA_MOVIMIENTO_TRIBUTARIO" Role="CABECERA_MOVIMIENTO_TRIBUTARIO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.CABECERA_MOVIMIENTO_FACTURA" Role="CABECERA_MOVIMIENTO_FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CABECERA_MOVIMIENTO_TRIBUTARIO">
+              <PropertyRef Name="CABECERA_MOVIMIENTO_TRIBUTARIO_ID" />
+            </Principal>
+            <Dependent Role="CABECERA_MOVIMIENTO_FACTURA">
+              <PropertyRef Name="CABECERA_MOVIMIENTO_TRIBUTARIO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE_MOV_FACTURA_VS_CABECERA_MOV_FACT">
+          <End Type="Decisiones_Inteligentes_Modelo.CABECERA_MOVIMIENTO_FACTURA" Role="CABECERA_MOVIMIENTO_FACTURA" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_MOVIMIENTO_FACTURA" Role="DETALLE_MOVIMIENTO_FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CABECERA_MOVIMIENTO_FACTURA">
+              <PropertyRef Name="CABECERA_MOVIMIENTO_FACTURA_ID" />
+            </Principal>
+            <Dependent Role="DETALLE_MOVIMIENTO_FACTURA">
+              <PropertyRef Name="CABECERA_MOVIMIENTO_FACTURA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CABECERA_MOV_FE_USUARIO">
+          <End Type="Decisiones_Inteligentes_Modelo.USUARIO" Role="USUARIO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.CABECERA_MOVIMIENTO_FE" Role="CABECERA_MOVIMIENTO_FE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="USUARIO_ID" />
+            </Principal>
+            <Dependent Role="CABECERA_MOVIMIENTO_FE">
+              <PropertyRef Name="USUARIO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CABECERA_MOV_FE_VS_ESTADO_COMPROBANTE_ELECTRONICO">
+          <End Type="Decisiones_Inteligentes_Modelo.ESTADO_COMPROBANTE_ELECTRONICO" Role="ESTADO_COMPROBANTE_ELECTRONICO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.CABECERA_MOVIMIENTO_FE" Role="CABECERA_MOVIMIENTO_FE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO_COMPROBANTE_ELECTRONICO">
+              <PropertyRef Name="ESTADO_COMPROBANTE_ELECTRONICO_ID" />
+            </Principal>
+            <Dependent Role="CABECERA_MOVIMIENTO_FE">
+              <PropertyRef Name="ESTADO_COMPROBANTE_ELECTRONICO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CABECERA_MOV_FE_VS_INDIVIDUO_ROL">
+          <End Type="Decisiones_Inteligentes_Modelo.INDIVIDUO_ROL" Role="INDIVIDUO_ROL" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.CABECERA_MOVIMIENTO_FE" Role="CABECERA_MOVIMIENTO_FE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INDIVIDUO_ROL">
+              <PropertyRef Name="INDIVIDUO_ROL_ID" />
+            </Principal>
+            <Dependent Role="CABECERA_MOVIMIENTO_FE">
+              <PropertyRef Name="INDIVIDUO_ROL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CABECERA_MOV_FE_VS_MONEDA">
+          <End Type="Decisiones_Inteligentes_Modelo.MONEDA" Role="MONEDA" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.CABECERA_MOVIMIENTO_FE" Role="CABECERA_MOVIMIENTO_FE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MONEDA">
+              <PropertyRef Name="MONEDA_ID" />
+            </Principal>
+            <Dependent Role="CABECERA_MOVIMIENTO_FE">
+              <PropertyRef Name="MONEDA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CABECERA_MOVIMIENTO_FE_CABECERA_MOV_TRIBUTARIO">
+          <End Type="Decisiones_Inteligentes_Modelo.CABECERA_MOVIMIENTO_TRIBUTARIO" Role="CABECERA_MOVIMIENTO_TRIBUTARIO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.CABECERA_MOVIMIENTO_FE" Role="CABECERA_MOVIMIENTO_FE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CABECERA_MOVIMIENTO_TRIBUTARIO">
+              <PropertyRef Name="CABECERA_MOVIMIENTO_TRIBUTARIO_ID" />
+            </Principal>
+            <Dependent Role="CABECERA_MOVIMIENTO_FE">
+              <PropertyRef Name="CABECERA_MOVIMIENTO_TRIBUTARIO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CABECERA_MOVIMIENTO_FE_VS_MENSAJE">
+          <End Type="Decisiones_Inteligentes_Modelo.MENSAJE" Role="MENSAJE" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.CABECERA_MOVIMIENTO_FE" Role="CABECERA_MOVIMIENTO_FE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MENSAJE">
+              <PropertyRef Name="MENSAJE_ID" />
+            </Principal>
+            <Dependent Role="CABECERA_MOVIMIENTO_FE">
+              <PropertyRef Name="MENSAJE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CABECERA_MOVIMIENTO_FE_VS_TIPO_COMPROBANTE">
+          <End Type="Decisiones_Inteligentes_Modelo.TIPO_COMPROBANTE" Role="TIPO_COMPROBANTE" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.CABECERA_MOVIMIENTO_FE" Role="CABECERA_MOVIMIENTO_FE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_COMPROBANTE">
+              <PropertyRef Name="TIPO_COMPROBANTE_ID" />
+            </Principal>
+            <Dependent Role="CABECERA_MOVIMIENTO_FE">
+              <PropertyRef Name="TIPO_COMPROBANTE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CABECERA_MOVIMIENTO_FE_VS_TIPO_IDENTIFICACION">
+          <End Type="Decisiones_Inteligentes_Modelo.TIPO_IDENTIFICACION" Role="TIPO_IDENTIFICACION" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.CABECERA_MOVIMIENTO_FE" Role="CABECERA_MOVIMIENTO_FE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_IDENTIFICACION">
+              <PropertyRef Name="TIPO_IDENTIFICACION_ID" />
+            </Principal>
+            <Dependent Role="CABECERA_MOVIMIENTO_FE">
+              <PropertyRef Name="TIPO_IDENTIFICACION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SECUENCIALES_SRI_VS_TIPO_COMPROBANTE">
+          <End Type="Decisiones_Inteligentes_Modelo.TIPO_COMPROBANTE" Role="TIPO_COMPROBANTE" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.SECUENCIALES_SRI" Role="SECUENCIALES_SRI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_COMPROBANTE">
+              <PropertyRef Name="TIPO_COMPROBANTE_ID" />
+            </Principal>
+            <Dependent Role="SECUENCIALES_SRI">
+              <PropertyRef Name="TIPO_COMPROBANTE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROVEEDOR_IMPUESTO_VS_PROVEDEOR">
+          <End Type="Decisiones_Inteligentes_Modelo.PROVEEDOR" Role="PROVEEDOR" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.PROVEEDOR_IMPUESTO" Role="PROVEEDOR_IMPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVEEDOR">
+              <PropertyRef Name="PROVEEDOR_ID" />
+            </Principal>
+            <Dependent Role="PROVEEDOR_IMPUESTO">
+              <PropertyRef Name="PROVEEDOR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROVEEDOR_IMPUESTO_GRUPO_IMPUESTO">
+          <End Type="Decisiones_Inteligentes_Modelo.GRUPO_IMPUESTO" Role="GRUPO_IMPUESTO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.PROVEEDOR_IMPUESTO" Role="PROVEEDOR_IMPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRUPO_IMPUESTO">
+              <PropertyRef Name="GRUPO_IMPUESTO_ID" />
+            </Principal>
+            <Dependent Role="PROVEEDOR_IMPUESTO">
+              <PropertyRef Name="GRUPO_IMPUESTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROVEEDOR_IMPUESTO_IMPUESTO">
+          <End Type="Decisiones_Inteligentes_Modelo.IMPUESTO" Role="IMPUESTO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.PROVEEDOR_IMPUESTO" Role="PROVEEDOR_IMPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IMPUESTO">
+              <PropertyRef Name="IMPUESTO_ID" />
+            </Principal>
+            <Dependent Role="PROVEEDOR_IMPUESTO">
+              <PropertyRef Name="IMPUESTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROVEEDOR_IMPUESTO_VS_CONDICION_IMPUESTO">
+          <End Type="Decisiones_Inteligentes_Modelo.CONDICION_IMPUESTO" Role="CONDICION_IMPUESTO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.PROVEEDOR_IMPUESTO" Role="PROVEEDOR_IMPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONDICION_IMPUESTO">
+              <PropertyRef Name="CONDICION_IMPUESTO_ID" />
+            </Principal>
+            <Dependent Role="PROVEEDOR_IMPUESTO">
+              <PropertyRef Name="CONDICION_IMPUESTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROVEEDOR_IMPUESTO_VS_PORCENTAJE_IMPUESTO">
+          <End Type="Decisiones_Inteligentes_Modelo.PORCENTAJE_IMPUESTO" Role="PORCENTAJE_IMPUESTO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.PROVEEDOR_IMPUESTO" Role="PROVEEDOR_IMPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PORCENTAJE_IMPUESTO">
+              <PropertyRef Name="PORCENTAJE_IMPUESTO_ID" />
+            </Principal>
+            <Dependent Role="PROVEEDOR_IMPUESTO">
+              <PropertyRef Name="PORCENTAJE_IMPUESTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MENSAJE_VS_TIPO_MENSAJE">
+          <End Type="Decisiones_Inteligentes_Modelo.TIPO_MENSAJE" Role="TIPO_MENSAJE" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.MENSAJE" Role="MENSAJE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_MENSAJE">
+              <PropertyRef Name="TIPO_MENSAJE_ID" />
+            </Principal>
+            <Dependent Role="MENSAJE">
+              <PropertyRef Name="TIPO_MENSAJE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CABECERA_FACTURACION">
+          <Key>
+            <PropertyRef Name="CABECERA_FACTURACION_ID" />
+          </Key>
+          <Property Name="CABECERA_FACTURACION_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PUNTO_VENTA_ID" Type="Int32" />
+          <Property Name="SUCURSAL_ID" Type="Int32" />
+          <Property Name="TIPO_AMBIENTE_ID" Type="Int32" />
+          <Property Name="TIPO_EMISION_ID" Type="Int32" />
+          <Property Name="RAZON_SOCIAL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBRE_COMERCIAL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RUC" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="ESTABLECIMIENTO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DIRECCION_MATRIZ" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="LLEVA_CONTABILIDAD" Type="Boolean" />
+          <NavigationProperty Name="PUNTO_VENTA" Relationship="Decisiones_Inteligentes_Modelo.FK_CABECERA_FACTURACION_VS_PUNTO_VENTA" FromRole="CABECERA_FACTURACION" ToRole="PUNTO_VENTA" />
+          <NavigationProperty Name="SUCURSAL" Relationship="Decisiones_Inteligentes_Modelo.FK_CABECERA_FACTURACION_VS_SUCURSAL" FromRole="CABECERA_FACTURACION" ToRole="SUCURSAL" />
+          <NavigationProperty Name="TIPO_AMBIENTE" Relationship="Decisiones_Inteligentes_Modelo.FK_CABECERA_FACTURACION_VS_TIPO_AMBIENTE" FromRole="CABECERA_FACTURACION" ToRole="TIPO_AMBIENTE" />
+          <NavigationProperty Name="TIPO_EMISION" Relationship="Decisiones_Inteligentes_Modelo.FK_CABECERA_FACTURACION_VS_TIPO_EMISION" FromRole="CABECERA_FACTURACION" ToRole="TIPO_EMISION" />
+          <NavigationProperty Name="CABECERA_MOVIMIENTO_TRIBUTARIO" Relationship="Decisiones_Inteligentes_Modelo.FK_CABECERA_MOV_TRIBUTARIO_VS_CABECERA_FACTURACION" FromRole="CABECERA_FACTURACION" ToRole="CABECERA_MOVIMIENTO_TRIBUTARIO" />
+        </EntityType>
+        <Association Name="FK_CABECERA_FACTURACION_VS_PUNTO_VENTA">
+          <End Type="Decisiones_Inteligentes_Modelo.PUNTO_VENTA" Role="PUNTO_VENTA" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.CABECERA_FACTURACION" Role="CABECERA_FACTURACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PUNTO_VENTA">
+              <PropertyRef Name="PUNTO_VENTA_ID" />
+            </Principal>
+            <Dependent Role="CABECERA_FACTURACION">
+              <PropertyRef Name="PUNTO_VENTA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CABECERA_FACTURACION_VS_SUCURSAL">
+          <End Type="Decisiones_Inteligentes_Modelo.SUCURSAL" Role="SUCURSAL" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.CABECERA_FACTURACION" Role="CABECERA_FACTURACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUCURSAL">
+              <PropertyRef Name="SUCURSAL_ID" />
+            </Principal>
+            <Dependent Role="CABECERA_FACTURACION">
+              <PropertyRef Name="SUCURSAL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CABECERA_FACTURACION_VS_TIPO_AMBIENTE">
+          <End Type="Decisiones_Inteligentes_Modelo.TIPO_AMBIENTE" Role="TIPO_AMBIENTE" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.CABECERA_FACTURACION" Role="CABECERA_FACTURACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_AMBIENTE">
+              <PropertyRef Name="TIPO_AMBIENTE_ID" />
+            </Principal>
+            <Dependent Role="CABECERA_FACTURACION">
+              <PropertyRef Name="TIPO_AMBIENTE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CABECERA_FACTURACION_VS_TIPO_EMISION">
+          <End Type="Decisiones_Inteligentes_Modelo.TIPO_EMISION" Role="TIPO_EMISION" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.CABECERA_FACTURACION" Role="CABECERA_FACTURACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_EMISION">
+              <PropertyRef Name="TIPO_EMISION_ID" />
+            </Principal>
+            <Dependent Role="CABECERA_FACTURACION">
+              <PropertyRef Name="TIPO_EMISION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CABECERA_MOV_TRIBUTARIO_VS_CABECERA_FACTURACION">
+          <End Type="Decisiones_Inteligentes_Modelo.CABECERA_FACTURACION" Role="CABECERA_FACTURACION" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.CABECERA_MOVIMIENTO_TRIBUTARIO" Role="CABECERA_MOVIMIENTO_TRIBUTARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CABECERA_FACTURACION">
+              <PropertyRef Name="CABECERA_FACTURACION_ID" />
+            </Principal>
+            <Dependent Role="CABECERA_MOVIMIENTO_TRIBUTARIO">
+              <PropertyRef Name="CABECERA_FACTURACION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ORDEN_TRABAJO_COMISION">
+          <Key>
+            <PropertyRef Name="ORDEN_TRABAJO_COMISION_ID" />
+          </Key>
+          <Property Name="ORDEN_TRABAJO_COMISION_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ORDEN_TRABAJO_ID" Type="Int64" />
+          <Property Name="VENTA_COMISION_ID" Type="Int32" />
+          <Property Name="FECHA_GENERACION_COMISION" Type="DateTime" Precision="3" />
+          <Property Name="USUARIO_ID" Type="Int32" />
+          <Property Name="VALOR" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_ORDEN_TRABAJO" FromRole="ORDEN_TRABAJO_COMISION" ToRole="ORDEN_TRABAJO" />
+          <NavigationProperty Name="VENTA_COMISION" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_VENTA_COMISION" FromRole="ORDEN_TRABAJO_COMISION" ToRole="VENTA_COMISION" />
+        </EntityType>
+        <Association Name="FK_ORDEN_TRABAJO_VS_ORDEN_TRABAJO">
+          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO" Role="ORDEN_TRABAJO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO_COMISION" Role="ORDEN_TRABAJO_COMISION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN_TRABAJO">
+              <PropertyRef Name="ORDEN_TRABAJO_ID" />
+            </Principal>
+            <Dependent Role="ORDEN_TRABAJO_COMISION">
+              <PropertyRef Name="ORDEN_TRABAJO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDEN_TRABAJO_VS_VENTA_COMISION">
+          <End Type="Decisiones_Inteligentes_Modelo.VENTA_COMISION" Role="VENTA_COMISION" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO_COMISION" Role="ORDEN_TRABAJO_COMISION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTA_COMISION">
+              <PropertyRef Name="VENTA_COMISION_ID" />
+            </Principal>
+            <Dependent Role="ORDEN_TRABAJO_COMISION">
+              <PropertyRef Name="VENTA_COMISION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DETALLE_ORDEN_TRABAJO">
+          <Key>
+            <PropertyRef Name="DETALLE_ORDEN_TRABAJO_ID" />
+          </Key>
+          <Property Name="DETALLE_ORDEN_TRABAJO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ORDEN_TRABAJO_ID" Type="Int64" />
+          <Property Name="PRODUCTO_ID" Type="Int32" />
+          <Property Name="COLOR_ID" Type="Int32" />
+          <Property Name="CANTIDAD" Type="Int32" />
+          <Property Name="VALOR_UNITARIO" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="PORCENTAJE_IMPUESTO" Type="Decimal" Precision="8" Scale="4" />
+          <Property Name="VALOR_TOTAL" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="OBSERVACION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PRODUCTO_TALLA_ID" Type="Int32" />
+          <Property Name="MARCA_ID" Type="Int32" />
+          <Property Name="MATERIAL_ID" Type="Int32" />
+          <Property Name="PORCENTAJE_IMPUESTO_SUCURSAL_ID" Type="Int32" />
+          <NavigationProperty Name="COLOR" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_OT_VS_COLOR" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="COLOR" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_VS_PRODUCTO" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="PRODUCTO" />
+          <NavigationProperty Name="ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="ORDEN_TRABAJO" />
+          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO_OBSERVACION" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_OT_OBSERVACION_VS_DETALLE_OT" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="DETALLE_ORDEN_TRABAJO_OBSERVACION" />
+          <NavigationProperty Name="DETALLE_TRABAJO_FOTOGRAFIA" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DETALLE_ORDEN_TRABAJO" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="DETALLE_TRABAJO_FOTOGRAFIA" />
+        </EntityType>
+        <Association Name="FK_DETALLE_OT_VS_COLOR">
+          <End Type="Decisiones_Inteligentes_Modelo.COLOR" Role="COLOR" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO" Role="DETALLE_ORDEN_TRABAJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COLOR">
+              <PropertyRef Name="COLOR_ID" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN_TRABAJO">
+              <PropertyRef Name="COLOR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE_ORDEN_TRABAJO_VS_PRODUCTO">
+          <End Type="Decisiones_Inteligentes_Modelo.PRODUCTO" Role="PRODUCTO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO" Role="DETALLE_ORDEN_TRABAJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="PRODUCTO_ID" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN_TRABAJO">
+              <PropertyRef Name="PRODUCTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO">
+          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO" Role="ORDEN_TRABAJO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO" Role="DETALLE_ORDEN_TRABAJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN_TRABAJO">
+              <PropertyRef Name="ORDEN_TRABAJO_ID" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN_TRABAJO">
+              <PropertyRef Name="ORDEN_TRABAJO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE_OT_OBSERVACION_VS_DETALLE_OT">
+          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO" Role="DETALLE_ORDEN_TRABAJO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO_OBSERVACION" Role="DETALLE_ORDEN_TRABAJO_OBSERVACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DETALLE_ORDEN_TRABAJO">
+              <PropertyRef Name="DETALLE_ORDEN_TRABAJO_ID" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN_TRABAJO_OBSERVACION">
+              <PropertyRef Name="DETALLE_ORDEN_TRABAJO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DETALLE_ORDEN_TRABAJO">
+          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO" Role="DETALLE_ORDEN_TRABAJO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_TRABAJO_FOTOGRAFIA" Role="DETALLE_TRABAJO_FOTOGRAFIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DETALLE_ORDEN_TRABAJO">
+              <PropertyRef Name="DETALLE_ORDEN_TRABAJO_ID" />
+            </Principal>
+            <Dependent Role="DETALLE_TRABAJO_FOTOGRAFIA">
+              <PropertyRef Name="DETALLE_ORDEN_TRABAJO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4505,22 +5802,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CABECERA_FACTURACION">
-            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.CABECERA_FACTURACION">
-              <MappingFragment StoreEntitySet="CABECERA_FACTURACION">
-                <ScalarProperty Name="CABECERA_FACTURACION_ID" ColumnName="CABECERA_FACTURACION_ID" />
-                <ScalarProperty Name="PUNTO_VENTA_ID" ColumnName="PUNTO_VENTA_ID" />
-                <ScalarProperty Name="SUCURSAL_ID" ColumnName="SUCURSAL_ID" />
-                <ScalarProperty Name="LLEVA_CONTABILIDAD_ID" ColumnName="LLEVA_CONTABILIDAD_ID" />
-                <ScalarProperty Name="TIPO_AMBIENTE_ID" ColumnName="TIPO_AMBIENTE_ID" />
-                <ScalarProperty Name="TIPO_EMISION_ID" ColumnName="TIPO_EMISION_ID" />
-                <ScalarProperty Name="MONEDA_ID" ColumnName="MONEDA_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="SECUENCIALES_SRI">
             <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.SECUENCIALES_SRI">
               <MappingFragment StoreEntitySet="SECUENCIALES_SRI">
+                <ScalarProperty Name="TIPO_COMPROBANTE_ID" ColumnName="TIPO_COMPROBANTE_ID" />
                 <ScalarProperty Name="SECUENCIALES_SRI_ID" ColumnName="SECUENCIALES_SRI_ID" />
                 <ScalarProperty Name="PUNTO_VENTA_ID" ColumnName="PUNTO_VENTA_ID" />
                 <ScalarProperty Name="SUCURSAL_ID" ColumnName="SUCURSAL_ID" />
@@ -4702,26 +5987,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="IMPUESTO">
-            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.IMPUESTO">
-              <MappingFragment StoreEntitySet="IMPUESTO">
-                <ScalarProperty Name="IMPUESTO_ID" ColumnName="IMPUESTO_ID" />
-                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
-                <ScalarProperty Name="PORCENTAJE" ColumnName="PORCENTAJE" />
-                <ScalarProperty Name="ESTA_HABILITADO" ColumnName="ESTA_HABILITADO" />
-                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LLEVA_CONTABILIDAD">
-            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.LLEVA_CONTABILIDAD">
-              <MappingFragment StoreEntitySet="LLEVA_CONTABILIDAD">
-                <ScalarProperty Name="LLEVA_CONTABILIDAD_ID" ColumnName="LLEVA_CONTABILIDAD_ID" />
-                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
-                <ScalarProperty Name="ESTA_HABILITADO" ColumnName="ESTA_HABILITADO" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="MARCA">
             <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.MARCA">
               <MappingFragment StoreEntitySet="MARCA">
@@ -4753,6 +6018,7 @@
           <EntitySetMapping Name="MONEDA">
             <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.MONEDA">
               <MappingFragment StoreEntitySet="MONEDA">
+                <ScalarProperty Name="ABREVITURA" ColumnName="ABREVITURA" />
                 <ScalarProperty Name="MONEDA_ID" ColumnName="MONEDA_ID" />
                 <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
                 <ScalarProperty Name="ESTA_HABILITADO" ColumnName="ESTA_HABILITADO" />
@@ -5091,26 +6357,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DETALLE_ORDEN_TRABAJO">
-            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO">
-              <MappingFragment StoreEntitySet="DETALLE_ORDEN_TRABAJO">
-                <ScalarProperty Name="DETALLE_ORDEN_TRABAJO_ID" ColumnName="DETALLE_ORDEN_TRABAJO_ID" />
-                <ScalarProperty Name="ORDEN_TRABAJO_ID" ColumnName="ORDEN_TRABAJO_ID" />
-                <ScalarProperty Name="PRODUCTO_ID" ColumnName="PRODUCTO_ID" />
-                <ScalarProperty Name="IMPUESTO_ID" ColumnName="IMPUESTO_ID" />
-                <ScalarProperty Name="COLOR_ID" ColumnName="COLOR_ID" />
-                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
-                <ScalarProperty Name="VALOR_UNITARIO" ColumnName="VALOR_UNITARIO" />
-                <ScalarProperty Name="PORCENTAJE_IMPUESTO" ColumnName="PORCENTAJE_IMPUESTO" />
-                <ScalarProperty Name="VALOR_TOTAL" ColumnName="VALOR_TOTAL" />
-                <ScalarProperty Name="OBSERVACION" ColumnName="OBSERVACION" />
-                <ScalarProperty Name="PRODUCTO_TALLA_ID" ColumnName="PRODUCTO_TALLA_ID" />
-                <ScalarProperty Name="MARCA_ID" ColumnName="MARCA_ID" />
-                <ScalarProperty Name="MATERIAL_ID" ColumnName="MATERIAL_ID" />
-                <ScalarProperty Name="VENTA_COMISION_ID" ColumnName="VENTA_COMISION_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="NUMERACION_ORDEN">
             <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.NUMERACION_ORDEN">
               <MappingFragment StoreEntitySet="NUMERACION_ORDEN">
@@ -5311,6 +6557,246 @@
                 <ScalarProperty Name="TIPO_INDIVIDUO_ID" ColumnName="TIPO_INDIVIDUO_ID" />
                 <ScalarProperty Name="TIPO_IDENTIFICACION_ID" ColumnName="TIPO_IDENTIFICACION_ID" />
                 <ScalarProperty Name="INDIVIDUO_ID" ColumnName="INDIVIDUO_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROVEEDOR">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.PROVEEDOR">
+              <MappingFragment StoreEntitySet="PROVEEDOR">
+                <ScalarProperty Name="NOMBRE_REPRESENTANTE" ColumnName="NOMBRE_REPRESENTANTE" />
+                <ScalarProperty Name="DIAS_CREDITO" ColumnName="DIAS_CREDITO" />
+                <ScalarProperty Name="FORMA_PAGO_ID" ColumnName="FORMA_PAGO_ID" />
+                <ScalarProperty Name="INDIVIDUO_ID" ColumnName="INDIVIDUO_ID" />
+                <ScalarProperty Name="PROVEEDOR_ID" ColumnName="PROVEEDOR_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VENDEDOR">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.VENDEDOR">
+              <MappingFragment StoreEntitySet="VENDEDOR">
+                <ScalarProperty Name="HABILITADO" ColumnName="HABILITADO" />
+                <ScalarProperty Name="ES_EMPLEADO" ColumnName="ES_EMPLEADO" />
+                <ScalarProperty Name="INDIVIDUO_ID" ColumnName="INDIVIDUO_ID" />
+                <ScalarProperty Name="VENDEDOR_ID" ColumnName="VENDEDOR_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BANCO">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.BANCO">
+              <MappingFragment StoreEntitySet="BANCO">
+                <ScalarProperty Name="CODIGO_SIB" ColumnName="CODIGO_SIB" />
+                <ScalarProperty Name="HABILITADO" ColumnName="HABILITADO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="BANCO_ID" ColumnName="BANCO_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CONDICION_IMPUESTO">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.CONDICION_IMPUESTO">
+              <MappingFragment StoreEntitySet="CONDICION_IMPUESTO">
+                <ScalarProperty Name="HABILITADO" ColumnName="HABILITADO" />
+                <ScalarProperty Name="IMPUESTO_ID" ColumnName="IMPUESTO_ID" />
+                <ScalarProperty Name="CONDICION_IMPUESTO_ID" ColumnName="CONDICION_IMPUESTO_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GRUPO_IMPUESTO">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.GRUPO_IMPUESTO">
+              <MappingFragment StoreEntitySet="GRUPO_IMPUESTO">
+                <ScalarProperty Name="HABILITADO" ColumnName="HABILITADO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="IMPUESTO_ID" ColumnName="IMPUESTO_ID" />
+                <ScalarProperty Name="GRUPO_IMPUESTO_ID" ColumnName="GRUPO_IMPUESTO_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PORCENTAJE_IMPUESTO">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.PORCENTAJE_IMPUESTO">
+              <MappingFragment StoreEntitySet="PORCENTAJE_IMPUESTO">
+                <ScalarProperty Name="CONDICION_IMPUESTO_ID" ColumnName="CONDICION_IMPUESTO_ID" />
+                <ScalarProperty Name="GRUPO_IMPUESTO_ID" ColumnName="GRUPO_IMPUESTO_ID" />
+                <ScalarProperty Name="IMPUESTO_ID" ColumnName="IMPUESTO_ID" />
+                <ScalarProperty Name="PORCENTAJE_IMPUESTO_ID" ColumnName="PORCENTAJE_IMPUESTO_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PORCENTAJE_IMPUESTO_SUCURSAL">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.PORCENTAJE_IMPUESTO_SUCURSAL">
+              <MappingFragment StoreEntitySet="PORCENTAJE_IMPUESTO_SUCURSAL">
+                <ScalarProperty Name="SUCURSAL_ID" ColumnName="SUCURSAL_ID" />
+                <ScalarProperty Name="BASE_MAXIMA" ColumnName="BASE_MAXIMA" />
+                <ScalarProperty Name="BASE_MINIMA" ColumnName="BASE_MINIMA" />
+                <ScalarProperty Name="PORCENTAJE" ColumnName="PORCENTAJE" />
+                <ScalarProperty Name="PORCENTAJE_IMPUESTO_ID" ColumnName="PORCENTAJE_IMPUESTO_ID" />
+                <ScalarProperty Name="PORCENTAJE_IMPUESTO_SUCURSAL_ID" ColumnName="PORCENTAJE_IMPUESTO_SUCURSAL_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IMPUESTO">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.IMPUESTO">
+              <MappingFragment StoreEntitySet="IMPUESTO">
+                <ScalarProperty Name="TIENE_RETENCION" ColumnName="TIENE_RETENCION" />
+                <ScalarProperty Name="FECHA_FIN_VIGENCIA" ColumnName="FECHA_FIN_VIGENCIA" />
+                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+                <ScalarProperty Name="ESTA_HABILITADO" ColumnName="ESTA_HABILITADO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="IMPUESTO_ID" ColumnName="IMPUESTO_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CABECERA_MOVIMIENTO_FACTURA">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.CABECERA_MOVIMIENTO_FACTURA">
+              <MappingFragment StoreEntitySet="CABECERA_MOVIMIENTO_FACTURA">
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+                <ScalarProperty Name="FECHA_EMISION" ColumnName="FECHA_EMISION" />
+                <ScalarProperty Name="CABECERA_MOVIMIENTO_TRIBUTARIO_ID" ColumnName="CABECERA_MOVIMIENTO_TRIBUTARIO_ID" />
+                <ScalarProperty Name="CABECERA_MOVIMIENTO_FACTURA_ID" ColumnName="CABECERA_MOVIMIENTO_FACTURA_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CABECERA_MOVIMIENTO_FE">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.CABECERA_MOVIMIENTO_FE">
+              <MappingFragment StoreEntitySet="CABECERA_MOVIMIENTO_FE">
+                <ScalarProperty Name="FECHA_AUTORIZACION" ColumnName="FECHA_AUTORIZACION" />
+                <ScalarProperty Name="NUMERO_AUTORIZACION" ColumnName="NUMERO_AUTORIZACION" />
+                <ScalarProperty Name="CLAVE_ACCESO" ColumnName="CLAVE_ACCESO" />
+                <ScalarProperty Name="COMPRA_O_VENTA" ColumnName="COMPRA_O_VENTA" />
+                <ScalarProperty Name="NUMERO_COMPROBANTE" ColumnName="NUMERO_COMPROBANTE" />
+                <ScalarProperty Name="FAX" ColumnName="FAX" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+                <ScalarProperty Name="FECHA_ENVIO" ColumnName="FECHA_ENVIO" />
+                <ScalarProperty Name="CORREO_ELECTRONICO" ColumnName="CORREO_ELECTRONICO" />
+                <ScalarProperty Name="FECHA_EMISION" ColumnName="FECHA_EMISION" />
+                <ScalarProperty Name="CABECERA_MOVIMIENTO_TRIBUTARIO_ID" ColumnName="CABECERA_MOVIMIENTO_TRIBUTARIO_ID" />
+                <ScalarProperty Name="MENSAJE_ID" ColumnName="MENSAJE_ID" />
+                <ScalarProperty Name="INDIVIDUO_ROL_ID" ColumnName="INDIVIDUO_ROL_ID" />
+                <ScalarProperty Name="MONEDA_ID" ColumnName="MONEDA_ID" />
+                <ScalarProperty Name="USUARIO_ID" ColumnName="USUARIO_ID" />
+                <ScalarProperty Name="ESTADO_COMPROBANTE_ELECTRONICO_ID" ColumnName="ESTADO_COMPROBANTE_ELECTRONICO_ID" />
+                <ScalarProperty Name="TIPO_IDENTIFICACION_ID" ColumnName="TIPO_IDENTIFICACION_ID" />
+                <ScalarProperty Name="TIPO_COMPROBANTE_ID" ColumnName="TIPO_COMPROBANTE_ID" />
+                <ScalarProperty Name="CABECERA_MOVIMIENTO_FE_ID" ColumnName="CABECERA_MOVIMIENTO_FE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CABECERA_MOVIMIENTO_TRIBUTARIO">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.CABECERA_MOVIMIENTO_TRIBUTARIO">
+              <MappingFragment StoreEntitySet="CABECERA_MOVIMIENTO_TRIBUTARIO">
+                <ScalarProperty Name="SECUENCIAL" ColumnName="SECUENCIAL" />
+                <ScalarProperty Name="PUNTO_EMISION" ColumnName="PUNTO_EMISION" />
+                <ScalarProperty Name="ESTABLECIMIENTO" ColumnName="ESTABLECIMIENTO" />
+                <ScalarProperty Name="CABECERA_FACTURACION_ID" ColumnName="CABECERA_FACTURACION_ID" />
+                <ScalarProperty Name="CABECERA_MOVIMIENTO_TRIBUTARIO_ID" ColumnName="CABECERA_MOVIMIENTO_TRIBUTARIO_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLE_MOVIMIENTO_FACTURA">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.DETALLE_MOVIMIENTO_FACTURA">
+              <MappingFragment StoreEntitySet="DETALLE_MOVIMIENTO_FACTURA">
+                <ScalarProperty Name="TOTAL_SIN_IMPUESTOS" ColumnName="TOTAL_SIN_IMPUESTOS" />
+                <ScalarProperty Name="DESCUENTO" ColumnName="DESCUENTO" />
+                <ScalarProperty Name="PRECIO_UNITARIO" ColumnName="PRECIO_UNITARIO" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="CABECERA_MOVIMIENTO_FACTURA_ID" ColumnName="CABECERA_MOVIMIENTO_FACTURA_ID" />
+                <ScalarProperty Name="DETALLE_MOVIMIENTO_FACTURA_ID" ColumnName="DETALLE_MOVIMIENTO_FACTURA_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROVEEDOR_IMPUESTO">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.PROVEEDOR_IMPUESTO">
+              <MappingFragment StoreEntitySet="PROVEEDOR_IMPUESTO">
+                <ScalarProperty Name="PROVEEDOR_ID" ColumnName="PROVEEDOR_ID" />
+                <ScalarProperty Name="PORCENTAJE_IMPUESTO_ID" ColumnName="PORCENTAJE_IMPUESTO_ID" />
+                <ScalarProperty Name="IMPUESTO_ID" ColumnName="IMPUESTO_ID" />
+                <ScalarProperty Name="GRUPO_IMPUESTO_ID" ColumnName="GRUPO_IMPUESTO_ID" />
+                <ScalarProperty Name="CONDICION_IMPUESTO_ID" ColumnName="CONDICION_IMPUESTO_ID" />
+                <ScalarProperty Name="PROVEEDOR_IMPUESTO_ID" ColumnName="PROVEEDOR_IMPUESTO_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ESTADO_COMPROBANTE_ELECTRONICO">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.ESTADO_COMPROBANTE_ELECTRONICO">
+              <MappingFragment StoreEntitySet="ESTADO_COMPROBANTE_ELECTRONICO">
+                <ScalarProperty Name="ABREVIATURA" ColumnName="ABREVIATURA" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="ESTADO_COMPROBANTE_ELECTRONICO_ID" ColumnName="ESTADO_COMPROBANTE_ELECTRONICO_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MENSAJE">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.MENSAJE">
+              <MappingFragment StoreEntitySet="MENSAJE">
+                <ScalarProperty Name="ABREVIATURA" ColumnName="ABREVIATURA" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="TIPO_MENSAJE_ID" ColumnName="TIPO_MENSAJE_ID" />
+                <ScalarProperty Name="MENSAJE_ID" ColumnName="MENSAJE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_COMPROBANTE">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.TIPO_COMPROBANTE">
+              <MappingFragment StoreEntitySet="TIPO_COMPROBANTE">
+                <ScalarProperty Name="CODIGO_SRI" ColumnName="CODIGO_SRI" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="TIPO_COMPROBANTE_ID" ColumnName="TIPO_COMPROBANTE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_MENSAJE">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.TIPO_MENSAJE">
+              <MappingFragment StoreEntitySet="TIPO_MENSAJE">
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="TIPO_MENSAJE_ID" ColumnName="TIPO_MENSAJE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CABECERA_FACTURACION">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.CABECERA_FACTURACION">
+              <MappingFragment StoreEntitySet="CABECERA_FACTURACION">
+                <ScalarProperty Name="LLEVA_CONTABILIDAD" ColumnName="LLEVA_CONTABILIDAD" />
+                <ScalarProperty Name="DIRECCION_MATRIZ" ColumnName="DIRECCION_MATRIZ" />
+                <ScalarProperty Name="ESTABLECIMIENTO" ColumnName="ESTABLECIMIENTO" />
+                <ScalarProperty Name="RUC" ColumnName="RUC" />
+                <ScalarProperty Name="NOMBRE_COMERCIAL" ColumnName="NOMBRE_COMERCIAL" />
+                <ScalarProperty Name="RAZON_SOCIAL" ColumnName="RAZON_SOCIAL" />
+                <ScalarProperty Name="TIPO_EMISION_ID" ColumnName="TIPO_EMISION_ID" />
+                <ScalarProperty Name="TIPO_AMBIENTE_ID" ColumnName="TIPO_AMBIENTE_ID" />
+                <ScalarProperty Name="SUCURSAL_ID" ColumnName="SUCURSAL_ID" />
+                <ScalarProperty Name="PUNTO_VENTA_ID" ColumnName="PUNTO_VENTA_ID" />
+                <ScalarProperty Name="CABECERA_FACTURACION_ID" ColumnName="CABECERA_FACTURACION_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDEN_TRABAJO_COMISION">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO_COMISION">
+              <MappingFragment StoreEntitySet="ORDEN_TRABAJO_COMISION">
+                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+                <ScalarProperty Name="USUARIO_ID" ColumnName="USUARIO_ID" />
+                <ScalarProperty Name="FECHA_GENERACION_COMISION" ColumnName="FECHA_GENERACION_COMISION" />
+                <ScalarProperty Name="VENTA_COMISION_ID" ColumnName="VENTA_COMISION_ID" />
+                <ScalarProperty Name="ORDEN_TRABAJO_ID" ColumnName="ORDEN_TRABAJO_ID" />
+                <ScalarProperty Name="ORDEN_TRABAJO_COMISION_ID" ColumnName="ORDEN_TRABAJO_COMISION_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLE_ORDEN_TRABAJO">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO">
+              <MappingFragment StoreEntitySet="DETALLE_ORDEN_TRABAJO">
+                <ScalarProperty Name="PORCENTAJE_IMPUESTO_SUCURSAL_ID" ColumnName="PORCENTAJE_IMPUESTO_SUCURSAL_ID" />
+                <ScalarProperty Name="MATERIAL_ID" ColumnName="MATERIAL_ID" />
+                <ScalarProperty Name="MARCA_ID" ColumnName="MARCA_ID" />
+                <ScalarProperty Name="PRODUCTO_TALLA_ID" ColumnName="PRODUCTO_TALLA_ID" />
+                <ScalarProperty Name="OBSERVACION" ColumnName="OBSERVACION" />
+                <ScalarProperty Name="VALOR_TOTAL" ColumnName="VALOR_TOTAL" />
+                <ScalarProperty Name="PORCENTAJE_IMPUESTO" ColumnName="PORCENTAJE_IMPUESTO" />
+                <ScalarProperty Name="VALOR_UNITARIO" ColumnName="VALOR_UNITARIO" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="COLOR_ID" ColumnName="COLOR_ID" />
+                <ScalarProperty Name="PRODUCTO_ID" ColumnName="PRODUCTO_ID" />
+                <ScalarProperty Name="ORDEN_TRABAJO_ID" ColumnName="ORDEN_TRABAJO_ID" />
+                <ScalarProperty Name="DETALLE_ORDEN_TRABAJO_ID" ColumnName="DETALLE_ORDEN_TRABAJO_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

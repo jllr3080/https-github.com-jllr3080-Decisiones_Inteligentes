@@ -29,54 +29,7 @@
             </div>
         </div>
     </div>
-    <br />
-     <div class="panel panel-default" id="_datoOrdenTrabajo" data-toggle="collapse" data-target="#_divHistorial">
-           <div class="panel-heading"><asp:Literal runat="server" ID="_literalDetallaHistorial" Text="<%$ Resources:Web_es_Ec,Panel_Historial_Proceso%>"/></div>
-        <div class="panel-body" id="_divHistorial" >
-            
-             <div class="row">
-                
-                    <div class="row">
-                            <div class="col-md-12">
-                                <asp:GridView ID="_datosHistorial" runat="server" AutoGenerateColumns="False">
-                                    <Columns>
-                                        <asp:BoundField DataField="NumeroOrden" HeaderText="Numero de Orden" />
-                                        <asp:BoundField DataField="FechaRegistro" HeaderText="Fecha" />
-                                        <asp:BoundField DataField="EtapaProceso.Descripcion" HeaderText="Etapa Proceso" />
-                                    </Columns>
-                                     <HeaderStyle CssClass="tableCabecera" ></HeaderStyle>
-                                       <FooterStyle CssClass="tablePiePagina"></FooterStyle>
-                                </asp:GridView> 
-                            </div>
-                    </div>
-             </div>
-        </div>
-    </div>
          
-     <br />
-     <div class="panel panel-default" id="_datosHistorialPago" data-toggle="collapse" data-target="#_divHistorialPago">
-           <div class="panel-heading"><asp:Literal runat="server" ID="_literalHistorialPago" Text="<%$ Resources:Web_es_Ec,Panel_Historial_Pago%>"/></div>
-        <div class="panel-body" id="_divHistorialPago">
-            
-             <div class="row">
-                
-                    <div class="row">
-                            <div class="col-md-12">
-                                <asp:HiddenField ID="_cuentaPorCobrarId" runat="server" />
-                                <asp:GridView ID="_datosPago" runat="server"   AutoGenerateColumns="False">
-                                    <Columns>
-                                          <asp:BoundField DataField="HistorialCuentaPorCobrar.FechaCobro" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Fecha_Creacion%>"/>
-                                        <asp:BoundField DataField="HistorialCuentaPorCobrar.ValorCobro" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Valor%>" DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" ItemStyle-VerticalAlign="Middle" />
-                                        
-                                    </Columns>
-                                  <HeaderStyle CssClass="tableCabecera" ></HeaderStyle>
-                                <FooterStyle CssClass="tablePiePagina"></FooterStyle>
-                                </asp:GridView> 
-                            </div>
-                    </div>
-             </div>
-        </div>
-    </div>
           <br/>
     <div class="panel panel-default" id="_datoOrdenTrabajo" data-toggle="collapse" data-target="#_divOrdenTrabajo">
            <div class="panel-heading"><asp:Literal runat="server" ID="Literal1" Text="<%$ Resources:Web_es_Ec,Panel_Orden_Trabajo%>" /></div>
@@ -159,7 +112,7 @@
             <br/>
             <div class="row">
                     <div class="col-md-12">
-                        <asp:GridView ID="_datos" runat="server" AutoGenerateColumns="False" OnRowCommand="_datos_RowCommand" Width="100%">
+                        <asp:GridView ID="_datos" runat="server" AutoGenerateColumns="False" OnRowCommand="_datos_RowCommand" Width="100%" OnRowDataBound="_datos_RowDataBound" ShowFooter="True" >
                             <Columns>
                                 <asp:BoundField DataField="DetalleOrdenTrabajoId" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Codigo_Orden_Trabajo%>" />
                                 <asp:BoundField DataField="Cantidad" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Cantidad%>"/>
@@ -181,6 +134,44 @@
                     
             </div>
             
+        </div>
+    </div>
+         
+         <br />
+         
+     <div class="panel panel-default" id="_datoOrdenTrabajo" data-toggle="collapse" data-target="#_divHistorial">
+           <div class="panel-heading"><asp:Literal runat="server" ID="_literalDetallaHistorial" Text="<%$ Resources:Web_es_Ec,Panel_Historial_Proceso%>"/></div>
+        <div class="panel-body" id="_divHistorial" >
+            
+             <div class="row">
+                
+                    <div class="row">
+                            <div class="col-md-6">
+                                <asp:GridView ID="_datosHistorial" runat="server" AutoGenerateColumns="False" Width="100%">
+                                    <Columns>
+                                        <asp:BoundField DataField="NumeroOrden" HeaderText="Numero de Orden" />
+                                        <asp:BoundField DataField="FechaRegistro" HeaderText="Fecha" />
+                                        <asp:BoundField DataField="EtapaProceso.Descripcion" HeaderText="Etapa Proceso" />
+                                    </Columns>
+                                     <HeaderStyle CssClass="tableCabecera" ></HeaderStyle>
+                                       <FooterStyle CssClass="tablePiePagina"></FooterStyle>
+                                </asp:GridView> 
+                            </div>
+                             <div class="col-md-6">
+                                <asp:HiddenField ID="_cuentaPorCobrarId" runat="server" />
+                                <asp:GridView ID="_datosPago" runat="server"   AutoGenerateColumns="False" Width="100%" ShowFooter="True" OnRowDataBound="_datosPago_RowDataBound">
+                                    <Columns>
+                                          <asp:BoundField DataField="HistorialCuentaPorCobrar.FechaCobro" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Fecha_Creacion%>"/>
+                                        <asp:BoundField DataField="HistorialCuentaPorCobrar.ValorCobro" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Valor%>" DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" ItemStyle-VerticalAlign="Middle" />
+                                        
+                                    </Columns>
+                                  <HeaderStyle CssClass="tableCabecera" ></HeaderStyle>
+                                <FooterStyle CssClass="tablePiePagina"></FooterStyle>
+                                </asp:GridView> 
+                            </div>
+
+                    </div>
+             </div>
         </div>
     </div>
      </section>

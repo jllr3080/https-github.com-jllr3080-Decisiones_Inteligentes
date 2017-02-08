@@ -14,11 +14,19 @@ namespace JLLR.Core.Base.Proveedor.Entidades
     
     public partial class INDIVIDUO_ROL
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public INDIVIDUO_ROL()
+        {
+            this.CABECERA_MOVIMIENTO_FE = new HashSet<CABECERA_MOVIMIENTO_FE>();
+        }
+    
         public int INDIVIDUO_ROL_ID { get; set; }
         public Nullable<int> TIPO_ROL_INDIVIDUO_ID { get; set; }
         public Nullable<int> INDIVIDUO_ID { get; set; }
     
         public virtual TIPO_ROL_INDIVIDUO TIPO_ROL_INDIVIDUO { get; set; }
         public virtual INDIVIDUO INDIVIDUO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CABECERA_MOVIMIENTO_FE> CABECERA_MOVIMIENTO_FE { get; set; }
     }
 }

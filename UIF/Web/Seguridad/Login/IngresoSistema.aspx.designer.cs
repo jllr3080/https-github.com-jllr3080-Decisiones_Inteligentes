@@ -13,15 +13,6 @@ namespace Web.Seguridad.Login {
     public partial class IngresoSistema {
         
         /// <summary>
-        /// Control Literal4.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Literal4;
-        
-        /// <summary>
         /// Control _usuario.
         /// </summary>
         /// <remarks>

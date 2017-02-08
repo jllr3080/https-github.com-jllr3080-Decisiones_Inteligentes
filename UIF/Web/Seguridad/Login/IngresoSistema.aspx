@@ -1,27 +1,30 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PaginaMaestra/Login.Master"  AutoEventWireup="true" CodeBehind="IngresoSistema.aspx.cs" Inherits="Web.Seguridad.Login.IngresoSistema" %>
 <%@ Register TagPrefix="cc1" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=16.1.1.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="_contenido" runat="server">
-    <div  id="_imagenfondo" style="background-image: url('../../Content/Imagen/ImagenInicial.png')" >
-    <br/>
-    <br/>
-    <br/>
-     <div class="form-group" style="">
-                <h1><asp:Literal runat="server" Text="<%$ Resources:Web_es_Ec,Titulo_Ingreso_Sistema%>"></asp:Literal></h1>
-    </div>
-    
-    <br/>        
-    <br/>
-    <br/>
-    <div class="panel panel-default" id="_datosBusquedaCliente" style="width: 450px">
-           <div class="panel-heading"><asp:Literal runat="server" ID="Literal4" Text="<%$ Resources:Web_es_Ec,Panel_Ingreso_Sistema%>"/></div>
-        <div class="panel-body">
+    <div  id="_imagenfondo" style="background-image: url('../../Content/Imagen/ImagenInicial.png'); width: 1600px;height: 800px" >
+   
+    <div id="_datosBusquedaCliente" style="width: 800px; padding-top: 100px;padding-left: 450px">
+           <div style="padding-left:150px"><img src="../../Content/Imagen/Logo_Principal.png"/></div>
+        <div class="panel-body" style="background-image: url('../../Content/Imagen/usuario.png'); width: 450px;height: 450px">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
             <div class="row">
+                <div class="col-md-1">
+                 </div>
                     <div class="col-md-6">
                        <asp:Label runat="server" AssociatedControlID="_usuario"  Style="text-align:left" Text="<%$ Resources:Web_es_Ec,Label_Usuario%>"></asp:Label>
                     </div>
                     
             </div>
             <div class="row">
+                <div class="col-md-1">
+                 </div>
                     <div class="col-md-6">
                        <asp:TextBox runat="server" ID="_usuario" CssClass="form-control" AutoCompleteType="Disabled" ValidationGroup="IngresoSistema" />
                             <asp:RequiredFieldValidator runat="server" ControlToValidate="_usuario" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="IngresoSistema" />
@@ -29,19 +32,25 @@
                     
             </div>
              <div class="row">
+                 <div class="col-md-1">
+                 </div>
                     <div class="col-md-6">
                         <asp:Label runat="server" AssociatedControlID="_contrasena"  Style="text-align:left" Text="<%$ Resources:Web_es_Ec,Label_Contrasena%>"></asp:Label>
                     </div>
                     
             </div>
             <div class="row">
-                    <div class="col-md-6">
+                <div class="col-md-1">
+                 </div>
+                    <div class="col-md-6" style="text-align:center">
                         <asp:TextBox runat="server" ID="_contrasena" TextMode="Password" CssClass="form-control" ValidationGroup="IngresoSistema" AutoCompleteType="Disabled"/>
                             <asp:RequiredFieldValidator runat="server" ControlToValidate="_contrasena" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="IngresoSistema"/>
                     </div>
                     
             </div>
              <div class="row">
+                  <div class="col-md-1">
+                 </div>
                     <div class="col-md-6">
                          <asp:Button runat="server"  Text="<%$ Resources:Web_es_Ec,Boton_Ingreso_Sistema%>" CssClass="btn btn-primary" ID="_ingresoSistema" ValidationGroup="IngresoSistema" OnClick="_ingresoSistema_Click" />
                     </div>
@@ -51,11 +60,6 @@
         </div>
          </div>
 
-     <br/>
-        <br/>
-        <br/>
-        
-        <br/><br/>
 
     </div>
     

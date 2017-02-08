@@ -22,7 +22,8 @@ namespace Web.Seguridad.Login
         #region Eventos
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(!IsPostBack)
+                _usuario.Focus();
         }
         /// <summary>
         /// Ingreso al sistema 

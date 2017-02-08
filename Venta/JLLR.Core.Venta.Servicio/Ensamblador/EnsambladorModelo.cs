@@ -117,10 +117,7 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
             {
                 OrdenTrabajoId =Convert.ToInt64(e.ORDEN_TRABAJO_ID)
             };
-            ImpuestoModelo impuesto = new ImpuestoModelo()
-            {
-                ImpuestoId = Convert.ToInt32(e.IMPUESTO_ID)
-            };
+            
             ProductoModelo producto = new ProductoModelo()
             {
                 ProductoId = Convert.ToInt32(e.PRODUCTO_ID)
@@ -146,17 +143,12 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                 MaterialId = Convert.ToInt32(e.MATERIAL_ID)
             };
 
-            modeloParametrizacion.VentaComisionModelo  _vetComisionModelo = new modeloParametrizacion.VentaComisionModelo()
-            {
-                 VentaComisionId= Convert.ToInt32(e.VENTA_COMISION_ID)
-
-            };
+            
             List<modelo.DetalleOrdenTrabajoObservacionModelo> _detalleOrdenTrabajoObservaciones =CrearDetalleOrdenTrabajosObservacion(e.DETALLE_ORDEN_TRABAJO_OBSERVACION);
             return new modelo.DetalleOrdenTrabajoModelo
             {
                 DetalleOrdenTrabajoId = e.DETALLE_ORDEN_TRABAJO_ID,
                 OrdenTrabajo = ordenTrabajo,
-                Impuesto = impuesto,
                 Cantidad = e.CANTIDAD,
                 Observacion = e.OBSERVACION,
                 PorcentajeImpuesto = e.PORCENTAJE_IMPUESTO,
@@ -167,7 +159,6 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                 ProductoTalla = _productoTalla,
                 Marca = _marca,
                 Material = _material,
-                VentaComision = _vetComisionModelo,
                 DetalleOrdenTrabajoObservacion = _detalleOrdenTrabajoObservaciones
 
 

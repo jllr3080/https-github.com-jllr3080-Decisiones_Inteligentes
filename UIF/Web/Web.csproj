@@ -194,6 +194,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Contabilidad\ArqueoCaja.aspx" />
     <Content Include="Contabilidad\CuentasPorCobrar.aspx" />
     <Content Include="Contabilidad\CuentasPorPagar.aspx" />
     <Content Include="Content\bootstrap.css" />
@@ -208,12 +209,18 @@
     <Content Include="Content\Imagen\Logo_Principal.png" />
     <Content Include="Content\Imagen\Nuevo.png" />
     <Content Include="Content\Imagen\Observar.png" />
+    <Content Include="Content\Imagen\usuario.png" />
     <Content Include="Content\Site.css" />
+    <Content Include="FE\FacturaElectronica.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Individuo\Cliente.aspx" />
+    <Content Include="Individuo\Empleado.aspx" />
+    <Content Include="Individuo\Proveedor.aspx" />
+    <Content Include="Individuo\Vendedor.aspx" />
+    <Content Include="Inventario\Kardex.aspx" />
     <Content Include="Logistica\EntregaRecepcionPrendas.aspx" />
     <Content Include="PaginaMaestra\Login.Master" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -222,6 +229,7 @@
     <Content Include="Reporte\ReporteDiario.aspx" />
     <Content Include="Reporte\ReporteEntregaRecepcionPrendas.aspx" />
     <Content Include="Reporte\ReporteImpresionOrden.aspx" />
+    <Content Include="RRHH\MultaEmpleado.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -254,8 +262,11 @@
     <Content Include="Inicio\Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Seguridad\Acceso.aspx" />
     <Content Include="Seguridad\Login\IngresoSistema.aspx" />
     <Content Include="PaginaMaestra\Site.Master" />
+    <Content Include="Seguridad\Perfil.aspx" />
+    <Content Include="Seguridad\Usuario.aspx" />
     <Content Include="Venta\ConsultaOrdenTrabajo.aspx" />
     <Content Include="Venta\OrdenTrabajo.aspx" />
     <Content Include="ViewSwitcher.ascx" />
@@ -291,6 +302,13 @@
     <Compile Include="Base\PaginaBaseMaestra.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Contabilidad\ArqueoCaja.aspx.cs">
+      <DependentUpon>ArqueoCaja.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\ArqueoCaja.aspx.designer.cs">
+      <DependentUpon>ArqueoCaja.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Contabilidad\CuentasPorCobrar.aspx.cs">
       <DependentUpon>CuentasPorCobrar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -309,6 +327,7 @@
     <Compile Include="DTOs\FlujoProceso\HistorialProcesoVistaDTOs.cs" />
     <Compile Include="DTOs\Individuo\ClienteGeneralVistaDTOs.cs" />
     <Compile Include="DTOs\Individuo\ClienteVistaDTOs.cs" />
+    <Compile Include="DTOs\Individuo\ProveedorVistaDTOs.cs.cs" />
     <Compile Include="DTOs\Logistica\EntregaOrdenTrabajoVistaDTOs.cs" />
     <Compile Include="DTOs\Seguridad\AccesoVistaDTOs.cs" />
     <Compile Include="DTOs\Seguridad\UsuarioVistaDTOs.cs" />
@@ -317,12 +336,40 @@
     <Compile Include="DTOs\Venta\CabeceraOrdenTrabajoVistaDTOs.cs" />
     <Compile Include="DTOs\Venta\HerenciaOrdenTrabajoVistaDTOs.cs" />
     <Compile Include="DTOs\Venta\OrdenTrabajoVistaDTOs.cs" />
+    <Compile Include="FE\FacturaElectronica.aspx.cs">
+      <DependentUpon>FacturaElectronica.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FE\FacturaElectronica.aspx.designer.cs">
+      <DependentUpon>FacturaElectronica.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Individuo\Cliente.aspx.cs">
       <DependentUpon>Cliente.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Individuo\Cliente.aspx.designer.cs">
       <DependentUpon>Cliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Individuo\Empleado.aspx.cs">
+      <DependentUpon>Empleado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Individuo\Empleado.aspx.designer.cs">
+      <DependentUpon>Empleado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Individuo\Proveedor.aspx.cs">
+      <DependentUpon>Proveedor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Individuo\Proveedor.aspx.designer.cs">
+      <DependentUpon>Proveedor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Individuo\Vendedor.aspx.cs">
+      <DependentUpon>Vendedor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Individuo\Vendedor.aspx.designer.cs">
+      <DependentUpon>Vendedor.aspx</DependentUpon>
     </Compile>
     <Compile Include="Inicio\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -333,6 +380,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Inventario\Kardex.aspx.cs">
+      <DependentUpon>Kardex.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Inventario\Kardex.aspx.designer.cs">
+      <DependentUpon>Kardex.aspx</DependentUpon>
     </Compile>
     <Compile Include="Logistica\EntregaRecepcionPrendas.aspx.cs">
       <DependentUpon>EntregaRecepcionPrendas.aspx</DependentUpon>
@@ -375,6 +429,7 @@
     <Compile Include="Models\Individuo\DireccionVistaModelo.cs" />
     <Compile Include="Models\Individuo\IndividuoRolVistaModelo.cs" />
     <Compile Include="Models\Individuo\IndividuoVistaModelo.cs" />
+    <Compile Include="Models\Individuo\ProveedorVistaModelo.cs" />
     <Compile Include="Models\Individuo\TelefonoVistaModelo.cs" />
     <Compile Include="Models\Inventario\Parametrizacion\ProductoPrecioVistaModelo.cs" />
     <Compile Include="Models\Inventario\Parametrizacion\ProductoTallaVistaModelo.cs" />
@@ -429,6 +484,20 @@
     <Compile Include="Reporte\ReporteImpresionOrden.aspx.designer.cs">
       <DependentUpon>ReporteImpresionOrden.aspx</DependentUpon>
     </Compile>
+    <Compile Include="RRHH\MultaEmpleado.aspx.cs">
+      <DependentUpon>MultaEmpleado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RRHH\MultaEmpleado.aspx.designer.cs">
+      <DependentUpon>MultaEmpleado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Seguridad\Acceso.aspx.cs">
+      <DependentUpon>Acceso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Seguridad\Acceso.aspx.designer.cs">
+      <DependentUpon>Acceso.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Seguridad\Login\IngresoSistema.aspx.cs">
       <DependentUpon>IngresoSistema.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -449,6 +518,20 @@
     </Compile>
     <Compile Include="PaginaMaestra\Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Seguridad\Perfil.aspx.cs">
+      <DependentUpon>Perfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Seguridad\Perfil.aspx.designer.cs">
+      <DependentUpon>Perfil.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Seguridad\Usuario.aspx.cs">
+      <DependentUpon>Usuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Seguridad\Usuario.aspx.designer.cs">
+      <DependentUpon>Usuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="ServicioDelegado\ServicioDelegadoContabilidad.cs" />
     <Compile Include="ServicioDelegado\ServicioDelegadoFE.cs" />

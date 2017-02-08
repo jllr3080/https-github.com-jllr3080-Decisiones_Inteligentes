@@ -46,29 +46,57 @@ namespace Web.Individuo
                     _apellidoMaterno.Text = _clienteGeneralVistaDtOs.Individuo.SegundoCampo;
                     _primerNombre.Text = _clienteGeneralVistaDtOs.Individuo.TercerCampo;
                     _segundoNombre.Text = _clienteGeneralVistaDtOs.Individuo.CuartoCampo;
-                    _numeroDocumento.Text= _clienteGeneralVistaDtOs.Individuo.NumeroIdentificacion;
+                    _numeroDocumento.Text = _clienteGeneralVistaDtOs.Individuo.NumeroIdentificacion;
                     _fechaNacimiento.Text = _clienteGeneralVistaDtOs.Cliente.FechaNacimiento.Value.ToShortDateString();
                     _direccion.Text = _clienteGeneralVistaDtOs.Direccion.DescripcionDireccion;
                     _email.Text = _clienteGeneralVistaDtOs.CorreoElectronico.DireccionCorreoElectronico;
                     _telefono.Text = _clienteGeneralVistaDtOs.Telefono.NumeroTelefono;
-                    _tipoDocumento.SelectedIndex = _tipoDocumento.Items.IndexOf(_tipoDocumento.Items.FindByValue(_clienteGeneralVistaDtOs.Individuo.TipoIdentificacion.TipoIdentificacionId.ToString()));
-                    _genero.SelectedIndex = _genero.Items.IndexOf(_genero.Items.FindByValue(_clienteGeneralVistaDtOs.Cliente.TipoGenero.TipoGeneroId.ToString()));
-                    _pais.SelectedIndex = _pais.Items.IndexOf(_pais.Items.FindByValue(_clienteGeneralVistaDtOs.Direccion.Pais.PaisId.ToString()));
-                    _provincia.SelectedIndex = _provincia.Items.IndexOf(_provincia.Items.FindByValue(_clienteGeneralVistaDtOs.Direccion.Estado.EstadoId.ToString()));
-                    _ciudad.DataSource = _servicioDelegadoGeneral.ObtenerCiudadPorPaisIdYEstadoId(Convert.ToInt32(_pais.SelectedItem.Value),
-                        Convert.ToInt32(_provincia.SelectedItem.Value));
+                    _tipoDocumento.SelectedIndex =
+                        _tipoDocumento.Items.IndexOf(
+                            _tipoDocumento.Items.FindByValue(
+                                _clienteGeneralVistaDtOs.Individuo.TipoIdentificacion.TipoIdentificacionId.ToString()));
+                    _genero.SelectedIndex =
+                        _genero.Items.IndexOf(
+                            _genero.Items.FindByValue(
+                                _clienteGeneralVistaDtOs.Cliente.TipoGenero.TipoGeneroId.ToString()));
+                    _pais.SelectedIndex =
+                        _pais.Items.IndexOf(
+                            _pais.Items.FindByValue(_clienteGeneralVistaDtOs.Direccion.Pais.PaisId.ToString()));
+                    _provincia.SelectedIndex =
+                        _provincia.Items.IndexOf(
+                            _provincia.Items.FindByValue(_clienteGeneralVistaDtOs.Direccion.Estado.EstadoId.ToString()));
+                    _ciudad.DataSource =
+                        _servicioDelegadoGeneral.ObtenerCiudadPorPaisIdYEstadoId(
+                            Convert.ToInt32(_pais.SelectedItem.Value),
+                            Convert.ToInt32(_provincia.SelectedItem.Value));
                     _ciudad.DataBind();
-                    _ciudad.SelectedIndex = _ciudad.Items.IndexOf(_ciudad.Items.FindByValue(_clienteGeneralVistaDtOs.Direccion.Ciudad.CiudadId.ToString()));
-                    _tipoDireccion.SelectedIndex = _tipoDireccion.Items.IndexOf(_tipoDireccion.Items.FindByValue(_clienteGeneralVistaDtOs.Direccion.TipoDireccion.TipoDireccionId.ToString()));
-                    _tipoCorreo.SelectedIndex = _tipoCorreo.Items.IndexOf(_tipoCorreo.Items.FindByValue(_clienteGeneralVistaDtOs.CorreoElectronico.TipoCorreoElectronico.TipoCorreoElectronicoId.ToString()));
-                    _tipoTelefono.SelectedIndex = _tipoTelefono.Items.IndexOf(_tipoTelefono.Items.FindByValue(_clienteGeneralVistaDtOs.Telefono.TipoTelefono.TipoTelefonoId.ToString()));
+                    _ciudad.SelectedIndex =
+                        _ciudad.Items.IndexOf(
+                            _ciudad.Items.FindByValue(_clienteGeneralVistaDtOs.Direccion.Ciudad.CiudadId.ToString()));
+                    _tipoDireccion.SelectedIndex =
+                        _tipoDireccion.Items.IndexOf(
+                            _tipoDireccion.Items.FindByValue(
+                                _clienteGeneralVistaDtOs.Direccion.TipoDireccion.TipoDireccionId.ToString()));
+                    _tipoCorreo.SelectedIndex =
+                        _tipoCorreo.Items.IndexOf(
+                            _tipoCorreo.Items.FindByValue(
+                                _clienteGeneralVistaDtOs.CorreoElectronico.TipoCorreoElectronico.TipoCorreoElectronicoId
+                                    .ToString()));
+                    _tipoTelefono.SelectedIndex =
+                        _tipoTelefono.Items.IndexOf(
+                            _tipoTelefono.Items.FindByValue(
+                                _clienteGeneralVistaDtOs.Telefono.TipoTelefono.TipoTelefonoId.ToString()));
                     _tipoDocumento.Enabled = false;
                     _numeroDocumento.Enabled = false;
                     _banderaActualizacion = true;
 
                 }
                 else
-                    Mensajes(GetGlobalResourceObject("Web_es_Ec", "No existe información").ToString(), "_grabarCliente");
+                {
+                    LimpiarControles();
+                    Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Informacion_No_existe").ToString(), "_grabarCliente");
+                }
+                
 
             }
             catch (Exception ex)

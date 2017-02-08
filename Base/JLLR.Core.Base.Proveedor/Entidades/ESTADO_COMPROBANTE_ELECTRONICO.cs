@@ -12,19 +12,19 @@ namespace JLLR.Core.Base.Proveedor.Entidades
     using System;
     using System.Collections.Generic;
     
-    public partial class LLEVA_CONTABILIDAD
+    public partial class ESTADO_COMPROBANTE_ELECTRONICO
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public LLEVA_CONTABILIDAD()
+        public ESTADO_COMPROBANTE_ELECTRONICO()
         {
-            this.CABECERA_FACTURACION = new HashSet<CABECERA_FACTURACION>();
+            this.CABECERA_MOVIMIENTO_FE = new HashSet<CABECERA_MOVIMIENTO_FE>();
         }
     
-        public int LLEVA_CONTABILIDAD_ID { get; set; }
+        public int ESTADO_COMPROBANTE_ELECTRONICO_ID { get; set; }
         public string DESCRIPCION { get; set; }
-        public Nullable<bool> ESTA_HABILITADO { get; set; }
+        public string ABREVIATURA { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CABECERA_FACTURACION> CABECERA_FACTURACION { get; set; }
+        public virtual ICollection<CABECERA_MOVIMIENTO_FE> CABECERA_MOVIMIENTO_FE { get; set; }
     }
 }

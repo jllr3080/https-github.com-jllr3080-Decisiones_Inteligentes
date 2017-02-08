@@ -18,6 +18,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public TIPO_IDENTIFICACION()
         {
             this.INDIVIDUO = new HashSet<INDIVIDUO>();
+            this.CABECERA_MOVIMIENTO_FE = new HashSet<CABECERA_MOVIMIENTO_FE>();
         }
     
         public int TIPO_IDENTIFICACION_ID { get; set; }
@@ -27,5 +28,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<INDIVIDUO> INDIVIDUO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CABECERA_MOVIMIENTO_FE> CABECERA_MOVIMIENTO_FE { get; set; }
     }
 }

@@ -17,14 +17,15 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MONEDA()
         {
-            this.CABECERA_FACTURACION = new HashSet<CABECERA_FACTURACION>();
+            this.CABECERA_MOVIMIENTO_FE = new HashSet<CABECERA_MOVIMIENTO_FE>();
         }
     
         public int MONEDA_ID { get; set; }
         public string DESCRIPCION { get; set; }
         public Nullable<bool> ESTA_HABILITADO { get; set; }
+        public string ABREVITURA { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CABECERA_FACTURACION> CABECERA_FACTURACION { get; set; }
+        public virtual ICollection<CABECERA_MOVIMIENTO_FE> CABECERA_MOVIMIENTO_FE { get; set; }
     }
 }

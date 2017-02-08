@@ -106,6 +106,68 @@ namespace JLLR.Core.Individuo.Servicio.Transformador
             }
         }
         #endregion
+
+        #region PROVEEDOR
+        /// <summary>
+        /// Grabar Proveedor
+        /// </summary>
+        /// <param name="proveedorDtOs"></param>
+        /// <returns></returns>
+        public ProveedorModelo GrabarProveedor(ProveedorDTOs proveedorDtOs)
+        {
+
+            try
+            {
+                return
+                    _ensambladorModelo.CrearProveedor(
+                        _individuoNegocio.GrabarProveedor(_ensambladorEntidadDtOs.CrearProveedorDtOs(proveedorDtOs)));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Actualza  el  cliente
+        /// </summary>
+        /// <param name="clienteGeneralDtOs"></param>
+        /// <returns></returns>
+        public void ActualizarProveedor(ProveedorDTOs proveedorDtOs)
+        {
+            try
+            {
+                _individuoNegocio.ActualizarProveedor(_ensambladorEntidadDtOs.CrearProveedorDtOs(proveedorDtOs));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        /// Obtiene el proveedor completo por  numero  de documento
+        /// </summary>
+        /// <param name="numeroIdentificacion"></param>
+        /// <returns></returns>
+        public ProveedorDTOs ObtenerProveedorPorNumeroIdentificacion(string numeroIdentificacion)
+        {
+            try
+            {
+                return
+                    _ensambladorModeloDtOs.CrearProveedorDtOs(
+                        _individuoNegocio.ObtenerProveedorPorNumeroIdentificacion(numeroIdentificacion));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
         #endregion
 
         #region VALIDACIONES

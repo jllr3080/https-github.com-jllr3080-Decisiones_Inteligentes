@@ -14,19 +14,29 @@ namespace JLLR.Core.Base.Proveedor.Entidades
     
     public partial class CABECERA_FACTURACION
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CABECERA_FACTURACION()
+        {
+            this.CABECERA_MOVIMIENTO_TRIBUTARIO = new HashSet<CABECERA_MOVIMIENTO_TRIBUTARIO>();
+        }
+    
         public int CABECERA_FACTURACION_ID { get; set; }
         public Nullable<int> PUNTO_VENTA_ID { get; set; }
         public Nullable<int> SUCURSAL_ID { get; set; }
-        public Nullable<int> LLEVA_CONTABILIDAD_ID { get; set; }
         public Nullable<int> TIPO_AMBIENTE_ID { get; set; }
         public Nullable<int> TIPO_EMISION_ID { get; set; }
-        public Nullable<int> MONEDA_ID { get; set; }
+        public string RAZON_SOCIAL { get; set; }
+        public string NOMBRE_COMERCIAL { get; set; }
+        public string RUC { get; set; }
+        public string ESTABLECIMIENTO { get; set; }
+        public string DIRECCION_MATRIZ { get; set; }
+        public Nullable<bool> LLEVA_CONTABILIDAD { get; set; }
     
-        public virtual LLEVA_CONTABILIDAD LLEVA_CONTABILIDAD { get; set; }
-        public virtual MONEDA MONEDA { get; set; }
         public virtual PUNTO_VENTA PUNTO_VENTA { get; set; }
         public virtual SUCURSAL SUCURSAL { get; set; }
         public virtual TIPO_AMBIENTE TIPO_AMBIENTE { get; set; }
         public virtual TIPO_EMISION TIPO_EMISION { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CABECERA_MOVIMIENTO_TRIBUTARIO> CABECERA_MOVIMIENTO_TRIBUTARIO { get; set; }
     }
 }

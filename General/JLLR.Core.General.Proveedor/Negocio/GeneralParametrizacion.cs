@@ -31,7 +31,7 @@ namespace JLLR.Core.General.Proveedor.Negocio
         private readonly  TipoTelefonoDAOs _tipoTelefonoDaOs= new TipoTelefonoDAOs();
         private readonly  EtapaProcesoDAOs _etapaProcesoDaOs= new EtapaProcesoDAOs();
         private readonly  PuntoVentaDAOs _puntoVentaDaOs= new PuntoVentaDAOs();
-        
+        private  readonly  FormaPagoDAOs _formaPagoDaOs= new FormaPagoDAOs();
 
 
         #endregion
@@ -363,6 +363,27 @@ namespace JLLR.Core.General.Proveedor.Negocio
             try
             {
                 return _puntoVentaDaOs.ObtenerPuntosVentaPorSucursalId(sucursalId);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region FORMA PAGO
+        /// <summary>
+        /// Obtiene  todas las   formas  de  pago
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<FORMA_PAGO> ObtenerFormaPagos()
+        {
+
+            try
+            {
+                return _formaPagoDaOs.ObtenerFormaPagos();
 
             }
             catch (Exception ex)

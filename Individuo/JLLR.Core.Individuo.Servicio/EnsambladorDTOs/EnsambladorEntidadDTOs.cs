@@ -64,6 +64,8 @@ namespace JLLR.Core.Individuo.Servicio.EnsambladorDTOs
         /// <returns></returns>
         public entidadDTOs.ClienteGeneralDTOs CrearClienteGeneralDTOS(modeloDTOs.ClienteGeneralDTOs m)
         {
+            if (m == null)
+                return null;
             return new entidadDTOs.ClienteGeneralDTOs()
             {
                Individuo = _ensambladorEntidad.CrearIndividuo(m.Individuo),
@@ -89,6 +91,48 @@ namespace JLLR.Core.Individuo.Servicio.EnsambladorDTOs
             foreach (var modelo in listadoModelo)
             {
                 listaEntidad.Add(CrearClienteGeneralDTOS(modelo));
+            }
+            return listaEntidad;
+
+        }
+        #endregion
+
+
+        #region PROVEEDOR
+        /// <summary>
+        /// Convierte el modelo DTO en una entidad DTO
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public entidadDTOs.ProveedorDTOs CrearProveedorDtOs(modeloDTOs.ProveedorDTOs m)
+        {
+            if (m == null)
+                return null;
+            return new entidadDTOs.ProveedorDTOs()
+            {
+                Individuo = _ensambladorEntidad.CrearIndividuo(m.Individuo),
+                Direccion = _ensambladorEntidad.CrearDireccion(m.Direccion),
+                Telefono = _ensambladorEntidad.CrearTelefono(m.Telefono),
+                CorreoElectronico = _ensambladorEntidad.CrearCorreoElectronico(m.CorreoElectronico),
+                Proveedor = _ensambladorEntidad.CrearProveedor(m.Proveedor),
+                IndividuoRol = _ensambladorEntidad.CrearIndividuoRol(m.IndividuoRol)
+
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos  Usuario en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<entidadDTOs.ProveedorDTOs> CrearProveedorDtOses(List<modeloDTOs.ProveedorDTOs> listadoModelo)
+        {
+            List<entidadDTOs.ProveedorDTOs> listaEntidad = new List<entidadDTOs.ProveedorDTOs>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearProveedorDtOs(modelo));
             }
             return listaEntidad;
 

@@ -60,6 +60,43 @@ namespace JLLR.Core.Individuo.Servicio
              ResponseFormat = WebMessageFormat.Json)]
         ClienteGeneralDTOs ObtenerClientePorNumeroIdentificacion(string numeroIdentificacion);
         #endregion
+
+        #region PROVEEDOR
+
+        /// <summary>
+        /// Grabar Proveedor
+        /// </summary>
+        /// <param name="proveedorDtOs"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabarProveedor/*", RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+
+        ProveedorModelo GrabarProveedor(ProveedorDTOs proveedorDtOs);
+
+
+        /// <summary>
+        /// Actualza  el  cliente
+        /// </summary>
+        /// <param name="clienteGeneralDtOs"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "ActualizarProveedor/*", RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void ActualizarProveedor(ProveedorDTOs proveedorDtOs);
+
+        /// <summary>
+        /// Obtiene el proveedor completo por  numero  de documento
+        /// </summary>
+        /// <param name="numeroIdentificacion"></param>
+        /// <returns></returns>
+
+        [OperationContract]
+        [WebGet(UriTemplate = "ObtenerProveedorPorNumeroIdentificacion?numeroIdentificacion={numeroIdentificacion}",
+            ResponseFormat = WebMessageFormat.Json)]
+        ProveedorDTOs ObtenerProveedorPorNumeroIdentificacion(string numeroIdentificacion);
+       
+        #endregion
         #endregion
 
         #region VALIDACIONES

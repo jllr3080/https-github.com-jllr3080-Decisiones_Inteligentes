@@ -108,6 +108,63 @@ namespace JLLR.Core.Individuo.Proveedor.Negocio
         }
         #endregion
 
+        #region PROVEEDOR
+        /// <summary>
+        /// Grabar Proveedor
+        /// </summary>
+        /// <param name="proveedorDtOs"></param>
+        /// <returns></returns>
+        public PROVEEDOR GrabarProveedor(ProveedorDTOs proveedorDtOs)
+        {
+
+            try
+            {
+                return _transaccionalDaOs.GrabarProveedor(proveedorDtOs);
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Actualza  el  cliente
+        /// </summary>
+        /// <param name="clienteGeneralDtOs"></param>
+        /// <returns></returns>
+        public void ActualizarProveedor(ProveedorDTOs proveedorDtOs)
+        {
+            try
+            {
+                 _transaccionalDaOs.ActualizarProveedor(proveedorDtOs);
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+           
+        }
+
+        /// <summary>
+        /// Obtiene el proveedor completo por  numero  de documento
+        /// </summary>
+        /// <param name="numeroIdentificacion"></param>
+        /// <returns></returns>
+        public ProveedorDTOs ObtenerProveedorPorNumeroIdentificacion(string numeroIdentificacion)
+        {
+            try
+            {
+                return _transaccionalDaOs.ObtenerProveedorPorNumeroIdentificacion(numeroIdentificacion);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
 
         #endregion
 

@@ -17,8 +17,9 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ORDEN_TRABAJO()
         {
-            this.DETALLE_ORDEN_TRABAJO = new HashSet<DETALLE_ORDEN_TRABAJO>();
             this.HISTORIAL_PROCESO = new HashSet<HISTORIAL_PROCESO>();
+            this.ORDEN_TRABAJO_COMISION = new HashSet<ORDEN_TRABAJO_COMISION>();
+            this.DETALLE_ORDEN_TRABAJO = new HashSet<DETALLE_ORDEN_TRABAJO>();
         }
     
         public long ORDEN_TRABAJO_ID { get; set; }
@@ -39,8 +40,10 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual ESTADO_PAGO ESTADO_PAGO { get; set; }
         public virtual TIPO_LAVADO TIPO_LAVADO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DETALLE_ORDEN_TRABAJO> DETALLE_ORDEN_TRABAJO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HISTORIAL_PROCESO> HISTORIAL_PROCESO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ORDEN_TRABAJO_COMISION> ORDEN_TRABAJO_COMISION { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DETALLE_ORDEN_TRABAJO> DETALLE_ORDEN_TRABAJO { get; set; }
     }
 }

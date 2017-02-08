@@ -28,10 +28,62 @@ namespace Web.Venta
         private readonly ServicioDelegadoGeneral _servicioDelegadoGeneral = new  ServicioDelegadoGeneral();
         private static List<ConsultaOrdenTrabajoVistaDTOs> _listaConsultaOrdenTrabajoVistaDtOses =null;
         private static List<HistorialProcesoVistaModelo> _listaHistorialProcesoVistaModelos = null;
-        private static  List<CuentaPorCobrarVistaDTOs>  _listaCuentaPorCobrarVistaDtOses = null; 
+        private static  List<CuentaPorCobrarVistaDTOs>  _listaCuentaPorCobrarVistaDtOses = null;
         #endregion
 
         #region Eventos
+
+        /// <summary>
+        /// Totales del historial de pago
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private decimal _montoAbono = 0;
+        protected void _datosPago_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            try
+            {
+                if (e.Row.RowType == DataControlRowType.DataRow)
+                    _montoAbono += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "HistorialCuentaPorCobrar.ValorCobro"));
+                
+                else if (e.Row.RowType == DataControlRowType.Footer)
+                {
+                    e.Row.Cells[0].Text = "Total Abono:";
+                    e.Row.Cells[1].Text = _montoAbono.ToString("C");
+                    e.Row.Cells[1].HorizontalAlign = HorizontalAlign.Right;
+                    e.Row.Font.Bold = true;
+                }
+            }
+            catch (Exception)
+            {
+
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_btnBuscar");
+            }
+        }
+        /// <summary>
+        /// Carga los totales  de las prendas
+        /// </summary>
+        private decimal _montoTotal = 0;
+        private int _cantidadTotal = 0;
+        protected void _datos_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                _montoTotal += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ValorTotal"));
+                _cantidadTotal += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "Cantidad"));
+            }
+            else if (e.Row.RowType == DataControlRowType.Footer)
+            {
+                e.Row.Cells[0].Text = "Totales:";
+                e.Row.Cells[1].Text = _cantidadTotal.ToString();
+                e.Row.Cells[1].HorizontalAlign = HorizontalAlign.Left;
+
+                e.Row.Cells[6].Text = _montoTotal.ToString("C");
+                e.Row.Cells[6].HorizontalAlign = HorizontalAlign.Right;
+                e.Row.Font.Bold = true;
+            }
+        }
+
 
         /// <summary>
         /// Abonar valor
@@ -42,10 +94,16 @@ namespace Web.Venta
         {
             try
             {
-
+                if (_listaCuentaPorCobrarVistaDtOses.Sum(b => b.HistorialCuentaPorCobrar.ValorCobro) + Convert.ToDecimal(_valorAbonar.Text)<=_listaConsultaOrdenTrabajoVistaDtOses.Sum(m => m.ValorTotal) )
+                {
+                
                 if (_listaCuentaPorCobrarVistaDtOses.Count > 0)
                 {
-                    HistorialCuentaPorCobrarVistaModelo _historialCuentaPorCobrar =
+                        CuentaPorCobrarVistaModelo _cuentaPorCobrarVistaModelo = _listaCuentaPorCobrarVistaDtOses.Select(b => b.CuentaPorCobrar).FirstOrDefault();
+                        _cuentaPorCobrarVistaModelo.Saldo += Convert.ToDecimal(_valorAbonar.Text);
+                        _servicioDelegadoContabilidad.ActualizaCuentaPorCobrar(_cuentaPorCobrarVistaModelo);
+
+                        HistorialCuentaPorCobrarVistaModelo _historialCuentaPorCobrar =
                         new HistorialCuentaPorCobrarVistaModelo();
                     _historialCuentaPorCobrar.UsuarioId = User.Id;
                     _historialCuentaPorCobrar.CuentaPorCobrarId = Convert.ToInt32(_cuentaPorCobrarId.Value);
@@ -86,6 +144,12 @@ namespace Web.Venta
                     _historialCuentaPorCobrar =
                         _servicioDelegadoContabilidad.GrabarHistorialCuentaPorCobrar(_historialCuentaPorCobrar);
                 }
+                    _listaCuentaPorCobrarVistaDtOses = _servicioDelegadoContabilidad.ObtenerHistorialCuentaPorCobrarPorNumeroOrden(_numeroOrden.Text);
+                    _datosPago.DataSource = _listaCuentaPorCobrarVistaDtOses;
+                    _datosPago.DataBind();
+                }
+                else
+                    Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Abono_Excede").ToString(), "_btnBuscar");
 
 
 
@@ -93,7 +157,7 @@ namespace Web.Venta
             catch (Exception ex)
             {
 
-                throw;
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_btnBuscar");
             }
         }
 
@@ -106,14 +170,36 @@ namespace Web.Venta
         {
             try
             {
-                _btnAbonar_ModalPopupExtender.TargetControlID = "_btnBuscar";
-                _btnAbonar_ModalPopupExtender.Show();
+                int ordenCerrada = Convert.ToInt32(_listaHistorialProcesoVistaModelos.Where(a => a.EtapaProceso.EtapaProcesoId.Equals(Convert.ToInt32(Util.EtapaProceso.EntregaFranquiciaHaciaCliente))).Select(b => b.EtapaProceso.EtapaProcesoId).FirstOrDefault().ToString());
+                int ordenAnulada = Convert.ToInt32(_listaHistorialProcesoVistaModelos.Where(a => a.EtapaProceso.EtapaProcesoId.Equals(Convert.ToInt32(Util.EtapaProceso.AnulacionOrdenTrabajo))).Select(b => b.EtapaProceso.EtapaProcesoId).FirstOrDefault().ToString());
+
+                if (ordenCerrada == Convert.ToInt32(Util.EtapaProceso.EntregaFranquiciaHaciaCliente) ||
+                    ordenAnulada == Convert.ToInt32(Util.EtapaProceso.AnulacionOrdenTrabajo))
+                    Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Orden_Cerrada").ToString(), "_btnBuscar");
+                else
+                {
+
+                   
+                    if (Convert.ToDecimal(_listaConsultaOrdenTrabajoVistaDtOses.Sum(m => m.ValorTotal))>Convert.ToDecimal( _listaCuentaPorCobrarVistaDtOses.Sum(b => b.HistorialCuentaPorCobrar.ValorCobro)))
+                    {
+                        _btnAbonar_ModalPopupExtender.TargetControlID = "_btnBuscar";
+                        _btnAbonar_ModalPopupExtender.Show();
+
+                        if (_listaCuentaPorCobrarVistaDtOses.Count() == 0)
+                        _valorAbonar.Text = String.Format("{0:0.00}", _listaConsultaOrdenTrabajoVistaDtOses.Sum(m => m.ValorTotal));
+                    else
+                        _valorAbonar.Text = String.Format("{0:0.00}", _listaConsultaOrdenTrabajoVistaDtOses.Sum(m => m.ValorTotal) - _listaCuentaPorCobrarVistaDtOses.Sum(b => b.HistorialCuentaPorCobrar.ValorCobro));
+                    }
+                    else
+                        Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Abono_Completo").ToString(), "_abonar");
+
+                }
 
             }
             catch (Exception)
             {
 
-                throw;
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_btnBuscar");
             }
 
         }
@@ -139,7 +225,7 @@ namespace Web.Venta
             catch (Exception ex)
             {
 
-                throw;
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_btnBuscar");
             }
         }
 
@@ -168,11 +254,37 @@ namespace Web.Venta
                 _listaHistorialProcesoVistaModelos = _servicioDelegadoFlujoProceso.ObtenerHIstorialProcesosPorNumeroOrden(_numeroOrden.Text);
                 _datosHistorial.DataSource = _listaHistorialProcesoVistaModelos;
                 _datosHistorial.DataBind();
+
+
+                if (Convert.ToDecimal(_valorTotal.Text)!=0)
+                { 
+                if (_listaCuentaPorCobrarVistaDtOses.Count > 0)
+                {
+
+                     CuentaPorCobrarVistaModelo _cuentaPorCobrarVistaModelo= _listaCuentaPorCobrarVistaDtOses.Select(b => b.CuentaPorCobrar).FirstOrDefault();
+                    _cuentaPorCobrarVistaModelo.Saldo = _cuentaPorCobrarVistaModelo.Saldo +
+                                                        Convert.ToDecimal(_valorTotal.Text);
+                      _servicioDelegadoContabilidad.ActualizaCuentaPorCobrar(_cuentaPorCobrarVistaModelo);
+                      HistorialCuentaPorCobrarVistaModelo _historialCuentaPorCobrar =new HistorialCuentaPorCobrarVistaModelo();
+                    _historialCuentaPorCobrar.UsuarioId = User.Id;
+                    _historialCuentaPorCobrar.CuentaPorCobrarId = Convert.ToInt32(_cuentaPorCobrarId.Value);
+                    _historialCuentaPorCobrar.FechaCobro = DateTime.Now;
+                    FormaPagoVistaModelo _formaPago = new FormaPagoVistaModelo();
+                    _formaPago.FormaPagoId = Convert.ToInt32(Util.FormaPago.Efectivo);
+                    _historialCuentaPorCobrar.FormaPago = _formaPago;
+                    _historialCuentaPorCobrar.ValorCobro = Convert.ToDecimal(_valorTotal.Text);
+                    _historialCuentaPorCobrar =
+                        _servicioDelegadoContabilidad.GrabarHistorialCuentaPorCobrar(_historialCuentaPorCobrar);
+                }
+                _listaCuentaPorCobrarVistaDtOses = _servicioDelegadoContabilidad.ObtenerHistorialCuentaPorCobrarPorNumeroOrden(_numeroOrden.Text);
+                _datosPago.DataSource = _listaCuentaPorCobrarVistaDtOses;
+                _datosPago.DataBind();
+                }
             }
             catch (Exception ex)
             {
 
-                throw;
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_btnBuscar");
             }
         }
 
@@ -206,8 +318,8 @@ namespace Web.Venta
             }
             catch (Exception ex)
             {
-                
-                throw;
+
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_btnBuscar");
             }
         }
         /// <summary>
@@ -258,7 +370,7 @@ namespace Web.Venta
             catch (Exception)
             {
 
-                throw;
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_btnBuscar");
             }
 
         }
@@ -406,7 +518,6 @@ namespace Web.Venta
                     _listaCuentaPorCobrarVistaDtOses= _servicioDelegadoContabilidad.ObtenerHistorialCuentaPorCobrarPorNumeroOrden(_numeroOrden.Text);
                     _datosPago.DataSource = _listaCuentaPorCobrarVistaDtOses;
                     _datosPago.DataBind();
-                    _valorTotal.Text =String.Format("{0:0.00}", _listaConsultaOrdenTrabajoVistaDtOses.Sum(m => m.ValorTotal));
                     _cuentaPorCobrarId.Value =_listaCuentaPorCobrarVistaDtOses.Select(m=>m.CuentaPorCobrar.CuentaPorCobrarId).FirstOrDefault().ToString();
                     DesbloquearControles();
                    
@@ -495,6 +606,7 @@ namespace Web.Venta
             _cerrarOrdenTrabajo.Enabled = true;
             _anularOrden.Enabled = true;
             _btnAceptarObservaciones.Enabled = true;
+            _abonar.Enabled = true;
         }
 
         /// <summary>
@@ -506,6 +618,14 @@ namespace Web.Venta
             {
                 _estadoPagoOrden.DataSource = _servicioDelegadoGeneral.ObtenerEstadosPago();
                 _estadoPagoOrden.DataBind();
+                _estadoPagoOrden.SelectedIndex=_estadoPagoOrden.Items.IndexOf(_estadoPagoOrden.Items.FindByValue("2"));
+                _estadoPagoOrden.Enabled = false;
+                if(_listaCuentaPorCobrarVistaDtOses.Count ==0)
+                _valorTotal.Text = String.Format("{0:0.00}", _listaConsultaOrdenTrabajoVistaDtOses.Sum(m => m.ValorTotal));
+                else
+                 _valorTotal.Text = String.Format("{0:0.00}", _listaConsultaOrdenTrabajoVistaDtOses.Sum(m => m.ValorTotal)- _listaCuentaPorCobrarVistaDtOses.Sum(b=>b.HistorialCuentaPorCobrar.ValorCobro));
+                _valorTotal.Enabled = false;
+                _valorTotal.CssClass = "form-control";
 
             }
             catch (Exception ex)
@@ -518,8 +638,9 @@ namespace Web.Venta
 
 
 
+
         #endregion
 
-        
+       
     }
 }

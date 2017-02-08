@@ -17,16 +17,26 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public IMPUESTO()
         {
-            this.DETALLE_ORDEN_TRABAJO = new HashSet<DETALLE_ORDEN_TRABAJO>();
+            this.CONDICION_IMPUESTO = new HashSet<CONDICION_IMPUESTO>();
+            this.GRUPO_IMPUESTO = new HashSet<GRUPO_IMPUESTO>();
+            this.PORCENTAJE_IMPUESTO = new HashSet<PORCENTAJE_IMPUESTO>();
+            this.PROVEEDOR_IMPUESTO = new HashSet<PROVEEDOR_IMPUESTO>();
         }
     
         public int IMPUESTO_ID { get; set; }
         public string DESCRIPCION { get; set; }
-        public Nullable<decimal> PORCENTAJE { get; set; }
         public Nullable<bool> ESTA_HABILITADO { get; set; }
         public Nullable<System.DateTime> FECHA_CREACION { get; set; }
+        public Nullable<int> FECHA_FIN_VIGENCIA { get; set; }
+        public Nullable<bool> TIENE_RETENCION { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DETALLE_ORDEN_TRABAJO> DETALLE_ORDEN_TRABAJO { get; set; }
+        public virtual ICollection<CONDICION_IMPUESTO> CONDICION_IMPUESTO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GRUPO_IMPUESTO> GRUPO_IMPUESTO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PORCENTAJE_IMPUESTO> PORCENTAJE_IMPUESTO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PROVEEDOR_IMPUESTO> PROVEEDOR_IMPUESTO { get; set; }
     }
 }

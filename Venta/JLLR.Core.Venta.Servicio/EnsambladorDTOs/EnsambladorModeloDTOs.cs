@@ -82,7 +82,12 @@ namespace JLLR.Core.Venta.Servicio.EnsambladorDTOs
                Observacion = e.Observacion,
                 EstadoPagoId = e.EstadoPagoId,
                 DetalleOrdenTrabajoId = e.DetalleOrdenTrabajoId,
-                OrdenTrabajoId = e.OrdenTrabajoId
+                OrdenTrabajoId = e.OrdenTrabajoId,
+                Direccion = e.Direccion,
+                CorreoElectronico = e.CorreoElectronico,
+                Telefono = e.Telefono,
+                NombrePuntoVenta = e.NombrePuntoVenta,
+                NombreUsuario = e.NombreUsuario
 
             };
 

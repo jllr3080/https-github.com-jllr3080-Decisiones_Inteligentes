@@ -17,7 +17,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public VENTA_COMISION()
         {
-            this.DETALLE_ORDEN_TRABAJO = new HashSet<DETALLE_ORDEN_TRABAJO>();
+            this.ORDEN_TRABAJO_COMISION = new HashSet<ORDEN_TRABAJO_COMISION>();
         }
     
         public int VENTA_COMISION_ID { get; set; }
@@ -28,7 +28,8 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<int> PUNTO_VENTA_ID { get; set; }
         public Nullable<decimal> PORCENTAJE_COMISION { get; set; }
     
+        public virtual VENDEDOR VENDEDOR { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DETALLE_ORDEN_TRABAJO> DETALLE_ORDEN_TRABAJO { get; set; }
+        public virtual ICollection<ORDEN_TRABAJO_COMISION> ORDEN_TRABAJO_COMISION { get; set; }
     }
 }

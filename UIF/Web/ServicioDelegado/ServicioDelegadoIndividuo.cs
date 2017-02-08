@@ -131,6 +131,89 @@ namespace Web.ServicioDelegado
                 throw;
             }
         }
+
+        #region PROVEEDOR
+        /// <summary>
+        /// Grabar Proveedor
+        /// </summary>
+        /// <param name="proveedorDtOs"></param>
+        /// <returns></returns>
+        public ProveedorVistaModelo GrabarProveedor(ProveedorVistaDTOs proveedorDtOs)
+        {
+
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ProveedorVistaDTOs));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, proveedorDtOs);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "GrabarProveedor", "POST", datos);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<ProveedorVistaModelo>(json);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Actualza  el  cliente
+        /// </summary>
+        /// <param name="clienteGeneralDtOs"></param>
+        /// <returns></returns>
+        public void ActualizarProveedor(ProveedorVistaDTOs proveedorDtOs)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ProveedorVistaDTOs));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, proveedorDtOs);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "ActualizarProveedor", "POST", datos);
+                //var js = new JavaScriptSerializer();
+                //return js.Deserialize<ProveedorVistaModelo>(json);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        /// Obtiene el proveedor completo por  numero  de documento
+        /// </summary>
+        /// <param name="numeroIdentificacion"></param>
+        /// <returns></returns>
+        public ProveedorVistaDTOs ObtenerProveedorPorNumeroIdentificacion(string numeroIdentificacion)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerProveedorPorNumeroIdentificacion?numeroIdentificacion=" + numeroIdentificacion);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<ProveedorVistaDTOs>(json);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
         #endregion
 
         #region VALIDACIONES

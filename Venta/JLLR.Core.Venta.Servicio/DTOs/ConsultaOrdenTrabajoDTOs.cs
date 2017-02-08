@@ -112,5 +112,36 @@ namespace JLLR.Core.Venta.Servicio.DTOs
         /// </summary>
         [DataMember]
         public Int64? DetalleOrdenTrabajoId { get; set; }
+
+        /// <summary>
+        /// Direccion
+        /// </summary>
+        [DataMember]
+        public string Direccion { get; set; }
+
+        /// <summary>
+        /// Telefono
+        /// </summary>
+        [DataMember]
+        public string Telefono { get; set; }
+
+        /// <summary>
+        /// Telefono
+        /// </summary>
+        [DataMember]
+        public string CorreoElectronico { get; set; }
+
+        /// <summary>
+        /// NombrePuntoVenta
+        /// </summary>
+
+        [DataMember]
+        public string NombrePuntoVenta { get; set; }
+
+        /// <summary>
+        /// NombreUsuario
+        /// </summary>
+        [DataMember]
+        public string NombreUsuario { get; set; }
     }
 }

@@ -324,7 +324,6 @@ namespace JLLR.Core.General.Servicio.Ensamblador
             {
                ImpuestoId = e.IMPUESTO_ID,
                Descripcion = e.DESCRIPCION,
-               Porcentaje = e.PORCENTAJE,
                FechaCreacion = e.FECHA_CREACION,
                EstaHabilitado = e.ESTA_HABILITADO
 

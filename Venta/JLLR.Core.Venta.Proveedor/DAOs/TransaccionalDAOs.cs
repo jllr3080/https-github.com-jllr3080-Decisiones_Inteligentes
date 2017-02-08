@@ -2,9 +2,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JLLR.Core.Base.Proveedor.DAOs;
 using JLLR.Core.Base.Proveedor.Entidades;
 using JLLR.Core.Venta.Proveedor.DTOs;
 using Web.DTOs.Venta;
@@ -16,7 +18,7 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
     /// <summary>
     /// Metodos  generales de  venta
     /// </summary>
-    public class TransaccionalDAOs
+    public class TransaccionalDAOs:BaseDAOs
     {
 
         #region DECLARACIONES E INSTANCIAS
@@ -143,7 +145,13 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                                      join marca in _entidad.MARCA on detalleOrdenTrabajo.MARCA_ID equals marca.MARCA_ID
                                      join material in _entidad.MATERIAL on detalleOrdenTrabajo.MATERIAL_ID equals material.MATERIAL_ID
                                      join estadoPago in _entidad.ESTADO_PAGO on ordenTrabajo.ESTADO_PAGO_ID equals estadoPago.ESTADO_PAGO_ID
+                                     join direccion in _entidad.DIRECCION on  individuo.INDIVIDUO_ID equals  direccion.INDIVIDUO_ID
+                                     join telefono in  _entidad.TELEFONO on individuo.INDIVIDUO_ID equals telefono.INDIVIDUO_ID
+                                     join email in  _entidad.E_MAIL on individuo.INDIVIDUO_ID equals email.INDIVIDUO_ID
+                                     join puntoVenta in _entidad.PUNTO_VENTA on ordenTrabajo.PUNTO_VENTA_ID equals puntoVenta.PUNTO_VENTA_ID
+                                     join usuario in _entidad.USUARIO on ordenTrabajo.USUARIO_ID equals usuario.USUARIO_ID
                                      where ordenTrabajo.NUMERO_ORDEN == numeroOrden && ordenTrabajo.PUNTO_VENTA_ID == puntoVentaId
+
                                      select new ConsultaOrdenTrabajoDTOs
                                      {
                                          TipoLavado = tipoLavado.DESCRIPCION,
@@ -161,7 +169,12 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                                          NombreCliente = individuo.PRIMER_CAMPO + " " + individuo.SEGUNDO_CAMPO + " " + individuo.TERCER_CAMPO + " " + individuo.CUARTO_CAMPO,
                                          EstadoPagoId = ordenTrabajo.ESTADO_PAGO_ID,
                                          OrdenTrabajoId = ordenTrabajo.ORDEN_TRABAJO_ID,
-                                         DetalleOrdenTrabajoId = detalleOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID
+                                         DetalleOrdenTrabajoId = detalleOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID,
+                                         Direccion = direccion.DESCRIPCION_DIRECCION,
+                                         CorreoElectronico = email.DIRECCION_CORREO_ELECTRONICO,
+                                         Telefono = telefono.NUMERO_TELEFONO,
+                                         NombrePuntoVenta = puntoVenta.DESCRIPCION,
+                                         NombreUsuario = usuario.NOMBRE_USUARIO
                                      };
                 return ordenesTrabajo;
 
@@ -197,8 +210,10 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                 join marca in _entidad.MARCA on detalleOrdenTrabajo.MARCA_ID equals marca.MARCA_ID
                 join material in _entidad.MATERIAL on detalleOrdenTrabajo.MATERIAL_ID equals material.MATERIAL_ID
                 join estadoPago in _entidad.ESTADO_PAGO on ordenTrabajo.ESTADO_PAGO_ID equals estadoPago.ESTADO_PAGO_ID
-                where ordenTrabajo.FECHA_ENTREGA >= fechaDesde && ordenTrabajo.PUNTO_VENTA_ID==sucursalId
+                where EntityFunctions.TruncateTime(ordenTrabajo.FECHA_ENTREGA) == fechaDesde && ordenTrabajo.PUNTO_VENTA_ID==sucursalId   
                 select  new ConsultaOrdenTrabajoDTOs { TipoLavado = tipoLavado.DESCRIPCION,EstadoPago = estadoPago.DESCRIPCION,Marca = marca.DESCRIPCION,NumeroOrden = ordenTrabajo.NUMERO_ORDEN,FechaIngreso = ordenTrabajo.FECHA_INGRESO,FechaEntrega = ordenTrabajo.FECHA_ENTREGA,ValorUnitario = detalleOrdenTrabajo.VALOR_UNITARIO,Cantidad = detalleOrdenTrabajo.CANTIDAD,Color = color.DESCRIPCION,ValorTotal = detalleOrdenTrabajo.VALOR_TOTAL,Observacion = detalleOrdenTrabajo.OBSERVACION,Prenda = producto.NOMBRE,NombreCliente = individuo.PRIMER_CAMPO + " "+ individuo.SEGUNDO_CAMPO + " "+individuo.TERCER_CAMPO + " "+individuo.CUARTO_CAMPO};
+
+                //EntityFunctions.TruncateTime(p.date) == dateWithoutTime
             return ordenesTrabajo;
 
 

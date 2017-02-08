@@ -104,5 +104,35 @@ namespace Web.DTOs.Venta
         /// DetalleOrdenTrabajoId
         /// </summary>
         public Int64? DetalleOrdenTrabajoId { get; set; }
+
+        /// <summary>
+        /// Direccion
+        /// </summary>
+        
+        public string Direccion { get; set; }
+
+        /// <summary>
+        /// Telefono
+        /// </summary>
+        
+        public string Telefono { get; set; }
+
+        /// <summary>
+        /// Telefono
+        /// </summary>
+        
+        public string CorreoElectronico { get; set; }
+
+        /// <summary>
+        /// NombrePuntoVenta
+        /// </summary>
+
+        public string NombrePuntoVenta { get; set; }
+
+        /// <summary>
+        /// NombreUsuario
+        /// </summary>
+        
+        public string NombreUsuario { get; set; }
     }
 }

@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="DTOs\ClienteDTOs.cs" />
     <Compile Include="DTOs\ClienteGeneralDTOs.cs" />
+    <Compile Include="DTOs\ProveedorDTOs.cs" />
     <Compile Include="EnsambladorDTOs\EnsambladorEntidadDTOs.cs" />
     <Compile Include="EnsambladorDTOs\EnsambladorModeloDTOs.cs" />
     <Compile Include="Ensamblador\EnsambladorEntidad.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Modelo\DireccionModelo.cs" />
     <Compile Include="Modelo\IndividuoModelo.cs" />
     <Compile Include="Modelo\IndividuoRolModelo.cs" />
+    <Compile Include="Modelo\ProveedorModelo.cs" />
     <Compile Include="Modelo\TelefonoModelo.cs" />
     <Compile Include="ServicioIndividuo.svc.cs">
       <DependentUpon>ServicioIndividuo.svc</DependentUpon>

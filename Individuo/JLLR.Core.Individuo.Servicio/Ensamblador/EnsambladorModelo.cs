@@ -308,5 +308,49 @@ namespace JLLR.Core.Individuo.Servicio.Ensamblador
         }
 
         #endregion
+
+        #region PROVEEDOR
+        /// <summary>
+        /// Convierte el DTO de entidad a modelo
+        /// </summary>
+        /// <param name="e">Entidad</param>
+        /// <returns></returns>
+        public modelo.ProveedorModelo CrearProveedor(entidad.PROVEEDOR e)
+        {
+            modelo.IndividuoModelo _individuo = new modelo.IndividuoModelo();
+            _individuo.IndividuoId = Convert.ToInt32(e.INDIVIDUO_ID);
+
+
+            modeloGeneral.FormaPagoModelo _formaPago= new modeloGeneral.FormaPagoModelo();
+            _formaPago.FormaPagoId= Convert.ToInt32(e.FORMA_PAGO_ID);
+
+            return new modelo.ProveedorModelo
+            {
+              Individuo = _individuo,
+              FormaPago = _formaPago,
+              ProveedorId = e.PROVEEDOR_ID,
+              DiasCredito = e.DIAS_CREDITO
+                
+            };
+
+        }
+
+        /// <summary>
+        /// Convierte un listado de DTO en listado de  modelos de DTO
+        /// </summary>
+        /// <param name="listadoEntidad">Listado de Entidades</param>
+        /// <returns></returns>
+        public List<modelo.ProveedorModelo> CrearProveedores(IQueryable<entidad.PROVEEDOR> listadoEntidad)
+        {
+            List<modelo.ProveedorModelo> listaModelo = new List<modelo.ProveedorModelo>();
+
+            foreach (var entidad in listadoEntidad)
+            {
+                listaModelo.Add(CrearProveedor(entidad));
+            }
+            return listaModelo;
+
+        }
+        #endregion
     }
 }

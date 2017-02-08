@@ -15,7 +15,7 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
     /// <summary>
     /// Venta de  comision 
     /// </summary>
-    public class VentaComisionDAOs
+    public class VentaComisionDAOs:BaseDAOs
     {
 
         /// <summary>

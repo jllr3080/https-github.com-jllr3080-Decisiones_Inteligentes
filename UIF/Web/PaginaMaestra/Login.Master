@@ -12,9 +12,16 @@
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
    <webopt:bundlereference runat="server" path="~/Content/css" />
-
+    <script>
+    function nobackbutton() {
+        window.location.hash = "no-back-button";
+        window.location.hash = "Again-No-back-button" //chrome
+        window.onhashchange = function () { window.location.hash = "no-back-button"; }
+     
+    }
+</script>
 </head>
-<body >
+<body style="padding-top:0px " onload="nobackbutton();">
     <form id="form1" runat="server">
      <asp:ScriptManager runat="server">
             <Scripts>
@@ -36,7 +43,7 @@
                 <%--Scripts del sitio--%>
             </Scripts>
         </asp:ScriptManager>
-         <div class="container body-content" >
+         <div >
            
             <asp:ContentPlaceHolder ID="_contenido" runat="server">
             </asp:ContentPlaceHolder>

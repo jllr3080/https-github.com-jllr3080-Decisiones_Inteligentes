@@ -1,10 +1,16 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/PaginaMaestra/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Web._Default" %>
 
-<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server" style="padding-top: 0px;padding-left: 0px ">
     <br/>
     <br/>
     <br/>
-    <div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div >
         <img src="../Content/Imagen/Logo_Pagina_Inicio.png"/>
     </div>
    

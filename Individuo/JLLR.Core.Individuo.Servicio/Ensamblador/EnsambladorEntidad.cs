@@ -246,5 +246,43 @@ namespace JLLR.Core.Individuo.Servicio.Ensamblador
         }
         #endregion
 
+        #region PROVEEDOR
+        /// <summary>
+        /// Convierte el modelo en una entidad
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public entidad.PROVEEDOR CrearProveedor(modelo.ProveedorModelo m)
+        {
+            return new entidad.PROVEEDOR()
+            {
+                INDIVIDUO_ID = m.Individuo.IndividuoId,
+                FORMA_PAGO_ID =  m.FormaPago.FormaPagoId,
+                PROVEEDOR_ID = m.ProveedorId,
+                DIAS_CREDITO = m.DiasCredito
+
+
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>
+        public List<entidad.PROVEEDOR> CrearProveedores(List<modelo.ProveedorModelo> listadoModelo)
+        {
+            List<entidad.PROVEEDOR> listaEntidad = new List<entidad.PROVEEDOR>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearProveedor (modelo));
+            }
+            return listaEntidad;
+
+        }
+        #endregion
+
     }
 }

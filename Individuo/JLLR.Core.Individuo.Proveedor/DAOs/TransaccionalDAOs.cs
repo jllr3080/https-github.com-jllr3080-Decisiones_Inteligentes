@@ -26,7 +26,10 @@ namespace JLLR.Core.Individuo.Proveedor.DAOs
         private readonly  IndividuoRolDAOs _individuoRolDaOs= new IndividuoRolDAOs();
         private readonly  CorreoElectronicoDAOs _correoElectronicoDaOs= new CorreoElectronicoDAOs();
         private readonly  Decisiones_Inteligentes _entidad= new Decisiones_Inteligentes();
+        private readonly  ProveedorDAOs _proveedorDaOs=  new ProveedorDAOs();
         #endregion
+
+
         #region CLIENTE
 
         /// <summary>
@@ -206,6 +209,145 @@ namespace JLLR.Core.Individuo.Proveedor.DAOs
             }
         }
 
+        #endregion
+
+
+        #region PROVEEDOR
+        /// <summary>
+        /// Grabar Proveedor
+        /// </summary>
+        /// <param name="proveedorDtOs"></param>
+        /// <returns></returns>
+        public PROVEEDOR GrabarProveedor(ProveedorDTOs proveedorDtOs)
+        {
+
+            using (System.Transactions.TransactionScope transaction = new System.Transactions.TransactionScope())
+            {
+                try
+                {
+                    //Graba el  individuo
+                    INDIVIDUO individuo = _individuoDaOs.GrabarIndividuo(proveedorDtOs.Individuo);
+
+                    //Graba el cliente
+                    proveedorDtOs.Proveedor.INDIVIDUO_ID = individuo.INDIVIDUO_ID;
+                    PROVEEDOR proveedor= _proveedorDaOs.GrabarProveedor(proveedorDtOs.Proveedor);
+
+                    //Graba la direccion
+                    proveedorDtOs.Direccion.INDIVIDUO_ID = individuo.INDIVIDUO_ID;
+                    _direccionDaOs.GrabarDireccion(proveedorDtOs.Direccion);
+
+                    //Graba el telefono
+                    proveedorDtOs.Telefono.INDIVIDUO_ID = individuo.INDIVIDUO_ID;
+                    _telefonoDaOs.GrabarTelefono(proveedorDtOs.Telefono);
+
+
+                    //Graba el correo electronico
+                    proveedorDtOs.CorreoElectronico.INDIVIDUO_ID = individuo.INDIVIDUO_ID;
+                    _correoElectronicoDaOs.GrabarCorreoElectronico(proveedorDtOs.CorreoElectronico);
+
+                    //Graba el correo electronico
+                    proveedorDtOs.IndividuoRol.INDIVIDUO_ID = individuo.INDIVIDUO_ID;
+                    _individuoRolDaOs.GrabarIndividuoRol(proveedorDtOs.IndividuoRol);
+
+                    transaction.Complete();
+                    return proveedor;
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    throw;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Actualza  el  cliente
+        /// </summary>
+        /// <param name="clienteGeneralDtOs"></param>
+        /// <returns></returns>
+        public void ActualizarProveedor(ProveedorDTOs proveedorDtOs)
+        {
+
+            using (System.Transactions.TransactionScope transaction = new System.Transactions.TransactionScope())
+            {
+                try
+                {
+                    //Graba el  individuo
+                    _individuoDaOs.Actualizaindividuo(proveedorDtOs.Individuo);
+
+                    //Graba el cliente
+
+                    _proveedorDaOs.ActualizaProveedor(proveedorDtOs.Proveedor);
+
+                    //Graba la direccion
+
+                    _direccionDaOs.ActualizaDireccion(proveedorDtOs.Direccion);
+
+                    //Graba el telefono
+
+                    _telefonoDaOs.ActualizaTelefono(proveedorDtOs.Telefono);
+
+
+                    //Graba el correo electronico
+
+                    _correoElectronicoDaOs.ActualizaCorreoElectronico(proveedorDtOs.CorreoElectronico);
+
+                    //Graba el correo electronico
+
+                    _individuoRolDaOs.ActualizaIndividuoRol(proveedorDtOs.IndividuoRol);
+
+                    transaction.Complete();
+
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    throw;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Obtiene el proveedor completo por  numero  de documento
+        /// </summary>
+        /// <param name="numeroIdentificacion"></param>
+        /// <returns></returns>
+        public ProveedorDTOs ObtenerProveedorPorNumeroIdentificacion(string numeroIdentificacion)
+        {
+            try
+            {
+                var proveedores = from proveedor in _entidad.PROVEEDOR
+                               join individuo in _entidad.INDIVIDUO on proveedor.INDIVIDUO_ID equals individuo.INDIVIDUO_ID
+                               join direccion in _entidad.DIRECCION on individuo.INDIVIDUO_ID equals direccion.INDIVIDUO_ID
+                               join telefono in _entidad.TELEFONO on individuo.INDIVIDUO_ID equals telefono.INDIVIDUO_ID
+                               join email in _entidad.E_MAIL on individuo.INDIVIDUO_ID equals email.INDIVIDUO_ID
+                               join individuoRol in _entidad.INDIVIDUO_ROL on individuo.INDIVIDUO_ID equals
+                                   individuoRol.INDIVIDUO_ID
+                               where
+                                   individuo.NUMERO_IDENTIFICACION == numeroIdentificacion &&
+                                   individuoRol.TIPO_ROL_INDIVIDUO_ID == 2
+                               select new ProveedorDTOs()
+                               {
+                                   Proveedor = proveedor,
+                                   Individuo = individuo,
+                                   IndividuoRol = individuoRol,
+                                   CorreoElectronico = email,
+                                   Direccion = direccion,
+                                   Telefono = telefono
+                               };
+
+                return proveedores.FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
     }
 }

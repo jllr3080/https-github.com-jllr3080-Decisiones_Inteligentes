@@ -18,6 +18,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public FORMA_PAGO()
         {
             this.HISTORIAL_CUENTA_POR_COBRAR = new HashSet<HISTORIAL_CUENTA_POR_COBRAR>();
+            this.PROVEEDOR = new HashSet<PROVEEDOR>();
         }
     
         public int FORMA_PAGO_ID { get; set; }
@@ -26,5 +27,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HISTORIAL_CUENTA_POR_COBRAR> HISTORIAL_CUENTA_POR_COBRAR { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PROVEEDOR> PROVEEDOR { get; set; }
     }
 }
