@@ -20,5 +20,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<int> NUMERO_ENTERO { get; set; }
         public Nullable<System.DateTime> FECHA { get; set; }
         public Nullable<bool> BOOLEANO { get; set; }
+        public Nullable<decimal> NUMERO_DECIMAL { get; set; }
     }
 }

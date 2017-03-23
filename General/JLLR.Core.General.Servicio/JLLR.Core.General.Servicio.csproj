@@ -88,6 +88,7 @@
     <Compile Include="Modelo\MaterialModelo.cs" />
     <Compile Include="Modelo\ModeloModelo.cs" />
     <Compile Include="Modelo\PaisModelo.cs" />
+    <Compile Include="Modelo\ParametroModelo.cs" />
     <Compile Include="Modelo\PuntoVentaModelo.cs" />
     <Compile Include="Modelo\SucursalModelo.cs" />
     <Compile Include="Modelo\TipoCorreoElectronicoModelo.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Modelo\TipoIndividuoModelo.cs" />
     <Compile Include="Modelo\TipoLavadoModelo.cs" />
     <Compile Include="Modelo\TipoProductoModelo.cs" />
+    <Compile Include="Modelo\TipoReglaModelo.cs" />
     <Compile Include="Modelo\TipoRolIndividuoModelo.cs" />
     <Compile Include="Modelo\TipoTelefonoModelo.cs" />
     <Compile Include="ServicioGeneral.svc.cs">

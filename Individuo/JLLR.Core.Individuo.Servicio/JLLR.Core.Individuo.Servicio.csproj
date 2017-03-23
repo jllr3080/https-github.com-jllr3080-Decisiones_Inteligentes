@@ -86,6 +86,7 @@
     <Compile Include="Modelo\IndividuoRolModelo.cs" />
     <Compile Include="Modelo\ProveedorModelo.cs" />
     <Compile Include="Modelo\TelefonoModelo.cs" />
+    <Compile Include="Modelo\VendedorModelo.cs" />
     <Compile Include="ServicioIndividuo.svc.cs">
       <DependentUpon>ServicioIndividuo.svc</DependentUpon>
     </Compile>

@@ -1,4 +1,4 @@
-﻿ <%@ Page Title="<%$ Resources:Web_es_Ec,Titulo_Pagina_Consulta_Orden_Trabajo%>" Language="C#" MasterPageFile="~/PaginaMaestra/Site.Master" AutoEventWireup="true" CodeBehind="ConsultaOrdenTrabajo.aspx.cs" Inherits="Web.Venta.ConsultaOrdenTrabajo" %>
+﻿ <%@ Page Title="<%$ Resources:Web_es_Ec,Titulo_Pagina_Consulta_Orden_Trabajo%>" Language="C#" MasterPageFile="~/PaginaMaestra/Site.Master" AutoEventWireup="true" CodeBehind="ConsultaOrdenTrabajo.aspx.cs" Inherits="Web.Venta.ConsultaOrdenTrabajo" MaintainScrollPositionOnPostback="true"%>
 <%@ Register TagPrefix="cc1" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=16.1.1.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <br>
@@ -287,9 +287,69 @@
                                     </div>
                                   
                                 </div>
+                                <div class="row">
+                                        <div class="col-md-6">
+                                             <asp:Label ID="_labelDescuento" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Aplica_Descuento%>"></asp:Label>
+                                        </div>
+                                        <div class="col-md-6">
+                                             <asp:Label ID="_labelValorDescuento" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Valor_Descuento%>"></asp:Label>
+                                        </div>
+                                  
+                                 </div>
+                              <div class="row">
+                                <div class="col-md-6">
+                                    <asp:CheckBox ID="_descuento" runat="server" class="form-control" OnCheckedChanged="_descuento_CheckedChanged" AutoPostBack="False"/>     
+                                 </div>
+                               <div class="col-md-6">
+                                         <asp:TextBox ID="_valorDescuento" runat="server" class="form-control" ValidationGroup="CerrarOrden"  ></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="_valorDescuentoValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CerrarOrden" ControlToValidate="_valorDescuento"  Enabled="False"></asp:RequiredFieldValidator>
+                                     <cc1:MaskedEditExtender ID="_valorDescuentoMascara" runat="server" TargetControlID="_valorDescuento" Mask="999.99" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus" OnInvalidCssClass="MaskedEditError" MaskType="Number" InputDirection="RightToLeft" AcceptNegative="Left" DisplayMoney="Left" ErrorTooltipEnabled="True" />
+                               </div>
+                              </div>
+                              <div class="row">
+                                        <div class="col-md-6">
+                                             <asp:Label ID="_labelPorcentajeFranquicia" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Porcentaje_Franquicia%>"></asp:Label>
+                                        </div>
+                                        <div class="col-md-6">
+                                             <asp:Label ID="_labelPorcentajeMatriz" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Porcentaje_Matriz%>"></asp:Label>
+                                        </div>
+                                  
+                                 </div>
+                            
+                             <div class="row">
+                                <div class="col-md-6">
+                                         <asp:TextBox ID="_procentajeFranquicia" runat="server" class="form-control" ValidationGroup="CerrarOrden"  TextMode="Number"></asp:TextBox>
+                                        <asp:RangeValidator ID="_procentajeFranquiciavalidador" runat="server" ControlToValidate="_procentajeFranquicia"  MinimumValue="0" MaximumValue="100" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>"></asp:RangeValidator>
+                                        <asp:RequiredFieldValidator ID="_procentajeFranquiciaValidador1" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CerrarOrden" ControlToValidate="_procentajeFranquicia" ></asp:RequiredFieldValidator>
+                                    
+                                 </div>
+                               <div class="col-md-6">
+                                         <asp:TextBox ID="_procentajeMatriz" runat="server" class="form-control" ValidationGroup="CerrarOrden"  TextMode="Number"></asp:TextBox>
+                                         <asp:RangeValidator ID="_procentajeMatrizValidador" runat="server" ControlToValidate="_procentajeMatriz"  MinimumValue="0" MaximumValue="100" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>"></asp:RangeValidator>
+                                         <asp:RequiredFieldValidator ID="_procentajeMatrizValidador2" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CerrarOrden" ControlToValidate="_procentajeMatriz" ></asp:RequiredFieldValidator>
+
+                               </div>
+                              </div>
+                            <div class="row">
+                                        <div class="col-md-12">
+                                             <asp:Label ID="_labelMotivoDescuento" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Motivo_Descuento%>"></asp:Label>
+                                        </div>
+                                       
+                                  
+                             </div>
+                             <div class="row">
+                                <div class="col-md-12">
+                                         <asp:TextBox ID="_motivoDescuento" runat="server" class="form-control" ValidationGroup="CerrarOrden"  Width="100%" ></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="_motivoDescuentoValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CerrarOrden" ControlToValidate="_motivoDescuento" ></asp:RequiredFieldValidator>
+                                        
+                                    
+                                 </div>
+                               
+                              </div>
+
                         </div>
                         <div class="modal-footer">
-                            <asp:Button ID="_btnAceptarCerrarOrden" runat="server" Text="Cerrar Orden" class="btn btn-primary" data-dismiss="modal" OnClick="_btnAceptarCerrarOrden_Click"  />
+                            <asp:Button ID="_btnAceptarCerrarOrden" runat="server" Text="Cerrar Orden" class="btn btn-primary" data-dismiss="modal" OnClick="_btnAceptarCerrarOrden_Click" ValidationGroup="CerrarOrden"  />
                             <asp:Button ID="_btnCancelarCerrarOrden" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Cancelar%>"  class="btn btn-primary" data-dismiss="modal" />
                         </div>
                     </asp:Panel>

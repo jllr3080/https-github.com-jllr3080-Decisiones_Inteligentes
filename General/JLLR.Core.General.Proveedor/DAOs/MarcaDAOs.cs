@@ -41,5 +41,49 @@ namespace JLLR.Core.General.Proveedor.DAOs
                 throw;
             }
         }
+
+        /// <summary>
+        /// Graba las  marcas
+        /// </summary>
+        /// <param name="marca"></param>
+       
+        public void GrabarMarca(MARCA marca)
+        {
+            try
+            {
+                _entidad.MARCA.Add(marca);
+                _entidad.SaveChanges();
+                
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        ///  valida si  existe la marca ya  creada
+        /// </summary>
+        /// <param name="descripcion"></param>
+        /// <returns></returns>
+        public MARCA ValidarSiExisteMarcaPorDescripcion(string descripcion)
+        {
+            try
+            {
+                var marcas = from marca in _entidad.MARCA
+                    where marca.DESCRIPCION == descripcion
+                    select marca;
+
+                return marcas.FirstOrDefault();
+
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+
+        }
     }
 }

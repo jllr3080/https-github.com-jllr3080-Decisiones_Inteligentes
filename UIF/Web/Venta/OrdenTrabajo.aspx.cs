@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 using Web.Base;
 using Web.DTOs.Individuo;
 using Web.DTOs.Logistica;
+using Web.DTOs.ReglaNegocio;
 using Web.DTOs.Venta;
 using Web.Models.Contabilidad;
 using Web.Models.FlujoProceso;
@@ -35,12 +36,261 @@ namespace Web.Venta
         private static ClienteVistaDTOs clienteVistaDtOs = new ClienteVistaDTOs();
         private static List<DetalleOrdenTrabajoVistaModelo> _listaTrabajoVistaDtOs =
             new List<DetalleOrdenTrabajoVistaModelo>();
-        
+        private readonly  ServicioDelegadoReglaNegocio _servicioDelegadoReglaNegocio= new ServicioDelegadoReglaNegocio();
 
         #endregion
 
         #region Eventos
 
+
+        /// <summary>
+        /// Agrega el reporte por libras
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _agregarRopaPorLibras_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AgregarOrdenTrabajo();
+                CargarDetalleOrdenTrabajoPorLibras();
+                LimpiarDetalleOrdenTrabajoPorLibras();
+
+            }
+            catch (Exception ex)
+            {
+
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarOrdenTrabajo");
+            }
+        }
+
+        /// <summary>
+        /// Prenda 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _prendaPorLibras_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _cantidadPorLibras.Text = "1";
+                _tallaPorLibras.DataSource =_servicioDelegadoInventario.ObtenProductoTallaPorProductoId(Convert.ToInt32(_prendaPorLibras.SelectedItem.Value));
+                _tallaPorLibras.DataBind();
+                List<ProductoPrecioVistaModelo> _precio =_servicioDelegadoInventario.ObtenerProductoPrecioPorProductoIdYProductoTallaId(Convert.ToInt32(_prendaPorLibras.SelectedItem.Value),
+                   Convert.ToInt32(_tallaPorLibras.SelectedItem.Value));
+                foreach (var productoPrecioVistaModelo in _precio)
+                {
+
+                    _valorUnitarioPorLibras.Text = String.Format("{0:0.00}", productoPrecioVistaModelo.Precio);
+                }
+
+                _valorTotalPorLibras.Text = String.Format("{0:0.00}", Convert.ToDecimal(_cantidadPorLibras.Text) * Convert.ToDecimal(_valorUnitarioPorLibras.Text));
+            }
+            catch (Exception)
+            {
+
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarOrdenTrabajo");
+            }
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _tallaPorLibras_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                List<ProductoPrecioVistaModelo> _precio =_servicioDelegadoInventario.ObtenerProductoPrecioPorProductoIdYProductoTallaId(Convert.ToInt32(_prendaPorLibras.SelectedItem.Value),
+                 Convert.ToInt32(_tallaPorLibras.SelectedItem.Value));
+                foreach (var productoPrecioVistaModelo in _precio)
+                {
+
+                    _valorUnitarioPorLibras.Text = String.Format("{0:0.00}", productoPrecioVistaModelo.Precio);
+                }
+                _valorTotalPorLibras.Text = String.Format("{0:0.00}", Convert.ToDecimal(_cantidad.Text) * Convert.ToDecimal(_valorUnitarioPorLibras.Text));
+
+            }
+            catch (Exception)
+            {
+
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarOrdenTrabajo");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _numeroLibras_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+
+                _valorTotalLibra.Text = String.Format("{0:0.00}",
+                    Convert.ToDecimal(_numeroLibras.Text)*Convert.ToDecimal(_valorUnitarioLibra.Text));
+
+
+            }
+            catch (Exception ex)
+            {
+
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarOrdenTrabajo");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _valorUnitarioLibra_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _valorTotalLibra.Text = String.Format("{0:0.00}",
+                   Convert.ToDecimal(_numeroLibras.Text) * Convert.ToDecimal(_valorUnitarioLibra.Text));
+            }
+            catch (Exception)
+            {
+
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarOrdenTrabajo");
+            }
+        }
+        /// <summary>
+        /// Opcion de  libras   se visualiza  el panel de libras
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _opcionLibras_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _panelLibras.Visible = true;
+                _panelEdredones.Visible = false;
+                _valorUnitarioLibra.Text = Convert.ToString(_servicioDelegadoGeneral.ObtenerParametroPorDescripcion("VALOR_LIBRA").NumeroDecimal);
+                LimpiarDetalleOrdenTrabajoPorLibras();
+
+
+            }
+            catch (Exception ex)
+            {
+
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarOrdenTrabajo");
+            }
+
+        }
+
+        /// <summary>
+        /// Opcion de edredones se visualiza la opcion de edredones
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _opcionEdredones_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _panelLibras.Visible = false;
+                _panelEdredones.Visible = true;
+                _prendaPorLibras.DataSource = _servicioDelegadoInventario.ObtenerProductoPorTipoProductoId(Convert.ToInt32(Util.TipoProducto.Servicio));
+                _prendaPorLibras.DataBind();
+                _tallaPorLibras.DataSource =
+                    _servicioDelegadoInventario.ObtenProductoTallaPorProductoId(
+                        Convert.ToInt32(_prenda.SelectedItem.Value));
+                _tallaPorLibras.DataBind();
+                _marcaPorLibras.DataSource = _servicioDelegadoGeneral.ObtenerMarcas();
+                _marcaPorLibras.DataBind();
+                _colorPorLibras.DataSource = _servicioDelegadoGeneral.ObetenerColores();
+                _colorPorLibras.DataBind();
+                _valorUnitarioLibra.Text =String.Empty;
+                LimpiarDetalleOrdenTrabajoPorLibras();
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarOrdenTrabajo");
+            }
+
+        }
+
+        /// <summary>
+        /// Aplica las promociones 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _promocion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarOrdenTrabajo");
+            }
+
+        }
+        /// <summary>
+        /// Graba la marca   y lo coloca en el  combo de marca
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _btnGrabarrMarca_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MarcaVistaModelo _validarMarcaVistaModelo =
+                    _servicioDelegadoGeneral.ValidarSiExisteMarcaPorDescripcion(_txtMarca.Text);
+
+                if (_validarMarcaVistaModelo == null)
+                {
+                    MarcaVistaModelo _marcaVistaModelo = new MarcaVistaModelo();
+                    _marcaVistaModelo.Descripcion = _txtMarca.Text;
+                    _marcaVistaModelo.EstaHabilitado = true;
+                    _servicioDelegadoGeneral.GrabarMarca(_marcaVistaModelo);
+                    _marca.DataSource = _servicioDelegadoGeneral.ObtenerMarcas();
+                    _marca.DataBind();
+                }
+
+                else
+                    Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Marca_Existe").ToString(), "_grabarOrdenTrabajo");
+
+
+            }
+            catch (Exception ex)
+            {
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarOrdenTrabajo");
+
+            }
+        }
+
+        /// <summary>
+        /// Crea la marca 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _crearMarca_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _txtMarca.Text=String.Empty;
+                _btnMarca_ModalPopupExtender.TargetControlID = "_crearMarca";
+                _btnMarca_ModalPopupExtender.Show();
+            }
+            catch (Exception ex)
+            {
+
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarOrdenTrabajo");
+            }
+
+        }
 
         /// <summary>
         /// depende  de la forma de pago 
@@ -109,8 +359,8 @@ namespace Web.Venta
                     e.Row.Cells[3].Text = _cantidadTotal.ToString();
                     e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Right;
 
-                    e.Row.Cells[8].Text = _montoTotal.ToString();
-                    e.Row.Cells[8].HorizontalAlign = HorizontalAlign.Right;
+                    e.Row.Cells[7].Text = _montoTotal.ToString();
+                    e.Row.Cells[7].HorizontalAlign = HorizontalAlign.Right;
                     e.Row.Font.Bold = true;
                 }
                 
@@ -119,7 +369,7 @@ namespace Web.Venta
             catch (Exception ex)
             {
 
-                throw;
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarOrdenTrabajo");
             }
 
 
@@ -138,8 +388,18 @@ namespace Web.Venta
                 {
                   int index = Convert.ToInt32(e.CommandArgument);
                   _listaTrabajoVistaDtOs.RemoveAt(index);
-                  _datos.DataSource = _listaTrabajoVistaDtOs;
-                  _datos.DataBind();
+                    if (Convert.ToInt32(_tipoLavado.SelectedItem.Value) == Convert.ToInt32(Util.TipoLavado.LavadoSeco))
+                    {
+                        _datos.DataSource = _listaTrabajoVistaDtOs;
+                        _datos.DataBind();
+                    }
+
+                    else
+                    {
+                        _datosLibras.DataSource = _listaTrabajoVistaDtOs;
+                        _datosLibras.DataBind();
+                    }
+
 
                 }
             }
@@ -168,21 +428,31 @@ namespace Web.Venta
                     _talla.DataBind();
                     _cantidad.Text = "1";
                     List<ProductoPrecioVistaModelo> _precio =
-                   _servicioDelegadoInventario.ObtenerProductoPrecioPorProductoIdYProductoTallaId(
-                       Convert.ToInt32(_prenda.SelectedItem.Value),
-                       Convert.ToInt32(_talla.SelectedItem.Value));
+                        _servicioDelegadoInventario.ObtenerProductoPrecioPorProductoIdYProductoTallaId(
+                            Convert.ToInt32(_prenda.SelectedItem.Value),
+                            Convert.ToInt32(_talla.SelectedItem.Value));
                     foreach (var productoPrecioVistaModelo in _precio)
                     {
 
                         _valorUnitario.Text = String.Format("{0:0.00}", productoPrecioVistaModelo.Precio);
                     }
-                    _valorTotal.Text = String.Format("{0:0.00}", Convert.ToDecimal(_cantidad.Text) * Convert.ToDecimal(_valorUnitario.Text));
-
+                    _valorTotal.Text = String.Format("{0:0.00}",
+                        Convert.ToDecimal(_cantidad.Text)*Convert.ToDecimal(_valorUnitario.Text));
+                    _panelLavadoMojado.Visible = false;
+                }
+                else if (Convert.ToInt32(_tipoLavado.SelectedItem.Value) ==
+                         Convert.ToInt32(Util.TipoLavado.LavadoPorLibras))
+                {
+                    _panelLavadoSeco.Visible = false;
+                    _panelLavadoMojado.Visible = true;
+                    
+                }
+                else
+                {
+                    _panelLavadoSeco.Visible = false;
+                    _panelLavadoMojado.Visible = false;
                 }
 
-
-                else
-                    _panelLavadoSeco.Visible = false;
             }
             catch (Exception)
             {
@@ -439,6 +709,29 @@ namespace Web.Venta
                 {
                     InicializarVariables();
                     CargarDatos();
+
+                    if (Convert.ToInt32(_tipoLavado.SelectedItem.Value) == Convert.ToInt32(Util.TipoLavado.LavadoSeco))
+                    {
+                        _panelLavadoSeco.Visible = true;
+                        _talla.DataSource =
+                            _servicioDelegadoInventario.ObtenProductoTallaPorProductoId(
+                                Convert.ToInt32(_prenda.SelectedItem.Value));
+                        _talla.DataBind();
+                        _cantidad.Text = "1";
+                        
+                        List<ProductoPrecioVistaModelo> _precio =
+                            _servicioDelegadoInventario.ObtenerProductoPrecioPorProductoIdYProductoTallaId(
+                                Convert.ToInt32(_prenda.SelectedItem.Value),
+                                Convert.ToInt32(_talla.SelectedItem.Value));
+                        foreach (var productoPrecioVistaModelo in _precio)
+                        {
+
+                            _valorUnitario.Text = String.Format("{0:0.00}", productoPrecioVistaModelo.Precio);
+                        }
+                        _valorTotal.Text = String.Format("{0:0.00}",
+                            Convert.ToDecimal(_cantidad.Text) * Convert.ToDecimal(_valorUnitario.Text));
+                        _panelLavadoMojado.Visible = false;
+                    }
                 }
             }
             catch (Exception)
@@ -554,8 +847,8 @@ namespace Web.Venta
                     _servicioDelegadoInventario.ObtenProductoTallaPorProductoId(
                         Convert.ToInt32(_prenda.SelectedItem.Value));
                 _talla.DataBind();
-                _material.DataSource = _servicioDelegadoGeneral.ObtenerMateriales();
-                _material.DataBind();
+                //_material.DataSource = _servicioDelegadoGeneral.ObtenerMateriales();
+                //_material.DataBind();
                 _marca.DataSource = _servicioDelegadoGeneral.ObtenerMarcas();
                 _marca.DataBind();
                 _color.DataSource = _servicioDelegadoGeneral.ObetenerColores();
@@ -587,8 +880,8 @@ namespace Web.Venta
                     _servicioDelegadoInventario.ObtenProductoTallaPorProductoId(
                         Convert.ToInt32(_prenda.SelectedItem.Value));
                 _talla.DataBind();
-                _material.DataSource = _servicioDelegadoGeneral.ObtenerMateriales();
-                _material.DataBind();
+                //_material.DataSource = _servicioDelegadoGeneral.ObtenerMateriales();
+                //_material.DataBind();
                 _marca.DataSource = _servicioDelegadoGeneral.ObtenerMarcas();
                 _marca.DataBind();
                 _color.DataSource = _servicioDelegadoGeneral.ObetenerColores();
@@ -602,11 +895,22 @@ namespace Web.Venta
                 _estadoPago.SelectedIndex = _estadoPago.Items.IndexOf(_estadoPago.Items.FindByValue("1"));
                 _labelValorPago.Visible = false;
                 _valorPago.Visible = false;
+                _promocion.DataSource =
+                _servicioDelegadoReglaNegocio.ObtenerReglasPorPuntoVentaIdYSucursalId(
+                       Convert.ToInt32(User.PuntoVentaId), Convert.ToInt32(User.SucursalId));
+                _promocion.DataBind();
+                ListItem _listItem= new ListItem();
+                _listItem.Value = "-1";
+                _listItem.Text = "NINGUNA";
+                _listItem.Selected = true;
+                
+                _promocion.Items.Add(_listItem);
+
             }
             catch (Exception ex)
             {
 
-                throw;
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarOrdenTrabajo");
             }
 
         }
@@ -666,6 +970,12 @@ namespace Web.Venta
 
                 DetalleOrdenTrabajoVistaModelo _detalleOrdenTrabajoVista = new DetalleOrdenTrabajoVistaModelo();
 
+                if ((Convert.ToInt32(_tipoLavado.SelectedItem.Value) == Convert.ToInt32(Util.TipoLavado.LavadoPorLibras) &&
+                     _opcionEdredones.Checked == true) ||
+                    (Convert.ToInt32(_tipoLavado.SelectedItem.Value) == Convert.ToInt32(Util.TipoLavado.LavadoSeco)))
+                {
+                    
+               
                 ProductoVistaModelo _productoVista = new ProductoVistaModelo
                 {
                     ProductoId = Convert.ToInt32(_prenda.SelectedItem.Value),
@@ -685,8 +995,8 @@ namespace Web.Venta
                 };
                 MaterialVistaModelo _materialVista = new MaterialVistaModelo
                 {
-                    MaterialId = Convert.ToInt32(_material.SelectedItem.Value),
-                    Descripcion = _material.SelectedItem.Text
+                    MaterialId = Convert.ToInt32(1)
+                    //Descripcion = _material.SelectedItem.Text
                 };
                 ColorVistaModelo _colorVista = new ColorVistaModelo
                 {
@@ -721,6 +1031,36 @@ namespace Web.Venta
                 _detalleOrdenTrabajoVista.VentaComision = _ventaComisionVista;
                 _detalleOrdenTrabajoVista.PorcentajeImpuesto = 14;
                 _detalleOrdenTrabajoVista.DetalleOrdenTrabajoObservacion = _listaDetalleOrdenTrabajoObservacion;
+                _detalleOrdenTrabajoVista.TratamientoEspecial = _tratamientoEspecial.Text;
+                _detalleOrdenTrabajoVista.NumeroInternoPrenda = _numeroInterno.Text;
+                }
+                //Lavado en Mojado
+                if (Convert.ToInt32(_tipoLavado.SelectedItem.Value) == Convert.ToInt32(Util.TipoLavado.LavadoPorLibras))
+                {
+                    if (_opcionLibras.Checked==true)
+                    {
+                        ProductoVistaModelo _productoVista = new ProductoVistaModelo
+                        {
+                            ProductoId   = 172,
+                            Nombre = "LAVADO POR LIBRAS"
+
+                        };
+
+                        _detalleOrdenTrabajoVista.NumeroLibras = Convert.ToDecimal(_numeroLibras.Text);
+                    _detalleOrdenTrabajoVista.Suavizante =Convert.ToBoolean( _suavizante.Checked);
+                    _detalleOrdenTrabajoVista.Desengrasante = Convert.ToBoolean(_desengrasante.Checked);
+                    _detalleOrdenTrabajoVista.FijadorColor = Convert.ToBoolean(_fijadorColor.Checked);
+                    _detalleOrdenTrabajoVista.ValorUnitario = Convert.ToDecimal(_valorUnitarioLibra.Text);
+                    _detalleOrdenTrabajoVista.ValorTotal= Convert.ToDecimal(_valorTotalLibra.Text);
+                    _detalleOrdenTrabajoVista.Cantidad = Convert.ToInt32(_numeroLibras.Text);
+                        _detalleOrdenTrabajoVista.Producto = _productoVista;
+                    }
+
+
+
+                }
+
+
                 _listaTrabajoVistaDtOs.Add(_detalleOrdenTrabajoVista);
                 _ordenTrabajoVistaDtOs.DetalleOrdenTrabajo = _listaTrabajoVistaDtOs;
 
@@ -761,6 +1101,59 @@ namespace Web.Venta
         }
 
         /// <summary>
+        /// Encera  todos los controles de detalle de  orden de trabajo
+        /// </summary>
+        private void LimpiarDetalleOrdenTrabajoPorLibras()
+        {
+            try
+            {
+                _cantidadPorLibras.Text = String.Empty;
+                CargarDatosDetalle();
+                _valorUnitarioPorLibras.Text = String.Empty;
+                _valorTotalPorLibras.Text = String.Empty;
+                _estadoPrendaPorLibras.Text = String.Empty;
+                _tratamientoEspecialPorLibras.Text = String.Empty;
+                _numeroInternoPorLibras.Text = String.Empty;
+                _informacionVisualPorLibras.Text = String.Empty;
+                _cantidadPorLibras.Text = "1";
+                _valorUnitarioLibra.Text=String.Empty;
+                _valorTotalLibra.Text=String.Empty;
+                _suavizante.Checked = false;
+                _desengrasante.Checked = false;
+                _fijadorColor.Checked = false;
+                _numeroLibras.Text = "1";
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+
+
+        /// <summary>
+        /// Carga el detalle de la orden de trabajo
+        /// </summary>
+        private void CargarDetalleOrdenTrabajoPorLibras()
+        {
+            try
+            {
+                _datosLibras.DataSource = _ordenTrabajoVistaDtOs.DetalleOrdenTrabajo;
+                _datosLibras.DataBind();
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        /// <summary>
         /// Carga el detalle de la orden de trabajo
         /// </summary>
         private void CargarDetalleOrdenTrabajo()
@@ -783,13 +1176,9 @@ namespace Web.Venta
 
 
 
-
-
-
-
-
-
         #endregion
+
+       
 
         
     }

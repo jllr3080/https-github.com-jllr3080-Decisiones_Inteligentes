@@ -159,11 +159,11 @@ namespace Web.Individuo
                     _individuoVistaModelo.TipoIndividuo = _tipoIndividuoVistaModelo;
 
 
-                    _individuoVistaModelo.PrimerCampo = _apellidoPaterno.Text;
-                    _individuoVistaModelo.SegundoCampo = _apellidoMaterno.Text;
-                    _individuoVistaModelo.TercerCampo = _primerNombre.Text;
-                    _individuoVistaModelo.CuartoCampo = _segundoNombre.Text;
-                    _individuoVistaModelo.NumeroIdentificacion = _numeroDocumento.Text;
+                    _individuoVistaModelo.PrimerCampo = _apellidoPaterno.Text.ToUpper();
+                    _individuoVistaModelo.SegundoCampo = _apellidoMaterno.Text.ToUpper();
+                    _individuoVistaModelo.TercerCampo = _primerNombre.Text.ToUpper();
+                    _individuoVistaModelo.CuartoCampo = _segundoNombre.Text.ToUpper();
+                    _individuoVistaModelo.NumeroIdentificacion = _numeroDocumento.Text.ToUpper();
                     _individuoVistaModelo.Habilitado = true;
                     _individuoVistaModelo.FechaCreacion = DateTime.Now;
                     _individuoVistaModelo.FechaModificacion = DateTime.Now;
@@ -193,7 +193,7 @@ namespace Web.Individuo
                     _tipoDireccionVistaModelo.TipoDireccionId = Convert.ToInt32(_tipoDireccion.SelectedItem.Value);
 
                     _direccionVistaModelo.Individuo = _individuoVistaModelo;
-                    _direccionVistaModelo.DescripcionDireccion = _direccion.Text;
+                    _direccionVistaModelo.DescripcionDireccion = _direccion.Text.ToUpper();
                     _direccionVistaModelo.Pais = _paisVistaModelo;
                     _direccionVistaModelo.Estado = _estadoVistaModelo;
                     _direccionVistaModelo.Ciudad = _ciudadVistaModelo;
@@ -218,7 +218,7 @@ namespace Web.Individuo
 
                     _telefonoVistaModelo.TipoTelefono = _tipoTelefonoVistaModelo;
                     _telefonoVistaModelo.Individuo = _individuoVistaModelo;
-                    _telefonoVistaModelo.NumeroTelefono = _telefono.Text;
+                    _telefonoVistaModelo.NumeroTelefono = _telefono.Text.ToUpper();
                     _clienteGeneralVistaDtOs.Telefono = _telefonoVistaModelo;
 
                     _correoElectronicoVistaModelo.TipoCorreoElectronico = _tipoCorreoElectronicoVistaModelo;

@@ -47,18 +47,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAOs\AprobacionDescuentoDAOs.cs" />
     <Compile Include="DAOs\DetalleOrdenTrabajoDAOs.cs" />
     <Compile Include="DAOs\DetalleOrdenTrabajoFotografiaDAOs.cs" />
     <Compile Include="DAOs\DetalleOrdenTrabajoObservacionDAOs.cs" />
+    <Compile Include="DAOs\HistorialReglaDAOs.cs" />
     <Compile Include="DAOs\NumeroOrdenDAOs.cs" />
+    <Compile Include="DAOs\OrdenTrabajoComisionDAOs.cs" />
     <Compile Include="DAOs\OrdenTrabajoDAOs.cs" />
+    <Compile Include="DAOs\OrdenTrabajoDescuentoDAOs.cs" />
     <Compile Include="DAOs\TransaccionalDAOs.cs" />
     <Compile Include="DAOs\VentaComisionDAOs.cs" />
     <Compile Include="DTOs\ConsultaOrdenTrabajoDTOs.cs" />
+    <Compile Include="DTOs\DetalleOrdenTrabajoObservacionDTOs.cs" />
+    <Compile Include="DTOs\EstadoCuentaDTOs.cs" />
+    <Compile Include="DTOs\NumeroPrendaDTOs.cs" />
+    <Compile Include="DTOs\OrdenTrabajoDescuentoDTO.cs" />
     <Compile Include="DTOs\OrdenTrabajoDTOs.cs" />
+    <Compile Include="DTOs\PrendaMarcaDTOs.cs" />
     <Compile Include="Negocio\VentaNegocio.cs" />
     <Compile Include="Negocio\VentaParametrizacion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\Enum.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Validacion\" />

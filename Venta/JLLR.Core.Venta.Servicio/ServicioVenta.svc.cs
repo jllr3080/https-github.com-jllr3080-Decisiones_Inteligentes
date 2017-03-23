@@ -8,6 +8,7 @@ using System.ServiceModel.Web;
 using System.Text;
 using JLLR.Core.Venta.Servicio.DTOs;
 using JLLR.Core.Venta.Servicio.Modelo;
+using JLLR.Core.Venta.Servicio.Modelo.Parametrizacion;
 using JLLR.Core.Venta.Servicio.Transformador;
 
 #endregion
@@ -24,6 +25,51 @@ namespace JLLR.Core.Venta.Servicio
 
         #region TRANSACCIONAL
         #region NEGOCIO
+
+        /// <summary>
+        /// Obtiene todas las observaciones  de las prendas por  
+        /// </summary>
+        /// <returns></returns>
+
+        public List<DetalleOrdenTrabajoObservacionDTOs> ObtenerDetalleOrdenTrabajoObservacionPorDetalleOrdenTrabajoId(int detalleOrdenTrabajoId)
+        {
+            try
+            {
+                return
+                    _ventaTransformadorNegocio.ObtenerDetalleOrdenTrabajoObservacionPorDetalleOrdenTrabajoId(
+                        detalleOrdenTrabajoId);
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene  todos los descuentos   que  estan por aprobarse
+        /// </summary>
+        /// <returns></returns>
+        public List<OrdenTrabajoDescuentoDTO> ObtenerOrdenesTrabajoDescuentoPorEstadoProceso()
+        {
+            try
+            {
+
+
+                return _ventaTransformadorNegocio.ObtenerOrdenesTrabajoDescuentoPorEstadoProceso();
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         /// <summary>
         /// Graba la orden  de trabajo de forma completa
         /// </summary>
@@ -142,7 +188,218 @@ namespace JLLR.Core.Venta.Servicio
         }
         #endregion
 
+        #region ORDEN TRABAJO COMISION
+
+        /// <summary>
+        /// Graba la comision de la orden de  trabajo
+        /// </summary>
+        /// <param name="ordenTrabajoComision"></param>
+        public OrdenTrabajoComisionModelo GrabaOrdenTrabajoComision(OrdenTrabajoComisionModelo ordenTrabajoComision)
+        {
+            try
+            {
+                return _ventaTransformadorNegocio.GrabaOrdenTrabajoComision(ordenTrabajoComision);
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region  VENTA COMISION
+
+        /// <summary>
+        /// Obtiene 
+        /// </summary>
+        /// <param name="usuarioId"></param>
+        /// <returns></returns>
+        public VentaComisionModelo ObtenerVentaComisionPorusuarioId(int usuarioId)
+        {
+            try
+            {
+                return _ventaTransformadorNegocio.ObtenerVentaComisionPorusuarioId(usuarioId);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region HISTORIAL REGLA
+        /// <summary>
+        /// Graba el  historial de las  reglas
+        /// </summary>
+        /// <param name="historialRegla"></param>
+        public void GrabarHistorialRegla(HistorialReglaModelo historialRegla)
+        {
+            try
+            {
+
+                _ventaTransformadorNegocio.GrabarHistorialRegla(historialRegla);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region ORDEN TRABAJO DESCUENTO
+
+        /// <summary>
+        /// Actualiza  la orden de  descuento
+        /// </summary>
+        /// <param name="ordenTrabajoDescuento"></param>
+        public void ActualizarOrdenTrabajoDescuento(OrdenTrabajoDescuentoModelo ordenTrabajoDescuento)
+        {
+            try
+            {
+
+                _ventaTransformadorNegocio.ActualizarOrdenTrabajoDescuento(ordenTrabajoDescuento);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        /// <summary>
+        /// Graba el descuento de la orden d etrabajo
+        /// </summary>
+        public void GrabarOrdenTrabajoDescuento(OrdenTrabajoDescuentoModelo ordenTrabajoDescuento)
+        {
+            try
+            {
+              _ventaTransformadorNegocio.GrabarOrdenTrabajoDescuento(ordenTrabajoDescuento);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Obtiene todas las ordenes de  trabajo para ekl descuento  por el estado
+        /// </summary>
+        /// <returns></returns>
+        public List<OrdenTrabajoDescuentoModelo> ObtenerOrdenTrabajoDescuentoPorEstadoProceso()
+        {
+            try
+            {
+
+                return _ventaTransformadorNegocio.ObtenerOrdenTrabajoDescuentoPorEstadoProceso();
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region  APROBACION DESCUENTO
+        /// <summary>
+        /// Graba la  aprobacion del descuento
+        /// </summary>
+        /// <param name="aprobacionDescuento"></param>
+
+        public void GrabarAprobacionDescuento(AprobacionDescuentoModelo aprobacionDescuento)
+        {
+            try
+            {
+               _ventaTransformadorNegocio.GrabarAprobacionDescuento(aprobacionDescuento);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
         #region REPORTES
+
+        /// <summary>
+        ///  Obtiene el reporte de prenda  y marcas 
+        /// </summary>
+        /// <param name="prendaId"></param>
+        /// <param name="marcaId"></param>
+        /// <param name="fecha"></param>
+        /// <returns></returns>
+        public List<PrendaMarcaDTOs> ObtenerPrendayMarcaPorVariosParametros(int prendaId, int marcaId, string fecha)
+        {
+            try
+            {
+                return _ventaTransformadorNegocio.ObtenerPrendayMarcaPorVariosParametros(prendaId, marcaId,Convert.ToDateTime(fecha));
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene el reporte de   numero de  prendas por  fecha  desde y fecha hasta
+        /// </summary>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechaHasta"></param>
+        /// <returns></returns>
+
+        public List<NumeroPrendaDTOs> ObtenerNumeroPrendasPorFecha(string fechaDesde, string fechaHasta)
+        {
+            try
+            {
+
+                return _ventaTransformadorNegocio.ObtenerNumeroPrendasPorFecha(Convert.ToDateTime(fechaDesde),Convert.ToDateTime(fechaHasta));
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene el  reporte de   estadp de  cuenta 
+        /// </summary>
+        /// <param name="puntoventaId"></param>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechaHasta"></param>
+        /// <returns></returns>
+        public List<EstadoCuentaDTOs> ObtenerEstadoCuentaPorVariosParametros(int puntoventaId, string fechaDesde,
+            string fechaHasta)
+        {
+            try
+            {
+                return _ventaTransformadorNegocio.ObtenerEstadoCuentaPorVariosParametros(puntoventaId,Convert.ToDateTime(fechaDesde),
+                    Convert.ToDateTime(fechaHasta));
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
 
         /// <summary>
         /// Obtiene  la orden de  trabajo por  numero de  orden

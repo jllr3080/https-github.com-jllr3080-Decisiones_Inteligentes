@@ -14,6 +14,7 @@ using Web.DTOs.Venta;
 using Web.Models.Individuo;
 
 using Web.Models.Venta.Negocio;
+using Web.Models.Venta.Parametrizacion;
 
 #endregion
 namespace Web.ServicioDelegado
@@ -29,7 +30,56 @@ namespace Web.ServicioDelegado
 
         #region NEGOCIO
         #region TRANSACCIONAL
+        /// <summary>
+        /// Obtiene todas las observaciones  de las prendas por  
+        /// </summary>
+        /// <returns></returns>
 
+        public List<DetalleOrdenTrabajoObservacionVistaDTOs> ObtenerDetalleOrdenTrabajoObservacionPorDetalleOrdenTrabajoId(int detalleOrdenTrabajoId)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerDetalleOrdenTrabajoObservacionPorDetalleOrdenTrabajoId?detalleOrdenTrabajoId="+ detalleOrdenTrabajoId);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<DetalleOrdenTrabajoObservacionVistaDTOs>>(json);
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene  todos los descuentos   que  estan por aprobarse
+        /// </summary>
+        /// <returns></returns>
+        public List<OrdenTrabajoDescuentoVistaDTO> ObtenerOrdenesTrabajoDescuentoPorEstadoProceso()
+        {
+            try
+            {
+
+
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerOrdenesTrabajoDescuentoPorEstadoProceso");
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<OrdenTrabajoDescuentoVistaDTO>>(json);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         /// <summary>
         /// Graba la orden  de trabajo de forma completa
         /// </summary>
@@ -159,8 +209,88 @@ namespace Web.ServicioDelegado
         }
 
         #endregion
-        
+
         #region REPORTES
+        /// <summary>
+        ///  Obtiene el reporte de prenda  y marcas 
+        /// </summary>
+        /// <param name="prendaId"></param>
+        /// <param name="marcaId"></param>
+        /// <param name="fecha"></param>
+        /// <returns></returns>
+        public List<PrendaMarcaVistaDTOs> ObtenerPrendayMarcaPorVariosParametros(int prendaId, int marcaId, string fecha)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerPrendayMarcaPorVariosParametros?prendaId=" + prendaId + "&marcaId=" + marcaId+ "&fecha="+ fecha);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<PrendaMarcaVistaDTOs>>(json);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene el reporte de   numero de  prendas por  fecha  desde y fecha hasta
+        /// </summary>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechaHasta"></param>
+        /// <returns></returns>
+
+        public List<NumeroPrendaVistaDTOs> ObtenerNumeroPrendasPorFecha(string fechaDesde, string fechaHasta)
+        {
+            try
+            {
+
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerNumeroPrendasPorFecha?fechaDesde=" + fechaDesde + "&fechaHasta=" + fechaHasta);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<NumeroPrendaVistaDTOs>>(json);
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene el  reporte de   estadp de  cuenta 
+        /// </summary>
+        /// <param name="puntoventaId"></param>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechaHasta"></param>
+        /// <returns></returns>
+        public List<EstadoCuentaVistaDTOs> ObtenerEstadoCuentaPorVariosParametros(int puntoventaId, string fechaDesde,
+            string fechaHasta)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerEstadoCuentaPorVariosParametros?puntoventaId=" + puntoventaId+ "&fechaDesde="+ fechaDesde + "&fechaHasta="+ fechaHasta);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<EstadoCuentaVistaDTOs>>(json);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
 
         /// <summary>
         /// Obtiene  la orden de  trabajo por  numero de  orden
@@ -210,8 +340,7 @@ namespace Web.ServicioDelegado
             }
         }
         #endregion
-
-
+        
         #region DETALLE DE  ORDEN DE TRABAJO OBSERVACIONES
         /// <summary>
         /// Graba todas las observaciones de  los detalles de la orden de trabajo
@@ -252,6 +381,191 @@ namespace Web.ServicioDelegado
                 var js = new JavaScriptSerializer();
                 return js.Deserialize<List<DetalleOrdenTrabajoObservacionVistaModelo>>(json);
 
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region ORDEN TRABAJO COMISION
+
+        /// <summary>
+        /// Graba la comision de la orden de  trabajo
+        /// </summary>
+        /// <param name="ordenTrabajoComision"></param>
+        public void GrabaOrdenTrabajoComision(OrdenTrabajoComisionVistaModelo ordenTrabajoComision)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(OrdenTrabajoComisionVistaModelo));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, ordenTrabajoComision);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "GrabaOrdenTrabajoComision", "POST", datos);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+        
+        #region  VENTA COMISION
+
+        /// <summary>
+        /// Obtiene 
+        /// </summary>
+        /// <param name="usuarioId"></param>
+        /// <returns></returns>
+        public VentaComisionVistaModelo ObtenerVentaComisionPorusuarioId(int usuarioId)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerVentaComisionPorusuarioId?usuarioId=" + usuarioId);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<VentaComisionVistaModelo>(json);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region HISTORIAL REGLA
+        /// <summary>
+        /// Graba el  historial de las  reglas
+        /// </summary>
+        /// <param name="historialRegla"></param>
+        public void GrabarHistorialRegla(HistorialReglaVistaModelo historialRegla)
+        {
+            try
+            {
+
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(HistorialReglaVistaModelo));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, historialRegla);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "GrabarHistorialRegla ", "POST", datos);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region ORDEN TRABAJO DESCUENTO
+
+        /// <summary>
+        /// Actualiza  la orden de  descuento
+        /// </summary>
+        /// <param name="ordenTrabajoDescuento"></param>
+        public void ActualizarOrdenTrabajoDescuento(OrdenTrabajoDescuentoVistaModelo ordenTrabajoDescuento)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(OrdenTrabajoDescuentoVistaModelo));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, ordenTrabajoDescuento);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "ActualizarOrdenTrabajoDescuento ", "POST", datos);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        /// <summary>
+        /// Graba el descuento de la orden d etrabajo
+        /// </summary>
+        public void GrabarOrdenTrabajoDescuento(OrdenTrabajoDescuentoVistaModelo ordenTrabajoDescuento)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(OrdenTrabajoDescuentoVistaModelo));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, ordenTrabajoDescuento);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "GrabarOrdenTrabajoDescuento ", "POST", datos);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Obtiene todas las ordenes de  trabajo para ekl descuento  por el estado
+        /// </summary>
+        /// <returns></returns>
+        public List<OrdenTrabajoDescuentoVistaDTO> ObtenerOrdenTrabajoDescuentoPorEstadoProceso()
+        {
+            try
+            {
+
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerOrdenTrabajoDescuentoPorEstadoProceso");
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<OrdenTrabajoDescuentoVistaDTO>>(json);
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region  APROBACION DESCUENTO
+        /// <summary>
+        /// Graba la  aprobacion del descuento
+        /// </summary>
+        /// <param name="aprobacionDescuento"></param>
+
+        public void GrabarAprobacionDescuento(AprobacionDescuentoVistaModelo aprobacionDescuento)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(AprobacionDescuentoVistaModelo));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, aprobacionDescuento);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "GrabarAprobacionDescuento ", "POST", datos);
             }
             catch (Exception ex)
             {

@@ -57,6 +57,46 @@ namespace JLLR.Core.General.Servicio
                 throw;
             }
         }
+
+        /// <summary>
+        /// Graba las  marcas
+        /// </summary>
+        /// <param name="marca"></param>
+
+        public void GrabarMarca(MarcaModelo marca)
+        {
+            try
+            {
+                _generalTransformadorParametrizacion.GrabarMarca(marca);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        ///  valida si  existe la marca ya  creada
+        /// </summary>
+        /// <param name="descripcion"></param>
+        /// <returns></returns>
+        public MarcaModelo ValidarSiExisteMarcaPorDescripcion(string descripcion)
+        {
+            try
+            {
+
+                return _generalTransformadorParametrizacion.ValidarSiExisteMarcaPorDescripcion(descripcion);
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
         #endregion
 
         #region MATERIAL
@@ -366,6 +406,27 @@ namespace JLLR.Core.General.Servicio
             try
             {
                 return _generalTransformadorParametrizacion.ObtenerFormaPagos();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region PARAMETRO
+        /// <summary>
+        /// Obtiene los  parametros por descripcion
+        /// </summary>
+        /// <param name="descripcion"></param>
+        /// <returns></returns>
+        public ParametroModelo ObtenerParametroPorDescripcion(string descripcion)
+        {
+            try
+            {
+                return _generalTransformadorParametrizacion.ObtenerParametroPorDescripcion(descripcion);
 
             }
             catch (Exception ex)

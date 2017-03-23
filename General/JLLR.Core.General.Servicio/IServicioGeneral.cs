@@ -38,6 +38,24 @@ namespace JLLR.Core.General.Servicio
         [WebGet(UriTemplate = "ObtenerMarcas", ResponseFormat = WebMessageFormat.Json)]
         List<MarcaModelo> ObtenerMarcas();
 
+        /// <summary>
+        /// Graba las  marcas
+        /// </summary>
+        /// <param name="marca"></param>
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabarMarca/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void GrabarMarca(MarcaModelo marca);
+
+        /// <summary>
+        ///  valida si  existe la marca ya  creada
+        /// </summary>
+        /// <param name="descripcion"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(UriTemplate = "ValidarSiExisteMarcaPorDescripcion?descripcion={descripcion}", ResponseFormat = WebMessageFormat.Json)]
+        MarcaModelo ValidarSiExisteMarcaPorDescripcion(string descripcion);
+        
         #endregion
 
         #region MATERIAL
@@ -236,6 +254,19 @@ namespace JLLR.Core.General.Servicio
 
         #endregion
 
+
+        #region PARAMETRO
+
+        /// <summary>
+        /// Obtiene los  parametros por descripcion
+        /// </summary>
+        /// <param name="descripcion"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(UriTemplate = "ObtenerParametroPorDescripcion?descripcion={descripcion}", ResponseFormat = WebMessageFormat.Json)]
+        ParametroModelo ObtenerParametroPorDescripcion(string descripcion);
+
+        #endregion
 
     }
 

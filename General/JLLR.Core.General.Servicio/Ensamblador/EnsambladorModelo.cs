@@ -54,6 +54,8 @@ namespace JLLR.Core.General.Servicio.Ensamblador
         /// <returns></returns>
         public modelo.MarcaModelo CrearMarca(entidad.MARCA e)
         {
+            if (e == null)
+                return null;
             return new modelo.MarcaModelo
             {
                 MarcaId = e.MARCA_ID,
@@ -796,7 +798,48 @@ namespace JLLR.Core.General.Servicio.Ensamblador
 
         #endregion
 
-        
+        #region  PARAMETRO
+        /// <summary>
+        /// Convierte el DTO de entidad a modelo
+        /// </summary>
+        /// <param name="e">Entidad</param>
+        /// <returns></returns>
+        public modelo.ParametroModelo CrearParametro(entidad.PARAMETRO e)
+        {
+            return new modelo.ParametroModelo
+            {
+               ParametroId = e.PARAMETRO_ID,
+               Descripcion = e.DESCRIPCION,
+               Texto = e.TEXTO,
+               Fecha = e.FECHA,
+               NumeroDecimal = e.NUMERO_DECIMAL,
+               NumeroEntero = e.NUMERO_ENTERO,
+               Boolenao = e.BOOLEANO
+
+            };
+
+        }
+
+        /// <summary>
+        /// Convierte un listado de DTO en listado de  modelos de DTO
+        /// </summary>
+        /// <param name="listadoEntidad">Listado de Entidades</param>
+        /// <returns></returns>
+        public List<modelo.ParametroModelo> CrearParametros(IQueryable<entidad.PARAMETRO> listadoEntidad)
+        {
+            List<modelo.ParametroModelo> listaModelo = new List<modelo.ParametroModelo>();
+
+            foreach (var entidad in listadoEntidad)
+            {
+                listaModelo.Add(CrearParametro(entidad));
+            }
+            return listaModelo;
+
+        }
+
+        #endregion
+
+
     }
 
 }

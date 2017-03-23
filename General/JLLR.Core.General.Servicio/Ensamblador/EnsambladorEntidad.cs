@@ -55,6 +55,8 @@ namespace JLLR.Core.General.Servicio.Ensamblador
         /// <returns></returns>
         public entidad.MARCA CrearMarca(modelo.MarcaModelo m)
         {
+            if (m == null)
+                return null;
             return new entidad.MARCA()
             {
                 MARCA_ID = m.MarcaId,
@@ -775,6 +777,46 @@ namespace JLLR.Core.General.Servicio.Ensamblador
         }
         #endregion
 
-        
+        #region PARAMETRO
+        /// <summary>
+        /// Convierte el modelo en una entidad
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public entidad.PARAMETRO CrearParametro(modelo.ParametroModelo m)
+        {
+            return new entidad.PARAMETRO()
+            {
+              PARAMETRO_ID = m.ParametroId,
+              DESCRIPCION = m.Descripcion,
+              TEXTO = m.Texto,
+              BOOLEANO = m.Boolenao,
+              FECHA = m.Fecha,
+              NUMERO_DECIMAL = m.NumeroDecimal,
+              NUMERO_ENTERO = m.NumeroEntero
+
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<entidad.PARAMETRO> CrearParametros(List<modelo.ParametroModelo> listadoModelo)
+        {
+            List<entidad.PARAMETRO> listaEntidad = new List<entidad.PARAMETRO>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearParametro(modelo));
+            }
+            return listaEntidad;
+
+        }
+        #endregion
+
+
     }
 }

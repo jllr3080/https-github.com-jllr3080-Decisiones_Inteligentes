@@ -21,11 +21,56 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
         private readonly  DetalleOrdenTrabajoDAOs _detalleOrdenTrabajoDaOs= new DetalleOrdenTrabajoDAOs();
         private readonly TransaccionalDAOs _transaccionalDaOs = new TransaccionalDAOs();
         private readonly  DetalleOrdenTrabajoObservacionDAOs _detalleOrdenTrabajoObservacionDaOs= new DetalleOrdenTrabajoObservacionDAOs();
+        private readonly  OrdenTrabajoComisionDAOs _ordenTrabajoComisionDaOs= new OrdenTrabajoComisionDAOs();
+        private readonly  HistorialReglaDAOs _historialReglaDaOs= new HistorialReglaDAOs();
+        private readonly  OrdenTrabajoDescuentoDAOs _ordenTrabajoDescuentoDaOs= new OrdenTrabajoDescuentoDAOs();
+        private readonly  AprobacionDescuentoDAOs _aprobacionDescuentoDaOs= new AprobacionDescuentoDAOs();
         #endregion
 
 
         #region NEGOCIO
+
         #region  TRANSACCIONAL
+
+        /// <summary>
+        /// Obtiene todas las observaciones  de las prendas por  
+        /// </summary>
+        /// <returns></returns>
+
+        public IQueryable<DetalleOrdenTrabajoObservacionDTOs> ObtenerDetalleOrdenTrabajoObservacionPorDetalleOrdenTrabajoId(int detalleOrdenTrabajoId)
+        {
+            try
+            {
+                return
+                    _transaccionalDaOs.ObtenerDetalleOrdenTrabajoObservacionPorDetalleOrdenTrabajoId(
+                        detalleOrdenTrabajoId);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene  todos los descuentos   que  estan por aprobarse
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<OrdenTrabajoDescuentoDTO> ObtenerOrdenesTrabajoDescuentoPorEstadoProceso()
+        {
+            try
+            {
+              
+                return _transaccionalDaOs.ObtenerOrdenesTrabajoDescuentoPorEstadoProceso();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         /// <summary>
         /// Graba la orden de trabajo 
         /// </summary>
@@ -142,11 +187,214 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
         }
         #endregion
 
+        #region ORDEN TRABAJO COMISION
+
+        /// <summary>
+        /// Graba la comision de la orden de  trabajo
+        /// </summary>
+        /// <param name="ordenTrabajoComision"></param>
+        public ORDEN_TRABAJO_COMISION GrabaOrdenTrabajoComision(ORDEN_TRABAJO_COMISION ordenTrabajoComision)
+        {
+            try
+            {
+              return _ordenTrabajoComisionDaOs.GrabaOrdenTrabajoComision(ordenTrabajoComision);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region  VENTA COMISION
+
+        /// <summary>
+        /// Obtiene 
+        /// </summary>
+        /// <param name="usuarioId"></param>
+        /// <returns></returns>
+        public VENTA_COMISION ObtenerVentaComisionPorusuarioId(int usuarioId)
+        {
+            try
+            {
+               return _transaccionalDaOs.ObtenerVentaComisionPorusuarioId(usuarioId);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region HISTORIAL REGLA
+        /// <summary>
+        /// Graba el  historial de las  reglas
+        /// </summary>
+        /// <param name="historialRegla"></param>
+        public void GrabarHistorialRegla(HISTORIAL_REGLA historialRegla)
+        {
+            try
+            {
+            
+                _historialReglaDaOs.GrabarHistorialRegla(historialRegla);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region ORDEN TRABAJO DESCUENTO
+
+        /// <summary>
+        /// Actualiza  la orden de  descuento
+        /// </summary>
+        /// <param name="ordenTrabajoDescuento"></param>
+        public void ActualizarOrdenTrabajoDescuento(ORDEN_TRABAJO_DESCUENTO ordenTrabajoDescuento)
+        {
+            try
+            {
+              
+                _ordenTrabajoDescuentoDaOs.ActualizarOrdenTrabajoDescuento(ordenTrabajoDescuento);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        /// <summary>
+        /// Graba el descuento de la orden d etrabajo
+        /// </summary>
+        public void GrabarOrdenTrabajoDescuento(ORDEN_TRABAJO_DESCUENTO ordenTrabajoDescuento)
+        {
+            try
+            {
+              _ordenTrabajoDescuentoDaOs.GrabarOrdenTrabajoDescuento(ordenTrabajoDescuento);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Obtiene todas las ordenes de  trabajo para ekl descuento  por el estado
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<ORDEN_TRABAJO_DESCUENTO> ObtenerOrdenTrabajoDescuentoPorEstadoProceso()
+        {
+            try
+            {
+
+                return _ordenTrabajoDescuentoDaOs.ObtenerOrdenTrabajoDescuentoPorEstadoProceso();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region  APROBACION DESCUENTO
+        /// <summary>
+        /// Graba la  aprobacion del descuento
+        /// </summary>
+        /// <param name="aprobacionDescuento"></param>
+
+        public void GrabarAprobacionDescuento(APROBACION_DESCUENTO aprobacionDescuento)
+        {
+            try
+            {
+              _aprobacionDescuentoDaOs.GrabarAprobacionDescuento(aprobacionDescuento);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
 
+        #endregion
+
 
         #region REPORTES
+
+        /// <summary>
+        ///  Obtiene el reporte de prenda  y marcas 
+        /// </summary>
+        /// <param name="prendaId"></param>
+        /// <param name="marcaId"></param>
+        /// <param name="fecha"></param>
+        /// <returns></returns>
+        public IQueryable<PrendaMarcaDTOs> ObtenerPrendayMarcaPorVariosParametros(int prendaId, int marcaId, DateTime fecha)
+        {
+            try
+            {
+               return _transaccionalDaOs.ObtenerPrendayMarcaPorVariosParametros(prendaId,marcaId,fecha);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene el reporte de   numero de  prendas por  fecha  desde y fecha hasta
+        /// </summary>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechaHasta"></param>
+        /// <returns></returns>
+
+        public List<NumeroPrendaDTOs> ObtenerNumeroPrendasPorFecha(DateTime fechaDesde, DateTime fechaHasta)
+        {
+            try
+            {
+
+             return _transaccionalDaOs.ObtenerNumeroPrendasPorFecha(fechaDesde,fechaHasta);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene el  reporte de   estadp de  cuenta 
+        /// </summary>
+        /// <param name="puntoventaId"></param>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechaHasta"></param>
+        /// <returns></returns>
+        public List<EstadoCuentaDTOs> ObtenerEstadoCuentaPorVariosParametros(int puntoventaId, DateTime fechaDesde,
+            DateTime fechaHasta)
+        {
+            try
+            {
+              return  _transaccionalDaOs.ObtenerEstadoCuentaPorVariosParametros(puntoventaId,fechaDesde,fechaHasta);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         /// <summary>
         /// Obtiene  
         /// </summary>

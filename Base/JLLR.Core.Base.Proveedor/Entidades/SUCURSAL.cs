@@ -22,6 +22,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
             this.USUARIO = new HashSet<USUARIO>();
             this.PORCENTAJE_IMPUESTO_SUCURSAL = new HashSet<PORCENTAJE_IMPUESTO_SUCURSAL>();
             this.CABECERA_FACTURACION = new HashSet<CABECERA_FACTURACION>();
+            this.REGLA = new HashSet<REGLA>();
         }
     
         public int SUCURSAL_ID { get; set; }
@@ -38,5 +39,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual ICollection<PORCENTAJE_IMPUESTO_SUCURSAL> PORCENTAJE_IMPUESTO_SUCURSAL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CABECERA_FACTURACION> CABECERA_FACTURACION { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<REGLA> REGLA { get; set; }
     }
 }

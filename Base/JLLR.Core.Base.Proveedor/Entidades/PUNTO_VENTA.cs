@@ -20,6 +20,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
             this.SECUENCIALES_SRI = new HashSet<SECUENCIALES_SRI>();
             this.USUARIO = new HashSet<USUARIO>();
             this.CABECERA_FACTURACION = new HashSet<CABECERA_FACTURACION>();
+            this.REGLA = new HashSet<REGLA>();
         }
     
         public int PUNTO_VENTA_ID { get; set; }
@@ -35,5 +36,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual ICollection<USUARIO> USUARIO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CABECERA_FACTURACION> CABECERA_FACTURACION { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<REGLA> REGLA { get; set; }
     }
 }

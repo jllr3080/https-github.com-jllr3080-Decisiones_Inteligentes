@@ -223,12 +223,17 @@
     <Content Include="Inventario\Kardex.aspx" />
     <Content Include="Logistica\EntregaRecepcionPrendas.aspx" />
     <Content Include="PaginaMaestra\Login.Master" />
+    <None Include="Properties\PublishProfiles\Administrador.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Reporte\ReporteCuentasPorCobrar.aspx" />
     <Content Include="Reporte\ReporteCuentasPorPagar.aspx" />
     <Content Include="Reporte\ReporteDiario.aspx" />
     <Content Include="Reporte\ReporteEntregaRecepcionPrendas.aspx" />
+    <Content Include="Reporte\ReporteEstadisticaGeneralPrendas.aspx" />
+    <Content Include="Reporte\ReporteEstadoCuenta.aspx" />
     <Content Include="Reporte\ReporteImpresionOrden.aspx" />
+    <Content Include="Reporte\ReporteImpresionOrdenPlanta.aspx" />
+    <Content Include="Reporte\ReportePrendaMarca.aspx" />
     <Content Include="RRHH\MultaEmpleado.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -267,6 +272,8 @@
     <Content Include="PaginaMaestra\Site.Master" />
     <Content Include="Seguridad\Perfil.aspx" />
     <Content Include="Seguridad\Usuario.aspx" />
+    <Content Include="Venta\AprobacionDescuento.aspx" />
+    <Content Include="Venta\ConsultaOrdenPlanta.aspx" />
     <Content Include="Venta\ConsultaOrdenTrabajo.aspx" />
     <Content Include="Venta\OrdenTrabajo.aspx" />
     <Content Include="ViewSwitcher.ascx" />
@@ -329,13 +336,19 @@
     <Compile Include="DTOs\Individuo\ClienteVistaDTOs.cs" />
     <Compile Include="DTOs\Individuo\ProveedorVistaDTOs.cs.cs" />
     <Compile Include="DTOs\Logistica\EntregaOrdenTrabajoVistaDTOs.cs" />
+    <Compile Include="DTOs\ReglaNegocio\ReglaVistaDTOs.cs" />
     <Compile Include="DTOs\Seguridad\AccesoVistaDTOs.cs" />
     <Compile Include="DTOs\Seguridad\UsuarioVistaDTOs.cs" />
     <Compile Include="DTOs\Venta\ConsultaOrdenTrabajoVistaDTOs.cs" />
+    <Compile Include="DTOs\Venta\DetalleOrdenTrabajoObservacionVistaDTOs.cs" />
     <Compile Include="DTOs\Venta\DetalleOrdenTrabajoVistaDTOs.cs" />
     <Compile Include="DTOs\Venta\CabeceraOrdenTrabajoVistaDTOs.cs" />
+    <Compile Include="DTOs\Venta\EstadoCuentaVistaDTOs.cs" />
     <Compile Include="DTOs\Venta\HerenciaOrdenTrabajoVistaDTOs.cs" />
+    <Compile Include="DTOs\Venta\NumeroPrendaVistaDTOs.cs" />
+    <Compile Include="DTOs\Venta\OrdenTrabajoDescuentoVistaDTO.cs" />
     <Compile Include="DTOs\Venta\OrdenTrabajoVistaDTOs.cs" />
+    <Compile Include="DTOs\Venta\PrendaMarcaVistaDTOs.cs" />
     <Compile Include="FE\FacturaElectronica.aspx.cs">
       <DependentUpon>FacturaElectronica.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -412,6 +425,7 @@
     <Compile Include="Models\General\MaterialVistaModelo.cs" />
     <Compile Include="Models\General\ModeloVistaModelo.cs" />
     <Compile Include="Models\General\PaisVistaModelo.cs" />
+    <Compile Include="Models\General\ParametroVistaModelo.cs" />
     <Compile Include="Models\General\PuntoVentaVistaModelo.cs" />
     <Compile Include="Models\General\SucursalVistaModelo.cs" />
     <Compile Include="Models\General\TipoCorreoElectronicoVistaModelo.cs" />
@@ -421,6 +435,7 @@
     <Compile Include="Models\General\TipoIndividuoVistaModelo.cs" />
     <Compile Include="Models\General\TipoLavadoVistaModelo.cs" />
     <Compile Include="Models\General\TipoProductoVistaModelo.cs" />
+    <Compile Include="Models\General\TipoReglaVistaModelo.cs" />
     <Compile Include="Models\General\TipoRolIndividuoVistaModelo.cs" />
     <Compile Include="Models\General\TipoTelefonoVistaModelo.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -435,9 +450,15 @@
     <Compile Include="Models\Inventario\Parametrizacion\ProductoTallaVistaModelo.cs" />
     <Compile Include="Models\Inventario\Parametrizacion\ProductoVistaModelo.cs" />
     <Compile Include="Models\Inventario\Parametrizacion\TipoProductoVistaModelo.cs" />
+    <Compile Include="Models\ReglaNegocio\AccionReglaVistaModelo.cs" />
+    <Compile Include="Models\ReglaNegocio\ReglaVistaModelo.cs" />
     <Compile Include="Models\Seguridad\Negocio\UsuarioVistaModelo.cs" />
+    <Compile Include="Models\Venta\Negocio\AprobacionDescuentoVistaModelo.cs" />
     <Compile Include="Models\Venta\Negocio\DetalleOrdenTrabajoObservacionVistaModelo.cs" />
     <Compile Include="Models\Venta\Negocio\DetalleOrdenTrabajoVistaModelo.cs" />
+    <Compile Include="Models\Venta\Negocio\HistorialReglaVistaModelo.cs" />
+    <Compile Include="Models\Venta\Negocio\OrdenTrabajoComisionVistaModelo.cs" />
+    <Compile Include="Models\Venta\Negocio\OrdenTrabajoDescuentoVistaModelo.cs" />
     <Compile Include="Models\Venta\Negocio\OrdenTrabajoVistaModelo.cs" />
     <Compile Include="Models\Venta\Parametrizacion\NumeroOrdenVistaModelo.cs" />
     <Compile Include="Models\Venta\Parametrizacion\VentaComisionVistaModelo.cs" />
@@ -477,12 +498,40 @@
     <Compile Include="Reporte\ReporteEntregaRecepcionPrendas.aspx.designer.cs">
       <DependentUpon>ReporteEntregaRecepcionPrendas.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reporte\ReporteEstadisticaGeneralPrendas.aspx.cs">
+      <DependentUpon>ReporteEstadisticaGeneralPrendas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reporte\ReporteEstadisticaGeneralPrendas.aspx.designer.cs">
+      <DependentUpon>ReporteEstadisticaGeneralPrendas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reporte\ReporteEstadoCuenta.aspx.cs">
+      <DependentUpon>ReporteEstadoCuenta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reporte\ReporteEstadoCuenta.aspx.designer.cs">
+      <DependentUpon>ReporteEstadoCuenta.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Reporte\ReporteImpresionOrden.aspx.cs">
       <DependentUpon>ReporteImpresionOrden.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Reporte\ReporteImpresionOrden.aspx.designer.cs">
       <DependentUpon>ReporteImpresionOrden.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reporte\ReporteImpresionOrdenPlanta.aspx.cs">
+      <DependentUpon>ReporteImpresionOrdenPlanta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reporte\ReporteImpresionOrdenPlanta.aspx.designer.cs">
+      <DependentUpon>ReporteImpresionOrdenPlanta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reporte\ReportePrendaMarca.aspx.cs">
+      <DependentUpon>ReportePrendaMarca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reporte\ReportePrendaMarca.aspx.designer.cs">
+      <DependentUpon>ReportePrendaMarca.aspx</DependentUpon>
     </Compile>
     <Compile Include="RRHH\MultaEmpleado.aspx.cs">
       <DependentUpon>MultaEmpleado.aspx</DependentUpon>
@@ -541,11 +590,26 @@
     <Compile Include="ServicioDelegado\ServicioDelegadoInventario.cs" />
     <Compile Include="ServicioDelegado\ServicioDelegadoLogistica.cs" />
     <Compile Include="ServicioDelegado\ServicioDelegadoProduccion.cs" />
+    <Compile Include="ServicioDelegado\ServicioDelegadoReglaNegocio.cs" />
     <Compile Include="ServicioDelegado\ServicioDelegadoRRHH.cs" />
     <Compile Include="ServicioDelegado\ServicioDelegadoSeguridad.cs" />
     <Compile Include="ServicioDelegado\ServicioDelegadoVenta.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Util\Enum.cs" />
+    <Compile Include="Venta\AprobacionDescuento.aspx.cs">
+      <DependentUpon>AprobacionDescuento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Venta\AprobacionDescuento.aspx.designer.cs">
+      <DependentUpon>AprobacionDescuento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Venta\ConsultaOrdenPlanta.aspx.cs">
+      <DependentUpon>ConsultaOrdenPlanta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Venta\ConsultaOrdenPlanta.aspx.designer.cs">
+      <DependentUpon>ConsultaOrdenPlanta.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Venta\ConsultaOrdenTrabajo.aspx.cs">
       <DependentUpon>ConsultaOrdenTrabajo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -589,7 +653,11 @@
   <ItemGroup>
     <EmbeddedResource Include="Reporte\FlujoProceso\ReporteEntregaRecepcioPrendas.rdlc" />
     <EmbeddedResource Include="Reporte\Venta\Rdlc\ReporteDiario.rdlc" />
+    <EmbeddedResource Include="Reporte\Venta\Rdlc\ReporteEstadisticaGeneralPrendas.rdlc" />
+    <EmbeddedResource Include="Reporte\Venta\Rdlc\ReporteEstadoCuenta.rdlc" />
+    <EmbeddedResource Include="Reporte\Venta\Rdlc\ReporteImpresionOrdenPlanta.rdlc" />
     <EmbeddedResource Include="Reporte\Venta\Rdlc\ReporteOrdenTrabajo.rdlc" />
+    <EmbeddedResource Include="Reporte\Venta\Rdlc\ReportePrendaMarca.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

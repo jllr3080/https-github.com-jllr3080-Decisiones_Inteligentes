@@ -1,12 +1,16 @@
 ﻿#region using
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Web;
 using System.Web.Script.Serialization;
+using Web.DTOs.Contabilidad;
 using Web.DTOs.Individuo;
+using Web.Models.Contabilidad;
 using Web.Models.General;
 
 #endregion
@@ -50,9 +54,7 @@ namespace Web.ServicioDelegado
         /// <returns></returns>
         public List<MarcaVistaModelo> ObtenerMarcas()
         {
-            try
-            {
-                try
+             try
                 {
                     var clienteWeb = new WebClient();
                     var json = clienteWeb.DownloadString(direccionUrl + "ObtenerMarcas");
@@ -64,12 +66,59 @@ namespace Web.ServicioDelegado
 
                     throw;
                 }
+         
+        }
+
+        /// <summary>
+        /// Graba las  marcas
+        /// </summary>
+        /// <param name="marca"></param>
+
+        public void GrabarMarca(MarcaVistaModelo marca)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(MarcaVistaModelo));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, marca);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "GrabarMarca", "POST", datos);
+                //var js = new JavaScriptSerializer();
+                //return js.Deserialize<CuentaPorCobrarVistaModelo>(json);
             }
             catch (Exception ex)
             {
 
                 throw;
             }
+        }
+
+
+        /// <summary>
+        ///  valida si  existe la marca ya  creada
+        /// </summary>
+        /// <param name="descripcion"></param>
+        /// <returns></returns>
+        public MarcaVistaModelo ValidarSiExisteMarcaPorDescripcion(string descripcion)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                var json = clienteWeb.DownloadString(direccionUrl + "ValidarSiExisteMarcaPorDescripcion?descripcion"+ descripcion);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<MarcaVistaModelo>(json);
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
         }
         #endregion
 
@@ -411,6 +460,32 @@ namespace Web.ServicioDelegado
                 var json = clienteWeb.DownloadString(direccionUrl + "ObtenerFormaPagos");
                 var js = new JavaScriptSerializer();
                 return js.Deserialize<List<FormaPagoVistaModelo>>(json);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region PARAMETRO
+        /// <summary>
+        /// Obtiene los  parametros por descripcion
+        /// </summary>
+        /// <param name="descripcion"></param>
+        /// <returns></returns>
+        public ParametroVistaModelo ObtenerParametroPorDescripcion(string descripcion)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerParametroPorDescripcion?descripcion="+ descripcion);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<ParametroVistaModelo>(json);
 
             }
             catch (Exception ex)

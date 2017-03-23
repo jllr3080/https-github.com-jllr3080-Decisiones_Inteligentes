@@ -60,6 +60,48 @@ namespace JLLR.Core.General.Servicio.Transformador
                 throw;
             }
         }
+
+        /// <summary>
+        /// Graba las  marcas
+        /// </summary>
+        /// <param name="marca"></param>
+
+        public void GrabarMarca(modelo.MarcaModelo marca)
+        {
+            try
+            {
+                _generalParametrizacion.GrabarMarca(_ensambladorEntidad.CrearMarca(marca));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        ///  valida si  existe la marca ya  creada
+        /// </summary>
+        /// <param name="descripcion"></param>
+        /// <returns></returns>
+        public modelo.MarcaModelo ValidarSiExisteMarcaPorDescripcion(string descripcion)
+        {
+            try
+            {
+
+                return
+                    _ensambladorModelo.CrearMarca(_generalParametrizacion.ValidarSiExisteMarcaPorDescripcion(descripcion));
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+
         #endregion
 
         #region MATERIAL
@@ -372,6 +414,27 @@ namespace JLLR.Core.General.Servicio.Transformador
             try
             {
                 return  _ensambladorModelo.CrearFormasPago(_generalParametrizacion.ObtenerFormaPagos());
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region PARAMETRO
+        /// <summary>
+        /// Obtiene los  parametros por descripcion
+        /// </summary>
+        /// <param name="descripcion"></param>
+        /// <returns></returns>
+        public modelo.ParametroModelo ObtenerParametroPorDescripcion(string descripcion)
+        {
+            try
+            {
+                return  _ensambladorModelo.CrearParametro(_generalParametrizacion.ObtenerParametroPorDescripcion(descripcion));
 
             }
             catch (Exception ex)

@@ -34,6 +34,13 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<int> MARCA_ID { get; set; }
         public Nullable<int> MATERIAL_ID { get; set; }
         public Nullable<int> PORCENTAJE_IMPUESTO_SUCURSAL_ID { get; set; }
+        public string TRATAMIENTO_ESPECIAL { get; set; }
+        public string NUMERO_INTERNO_PRENDA { get; set; }
+        public Nullable<decimal> NUMERO_LIBRAS { get; set; }
+        public string NUMERO_ORDEN_MANUAL { get; set; }
+        public Nullable<bool> SUAVIZANTE { get; set; }
+        public Nullable<bool> DESENGRASANTE { get; set; }
+        public Nullable<bool> FIJADOR_COLOR { get; set; }
     
         public virtual COLOR COLOR { get; set; }
         public virtual PRODUCTO PRODUCTO { get; set; }

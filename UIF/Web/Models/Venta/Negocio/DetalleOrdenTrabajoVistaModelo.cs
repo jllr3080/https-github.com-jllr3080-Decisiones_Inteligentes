@@ -104,5 +104,50 @@ namespace Web.Models.Venta.Negocio
         /// </summary>
         
         public List<DetalleOrdenTrabajoObservacionVistaModelo> DetalleOrdenTrabajoObservacion { get; set; }
+
+        /// <summary>
+        /// TratamientoEspecial
+        /// </summary>
+        
+        public string TratamientoEspecial { get; set; }
+
+
+        /// <summary>
+        /// NumeroLibras
+        /// </summary>
+        
+        public decimal? NumeroLibras { get; set; }
+
+
+        /// <summary>
+        /// NumeroOrdenManual
+        /// </summary>
+        
+        public string NumeroOrdenManual { get; set; }
+
+        /// <summary>
+        /// Suavizante
+        /// </summary>
+        
+        public bool? Suavizante { get; set; }
+
+        /// <summary>
+        /// Desengrasante
+        /// </summary>
+        
+        public bool? Desengrasante { get; set; }
+
+
+        /// <summary>
+        /// FijadorColor
+        /// </summary>
+        
+        public bool? FijadorColor { get; set; }
+
+        /// <summary>
+        /// NumeroInternoPrenda
+        /// </summary>
+
+        public string NumeroInternoPrenda { get; set; }
     }
 }

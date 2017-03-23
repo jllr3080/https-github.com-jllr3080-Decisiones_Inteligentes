@@ -33,6 +33,7 @@ namespace JLLR.Core.General.Proveedor.DAOs
             {
 
                 var tipoLavados = from tipoLavado in _entidad.TIPO_LAVADO
+                                  where tipoLavado.ESTA_HABILITADO==true
                                  select tipoLavado;
 
                 return tipoLavados.OrderBy(m=>m.DESCRIPCION);

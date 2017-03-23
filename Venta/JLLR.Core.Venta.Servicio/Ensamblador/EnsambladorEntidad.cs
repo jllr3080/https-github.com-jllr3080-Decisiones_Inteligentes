@@ -89,6 +89,13 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                 PRODUCTO_TALLA_ID = m.ProductoTalla.ProductoTallaId,
                 MARCA_ID = m.Marca.MarcaId,
                 MATERIAL_ID = m.Material.MaterialId,
+                TRATAMIENTO_ESPECIAL = m.TratamientoEspecial,
+                NUMERO_INTERNO_PRENDA = m.NumeroInternoPrenda,
+                SUAVIZANTE = m.Suavizante,
+                DESENGRASANTE = m.Desengrasante,
+                FIJADOR_COLOR = m.FijadorColor,
+                NUMERO_LIBRAS = m.NumeroLibras,
+                NUMERO_ORDEN_MANUAL = m.NumeroOrdenManual,
                 DETALLE_ORDEN_TRABAJO_OBSERVACION = _lisaDetalleOrdenTrabajoObservacion
 
 
@@ -146,6 +153,147 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
 
         #endregion
 
+        #region ORDEN TRABAJO COMISION
+        /// <summary>
+        /// Convierte el modelo en una entidad
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public entidad.ORDEN_TRABAJO_COMISION CrearOrdenTrabajoComision(modelo.OrdenTrabajoComisionModelo m)
+        {
+            return new entidad.ORDEN_TRABAJO_COMISION()
+            {
+                ORDEN_TRABAJO_COMISION_ID = m.OrdenTrabajoComisionId,
+                FECHA_GENERACION_COMISION = m.FechaGeneracionComision,
+                USUARIO_ID = m.UsuarioId,
+                VALOR = m.Valor,
+                VENTA_COMISION_ID = m.VentaComision.VentaComisionId,
+                ORDEN_TRABAJO_ID = m.OrdenTrabajo.OrdenTrabajoId
+            
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<entidad.ORDEN_TRABAJO_COMISION> CrearOrdenesTrabajoComision(List<Modelo.OrdenTrabajoComisionModelo> listadoModelo)
+        {
+            return listadoModelo.Select(CrearOrdenTrabajoComision).ToList();
+        }
+        #endregion
+
+        #region HISTORIAL REGLA
+        /// <summary>
+        /// Convierte el modelo en una entidad
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public entidad.HISTORIAL_REGLA CrearHistorialRegla(modelo.HistorialReglaModelo m)
+        {
+            if (m == null)
+                return null;
+            return new entidad.HISTORIAL_REGLA()
+            {
+                HISTORIAL_REGLA_ID = m.HistorialReglaId,
+                ORDEN_TRABAJO_ID = m.OrdenTrabajo.OrdenTrabajoId,
+                ACCION_REGLA_ID = m.AccionRegla.AccionreglaId,
+                FECHA_EJECUCION = m.FechaEjecucion,
+                USUARIO_ID = m.UsuarioId
+
+
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<entidad.HISTORIAL_REGLA> CrearHistorialReglas(List<Modelo.HistorialReglaModelo> listadoModelo)
+        {
+            return listadoModelo.Select(CrearHistorialRegla).ToList();
+        }
+        #endregion
+
+        #region ORDEN TRABAJO DESCUENTO
+        /// <summary>
+        /// Convierte el modelo en una entidad
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public entidad.ORDEN_TRABAJO_DESCUENTO CrearOrdenTrabajoDescuento(modelo.OrdenTrabajoDescuentoModelo m)
+        {
+            if (m == null)
+                return null;
+            return new entidad.ORDEN_TRABAJO_DESCUENTO()
+            {
+                ORDEN_TRABAJO_DESCUENTO_ID = m.OrdenTrabajoDescuentoId,
+                ORDEN_TRABAJO_ID = m.OrdenTrabajo.OrdenTrabajoId,
+                HISTORIAL_REGLA_ID = m.HistorialRegla.HistorialReglaId,
+                MOTIVO = m.Motivo,
+                VALOR = m.Valor,
+                PORCENTAJE_FRANQUICIA = m.PorcentajeFranquicia,
+                PORDENTAJE_MATRIZ = m.PorcentajeMatriz,
+                ESTADO_PROCESO = m.EstadoProceso,
+                FECHA_CREACION = m.FechaCreacion,
+                FECHA_ACTUALIZACION = m.FechaActualizacion,
+                USUARIO_CREACION_ID = m.UsuarioCreacionId,
+                USUARIO_MODIFICACION_ID = m.UsuarioActualizacionId
+            
+
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<entidad.ORDEN_TRABAJO_DESCUENTO> CrearOrdenTrabajoDescuentos(List<Modelo.OrdenTrabajoDescuentoModelo> listadoModelo)
+        {
+            return listadoModelo.Select(CrearOrdenTrabajoDescuento).ToList();
+        }
+        #endregion
+
+        #region APROBACION  DESCUENTO
+        /// <summary>
+        /// Convierte el modelo en una entidad
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public entidad.APROBACION_DESCUENTO CrearAprobacionDescuento(modelo.AprobacionDescuentoModelo m)
+        {
+            if (m == null)
+                return null;
+            return new entidad.APROBACION_DESCUENTO()
+            {
+               APROBACION_DESCUENTO_ID = m.AprobacionDescuentoId,
+               ORDEN_TRABAJO_DESCUENTO_ID = m.OrdenTrabajoDescuento.OrdenTrabajoDescuentoId,
+               ORDEN_TRABAJO_ID = m.OrdenTrabajo.OrdenTrabajoId,
+               USUARIO_APROBACION_ID = m.usuarioAprobacionId,
+               FECHA_APROBACION = m.FechaAprobacion,
+               VALOR_FRANQUICIA_APROBACION = m.ValorFranquiciaAprobacion,
+               VALOR_MATRIZ_APROBACION = m.ValorMatrizAprobacion
+               
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<entidad.APROBACION_DESCUENTO> CrearAprobacionDescuentos(List<Modelo.AprobacionDescuentoModelo> listadoModelo)
+        {
+            return listadoModelo.Select(CrearAprobacionDescuento).ToList();
+        }
+        #endregion
         #endregion
 
         #region PARAMTRIZACION

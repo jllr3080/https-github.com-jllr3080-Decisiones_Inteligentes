@@ -32,6 +32,7 @@ namespace JLLR.Core.General.Proveedor.Negocio
         private readonly  EtapaProcesoDAOs _etapaProcesoDaOs= new EtapaProcesoDAOs();
         private readonly  PuntoVentaDAOs _puntoVentaDaOs= new PuntoVentaDAOs();
         private  readonly  FormaPagoDAOs _formaPagoDaOs= new FormaPagoDAOs();
+        private readonly  ParametroDAOs _parametroDaOs= new ParametroDAOs();
 
 
         #endregion
@@ -72,6 +73,45 @@ namespace JLLR.Core.General.Proveedor.Negocio
 
                 throw;
             }
+        }
+
+        /// <summary>
+        /// Graba las  marcas
+        /// </summary>
+        /// <param name="marca"></param>
+
+        public void GrabarMarca(MARCA marca)
+        {
+            try
+            {
+              _marcaDaOs.GrabarMarca(marca);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        ///  valida si  existe la marca ya  creada
+        /// </summary>
+        /// <param name="descripcion"></param>
+        /// <returns></returns>
+        public MARCA ValidarSiExisteMarcaPorDescripcion(string descripcion)
+        {
+            try
+            {
+
+                return _marcaDaOs.ValidarSiExisteMarcaPorDescripcion(descripcion);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
         }
         #endregion
 
@@ -394,6 +434,25 @@ namespace JLLR.Core.General.Proveedor.Negocio
         }
         #endregion
 
+        #region PARAMETRO
+        /// <summary>
+        /// Obtiene los  parametros por descripcion
+        /// </summary>
+        /// <param name="descripcion"></param>
+        /// <returns></returns>
+        public PARAMETRO ObtenerParametroPorDescripcion(string descripcion)
+        {
+            try
+            {
+                return _parametroDaOs.ObtenerParametroPorDescripcion(descripcion);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
 
     }
 }

@@ -14,6 +14,12 @@ namespace JLLR.Core.Base.Proveedor.Entidades
     
     public partial class DETALLE_MOVIMIENTO_FACTURA
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public DETALLE_MOVIMIENTO_FACTURA()
+        {
+            this.DETALLE_IMPUESTO_MOVIMIENTO_FACTURA = new HashSet<DETALLE_IMPUESTO_MOVIMIENTO_FACTURA>();
+        }
+    
         public long DETALLE_MOVIMIENTO_FACTURA_ID { get; set; }
         public Nullable<long> CABECERA_MOVIMIENTO_FACTURA_ID { get; set; }
         public string DESCRIPCION { get; set; }
@@ -23,5 +29,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<decimal> TOTAL_SIN_IMPUESTOS { get; set; }
     
         public virtual CABECERA_MOVIMIENTO_FACTURA CABECERA_MOVIMIENTO_FACTURA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DETALLE_IMPUESTO_MOVIMIENTO_FACTURA> DETALLE_IMPUESTO_MOVIMIENTO_FACTURA { get; set; }
     }
 }

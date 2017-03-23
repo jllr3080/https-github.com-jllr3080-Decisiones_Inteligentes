@@ -7,6 +7,7 @@ using System.Web;
 using JLLR.Core.General.Servicio.Modelo;
 using JLLR.Core.Individuo.Servicio.Modelo;
 using JLLR.Core.Inventario.Servicio.Modelo.Parametrizacion;
+using JLLR.Core.ReglaNegocio.Servicio.Modelo;
 using JLLR.Core.Seguridad.Servicio.Modelo;
 using modelo=JLLR.Core.Venta.Servicio.Modelo;
 using  entidad=JLLR.Core.Base.Proveedor.Entidades;
@@ -159,7 +160,17 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                 ProductoTalla = _productoTalla,
                 Marca = _marca,
                 Material = _material,
-                DetalleOrdenTrabajoObservacion = _detalleOrdenTrabajoObservaciones
+                DetalleOrdenTrabajoObservacion = _detalleOrdenTrabajoObservaciones,
+                TratamientoEspecial = e.TRATAMIENTO_ESPECIAL,
+                NumeroInternoPrenda = e.NUMERO_INTERNO_PRENDA,
+                FijadorColor = e.FIJADOR_COLOR,
+                Desengrasante = e.DESENGRASANTE,
+                NumeroLibras = e.NUMERO_LIBRAS,
+                NumeroOrdenManual = e.NUMERO_ORDEN_MANUAL,
+                Suavizante = e.SUAVIZANTE
+               
+               
+               
 
 
 
@@ -260,6 +271,254 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
         }
 
         #endregion
+
+        #region ORDEN TRABAJO COMISION
+        /// <summary>
+        /// Convierte el DTO de entidad a modelo
+        /// </summary>
+        /// <param name="e">Entidad</param>
+        /// <returns></returns>
+        public modelo.OrdenTrabajoComisionModelo CrearOrdenTrabajoComision(entidad.ORDEN_TRABAJO_COMISION e)
+        {
+
+            modelo.OrdenTrabajoModelo _ordenTrabajoModelo = new modelo.OrdenTrabajoModelo
+            {
+                OrdenTrabajoId =Convert.ToInt32(e.ORDEN_TRABAJO_ID)
+            }; 
+
+            modeloParametrizacion.VentaComisionModelo _ventaComisionModelo= new modeloParametrizacion.VentaComisionModelo
+            {
+                VentaComisionId =Convert.ToInt32(e.VENTA_COMISION_ID)
+            };
+
+            return new modelo.OrdenTrabajoComisionModelo
+            {
+                OrdenTrabajo = _ordenTrabajoModelo,
+                VentaComision = _ventaComisionModelo,
+                UsuarioId = e.USUARIO_ID,
+                Valor = e.VALOR,
+                FechaGeneracionComision = e.FECHA_GENERACION_COMISION,
+                OrdenTrabajoComisionId = e.ORDEN_TRABAJO_COMISION_ID
+
+            };
+
+        }
+
+        /// <summary>
+        /// Convierte un listado de DTO en listado de  modelos de DTO
+        /// </summary>
+        /// <param name="listadoEntidad">Listado de Entidades</param>
+        /// <returns></returns>
+        public List<modelo.OrdenTrabajoComisionModelo> CrearOrdenesTrabajoComision(IQueryable<entidad.ORDEN_TRABAJO_COMISION> listadoEntidad)
+        {
+            List<modelo.OrdenTrabajoComisionModelo> listaModelo = new List<modelo.OrdenTrabajoComisionModelo>();
+
+            foreach (var entidad in listadoEntidad)
+            {
+                listaModelo.Add(CrearOrdenTrabajoComision(entidad));
+            }
+            return listaModelo;
+
+        }
+
+
+
+        #endregion
+
+        #region HISTORIAL REGLA
+        /// <summary>
+        /// Convierte el DTO de entidad a modelo
+        /// </summary>
+        /// <param name="e">Entidad</param>
+        /// <returns></returns>
+        public modelo.HistorialReglaModelo CrearHistorialRegla(entidad.HISTORIAL_REGLA e)
+        {
+
+            if (e == null)
+                return null;
+            modelo.OrdenTrabajoModelo _ordenTrabajoModelo = new modelo.OrdenTrabajoModelo
+            {
+                OrdenTrabajoId = Convert.ToInt32(e.ORDEN_TRABAJO_ID)
+            };
+
+            AccionReglaModelo _accionRegla = new AccionReglaModelo
+            {
+                AccionreglaId =Convert.ToInt32(e.ACCION_REGLA_ID)
+            };
+
+            return new modelo.HistorialReglaModelo
+            {
+                
+                OrdenTrabajo = _ordenTrabajoModelo,
+                AccionRegla = _accionRegla,
+                UsuarioId = e.USUARIO_ID,
+                HistorialReglaId = e.HISTORIAL_REGLA_ID,
+                FechaEjecucion = e.FECHA_EJECUCION
+              
+            };
+
+        }
+
+        /// <summary>
+        /// Convierte un listado de DTO en listado de  modelos de DTO
+        /// </summary>
+        /// <param name="listadoEntidad">Listado de Entidades</param>
+        /// <returns></returns>
+        public List<modelo.HistorialReglaModelo> CrearHistorialReglas(IQueryable<entidad.HISTORIAL_REGLA> listadoEntidad)
+        {
+            List<modelo.HistorialReglaModelo> listaModelo = new List<modelo.HistorialReglaModelo>();
+
+            foreach (var entidad in listadoEntidad)
+            {
+                listaModelo.Add(CrearHistorialRegla(entidad));
+            }
+            return listaModelo;
+
+        }
+
+
+
+        #endregion
+
+        #region  ORDEN TRABAJO DESCUENTO
+        /// <summary>
+        /// Convierte el DTO de entidad a modelo
+        /// </summary>
+        /// <param name="e">Entidad</param>
+        /// <returns></returns>
+        public modelo.OrdenTrabajoDescuentoModelo CrearOrdenTrabajoDescuento(entidad.ORDEN_TRABAJO_DESCUENTO e)
+        {
+
+            if (e == null)
+                return null;
+            modelo.OrdenTrabajoModelo _ordenTrabajoModelo = new modelo.OrdenTrabajoModelo
+            {
+                OrdenTrabajoId = Convert.ToInt32(e.ORDEN_TRABAJO_ID),
+                NumeroOrden = e.ORDEN_TRABAJO.NUMERO_ORDEN
+            };
+
+            modelo.HistorialReglaModelo _historialRegla=
+            new modelo.HistorialReglaModelo
+            {
+                HistorialReglaId =Convert.ToInt64(e.HISTORIAL_REGLA_ID)
+            };
+            
+
+            return new modelo.OrdenTrabajoDescuentoModelo
+            {
+
+                OrdenTrabajo = _ordenTrabajoModelo,
+              FechaCreacion = e.FECHA_CREACION,
+              Valor = e.VALOR,
+              UsuarioCreacionId = e.USUARIO_CREACION_ID,
+              OrdenTrabajoDescuentoId = e.ORDEN_TRABAJO_DESCUENTO_ID,
+              EstadoProceso = e.ESTADO_PROCESO,
+              FechaActualizacion = e.FECHA_ACTUALIZACION,
+              Motivo = e.MOTIVO,
+              PorcentajeFranquicia = e.PORCENTAJE_FRANQUICIA,
+              PorcentajeMatriz = e.PORDENTAJE_MATRIZ,
+              UsuarioActualizacionId = e.USUARIO_CREACION_ID,
+              HistorialRegla = _historialRegla
+
+            };
+
+        }
+
+        /// <summary>
+        /// Convierte un listado de DTO en listado de  modelos de DTO
+        /// </summary>
+        /// <param name="listadoEntidad">Listado de Entidades</param>
+        /// <returns></returns>
+        public List<modelo.OrdenTrabajoDescuentoModelo> CrearOrdenTrabajoDescuentos(IQueryable<entidad.ORDEN_TRABAJO_DESCUENTO> listadoEntidad)
+        {
+            List<modelo.OrdenTrabajoDescuentoModelo> listaModelo = new List<modelo.OrdenTrabajoDescuentoModelo>();
+
+            foreach (var entidad in listadoEntidad)
+            {
+                listaModelo.Add(CrearOrdenTrabajoDescuento(entidad));
+            }
+            return listaModelo;
+
+        }
+
+        /// <summary>
+        /// devuelve una coleccion 
+        /// </summary>
+        /// <param name="listadoEntidad"></param>
+        /// <returns></returns>
+        public List<modelo.OrdenTrabajoDescuentoModelo> CrearColeccionOrdenTrabajoDescuentos(List<entidad.ORDEN_TRABAJO_DESCUENTO> listadoEntidad)
+        {
+            List<modelo.OrdenTrabajoDescuentoModelo> listaModelo = new List<modelo.OrdenTrabajoDescuentoModelo>();
+
+            foreach (var entidad in listadoEntidad)
+            {
+                listaModelo.Add(CrearOrdenTrabajoDescuento(entidad));
+            }
+            return listaModelo;
+
+        }
+
+        #endregion
+
+        #region  APROBACION DESCUENTO
+        /// <summary>
+        /// Convierte el DTO de entidad a modelo
+        /// </summary>
+        /// <param name="e">Entidad</param>
+        /// <returns></returns>
+        public modelo.AprobacionDescuentoModelo CrearAprobacionDescuento(entidad.APROBACION_DESCUENTO e)
+        {
+
+            if (e == null)
+                return null;
+            modelo.OrdenTrabajoModelo _ordenTrabajoModelo = new modelo.OrdenTrabajoModelo
+            {
+                OrdenTrabajoId = Convert.ToInt32(e.ORDEN_TRABAJO_ID)
+            };
+
+            modelo.OrdenTrabajoDescuentoModelo _ordenTrabajoDescuento=
+            new modelo.OrdenTrabajoDescuentoModelo
+            {
+                OrdenTrabajoDescuentoId = Convert.ToInt64(e.ORDEN_TRABAJO_DESCUENTO_ID)
+            };
+
+
+            return new modelo.AprobacionDescuentoModelo
+            {
+
+                OrdenTrabajo = _ordenTrabajoModelo,
+                OrdenTrabajoDescuento = _ordenTrabajoDescuento,
+                ValorMatrizAprobacion = e.VALOR_MATRIZ_APROBACION,
+                ValorFranquiciaAprobacion = e.VALOR_FRANQUICIA_APROBACION,
+                FechaAprobacion = e.FECHA_APROBACION,
+                usuarioAprobacionId = e.USUARIO_APROBACION_ID,
+                AprobacionDescuentoId = e.APROBACION_DESCUENTO_ID
+               
+            };
+
+        }
+
+        /// <summary>
+        /// Convierte un listado de DTO en listado de  modelos de DTO
+        /// </summary>
+        /// <param name="listadoEntidad">Listado de Entidades</param>
+        /// <returns></returns>
+        public List<modelo.AprobacionDescuentoModelo> CrearAprobacionDescuentos(IQueryable<entidad.APROBACION_DESCUENTO> listadoEntidad)
+        {
+            List<modelo.AprobacionDescuentoModelo> listaModelo = new List<modelo.AprobacionDescuentoModelo>();
+
+            foreach (var entidad in listadoEntidad)
+            {
+                listaModelo.Add(CrearAprobacionDescuento(entidad));
+            }
+            return listaModelo;
+
+        }
+
+
+
+        #endregion
+
         #endregion
 
         #region PARAMETRIZACION
@@ -318,6 +577,8 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
         /// <returns></returns>
         public modeloParametrizacion.VentaComisionModelo CrearVentaComision(entidad.VENTA_COMISION e)
         {
+            if (e == null)
+                return null;
 
             return new modeloParametrizacion.VentaComisionModelo
             {

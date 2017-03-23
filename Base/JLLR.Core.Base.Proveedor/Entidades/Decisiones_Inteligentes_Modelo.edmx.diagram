@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5eb8e97452c3448ab4281015474d7d18" Name="Diagram1" ZoomLevel="77">
+      <Diagram DiagramId="5eb8e97452c3448ab4281015474d7d18" Name="Diagram1" ZoomLevel="62">
         <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.CONTROL_USUARIO" Width="1.5" PointX="13.5" PointY="24.875" IsExpanded="false" />
         <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ARQUEO_CAJA" Width="1.5" PointX="0.75" PointY="13.875" IsExpanded="false" />
         <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DETALLE_ARQUEO_CAJA" Width="1.5" PointX="3" PointY="14.375" IsExpanded="false" />
@@ -30,7 +30,7 @@
         <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.MODELO" Width="1.5" PointX="11.25" PointY="12.75" IsExpanded="false" />
         <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.MONEDA" Width="1.5" PointX="9" PointY="45.5" IsExpanded="false" />
         <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.NIVEL_EDUCACION" Width="1.5" PointX="3" PointY="40.25" IsExpanded="false" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PARAMETRO" Width="1.5" PointX="2.75" PointY="4.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PARAMETRO" Width="1.5" PointX="2.75" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PUNTO_VENTA" Width="1.5" PointX="9" PointY="39.25" IsExpanded="false" />
         <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.RUTA" Width="1.5" PointX="18" PointY="10.875" IsExpanded="false" />
         <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.SUCURSAL" Width="1.5" PointX="6.75" PointY="39.5" IsExpanded="false" />
@@ -206,6 +206,25 @@
         <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO" />
         <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_OT_OBSERVACION_VS_DETALLE_OT" />
         <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DETALLE_ORDEN_TRABAJO" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_REGLA" Width="1.5" PointX="9" PointY="36.625" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ACCION_REGLA" Width="1.5" PointX="18.75" PointY="24.75" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.REGLA" Width="1.5" PointX="11.25" PointY="37.625" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.APROBACION_DESCUENTO" Width="1.5" PointX="17" PointY="41.875" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.HISTORIAL_REGLA" Width="1.5" PointX="22" PointY="22.75" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO_DESCUENTO" Width="1.5" PointX="12.75" PointY="54.5" />
+        <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_REGLA_VS_PUNTO_VENTA" />
+        <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_REGLA_VS_SUCURSAL" />
+        <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_REGLA_VS_TIPO_REGLA" />
+        <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_ACCION_REGLA_VS_PRODUCTO" />
+        <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_ACCION_REGLA_VS_REGLA" />
+        <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_REGLA_VS_ACCION_REGLA" />
+        <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_APROBACION_DESCUENTO_VS_ORDEN_TRABAJO" />
+        <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_APROBACION_DESCUENTO_VS_ORDEN_TRABAJO_DESCUENTO" />
+        <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_HISTORIA_REGLA_VS_ORDEN_TRABAJO" />
+        <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_DESCUENTO_VS_ORDEN_TRABAJO" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DETALLE_IMPUESTO_MOVIMIENTO_FACTURA" Width="1.5" PointX="20.25" PointY="55.625" />
+        <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_IMPUESTO_MOV_FACT_VS_DETALLE_MOV_FACT" />
+        <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_DESCUENTO_VS_HISTORIAL_REGLA" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

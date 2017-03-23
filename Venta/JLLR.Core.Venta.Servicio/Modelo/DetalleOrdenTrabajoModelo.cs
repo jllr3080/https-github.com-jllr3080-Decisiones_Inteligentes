@@ -101,6 +101,51 @@ namespace JLLR.Core.Venta.Servicio.Modelo
         public VentaComisionModelo VentaComision { get; set; }
 
         /// <summary>
+        /// TratamientoEspecial
+        /// </summary>
+        [DataMember]
+        public string TratamientoEspecial{ get; set; }
+
+
+        /// <summary>
+        /// NumeroInternoPrenda
+        /// </summary>
+        [DataMember]
+        public string NumeroInternoPrenda { get; set; }
+
+        /// <summary>
+        /// NumeroLibras
+        /// </summary>
+        [DataMember]
+        public decimal? NumeroLibras { get; set; }
+
+
+        /// <summary>
+        /// NumeroOrdenManual
+        /// </summary>
+        [DataMember]
+        public string NumeroOrdenManual{ get; set; }
+
+        /// <summary>
+        /// Suavizante
+        /// </summary>
+        [DataMember]
+        public bool? Suavizante{ get; set; }
+
+        /// <summary>
+        /// Desengrasante
+        /// </summary>
+        [DataMember]
+        public bool? Desengrasante { get; set; }
+
+
+        /// <summary>
+        /// FijadorColor
+        /// </summary>
+        [DataMember]
+        public bool? FijadorColor { get; set; }
+
+        /// <summary>
         /// DetalleOrdenTrabajoObservacion
         /// </summary>
         [DataMember]

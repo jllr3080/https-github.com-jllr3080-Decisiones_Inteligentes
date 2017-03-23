@@ -12,6 +12,8 @@ namespace JLLR.Core.Base.Proveedor.Entidades
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class Decisiones_Inteligentes : DbContext
     {
@@ -118,5 +120,42 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual DbSet<CABECERA_FACTURACION> CABECERA_FACTURACION { get; set; }
         public virtual DbSet<ORDEN_TRABAJO_COMISION> ORDEN_TRABAJO_COMISION { get; set; }
         public virtual DbSet<DETALLE_ORDEN_TRABAJO> DETALLE_ORDEN_TRABAJO { get; set; }
+        public virtual DbSet<TIPO_REGLA> TIPO_REGLA { get; set; }
+        public virtual DbSet<ACCION_REGLA> ACCION_REGLA { get; set; }
+        public virtual DbSet<REGLA> REGLA { get; set; }
+        public virtual DbSet<APROBACION_DESCUENTO> APROBACION_DESCUENTO { get; set; }
+        public virtual DbSet<HISTORIAL_REGLA> HISTORIAL_REGLA { get; set; }
+        public virtual DbSet<ORDEN_TRABAJO_DESCUENTO> ORDEN_TRABAJO_DESCUENTO { get; set; }
+        public virtual DbSet<DETALLE_IMPUESTO_MOVIMIENTO_FACTURA> DETALLE_IMPUESTO_MOVIMIENTO_FACTURA { get; set; }
+    
+        public virtual ObjectResult<ESTADISTICA_PRENDA_Result> ESTADISTICA_PRENDA(Nullable<System.DateTime> fECHADESDE, Nullable<System.DateTime> fECHAHASTA)
+        {
+            var fECHADESDEParameter = fECHADESDE.HasValue ?
+                new ObjectParameter("FECHADESDE", fECHADESDE) :
+                new ObjectParameter("FECHADESDE", typeof(System.DateTime));
+    
+            var fECHAHASTAParameter = fECHAHASTA.HasValue ?
+                new ObjectParameter("FECHAHASTA", fECHAHASTA) :
+                new ObjectParameter("FECHAHASTA", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ESTADISTICA_PRENDA_Result>("ESTADISTICA_PRENDA", fECHADESDEParameter, fECHAHASTAParameter);
+        }
+    
+        public virtual ObjectResult<ESTADO_CUENTA_Result> ESTADO_CUENTA(Nullable<int> pUNTOVENTAID, Nullable<System.DateTime> fECHADESDE, Nullable<System.DateTime> fECHAHASTA)
+        {
+            var pUNTOVENTAIDParameter = pUNTOVENTAID.HasValue ?
+                new ObjectParameter("PUNTOVENTAID", pUNTOVENTAID) :
+                new ObjectParameter("PUNTOVENTAID", typeof(int));
+    
+            var fECHADESDEParameter = fECHADESDE.HasValue ?
+                new ObjectParameter("FECHADESDE", fECHADESDE) :
+                new ObjectParameter("FECHADESDE", typeof(System.DateTime));
+    
+            var fECHAHASTAParameter = fECHAHASTA.HasValue ?
+                new ObjectParameter("FECHAHASTA", fECHAHASTA) :
+                new ObjectParameter("FECHAHASTA", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ESTADO_CUENTA_Result>("ESTADO_CUENTA", pUNTOVENTAIDParameter, fECHADESDEParameter, fECHAHASTAParameter);
+        }
     }
 }
