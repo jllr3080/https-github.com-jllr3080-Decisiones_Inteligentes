@@ -78,7 +78,8 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                 NumeroOrden = e.NUMERO_ORDEN,
                 EstadoPago = _estadoPago,
                 SeEnvio = e.SE_ENVIO,
-                EnvioMatriz = e.ENVIO_MATRIZ
+                EnvioMatriz = e.ENVIO_MATRIZ,
+                NumeroOrdenManual = e.NUMERO_ORDEN_MANUAL
 
             };
 
@@ -166,7 +167,6 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                 FijadorColor = e.FIJADOR_COLOR,
                 Desengrasante = e.DESENGRASANTE,
                 NumeroLibras = e.NUMERO_LIBRAS,
-                NumeroOrdenManual = e.NUMERO_ORDEN_MANUAL,
                 Suavizante = e.SUAVIZANTE
                
                

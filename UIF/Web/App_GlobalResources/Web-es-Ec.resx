@@ -181,7 +181,7 @@
     <value>Cliente</value>
   </data>
   <data name="Label_Cabecera_Grid_Codigo_Orden_Trabajo" xml:space="preserve">
-    <value>Código de la Orden de  Trabajo</value>
+    <value>Código Interno</value>
   </data>
   <data name="Label_Cabecera_Grid_Color" xml:space="preserve">
     <value>Color</value>
@@ -214,7 +214,7 @@
     <value>Número de Factura</value>
   </data>
   <data name="Label_Cabecera_Grid_Numero_Orden" xml:space="preserve">
-    <value>Número de  Orden</value>
+    <value>Numero de Orden</value>
   </data>
   <data name="Label_Cabecera_Grid_Numero_Prendas" xml:space="preserve">
     <value>Numero de Prendas</value>
@@ -577,10 +577,10 @@
     <value>Aplica Descuento ?</value>
   </data>
   <data name="Label_Porcentaje_Franquicia" xml:space="preserve">
-    <value>Porcentaje Franquicia</value>
+    <value>Valor Propuesto  Franquicia</value>
   </data>
   <data name="Label_Porcentaje_Matriz" xml:space="preserve">
-    <value>Porcentaje Matriz</value>
+    <value>Valor Propuesto Matriz </value>
   </data>
   <data name="Label_Valor_Descuento" xml:space="preserve">
     <value>Valor Descuento</value>
@@ -683,5 +683,11 @@
   </data>
   <data name="Label_Numero_Orden_Manual" xml:space="preserve">
     <value>Número de Orden Manual</value>
+  </data>
+  <data name="Label_Codigo_Interno" xml:space="preserve">
+    <value>Código Interno</value>
+  </data>
+  <data name="Titulo_Pagina_Arqueo_Caja" xml:space="preserve">
+    <value>Arqueo Caja</value>
   </data>
 </root>

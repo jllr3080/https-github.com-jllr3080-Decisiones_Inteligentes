@@ -55,7 +55,7 @@ namespace JLLR.Core.Venta.Servicio.DTOs
         /// EstadoPago
         /// </summary>
         [DataMember]
-        public int? Cantidad { get; set; }
+        public decimal? Cantidad { get; set; }
 
         /// <summary>
         /// Prenda

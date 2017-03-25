@@ -108,7 +108,7 @@ namespace Web
                 List<AccesoVistaDTOs> lista = servicioDelegadoSeguridad.GenerarMenu(Convert.ToInt32(User.Id));
 
 
-
+                
                 var emision = new MenuItem("VENTA") { Selectable = false };
                 var administracion = new MenuItem("ADMINISTRACION") { Selectable = false };
                 var contabilidad= new MenuItem("CONTABILIDAD") { Selectable = false };

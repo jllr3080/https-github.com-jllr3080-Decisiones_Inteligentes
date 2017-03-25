@@ -45,10 +45,10 @@
                         <div class="col-md-12">
                             <asp:GridView ID="_datos" runat="server" Width="100%" AutoGenerateColumns="False" OnRowCommand="_datos_RowCommand">
                                 <Columns>
-                                    <asp:BoundField DataField="OrdenTrabajo.OrdenTrabajoId"  HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Numero_Orden%>"/>
+                                    <asp:BoundField DataField="OrdenTrabajo.OrdenTrabajoId"  HeaderText="<%$ Resources:Web_es_Ec,Label_Codigo_Interno%>"/>
                                     <asp:BoundField DataField="OrdenTrabajo.NumeroOrden"  HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Numero_Orden%>"/>
                                     <asp:BoundField DataField="NumeroPrenda"  HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Numero_Prendas%>"/>
-                                    <asp:BoundField DataField="OrdenTrabajo.FechaIngreso"  HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Fecha_Recepcion%>"/>
+                                    <asp:BoundField DataField="OrdenTrabajo.FechaIngreso"  HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Fecha_Recepcion%>" DataFormatString="{0:d}"/>
 
                                     <asp:TemplateField>
                                         <ItemTemplate>
@@ -153,11 +153,21 @@
                         </div>
                         <div class="modal-body">
                              <div class="row">
-                                    <div class="col-md-6">
-                                        <asp:GridView ID="_datosDetalleOrden" runat="server">
+                                    <div class="col-md-12">
+                                        <asp:GridView ID="_datosDetalleOrden" runat="server" Width="100%" AutoGenerateColumns="False">
+                                            <Columns>
+                                                        <asp:BoundField DataField="DetalleOrdenTrabajoId" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Codigo_Orden_Trabajo%>" />
+                                        <asp:BoundField DataField="Cantidad" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Cantidad%>"/>
+                                        <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Prenda%>" DataField="Prenda" />
+                                        <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Color%>" DataField="Color" />
+                                        <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Marca%>" DataField="Marca" />
+                                        <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Valor_Unitario%>" DataField="ValorUnitario" DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" ItemStyle-VerticalAlign="Middle"  />
+                                        <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Valor_Total%>" DataField="ValorTotal"  DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" ItemStyle-VerticalAlign="Middle" />
+                                            </Columns>
                                             <HeaderStyle CssClass="tableCabecera" ></HeaderStyle>
                                             <FooterStyle CssClass="tablePiePagina"></FooterStyle> 
                                         </asp:GridView>
+
                                     </div>
                               </div>                
                             

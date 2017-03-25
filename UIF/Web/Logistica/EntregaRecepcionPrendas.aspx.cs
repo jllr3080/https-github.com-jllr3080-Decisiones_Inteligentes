@@ -170,7 +170,9 @@ namespace Web.Logistica
                     _btnDetalleOrden_ModalPopupExtender.TargetControlID = "_btnGuardarinformacion";
                     _btnDetalleOrden_ModalPopupExtender.Show();
                     //List<DetalleOrdenTrabajoObservacionVistaModelo> _lisaDetalleOrdenTrabajoObservacion = _servicioDelegadoVenta.ObtenerDetalleOrdenTrabajoObservaciones(Convert.ToInt32(_datos.Rows[index].Cells[0].Text));
-                    _datosDetalleOrden.DataSource=_listaOrdenTrabajoVistaDtOses.Where(m=>m.OrdenTrabajo.OrdenTrabajoId.Equals(Convert.ToInt64(_datos.Rows[index].Cells[0].Text))).Select(a=>a.DetalleOrdenTrabajo);
+                    _datosDetalleOrden.DataSource =
+                        _servicioDelegadoVenta.ObtenerOrdenTrabajoPorNumeroOrdenYPuntoVenta(
+                            _datos.Rows[index].Cells[1].Text, Convert.ToInt32(User.PuntoVentaId));
                     _datosDetalleOrden.DataBind();
                 }
             }

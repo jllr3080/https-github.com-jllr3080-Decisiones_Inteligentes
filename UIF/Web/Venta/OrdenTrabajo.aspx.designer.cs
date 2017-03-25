@@ -184,6 +184,24 @@ namespace Web.Venta {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator _fechaEntregaValidador;
         
         /// <summary>
+        /// Control _fechaEntregaExtensor.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender _fechaEntregaExtensor;
+        
+        /// <summary>
+        /// Control _fechaEntregaMarcaAgua.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TextBoxWatermarkExtender _fechaEntregaMarcaAgua;
+        
+        /// <summary>
         /// Control _labelCliente.
         /// </summary>
         /// <remarks>
@@ -634,150 +652,6 @@ namespace Web.Venta {
         protected global::System.Web.UI.WebControls.Panel _panelLavadoMojado;
         
         /// <summary>
-        /// Control _opcionLibras.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton _opcionLibras;
-        
-        /// <summary>
-        /// Control _opcionEdredones.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton _opcionEdredones;
-        
-        /// <summary>
-        /// Control _panelLibras.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel _panelLibras;
-        
-        /// <summary>
-        /// Control _labelNumeroLibras.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label _labelNumeroLibras;
-        
-        /// <summary>
-        /// Control _labelValorUnitarioLibra.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label _labelValorUnitarioLibra;
-        
-        /// <summary>
-        /// Control _labelvalorTotalLibra.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label _labelvalorTotalLibra;
-        
-        /// <summary>
-        /// Control _numeroLibras.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _numeroLibras;
-        
-        /// <summary>
-        /// Control _numeroLibrasValidador.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator _numeroLibrasValidador;
-        
-        /// <summary>
-        /// Control _valorUnitarioLibra.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _valorUnitarioLibra;
-        
-        /// <summary>
-        /// Control _valorUnitarioLibraValidador.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator _valorUnitarioLibraValidador;
-        
-        /// <summary>
-        /// Control _valorTotalLibra.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _valorTotalLibra;
-        
-        /// <summary>
-        /// Control _valorTotalLibraValidador.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator _valorTotalLibraValidador;
-        
-        /// <summary>
-        /// Control _suavizante.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox _suavizante;
-        
-        /// <summary>
-        /// Control _desengrasante.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox _desengrasante;
-        
-        /// <summary>
-        /// Control _fijadorColor.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox _fijadorColor;
-        
-        /// <summary>
-        /// Control _panelEdredones.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel _panelEdredones;
-        
-        /// <summary>
         /// Control _labelPrendaPorLibras.
         /// </summary>
         /// <remarks>
@@ -1084,6 +958,33 @@ namespace Web.Venta {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator _informacionVisualPorLibrasValidador;
         
         /// <summary>
+        /// Control _suavizante.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox _suavizante;
+        
+        /// <summary>
+        /// Control _desengrasante.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox _desengrasante;
+        
+        /// <summary>
+        /// Control _fijadorColor.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox _fijadorColor;
+        
+        /// <summary>
         /// Control _datosLibras.
         /// </summary>
         /// <remarks>
@@ -1228,6 +1129,15 @@ namespace Web.Venta {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator _valorTotalPagarValidador;
         
         /// <summary>
+        /// Control _labelNumeroOrdenManual.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label _labelNumeroOrdenManual;
+        
+        /// <summary>
         /// Control _labelEstadoPago.
         /// </summary>
         /// <remarks>
@@ -1246,13 +1156,22 @@ namespace Web.Venta {
         protected global::System.Web.UI.WebControls.Label _labelValorPago;
         
         /// <summary>
-        /// Control _labelNumeroOrdenManual.
+        /// Control _numeroOrdenManual.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label _labelNumeroOrdenManual;
+        protected global::System.Web.UI.WebControls.TextBox _numeroOrdenManual;
+        
+        /// <summary>
+        /// Control _numeroOrdenManualValidador.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator _numeroOrdenManualValidador;
         
         /// <summary>
         /// Control _estadoPago.
@@ -1298,24 +1217,6 @@ namespace Web.Venta {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::AjaxControlToolkit.MaskedEditExtender _valorPagoMascara;
-        
-        /// <summary>
-        /// Control _numeroOrdenManual.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _numeroOrdenManual;
-        
-        /// <summary>
-        /// Control _numeroOrdenManualValidador.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator _numeroOrdenManualValidador;
         
         /// <summary>
         /// Control _grabarOrdenTrabajo.

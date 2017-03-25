@@ -1,5 +1,6 @@
 ﻿#region  using
 
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using JLLR.Core.General.Servicio.Modelo;
@@ -50,7 +51,7 @@ namespace JLLR.Core.Venta.Servicio.Modelo
         /// Cantidad  de  prensdas 
         /// </summary>
         [DataMember]
-        public int? Cantidad{ get; set; }
+        public Decimal? Cantidad{ get; set; }
 
         /// <summary>
         /// Valor Unitario de las prendas
@@ -120,11 +121,7 @@ namespace JLLR.Core.Venta.Servicio.Modelo
         public decimal? NumeroLibras { get; set; }
 
 
-        /// <summary>
-        /// NumeroOrdenManual
-        /// </summary>
-        [DataMember]
-        public string NumeroOrdenManual{ get; set; }
+       
 
         /// <summary>
         /// Suavizante

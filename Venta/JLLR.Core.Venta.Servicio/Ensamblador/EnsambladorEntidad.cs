@@ -42,7 +42,8 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                NUMERO_ORDEN = m.NumeroOrden,
                ESTADO_PAGO_ID = m.EstadoPago.EstadoPagoId,
                SE_ENVIO = m.SeEnvio,
-               ENVIO_MATRIZ = m.EnvioMatriz
+               ENVIO_MATRIZ = m.EnvioMatriz,
+               NUMERO_ORDEN_MANUAL = m.NumeroOrdenManual
             };
         }
 
@@ -95,7 +96,6 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                 DESENGRASANTE = m.Desengrasante,
                 FIJADOR_COLOR = m.FijadorColor,
                 NUMERO_LIBRAS = m.NumeroLibras,
-                NUMERO_ORDEN_MANUAL = m.NumeroOrdenManual,
                 DETALLE_ORDEN_TRABAJO_OBSERVACION = _lisaDetalleOrdenTrabajoObservacion
 
 

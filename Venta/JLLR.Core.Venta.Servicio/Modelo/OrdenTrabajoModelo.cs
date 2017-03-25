@@ -93,6 +93,11 @@ namespace JLLR.Core.Venta.Servicio.Modelo
         [DataMember]
         public bool? SeEnvio { get; set; }
 
+        /// <summary>
+        /// NumeroOrdenManual
+        /// </summary>
+        [DataMember]
+        public string NumeroOrdenManual { get; set; }
 
     }
 }

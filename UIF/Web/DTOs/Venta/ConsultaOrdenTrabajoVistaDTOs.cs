@@ -49,7 +49,7 @@ namespace Web.DTOs.Venta
         /// EstadoPago
         /// </summary>
         
-        public int? Cantidad { get; set; }
+        public decimal? Cantidad { get; set; }
 
         /// <summary>
         /// Prenda

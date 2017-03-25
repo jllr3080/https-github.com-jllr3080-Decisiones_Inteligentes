@@ -28,6 +28,11 @@ namespace Web.Util
 
     }
 
+    public enum LavadoPorLibras
+    {
+        LavadoPorLibras=172 
+    }
+
     public enum TipoLavado
     {
         LavadoSeco=1,

@@ -18,11 +18,11 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public ORDEN_TRABAJO()
         {
             this.HISTORIAL_PROCESO = new HashSet<HISTORIAL_PROCESO>();
-            this.ORDEN_TRABAJO_COMISION = new HashSet<ORDEN_TRABAJO_COMISION>();
-            this.DETALLE_ORDEN_TRABAJO = new HashSet<DETALLE_ORDEN_TRABAJO>();
             this.APROBACION_DESCUENTO = new HashSet<APROBACION_DESCUENTO>();
+            this.DETALLE_ORDEN_TRABAJO = new HashSet<DETALLE_ORDEN_TRABAJO>();
             this.HISTORIAL_REGLA = new HashSet<HISTORIAL_REGLA>();
             this.ORDEN_TRABAJO_DESCUENTO = new HashSet<ORDEN_TRABAJO_DESCUENTO>();
+            this.ORDEN_TRABAJO_COMISION = new HashSet<ORDEN_TRABAJO_COMISION>();
         }
     
         public long ORDEN_TRABAJO_ID { get; set; }
@@ -38,21 +38,22 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public string NUMERO_ORDEN { get; set; }
         public Nullable<bool> ENVIO_MATRIZ { get; set; }
         public Nullable<bool> SE_ENVIO { get; set; }
+        public string NUMERO_ORDEN_MANUAL { get; set; }
     
         public virtual CLIENTE CLIENTE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HISTORIAL_PROCESO> HISTORIAL_PROCESO { get; set; }
         public virtual ESTADO_PAGO ESTADO_PAGO { get; set; }
         public virtual TIPO_LAVADO TIPO_LAVADO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HISTORIAL_PROCESO> HISTORIAL_PROCESO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ORDEN_TRABAJO_COMISION> ORDEN_TRABAJO_COMISION { get; set; }
+        public virtual ICollection<APROBACION_DESCUENTO> APROBACION_DESCUENTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETALLE_ORDEN_TRABAJO> DETALLE_ORDEN_TRABAJO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<APROBACION_DESCUENTO> APROBACION_DESCUENTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HISTORIAL_REGLA> HISTORIAL_REGLA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ORDEN_TRABAJO_DESCUENTO> ORDEN_TRABAJO_DESCUENTO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ORDEN_TRABAJO_COMISION> ORDEN_TRABAJO_COMISION { get; set; }
     }
 }

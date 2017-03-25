@@ -41,7 +41,36 @@ namespace Web.Venta
         #endregion
 
         #region Eventos
+        protected void _cantidadPorLibras_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _valorTotalPorLibras.Text = String.Format("{0:0.00}", Convert.ToDecimal(_cantidadPorLibras.Text) * Convert.ToDecimal(_valorUnitarioPorLibras.Text));
+            }
+            catch (Exception ex)
+            {
 
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarOrdenTrabajo");
+            }
+        }
+
+        /// <summary>
+        /// Calcula los valores  los valores 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _valorUnitarioPorLibras_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _valorTotalPorLibras.Text = String.Format("{0:0.00}", Convert.ToDecimal(_cantidadPorLibras.Text) * Convert.ToDecimal(_valorUnitarioPorLibras.Text));
+            }
+            catch (Exception ex)
+            {
+
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarOrdenTrabajo");
+            }
+        }
 
         /// <summary>
         /// Agrega el reporte por libras
@@ -85,6 +114,34 @@ namespace Web.Venta
                 }
 
                 _valorTotalPorLibras.Text = String.Format("{0:0.00}", Convert.ToDecimal(_cantidadPorLibras.Text) * Convert.ToDecimal(_valorUnitarioPorLibras.Text));
+                if (Convert.ToInt32(_prendaPorLibras.SelectedItem.Value) ==
+                    Convert.ToInt32(Util.LavadoPorLibras.LavadoPorLibras))
+                {
+                   
+                    _tallaPorLibras.Enabled = false;
+                    _colorPorLibras.SelectedIndex=_colorPorLibras.Items.IndexOf(_colorPorLibras.Items.FindByValue("5"));
+                    _marcaPorLibras.SelectedIndex= _marcaPorLibras.Items.IndexOf(_marcaPorLibras.Items.FindByValue("8"));
+                    _colorPorLibras.Enabled = false;
+                    _marcaPorLibras.Enabled = false;
+                    _crearMarca.Enabled = false;
+                    _suavizante.Visible = true;
+                    _fijadorColor.Visible = true;
+                    _desengrasante.Visible = true;
+                }
+                else
+                {
+                    _colorPorLibras.Enabled = true;
+                    _marcaPorLibras.Enabled = true;
+                    _tallaPorLibras.Enabled = true;
+                    _crearMarca.Enabled = true;
+                    _suavizante.Visible = false;
+                    _fijadorColor.Visible = false;
+                    _desengrasante.Visible = false;
+                    _suavizante.Checked = false;
+                    _fijadorColor.Checked = false;
+                    _desengrasante.Checked = false; 
+
+                }
             }
             catch (Exception)
             {
@@ -120,105 +177,11 @@ namespace Web.Venta
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void _numeroLibras_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
+       
 
-                _valorTotalLibra.Text = String.Format("{0:0.00}",
-                    Convert.ToDecimal(_numeroLibras.Text)*Convert.ToDecimal(_valorUnitarioLibra.Text));
+      
 
-
-            }
-            catch (Exception ex)
-            {
-
-                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarOrdenTrabajo");
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void _valorUnitarioLibra_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                _valorTotalLibra.Text = String.Format("{0:0.00}",
-                   Convert.ToDecimal(_numeroLibras.Text) * Convert.ToDecimal(_valorUnitarioLibra.Text));
-            }
-            catch (Exception)
-            {
-
-                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarOrdenTrabajo");
-            }
-        }
-        /// <summary>
-        /// Opcion de  libras   se visualiza  el panel de libras
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void _opcionLibras_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                _panelLibras.Visible = true;
-                _panelEdredones.Visible = false;
-                _valorUnitarioLibra.Text = Convert.ToString(_servicioDelegadoGeneral.ObtenerParametroPorDescripcion("VALOR_LIBRA").NumeroDecimal);
-                LimpiarDetalleOrdenTrabajoPorLibras();
-
-
-            }
-            catch (Exception ex)
-            {
-
-                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarOrdenTrabajo");
-            }
-
-        }
-
-        /// <summary>
-        /// Opcion de edredones se visualiza la opcion de edredones
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void _opcionEdredones_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                _panelLibras.Visible = false;
-                _panelEdredones.Visible = true;
-                _prendaPorLibras.DataSource = _servicioDelegadoInventario.ObtenerProductoPorTipoProductoId(Convert.ToInt32(Util.TipoProducto.Servicio));
-                _prendaPorLibras.DataBind();
-                _tallaPorLibras.DataSource =
-                    _servicioDelegadoInventario.ObtenProductoTallaPorProductoId(
-                        Convert.ToInt32(_prenda.SelectedItem.Value));
-                _tallaPorLibras.DataBind();
-                _marcaPorLibras.DataSource = _servicioDelegadoGeneral.ObtenerMarcas();
-                _marcaPorLibras.DataBind();
-                _colorPorLibras.DataSource = _servicioDelegadoGeneral.ObetenerColores();
-                _colorPorLibras.DataBind();
-                _valorUnitarioLibra.Text =String.Empty;
-                LimpiarDetalleOrdenTrabajoPorLibras();
-
-
-
-            }
-            catch (Exception ex)
-            {
-
-                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarOrdenTrabajo");
-            }
-
-        }
-
+       
         /// <summary>
         /// Aplica las promociones 
         /// </summary>
@@ -315,7 +278,7 @@ namespace Web.Venta
                     _valorPago.Visible = true;
                     _labelValorPago.Visible = true;
                     _valorPago.ReadOnly = true;
-                    _valorPago.Text = String.Format("{0:0.00}", _listaTrabajoVistaDtOs.Sum(m => m.ValorTotal));
+                    _valorPago.Text = String.Format("{0:0.00}", _valorTotalPagar.Text);
                 }
                 //Abonado
                 else if (_estadoPago.SelectedItem.Value.ToString() == "3")
@@ -422,6 +385,7 @@ namespace Web.Venta
                 if (Convert.ToInt32(_tipoLavado.SelectedItem.Value) == Convert.ToInt32(Util.TipoLavado.LavadoSeco))
                 {
                     _panelLavadoSeco.Visible = true;
+                    _panelLavadoMojado.Visible = false;
                     _talla.DataSource =
                         _servicioDelegadoInventario.ObtenProductoTallaPorProductoId(
                             Convert.ToInt32(_prenda.SelectedItem.Value));
@@ -438,14 +402,34 @@ namespace Web.Venta
                     }
                     _valorTotal.Text = String.Format("{0:0.00}",
                         Convert.ToDecimal(_cantidad.Text)*Convert.ToDecimal(_valorUnitario.Text));
-                    _panelLavadoMojado.Visible = false;
+                    
                 }
                 else if (Convert.ToInt32(_tipoLavado.SelectedItem.Value) ==
                          Convert.ToInt32(Util.TipoLavado.LavadoPorLibras))
                 {
                     _panelLavadoSeco.Visible = false;
                     _panelLavadoMojado.Visible = true;
-                    
+                    _prendaPorLibras.DataSource = _servicioDelegadoInventario.ObtenerProductoPorTipoProductoId(Convert.ToInt32(Util.TipoProducto.Servicio));
+                    _prendaPorLibras.DataBind();
+                    _cantidadPorLibras.Text = "1";
+                    _tallaPorLibras.DataSource =_servicioDelegadoInventario.ObtenProductoTallaPorProductoId(Convert.ToInt32(_prendaPorLibras.SelectedItem.Value));
+                    _tallaPorLibras.DataBind();
+                    List<ProductoPrecioVistaModelo> _precio =
+                       _servicioDelegadoInventario.ObtenerProductoPrecioPorProductoIdYProductoTallaId(
+                           Convert.ToInt32(_prendaPorLibras.SelectedItem.Value),
+                           Convert.ToInt32(_tallaPorLibras.SelectedItem.Value));
+                    foreach (var productoPrecioVistaModelo in _precio)
+                    {
+
+                        _valorUnitarioPorLibras.Text = String.Format("{0:0.00}", productoPrecioVistaModelo.Precio);
+                    }
+                    _valorTotalPorLibras.Text = String.Format("{0:0.00}",
+                        Convert.ToDecimal(_cantidadPorLibras.Text) * Convert.ToDecimal(_valorUnitarioPorLibras.Text));
+                    _colorPorLibras.DataSource = _servicioDelegadoGeneral.ObetenerColores();
+                    _colorPorLibras.DataBind();
+                    _marcaPorLibras.DataSource = _servicioDelegadoGeneral.ObtenerMarcas();
+                    _marcaPorLibras.DataBind();
+
                 }
                 else
                 {
@@ -487,6 +471,7 @@ namespace Web.Venta
                         _ordenTrabajoVistaDtOs.OrdenTrabajo.EstadoPago = _estadoPagoVista;
                         _ordenTrabajoVistaDtOs.OrdenTrabajo.SeEnvio = false;
                         _ordenTrabajoVistaDtOs.OrdenTrabajo.EnvioMatriz = true;
+                        _ordenTrabajoVistaDtOs.OrdenTrabajo.NumeroOrdenManual = _numeroOrdenManual.Text;
                         //Graba la Orden de trabajo
                         OrdenTrabajoVistaModelo _ordenTrabajoVistaModelo =
                             _servicioDelegadoVenta.GrabarOrdenTrabajoCompleta(_ordenTrabajoVistaDtOs);
@@ -970,13 +955,11 @@ namespace Web.Venta
 
                 DetalleOrdenTrabajoVistaModelo _detalleOrdenTrabajoVista = new DetalleOrdenTrabajoVistaModelo();
 
-                if ((Convert.ToInt32(_tipoLavado.SelectedItem.Value) == Convert.ToInt32(Util.TipoLavado.LavadoPorLibras) &&
-                     _opcionEdredones.Checked == true) ||
-                    (Convert.ToInt32(_tipoLavado.SelectedItem.Value) == Convert.ToInt32(Util.TipoLavado.LavadoSeco)))
+                if (Convert.ToInt32(_tipoLavado.SelectedItem.Value) == Convert.ToInt32(Util.TipoLavado.LavadoSeco))
                 {
-                    
-               
-                ProductoVistaModelo _productoVista = new ProductoVistaModelo
+
+               #region LAVADO EN SECO
+                    ProductoVistaModelo _productoVista = new ProductoVistaModelo
                 {
                     ProductoId = Convert.ToInt32(_prenda.SelectedItem.Value),
                     Nombre = _prenda.SelectedItem.Text
@@ -1033,28 +1016,73 @@ namespace Web.Venta
                 _detalleOrdenTrabajoVista.DetalleOrdenTrabajoObservacion = _listaDetalleOrdenTrabajoObservacion;
                 _detalleOrdenTrabajoVista.TratamientoEspecial = _tratamientoEspecial.Text;
                 _detalleOrdenTrabajoVista.NumeroInternoPrenda = _numeroInterno.Text;
+                #endregion
                 }
                 //Lavado en Mojado
-                if (Convert.ToInt32(_tipoLavado.SelectedItem.Value) == Convert.ToInt32(Util.TipoLavado.LavadoPorLibras))
+                else if (Convert.ToInt32(_tipoLavado.SelectedItem.Value) == Convert.ToInt32(Util.TipoLavado.LavadoPorLibras))
                 {
-                    if (_opcionLibras.Checked==true)
+                    #region LAVADO EN agua
+                    ProductoVistaModelo _productoVista = new ProductoVistaModelo
                     {
-                        ProductoVistaModelo _productoVista = new ProductoVistaModelo
-                        {
-                            ProductoId   = 172,
-                            Nombre = "LAVADO POR LIBRAS"
+                        ProductoId = Convert.ToInt32(_prendaPorLibras.SelectedItem.Value),
+                        Nombre = _prendaPorLibras.SelectedItem.Text
 
-                        };
+                    };
+                    ProductoTallaVistaModelo _productoTallaVista = new ProductoTallaVistaModelo
+                    {
+                        ProductoTallaId = Convert.ToInt32(_tallaPorLibras.SelectedItem.Value),
+                        Descripcion = _tallaPorLibras.SelectedItem.Text
+                    };
+                    MarcaVistaModelo _marcaVista = new MarcaVistaModelo
+                    {
+                        MarcaId = Convert.ToInt32(_marcaPorLibras.SelectedItem.Value),
+                        Descripcion = _marcaPorLibras.SelectedItem.Text
 
-                        _detalleOrdenTrabajoVista.NumeroLibras = Convert.ToDecimal(_numeroLibras.Text);
-                    _detalleOrdenTrabajoVista.Suavizante =Convert.ToBoolean( _suavizante.Checked);
+                    };
+                    MaterialVistaModelo _materialVista = new MaterialVistaModelo
+                    {
+                        MaterialId = Convert.ToInt32(1)
+                        //Descripcion = _material.SelectedItem.Text
+                    };
+                    ColorVistaModelo _colorVista = new ColorVistaModelo
+                    {
+                        ColorId = Convert.ToInt32(_colorPorLibras.SelectedItem.Value),
+                        Descripcion = _colorPorLibras.SelectedItem.Text
+                    };
+                    ImpuestoVistaModelo _impuestoVista = new ImpuestoVistaModelo
+                    {
+                        ImpuestoId = 1
+                    };
+                    VentaComisionVistaModelo _ventaComisionVista = new VentaComisionVistaModelo
+                    {
+                        VentaComisionId = 1
+                    };
+                    List<DetalleOrdenTrabajoObservacionVistaModelo> _listaDetalleOrdenTrabajoObservacion = new List<DetalleOrdenTrabajoObservacionVistaModelo>();
+                    DetalleOrdenTrabajoObservacionVistaModelo _detalleOrdenTrabajoObservacion = new DetalleOrdenTrabajoObservacionVistaModelo();
+                    _detalleOrdenTrabajoObservacion.UsuarioId = User.Id;
+                    _detalleOrdenTrabajoObservacion.FechaCreacionObservacion = DateTime.Now;
+                    _detalleOrdenTrabajoObservacion.Observacion = _observacion.Text;
+                    _listaDetalleOrdenTrabajoObservacion.Add(_detalleOrdenTrabajoObservacion);
+                    _detalleOrdenTrabajoVista.Producto = _productoVista;
+                    _detalleOrdenTrabajoVista.ProductoTalla = _productoTallaVista;
+                    _detalleOrdenTrabajoVista.Marca = _marcaVista;
+                    _detalleOrdenTrabajoVista.Material = _materialVista;
+                    _detalleOrdenTrabajoVista.Color = _colorVista;
+                    _detalleOrdenTrabajoVista.Cantidad = Convert.ToInt32(_cantidadPorLibras.Text);
+                    _detalleOrdenTrabajoVista.ValorUnitario = Convert.ToDecimal(_valorUnitarioPorLibras.Text);
+                    _detalleOrdenTrabajoVista.ValorTotal = Convert.ToDecimal(_valorTotalPorLibras.Text);
+                    _detalleOrdenTrabajoVista.Observacion = _estadoPrendaPorLibras.Text;
+                    _detalleOrdenTrabajoVista.Impuesto = _impuestoVista;
+                    _detalleOrdenTrabajoVista.OrdenTrabajo = _ordenTrabajoVista;
+                    _detalleOrdenTrabajoVista.VentaComision = _ventaComisionVista;
+                    _detalleOrdenTrabajoVista.PorcentajeImpuesto = 14;
+                    _detalleOrdenTrabajoVista.DetalleOrdenTrabajoObservacion = _listaDetalleOrdenTrabajoObservacion;
+                    _detalleOrdenTrabajoVista.TratamientoEspecial = _tratamientoEspecialPorLibras.Text;
+                    _detalleOrdenTrabajoVista.NumeroInternoPrenda = _numeroInternoPorLibras.Text;
+                    _detalleOrdenTrabajoVista.Suavizante = Convert.ToBoolean(_suavizante.Checked);
                     _detalleOrdenTrabajoVista.Desengrasante = Convert.ToBoolean(_desengrasante.Checked);
                     _detalleOrdenTrabajoVista.FijadorColor = Convert.ToBoolean(_fijadorColor.Checked);
-                    _detalleOrdenTrabajoVista.ValorUnitario = Convert.ToDecimal(_valorUnitarioLibra.Text);
-                    _detalleOrdenTrabajoVista.ValorTotal= Convert.ToDecimal(_valorTotalLibra.Text);
-                    _detalleOrdenTrabajoVista.Cantidad = Convert.ToInt32(_numeroLibras.Text);
-                        _detalleOrdenTrabajoVista.Producto = _productoVista;
-                    }
+                    #endregion
 
 
 
@@ -1063,8 +1091,9 @@ namespace Web.Venta
 
                 _listaTrabajoVistaDtOs.Add(_detalleOrdenTrabajoVista);
                 _ordenTrabajoVistaDtOs.DetalleOrdenTrabajo = _listaTrabajoVistaDtOs;
-
-
+                _valorTotalFinal.Text = String.Format("{0:0.00}", _listaTrabajoVistaDtOs.Sum(m => m.ValorTotal));
+                _descuento.Text = "0";
+                _valorTotalPagar.Text = String.Format("{0:0.00}",Convert.ToDecimal(_valorTotalFinal.Text)+Convert.ToDecimal(_descuento.Text));
 
 
 
@@ -1116,12 +1145,10 @@ namespace Web.Venta
                 _numeroInternoPorLibras.Text = String.Empty;
                 _informacionVisualPorLibras.Text = String.Empty;
                 _cantidadPorLibras.Text = "1";
-                _valorUnitarioLibra.Text=String.Empty;
-                _valorTotalLibra.Text=String.Empty;
-                _suavizante.Checked = false;
-                _desengrasante.Checked = false;
-                _fijadorColor.Checked = false;
-                _numeroLibras.Text = "1";
+                //_suavizante.Checked = false;
+                //_desengrasante.Checked = false;
+                //_fijadorColor.Checked = false;
+                
 
 
 
@@ -1176,9 +1203,10 @@ namespace Web.Venta
 
 
 
-        #endregion
 
-       
+
+
+        #endregion
 
         
     }

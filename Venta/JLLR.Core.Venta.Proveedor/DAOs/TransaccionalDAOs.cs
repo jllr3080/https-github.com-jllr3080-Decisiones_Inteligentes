@@ -114,7 +114,10 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                             Convert.ToInt32(ordenTrabajoDtOs.OrdenTrabajo.TIPO_LAVADO_ID),
                             Convert.ToInt32(ordenTrabajoDtOs.OrdenTrabajo.SUCURSAL_ID),
                             Convert.ToInt32(ordenTrabajoDtOs.OrdenTrabajo.PUNTO_VENTA_ID));
-                    ordenTrabajoDtOs.OrdenTrabajo.NUMERO_ORDEN =Convert.ToString(_numeracionOrden.NUMERO);
+                    if (ordenTrabajoDtOs.OrdenTrabajo.TIPO_LAVADO_ID==1)
+                    ordenTrabajoDtOs.OrdenTrabajo.NUMERO_ORDEN ="S" + Convert.ToString(_numeracionOrden.NUMERO);
+                    else if (ordenTrabajoDtOs.OrdenTrabajo.TIPO_LAVADO_ID == 2)
+                     ordenTrabajoDtOs.OrdenTrabajo.NUMERO_ORDEN = "A" + Convert.ToString(_numeracionOrden.NUMERO);
 
                     ORDEN_TRABAJO ordenTrabajo = _ordenTrabajoDaOs.GrabarOrdenTrabajo(ordenTrabajoDtOs.OrdenTrabajo);
 
@@ -132,6 +135,11 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                         
                     }
                     _numeracionOrden.NUMERO += 1;
+                    if (ordenTrabajoDtOs.OrdenTrabajo.TIPO_LAVADO_ID == 1)
+                        _numeracionOrden .NUMERO_ORDEN= "S" + Convert.ToString(_numeracionOrden.NUMERO);
+                    else if (ordenTrabajoDtOs.OrdenTrabajo.TIPO_LAVADO_ID == 2)
+                        _numeracionOrden.NUMERO_ORDEN = "A" + Convert.ToString(_numeracionOrden.NUMERO);
+
                     _numeroOrdenDaOs.ActualizarNumeroOrden(_numeracionOrden);
                     transaction.Complete();
 

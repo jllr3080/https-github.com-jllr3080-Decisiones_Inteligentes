@@ -456,7 +456,7 @@ namespace Web.Venta
                     _btnObservaciones_ModalPopupExtender.TargetControlID = "_btnBuscar";
                     _btnObservaciones_ModalPopupExtender.Show();
                     int index = Convert.ToInt32(e.CommandArgument);
-                    List<DetalleOrdenTrabajoObservacionVistaModelo> _lisaDetalleOrdenTrabajoObservacion= _servicioDelegadoVenta.ObtenerDetalleOrdenTrabajoObservaciones(Convert.ToInt32(_datos.Rows[index].Cells[0].Text));
+                    List<DetalleOrdenTrabajoObservacionVistaDTOs> _lisaDetalleOrdenTrabajoObservacion= _servicioDelegadoVenta.ObtenerDetalleOrdenTrabajoObservacionPorDetalleOrdenTrabajoId(Convert.ToInt32(_datos.Rows[index].Cells[0].Text));
                     if (_lisaDetalleOrdenTrabajoObservacion.Count>0)
                     {
                         _datosObservaciones.DataSource = _lisaDetalleOrdenTrabajoObservacion;

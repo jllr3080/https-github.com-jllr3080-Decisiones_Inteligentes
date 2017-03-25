@@ -27,8 +27,8 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<int> USUARIO_ID { get; set; }
     
         public virtual ACCION_REGLA ACCION_REGLA { get; set; }
-        public virtual ORDEN_TRABAJO ORDEN_TRABAJO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ORDEN_TRABAJO_DESCUENTO> ORDEN_TRABAJO_DESCUENTO { get; set; }
+        public virtual ORDEN_TRABAJO ORDEN_TRABAJO { get; set; }
     }
 }

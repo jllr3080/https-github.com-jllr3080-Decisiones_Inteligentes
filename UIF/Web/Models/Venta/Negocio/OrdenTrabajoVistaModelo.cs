@@ -92,5 +92,10 @@ namespace Web.Models.Venta.Negocio
         /// </summary>
         
         public bool? SeEnvio { get; set; }
+
+        /// <summary>
+        /// NumeroOrdenManual
+        /// </summary>
+        public string NumeroOrdenManual { get; set; }
     }
 }

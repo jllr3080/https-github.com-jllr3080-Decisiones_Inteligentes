@@ -20,7 +20,7 @@
             </div>
             <div class="row">
                     <div class="col-md-3">
-                          <asp:TextBox ID="_numeroOrden" runat="server" ValidationGroup="Busqueda" CssClass="form-control" AutoCompleteType="Disabled" TextMode="Number" MaxLength="10"></asp:TextBox>
+                          <asp:TextBox ID="_numeroOrden" runat="server" ValidationGroup="Busqueda" CssClass="form-control" AutoCompleteType="Disabled"  MaxLength="10"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="_numeroOrdenValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="Busqueda" ControlToValidate="_numeroOrden" ></asp:RequiredFieldValidator>
                     </div>
                      <div class="col-md-3">
@@ -318,14 +318,14 @@
                             
                              <div class="row">
                                 <div class="col-md-6">
-                                         <asp:TextBox ID="_procentajeFranquicia" runat="server" class="form-control" ValidationGroup="CerrarOrden"  TextMode="Number"></asp:TextBox>
-                                        <asp:RangeValidator ID="_procentajeFranquiciavalidador" runat="server" ControlToValidate="_procentajeFranquicia"  MinimumValue="0" MaximumValue="100" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>"></asp:RangeValidator>
+                                         <asp:TextBox ID="_procentajeFranquicia" runat="server" class="form-control" ValidationGroup="CerrarOrden"  ></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="_procentajeFranquiciaValidador1" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CerrarOrden" ControlToValidate="_procentajeFranquicia" ></asp:RequiredFieldValidator>
+                                        <cc1:MaskedEditExtender ID="_procentajeFranquiciaMascara" runat="server" TargetControlID="_procentajeFranquicia" Mask="999.99" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus" OnInvalidCssClass="MaskedEditError" MaskType="Number" InputDirection="RightToLeft" AcceptNegative="Left" DisplayMoney="Left" ErrorTooltipEnabled="True" />
                                     
                                  </div>
                                <div class="col-md-6">
-                                         <asp:TextBox ID="_procentajeMatriz" runat="server" class="form-control" ValidationGroup="CerrarOrden"  TextMode="Number"></asp:TextBox>
-                                         <asp:RangeValidator ID="_procentajeMatrizValidador" runat="server" ControlToValidate="_procentajeMatriz"  MinimumValue="0" MaximumValue="100" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>"></asp:RangeValidator>
+                                         <asp:TextBox ID="_procentajeMatriz" runat="server" class="form-control" ValidationGroup="CerrarOrden"  ></asp:TextBox>
+                                         <cc1:MaskedEditExtender ID="_procentajeMatrizMascara" runat="server" TargetControlID="_procentajeMatriz" Mask="999.99" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus" OnInvalidCssClass="MaskedEditError" MaskType="Number" InputDirection="RightToLeft" AcceptNegative="Left" DisplayMoney="Left" ErrorTooltipEnabled="True" />
                                          <asp:RequiredFieldValidator ID="_procentajeMatrizValidador2" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CerrarOrden" ControlToValidate="_procentajeMatriz" ></asp:RequiredFieldValidator>
 
                                </div>
@@ -369,10 +369,18 @@
                         <div class="modal-body">
                              <div class="row">
                                     <div class="col-md-6">
-                                        <asp:GridView ID="_datosObservaciones" runat="server" Width="100%">
+                                        
+                                       <asp:GridView ID="_datosObservaciones" runat="server" Width="100%" AutoGenerateColumns="False">
+                                             <Columns>
+                                             
+                                             <asp:BoundField DataField="NombreUsuario" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Nombre_Usuario%>" />
+                                            <asp:BoundField DataField="DetalleOrdenTrabajoObservacion.FechaCreacionObservacion" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Fecha%>" DataFormatString="{0:d}" />
+                                            <asp:BoundField DataField="DetalleOrdenTrabajoObservacion.Observacion" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Observacion%>" />
+                                            </Columns>
                                              <HeaderStyle CssClass="tableCabecera" ></HeaderStyle>
                                              <FooterStyle CssClass="tablePiePagina"></FooterStyle>
-                                        </asp:GridView>     
+
+                                        </asp:GridView>      
                                     </div>
                                     
                               </div>

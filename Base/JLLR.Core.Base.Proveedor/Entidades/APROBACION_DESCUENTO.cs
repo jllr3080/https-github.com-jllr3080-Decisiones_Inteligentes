@@ -22,7 +22,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<decimal> VALOR_FRANQUICIA_APROBACION { get; set; }
         public Nullable<decimal> VALOR_MATRIZ_APROBACION { get; set; }
     
-        public virtual ORDEN_TRABAJO ORDEN_TRABAJO { get; set; }
         public virtual ORDEN_TRABAJO_DESCUENTO ORDEN_TRABAJO_DESCUENTO { get; set; }
+        public virtual ORDEN_TRABAJO ORDEN_TRABAJO { get; set; }
     }
 }

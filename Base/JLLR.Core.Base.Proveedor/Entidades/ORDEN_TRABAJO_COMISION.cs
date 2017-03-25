@@ -21,7 +21,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<int> USUARIO_ID { get; set; }
         public Nullable<decimal> VALOR { get; set; }
     
-        public virtual ORDEN_TRABAJO ORDEN_TRABAJO { get; set; }
         public virtual VENTA_COMISION VENTA_COMISION { get; set; }
+        public virtual ORDEN_TRABAJO ORDEN_TRABAJO { get; set; }
     }
 }

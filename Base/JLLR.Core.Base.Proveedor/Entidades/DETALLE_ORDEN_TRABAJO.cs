@@ -25,7 +25,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<long> ORDEN_TRABAJO_ID { get; set; }
         public Nullable<int> PRODUCTO_ID { get; set; }
         public Nullable<int> COLOR_ID { get; set; }
-        public Nullable<int> CANTIDAD { get; set; }
+        public Nullable<decimal> CANTIDAD { get; set; }
         public Nullable<decimal> VALOR_UNITARIO { get; set; }
         public Nullable<decimal> PORCENTAJE_IMPUESTO { get; set; }
         public Nullable<decimal> VALOR_TOTAL { get; set; }
@@ -37,10 +37,10 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public string TRATAMIENTO_ESPECIAL { get; set; }
         public string NUMERO_INTERNO_PRENDA { get; set; }
         public Nullable<decimal> NUMERO_LIBRAS { get; set; }
-        public string NUMERO_ORDEN_MANUAL { get; set; }
         public Nullable<bool> SUAVIZANTE { get; set; }
         public Nullable<bool> DESENGRASANTE { get; set; }
         public Nullable<bool> FIJADOR_COLOR { get; set; }
+        public string INFORMACION_VISUAL { get; set; }
     
         public virtual COLOR COLOR { get; set; }
         public virtual PRODUCTO PRODUCTO { get; set; }

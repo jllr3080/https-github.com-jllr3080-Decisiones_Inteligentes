@@ -49,7 +49,7 @@ namespace Web.Models.Venta.Negocio
         /// Cantidad  de  prensdas 
         /// </summary>
         
-        public int? Cantidad { get; set; }
+        public decimal? Cantidad { get; set; }
 
         /// <summary>
         /// Valor Unitario de las prendas
@@ -119,11 +119,6 @@ namespace Web.Models.Venta.Negocio
         public decimal? NumeroLibras { get; set; }
 
 
-        /// <summary>
-        /// NumeroOrdenManual
-        /// </summary>
-        
-        public string NumeroOrdenManual { get; set; }
 
         /// <summary>
         /// Suavizante

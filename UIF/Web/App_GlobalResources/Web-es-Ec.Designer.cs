@@ -304,7 +304,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Código de la Orden de  Trabajo.
+        ///   Busca una cadena traducida similar a Código Interno.
         /// </summary>
         internal static string Label_Cabecera_Grid_Codigo_Orden_Trabajo {
             get {
@@ -421,7 +421,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Número de  Orden.
+        ///   Busca una cadena traducida similar a Numero de Orden.
         /// </summary>
         internal static string Label_Cabecera_Grid_Numero_Orden {
             get {
@@ -525,6 +525,15 @@ namespace Resources {
         internal static string Label_Ciudad {
             get {
                 return ResourceManager.GetString("Label_Ciudad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Código Interno.
+        /// </summary>
+        internal static string Label_Codigo_Interno {
+            get {
+                return ResourceManager.GetString("Label_Codigo_Interno", resourceCulture);
             }
         }
         
@@ -898,7 +907,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Porcentaje Franquicia.
+        ///   Busca una cadena traducida similar a Valor Propuesto  Franquicia.
         /// </summary>
         internal static string Label_Porcentaje_Franquicia {
             get {
@@ -907,7 +916,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Porcentaje Matriz.
+        ///   Busca una cadena traducida similar a Valor Propuesto Matriz .
         /// </summary>
         internal static string Label_Porcentaje_Matriz {
             get {
@@ -1632,6 +1641,15 @@ namespace Resources {
         internal static string Titulo_Pagina_Aprobacion_Descuento {
             get {
                 return ResourceManager.GetString("Titulo_Pagina_Aprobacion_Descuento", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Arqueo Caja.
+        /// </summary>
+        internal static string Titulo_Pagina_Arqueo_Caja {
+            get {
+                return ResourceManager.GetString("Titulo_Pagina_Arqueo_Caja", resourceCulture);
             }
         }
         

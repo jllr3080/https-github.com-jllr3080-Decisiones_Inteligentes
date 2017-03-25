@@ -634,15 +634,6 @@ namespace Web.Venta {
         protected global::System.Web.UI.WebControls.TextBox _procentajeFranquicia;
         
         /// <summary>
-        /// Control _procentajeFranquiciavalidador.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RangeValidator _procentajeFranquiciavalidador;
-        
-        /// <summary>
         /// Control _procentajeFranquiciaValidador1.
         /// </summary>
         /// <remarks>
@@ -650,6 +641,15 @@ namespace Web.Venta {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator _procentajeFranquiciaValidador1;
+        
+        /// <summary>
+        /// Control _procentajeFranquiciaMascara.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.MaskedEditExtender _procentajeFranquiciaMascara;
         
         /// <summary>
         /// Control _procentajeMatriz.
@@ -661,13 +661,13 @@ namespace Web.Venta {
         protected global::System.Web.UI.WebControls.TextBox _procentajeMatriz;
         
         /// <summary>
-        /// Control _procentajeMatrizValidador.
+        /// Control _procentajeMatrizMascara.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RangeValidator _procentajeMatrizValidador;
+        protected global::AjaxControlToolkit.MaskedEditExtender _procentajeMatrizMascara;
         
         /// <summary>
         /// Control _procentajeMatrizValidador2.
