@@ -30,7 +30,7 @@ namespace Web.Models.Venta.Negocio
         /// <summary>
         /// Orden de  trabajo
         /// </summary>
-        public OrdenTrabajoVistaModelo OrdenTrabajo { get; set; }
+        public DetalleOrdenTrabajoVistaModelo DetalleOrdenTrabajo { get; set; }
 
         /// <summary>
         /// FechaGeneracionComision

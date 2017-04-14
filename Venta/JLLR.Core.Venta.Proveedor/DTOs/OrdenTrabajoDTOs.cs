@@ -23,5 +23,17 @@ namespace JLLR.Core.Venta.Proveedor.DTOs
         /// Detalle de la orden de  trabajo
         /// </summary>
         public List<DETALLE_ORDEN_TRABAJO> DetalleOrdenTrabajos { get; set; }
+
+        /// <summary>
+        /// Abono
+        /// </summary>
+
+        public decimal? Abono { get; set; }
+
+        /// <summary>
+        /// PerfilId
+        /// </summary>
+
+        public int? PerfilId { get; set; }
     }
 }

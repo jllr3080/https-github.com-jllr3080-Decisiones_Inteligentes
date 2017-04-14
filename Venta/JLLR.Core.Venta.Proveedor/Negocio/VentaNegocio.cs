@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JLLR.Core.Base.Proveedor.DAOs;
 using JLLR.Core.Base.Proveedor.Entidades;
 using JLLR.Core.Venta.Proveedor.DAOs;
 using JLLR.Core.Venta.Proveedor.DTOs;
@@ -14,7 +15,7 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
     /// <summary>
     /// Metodos de la venta de  negocio
     /// </summary>
-    public class VentaNegocio
+    public class VentaNegocio:BaseDAOs
     {
         #region DECLARACION E INSTANCIAS
         private readonly OrdenTrabajoDAOs _ordenTrabajoDaOs= new OrdenTrabajoDAOs();
@@ -31,6 +32,25 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
         #region NEGOCIO
 
         #region  TRANSACCIONAL
+
+        /// <summary>
+        /// Graba el reverso de las comisiones  de una orden de trabajo este es el caso de  anulacion
+        /// </summary>
+        /// <param name="ordenTrabajoId"></param>
+        /// <param name="usuarioId"></param>
+        public void GrabarReversoOrdenTrabajoComision(int ordenTrabajoId, int usuarioId)
+        {
+            try
+            {
+               _transaccionalDaOs.GrabarReversoOrdenTrabajoComision(ordenTrabajoId,usuarioId);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         /// <summary>
         /// Obtiene todas las observaciones  de las prendas por  
@@ -76,7 +96,7 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
         /// </summary>
         /// <param name="ordenTrabajoDtOs"></param>
         /// <returns></returns>
-        public ORDEN_TRABAJO GrabarOrdenTrabajoCompleta(OrdenTrabajoDTOs ordenTrabajoDtOs)
+        public OrdenTrabajoDTOs GrabarOrdenTrabajoCompleta(OrdenTrabajoDTOs ordenTrabajoDtOs)
         {
             try
             {
@@ -330,7 +350,6 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
 
         #endregion
 
-
         #region REPORTES
 
         /// <summary>
@@ -433,6 +452,28 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
                 throw;
             }
         }
+
+
+        /// <summary>
+        /// Metodo para extraer solo el detalle de la orden de  trabajo
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public IQueryable<DETALLE_ORDEN_TRABAJO> ObtenerDetalleOrdenTrabajoPorNumeroOrdenYPuntoVenta(string numeroOrden,
+            int puntoVentaId)
+        {
+            try
+            {
+                return _transaccionalDaOs.ObtenerDetalleOrdenTrabajoPorNumeroOrdenYPuntoVenta(numeroOrden, puntoVentaId);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
         #endregion
 
 

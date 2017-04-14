@@ -25,5 +25,17 @@ namespace JLLR.Core.Venta.Servicio.DTOs
         [DataMember]
         public List<DetalleOrdenTrabajoModelo> DetalleOrdenTrabajo { get; set; }
 
+        /// <summary>
+        /// Abono
+        /// </summary>
+        [DataMember]
+        public  decimal? Abono{ get; set; }
+
+        /// <summary>
+        /// PerfilId
+        /// </summary>
+        [DataMember]
+        public int? PerfilId { get; set; }
+
     }
 }

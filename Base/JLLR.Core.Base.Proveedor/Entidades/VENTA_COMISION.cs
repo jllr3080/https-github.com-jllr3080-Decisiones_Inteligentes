@@ -24,11 +24,15 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<int> VENDEDOR_ID { get; set; }
         public Nullable<System.DateTime> FECHA_COMISION { get; set; }
         public Nullable<bool> ESTA_HABILITADO { get; set; }
+        public Nullable<decimal> PORCENTAJE_COMISION { get; set; }
         public Nullable<int> SUCURSAL_ID { get; set; }
         public Nullable<int> PUNTO_VENTA_ID { get; set; }
-        public Nullable<decimal> PORCENTAJE_COMISION { get; set; }
+        public Nullable<bool> VIENE_REGLA { get; set; }
+        public Nullable<int> TIPO_LAVADO_ID { get; set; }
+        public Nullable<int> PROMOCION_APLICADA { get; set; }
     
         public virtual VENDEDOR VENDEDOR { get; set; }
+        public virtual TIPO_LAVADO TIPO_LAVADO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ORDEN_TRABAJO_COMISION> ORDEN_TRABAJO_COMISION { get; set; }
     }

@@ -101,7 +101,16 @@ namespace Web.Reporte
                 _marca.DataSource = _servicioDelegadoGeneral.ObtenerMarcas();
                 _marca.DataBind();
                 _fechaDesde.Text = DateTime.Now.ToShortDateString();
-                
+
+                ListItem _item = new ListItem();
+                _item.Value = "-1";
+                _item.Text = "NINGUNO";
+                _prenda.Items.Add(_item);
+                _marca.Items.Add(_item);
+                _prenda.SelectedIndex=_prenda.Items.IndexOf(_prenda.Items.FindByValue("-1"));
+                _marca.SelectedIndex=_marca.Items.IndexOf(_marca.Items.FindByValue("-1"));
+
+
             }
             catch (Exception ex)
             {

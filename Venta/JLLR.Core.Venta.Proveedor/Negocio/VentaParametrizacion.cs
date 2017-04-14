@@ -73,13 +73,14 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
         /// </summary>
         /// <param name="sucursalId"></param>
         /// <param name="puntoVentaId"></param>
-        /// <param name="vendedorId"></param>
+        /// <param name="vieneRegla"></param>
+        /// <param name="tipoLavadoId"></param>
         /// <returns></returns>
-        public VENTA_COMISION ObtenerbVentaComisionPorVariosParametros(int sucursalId, int puntoVentaId, int vendedorId)
+        public VENTA_COMISION ObtenerbVentaComisionPorVariosParametros(int sucursalId, int puntoVentaId, bool vieneRegla, int tipoLavadoId, int promocionAplicada)
         {
             try
             {
-                return _ventaComisionDaOs.ObtenerbVentaComisionPorVariosParametros(sucursalId, puntoVentaId, vendedorId);
+                return _ventaComisionDaOs.ObtenerbVentaComisionPorVariosParametros(sucursalId, puntoVentaId,vieneRegla,tipoLavadoId,promocionAplicada);
             }
             catch (Exception ex)
             {

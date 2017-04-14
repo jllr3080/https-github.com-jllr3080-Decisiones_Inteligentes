@@ -16,5 +16,7 @@ namespace JLLR.Core.Venta.Proveedor.Util
         {
             Vendedor=4
         }
+
+      
     }
 }

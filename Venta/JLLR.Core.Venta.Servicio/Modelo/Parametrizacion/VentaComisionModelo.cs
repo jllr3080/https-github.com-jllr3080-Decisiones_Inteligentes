@@ -57,5 +57,17 @@ namespace JLLR.Core.Venta.Servicio.Modelo.Parametrizacion
         /// </summary>
         [DataMember]
         public int? PuntoVentaId { get; set; }
+
+        /// <summary>
+        ///TipoLavadoId
+        /// </summary>
+        [DataMember]
+        public int? TipoLavadoId { get; set; }
+
+        /// <summary>
+        ///TipoLavadoId
+        /// </summary>
+        [DataMember]
+        public bool? VieneRegla { get; set; }
     }
 }

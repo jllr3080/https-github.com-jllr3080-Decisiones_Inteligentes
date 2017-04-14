@@ -70,4 +70,9 @@ namespace Web.Util
     {
         Quito=1
     }
+
+    public enum TipoIdentificacion
+    {
+        RUC=1
+    }
 }

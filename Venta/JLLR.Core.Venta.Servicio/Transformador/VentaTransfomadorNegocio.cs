@@ -22,6 +22,7 @@ namespace JLLR.Core.Venta.Servicio.Transformador
 
         #region DECLARACIONES  E INSTANCIAS
         private readonly VentaNegocio _ventaNegocio = new VentaNegocio();
+        private readonly VentaParametrizacion _ventaParametrizacion= new VentaParametrizacion();
         private readonly EnsambladorEntidadDTOs _ensambladorEntidadDTOs = new EnsambladorEntidadDTOs();
         private readonly EnsambladorModeloDTOs _ensambladorModeloDTOs = new EnsambladorModeloDTOs();
         private readonly EnsambladorEntidad _ensambladorEntidad = new EnsambladorEntidad();
@@ -36,6 +37,25 @@ namespace JLLR.Core.Venta.Servicio.Transformador
 
 
         #region TRANSACCIONAL
+
+        /// <summary>
+        /// Graba el reverso de las comisiones  de una orden de trabajo este es el caso de  anulacion
+        /// </summary>
+        /// <param name="ordenTrabajoId"></param>
+        /// <param name="usuarioId"></param>
+        public void GrabarReversoOrdenTrabajoComision(int ordenTrabajoId, int usuarioId)
+        {
+            try
+            {
+                _ventaNegocio.GrabarReversoOrdenTrabajoComision(ordenTrabajoId, usuarioId);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         /// <summary>
         /// Obtiene todas las observaciones  de las prendas por  
         /// </summary>
@@ -87,11 +107,11 @@ namespace JLLR.Core.Venta.Servicio.Transformador
         /// </summary>
         /// <param name="ordenTrabajoDtOs"></param>
         /// <returns></returns>
-        public OrdenTrabajoModelo GrabarOrdenTrabajoCompleta(OrdenTrabajoDTOs ordenTrabajoDtOs)
+        public OrdenTrabajoDTOs GrabarOrdenTrabajoCompleta(OrdenTrabajoDTOs ordenTrabajoDtOs)
         {
             try
             {
-                return _ensambladorModelo.CrearOrdenTrabajo(_ventaNegocio.GrabarOrdenTrabajoCompleta(_ensambladorEntidadDTOs.CrearOrdenTrabajotOs(ordenTrabajoDtOs)));
+                return _ensambladorModeloDTOs.CrearOrdenTrabajotOs(_ventaNegocio.GrabarOrdenTrabajoCompleta(_ensambladorEntidadDTOs.CrearOrdenTrabajotOs(ordenTrabajoDtOs)));
             }
             catch (Exception ex)
             {
@@ -361,6 +381,27 @@ namespace JLLR.Core.Venta.Servicio.Transformador
             }
         }
 
+        /// <summary>
+        /// Metodo para extraer solo el detalle de la orden de  trabajo
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public List<DetalleOrdenTrabajoModelo> ObtenerDetalleOrdenTrabajoPorNumeroOrdenYPuntoVenta(string numeroOrden,
+            int puntoVentaId)
+        {
+            try
+            {
+                return
+                    _ensambladorModelo.CrearDetalleOrdenesTrabajo(_ventaNegocio.ObtenerDetalleOrdenTrabajoPorNumeroOrdenYPuntoVenta(numeroOrden, puntoVentaId));
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
 
         #endregion
 
@@ -464,6 +505,34 @@ namespace JLLR.Core.Venta.Servicio.Transformador
         }
         #endregion
 
+
+
+        #endregion
+
+        #region PARAMETRIZACION
+        #region VENTA COMISION
+
+        /// <summary>
+        /// Obtener Comision de las sucursal
+        /// </summary>
+        /// <param name="sucursalId"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <param name="vieneRegla"></param>
+        /// <param name="tipoLavadoId"></param>
+        /// <returns></returns>
+        public VentaComisionModelo ObtenerbVentaComisionPorVariosParametros(int sucursalId, int puntoVentaId, bool vieneRegla, int tipoLavadoId,int promocionAplicada)
+        {
+            try
+            {
+                return _ensambladorModelo.CrearVentaComision(_ventaParametrizacion.ObtenerbVentaComisionPorVariosParametros(sucursalId,puntoVentaId,vieneRegla,tipoLavadoId,promocionAplicada));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
         #endregion
 
     }

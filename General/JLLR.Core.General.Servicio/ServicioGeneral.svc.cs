@@ -437,5 +437,31 @@ namespace JLLR.Core.General.Servicio
         }
         #endregion
 
+        #region PARROQUIA
+        /// <summary>
+        /// Obtiene  todas las parroquias  depenedinedo del pais,provincia y canton
+        /// </summary>
+        /// <param name="paisId"></param>
+        /// <param name="ciudadId"></param>
+        /// <param name="estadoId"></param>
+        /// <returns></returns>
+        public List<ParroquiaModelo> ObtenerParroquiasPorVariosParametros(int paisId, int ciudadId, int estadoId)
+        {
+            try
+            {
+                return _generalTransformadorParametrizacion.ObtenerParroquiasPorVariosParametros(paisId, ciudadId,
+                    estadoId);
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+        #endregion
+
     }
 }

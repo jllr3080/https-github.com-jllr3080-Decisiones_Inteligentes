@@ -233,6 +233,7 @@
     <Content Include="Reporte\ReporteEstadoCuenta.aspx" />
     <Content Include="Reporte\ReporteImpresionOrden.aspx" />
     <Content Include="Reporte\ReporteImpresionOrdenPlanta.aspx" />
+    <Content Include="Reporte\ReporteImpresionRapida.aspx" />
     <Content Include="Reporte\ReportePrendaMarca.aspx" />
     <Content Include="RRHH\MultaEmpleado.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -331,11 +332,14 @@
       <DependentUpon>CuentasPorPagar.aspx</DependentUpon>
     </Compile>
     <Compile Include="DTOs\Contabilidad\CuentaPorCobrarVistaDTOs .cs" />
+    <Compile Include="DTOs\Contabilidad\CuentaPorPagarVistaDTOs .cs" />
     <Compile Include="DTOs\FlujoProceso\HistorialProcesoVistaDTOs.cs" />
     <Compile Include="DTOs\Individuo\ClienteGeneralVistaDTOs.cs" />
     <Compile Include="DTOs\Individuo\ClienteVistaDTOs.cs" />
     <Compile Include="DTOs\Individuo\ProveedorVistaDTOs.cs.cs" />
     <Compile Include="DTOs\Logistica\EntregaOrdenTrabajoVistaDTOs.cs" />
+    <Compile Include="DTOs\ReglaNegocio\ParametroEntradaReglaNegocioVistaDTOs.cs" />
+    <Compile Include="DTOs\ReglaNegocio\ParametroSalidaReglaNegocioVistaDTOs.cs" />
     <Compile Include="DTOs\ReglaNegocio\ReglaVistaDTOs.cs" />
     <Compile Include="DTOs\Seguridad\AccesoVistaDTOs.cs" />
     <Compile Include="DTOs\Seguridad\UsuarioVistaDTOs.cs" />
@@ -348,6 +352,7 @@
     <Compile Include="DTOs\Venta\NumeroPrendaVistaDTOs.cs" />
     <Compile Include="DTOs\Venta\OrdenTrabajoDescuentoVistaDTO.cs" />
     <Compile Include="DTOs\Venta\OrdenTrabajoVistaDTOs.cs" />
+    <Compile Include="DTOs\Venta\ParametroReversoVistaDTOs.cs" />
     <Compile Include="DTOs\Venta\PrendaMarcaVistaDTOs.cs" />
     <Compile Include="FE\FacturaElectronica.aspx.cs">
       <DependentUpon>FacturaElectronica.aspx</DependentUpon>
@@ -426,6 +431,7 @@
     <Compile Include="Models\General\ModeloVistaModelo.cs" />
     <Compile Include="Models\General\PaisVistaModelo.cs" />
     <Compile Include="Models\General\ParametroVistaModelo.cs" />
+    <Compile Include="Models\General\ParroquiaVistaModelo.cs" />
     <Compile Include="Models\General\PuntoVentaVistaModelo.cs" />
     <Compile Include="Models\General\SucursalVistaModelo.cs" />
     <Compile Include="Models\General\TipoCorreoElectronicoVistaModelo.cs" />
@@ -456,6 +462,7 @@
     <Compile Include="Models\Venta\Negocio\AprobacionDescuentoVistaModelo.cs" />
     <Compile Include="Models\Venta\Negocio\DetalleOrdenTrabajoObservacionVistaModelo.cs" />
     <Compile Include="Models\Venta\Negocio\DetalleOrdenTrabajoVistaModelo.cs" />
+    <Compile Include="Models\Venta\Negocio\DetallePrendaOrdenTrabajoVistaModelo.cs" />
     <Compile Include="Models\Venta\Negocio\HistorialReglaVistaModelo.cs" />
     <Compile Include="Models\Venta\Negocio\OrdenTrabajoComisionVistaModelo.cs" />
     <Compile Include="Models\Venta\Negocio\OrdenTrabajoDescuentoVistaModelo.cs" />
@@ -525,6 +532,13 @@
     </Compile>
     <Compile Include="Reporte\ReporteImpresionOrdenPlanta.aspx.designer.cs">
       <DependentUpon>ReporteImpresionOrdenPlanta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reporte\ReporteImpresionRapida.aspx.cs">
+      <DependentUpon>ReporteImpresionRapida.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reporte\ReporteImpresionRapida.aspx.designer.cs">
+      <DependentUpon>ReporteImpresionRapida.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reporte\ReportePrendaMarca.aspx.cs">
       <DependentUpon>ReportePrendaMarca.aspx</DependentUpon>
@@ -596,6 +610,7 @@
     <Compile Include="ServicioDelegado\ServicioDelegadoVenta.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Util\Enum.cs" />
+    <Compile Include="Util\Validacion.cs" />
     <Compile Include="Venta\AprobacionDescuento.aspx.cs">
       <DependentUpon>AprobacionDescuento.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -642,7 +657,6 @@
     <Folder Include="Models\RRHH\" />
     <Folder Include="Models\Seguridad\Parametrizacion\" />
     <Folder Include="Parametrizacion\" />
-    <Folder Include="Reporte\Contabilidad\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\Web-es-Ec.resx">
@@ -651,11 +665,14 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reporte\Contabilidad\ReporteCuentaPorCobrar.rdlc" />
+    <EmbeddedResource Include="Reporte\Contabilidad\ReporteCuentaPorPagar.rdlc" />
     <EmbeddedResource Include="Reporte\FlujoProceso\ReporteEntregaRecepcioPrendas.rdlc" />
     <EmbeddedResource Include="Reporte\Venta\Rdlc\ReporteDiario.rdlc" />
     <EmbeddedResource Include="Reporte\Venta\Rdlc\ReporteEstadisticaGeneralPrendas.rdlc" />
     <EmbeddedResource Include="Reporte\Venta\Rdlc\ReporteEstadoCuenta.rdlc" />
     <EmbeddedResource Include="Reporte\Venta\Rdlc\ReporteImpresionOrdenPlanta.rdlc" />
+    <EmbeddedResource Include="Reporte\Venta\Rdlc\ReporteImpresionRapida.rdlc" />
     <EmbeddedResource Include="Reporte\Venta\Rdlc\ReporteOrdenTrabajo.rdlc" />
     <EmbeddedResource Include="Reporte\Venta\Rdlc\ReportePrendaMarca.rdlc" />
   </ItemGroup>

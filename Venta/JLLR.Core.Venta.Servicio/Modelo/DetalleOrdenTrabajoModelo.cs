@@ -35,12 +35,7 @@ namespace JLLR.Core.Venta.Servicio.Modelo
         [DataMember]
         public ProductoModelo Producto { get; set; }
 
-        /// <summary>
-        /// Producto
-        /// </summary>
-        [DataMember]
-        public General.Servicio.Modelo.ColorModelo Color { get; set; }
-
+        
         /// <summary>
         /// Impuesto    
         /// </summary>
@@ -71,55 +66,19 @@ namespace JLLR.Core.Venta.Servicio.Modelo
         [DataMember]
         public decimal? ValorTotal { get; set; }
 
-        /// <summary>
-        /// Observacion
-        /// </summary>
-        [DataMember]
-        public string Observacion{ get; set; }
-
+        
         /// <summary>
         /// ProductoTalla
         /// </summary>
         [DataMember]
         public ProductoTallaModelo ProductoTalla { get; set; }
 
-        /// <summary>
-        /// Marca
-        /// </summary>
-        [DataMember]
-        public MarcaModelo Marca { get; set; }
-
-        /// <summary>
-        /// Material
-        /// </summary>
-        [DataMember]
-        public MaterialModelo Material { get; set; }
-
+        
         /// <summary>
         /// VentaComision
         /// </summary>
         [DataMember]
         public VentaComisionModelo VentaComision { get; set; }
-
-        /// <summary>
-        /// TratamientoEspecial
-        /// </summary>
-        [DataMember]
-        public string TratamientoEspecial{ get; set; }
-
-
-        /// <summary>
-        /// NumeroInternoPrenda
-        /// </summary>
-        [DataMember]
-        public string NumeroInternoPrenda { get; set; }
-
-        /// <summary>
-        /// NumeroLibras
-        /// </summary>
-        [DataMember]
-        public decimal? NumeroLibras { get; set; }
-
 
        
 
@@ -143,9 +102,28 @@ namespace JLLR.Core.Venta.Servicio.Modelo
         public bool? FijadorColor { get; set; }
 
         /// <summary>
-        /// DetalleOrdenTrabajoObservacion
+        /// ValorTotalUnitario
         /// </summary>
         [DataMember]
-        public List<DetalleOrdenTrabajoObservacionModelo> DetalleOrdenTrabajoObservacion { get; set;  }
+        public decimal? ValorTotalUnitario { get; set; }
+
+        /// <summary>
+        /// ValorTotalDescuento
+        /// </summary>
+        [DataMember]
+        public decimal? ValorDescuento { get; set; }
+
+        /// <summary>
+        /// ValorTotalDescuento
+        /// </summary>
+        [DataMember]
+        public int? PromocionAplicada { get; set; }
+
+      
+        /// <summary>
+        /// DetallePrendaOrdenTrabajo
+        /// </summary>
+        [DataMember]
+        public List<DetallePrendaOrdenTrabajoModelo> DetallePrendaOrdenTrabajo { get; set; }
     }
 }

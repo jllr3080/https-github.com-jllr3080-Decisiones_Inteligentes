@@ -27,6 +27,79 @@ namespace Web.ServicioDelegado
         private static string direccionUrl = "http://localhost/Decisiones_Inteligentes_Contabilidad/ServicioContabilidad.svc/";
 
         #region TRANSACCIONAL
+        /// <summary>
+        /// Obtiene el historial de las cuentas por  cobrar por numero de  orden
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <param name="sucursalId"></param>
+        /// <returns></returns>
+        public List<CuentaPorCobrarVistaDTOs> ObtenerHistorialCuentaPorCobrarPorVariosParametros(string numeroOrden, int puntoVentaId, int sucursalId)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerHistorialCuentaPorCobrarPorNumeroOrden?numeroOrden=" + numeroOrden + "&puntoVentaId=" + puntoVentaId + "&sucursalId=" + sucursalId);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<CuentaPorCobrarVistaDTOs>>(json);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene el historial de las cuentas por  cobrar por numero de  orden
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <param name="sucursalId"></param>
+        /// <returns></returns>
+        public List<CuentaPorPagarVistaDTOs> ObtenerHistorialCuentaPorPagarPorVariosParametros(string numeroOrden, int puntoVentaId, int sucursalId)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerHistorialCuentaPorPagarPorVariosParametros?numeroOrden=" + numeroOrden + "&puntoVentaId=" + puntoVentaId + "&sucursalId=" + sucursalId);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<CuentaPorPagarVistaDTOs>>(json);
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        /// <summary>
+        /// Obtiene el historial de las cuentas por  cobrar por numero de  orden
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        public List<CuentaPorPagarVistaDTOs> ObtenerHistorialCuentaPorPagarPorNumeroOrden(string numeroOrden)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerHistorialCuentaPorPagarPorNumeroOrden?numeroOrden=" + numeroOrden);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<CuentaPorPagarVistaDTOs>>(json);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
 
         /// <summary>
         /// Graba la cuenta por pagar  
@@ -93,6 +166,34 @@ namespace Web.ServicioDelegado
                 throw;
             }
         }
+        /// <summary>
+        /// Obtener  las cuentas  por  cobrar  por  fecha desde y  hasta  y el punto de  venta
+        /// </summary>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechaHasta"></param>
+        /// <param name="sucursalId"></param>
+        /// <returns></returns>
+        public List<CuentaPorPagarVistaDTOs> ObtenerCuentaPorPagarPorFechas(string fechaDesde, string fechaHasta,
+            int sucursalId)
+        {
+
+            try
+            {
+
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerCuentaPorPagarPorFechas?fechaDesde=" + fechaDesde+ "&fechaHasta="+ fechaHasta+ "&sucursalId="+ sucursalId);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<CuentaPorPagarVistaDTOs>>(json);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
         #region CUENTA POR COBRAR
@@ -152,6 +253,35 @@ namespace Web.ServicioDelegado
                 throw;
             }
         }
+
+        /// <summary>
+        /// Obtener las cuentas  por  cobrar por  fecha
+        /// </summary>
+        /// <param name="sucursalId"></param>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechaHasta"></param>
+        /// <returns></returns>
+
+        public List<CuentaPorCobrarVistaModelo> ObtenerCuentasPorCobrarPorFecha(int sucursalId, string fechaDesde,
+            string fechaHasta)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerCuentasPorCobrarPorFecha?sucursalId=" + sucursalId + "&fechaDesde=" + fechaDesde + "&fechaHasta=" + fechaHasta);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<CuentaPorCobrarVistaModelo>>(json);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
         #endregion
 
         #region HISTORIAL CUENTAS POR COBRAR
@@ -263,6 +393,34 @@ namespace Web.ServicioDelegado
                 //var js = new JavaScriptSerializer();
                 //return js.Deserialize<CuentaPorPagarVistaModelo>(json);
 
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtener  las cuentas  por pagar por  fecha
+        /// </summary>
+        /// <param name="sucursalId"></param>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechahasta"></param>
+        /// <returns></returns>
+
+        public List<CuentaPorPagarVistaModelo> ObtenerCuentaPorPagarPorFecha(int sucursalId, string fechaDesde,
+            string fechaHasta)
+        {
+
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerCuentaPorPagarPorFecha?sucursalId=" + sucursalId + "&fechaDesde=" + fechaDesde + "&fechaHasta=" + fechaHasta);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<CuentaPorPagarVistaModelo>>(json);
             }
             catch (Exception)
             {

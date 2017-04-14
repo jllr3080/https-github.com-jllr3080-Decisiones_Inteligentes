@@ -22,7 +22,7 @@
             </div>
              <div class="row">
                     <div class="col-md-3">
-                        <asp:TextBox ID="_numeroDocumento" runat="server" maxlength="13" class="form-control" ValidationGroup="BusquedaCliente"></asp:TextBox>
+                        <asp:TextBox ID="_numeroDocumento" runat="server" maxlength="13" class="form-control" ValidationGroup="BusquedaCliente" AutoCompleteType="Disabled"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="_numeroDocumentoValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="BusquedaCliente" ControlToValidate="_numeroDocumento" ></asp:RequiredFieldValidator>
                         
                     </div>
@@ -32,7 +32,7 @@
 
                     </div>
                      <div class="col-md-3">
-                        <asp:Button ID="_btnCrearCliente" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Crear_Cliente%>"  ValidationGroup="BusquedaCliente" class="btn btn-primary" OnClick="_btnCrearCliente_Click"/>
+                        <asp:Button ID="_btnCrearCliente" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Crear_Cliente%>"   class="btn btn-primary" OnClick="_btnCrearCliente_Click"/>
                     </div>
                     
             </div>
@@ -129,9 +129,24 @@
         </div>
         <br>
         <div class="panel panel-default" id="_datosDetalleOrdenTrabajo">
-        <div class="panel-heading"><asp:Literal runat="server" ID="_literalDetalleOrdenTrabajo" Text="<%$ Resources:Web_es_Ec,Panel_Detalle_Orden_Trabajo%>"/></div>
+        <div class="panel-heading">
+            
+             <div class="row">
+                    <div class="col-md-3">
+                        <asp:Literal runat="server" ID="_literalDetalleOrdenTrabajo" Text="<%$ Resources:Web_es_Ec,Panel_Detalle_Orden_Trabajo%>"/>            
+                    </div>       
+                    <div class="col-md-3">
+                    <asp:Button ID="_revisarPromocionesVigentes" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Promociones_Vigentes%>"   class="btn btn-primary" OnClick="_revisarPromocionesVigentes_Click"/>
+                    </div>
+                 <div class="col-md-3">
+                     <asp:Button ID="_crearMarca" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Crear_Marca%>" class="btn btn-primary" OnClick="_crearMarca_Click" Width="100%" />
 
-        <asp:Panel ID="_panelLavadoSeco" runat="server" Visible="False">
+                    </div>
+            </div>       
+
+        </div>
+
+        <asp:Panel ID="_panelLavadoSeco" runat="server" >
             
         <div class="panel-body">
             <div class="row">
@@ -143,13 +158,12 @@
                         <asp:Label ID="_labelTalla" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Talla%>"></asp:Label>
                         
                     </div>    
-                    <div class="col-md-3">
+                <div class="col-md-3">
                         <asp:Label ID="_labelCantidad" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Cantidad%>"></asp:Label>
                         
                     </div>
-                    <div class="col-md-3">
-                        <asp:Label ID="_labelColor" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Color%>"></asp:Label>
-                        
+                      <div class="col-md-3">
+                            <asp:Label ID="_labelValorUnitario" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Valor_Unitario%>"></asp:Label>
                         
                     </div>
                     
@@ -163,7 +177,8 @@
                   <div class="col-md-3">
                       <asp:DropDownList ID="_talla" AutoPostBack="True"  runat="server" CssClass="form-control" ValidationGroup="GrabarDetalleOrdenTrabajo" DataTextField="Descripcion" DataValueField="ProductoTallaId" OnSelectedIndexChanged="_talla_SelectedIndexChanged"></asp:DropDownList>
                       <asp:RequiredFieldValidator ID="_tallaValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GrabarDetalleOrdenTrabajo" ControlToValidate="_talla" ></asp:RequiredFieldValidator>
-                 </div>   
+                 </div>  
+                
                  <div class="col-md-3">
                      <asp:TextBox ID="_cantidad" runat="server" AutoPostBack="True" class="form-control" ValidationGroup="GrabarDetalleOrdenTrabajo" OnTextChanged="_cantidad_TextChanged" TextMode="Number"></asp:TextBox>
                       <asp:RequiredFieldValidator ID="_cantidadValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GrabarDetalleOrdenTrabajo" ControlToValidate="_cantidad" ></asp:RequiredFieldValidator>
@@ -171,94 +186,84 @@
                 </div>
                   
                 <div class="col-md-3">
-                 <asp:DropDownList ID="_color" runat="server" CssClass="form-control" ValidationGroup="GrabarDetalleOrdenTrabajo" DataTextField="Descripcion" DataValueField="ColorId" ></asp:DropDownList>
-                        <asp:RequiredFieldValidator ID="_colorValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GrabarDetalleOrdenTrabajo" ControlToValidate="_color" ></asp:RequiredFieldValidator>
-                </div>
-                    
-            </div>
-            <br>
-            <div class="row">
-                    <div class="col-md-3">
-                            <%--<asp:Label ID="_labelMaterial" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Material%>"></asp:Label>--%>
-                        <asp:Label ID="_labelMarca" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Marca%>"></asp:Label>
-                    </div>
-                    <div class="col-md-3">
-                            
-                        
-                    </div>
-                    <div class="col-md-3">
-                            <asp:Label ID="_labelValorUnitario" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Valor_Unitario%>"></asp:Label>
-                        
-                    </div>
-                    <div class="col-md-3">
-                         <asp:Label ID="_labelValorTotal" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Valor_Total%>"></asp:Label>
-                        
-                    </div>
-                    
-                    
-            </div>
-            <div class="row">
-                  
-                    <div class="col-md-3">
-                      <asp:DropDownList ID="_marca" runat="server" CssClass="form-control" ValidationGroup="GrabarDetalleOrdenTrabajo" DataTextField="Descripcion" DataValueField="MarcaId" OnSelectedIndexChanged="_talla_SelectedIndexChanged"></asp:DropDownList>
-                    <asp:RequiredFieldValidator ID="_marcaValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GrabarDetalleOrdenTrabajo" ControlToValidate="_marca" ></asp:RequiredFieldValidator>
-   
-                    </div>   
-                 <div class="col-md-3">
-                     <asp:Button ID="_crearMarca" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Crear_Marca%>" class="btn btn-primary" OnClick="_crearMarca_Click" Width="100%" />
-
-                    </div>
-                    <div class="col-md-3">
-                         <asp:TextBox ID="_valorUnitario" runat="server" class="form-control" ValidationGroup="GrabarDetalleOrdenTrabajo"  ></asp:TextBox>
+                         <asp:TextBox ID="_valorUnitario" runat="server" class="form-control" ValidationGroup="GrabarDetalleOrdenTrabajo"  ReadOnly="True" ></asp:TextBox>
                         <asp:RequiredFieldValidator ID="_valorUnitarioValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GrabarDetalleOrdenTrabajo" ControlToValidate="_valorUnitario" ></asp:RequiredFieldValidator>
                          <cc1:MaskedEditExtender ID="_mascaraValorUnitario" runat="server" TargetControlID="_valorUnitario" Mask="999.99" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus" OnInvalidCssClass="MaskedEditError" MaskType="Number" InputDirection="RightToLeft" AcceptNegative="Left" DisplayMoney="Left" ErrorTooltipEnabled="True" />
 
                     </div>
+                    
+            </div>
+            <br>
+            <div class="row">
+               
                     <div class="col-md-3">
-                         <asp:TextBox ID="_valorTotal" runat="server" class="form-control" ValidationGroup="GrabarDetalleOrdenTrabajo"  ></asp:TextBox>
+                         <asp:Label ID="_labelValorTotal" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Valor_Total%>"></asp:Label>
+                        
+                    </div>
+                  <div class="col-md-3">
+                        <asp:Label ID="_labelDescuento" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Valor_Descuento%>"></asp:Label>
+                    </div>
+                
+                    <div class="col-md-3">
+                        <asp:Label ID="_labelvalorTotalPagar" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Valor_Total_Pagar%>"></asp:Label>
+                    </div>
+                 <div class="col-md-3">
+                            
+                         <asp:Label ID="_labelPromocionAplicada" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Promocion_Aplicada%>"></asp:Label>
+                    </div>
+             </div>
+             <div class="row">
+                    
+                    <div class="col-md-3">
+                         <asp:TextBox ID="_valorTotal" runat="server" class="form-control" ValidationGroup="GrabarDetalleOrdenTrabajo"  ReadOnly="True"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="_valorTotalValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GrabarDetalleOrdenTrabajo" ControlToValidate="_valorTotal" ></asp:RequiredFieldValidator>
                          <cc1:MaskedEditExtender ID="_valorTotalMascara" runat="server" TargetControlID="_valorTotal" Mask="999.99" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus" OnInvalidCssClass="MaskedEditError" MaskType="Number" InputDirection="RightToLeft" AcceptNegative="Left" DisplayMoney="Left" ErrorTooltipEnabled="True" />
 
                     </div>
-                    
-                    
-            </div>
+                  <div class="col-md-3">
+                         <asp:TextBox ID="_descuento" runat="server" class="form-control" ValidationGroup="GuardarOrden" ReadOnly="True" ></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="_descuentoValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GrabarDetalleOrdenTrabajo" ControlToValidate="_descuento" ></asp:RequiredFieldValidator>
+                         
+                 </div>
+                <div class="col-md-3">
+                         <asp:TextBox ID="_valorTotalPagar" runat="server" class="form-control" ValidationGroup="GuardarOrden"  ReadOnly="True"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="_valorTotalPagarValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GrabarDetalleOrdenTrabajo" ControlToValidate="_valorTotalPagar" ></asp:RequiredFieldValidator>
+                         
+                 </div>
+                  <div class="col-md-3">
+                       
+                      <asp:TextBox ID="_promocionAplicada" runat="server" class="form-control" ValidationGroup="GuardarOrden" ReadOnly="True"   ForeColor="Red"></asp:TextBox>
+                        <asp:HiddenField ID="_promocionId" runat="server" />
+                 </div>
+             </div>
+           
+             <div>
             <br>
-             <div class="row">
-                   <div class="col-md-3">
-                         <asp:Label ID="_labelObservacion" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Estado_Prenda%>"></asp:Label>
-                    </div>
-                 <div class="col-md-3">
-                         <asp:Label ID="_labelTratamientoEspecial" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Tratamiento_Especial%>"></asp:Label>
-                    </div>
-                  <div class="col-md-3">
-                         <asp:Label ID="_labelNumeroInterno" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Numero_Interno%>"></asp:Label>
-                    </div>
+                <div class="row">
+               
                     <div class="col-md-3">
-                         <asp:Label ID="_labelinformacionVisual" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Informacion_Visual%>"></asp:Label>
+                        <asp:CheckBox ID="_suavizante" runat="server" CssClass="form-control" Text="<%$ Resources:Web_es_Ec,Label_Suavizante%>" Visible="False" AutoPostBack="True" OnCheckedChanged="_suavizante_CheckedChanged"/>
+                         
+                        
                     </div>
-              </div> 
-             <div class="row">
-                   <div class="col-md-3">
-                        <asp:TextBox ID="_observacion" runat="server" class="form-control" ValidationGroup="GrabarDetalleOrdenTrabajo"  ></asp:TextBox>
+                  <div class="col-md-3">
+                        <asp:CheckBox ID="_fijadorColor" runat="server" CssClass="form-control" Text="<%$ Resources:Web_es_Ec,Label_Fijado_Color%>" Visible="False" AutoPostBack="True" OnCheckedChanged="_fijadorColor_CheckedChanged"/>
                     </div>
+                
                     <div class="col-md-3">
-                        <asp:TextBox ID="_tratamientoEspecial" runat="server" class="form-control" ValidationGroup="GrabarDetalleOrdenTrabajo"  ></asp:TextBox>
+                        <asp:CheckBox ID="_desengrasante" runat="server" CssClass="form-control" Text="<%$ Resources:Web_es_Ec,Label_Desengrasante%>" Visible="False" AutoPostBack="True" OnCheckedChanged="_desengrasante_CheckedChanged"/>
                     </div>
-                  <div class="col-md-3">
-                        <asp:TextBox ID="_numeroInterno" runat="server" class="form-control" ValidationGroup="GrabarDetalleOrdenTrabajo"  MaxLength="10" ></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="_numeroInternoValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GrabarDetalleOrdenTrabajo" ControlToValidate="_numeroInterno" ></asp:RequiredFieldValidator>
-                    </div>
-                  <div class="col-md-3">
-                        <asp:TextBox ID="_informacionVisual" runat="server" class="form-control" ValidationGroup="GrabarDetalleOrdenTrabajo"   ></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="_informacionVisualValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GrabarDetalleOrdenTrabajo" ControlToValidate="_informacionVisual" ></asp:RequiredFieldValidator>
-                    </div>
-              </div> 
+                 
+             </div>     
             <br>
-
+            
             <div class="row">
                     <div class="col-md-3">
                        <asp:Button ID="_btnAgregarDetalleOrdenTrabajo" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Agregar_Orden_Trabajo%>"  ValidationGroup="GrabarDetalleOrdenTrabajo" class="btn btn-primary" OnClick="_btnAgregarDetalleOrdenTrabajo_Click"/>
+                       
+                    </div>
+                     <div class="col-md-3">
+                        <asp:CheckBox ID="_envioMatriz" runat="server" CssClass="form-control" Text="<%$ Resources:Web_es_Ec,Label_Entrega_Matriz%>" Visible="True"/>
                        
                     </div>
                    
@@ -268,7 +273,7 @@
               <div class="row">
                     <div class="col-md-12" style="text-align: center">
                        
-
+                        <asp:HiddenField ID="_nombreMarca" runat="server" />
                             <asp:GridView ID="_datos" runat="server" AutoGenerateColumns="False" OnRowCommand="_datos_RowCommand"  Width="100%" OnRowDataBound="_datos_RowDataBound" ShowFooter="True" >
                                 
                                 <Columns>
@@ -283,273 +288,57 @@
                                     <asp:BoundField DataField="ProductoTalla.Descripcion"  HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Talla%>"  >
                                     <ItemStyle HorizontalAlign="Left" VerticalAlign="Middle" />
                                     </asp:BoundField>
-                                    <asp:BoundField DataField="Cantidad" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Cantidad%>"   ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle"  >
-                                    <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="Marca.Descripcion" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Marca%>"  >
+                                   <asp:BoundField DataField="PromocionAplicada" HeaderText="<%$ Resources:Web_es_Ec,Label_Codigo_Promocion%>"    ItemStyle-HorizontalAlign="Left" ItemStyle-VerticalAlign="Middle" >
                                     <ItemStyle HorizontalAlign="Left" VerticalAlign="Middle" />
                                     </asp:BoundField>
-                                    <asp:BoundField DataField="Color.Descripcion"  HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Color%>" >
+                                      <asp:BoundField DataField="NombrePromocionAplicada" HeaderText="<%$ Resources:Web_es_Ec,Label_Promocion_Aplicada%>"   DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" ItemStyle-VerticalAlign="Middle" >
                                     <ItemStyle HorizontalAlign="Left" VerticalAlign="Middle" />
+                                    </asp:BoundField>
+                                     <asp:BoundField DataField="Cantidad" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Cantidad%>"   ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle"  >
+                                    <ItemStyle HorizontalAlign="Right" VerticalAlign="Middle" />
                                     </asp:BoundField>
                                     <asp:BoundField DataField="ValorUnitario"  HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Valor_Unitario%>"  DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" ItemStyle-VerticalAlign="Middle" >
                                     <ItemStyle HorizontalAlign="Right" VerticalAlign="Middle" />
                                     </asp:BoundField>
-                                    <asp:BoundField DataField="ValorTotal" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Valor_Total%>"   DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" ItemStyle-VerticalAlign="Middle" >
+                                    <asp:BoundField DataField="ValorTotalUnitario" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Valor_Total%>"   DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" ItemStyle-VerticalAlign="Middle" >
                                     <ItemStyle HorizontalAlign="Right" VerticalAlign="Middle" />
                                     </asp:BoundField>
+                                    <asp:BoundField DataField="ValorDescuento" HeaderText="<%$ Resources:Web_es_Ec,Label_Valor_Descuento%>"   DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" ItemStyle-VerticalAlign="Middle" >
+                                    <ItemStyle HorizontalAlign="Right" VerticalAlign="Middle" />
+                                    </asp:BoundField>
+                                     <asp:BoundField DataField="ValorTotal" HeaderText="<%$ Resources:Web_es_Ec,Label_Valor_Total_Pagar%>"   DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" ItemStyle-VerticalAlign="Middle" >
+                                    <ItemStyle HorizontalAlign="Right" VerticalAlign="Middle" />
+                                    </asp:BoundField>
+                                     <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <asp:ImageButton ID="_agregarDetalle" runat="server" ImageUrl="~/Content/Imagen/Nuevo.png"  CommandName="Agregar" CommandArgument="<%# ((GridViewRow)Container).RowIndex %>"/>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
                                 </Columns>
                                 <HeaderStyle CssClass="tableCabecera" ></HeaderStyle>
-                                <FooterStyle CssClass="tablePiePagina"></FooterStyle>
+                                <RowStyle CssClass="tableItem"></RowStyle>
+                              <FooterStyle CssClass="tablePiePagina"></FooterStyle>
+                                 
                             </asp:GridView>
 		
                     </div>    
     
               </div>
         </div>
-   
+   </div>
         
         </asp:Panel>
            
-        <asp:Panel ID="_panelLavadoMojado" runat="server" Visible="False">
-                  <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-3">
-                        <asp:Label ID="_labelPrendaPorLibras" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Prenda%>"></asp:Label>
-                        
-                    </div>
-                    <div class="col-md-3">
-                        <asp:Label ID="_labelTallaPorLibras" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Talla%>"></asp:Label>
-                        
-                    </div>    
-                    <div class="col-md-3">
-                        <asp:Label ID="_labelCantidadPorLibras" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Cantidad%>"></asp:Label>
-                        
-                    </div>
-                    <div class="col-md-3">
-                        <asp:Label ID="_labelColorPorLibras" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Color%>"></asp:Label>
-                        
-                        
-                    </div>
-                    
-            </div>
-             <div class="row">
-                 <div class="col-md-3">
-                     <asp:DropDownList ID="_prendaPorLibras" AutoPostBack="True" runat="server" CssClass="form-control" ValidationGroup="GrabarDetalleOrdenTrabajo" DataTextField="Nombre" DataValueField="ProductoId" OnSelectedIndexChanged="_prendaPorLibras_SelectedIndexChanged" ></asp:DropDownList>
-                     <asp:RequiredFieldValidator ID="_prendaPorLibrasValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GrabarDetalleOrdenTrabajo" ControlToValidate="_prendaPorLibras" ></asp:RequiredFieldValidator>
-                        
-                 </div>  
-                  <div class="col-md-3">
-                      <asp:DropDownList ID="_tallaPorLibras" AutoPostBack="True"  runat="server" CssClass="form-control" ValidationGroup="GrabarDetalleOrdenTrabajo" DataTextField="Descripcion" DataValueField="ProductoTallaId" OnSelectedIndexChanged="_tallaPorLibras_SelectedIndexChanged" ></asp:DropDownList>
-                      <asp:RequiredFieldValidator ID="_tallaPorLibrasValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GrabarDetalleOrdenTrabajo" ControlToValidate="_tallaPorLibras" ></asp:RequiredFieldValidator>
-                 </div>   
-                 <div class="col-md-3">
-                     <asp:TextBox ID="_cantidadPorLibras" runat="server" AutoPostBack="True" class="form-control" ValidationGroup="GrabarDetalleOrdenTrabajo" OnTextChanged="_cantidadPorLibras_TextChanged"  ></asp:TextBox>
-                      <asp:RequiredFieldValidator ID="_cantidadPorLibrasValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GrabarDetalleOrdenTrabajo" ControlToValidate="_cantidadPorLibras" ></asp:RequiredFieldValidator>
-
-                </div>
-                  
-                <div class="col-md-3">
-                 <asp:DropDownList ID="_colorPorLibras" runat="server" CssClass="form-control" ValidationGroup="GrabarDetalleOrdenTrabajo" DataTextField="Descripcion" DataValueField="ColorId" ></asp:DropDownList>
-                        <asp:RequiredFieldValidator ID="_colorPorLibrasValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GrabarDetalleOrdenTrabajo" ControlToValidate="_colorPorLibras" ></asp:RequiredFieldValidator>
-                </div>
-                    
-            </div>
-            <br>
-            <div class="row">
-                    <div class="col-md-3">
-                            <%--<asp:Label ID="_labelMaterial" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Material%>"></asp:Label>--%>
-                        <asp:Label ID="_labelMarcaPorLibras" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Marca%>"></asp:Label>
-                    </div>
-                    <div class="col-md-3">
-                            
-                        
-                    </div>
-                    <div class="col-md-3">
-                            <asp:Label ID="_labelValorUnitarioPorLibras" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Valor_Unitario%>"></asp:Label>
-                        
-                    </div>
-                    <div class="col-md-3">
-                         <asp:Label ID="_labelValorTotalPorLibras" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Valor_Total%>"></asp:Label>
-                        
-                    </div>
-                    
-                    
-            </div>
-            <div class="row">
-                  
-                    <div class="col-md-3">
-                      <asp:DropDownList ID="_marcaPorLibras" runat="server" CssClass="form-control" ValidationGroup="GrabarDetalleOrdenTrabajo" DataTextField="Descripcion" DataValueField="MarcaId" ></asp:DropDownList>
-                    <asp:RequiredFieldValidator ID="_marcaPorLibrasValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GrabarDetalleOrdenTrabajo" ControlToValidate="_marcaPorLibras" ></asp:RequiredFieldValidator>
-   
-                    </div>   
-                 <div class="col-md-3">
-                     <asp:Button ID="_crearMarcaPorLibras" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Crear_Marca%>" class="btn btn-primary" OnClick="_crearMarca_Click" Width="100%" />
-
-                    </div>
-                    <div class="col-md-3">
-                         <asp:TextBox ID="_valorUnitarioPorLibras" runat="server" class="form-control" ValidationGroup="GrabarDetalleOrdenTrabajo" OnTextChanged="_valorUnitarioPorLibras_TextChanged" AutoPostBack="True"  ></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="_valorUnitarioPorLibrasValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GrabarDetalleOrdenTrabajo" ControlToValidate="_valorUnitarioPorLibras" ></asp:RequiredFieldValidator>
-                         <cc1:MaskedEditExtender ID="_valorUnitarioPorLibrasMascara" runat="server" TargetControlID="_valorUnitarioPorLibras" Mask="999.99" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus" OnInvalidCssClass="MaskedEditError" MaskType="Number" InputDirection="RightToLeft" AcceptNegative="Left" DisplayMoney="Left" ErrorTooltipEnabled="True" />
-
-                    </div>
-                    <div class="col-md-3">
-                         <asp:TextBox ID="_valorTotalPorLibras" runat="server" class="form-control" ValidationGroup="GrabarDetalleOrdenTrabajo"  ></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="_valorTotalPorLibrasValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GrabarDetalleOrdenTrabajo" ControlToValidate="_valorTotalPorLibras" ></asp:RequiredFieldValidator>
-                         <cc1:MaskedEditExtender ID="_valorTotalPorLibrasMascara" runat="server" TargetControlID="_valorTotalPorLibras" Mask="999.99" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus" OnInvalidCssClass="MaskedEditError" MaskType="Number" InputDirection="RightToLeft" AcceptNegative="Left" DisplayMoney="Left" ErrorTooltipEnabled="True" />
-
-                    </div>
-                    
-                    
-            </div>
-            <br>
-             <div class="row">
-                   <div class="col-md-3">
-                         <asp:Label ID="_labelEstadoPrendaPorLibras" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Estado_Prenda%>"></asp:Label>
-                    </div>
-                 <div class="col-md-3">
-                         <asp:Label ID="_labelTratamientoEspecialPorLibras" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Tratamiento_Especial%>"></asp:Label>
-                    </div>
-                  <div class="col-md-3">
-                         <asp:Label ID="_labelNumeroInternoPorLibras" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Numero_Interno%>"></asp:Label>
-                    </div>
-                  <div class="col-md-3">
-                         <asp:Label ID="_labelInformacionVisualPorLibras" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Informacion_Visual%>"></asp:Label>
-                    </div>
-              </div> 
-             <div class="row">
-                   <div class="col-md-3">
-                        <asp:TextBox ID="_estadoPrendaPorLibras" runat="server" class="form-control" ValidationGroup="GrabarDetalleOrdenTrabajo"  ></asp:TextBox>
-                    </div>
-                    <div class="col-md-3">
-                        <asp:TextBox ID="_tratamientoEspecialPorLibras" runat="server" class="form-control" ValidationGroup="GrabarDetalleOrdenTrabajo"  ></asp:TextBox>
-                    </div>
-                  <div class="col-md-3">
-                        <asp:TextBox ID="_numeroInternoPorLibras" runat="server" class="form-control" ValidationGroup="GrabarDetalleOrdenTrabajo"  MaxLength="10" ></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="_numeroInternoPorLibrasValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GrabarDetalleOrdenTrabajo" ControlToValidate="_numeroInternoPorLibras" ></asp:RequiredFieldValidator>
-                    </div>
-                  <div class="col-md-3">
-                        <asp:TextBox ID="_informacionVisualPorLibras" runat="server" class="form-control" ValidationGroup="GrabarDetalleOrdenTrabajo"   ></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="_informacionVisualPorLibrasValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GrabarDetalleOrdenTrabajo" ControlToValidate="_informacionVisualPorLibras" ></asp:RequiredFieldValidator>
-                    </div>
-
-              </div> 
-             <br/>
-             <div class="row">
-                     <div class="col-md-3">
-                         <asp:CheckBox ID="_suavizante" runat="server" class="form-control" Text="<%$ Resources:Web_es_Ec,Label_Suavizante%>"  Visible="False" /> 
-                       </div>
-                     <div class="col-md-3">
-                           <asp:CheckBox ID="_desengrasante" runat="server" class="form-control" Text="<%$ Resources:Web_es_Ec,Label_Desengrasante%>"  Visible="False"/> 
-                       </div>
-                     <div class="col-md-3">
-                           <asp:CheckBox ID="_fijadorColor" runat="server" class="form-control" Text="<%$ Resources:Web_es_Ec,Label_Fijado_Color%>"  Visible="False"/> 
-                       </div>
-                </div>
-             <br>
-              <div class="row">
-                    <div class="col-md-12" style="text-align: center">
-                       
-
-                            <asp:GridView ID="_datosLibras" runat="server" AutoGenerateColumns="False" OnRowCommand="_datos_RowCommand"  Width="100%" OnRowDataBound="_datos_RowDataBound" ShowFooter="True" >
-                                
-                                <Columns>
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <asp:ImageButton ID="_eliminarPrenda" runat="server" ImageUrl="~/Content/Imagen/Borrar.png"  CommandName="Eliminar" CommandArgument="<%# ((GridViewRow)Container).RowIndex %>"/>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:BoundField DataField="Producto.Nombre" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Prenda%>" >
-                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Middle" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="ProductoTalla.Descripcion"  HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Talla%>"  >
-                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Middle" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="Cantidad" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Cantidad%>"   ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle"  >
-                                    <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="Marca.Descripcion" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Marca%>"  >
-                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Middle" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="Color.Descripcion"  HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Color%>" >
-                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Middle" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="ValorUnitario"  HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Valor_Unitario%>"  DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" ItemStyle-VerticalAlign="Middle" >
-                                    <ItemStyle HorizontalAlign="Right" VerticalAlign="Middle" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="ValorTotal" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Valor_Total%>"   DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" ItemStyle-VerticalAlign="Middle" >
-                                    <ItemStyle HorizontalAlign="Right" VerticalAlign="Middle" />
-                                    </asp:BoundField>
-                                </Columns>
-                                <HeaderStyle CssClass="tableCabecera" ></HeaderStyle>
-                                <FooterStyle CssClass="tablePiePagina"></FooterStyle>
-                            </asp:GridView>
-		
-                    </div>    
-             </div>
-            <br />
-             <div class="row">
-                    <div class="col-md-3">
-                       <asp:Button ID="_agregarRopaPorLibras" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Agregar_Orden_Trabajo%>"  ValidationGroup="GrabarDetalleOrdenTrabajo" class="btn btn-primary" OnClick="_agregarRopaPorLibras_Click" />
-                       
-                    </div>
-                    <div class="col-md-3">
-                        <asp:CheckBox ID="_matriz" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Entrega_Matriz%>" CssClass="form-control"  />
-                       
-                    </div>
-                   
-                    
-            </div>
-        </div>
-        </asp:Panel>
+        
          </div>
      <br/>
          <div class="panel panel-default" id="_datosFormaPago">
            <div class="panel-heading">
                <asp:Literal ID="_literaldatosPago" runat="server"  Text="<%$ Resources:Web_es_Ec,Literal_Datos_Pago%>"></asp:Literal></div>
         <div class="panel-body">
-            <div class="row">
-                
-                <div class="col-md-3">
-                        <asp:Label ID="_labelPromocion" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Aplica_Promocion%>"></asp:Label>
-                    </div>
-                    <div class="col-md-3">
-                        <asp:Label ID="_labelValorTotalFinal" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Valor_Total%>"></asp:Label>
-                    </div>
-                    <div class="col-md-3">
-                        <asp:Label ID="_labelDescuento" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Valor_Descuento%>"></asp:Label>
-                    </div>
-                
-                    <div class="col-md-3">
-                        <asp:Label ID="_labelvalorTotalPagar" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Valor_Total_Pagar%>"></asp:Label>
-                    </div>
-                    
-                   
-            </div>
             
-            <div class="row">
-                 <div class="col-md-3">
-                         <asp:DropDownList ID="_promocion" runat="server" CssClass="form-control" ValidationGroup="GuardarOrden" DataTextField="NombreRegla" DataValueField="ReglaId" AutoPostBack="True" OnSelectedIndexChanged="_promocion_SelectedIndexChanged"  ></asp:DropDownList>
-                        <asp:RequiredFieldValidator ID="_promocionValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GuardarOrden" ControlToValidate="_promocion" ></asp:RequiredFieldValidator>
-
-                 </div>
-                 <div class="col-md-3">
-                         <asp:TextBox ID="_valorTotalFinal" runat="server" class="form-control" ValidationGroup="GuardarOrden"  ReadOnly="True" ></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="_valorTotalFinalValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GuardarOrden" ControlToValidate="_valorTotalFinal" ></asp:RequiredFieldValidator>
-                         
-                 </div>
                 
-                <div class="col-md-3">
-                         <asp:TextBox ID="_descuento" runat="server" class="form-control" ValidationGroup="GuardarOrden" ReadOnly="True" ></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="_descuentoValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GuardarOrden" ControlToValidate="_descuento" ></asp:RequiredFieldValidator>
-                         
-                 </div>
-                <div class="col-md-3">
-                         <asp:TextBox ID="_valorTotalPagar" runat="server" class="form-control" ValidationGroup="GuardarOrden"  ReadOnly="True"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="_valorTotalPagarValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GuardarOrden" ControlToValidate="_valorTotalPagar" ></asp:RequiredFieldValidator>
-                         
-                 </div>
-            </div>
+             
             <div class="row">
                  <div class="col-md-3">
                         <asp:Label ID="_labelNumeroOrdenManual" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Numero_Orden_Manual%>"></asp:Label>
@@ -568,7 +357,7 @@
              <div class="row">
                  
                   <div class="col-md-3">
-                         <asp:TextBox ID="_numeroOrdenManual" runat="server" class="form-control" ValidationGroup="GuardarOrden"  ></asp:TextBox>
+                         <asp:TextBox ID="_numeroOrdenManual" runat="server" class="form-control" ValidationGroup="GuardarOrden" TextMode="Number" ></asp:TextBox>
                         <asp:RequiredFieldValidator ID="_numeroOrdenManualValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GuardarOrden" ControlToValidate="_numeroOrdenManual" ></asp:RequiredFieldValidator>
                          
 
@@ -589,8 +378,9 @@
                        
             </div>
 
-        </div>
+       
          </div>
+            </div>
     </section>
         <nav>
         <asp:Button ID="_grabarOrdenTrabajo" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Guardar_Orden_Trabajo%>"  ValidationGroup="GuardarOrden" class="btn btn-primary" OnClick="_grabarOrdenTrabajo_Click"/>
@@ -639,7 +429,7 @@
                           </div> 
                          <div class="row">
                                <div class="col-md-12">
-                                    <asp:TextBox ID="_txtMarca" runat="server" class="form-control" ValidationGroup="GrabarMarca"  ></asp:TextBox>
+                                    <asp:TextBox ID="_txtMarca" runat="server" class="form-control" ValidationGroup="GrabarMarca"  AutoCompleteType="Disabled"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="_txtMarcaValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GrabarMarca" ControlToValidate="_txtMarca" ></asp:RequiredFieldValidator>
                                 </div>
                                 
@@ -653,4 +443,148 @@
                     </asp:Panel>
      </div>
         </div>
+    
+     <div class="row" >
+                  <div class="col-md-12" >
+                <asp:Button ID="_btnRevisionPromociones" runat="server" Text="" Visible="false" />
+                    <cc1:ModalPopupExtender ID="_btnRevisionPromociones_ModalPopupExtender" PopupControlID="_panelPromociones" runat="server" BehaviorID="_btnRevisionPromociones_ModalPopupExtender" TargetControlID="_btnRevisionPromociones" BackgroundCssClass="modal-Backgoround" X="500" OnCancelScript="_btnCerrarPromociones" Y="300">
+                    </cc1:ModalPopupExtender>
+                    <asp:Panel ID="_panelPromociones" runat="server" Style="display: none; background-color: white; width:60%; height: auto;align-content:center ">
+                        <div class="modal-header">
+                            <h4 class="modal-title">
+                                <asp:Literal ID="Literal2" runat="server"  Text="<%$ Resources:Web_es_Ec,Label_Promociones_Vigentes%>"></asp:Literal></h4>
+                        </div>
+                        <div class="modal-body">
+                            
+                                
+                         <div class="row">
+                               <div class="col-md-12">
+                               <asp:GridView ID="_promociones" runat="server" AutoGenerateColumns="False"   Width="100%"  ShowFooter="True" >
+                                
+                                <Columns>
+                                     <asp:BoundField DataField="NombreRegla" HeaderText="<%$ Resources:Web_es_Ec,Label_Promociones_Vigentes%>"  >
+                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Middle" Font-Size="XX-Small" />
+                                    </asp:BoundField>
+                                      <asp:BoundField DataField="FechaInicio" HeaderText="<%$ Resources:Web_es_Ec,Label_Fecha_Desde%>" DataFormatString="{0:d}"  >
+                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Middle" Font-Size="XX-Small" />
+                                    </asp:BoundField>
+                                      <asp:BoundField DataField="FechaFin" HeaderText="<%$ Resources:Web_es_Ec,Label_Fecha_Hasta%>"  DataFormatString="{0:d}">
+                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Middle" Font-Size="XX-Small" />
+                                    </asp:BoundField>
+                                </Columns>
+                                <HeaderStyle CssClass="tableCabecera" ></HeaderStyle>
+                                <FooterStyle CssClass="tablePiePagina"></FooterStyle>
+                            </asp:GridView>
+                                   </div> 
+                             </div> 
+                        </div>
+                        <div class="modal-footer">
+
+                            <asp:Button ID="_btnCerrarPromociones" runat="server" Text="Aceptar" class="btn btn-primary" data-dismiss="modal" />
+                        </div>
+                    </asp:Panel>
+     </div>
+        </div>
+    
+    
+     <div class="row" >
+                  <div class="col-md-12" >
+                <asp:Button ID="_btnDetalleOrden" runat="server" Text="" Visible="false" />
+                    <cc1:ModalPopupExtender ID="_btnDetalleOrden_ModalPopupExtender" PopupControlID="_panelDetalleOrden" runat="server" BehaviorID="_btnDetalleOrden_ModalPopupExtender" TargetControlID="_btnRevisionPromociones" BackgroundCssClass="modal-Backgoround" X="250" OnOkScript="_grabarDetalle" OnCancelScript="_cancelarDetalle" Y="50" >
+                    </cc1:ModalPopupExtender>
+                    <asp:Panel ID="_panelDetalleOrden" runat="server" Style="display: none; background-color: white; width:60%; height: auto;align-content:center ">
+                        <div class="modal-header">
+                            <h4 class="modal-title">
+                                <asp:Literal ID="Literal3" runat="server"  Text="<%$ Resources:Web_es_Ec,Titulo_Detalle_Orden%>"></asp:Literal></h4>
+                        </div>
+                        <div class="modal-body">
+                            
+                                
+                            <div class="row">
+                               <div class="col-md-4">
+                                    <asp:Label ID="_labelColoDetalle" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Color%>"></asp:Label>
+                               </div>
+                               <div class="col-md-4">
+                                    <asp:Label ID="_labelMarcaDetalle" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Marca%>"></asp:Label>
+                               </div>
+                                <div class="col-md-4">
+                                    <asp:Label ID="_labelEstadoPrendaDetalle" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Estado_Prenda%>"></asp:Label>
+                               </div>
+                            </div>
+                             <div class="row">
+                               <div class="col-md-4">
+                                      <asp:DropDownList ID="_colorDetalle" runat="server" CssClass="form-control" ValidationGroup="DetallePrenda" DataTextField="Descripcion" DataValueField="ColorId" ></asp:DropDownList>
+                                      <asp:RequiredFieldValidator ID="_colorDetalleValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="DetallePrenda" ControlToValidate="_colorDetalle" ></asp:RequiredFieldValidator>       
+                               </div>
+                               <div class="col-md-4">
+                                    <asp:DropDownList ID="_marcaDetalle" runat="server" CssClass="form-control" ValidationGroup="DetallePrenda" DataTextField="Descripcion" DataValueField="MarcaId" ></asp:DropDownList>
+                                      <asp:RequiredFieldValidator ID="_marcaDetalleValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="DetallePrenda" ControlToValidate="_marcaDetalle" ></asp:RequiredFieldValidator>       
+                               </div>
+                                <div class="col-md-4">
+                                      <asp:TextBox ID="_estadoPrendaDetalle" runat="server" class="form-control" ValidationGroup="DetallePrenda"  AutoCompleteType="Disabled"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="_estadoPrendaDetalleValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="DetallePrenda" ControlToValidate="_estadoPrendaDetalle" ></asp:RequiredFieldValidator>
+                               </div>
+                            </div>
+                            <br/>
+                             <div class="row">
+                               <div class="col-md-4">
+                                    <asp:Label ID="_labelTratamientoEspecialPrenda" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Tratamiento_Especial%>"></asp:Label>
+                               </div>
+                               <div class="col-md-4">
+                                    <asp:Label ID="_labelNumeroInternoPrenda" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Numero_Interno%>"></asp:Label>
+                               </div>
+                                <div class="col-md-4">
+                                    <asp:Label ID="_labelinformacionVisualPrenda" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Informacion_Visual%>"></asp:Label>
+                               </div>
+                            </div>
+                             <div class="row">
+                               <div class="col-md-4">
+                                      <asp:TextBox ID="_tratamientoEspecialDetalle" runat="server" class="form-control" ValidationGroup="DetallePrenda"  AutoCompleteType="Disabled"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="_tratamientoEspecialDetalleValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="DetallePrenda" ControlToValidate="_tratamientoEspecialDetalle" ></asp:RequiredFieldValidator>
+                               </div>
+                               <div class="col-md-4">
+                                    <asp:TextBox ID="_numeroInternoDetalle" runat="server" class="form-control" ValidationGroup="DetallePrenda"  AutoCompleteType="Disabled" TextMode="Number"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="_numeroInternoDetalleValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="DetallePrenda" ControlToValidate="_numeroInternoDetalle" ></asp:RequiredFieldValidator>
+                               </div>
+                                <div class="col-md-4">
+                                      <asp:TextBox ID="_informacionVisualDetalle" runat="server" class="form-control" ValidationGroup="DetallePrenda"  AutoCompleteType="Disabled"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="_informacionVisualDetalleValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="DetallePrenda" ControlToValidate="_informacionVisualDetalle" ></asp:RequiredFieldValidator>
+                               </div>
+                            </div>
+                             <div class="row">
+                                 <div class="col-md-12">
+                                      <asp:GridView ID="_detallePrenda" runat="server"  AutoGenerateColumns="False"   Width="100%" ShowFooter="True" OnRowCommand="_detallePrenda_OnRowCommand" >
+                                          <Columns>
+                                              <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <asp:ImageButton ID="_eliminarDetallePrenda" runat="server" ImageUrl="~/Content/Imagen/Borrar.png"  CommandName="Eliminar" CommandArgument="<%# ((GridViewRow)Container).RowIndex %>"/>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                               <asp:BoundField DataField="NombreColor" HeaderText="<%$ Resources:Web_es_Ec,Label_Color%>"  >
+                                            </asp:BoundField>
+                                            <asp:BoundField DataField="NombreMarca" HeaderText="<%$ Resources:Web_es_Ec,Label_Marca%>"  >
+                                            </asp:BoundField>
+                                            <asp:BoundField DataField="EstadoPrenda" HeaderText="<%$ Resources:Web_es_Ec,Label_Estado_Prenda%>"  ></asp:BoundField>
+                                              <asp:BoundField DataField="TratamientoEspecial" HeaderText="<%$ Resources:Web_es_Ec,Label_Tratamiento_Especial%>"  ></asp:BoundField>
+                                              <asp:BoundField DataField="NumeroInternoPrenda" HeaderText="<%$ Resources:Web_es_Ec,Label_Numero_Interno%>"  ></asp:BoundField>
+                                              <asp:BoundField DataField="InformacionVisual" HeaderText="<%$ Resources:Web_es_Ec,Label_Informacion_Visual%>"  ></asp:BoundField>
+
+                                          </Columns>
+                                        <HeaderStyle CssClass="tableCabecera" ></HeaderStyle>
+                                            <RowStyle CssClass="tableItem"></RowStyle>
+                                          <FooterStyle CssClass="tablePiePagina"></FooterStyle>
+                                    </asp:GridView>
+                              </div>
+                            </div>
+                          
+                        </div>
+                        <div class="modal-footer">
+
+                            <asp:Button ID="_grabarDetalle" runat="server" Text="Agregar Detalle Prenda" class="btn btn-primary" data-dismiss="modal" ValidationGroup="DetallePrenda" OnClick="_grabarDetalle_OnClick"/>
+                            <asp:Button ID="_cancelarDetalle" runat="server" Text="Cancelar" class="btn btn-primary" data-dismiss="modal" />
+                        </div>
+                    </asp:Panel>
+     </div>
+        </div>
+    
 </asp:Content>

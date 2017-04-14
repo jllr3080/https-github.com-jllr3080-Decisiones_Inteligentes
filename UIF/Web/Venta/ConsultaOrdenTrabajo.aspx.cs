@@ -28,6 +28,7 @@ namespace Web.Venta
         private readonly  ServicioDelegadoContabilidad _servicioDelegadoContabilidad= new ServicioDelegadoContabilidad();
         private readonly ServicioDelegadoGeneral _servicioDelegadoGeneral = new  ServicioDelegadoGeneral();
         private static List<ConsultaOrdenTrabajoVistaDTOs> _listaConsultaOrdenTrabajoVistaDtOses =null;
+        private static List<DetalleOrdenTrabajoVistaModelo> _listaDetalleOrdenTrabajoVistaModelos= null;
         private static List<HistorialProcesoVistaModelo> _listaHistorialProcesoVistaModelos = null;
         private static  List<CuentaPorCobrarVistaDTOs>  _listaCuentaPorCobrarVistaDtOses = null;
         #endregion
@@ -44,11 +45,11 @@ namespace Web.Venta
             {
                 if (_descuento.Checked == true)
                 {
-                    _valorDescuentoValidador.Enabled = true;
+                   // _valorDescuentoValidador.Enabled = true;
                 }
                 else
                 {
-                    _valorDescuentoValidador.Enabled = false;
+                    //_valorDescuentoValidador.Enabled = false;
                 }
             }
             catch (Exception)
@@ -94,16 +95,17 @@ namespace Web.Venta
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                _montoTotal += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ValorTotal"));
-                _cantidadTotal += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "Cantidad"));
+                //_montoTotal += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ValorTotal"));
+                //_cantidadTotal += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "Cantidad"));
             }
             else if (e.Row.RowType == DataControlRowType.Footer)
             {
+                
                 e.Row.Cells[0].Text = "Totales:";
-                e.Row.Cells[1].Text = _cantidadTotal.ToString();
+                e.Row.Cells[1].Text = _listaDetalleOrdenTrabajoVistaModelos.Sum(a=>a.Cantidad).ToString();
                 e.Row.Cells[1].HorizontalAlign = HorizontalAlign.Left;
 
-                e.Row.Cells[6].Text = _montoTotal.ToString("C");
+                e.Row.Cells[6].Text = _listaDetalleOrdenTrabajoVistaModelos.Sum(a => a.ValorTotal).ToString();
                 e.Row.Cells[6].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
             }
@@ -119,13 +121,13 @@ namespace Web.Venta
         {
             try
             {
-                if (_listaCuentaPorCobrarVistaDtOses.Sum(b => b.HistorialCuentaPorCobrar.ValorCobro) + Convert.ToDecimal(_valorAbonar.Text)<=_listaConsultaOrdenTrabajoVistaDtOses.Sum(m => m.ValorTotal) )
+                if (_listaCuentaPorCobrarVistaDtOses.Sum(b => b.HistorialCuentaPorCobrar.ValorCobro) + Convert.ToDecimal(_valorAbonar.Text)<= _listaDetalleOrdenTrabajoVistaModelos.Sum(m => m.ValorTotal) )
                 {
                 
                 if (_listaCuentaPorCobrarVistaDtOses.Count > 0)
                 {
                         CuentaPorCobrarVistaModelo _cuentaPorCobrarVistaModelo = _listaCuentaPorCobrarVistaDtOses.Select(b => b.CuentaPorCobrar).FirstOrDefault();
-                        _cuentaPorCobrarVistaModelo.Saldo += Convert.ToDecimal(_valorAbonar.Text);
+                        _cuentaPorCobrarVistaModelo.Saldo = _listaDetalleOrdenTrabajoVistaModelos.Sum(m => m.ValorTotal) -   Convert.ToDecimal(_valorAbonar.Text);
                         _servicioDelegadoContabilidad.ActualizaCuentaPorCobrar(_cuentaPorCobrarVistaModelo);
 
                         HistorialCuentaPorCobrarVistaModelo _historialCuentaPorCobrar =
@@ -205,15 +207,15 @@ namespace Web.Venta
                 {
 
                    
-                    if (Convert.ToDecimal(_listaConsultaOrdenTrabajoVistaDtOses.Sum(m => m.ValorTotal))>Convert.ToDecimal( _listaCuentaPorCobrarVistaDtOses.Sum(b => b.HistorialCuentaPorCobrar.ValorCobro)))
+                    if (Convert.ToDecimal(_listaDetalleOrdenTrabajoVistaModelos.Sum(m => m.ValorTotal))>Convert.ToDecimal( _listaCuentaPorCobrarVistaDtOses.Sum(b => b.HistorialCuentaPorCobrar.ValorCobro)))
                     {
                         _btnAbonar_ModalPopupExtender.TargetControlID = "_btnBuscar";
                         _btnAbonar_ModalPopupExtender.Show();
 
                         if (_listaCuentaPorCobrarVistaDtOses.Count() == 0)
-                        _valorAbonar.Text = String.Format("{0:0.00}", _listaConsultaOrdenTrabajoVistaDtOses.Sum(m => m.ValorTotal));
+                        _valorAbonar.Text = String.Format("{0:0.00}", _listaDetalleOrdenTrabajoVistaModelos.Sum(m => m.ValorTotal));
                     else
-                        _valorAbonar.Text = String.Format("{0:0.00}", _listaConsultaOrdenTrabajoVistaDtOses.Sum(m => m.ValorTotal) - _listaCuentaPorCobrarVistaDtOses.Sum(b => b.HistorialCuentaPorCobrar.ValorCobro));
+                        _valorAbonar.Text = String.Format("{0:0.00}", _listaDetalleOrdenTrabajoVistaModelos.Sum(m => m.ValorTotal) - _listaCuentaPorCobrarVistaDtOses.Sum(b => b.HistorialCuentaPorCobrar.ValorCobro));
                     }
                     else
                         Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Abono_Completo").ToString(), "_abonar");
@@ -263,11 +265,7 @@ namespace Web.Venta
         {
             try
             {
-                VentaComisionVistaModelo _ventaComisionVista =
-                    _servicioDelegadoVenta.ObtenerVentaComisionPorusuarioId(User.Id);
-
-                //if (_ventaComisionVista != null)
-                //{ 
+                
                 //GUarda el proceso inicial que es la entrega del cliente hacia  la franquicia
                 HistorialProcesoVistaModelo _historialProcesoVista = new HistorialProcesoVistaModelo();
                 _historialProcesoVista.OrdenTrabajoId = _listaConsultaOrdenTrabajoVistaDtOses.Select(m => m.OrdenTrabajoId).First(); ;
@@ -314,21 +312,6 @@ namespace Web.Venta
                     {
                         #region GRABA LOS  DATOS DE LAS CUENTAS POR COBRAR, PAGAR Y LAS COMISIONES POR EL CIERRE DE LA ORDEN
 
-                        //Graba la comision de la franquicia  y el valor a pagar al proveedor de la quimica
-                        OrdenTrabajoComisionVistaModelo ordenTrabajoComisionVistaModelo =
-                            new OrdenTrabajoComisionVistaModelo();
-                        ordenTrabajoComisionVistaModelo.UsuarioId = User.Id;
-                        ordenTrabajoComisionVistaModelo.FechaGeneracionComision = DateTime.Now;
-                        ordenTrabajoComisionVistaModelo.VentaComision = _ventaComisionVista;
-                        OrdenTrabajoVistaModelo ordenTrabajoVistaModelo = new OrdenTrabajoVistaModelo();
-                        ordenTrabajoVistaModelo.OrdenTrabajoId =
-                            Convert.ToInt64(_listaConsultaOrdenTrabajoVistaDtOses.Select(m => m.OrdenTrabajoId).First());
-                        ordenTrabajoComisionVistaModelo.OrdenTrabajo = ordenTrabajoVistaModelo;
-                        ordenTrabajoComisionVistaModelo.Valor =
-                            Convert.ToDecimal(_listaConsultaOrdenTrabajoVistaDtOses.Sum(m => m.ValorTotal))*
-                            _ventaComisionVista.PorcentajeComision;
-                        _servicioDelegadoVenta.GrabaOrdenTrabajoComision(ordenTrabajoComisionVistaModelo);
-
                         //Graba la  cuenta por  cobrar  para  la franquicia 
 
                         CuentaPorCobrarVistaModelo _cuentaPorCobrarVista = new CuentaPorCobrarVistaModelo();
@@ -344,26 +327,8 @@ namespace Web.Venta
                         _cuentaPorCobrarVista.NumeroOrden = "0";
                         _cuentaPorCobrarVista.EstadoPagoId = Convert.ToInt32(Util.EstadoPago.Pendiente);
                         _cuentaPorCobrarVista =
-                            _servicioDelegadoContabilidad.GrabarCuentaPorCobrar(_cuentaPorCobrarVista);
-
-
-
-
-
-                        //Graba la cuenta por pagar  para la matriz
-
-                        CuentaPorPagarVistaModelo _cuentaPorPagarVista = new CuentaPorPagarVistaModelo();
-                        _cuentaPorPagarVista.PuntoVentaId = User.PuntoVentaId;
-                        _cuentaPorPagarVista.FechaCreacion = DateTime.Now;
-                        _cuentaPorPagarVista.FechaModificacion = DateTime.Now;
-                        _cuentaPorPagarVista.FechaVencimiento = DateTime.Now;
-                        _cuentaPorPagarVista.UsuarioModificacionId = User.Id;
-                        _cuentaPorPagarVista.UsuarioCreacionId = User.Id;
-                        _cuentaPorPagarVista.SucursalId = User.SucursalId;
-                        _cuentaPorPagarVista.Saldo = 0;
-                        _cuentaPorPagarVista.Valor = 0;
-                        _cuentaPorPagarVista.NumeroOrden = "1";
-                        _cuentaPorPagarVista = _servicioDelegadoContabilidad.GrabarCuentaPorPagar(_cuentaPorPagarVista);
+                         _servicioDelegadoContabilidad.GrabarCuentaPorCobrar(_cuentaPorCobrarVista);
+                        
 
 
                         #endregion
@@ -383,7 +348,7 @@ namespace Web.Venta
                         _ordenTrabajoDescuentoVistaModelo.Valor = Convert.ToDecimal(_valorDescuento.Text);
                         _ordenTrabajoDescuentoVistaModelo.PorcentajeFranquicia =
                             Convert.ToDecimal(_procentajeFranquicia.Text);
-                        _ordenTrabajoDescuentoVistaModelo.PorcentajeMatriz = Convert.ToInt32(_procentajeMatriz.Text);
+                        _ordenTrabajoDescuentoVistaModelo.PorcentajeMatriz = Convert.ToDecimal(_procentajeMatriz.Text);
                         HistorialReglaVistaModelo _historialReglaVista= new HistorialReglaVistaModelo();
                         _historialReglaVista.HistorialReglaId = 1;
                         _ordenTrabajoDescuentoVistaModelo.HistorialRegla = _historialReglaVista;
@@ -394,9 +359,7 @@ namespace Web.Venta
 
 
                 }
-              //}
-              //  else
-              //      Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_No_Tiene_Comision").ToString(), "_btnBuscar");
+             
                 
             }
             catch (Exception ex)
@@ -417,22 +380,18 @@ namespace Web.Venta
             try
             {
                 //GUarda el proceso inicial que es la entrega del cliente hacia  la franquicia
-                HistorialProcesoVistaModelo _historialProcesoVista = new HistorialProcesoVistaModelo();
-                _historialProcesoVista.OrdenTrabajoId = _listaConsultaOrdenTrabajoVistaDtOses.Select(m => m.OrdenTrabajoId).First(); ;
-                EtapaProcesoVistaModelo _etapaProcesoVistaModelo = new EtapaProcesoVistaModelo();
-                _etapaProcesoVistaModelo.EtapaProcesoId = Convert.ToInt32(Util.EtapaProceso.AnulacionOrdenTrabajo);
-                _historialProcesoVista.EtapaProceso = _etapaProcesoVistaModelo;
-                _historialProcesoVista.FechaRegistro = DateTime.Now;
-                _historialProcesoVista.FechaInicio = DateTime.Now;
-                _historialProcesoVista.FechaFin = DateTime.Now;
-                _historialProcesoVista.SucursalId = User.SucursalId;
-                _historialProcesoVista.PuntoVentaId = User.PuntoVentaId;
-                _historialProcesoVista.NumeroOrden = _listaConsultaOrdenTrabajoVistaDtOses.Select(m => m.NumeroOrden).First().ToString();
-                _historialProcesoVista.Texto = _observacionAnularOrden.Text;
-                _servicioDelegadoFlujoProceso.GrabarHistorialProceso(_historialProcesoVista);
+                ParametroReversoVistaDTOs parametroReversoVistaDtOs= new ParametroReversoVistaDTOs();
+                parametroReversoVistaDtOs.NumeroOrden = _numeroOrden.Text;
+                parametroReversoVistaDtOs.PuntoVentaId =Convert.ToInt32(User.PuntoVentaId);
+                parametroReversoVistaDtOs.SucursalId = Convert.ToInt32(User.SucursalId);
+                parametroReversoVistaDtOs.UsuarioId= Convert.ToInt32(User.Id);
+                parametroReversoVistaDtOs.Texto = _observacionAnularOrden.Text;
+                parametroReversoVistaDtOs.OrdenTrabajoId= Convert.ToInt32(_listaConsultaOrdenTrabajoVistaDtOses.Select(m => m.OrdenTrabajoId).First());
+                _servicioDelegadoVenta.GrabarReversoTransaccion(parametroReversoVistaDtOs);
                 _listaHistorialProcesoVistaModelos = _servicioDelegadoFlujoProceso.ObtenerHIstorialProcesosPorNumeroOrden(_numeroOrden.Text);
                 _datosHistorial.DataSource = _listaHistorialProcesoVistaModelos;
                 _datosHistorial.DataBind();
+
             }
             catch (Exception ex)
             {
@@ -514,7 +473,7 @@ namespace Web.Venta
                     _btnAnularOrden_ModalPopupExtender.TargetControlID = "_btnBuscar";
                     _btnAnularOrden_ModalPopupExtender.Show();
                     _valorTotalAnularOrden.Text = String.Format("{0:0.00}",
-                        _listaConsultaOrdenTrabajoVistaDtOses.Sum(m => m.ValorTotal));
+                        _listaDetalleOrdenTrabajoVistaModelos.Sum(m => m.ValorTotal));
 
                     foreach (
                         ConsultaOrdenTrabajoVistaDTOs consultaOrdenTrabajoVista in _listaConsultaOrdenTrabajoVistaDtOses
@@ -618,6 +577,8 @@ namespace Web.Venta
 
                 if (_listaConsultaOrdenTrabajoVistaDtOses.Count() >0)
                 {
+                    _listaDetalleOrdenTrabajoVistaModelos = _servicioDelegadoVenta.ObtenerDetalleOrdenTrabajoPorNumeroOrdenYPuntoVenta(_numeroOrden.Text,Convert.ToInt32(User.PuntoVentaId));
+
                     foreach (ConsultaOrdenTrabajoVistaDTOs consultaOrdenTrabajoVista in _listaConsultaOrdenTrabajoVistaDtOses)
                     {
                         _cliente.Text = consultaOrdenTrabajoVista.NombreCliente;
@@ -630,7 +591,7 @@ namespace Web.Venta
                     }
                     _datos.DataSource = _listaConsultaOrdenTrabajoVistaDtOses;
                     _datos.DataBind();
-                    _listaHistorialProcesoVistaModelos= _servicioDelegadoFlujoProceso.ObtenerHIstorialProcesosPorNumeroOrden(_numeroOrden.Text);
+                    _listaHistorialProcesoVistaModelos = _servicioDelegadoFlujoProceso.ObtenerHIstorialProcesosPorNumeroOrden(_numeroOrden.Text);
                     _datosHistorial.DataSource = _listaHistorialProcesoVistaModelos;
                     _datosHistorial.DataBind();
                     _listaCuentaPorCobrarVistaDtOses= _servicioDelegadoContabilidad.ObtenerHistorialCuentaPorCobrarPorNumeroOrden(_numeroOrden.Text);
@@ -739,9 +700,9 @@ namespace Web.Venta
                 _estadoPagoOrden.SelectedIndex=_estadoPagoOrden.Items.IndexOf(_estadoPagoOrden.Items.FindByValue("2"));
                 _estadoPagoOrden.Enabled = false;
                 if(_listaCuentaPorCobrarVistaDtOses.Count ==0)
-                _valorTotal.Text = String.Format("{0:0.00}", _listaConsultaOrdenTrabajoVistaDtOses.Sum(m => m.ValorTotal));
+                _valorTotal.Text = String.Format("{0:0.00}", _listaDetalleOrdenTrabajoVistaModelos.Sum(m => m.ValorTotal));
                 else
-                 _valorTotal.Text = String.Format("{0:0.00}", _listaConsultaOrdenTrabajoVistaDtOses.Sum(m => m.ValorTotal)- _listaCuentaPorCobrarVistaDtOses.Sum(b=>b.HistorialCuentaPorCobrar.ValorCobro));
+                 _valorTotal.Text = String.Format("{0:0.00}", _listaDetalleOrdenTrabajoVistaModelos.Sum(m => m.ValorTotal)- _listaCuentaPorCobrarVistaDtOses.Sum(b=>b.HistorialCuentaPorCobrar.ValorCobro));
                 _valorTotal.Enabled = false;
                 _valorTotal.CssClass = "form-control";
 

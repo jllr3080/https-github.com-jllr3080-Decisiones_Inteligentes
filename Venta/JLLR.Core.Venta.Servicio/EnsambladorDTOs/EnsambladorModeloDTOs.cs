@@ -179,7 +179,9 @@ namespace JLLR.Core.Venta.Servicio.EnsambladorDTOs
             return new modeloDTOs.OrdenTrabajoDTOs()
             {
               OrdenTrabajo =_ensambladorModelo.CrearOrdenTrabajo(e.OrdenTrabajo),
-              DetalleOrdenTrabajo =_ensambladorModelo.CrearColeecionDetalleOrdenesTrabajo(e.DetalleOrdenTrabajos)
+              DetalleOrdenTrabajo =_ensambladorModelo.CrearColeecionDetalleOrdenesTrabajo(e.DetalleOrdenTrabajos),
+              PerfilId = e.PerfilId,
+              Abono = e.Abono
             };
         }
 
@@ -234,7 +236,12 @@ namespace JLLR.Core.Venta.Servicio.EnsambladorDTOs
                 CorreoElectronico = e.CorreoElectronico,
                 Telefono = e.Telefono,
                 NombrePuntoVenta = e.NombrePuntoVenta,
-                NombreUsuario = e.NombreUsuario
+                NombreUsuario = e.NombreUsuario,
+                TratamientoEspecial = e.TratamientoEspecial,
+                NumeroInternoPrenda = e.NumeroInternoPrenda,
+                DetallePrendaOrdenTrabajoId = e.DetallePrendaOrdenTrabajoId,
+                EstadoPrenda = e.EstadoPrenda,
+                InformacionVisual = e.InformacionVisual
 
             };
 

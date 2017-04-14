@@ -166,15 +166,6 @@ namespace Web.Individuo {
         protected global::System.Web.UI.WebControls.TextBox _segundoNombre;
         
         /// <summary>
-        /// Control _segundoNombreValidador.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator _segundoNombreValidador;
-        
-        /// <summary>
         /// Control _labelTipoDocumento.
         /// </summary>
         /// <remarks>
@@ -328,13 +319,13 @@ namespace Web.Individuo {
         protected global::System.Web.UI.WebControls.Label _labelCiudad;
         
         /// <summary>
-        /// Control _labelTipoDireccion.
+        /// Control _labelParroquia.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label _labelTipoDireccion;
+        protected global::System.Web.UI.WebControls.Label _labelParroquia;
         
         /// <summary>
         /// Control _pais.
@@ -391,6 +382,42 @@ namespace Web.Individuo {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator _ciudadValidador;
         
         /// <summary>
+        /// Control _parroquia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList _parroquia;
+        
+        /// <summary>
+        /// Control _parroquiaValidador.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator _parroquiaValidador;
+        
+        /// <summary>
+        /// Control _labelTipoDireccion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label _labelTipoDireccion;
+        
+        /// <summary>
+        /// Control _labelDireccion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label _labelDireccion;
+        
+        /// <summary>
         /// Control _tipoDireccion.
         /// </summary>
         /// <remarks>
@@ -407,15 +434,6 @@ namespace Web.Individuo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator _tipoDireccionValidador;
-        
-        /// <summary>
-        /// Control _labelDireccion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label _labelDireccion;
         
         /// <summary>
         /// Control _direccion.

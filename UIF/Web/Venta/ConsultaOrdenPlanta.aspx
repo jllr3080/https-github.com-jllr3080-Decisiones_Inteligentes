@@ -43,15 +43,17 @@
                 <div class="panel-body">
                   <div class="row">
                             <div class="col-md-12">
-                             <asp:GridView ID="_datos" runat="server" AutoGenerateColumns="False"  Width="100%"  ShowFooter="True"  OnRowCommand="_datos_RowCommand" OnRowDataBound="_datos_RowDataBound" >
+                            <asp:GridView ID="_datos" runat="server" AutoGenerateColumns="False" OnRowCommand="_datos_RowCommand" Width="100%" OnRowDataBound="_datos_RowDataBound" ShowFooter="True" >
                             <Columns>
-                                <asp:BoundField DataField="DetalleOrdenTrabajoId" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Codigo_Orden_Trabajo%>" />
-                                <asp:BoundField DataField="Cantidad" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Cantidad%>"/>
+                                <asp:BoundField DataField="DetallePrendaOrdenTrabajoId" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Codigo_Orden_Trabajo%>" />
                                 <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Prenda%>" DataField="Prenda" />
-                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Color%>" DataField="Color" />
                                 <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Marca%>" DataField="Marca" />
-                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Valor_Unitario%>" DataField="ValorUnitario" DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" ItemStyle-VerticalAlign="Middle"  />
-                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Valor_Total%>" DataField="ValorTotal"  DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" ItemStyle-VerticalAlign="Middle" />
+                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Color%>" DataField="Color" />
+                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Informacion_Visual%>" DataField="InformacionVisual" />
+                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Estado_Prenda%>" DataField="EstadoPrenda" />
+                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Numero_Interno%>" DataField="NumeroInternoPrenda" />
+                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Tratamiento_Especial%>" DataField="TratamientoEspecial" />
+                                
                                 <asp:TemplateField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Mostrar_Observaciones%>">
                                     <ItemTemplate>
                                         <asp:ImageButton ID="_imgObservaciones" runat="server" ImageUrl="~/Content/Imagen/Observar.png"  CommandName="Observacion" CommandArgument="<%# ((GridViewRow)Container).RowIndex %>" />
@@ -61,7 +63,6 @@
                              <HeaderStyle CssClass="tableCabecera" ></HeaderStyle>
                              <FooterStyle CssClass="tablePiePagina"></FooterStyle>
                         </asp:GridView>
-                            </div>
                           
                     </div>
                 </div>

@@ -57,7 +57,7 @@
                                     </asp:TemplateField>
                                      <asp:TemplateField>
                                         <ItemTemplate>
-                                            <asp:CheckBox ID="_aceptarEntrega" class="form-control" runat="server" />
+                                            <asp:CheckBox ID="_aceptarEntrega" class="form-control" runat="server"  />
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     

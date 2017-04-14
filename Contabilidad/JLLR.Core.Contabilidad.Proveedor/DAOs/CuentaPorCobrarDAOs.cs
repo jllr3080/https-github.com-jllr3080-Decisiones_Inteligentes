@@ -1,6 +1,7 @@
 ﻿#region using
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -69,6 +70,34 @@ namespace JLLR.Core.Contabilidad.Proveedor.DAOs
         }
 
 
+        /// <summary>
+        /// Obtener las cuentas  por  cobrar por  fecha
+        /// </summary>
+        /// <param name="sucursalId"></param>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechaHasta"></param>
+        /// <returns></returns>
+
+        public IQueryable<CUENTA_POR_COBRAR> ObtenerCuentasPorCobrarPorFecha(int sucursalId, DateTime fechaDesde,
+            DateTime fechaHasta)
+        {
+            try
+            {
+                var cuentasPorCobrar= from cuentaPorCobrar in _entidad.CUENTA_POR_COBRAR
+                                      where
+                                            cuentaPorCobrar.PUNTO_VENTA_ID == sucursalId &&
+                                            EntityFunctions.TruncateTime(cuentaPorCobrar.FECHA_CREACION) >= fechaDesde &&
+                                            EntityFunctions.TruncateTime(cuentaPorCobrar.FECHA_CREACION) <= fechaHasta && cuentaPorCobrar.SALDO != 0
+                                      select cuentaPorCobrar;
+
+                return cuentasPorCobrar;
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
 
 
 

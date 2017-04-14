@@ -7,6 +7,7 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using JLLR.Core.ReglaNegocio.Servicio.DTOs;
+using JLLR.Core.ReglaNegocio.Servicio.Modelo;
 using JLLR.Core.ReglaNegocio.Servicio.Transformador;
 
 #endregion
@@ -23,6 +24,27 @@ namespace JLLR.Core.ReglaNegocio.Servicio
          private readonly TransformadoReglaNegocio _transformadoReglaNegocio= new TransformadoReglaNegocio();
 
         #region TRANSACCIONAL
+
+        /// <summary>
+        /// Obtiene  las  promociones  vigentes 
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <param name="sucursalId"></param>
+        /// <returns></returns>
+
+        public List<ReglaModelo> ObtenerPromocionesVigentes(int puntoVentaId, int sucursalId)
+        {
+            try
+            {
+                return _transformadoReglaNegocio.ObtenerPromocionesVigentes(puntoVentaId, sucursalId);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
         /// <summary>
         /// Obtener las reglas para aplicar     
         /// </summary>
@@ -45,5 +67,28 @@ namespace JLLR.Core.ReglaNegocio.Servicio
             }
         }
         #endregion
+
+        #region REGLA NEGOCIO
+
+        /// <summary>
+        /// Ejeuta las  reglas  de  negocio
+        /// </summary>
+        /// <param name="parametroEntradaReglaNegocio"></param>
+        /// <returns></returns>
+        public ParametroSalidaReglaNegocioDTOs EjecucionReglaNegocio(ParametroEntradaReglaNegocioDTOs parametroEntradaReglaNegocio)
+        {
+
+            try
+            {
+
+                return _transformadoReglaNegocio.EjecucionReglaNegocio(parametroEntradaReglaNegocio);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+      #endregion
     }
 }

@@ -48,7 +48,7 @@
             <asp:ContentPlaceHolder ID="_contenido" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
-            <footer>
+            <footer style="background-color: #14AAB4;height:50px ">
                <p>&copy; <%: DateTime.Now.Year %> - <asp:Literal runat="server" Text="<%$ Resources:Web_es_Ec,Titulo_Pie_Pagina_Sistema%>"></asp:Literal></p>
             </footer>
                 

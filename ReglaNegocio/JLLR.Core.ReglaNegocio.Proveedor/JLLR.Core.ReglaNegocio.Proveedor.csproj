@@ -47,10 +47,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAOs\AccionReglaDAOs.cs" />
+    <Compile Include="DAOs\ReglaDAOs.cs" />
     <Compile Include="DAOs\TransaccionalDAOs.cs" />
+    <Compile Include="DTOs\ParametroEntradaReglaNegocioDTOs.cs" />
+    <Compile Include="DTOs\ParametroSalidaReglaNegocioDTOs.cs" />
     <Compile Include="DTOs\ReglaDTOs.cs" />
     <Compile Include="Negocio\ReglaNegocio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\Enum.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Validacion\" />

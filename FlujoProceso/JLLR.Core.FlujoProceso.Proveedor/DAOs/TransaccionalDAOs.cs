@@ -57,7 +57,7 @@ namespace JLLR.Core.FlujoProceso.Proveedor.DAOs
                         where detalleOrdenTrabajo.ORDEN_TRABAJO_ID == objetoHistorialProcesoDTOs.OrdenTrabajoId
                         select detalleOrdenTrabajo;
 
-                    _historialProcesoDtOs.NumeroPrendas = detalleOrdenesTrabajo.Sum(m => m.CANTIDAD);
+                    _historialProcesoDtOs.NumeroPrendas =Convert.ToInt32(detalleOrdenesTrabajo.Sum(m => m.CANTIDAD));
                     _historialProcesoDtOs.UsuarioEntrega =
                         _entidad.USUARIO.Find(Convert.ToInt32(objetoHistorialProcesoDTOs.UsuarioEntregaId)).NOMBRE_USUARIO;
 

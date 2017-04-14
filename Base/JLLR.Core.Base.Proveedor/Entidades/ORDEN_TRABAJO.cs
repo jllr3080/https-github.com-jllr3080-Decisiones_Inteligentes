@@ -19,10 +19,9 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         {
             this.HISTORIAL_PROCESO = new HashSet<HISTORIAL_PROCESO>();
             this.APROBACION_DESCUENTO = new HashSet<APROBACION_DESCUENTO>();
-            this.DETALLE_ORDEN_TRABAJO = new HashSet<DETALLE_ORDEN_TRABAJO>();
             this.HISTORIAL_REGLA = new HashSet<HISTORIAL_REGLA>();
             this.ORDEN_TRABAJO_DESCUENTO = new HashSet<ORDEN_TRABAJO_DESCUENTO>();
-            this.ORDEN_TRABAJO_COMISION = new HashSet<ORDEN_TRABAJO_COMISION>();
+            this.DETALLE_ORDEN_TRABAJO = new HashSet<DETALLE_ORDEN_TRABAJO>();
         }
     
         public long ORDEN_TRABAJO_ID { get; set; }
@@ -48,12 +47,10 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<APROBACION_DESCUENTO> APROBACION_DESCUENTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DETALLE_ORDEN_TRABAJO> DETALLE_ORDEN_TRABAJO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HISTORIAL_REGLA> HISTORIAL_REGLA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ORDEN_TRABAJO_DESCUENTO> ORDEN_TRABAJO_DESCUENTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ORDEN_TRABAJO_COMISION> ORDEN_TRABAJO_COMISION { get; set; }
+        public virtual ICollection<DETALLE_ORDEN_TRABAJO> DETALLE_ORDEN_TRABAJO { get; set; }
     }
 }

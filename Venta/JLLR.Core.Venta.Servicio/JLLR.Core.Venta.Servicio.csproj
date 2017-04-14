@@ -81,20 +81,26 @@
     <Compile Include="DTOs\NumeroPrendaDTOs.cs" />
     <Compile Include="DTOs\OrdenTrabajoDescuentoDTO.cs" />
     <Compile Include="DTOs\OrdenTrabajoDTOs.cs" />
+    <Compile Include="DTOs\ParametroReversoDTOs.cs" />
     <Compile Include="DTOs\PrendaMarcaDTOs.cs" />
     <Compile Include="EnsambladorDTOs\EnsambladorEntidadDTOs.cs" />
     <Compile Include="EnsambladorDTOs\EnsambladorModeloDTOs.cs" />
     <Compile Include="Ensamblador\EnsambladorEntidad.cs" />
     <Compile Include="Ensamblador\EnsambladorModelo.cs" />
+    <Compile Include="Enums\Enum.cs" />
     <Compile Include="Modelo\AprobacionDescuentoModelo.cs" />
     <Compile Include="Modelo\DetalleOrdenTrabajoModelo.cs" />
     <Compile Include="Modelo\DetalleOrdenTrabajoObservacionModelo.cs" />
+    <Compile Include="Modelo\DetallePrendaOrdenTrabajoModelo.cs" />
     <Compile Include="Modelo\HistorialReglaModelo.cs" />
     <Compile Include="Modelo\OrdenTrabajoComisionModelo.cs" />
     <Compile Include="Modelo\OrdenTrabajoDescuentoModelo.cs" />
     <Compile Include="Modelo\OrdenTrabajoModelo.cs" />
     <Compile Include="Modelo\Parametrizacion\NumeroOrdenModelo.cs" />
     <Compile Include="Modelo\Parametrizacion\VentaComisionModelo.cs" />
+    <Compile Include="Negocio\VentaNegocio.cs" />
+    <Compile Include="ServicioDelegado\ServicioDelegadoContabilidad.cs" />
+    <Compile Include="ServicioDelegado\ServicioDelegadoFlujoProceso.cs" />
     <Compile Include="ServicioVenta.svc.cs">
       <DependentUpon>ServicioVenta.svc</DependentUpon>
     </Compile>
@@ -104,7 +110,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Enums\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\Administrador.pubxml" />
@@ -119,6 +124,14 @@
     <ProjectReference Include="..\..\Base\JLLR.Core.Base.Proveedor\JLLR.Core.Base.Proveedor.csproj">
       <Project>{7b02ff61-3c7a-4a7d-b1a8-c62710253a1b}</Project>
       <Name>JLLR.Core.Base.Proveedor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Contabilidad\JLLR.Core.Contabilidad.Servicio\JLLR.Core.Contabilidad.Servicio.csproj">
+      <Project>{e539ffc9-07b8-4dee-9d6f-2c425d55579b}</Project>
+      <Name>JLLR.Core.Contabilidad.Servicio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FlujoProceso\JLLR.Core.FlujoProceso.Servicio\JLLR.Core.FlujoProceso.Servicio.csproj">
+      <Project>{34ebb264-08c8-4509-ad8d-294710827f72}</Project>
+      <Name>JLLR.Core.FlujoProceso.Servicio</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\General\JLLR.Core.General.Servicio\JLLR.Core.General.Servicio.csproj">
       <Project>{fa1cb8ee-77d8-41c6-bb31-fee6716b8cf8}</Project>

@@ -26,6 +26,90 @@ namespace JLLR.Core.Contabilidad.Servicio.Transformador
         #endregion
 
         #region TRANSACCIONAL
+
+        /// <summary>
+        /// Obtiene el historial de las cuentas por  cobrar por numero de  orden
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <param name="sucursalId"></param>
+        /// <returns></returns>
+        public List<CuentaPorCobrarDTOs> ObtenerHistorialCuentaPorCobrarPorVariosParametros(string numeroOrden, int puntoVentaId, int sucursalId)
+        {
+            try
+            {
+                return
+                    _ensambladorModeloDTOs.CreaCuentasPorCobrarDtOs(
+                        _contabilidadNegocio.ObtenerHistorialCuentaPorCobrarPorVariosParametros(numeroOrden,
+                            puntoVentaId, sucursalId));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene el historial de las cuentas por  cobrar por numero de  orden
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <param name="sucursalId"></param>
+        /// <returns></returns>
+        public List<CuentaPorPagarDTOs> ObtenerHistorialCuentaPorPagarPorVariosParametros(string numeroOrden, int puntoVentaId, int sucursalId)
+        {
+            try
+            {
+                return
+                    _ensambladorModeloDTOs.CrearCuentasPorPagarDtOs(
+                        _contabilidadNegocio.ObtenerHistorialCuentaPorPagarPorVariosParametros(numeroOrden, puntoVentaId,
+                            sucursalId));
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene el historial de las cuentas por  cobrar por numero de  orden
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        public List<CuentaPorPagarDTOs> ObtenerHistorialCuentaPorPagarPorNumeroOrden(string numeroOrden)
+        {
+            try
+            {
+                return
+                    _ensambladorModeloDTOs.CrearCuentasPorPagarDtOs(
+                        _contabilidadNegocio.ObtenerHistorialCuentaPorPagarPorNumeroOrden(numeroOrden));
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        /// <summary>
+        /// Graba el asiento tanto  positivo como negativo
+        /// </summary>
+        public void GrabarAsiento(AsientoDTOs asientoDtOs)
+        {
+            try
+            {
+                _contabilidadNegocio.GrabarAsiento(_ensambladorEntidadDTOs.CrearAsiento(asientoDtOs));
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+
+        }
         /// <summary>
         /// Graba la cuenta por pagar  
         /// </summary>
@@ -77,6 +161,29 @@ namespace JLLR.Core.Contabilidad.Servicio.Transformador
                 throw;
             }
         }
+        /// <summary>
+        /// Obtener  las cuentas  por  cobrar  por  fecha desde y  hasta  y el punto de  venta
+        /// </summary>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechaHasta"></param>
+        /// <param name="sucursalId"></param>
+        /// <returns></returns>
+        public List<CuentaPorPagarDTOs> ObtenerCuentaPorPagarPorFechas(DateTime fechaDesde, DateTime fechaHasta,
+            int sucursalId)
+        {
+
+            try
+            {
+                return
+                    _ensambladorModeloDTOs.CrearCuentasPorPagarDtOs(
+                        _contabilidadNegocio.ObtenerCuentaPorPagarPorFechas(fechaDesde, fechaHasta, sucursalId));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
         #region CUENTA POR COBRAR
@@ -112,6 +219,30 @@ namespace JLLR.Core.Contabilidad.Servicio.Transformador
             {
                 _contabilidadNegocio.ActualizaCuentaPorCobrar(_ensambladorEntidad.CrearCuentaPorCobrar(cuentaPorCobrar));
 
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtener las cuentas  por  cobrar por  fecha
+        /// </summary>
+        /// <param name="sucursalId"></param>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechaHasta"></param>
+        /// <returns></returns>
+
+        public List<CuentaPorCobrarModelo> ObtenerCuentasPorCobrarPorFecha(int sucursalId, DateTime fechaDesde,
+            DateTime fechaHasta)
+        {
+            try
+            {
+                return
+                    _ensambladorModelo.CrearCuentasPorCobrar(
+                        _contabilidadNegocio.ObtenerCuentasPorCobrarPorFecha(sucursalId, fechaDesde, fechaHasta));
             }
             catch (Exception ex)
             {
@@ -198,6 +329,31 @@ namespace JLLR.Core.Contabilidad.Servicio.Transformador
             {
              _contabilidadNegocio.ActualizaCuentaPorPagar(_ensambladorEntidad.CrearCuentaPorPagar(cuentaPorPagar));
                 
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtener  las cuentas  por pagar por  fecha
+        /// </summary>
+        /// <param name="sucursalId"></param>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechahasta"></param>
+        /// <returns></returns>
+
+        public List<CuentaPorPagarModelo> ObtenerCuentaPorPagarPorFecha(int sucursalId, DateTime fechaDesde,
+            DateTime fechaHasta)
+        {
+
+            try
+            {
+                return
+                    _ensambladorModelo.CrearCuentasPorPagar(
+                        _contabilidadNegocio.ObtenerCuentaPorPagarPorFecha(sucursalId, fechaDesde, fechaHasta));
             }
             catch (Exception)
             {

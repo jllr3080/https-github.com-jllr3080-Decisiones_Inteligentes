@@ -1,10 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PaginaMaestra/Login.Master"  AutoEventWireup="true" CodeBehind="IngresoSistema.aspx.cs" Inherits="Web.Seguridad.Login.IngresoSistema" %>
 <%@ Register TagPrefix="cc1" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=16.1.1.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="_contenido" runat="server">
-    <div  id="_imagenfondo" style="background-image: url('../../Content/Imagen/ImagenInicial.png'); width: 1600px;height: 800px" >
+    <div  id="_imagenfondo" >
    
-    <div id="_datosBusquedaCliente" style="width: 800px; padding-top: 100px;padding-left: 450px">
-           <div style="padding-left:150px"><img src="../../Content/Imagen/Logo_Principal.png"/></div>
+    <div id="_datosBusquedaCliente" style="width: 800px; padding-top: 0px;padding-left: 500px">
+           <div style="padding-left:80px"><img src="../../Content/Imagen/Logo_Principal_Corazon.png"/>
+
+           </div>
         <div class="panel-body" style="background-image: url('../../Content/Imagen/usuario.png'); width: 450px;height: 450px">
             <br/>
             <br/>

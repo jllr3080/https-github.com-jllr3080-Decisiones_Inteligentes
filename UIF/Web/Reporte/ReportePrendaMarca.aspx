@@ -23,11 +23,9 @@
                         <asp:Label ID="_labelMarca" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Marca%>"></asp:Label>
                     </div>
                     <div class="col-md-3">
-                        <asp:Label ID="_labelFechaDesde" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Fecha_Desde%>"></asp:Label>
+                        <asp:Label ID="_labelFechaDesde" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Fecha%>"></asp:Label>
                     </div>
-                    <div class="col-md-3">
-                        <asp:Label ID="_labelFechaHasta" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Fecha_Hasta%>"></asp:Label>
-                    </div>
+                    
                     
             </div>
             

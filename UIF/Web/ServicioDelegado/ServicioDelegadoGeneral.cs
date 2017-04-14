@@ -107,7 +107,7 @@ namespace Web.ServicioDelegado
             try
             {
                 var clienteWeb = new WebClient();
-                var json = clienteWeb.DownloadString(direccionUrl + "ValidarSiExisteMarcaPorDescripcion?descripcion"+ descripcion);
+                var json = clienteWeb.DownloadString(direccionUrl + "ValidarSiExisteMarcaPorDescripcion?descripcion="+ descripcion);
                 var js = new JavaScriptSerializer();
                 return js.Deserialize<MarcaVistaModelo>(json);
 
@@ -493,6 +493,35 @@ namespace Web.ServicioDelegado
 
                 throw;
             }
+        }
+        #endregion
+
+        #region PARROQUIA
+        /// <summary>
+        /// Obtiene  todas las parroquias  depenedinedo del pais,provincia y canton
+        /// </summary>
+        /// <param name="paisId"></param>
+        /// <param name="ciudadId"></param>
+        /// <param name="estadoId"></param>
+        /// <returns></returns>
+        public List<ParroquiaVistaModelo> ObtenerParroquiasPorVariosParametros(int paisId, int ciudadId, int estadoId)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerParroquiasPorVariosParametros?paisId=" + paisId+ "&ciudadId="+ ciudadId + "&estadoId="+ estadoId);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<ParroquiaVistaModelo>>(json);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
         }
         #endregion
     }

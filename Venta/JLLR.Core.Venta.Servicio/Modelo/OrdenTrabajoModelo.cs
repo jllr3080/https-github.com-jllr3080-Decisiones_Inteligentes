@@ -99,5 +99,7 @@ namespace JLLR.Core.Venta.Servicio.Modelo
         [DataMember]
         public string NumeroOrdenManual { get; set; }
 
+        
+
     }
 }

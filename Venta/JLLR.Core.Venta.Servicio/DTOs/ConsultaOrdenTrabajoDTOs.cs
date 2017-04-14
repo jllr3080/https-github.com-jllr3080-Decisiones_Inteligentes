@@ -143,5 +143,35 @@ namespace JLLR.Core.Venta.Servicio.DTOs
         /// </summary>
         [DataMember]
         public string NombreUsuario { get; set; }
+
+        /// <summary>
+        /// Estado de  la Prenda
+        /// </summary>
+        [DataMember]
+        public string EstadoPrenda { get; set; }
+
+        /// <summary>
+        ///Tratamiento Especial
+        /// </summary>
+        [DataMember]
+        public string TratamientoEspecial { get; set; }
+
+        /// <summary>
+        ///InformacionVisual
+        /// </summary>
+        [DataMember]
+        public string InformacionVisual { get; set; }
+
+        /// <summary>
+        ///NumeroInternoPrenda
+        /// </summary>
+        [DataMember]
+        public string NumeroInternoPrenda { get; set; }
+
+        /// <summary>
+        ///NumeroInternoPrenda
+        /// </summary>
+        [DataMember]
+        public int DetallePrendaOrdenTrabajoId { get; set; }
     }
 }

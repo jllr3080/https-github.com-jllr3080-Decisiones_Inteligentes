@@ -839,6 +839,45 @@ namespace JLLR.Core.General.Servicio.Ensamblador
 
         #endregion
 
+        #region  PARROQUIA
+        /// <summary>
+        /// Convierte el DTO de entidad a modelo
+        /// </summary>
+        /// <param name="e">Entidad</param>
+        /// <returns></returns>
+        public Modelo.ParroquiaModelo CrearParroquia(entidad.PARROQUIA e)
+        {
+            return new modelo.ParroquiaModelo
+            {
+                CiudadId = e.CIUDAD_ID,
+                Descripcion = e.DESCRIPCION,
+                EstadoId = e.ESTADO_ID,
+                PaisId = e.PAIS_ID,
+                ParroquiaId = e.PARROQUIA_ID
+
+            };
+
+        }
+
+        /// <summary>
+        /// Convierte un listado de DTO en listado de  modelos de DTO
+        /// </summary>
+        /// <param name="listadoEntidad">Listado de Entidades</param>
+        /// <returns></returns>
+        public List<modelo.ParroquiaModelo> CrearParroquias(IQueryable<entidad.PARROQUIA> listadoEntidad)
+        {
+            List<modelo.ParroquiaModelo> listaModelo = new List<modelo.ParroquiaModelo>();
+
+            foreach (var entidad in listadoEntidad)
+            {
+                listaModelo.Add(CrearParroquia(entidad));
+            }
+            return listaModelo;
+
+        }
+
+        #endregion
+
 
     }
 

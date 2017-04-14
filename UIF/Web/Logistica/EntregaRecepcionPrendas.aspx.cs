@@ -98,54 +98,86 @@ namespace Web.Logistica
         {
             try
             {
+
+                //DataTable dt = new DataTable();
+                //dt.Columns.AddRange(new DataColumn[2] { new DataColumn("Name"), new DataColumn("Country") });
+                //foreach (GridViewRow row in GridView1.Rows)
+                //{
+                //    if (row.RowType == DataControlRowType.DataRow)
+                //    {
+                //        CheckBox chkRow = (row.Cells[0].FindControl("chkRow") as CheckBox);
+                //        if (chkRow.Checked)
+                //        {
+                //            string name = row.Cells[1].Text;
+                //            string country = (row.Cells[2].FindControl("lblCountry") as Label).Text;
+                //            dt.Rows.Add(name, country);
+                //        }
+                //    }
+                //}
+                //gvSelected.DataSource = dt;
+                //gvSelected.DataBind();
+
                 UsuarioVistaDTOs _usuarioVistaDtOs = _servicioDelegadoSeguridad.IngresoSistema(_usuario.Text, _contrasena.Text, 1, 1);
-                if (_usuarioVistaDtOs != null)
+                foreach (GridViewRow row in _datos.Rows)
                 {
-                    foreach (var objetoHistorialProceso in _listaHistorialProcesoVistaModelos)
+                    if (row.RowType == DataControlRowType.DataRow)
                     {
+                        CheckBox _aceptarEntrega = (row.Cells[0].FindControl("_aceptarEntrega") as CheckBox);
+                        if (_aceptarEntrega.Checked==true)
+                        {
+                           
+                            if (_usuarioVistaDtOs != null)
+                            {
+                                foreach (var objetoHistorialProceso in _listaHistorialProcesoVistaModelos)
+                                {
 
-                        objetoHistorialProceso.PasoPorEstaEtapa = true;
-                       _servicioDelegadoFlujoProceso.ActualizarHistorialProceso(objetoHistorialProceso);
-
-
-                        //Graba en el Historial de Proceso
-                        //GUarda el proceso inicial que es la entrega del cliente hacia  la franquicia
-                        HistorialProcesoVistaModelo _historialProcesoVista = new HistorialProcesoVistaModelo();
-                        _historialProcesoVista.OrdenTrabajoId = objetoHistorialProceso.OrdenTrabajoId;
-                        EtapaProcesoVistaModelo _etapaProcesoVistaModelo = new EtapaProcesoVistaModelo();
-                        _etapaProcesoVistaModelo.EtapaProcesoId = Convert.ToInt32(_etapaProcesoDestino.SelectedItem.Value);
-                        _historialProcesoVista.EtapaProceso = _etapaProcesoVistaModelo;
-                        _historialProcesoVista.OrdenTrabajoId = objetoHistorialProceso.OrdenTrabajoId;
-                        _historialProcesoVista.FechaRegistro = DateTime.Now;
-                        _historialProcesoVista.FechaInicio = DateTime.Now;
-                        _historialProcesoVista.FechaFin = DateTime.Now;
-                        _historialProcesoVista.NumeroOrden = objetoHistorialProceso.NumeroOrden;
-                        _historialProcesoVista.PasoPorEstaEtapa = false;
-                        _historialProcesoVista.SucursalId = User.SucursalId;
-                        _historialProcesoVista.PuntoVentaId = User.PuntoVentaId;
-                        _historialProcesoVista.UsuarioEntregaId = _usuarioVistaDtOs.UsuarioId;
-                        _historialProcesoVista.UsuarioRecibeId = User.Id;
-                        _historialProcesoVista.PerfilId = User.PerfilId;
-                       _servicioDelegadoFlujoProceso.GrabarHistorialProceso(_historialProcesoVista);
-
-                        ////Actualiza  la orden  de trabajo
-                        //OrdenTrabajoVistaModelo _ordenTrabajoVistaModelo = objetoOrdenTrabajoVista.OrdenTrabajo;
-                        //_ordenTrabajoVistaModelo.SeEnvio = true;
-                        //_servicioDelegadoVenta.ActualizarOrdenTrabajo(_ordenTrabajoVistaModelo);
+                                    objetoHistorialProceso.PasoPorEstaEtapa = true;
+                                    _servicioDelegadoFlujoProceso.ActualizarHistorialProceso(objetoHistorialProceso);
 
 
-                        _datos.DataSource = null;
-                        _datos.DataBind();
+                                    //Graba en el Historial de Proceso
+                                    //GUarda el proceso inicial que es la entrega del cliente hacia  la franquicia
+                                    HistorialProcesoVistaModelo _historialProcesoVista = new HistorialProcesoVistaModelo();
+                                    _historialProcesoVista.OrdenTrabajoId = objetoHistorialProceso.OrdenTrabajoId;
+                                    EtapaProcesoVistaModelo _etapaProcesoVistaModelo = new EtapaProcesoVistaModelo();
+                                    _etapaProcesoVistaModelo.EtapaProcesoId = Convert.ToInt32(_etapaProcesoDestino.SelectedItem.Value);
+                                    _historialProcesoVista.EtapaProceso = _etapaProcesoVistaModelo;
+                                    _historialProcesoVista.OrdenTrabajoId = objetoHistorialProceso.OrdenTrabajoId;
+                                    _historialProcesoVista.FechaRegistro = DateTime.Now;
+                                    _historialProcesoVista.FechaInicio = DateTime.Now;
+                                    _historialProcesoVista.FechaFin = DateTime.Now;
+                                    _historialProcesoVista.NumeroOrden = objetoHistorialProceso.NumeroOrden;
+                                    _historialProcesoVista.PasoPorEstaEtapa = false;
+                                    _historialProcesoVista.SucursalId = User.SucursalId;
+                                    _historialProcesoVista.PuntoVentaId = User.PuntoVentaId;
+                                    _historialProcesoVista.UsuarioEntregaId = _usuarioVistaDtOs.UsuarioId;
+                                    _historialProcesoVista.UsuarioRecibeId = User.Id;
+                                    _historialProcesoVista.PerfilId = User.PerfilId;
+                                    _servicioDelegadoFlujoProceso.GrabarHistorialProceso(_historialProcesoVista);
 
+                                    ////Actualiza  la orden  de trabajo
+                                    //OrdenTrabajoVistaModelo _ordenTrabajoVistaModelo = objetoOrdenTrabajoVista.OrdenTrabajo;
+                                    //_ordenTrabajoVistaModelo.SeEnvio = true;
+                                    //_servicioDelegadoVenta.ActualizarOrdenTrabajo(_ordenTrabajoVistaModelo);
+
+
+                                    _datos.DataSource = null;
+                                    _datos.DataBind();
+
+                                }
+
+
+
+                            }
+                            else
+                            {
+                                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Informacion_No_existe").ToString(), "_grabarEntregaRecepcionPrenda");
+                            }
+
+                        }
                     }
-
-                   
-
                 }
-                else
-                {
-                    Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Informacion_No_existe").ToString(), "_grabarEntregaRecepcionPrenda");
-                }
+               
 
             }
             catch (Exception ex)
@@ -167,7 +199,7 @@ namespace Web.Logistica
                 if (e.CommandName == "DetalleOrden")
                 {
                     int index = Convert.ToInt32(e.CommandArgument);
-                    _btnDetalleOrden_ModalPopupExtender.TargetControlID = "_btnGuardarinformacion";
+                    _btnDetalleOrden_ModalPopupExtender.TargetControlID = "_cancelar";
                     _btnDetalleOrden_ModalPopupExtender.Show();
                     //List<DetalleOrdenTrabajoObservacionVistaModelo> _lisaDetalleOrdenTrabajoObservacion = _servicioDelegadoVenta.ObtenerDetalleOrdenTrabajoObservaciones(Convert.ToInt32(_datos.Rows[index].Cells[0].Text));
                     _datosDetalleOrden.DataSource =
@@ -193,7 +225,7 @@ namespace Web.Logistica
         {
             try
             {
-                _btnSeguridad_ModalPopupExtender.TargetControlID = "_grabarEntregaRecepcionPrenda";
+                _btnSeguridad_ModalPopupExtender.TargetControlID = "_cancelar";
                 _btnSeguridad_ModalPopupExtender.Show();
                 _usuario.Text= string.Empty;
                 _contrasena.Text= string.Empty;

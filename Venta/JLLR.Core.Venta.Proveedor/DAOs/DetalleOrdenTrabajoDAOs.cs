@@ -43,6 +43,29 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
             }
         }
 
-       
+        /// <summary>
+        /// Obtiene  el detalle de  una orden de  trabajo por  orden de trabajo id
+        /// </summary>
+        /// <param name="ordenTrabajoId"></param>
+        /// <returns></returns>
+        public IQueryable<DETALLE_ORDEN_TRABAJO> ObtenerDetalleOrdenTrabajosPorOrdenTrabajoId(int ordenTrabajoId)
+        {
+            try
+            {
+                var detalleOrdenesTrabajo = from detalleOrdenTrabajo in _entidad.DETALLE_ORDEN_TRABAJO
+                    where detalleOrdenTrabajo.ORDEN_TRABAJO_ID == ordenTrabajoId
+                    select detalleOrdenTrabajo;
+
+                return detalleOrdenesTrabajo;
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
+
+
     }
 }

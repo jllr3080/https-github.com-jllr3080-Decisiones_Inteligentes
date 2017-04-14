@@ -56,6 +56,7 @@
     <Compile Include="DAOs\PaisDAOs.cs" />
     <Compile Include="DAOs\EstadoDAOs.cs" />
     <Compile Include="DAOs\ParametroDAOs.cs" />
+    <Compile Include="DAOs\ParroquiaDAOs.cs" />
     <Compile Include="DAOs\PuntoVentaDAOs.cs" />
     <Compile Include="DAOs\TipoCorreoElectronicoDAOs.cs" />
     <Compile Include="DAOs\TipoDireccionDAOs.cs" />

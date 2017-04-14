@@ -33,11 +33,7 @@ namespace Web.Models.Venta.Negocio
         
         public ProductoVistaModelo Producto { get; set; }
 
-        /// <summary>
-        /// Color
-        /// </summary>
-
-        public ColorVistaModelo Color { get; set; }
+       
 
         /// <summary>
         /// Impuesto    
@@ -69,29 +65,14 @@ namespace Web.Models.Venta.Negocio
         
         public decimal? ValorTotal { get; set; }
 
-        /// <summary>
-        /// Observacion
-        /// </summary>
-        
-        public string Observacion { get; set; }
-
+       
         /// <summary>
         /// ProductoTalla
         /// </summary>
         
         public ProductoTallaVistaModelo ProductoTalla { get; set; }
 
-        /// <summary>
-        /// Marca
-        /// </summary>
-        
-        public MarcaVistaModelo Marca { get; set; }
-
-        /// <summary>
-        /// Material
-        /// </summary>
-        
-        public MaterialVistaModelo Material { get; set; }
+       
 
         /// <summary>
         /// VentaComision
@@ -99,27 +80,16 @@ namespace Web.Models.Venta.Negocio
         
         public VentaComisionVistaModelo VentaComision { get; set; }
 
-        /// <summary>
-        /// DetalleOrdenTrabajoObservacion
-        /// </summary>
-        
-        public List<DetalleOrdenTrabajoObservacionVistaModelo> DetalleOrdenTrabajoObservacion { get; set; }
-
-        /// <summary>
-        /// TratamientoEspecial
-        /// </summary>
-        
-        public string TratamientoEspecial { get; set; }
+       
 
 
         /// <summary>
-        /// NumeroLibras
+        /// DetallePrendaOrdenTrabajo
         /// </summary>
         
-        public decimal? NumeroLibras { get; set; }
+        public List<DetallePrendaOrdenTrabajoVistaModelo> DetallePrendaOrdenTrabajo { get; set; }
 
-
-
+       
         /// <summary>
         /// Suavizante
         /// </summary>
@@ -139,10 +109,26 @@ namespace Web.Models.Venta.Negocio
         
         public bool? FijadorColor { get; set; }
 
+       
         /// <summary>
-        /// NumeroInternoPrenda
+        /// ValorTotalUnitario
         /// </summary>
+        
+        public decimal? ValorTotalUnitario { get; set; }
 
-        public string NumeroInternoPrenda { get; set; }
+        /// <summary>
+        /// ValorTotalDescuento
+        /// </summary>
+        public decimal? ValorDescuento { get; set; }
+
+        /// <summary>
+        /// ValorTotalDescuento
+        /// </summary>
+        public int? PromocionAplicada { get; set; }
+
+        /// <summary>
+        /// ValorTotalDescuento
+        /// </summary>
+        public string NombrePromocionAplicada { get; set; }
     }
 }

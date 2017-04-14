@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 using Microsoft.Reporting.WebForms;
 using Web.Base;
 using Web.DTOs.Venta;
+using Web.Models.Venta.Negocio;
 using Web.ServicioDelegado;
 
 #endregion
@@ -33,20 +34,7 @@ namespace Web.Reporte
         {
             try
             {
-                if (!IsPostBack)
-                {
-                    
-                    if (Session["OrdenTrabajoId"] != null)
-                    {
-                        
-                        string numeroOrden = Session["OrdenTrabajoId"].ToString();
-                        List<ConsultaOrdenTrabajoVistaDTOs> _listaConsultaOrdenTrabajoVistaDtOses = _servicioDelegadoVenta.ObtenerOrdenTrabajoPorNumeroOrdenYPuntoVenta(numeroOrden, Convert.ToInt32(User.PuntoVentaId));
-                        _numeroOrden.Text = numeroOrden;
-                        CargaInformacion(_listaConsultaOrdenTrabajoVistaDtOses);
-                        Session["OrdenTrabajoId"] = null;
-
-                    }
-                }
+               
 
                 
 
@@ -71,10 +59,13 @@ namespace Web.Reporte
             {
                 List<ConsultaOrdenTrabajoVistaDTOs> _listaConsultaOrdenTrabajoVistaDtOses = _servicioDelegadoVenta.ObtenerOrdenTrabajoPorNumeroOrdenYPuntoVenta(_numeroOrden.Text,
                     Convert.ToInt32(User.PuntoVentaId));
+                List<DetalleOrdenTrabajoVistaModelo> _listaDetalleOrdenTrabajoVistaModelos =
+                    _servicioDelegadoVenta.ObtenerDetalleOrdenTrabajoPorNumeroOrdenYPuntoVenta(_numeroOrden.Text,
+                        Convert.ToInt32(User.PuntoVentaId));
 
-                if (_listaConsultaOrdenTrabajoVistaDtOses.Count > 0)
+                if (_listaConsultaOrdenTrabajoVistaDtOses.Count > 0 && _listaDetalleOrdenTrabajoVistaModelos.Count>0)
                 {
-                    CargaInformacion(_listaConsultaOrdenTrabajoVistaDtOses);
+                    CargaInformacion(_listaConsultaOrdenTrabajoVistaDtOses, _listaDetalleOrdenTrabajoVistaModelos);
                 }
                 else
                 {
@@ -110,7 +101,7 @@ namespace Web.Reporte
         }
 
 
-        private void CargaInformacion( List<ConsultaOrdenTrabajoVistaDTOs>  consultaOrdenTrababajo)
+        private void CargaInformacion( List<ConsultaOrdenTrabajoVistaDTOs>  consultaOrdenTrababajo, List<DetalleOrdenTrabajoVistaModelo> detalleOrdenTrabajoVista )
         {
             try
             {
@@ -118,6 +109,7 @@ namespace Web.Reporte
                 string pathreport = Server.MapPath("~/Reporte/Venta/Rdlc/ReporteOrdenTrabajo.rdlc");
                 _impresion.LocalReport.ReportPath = pathreport;
                 _impresion.LocalReport.DataSources.Add(new ReportDataSource("DetalleOrden", consultaOrdenTrababajo));
+                _impresion.LocalReport.DataSources.Add(new ReportDataSource("DetalleValores", detalleOrdenTrabajoVista));
             }
             catch (Exception)
             {

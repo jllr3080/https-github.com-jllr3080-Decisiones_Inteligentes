@@ -21,6 +21,52 @@ namespace JLLR.Core.Contabilidad.Servicio
         #region TRANSACCIONAL
 
         /// <summary>
+        /// Obtiene el historial de las cuentas por  cobrar por numero de  orden
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <param name="sucursalId"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(
+            UriTemplate = "ObtenerHistorialCuentaPorCobrarPorVariosParametros?numeroOrden={numeroOrden}&puntoVentaId={puntoVentaId}&sucursalId={sucursalId}",
+            ResponseFormat = WebMessageFormat.Json)]
+        List<CuentaPorCobrarDTOs> ObtenerHistorialCuentaPorCobrarPorVariosParametros(string numeroOrden,
+            int puntoVentaId, int sucursalId);
+
+        /// <summary>
+        /// Obtiene el historial de las cuentas por  cobrar por numero de  orden
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <param name="sucursalId"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(
+            UriTemplate = "ObtenerHistorialCuentaPorPagarPorVariosParametros?numeroOrden={numeroOrden}&puntoVentaId={puntoVentaId}&sucursalId={sucursalId}",
+            ResponseFormat = WebMessageFormat.Json)]
+        List<CuentaPorPagarDTOs> ObtenerHistorialCuentaPorPagarPorVariosParametros(string numeroOrden, int puntoVentaId,
+            int sucursalId);
+       
+
+        /// <summary>
+        /// Obtiene el historial de las cuentas por  cobrar por numero de  orden
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        [OperationContract]
+        [WebGet(
+            UriTemplate = "ObtenerHistorialCuentaPorPagarPorNumeroOrden?numeroOrden={numeroOrden}",
+            ResponseFormat = WebMessageFormat.Json)]
+        List<CuentaPorPagarDTOs> ObtenerHistorialCuentaPorPagarPorNumeroOrden(string numeroOrden);
+       
+        /// <summary>
+        /// Graba el asiento tanto  positivo como negativo
+        /// </summary>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabarAsiento/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void GrabarAsiento(AsientoDTOs asientoDtOs);
+
+        /// <summary>
         /// Graba la cuenta por pagar  
         /// </summary>
         /// <param name="cuentaPorCobrarDtOs"></param>
@@ -51,7 +97,22 @@ namespace JLLR.Core.Contabilidad.Servicio
                 "ObtenerHistorialCuentaPorCobrarPorNumeroidentificacion?numeroIdentificacion={numeroIdentificacion}",
             ResponseFormat = WebMessageFormat.Json)]
         List<CuentaPorCobrarDTOs> ObtenerHistorialCuentaPorCobrarPorNumeroidentificacion(string numeroIdentificacion);
-       
+
+
+        /// <summary>
+        /// Obtener  las cuentas  por  cobrar  por  fecha desde y  hasta  y el punto de  venta
+        /// </summary>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechaHasta"></param>
+        /// <param name="sucursalId"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(
+            UriTemplate =
+                "ObtenerCuentaPorPagarPorFechas?fechaDesde={fechaDesde}&fechaHasta={fechaHasta}&sucursalId={sucursalId}",
+            ResponseFormat = WebMessageFormat.Json)]
+        List<CuentaPorPagarDTOs> ObtenerCuentaPorPagarPorFechas(string fechaDesde, string fechaHasta,
+            int sucursalId);
         #endregion
 
         #region CUENTA POR COBRAR
@@ -73,6 +134,20 @@ namespace JLLR.Core.Contabilidad.Servicio
         [OperationContract]
         [WebInvoke(UriTemplate = "ActualizaCuentaPorCobrar/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
         void ActualizaCuentaPorCobrar(CuentaPorCobrarModelo cuentaPorCobrar);
+
+        /// <summary>
+        /// Obtener las cuentas  por  cobrar por  fecha
+        /// </summary>
+        /// <param name="sucursalId"></param>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechaHasta"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(
+           UriTemplate = "ObtenerCuentasPorCobrarPorFecha?sucursalId={sucursalId}&fechaDesde={fechaDesde}&fechaHasta={fechaHasta}",
+           ResponseFormat = WebMessageFormat.Json)]
+        List<CuentaPorCobrarModelo> ObtenerCuentasPorCobrarPorFecha(int sucursalId, string fechaDesde,
+            string fechaHasta);
 
         #endregion
 
@@ -123,6 +198,20 @@ namespace JLLR.Core.Contabilidad.Servicio
         [OperationContract]
         [WebInvoke(UriTemplate = "ActualizaCuentaPorPagar/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
         void ActualizaCuentaPorPagar(CuentaPorPagarModelo cuentaPorPagar);
+
+        /// <summary>
+        /// Obtener  las cuentas  por pagar por  fecha
+        /// </summary>
+        /// <param name="sucursalId"></param>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechahasta"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(
+          UriTemplate = "ObtenerCuentaPorPagarPorFecha?sucursalId={sucursalId}&fechaDesde={fechaDesde}&fechaHasta={fechaHasta}",
+          ResponseFormat = WebMessageFormat.Json)]
+        List<CuentaPorPagarModelo> ObtenerCuentaPorPagarPorFecha(int sucursalId, string fechaDesde,
+            string fechaHasta);
 
         #endregion
 

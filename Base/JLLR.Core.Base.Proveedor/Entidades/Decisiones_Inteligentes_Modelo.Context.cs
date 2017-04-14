@@ -33,7 +33,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual DbSet<SECUENCIALES_SRI> SECUENCIALES_SRI { get; set; }
         public virtual DbSet<CIUDAD> CIUDAD { get; set; }
         public virtual DbSet<CLIENTE> CLIENTE { get; set; }
-        public virtual DbSet<DIRECCION> DIRECCION { get; set; }
         public virtual DbSet<E_MAIL> E_MAIL { get; set; }
         public virtual DbSet<EMPLEADO> EMPLEADO { get; set; }
         public virtual DbSet<ESTADO> ESTADO { get; set; }
@@ -86,10 +85,8 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual DbSet<USUARIO_PREGUNTA_SEGURIDAD> USUARIO_PREGUNTA_SEGURIDAD { get; set; }
         public virtual DbSet<USUARIO_SEGURIDAD> USUARIO_SEGURIDAD { get; set; }
         public virtual DbSet<NUMERACION_ORDEN> NUMERACION_ORDEN { get; set; }
-        public virtual DbSet<VENTA_COMISION> VENTA_COMISION { get; set; }
         public virtual DbSet<HISTORIAL_PROCESO> HISTORIAL_PROCESO { get; set; }
         public virtual DbSet<ETAPA_PROCESO> ETAPA_PROCESO { get; set; }
-        public virtual DbSet<DETALLE_ORDEN_TRABAJO_OBSERVACION> DETALLE_ORDEN_TRABAJO_OBSERVACION { get; set; }
         public virtual DbSet<DETALLE_TRABAJO_FOTOGRAFIA> DETALLE_TRABAJO_FOTOGRAFIA { get; set; }
         public virtual DbSet<CUENTA_POR_COBRAR> CUENTA_POR_COBRAR { get; set; }
         public virtual DbSet<CUENTA_POR_PAGAR> CUENTA_POR_PAGAR { get; set; }
@@ -117,7 +114,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual DbSet<TIPO_COMPROBANTE> TIPO_COMPROBANTE { get; set; }
         public virtual DbSet<TIPO_MENSAJE> TIPO_MENSAJE { get; set; }
         public virtual DbSet<CABECERA_FACTURACION> CABECERA_FACTURACION { get; set; }
-        public virtual DbSet<ORDEN_TRABAJO_COMISION> ORDEN_TRABAJO_COMISION { get; set; }
         public virtual DbSet<TIPO_REGLA> TIPO_REGLA { get; set; }
         public virtual DbSet<ACCION_REGLA> ACCION_REGLA { get; set; }
         public virtual DbSet<REGLA> REGLA { get; set; }
@@ -125,8 +121,14 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual DbSet<HISTORIAL_REGLA> HISTORIAL_REGLA { get; set; }
         public virtual DbSet<ORDEN_TRABAJO_DESCUENTO> ORDEN_TRABAJO_DESCUENTO { get; set; }
         public virtual DbSet<DETALLE_IMPUESTO_MOVIMIENTO_FACTURA> DETALLE_IMPUESTO_MOVIMIENTO_FACTURA { get; set; }
-        public virtual DbSet<DETALLE_ORDEN_TRABAJO> DETALLE_ORDEN_TRABAJO { get; set; }
         public virtual DbSet<ORDEN_TRABAJO> ORDEN_TRABAJO { get; set; }
+        public virtual DbSet<PARROQUIA> PARROQUIA { get; set; }
+        public virtual DbSet<DIRECCION> DIRECCION { get; set; }
+        public virtual DbSet<DETALLE_ORDEN_TRABAJO> DETALLE_ORDEN_TRABAJO { get; set; }
+        public virtual DbSet<DETALLE_PRENDA_ORDEN_TRABAJO> DETALLE_PRENDA_ORDEN_TRABAJO { get; set; }
+        public virtual DbSet<ORDEN_TRABAJO_COMISION> ORDEN_TRABAJO_COMISION { get; set; }
+        public virtual DbSet<DETALLE_ORDEN_TRABAJO_OBSERVACION> DETALLE_ORDEN_TRABAJO_OBSERVACION { get; set; }
+        public virtual DbSet<VENTA_COMISION> VENTA_COMISION { get; set; }
     
         public virtual ObjectResult<ESTADISTICA_PRENDA_Result> ESTADISTICA_PRENDA(Nullable<System.DateTime> fECHADESDE, Nullable<System.DateTime> fECHAHASTA)
         {

@@ -112,15 +112,20 @@
             <br/>
             <div class="row">
                     <div class="col-md-12">
+                       
                         <asp:GridView ID="_datos" runat="server" AutoGenerateColumns="False" OnRowCommand="_datos_RowCommand" Width="100%" OnRowDataBound="_datos_RowDataBound" ShowFooter="True" >
                             <Columns>
-                                <asp:BoundField DataField="DetalleOrdenTrabajoId" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Codigo_Orden_Trabajo%>" />
-                                <asp:BoundField DataField="Cantidad" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Cantidad%>"/>
+                                <asp:BoundField DataField="DetallePrendaOrdenTrabajoId" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Codigo_Orden_Trabajo%>" />
                                 <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Prenda%>" DataField="Prenda" />
-                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Color%>" DataField="Color" />
                                 <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Marca%>" DataField="Marca" />
-                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Valor_Unitario%>" DataField="ValorUnitario" DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" ItemStyle-VerticalAlign="Middle"  />
-                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Valor_Total%>" DataField="ValorTotal"  DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" ItemStyle-VerticalAlign="Middle" />
+                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Color%>" DataField="Color" />
+                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Informacion_Visual%>" DataField="InformacionVisual" />
+                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Estado_Prenda%>" DataField="EstadoPrenda" />
+                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Numero_Interno%>" DataField="NumeroInternoPrenda"  >
+                                <ItemStyle HorizontalAlign="Right" VerticalAlign="Middle" />
+                                </asp:BoundField>
+                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Tratamiento_Especial%>" DataField="TratamientoEspecial" />
+                                
                                 <asp:TemplateField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Mostrar_Observaciones%>">
                                     <ItemTemplate>
                                         <asp:ImageButton ID="_imgObservaciones" runat="server" ImageUrl="~/Content/Imagen/Observar.png"  CommandName="Observacion" CommandArgument="<%# ((GridViewRow)Container).RowIndex %>" />
@@ -128,6 +133,7 @@
                                 </asp:TemplateField>
                             </Columns>
                              <HeaderStyle CssClass="tableCabecera" ></HeaderStyle>
+                             <RowStyle CssClass="tableItem"></RowStyle>
                              <FooterStyle CssClass="tablePiePagina"></FooterStyle>
                         </asp:GridView>
                     </div>
@@ -258,7 +264,7 @@
     <div class="row" >
                   <div class="col-md-12" >
                 <asp:Button ID="_btnCerrarOrden" runat="server" Text="" Visible="false" />
-                    <cc1:ModalPopupExtender ID="_btnCerrarOrden_ModalPopupExtender" PopupControlID="_panelCerrarOrden" runat="server" BehaviorID="_btnCerrarOrden_ModalPopupExtender" TargetControlID="_btnCerrarOrden" BackgroundCssClass="modal-Backgoround" X="500" OnCancelScript="_btnCancelarCerrarOrden" OnOkScript="_btnAceptarCerrarOrden" Y="300">
+                    <cc1:ModalPopupExtender ID="_btnCerrarOrden_ModalPopupExtender" PopupControlID="_panelCerrarOrden" runat="server" BehaviorID="_btnCerrarOrden_ModalPopupExtender" TargetControlID="_btnCerrarOrden" BackgroundCssClass="modal-Backgoround" X="150" OnCancelScript="_btnCancelarCerrarOrden" OnOkScript="_btnAceptarCerrarOrden" Y="50">
                     </cc1:ModalPopupExtender>
                     <asp:Panel ID="_panelCerrarOrden" runat="server" Style="display: none; background-color: white; width: 40%; height: auto;align-content:center ">
                         <div class="modal-header">
@@ -302,7 +308,7 @@
                                  </div>
                                <div class="col-md-6">
                                          <asp:TextBox ID="_valorDescuento" runat="server" class="form-control" ValidationGroup="CerrarOrden"  ></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="_valorDescuentoValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CerrarOrden" ControlToValidate="_valorDescuento"  Enabled="False"></asp:RequiredFieldValidator>
+                                    <%--<asp:RequiredFieldValidator ID="_valorDescuentoValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CerrarOrden" ControlToValidate="_valorDescuento"  Enabled="False"></asp:RequiredFieldValidator>--%>
                                      <cc1:MaskedEditExtender ID="_valorDescuentoMascara" runat="server" TargetControlID="_valorDescuento" Mask="999.99" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus" OnInvalidCssClass="MaskedEditError" MaskType="Number" InputDirection="RightToLeft" AcceptNegative="Left" DisplayMoney="Left" ErrorTooltipEnabled="True" />
                                </div>
                               </div>
@@ -319,14 +325,14 @@
                              <div class="row">
                                 <div class="col-md-6">
                                          <asp:TextBox ID="_procentajeFranquicia" runat="server" class="form-control" ValidationGroup="CerrarOrden"  ></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="_procentajeFranquiciaValidador1" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CerrarOrden" ControlToValidate="_procentajeFranquicia" ></asp:RequiredFieldValidator>
+                                        <%--<asp:RequiredFieldValidator ID="_procentajeFranquiciaValidador1" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CerrarOrden" ControlToValidate="_procentajeFranquicia" ></asp:RequiredFieldValidator>--%>
                                         <cc1:MaskedEditExtender ID="_procentajeFranquiciaMascara" runat="server" TargetControlID="_procentajeFranquicia" Mask="999.99" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus" OnInvalidCssClass="MaskedEditError" MaskType="Number" InputDirection="RightToLeft" AcceptNegative="Left" DisplayMoney="Left" ErrorTooltipEnabled="True" />
                                     
                                  </div>
                                <div class="col-md-6">
                                          <asp:TextBox ID="_procentajeMatriz" runat="server" class="form-control" ValidationGroup="CerrarOrden"  ></asp:TextBox>
                                          <cc1:MaskedEditExtender ID="_procentajeMatrizMascara" runat="server" TargetControlID="_procentajeMatriz" Mask="999.99" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus" OnInvalidCssClass="MaskedEditError" MaskType="Number" InputDirection="RightToLeft" AcceptNegative="Left" DisplayMoney="Left" ErrorTooltipEnabled="True" />
-                                         <asp:RequiredFieldValidator ID="_procentajeMatrizValidador2" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CerrarOrden" ControlToValidate="_procentajeMatriz" ></asp:RequiredFieldValidator>
+                                         <%--<asp:RequiredFieldValidator ID="_procentajeMatrizValidador2" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CerrarOrden" ControlToValidate="_procentajeMatriz" ></asp:RequiredFieldValidator>--%>
 
                                </div>
                               </div>
@@ -339,8 +345,8 @@
                              </div>
                              <div class="row">
                                 <div class="col-md-12">
-                                         <asp:TextBox ID="_motivoDescuento" runat="server" class="form-control" ValidationGroup="CerrarOrden"  Width="100%" ></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="_motivoDescuentoValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CerrarOrden" ControlToValidate="_motivoDescuento" ></asp:RequiredFieldValidator>
+                                         <asp:TextBox ID="_motivoDescuento" runat="server" class="form-control" ValidationGroup="CerrarOrden"  Width="100%"  AutoCompleteType="Disabled"></asp:TextBox>
+                                        <%--<asp:RequiredFieldValidator ID="_motivoDescuentoValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CerrarOrden" ControlToValidate="_motivoDescuento" ></asp:RequiredFieldValidator>--%>
                                         
                                     
                                  </div>
@@ -349,7 +355,7 @@
 
                         </div>
                         <div class="modal-footer">
-                            <asp:Button ID="_btnAceptarCerrarOrden" runat="server" Text="Cerrar Orden" class="btn btn-primary" data-dismiss="modal" OnClick="_btnAceptarCerrarOrden_Click" ValidationGroup="CerrarOrden"  />
+                            <asp:Button ID="_btnAceptarCerrarOrden" runat="server" Text="Cerrar Orden" class="btn btn-primary" data-dismiss="modal" OnClick="_btnAceptarCerrarOrden_Click"   />
                             <asp:Button ID="_btnCancelarCerrarOrden" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Cancelar%>"  class="btn btn-primary" data-dismiss="modal" />
                         </div>
                     </asp:Panel>

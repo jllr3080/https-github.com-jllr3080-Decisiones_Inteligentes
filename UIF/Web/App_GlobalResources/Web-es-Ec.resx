@@ -271,7 +271,7 @@
     <value>Estado de Pago</value>
   </data>
   <data name="Label_Etapa_Proceso" xml:space="preserve">
-    <value>Etapa de Proceso</value>
+    <value>Etapa de Proceso Origen</value>
   </data>
   <data name="Label_Etapa_Proceso_Destino" xml:space="preserve">
     <value>Etapa de Proceso Destino</value>
@@ -689,5 +689,44 @@
   </data>
   <data name="Titulo_Pagina_Arqueo_Caja" xml:space="preserve">
     <value>Arqueo Caja</value>
+  </data>
+  <data name="Label_Parroquia" xml:space="preserve">
+    <value>Parroquia</value>
+  </data>
+  <data name="Label_Promocion_Aplicada" xml:space="preserve">
+    <value>Promoción Aplicada</value>
+  </data>
+  <data name="Label_Promociones_Vigentes" xml:space="preserve">
+    <value>Promociones Vigentes</value>
+  </data>
+  <data name="Label_Codigo_Promocion" xml:space="preserve">
+    <value>Código Promoción</value>
+  </data>
+  <data name="Titulo_Detalle_Orden" xml:space="preserve">
+    <value>Datos del Detalle  de la Orden</value>
+  </data>
+  <data name="Panel_Cabecera_Cuenta_Por_Pagar" xml:space="preserve">
+    <value>Busqueda de Cuentas  Por Pagar por Fecha</value>
+  </data>
+  <data name="Titulo_Pagina_Cuenta_Por_Pagar" xml:space="preserve">
+    <value>Cuenta Por Pagar</value>
+  </data>
+  <data name="Titulo_Pagina_Reporte_Cuenta_Por_Cobrar" xml:space="preserve">
+    <value>Reporte de Cuentas Por Cobrar</value>
+  </data>
+  <data name="Titulo_Pagina_Reporte_Cuenta_Por_Pagar" xml:space="preserve">
+    <value>Reporte de Cuentas Por Pagar</value>
+  </data>
+  <data name="Titulo_Pagina_Impresion_Corta" xml:space="preserve">
+    <value>Reporte Impresión Corta</value>
+  </data>
+  <data name="Mensaje_Numero_Prendas_No_Coincide" xml:space="preserve">
+    <value>El numero de  prendas  no coincide  con la información ingresada en el detalle</value>
+  </data>
+  <data name="Mensaje_Cedula_No_Valida" xml:space="preserve">
+    <value>Cedula  no cumple con el digito verificador</value>
+  </data>
+  <data name="Mensaje_RUC_Persona_Natural_No_Valido" xml:space="preserve">
+    <value>Ruc de persona natural no cumple con el digito verificador</value>
   </data>
 </root>

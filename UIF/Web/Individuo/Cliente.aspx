@@ -79,7 +79,7 @@
                     </div>
                     <div class="col-md-3">
                          <asp:TextBox ID="_segundoNombre" runat="server" ValidationGroup="CrearModificarCliente" CssClass="form-control" AutoCompleteType="Disabled" MaxLength="20"></asp:TextBox>
-                          <asp:RequiredFieldValidator ID="_segundoNombreValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CrearModificarCliente" ControlToValidate="_segundoNombre" ></asp:RequiredFieldValidator>
+                         <%-- <asp:RequiredFieldValidator ID="_segundoNombreValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CrearModificarCliente" ControlToValidate="_segundoNombre" ></asp:RequiredFieldValidator>--%>
                     </div>
             </div>
             <br />
@@ -100,7 +100,7 @@
             </div>
             <div class="row">
                     <div class="col-md-3">
-                          <asp:DropDownList ID="_tipoDocumento" runat="server" CssClass="form-control" ValidationGroup="CrearModificarCliente" DataTextField="Descripcion" DataValueField="TipoIdentificacionId"></asp:DropDownList>
+                          <asp:DropDownList ID="_tipoDocumento" runat="server" CssClass="form-control" ValidationGroup="CrearModificarCliente" DataTextField="Descripcion" DataValueField="TipoIdentificacionId" AutoPostBack="True" OnSelectedIndexChanged="_tipoDocumento_SelectedIndexChanged"></asp:DropDownList>
                     </div>
                      <div class="col-md-3">
                          <asp:TextBox ID="_numeroDocumento" runat="server" ValidationGroup="CrearModificarCliente" CssClass="form-control" AutoCompleteType="Disabled" AutoPostBack="True" OnTextChanged="_numeroDocumento_TextChanged" MaxLength="13"></asp:TextBox>
@@ -137,8 +137,9 @@
                         <asp:Label ID="_labelCiudad" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Ciudad%>"></asp:Label>
                     </div>
                     <div class="col-md-3">
-                        <asp:Label ID="_labelTipoDireccion" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Tipo_Direccion%>"></asp:Label>
+                        <asp:Label ID="_labelParroquia" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Parroquia%>"></asp:Label>
                     </div>
+                   
                     
             </div>
             <div class="row">
@@ -151,16 +152,20 @@
                           <asp:RequiredFieldValidator ID="_provinciaValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CrearModificarCliente" ControlToValidate="_provincia" ></asp:RequiredFieldValidator>
                        </div>
                     <div class="col-md-3">
-                         <asp:DropDownList ID="_ciudad" runat="server" CssClass="form-control" ValidationGroup="CrearModificarCliente" DataTextField="Descripcion" DataValueField="CiudadId"></asp:DropDownList>
+                         <asp:DropDownList ID="_ciudad" runat="server" CssClass="form-control" ValidationGroup="CrearModificarCliente" DataTextField="Descripcion" DataValueField="CiudadId" OnSelectedIndexChanged="_ciudad_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
                           <asp:RequiredFieldValidator ID="_ciudadValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CrearModificarCliente" ControlToValidate="_ciudad" ></asp:RequiredFieldValidator>
                     </div>
-                    <div class="col-md-3">
-                         <asp:DropDownList ID="_tipoDireccion" runat="server" CssClass="form-control" ValidationGroup="CrearModificarCliente" DataTextField="Descripcion" DataValueField="TipoDireccionId"></asp:DropDownList>
-                          <asp:RequiredFieldValidator ID="_tipoDireccionValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CrearModificarCliente" ControlToValidate="_tipoDireccion" ></asp:RequiredFieldValidator>
+                 <div class="col-md-3">
+                         <asp:DropDownList ID="_parroquia" runat="server" CssClass="form-control" ValidationGroup="CrearModificarCliente" DataTextField="Descripcion" DataValueField="ParroquiaId"></asp:DropDownList>
+                          <asp:RequiredFieldValidator ID="_parroquiaValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CrearModificarCliente" ControlToValidate="_parroquia" ></asp:RequiredFieldValidator>
                     </div>
+                   
             </div>
             <br />
             <div class="row">
+                 <div class="col-md-3">
+                        <asp:Label ID="_labelTipoDireccion" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Tipo_Direccion%>"></asp:Label>
+                    </div>
                     <div class="col-md-6">
                         <asp:Label ID="_labelDireccion" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Direccion%>"></asp:Label>
                     </div>
@@ -168,10 +173,15 @@
                     
             </div>
             <div class="row">
+                 <div class="col-md-3">
+                         <asp:DropDownList ID="_tipoDireccion" runat="server" CssClass="form-control" ValidationGroup="CrearModificarCliente" DataTextField="Descripcion" DataValueField="TipoDireccionId"></asp:DropDownList>
+                          <asp:RequiredFieldValidator ID="_tipoDireccionValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CrearModificarCliente" ControlToValidate="_tipoDireccion" ></asp:RequiredFieldValidator>
+                    </div>
                     <div class="col-md-6">
                           <asp:TextBox ID="_direccion" runat="server" ValidationGroup="CrearModificarCliente" CssClass="form-control" AutoCompleteType="Disabled" MaxLength="100"></asp:TextBox>
                           <asp:RequiredFieldValidator ID="_direccionValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CrearModificarCliente" ControlToValidate="_direccion" ></asp:RequiredFieldValidator>
                     </div>
+
                     
             </div>
 

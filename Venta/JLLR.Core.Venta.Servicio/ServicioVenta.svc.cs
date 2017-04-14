@@ -9,6 +9,7 @@ using System.Text;
 using JLLR.Core.Venta.Servicio.DTOs;
 using JLLR.Core.Venta.Servicio.Modelo;
 using JLLR.Core.Venta.Servicio.Modelo.Parametrizacion;
+using JLLR.Core.Venta.Servicio.Negocio;
 using JLLR.Core.Venta.Servicio.Transformador;
 
 #endregion
@@ -21,11 +22,49 @@ namespace JLLR.Core.Venta.Servicio
     {
         #region  DECLARACIONES  E INSTANCIAS
         private readonly VentaTransfomadorNegocio _ventaTransformadorNegocio = new VentaTransfomadorNegocio();
+        private  readonly  VentaNegocio _ventaNegocio= new VentaNegocio();
         #endregion
 
         #region TRANSACCIONAL
         #region NEGOCIO
 
+        /// <summary>
+        /// Graba el reverso de la transaccion reversa comision,cuenta por  cobrar y cuenta por  pagar
+        /// </summary>
+        /// <param name="parametroReversoDtOs"></param>
+        /// <returns></returns>
+        public string GrabarReversoTransaccion(ParametroReversoDTOs parametroReversoDtOs)
+        {
+            try
+            {
+
+
+                return _ventaNegocio.GrabarReversoTransaccion(parametroReversoDtOs);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        /// <summary>
+        /// Graba las comisiones  hace un asiento de  cuentas por cobrar y cuentas por pagar
+        /// </summary>
+        /// <param name="ordenTrabajoDtOs"></param>
+
+        public string GrabarTransaccionInicialCompleta(OrdenTrabajoDTOs ordenTrabajoDtOs)
+        {
+            try
+            {
+               return _ventaNegocio.GrabarTransaccionInicialCompleta(ordenTrabajoDtOs);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         /// <summary>
         /// Obtiene todas las observaciones  de las prendas por  
         /// </summary>
@@ -75,7 +114,7 @@ namespace JLLR.Core.Venta.Servicio
         /// </summary>
         /// <param name="ordenTrabajoDtOs"></param>
         /// <returns></returns>
-        public OrdenTrabajoModelo GrabarOrdenTrabajoCompleta(OrdenTrabajoDTOs ordenTrabajoDtOs)
+        public OrdenTrabajoDTOs GrabarOrdenTrabajoCompleta(OrdenTrabajoDTOs ordenTrabajoDtOs)
         {
             try
             {
@@ -434,6 +473,28 @@ namespace JLLR.Core.Venta.Servicio
             try
             {
                 return _ventaTransformadorNegocio.ObtenerOrdenTrabajoPorFechaIngresoYPorSucursal(Convert.ToDateTime(fechaDesde), sucursalId);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Metodo para extraer solo el detalle de la orden de  trabajo
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public List<DetalleOrdenTrabajoModelo> ObtenerDetalleOrdenTrabajoPorNumeroOrdenYPuntoVenta(string numeroOrden,
+            int puntoVentaId)
+        {
+            try
+            {
+                return _ventaTransformadorNegocio.ObtenerDetalleOrdenTrabajoPorNumeroOrdenYPuntoVenta(numeroOrden,
+                    puntoVentaId);
 
             }
             catch (Exception ex)

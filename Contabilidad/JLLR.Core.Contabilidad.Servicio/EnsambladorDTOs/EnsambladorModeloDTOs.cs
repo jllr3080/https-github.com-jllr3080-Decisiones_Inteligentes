@@ -55,5 +55,78 @@ namespace JLLR.Core.Contabilidad.Servicio.EnsambladorDTOs
 
         }
         #endregion
+
+        #region ASIENTO DTO
+        /// <summary>
+        /// Convierte el modelo DTO en una entidad DTO
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public modeloDTOs.AsientoDTOs CrearAsiento(entidadDTOs.AsientoDTOs e)
+        {
+            return new modeloDTOs.AsientoDTOs()
+            {
+                CuentaPorCobrar = _ensambladorModelo.CrearCuentaPorCobrar(e.CuentaPorCobrar),
+                HistorialCuentaPorCobrar = _ensambladorModelo.CrearHistorialCuentaPorCobrar(e.HistorialCuentaPorCobrar),
+                CuentaPorPagar = _ensambladorModelo.CrearCuentaPorPagar(e.CuentaPorPagar),
+                HistorialCuentaPorPagar = _ensambladorModelo.CrearHistorialCuentaPorPagar(e.HistorialCuentaPorPagar)
+
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos  Usuario en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<modeloDTOs.AsientoDTOs> CrearAsientos(List<entidadDTOs.AsientoDTOs> listadoModelo)
+        {
+            List<modeloDTOs.AsientoDTOs> listaEntidad = new List<modeloDTOs.AsientoDTOs>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearAsiento(modelo));
+            }
+            return listaEntidad;
+
+        }
+        #endregion
+
+        #region CUENTA POR PAGAR DTO
+        /// <summary>
+        /// Convierte el modelo DTO en una entidad DTO
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public modeloDTOs.CuentaPorPagarDTOs CrearCuentaPorPagarDtOs(entidadDTOs.CuentaPorPagarDTOs e)
+        {
+            return new modeloDTOs.CuentaPorPagarDTOs()
+            {
+                CuentaPorPagar = _ensambladorModelo.CrearCuentaPorPagar(e.CuentaPorPagar),
+                HistorialCuentaPorPagar = _ensambladorModelo.CrearHistorialCuentaPorPagar(e.HistorialCuentaPorPagar),
+                proveedor = e.proveedor
+
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos  Usuario en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<modeloDTOs.CuentaPorPagarDTOs> CrearCuentasPorPagarDtOs(List<entidadDTOs.CuentaPorPagarDTOs> listadoModelo)
+        {
+            List<modeloDTOs.CuentaPorPagarDTOs> listaEntidad = new List<modeloDTOs.CuentaPorPagarDTOs>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearCuentaPorPagarDtOs(modelo));
+            }
+            return listaEntidad;
+
+        }
+        #endregion
     }
 }

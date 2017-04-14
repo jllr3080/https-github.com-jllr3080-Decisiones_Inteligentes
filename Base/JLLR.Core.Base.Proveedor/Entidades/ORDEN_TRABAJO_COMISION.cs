@@ -15,13 +15,13 @@ namespace JLLR.Core.Base.Proveedor.Entidades
     public partial class ORDEN_TRABAJO_COMISION
     {
         public long ORDEN_TRABAJO_COMISION_ID { get; set; }
-        public Nullable<long> ORDEN_TRABAJO_ID { get; set; }
         public Nullable<int> VENTA_COMISION_ID { get; set; }
         public Nullable<System.DateTime> FECHA_GENERACION_COMISION { get; set; }
         public Nullable<int> USUARIO_ID { get; set; }
         public Nullable<decimal> VALOR { get; set; }
+        public Nullable<int> DETALLE_ORDEN_TRABAJO_ID { get; set; }
     
+        public virtual DETALLE_ORDEN_TRABAJO DETALLE_ORDEN_TRABAJO { get; set; }
         public virtual VENTA_COMISION VENTA_COMISION { get; set; }
-        public virtual ORDEN_TRABAJO ORDEN_TRABAJO { get; set; }
     }
 }

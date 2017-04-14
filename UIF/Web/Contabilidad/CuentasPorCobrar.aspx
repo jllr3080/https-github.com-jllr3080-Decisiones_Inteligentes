@@ -39,9 +39,9 @@
               <div class="col-md-12">
                         <asp:GridView ID="_datos" runat="server" Width="100%" AutoGenerateColumns="False" OnRowCommand="_datos_RowCommand">
                             <Columns>
-                             <asp:BoundField DataField="CuentaPorCobrar.CuentaPorCobrarId" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Cuenta_Por_Cobrar_Id%>" />
-                            <asp:BoundField DataField="CuentaPorCobrar.FechaCreacion" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Fecha_Creacion%>" />
-                            <asp:BoundField DataField="CuentaPorCobrar.FechaModificacion" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Fecha_Modificacion%>" />
+                             <asp:BoundField DataField="CuentaPorCobrar.CuentaPorCobrarId" HeaderText="<%$ Resources:Web_es_Ec,Label_Codigo_Interno%>" />
+                            <asp:BoundField DataField="CuentaPorCobrar.FechaCreacion" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Fecha_Creacion%>"  DataFormatString="{0:d}"/>
+                            <asp:BoundField DataField="CuentaPorCobrar.FechaModificacion" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Fecha_Modificacion%>" DataFormatString="{0:d}" />
                             <asp:BoundField DataField="CuentaPorCobrar.NumeroOrden" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Numero_Orden%>" />
                             <asp:BoundField DataField="CuentaPorCobrar.NumeroFactura" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Numero_Factura%>" />
                             <asp:BoundField DataField="CuentaPorCobrar.Valor" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Valor%>" DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" ItemStyle-VerticalAlign="Middle" />

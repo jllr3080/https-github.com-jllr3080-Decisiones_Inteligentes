@@ -18,7 +18,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public INDIVIDUO()
         {
             this.CLIENTE = new HashSet<CLIENTE>();
-            this.DIRECCION = new HashSet<DIRECCION>();
             this.E_MAIL = new HashSet<E_MAIL>();
             this.EMPLEADO = new HashSet<EMPLEADO>();
             this.INDIVIDUO_ROL = new HashSet<INDIVIDUO_ROL>();
@@ -27,6 +26,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
             this.USUARIO = new HashSet<USUARIO>();
             this.PROVEEDOR = new HashSet<PROVEEDOR>();
             this.VENDEDOR = new HashSet<VENDEDOR>();
+            this.DIRECCION = new HashSet<DIRECCION>();
         }
     
         public int INDIVIDUO_ID { get; set; }
@@ -45,8 +45,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CLIENTE> CLIENTE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DIRECCION> DIRECCION { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<E_MAIL> E_MAIL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EMPLEADO> EMPLEADO { get; set; }
@@ -64,5 +62,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual ICollection<PROVEEDOR> PROVEEDOR { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VENDEDOR> VENDEDOR { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DIRECCION> DIRECCION { get; set; }
     }
 }

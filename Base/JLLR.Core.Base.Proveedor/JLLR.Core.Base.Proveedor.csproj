@@ -136,6 +136,9 @@
     <Compile Include="Entidades\DETALLE_ORDEN_TRABAJO_OBSERVACION.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entidades\DETALLE_PRENDA_ORDEN_TRABAJO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entidades\DETALLE_TRABAJO_FOTOGRAFIA.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
@@ -248,6 +251,9 @@
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\PARAMETRO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\PARROQUIA.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\PERFIL.cs">

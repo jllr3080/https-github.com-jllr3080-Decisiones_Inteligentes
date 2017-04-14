@@ -28,19 +28,34 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
         /// </summary>
         /// <param name="sucursalId"></param>
         /// <param name="puntoVentaId"></param>
-        /// <param name="vendedorId"></param>
+        /// <param name="vieneRegla"></param>
+        /// <param name="tipoLavadoId"></param>
         /// <returns></returns>
-        public VENTA_COMISION ObtenerbVentaComisionPorVariosParametros(int sucursalId, int puntoVentaId, int vendedorId)
+        public VENTA_COMISION ObtenerbVentaComisionPorVariosParametros(int sucursalId, int puntoVentaId, bool vieneRegla, int tipoLavadoId, int promocionAplicada)
         {
             try
             {
+                if (vieneRegla ==false)
+                { 
                 var ventasComision = from ventaComision in _entidad.VENTA_COMISION
                     where
                     ventaComision.SUCURSAL_ID == sucursalId && ventaComision.PUNTO_VENTA_ID == puntoVentaId &&
-                    ventaComision.VENDEDOR_ID == vendedorId && ventaComision.ESTA_HABILITADO == true
+                    ventaComision.TIPO_LAVADO_ID == tipoLavadoId && ventaComision.ESTA_HABILITADO == true && ventaComision.VIENE_REGLA==vieneRegla
                     select ventaComision;
+                    return ventasComision.FirstOrDefault();
+                }
+                else
+                {
+                    var ventasComision = from ventaComision in _entidad.VENTA_COMISION
+                                         where
+                                         ventaComision.SUCURSAL_ID == sucursalId && ventaComision.PUNTO_VENTA_ID == puntoVentaId &&
+                                         ventaComision.TIPO_LAVADO_ID == tipoLavadoId && ventaComision.ESTA_HABILITADO == true && ventaComision.VIENE_REGLA == vieneRegla && ventaComision.PROMOCION_APLICADA==promocionAplicada
+                                         select ventaComision;
 
-                return ventasComision.FirstOrDefault();
+                    return ventasComision.FirstOrDefault();
+                }
+
+                
             }
             catch (Exception ex)
             {

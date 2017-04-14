@@ -40,5 +40,41 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                 throw;
             }
         }
+
+        /// <summary>
+        /// Obtiene las comisiones de la orden de trabajo
+        /// </summary>
+        /// <param name="detalleOrdenTrabajos"></param>
+        /// <returns></returns>
+        public List<ORDEN_TRABAJO_COMISION> ObteneOrdenTrabajoComisionesPorListaDetalleOdenTrabajo(
+            IQueryable<DETALLE_ORDEN_TRABAJO> detalleOrdenTrabajos)
+        {
+
+            try
+            {
+                 List<ORDEN_TRABAJO_COMISION> ordenTrabajoComisiones =  new List<ORDEN_TRABAJO_COMISION>();
+
+                foreach (var detalleOrdenTrabajo in detalleOrdenTrabajos)
+                {
+                    var ordenesTrabajoComision = from ordenTrabajoComision in _entidad.ORDEN_TRABAJO_COMISION
+                        where
+                            ordenTrabajoComision.DETALLE_ORDEN_TRABAJO_ID ==
+                            detalleOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID
+                        select ordenTrabajoComision;
+                    ordenTrabajoComisiones.Add(ordenesTrabajoComision.FirstOrDefault());
+
+
+                }
+
+                return ordenTrabajoComisiones;
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
+
     }
 }

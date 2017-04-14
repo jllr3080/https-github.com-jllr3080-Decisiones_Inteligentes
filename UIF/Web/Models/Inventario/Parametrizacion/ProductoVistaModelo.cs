@@ -58,5 +58,11 @@ namespace Web.Models.Inventario.Parametrizacion
         /// </summary>
 
         public bool? PedirMedida { get; set; }
+
+        /// <summary>
+        /// Visible
+        /// </summary>
+
+        public bool? Visible { get; set; }
     }
 }

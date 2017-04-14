@@ -17,37 +17,35 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DETALLE_ORDEN_TRABAJO()
         {
-            this.DETALLE_ORDEN_TRABAJO_OBSERVACION = new HashSet<DETALLE_ORDEN_TRABAJO_OBSERVACION>();
+            this.DETALLE_PRENDA_ORDEN_TRABAJO = new HashSet<DETALLE_PRENDA_ORDEN_TRABAJO>();
             this.DETALLE_TRABAJO_FOTOGRAFIA = new HashSet<DETALLE_TRABAJO_FOTOGRAFIA>();
+            this.ORDEN_TRABAJO_COMISION = new HashSet<ORDEN_TRABAJO_COMISION>();
         }
     
         public int DETALLE_ORDEN_TRABAJO_ID { get; set; }
         public Nullable<long> ORDEN_TRABAJO_ID { get; set; }
         public Nullable<int> PRODUCTO_ID { get; set; }
-        public Nullable<int> COLOR_ID { get; set; }
         public Nullable<decimal> CANTIDAD { get; set; }
         public Nullable<decimal> VALOR_UNITARIO { get; set; }
         public Nullable<decimal> PORCENTAJE_IMPUESTO { get; set; }
         public Nullable<decimal> VALOR_TOTAL { get; set; }
         public string OBSERVACION { get; set; }
         public Nullable<int> PRODUCTO_TALLA_ID { get; set; }
-        public Nullable<int> MARCA_ID { get; set; }
-        public Nullable<int> MATERIAL_ID { get; set; }
         public Nullable<int> PORCENTAJE_IMPUESTO_SUCURSAL_ID { get; set; }
-        public string TRATAMIENTO_ESPECIAL { get; set; }
-        public string NUMERO_INTERNO_PRENDA { get; set; }
-        public Nullable<decimal> NUMERO_LIBRAS { get; set; }
         public Nullable<bool> SUAVIZANTE { get; set; }
         public Nullable<bool> DESENGRASANTE { get; set; }
         public Nullable<bool> FIJADOR_COLOR { get; set; }
-        public string INFORMACION_VISUAL { get; set; }
+        public Nullable<decimal> VALOR_TOTAL_UNITARIO { get; set; }
+        public Nullable<decimal> VALOR_DESCUENTO { get; set; }
+        public Nullable<int> PROMOCION_APLICADA { get; set; }
     
-        public virtual COLOR COLOR { get; set; }
         public virtual PRODUCTO PRODUCTO { get; set; }
         public virtual ORDEN_TRABAJO ORDEN_TRABAJO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DETALLE_ORDEN_TRABAJO_OBSERVACION> DETALLE_ORDEN_TRABAJO_OBSERVACION { get; set; }
+        public virtual ICollection<DETALLE_PRENDA_ORDEN_TRABAJO> DETALLE_PRENDA_ORDEN_TRABAJO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETALLE_TRABAJO_FOTOGRAFIA> DETALLE_TRABAJO_FOTOGRAFIA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ORDEN_TRABAJO_COMISION> ORDEN_TRABAJO_COMISION { get; set; }
     }
 }

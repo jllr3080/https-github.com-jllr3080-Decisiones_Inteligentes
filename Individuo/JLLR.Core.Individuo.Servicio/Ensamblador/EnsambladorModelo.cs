@@ -229,6 +229,10 @@ namespace JLLR.Core.Individuo.Servicio.Ensamblador
             modeloGeneral.CiudadModelo _ciudad = new modeloGeneral.CiudadModelo();
             _ciudad.CiudadId = Convert.ToInt32(e.CIUDAD_ID);
 
+            modeloGeneral.ParroquiaModelo _parroquia = new modeloGeneral.ParroquiaModelo();
+            _parroquia.ParroquiaId = Convert.ToInt32(e.PARROQUIA_ID);
+
+
             return new modelo.DireccionModelo
             {
                DireccionId = e.DIRECCION_ID,
@@ -237,7 +241,8 @@ namespace JLLR.Core.Individuo.Servicio.Ensamblador
                TipoDireccion = _tipoDireccion,
                Pais = _pais,
                Ciudad = _ciudad,
-               Estado =_estado
+               Estado =_estado,
+               Parroquia = _parroquia
                
 
             };

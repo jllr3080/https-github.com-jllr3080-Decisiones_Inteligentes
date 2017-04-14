@@ -50,9 +50,16 @@ namespace Web.Models.Individuo
 
 
         /// <summary>
-        /// DescripcionDireccion
+        /// Parroquia
         /// </summary>
         
+        public modeloVistaGeneral.ParroquiaVistaModelo Parroquia { get; set; }
+
+
+        /// <summary>
+        /// DescripcionDireccion
+        /// </summary>
+
         public string DescripcionDireccion { get; set; }
     }
 }

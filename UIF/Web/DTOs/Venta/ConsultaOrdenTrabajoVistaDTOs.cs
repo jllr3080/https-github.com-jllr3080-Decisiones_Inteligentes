@@ -134,5 +134,31 @@ namespace Web.DTOs.Venta
         /// </summary>
         
         public string NombreUsuario { get; set; }
+
+        /// <summary>
+        /// Estado de  la Prenda
+        /// </summary>
+        public string EstadoPrenda { get; set; }
+
+        /// <summary>
+        ///Tratamiento Especial
+        /// </summary>
+        public string TratamientoEspecial { get; set; }
+
+        /// <summary>
+        ///InformacionVisual
+        /// </summary>
+        public string InformacionVisual { get; set; }
+
+        /// <summary>
+        ///NumeroInternoPrenda
+        /// </summary>
+        public string NumeroInternoPrenda { get; set; }
+
+        /// <summary>
+        ///NumeroInternoPrenda
+        /// </summary>
+        public int DetallePrendaOrdenTrabajoId { get; set; }
+
     }
 }

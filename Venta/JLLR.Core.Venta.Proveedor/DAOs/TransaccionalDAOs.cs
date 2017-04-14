@@ -28,11 +28,52 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
         private readonly DetalleOrdenTrabajoDAOs _detalleOrdenTrabajoDaOs = new DetalleOrdenTrabajoDAOs();
         private readonly  NumeroOrdenDAOs _numeroOrdenDaOs= new  NumeroOrdenDAOs();
         private readonly  DetalleOrdenTrabajoObservacionDAOs _detalleOrdenTrabajoObservacionDaOs= new DetalleOrdenTrabajoObservacionDAOs();
+        private readonly  OrdenTrabajoComisionDAOs _ordenTrabajoComisionDaOs= new OrdenTrabajoComisionDAOs();
+
         #endregion
 
 
         #region TRANSACCIONAL
 
+        /// <summary>
+        /// Graba el reverso de las comisiones  de una orden de trabajo este es el caso de  anulacion
+        /// </summary>
+        /// <param name="ordenTrabajoId"></param>
+        /// <param name="usuarioId"></param>
+        public void GrabarReversoOrdenTrabajoComision(int ordenTrabajoId, int usuarioId)
+        {
+            try
+            {
+                IQueryable<DETALLE_ORDEN_TRABAJO> detalleOrdenTrabajos =
+                    _detalleOrdenTrabajoDaOs.ObtenerDetalleOrdenTrabajosPorOrdenTrabajoId(ordenTrabajoId);
+
+                if (detalleOrdenTrabajos.Count() > 0)
+                {
+
+                    List<ORDEN_TRABAJO_COMISION> ordenTrabajoComisions =
+                        _ordenTrabajoComisionDaOs.ObteneOrdenTrabajoComisionesPorListaDetalleOdenTrabajo(
+                            detalleOrdenTrabajos);
+
+                    foreach (var objetoOrdenTrabajoComision in ordenTrabajoComisions)
+                    {
+                        ORDEN_TRABAJO_COMISION ordenTrabajoComision= new ORDEN_TRABAJO_COMISION();
+                        ordenTrabajoComision.VALOR = objetoOrdenTrabajoComision.VALOR*-1;
+                        ordenTrabajoComision.DETALLE_ORDEN_TRABAJO_ID =
+                            objetoOrdenTrabajoComision.DETALLE_ORDEN_TRABAJO_ID;
+                        ordenTrabajoComision.FECHA_GENERACION_COMISION=DateTime.Now;
+                        ordenTrabajoComision.VENTA_COMISION_ID = objetoOrdenTrabajoComision.VENTA_COMISION_ID;
+                        ordenTrabajoComision.USUARIO_ID = usuarioId;
+                        _ordenTrabajoComisionDaOs.GrabaOrdenTrabajoComision(ordenTrabajoComision);
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         /// <summary>
         /// Obtiene todas las observaciones  de las prendas por  
         /// </summary>
@@ -46,7 +87,7 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                     from detalleOrdenTrabajoObservacion in _entidad.DETALLE_ORDEN_TRABAJO_OBSERVACION
                     join usuario in _entidad.USUARIO on detalleOrdenTrabajoObservacion.USUARIO_ID equals
                         usuario.USUARIO_ID
-                    where detalleOrdenTrabajoObservacion.DETALLE_ORDEN_TRABAJO_ID == detalleOrdenTrabajoId
+                    where detalleOrdenTrabajoObservacion.DETALLE_PRENDA_ORDEN_TRABAJO_ID == detalleOrdenTrabajoId
                     select
                         new DetalleOrdenTrabajoObservacionDTOs
                         {
@@ -103,7 +144,7 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
         /// </summary>
         /// <param name="ordenTrabajoDtOs"></param>
         /// <returns></returns>
-        public ORDEN_TRABAJO GrabarOrdenTrabajoCompleta(OrdenTrabajoDTOs ordenTrabajoDtOs)
+        public OrdenTrabajoDTOs GrabarOrdenTrabajoCompleta(OrdenTrabajoDTOs ordenTrabajoDtOs)
         {
             using (System.Transactions.TransactionScope transaction = new System.Transactions.TransactionScope())
             {
@@ -125,15 +166,7 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                     {
                         detalleOrdenTrabajo.ORDEN_TRABAJO_ID = ordenTrabajo.ORDEN_TRABAJO_ID;
                         DETALLE_ORDEN_TRABAJO _detalleOrdenTrabajo=  _detalleOrdenTrabajoDaOs.GrabarDetelleOrdenTrabajo(detalleOrdenTrabajo);
-                        //foreach (var detalleOrdenTrabajoObservacion in detalleOrdenTrabajo.DETALLE_ORDEN_TRABAJO_OBSERVACION)
-                        //{
-                        //    detalleOrdenTrabajoObservacion.DETALLE_ORDEN_TRABAJO_ID =_detalleOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID;
-                        //    _detalleOrdenTrabajoObservacionDaOs.GrabarDetalleOrdenTrabajoObservacion(detalleOrdenTrabajoObservacion);
-
-                        //}
-
-                        
-                    }
+                     }
                     _numeracionOrden.NUMERO += 1;
                     if (ordenTrabajoDtOs.OrdenTrabajo.TIPO_LAVADO_ID == 1)
                         _numeracionOrden .NUMERO_ORDEN= "S" + Convert.ToString(_numeracionOrden.NUMERO);
@@ -143,7 +176,7 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                     _numeroOrdenDaOs.ActualizarNumeroOrden(_numeracionOrden);
                     transaction.Complete();
 
-                    return ordenTrabajo;
+                    return ordenTrabajoDtOs;
 
                 }
                 catch (Exception ex)
@@ -262,19 +295,72 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
         {
             try
             {
-                var prendaMarcas = from ordenTrabajo in _entidad.ORDEN_TRABAJO
-                    join detalleOrdenTrabajo in _entidad.DETALLE_ORDEN_TRABAJO on ordenTrabajo.ORDEN_TRABAJO_ID equals
-                        detalleOrdenTrabajo.ORDEN_TRABAJO_ID
-                    join producto in _entidad.PRODUCTO on detalleOrdenTrabajo.PRODUCTO_ID equals producto.PRODUCTO_ID
-                    join puntoventa in _entidad.PUNTO_VENTA on ordenTrabajo.PUNTO_VENTA_ID equals
-                        puntoventa.PUNTO_VENTA_ID
-                    join marca in _entidad.MARCA on detalleOrdenTrabajo.MARCA_ID equals marca.MARCA_ID
-                    join historialProceso in _entidad.HISTORIAL_PROCESO on ordenTrabajo.ORDEN_TRABAJO_ID equals
-                        historialProceso.ORDEN_TRABAJO_ID
-                    where detalleOrdenTrabajo.PRODUCTO_ID == prendaId
-                    select new PrendaMarcaDTOs() {NumeroOrden = ordenTrabajo.NUMERO_ORDEN,FechaIngreso = ordenTrabajo.FECHA_INGRESO,NombreSucursal = puntoventa.DESCRIPCION,NombrePrenda = producto.NOMBRE,NombreMarca = marca.DESCRIPCION};
+                if (prendaId == -1 && marcaId !=-1)
+                {
+                    var prendaMarcas = from ordenTrabajo in _entidad.ORDEN_TRABAJO
+                                       join detalleOrdenTrabajo in _entidad.DETALLE_ORDEN_TRABAJO on ordenTrabajo.ORDEN_TRABAJO_ID equals
+                                           detalleOrdenTrabajo.ORDEN_TRABAJO_ID
+                                       join producto in _entidad.PRODUCTO on detalleOrdenTrabajo.PRODUCTO_ID equals producto.PRODUCTO_ID
+                                       join puntoventa in _entidad.PUNTO_VENTA on ordenTrabajo.PUNTO_VENTA_ID equals
+                                           puntoventa.PUNTO_VENTA_ID
+                                       join detallePrendaOrdenTrabajo in _entidad.DETALLE_PRENDA_ORDEN_TRABAJO on detalleOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID equals detallePrendaOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID
+                                       join marca in _entidad.MARCA on detallePrendaOrdenTrabajo.MARCA_ID equals marca.MARCA_ID
+                                       join historialProceso in _entidad.HISTORIAL_PROCESO on ordenTrabajo.ORDEN_TRABAJO_ID equals
+                                           historialProceso.ORDEN_TRABAJO_ID
+                                       where  EntityFunctions.TruncateTime(ordenTrabajo.FECHA_INGRESO) == fecha && detallePrendaOrdenTrabajo.MARCA_ID == marcaId
+                                       select new PrendaMarcaDTOs() { NumeroOrden = ordenTrabajo.NUMERO_ORDEN, FechaIngreso = ordenTrabajo.FECHA_INGRESO, NombreSucursal = puntoventa.DESCRIPCION, NombrePrenda = producto.NOMBRE, NombreMarca = marca.DESCRIPCION };
 
-                return prendaMarcas;
+                    return prendaMarcas;
+                }
+                else if (marcaId == -1 && prendaId != -1)
+                {
+                    var prendaMarcas = from ordenTrabajo in _entidad.ORDEN_TRABAJO
+                        join detalleOrdenTrabajo in _entidad.DETALLE_ORDEN_TRABAJO on ordenTrabajo.ORDEN_TRABAJO_ID
+                            equals
+                            detalleOrdenTrabajo.ORDEN_TRABAJO_ID
+                        join producto in _entidad.PRODUCTO on detalleOrdenTrabajo.PRODUCTO_ID equals
+                            producto.PRODUCTO_ID
+                        join puntoventa in _entidad.PUNTO_VENTA on ordenTrabajo.PUNTO_VENTA_ID equals
+                            puntoventa.PUNTO_VENTA_ID
+                        join detallePrendaOrdenTrabajo in _entidad.DETALLE_PRENDA_ORDEN_TRABAJO on
+                            detalleOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID equals
+                            detallePrendaOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID
+                        join marca in _entidad.MARCA on detallePrendaOrdenTrabajo.MARCA_ID equals marca.MARCA_ID
+                        join historialProceso in _entidad.HISTORIAL_PROCESO on ordenTrabajo.ORDEN_TRABAJO_ID equals
+                            historialProceso.ORDEN_TRABAJO_ID
+                        where
+                            EntityFunctions.TruncateTime(ordenTrabajo.FECHA_INGRESO) == fecha &&
+                            detalleOrdenTrabajo.PRODUCTO_ID == prendaId
+                        select
+                            new PrendaMarcaDTOs()
+                            {
+                                NumeroOrden = ordenTrabajo.NUMERO_ORDEN,
+                                FechaIngreso = ordenTrabajo.FECHA_INGRESO,
+                                NombreSucursal = puntoventa.DESCRIPCION,
+                                NombrePrenda = producto.NOMBRE,
+                                NombreMarca = marca.DESCRIPCION
+                            };
+
+                    return prendaMarcas;
+                }
+                else
+                {
+                    var prendaMarcas = from ordenTrabajo in _entidad.ORDEN_TRABAJO
+                                       join detalleOrdenTrabajo in _entidad.DETALLE_ORDEN_TRABAJO on ordenTrabajo.ORDEN_TRABAJO_ID equals
+                                           detalleOrdenTrabajo.ORDEN_TRABAJO_ID
+                                       join producto in _entidad.PRODUCTO on detalleOrdenTrabajo.PRODUCTO_ID equals producto.PRODUCTO_ID
+                                       join puntoventa in _entidad.PUNTO_VENTA on ordenTrabajo.PUNTO_VENTA_ID equals
+                                           puntoventa.PUNTO_VENTA_ID
+                                       join detallePrendaOrdenTrabajo in _entidad.DETALLE_PRENDA_ORDEN_TRABAJO on detalleOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID equals detallePrendaOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID
+                                       join marca in _entidad.MARCA on detallePrendaOrdenTrabajo.MARCA_ID equals marca.MARCA_ID
+                                       join historialProceso in _entidad.HISTORIAL_PROCESO on ordenTrabajo.ORDEN_TRABAJO_ID equals
+                                           historialProceso.ORDEN_TRABAJO_ID
+                                       where EntityFunctions.TruncateTime(ordenTrabajo.FECHA_INGRESO) == fecha && detalleOrdenTrabajo.PRODUCTO_ID == prendaId && detallePrendaOrdenTrabajo.MARCA_ID == marcaId
+                                       select new PrendaMarcaDTOs() { NumeroOrden = ordenTrabajo.NUMERO_ORDEN, FechaIngreso = ordenTrabajo.FECHA_INGRESO, NombreSucursal = puntoventa.DESCRIPCION, NombrePrenda = producto.NOMBRE, NombreMarca = marca.DESCRIPCION };
+
+                    return prendaMarcas;
+                }
+
             }
             catch (Exception ex)
             {
@@ -307,19 +393,7 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                     _numeroPrendaDtOses.Add(_numeroPrendaDtOs);
                 }
                 
-
-                
-
-                //var numeroPrendas = from ordenTrabajo in _entidad.ORDEN_TRABAJO
-                //                    join detalleOrdenTrabajo in _entidad.DETALLE_ORDEN_TRABAJO on ordenTrabajo.ORDEN_TRABAJO_ID equals
-                //                        detalleOrdenTrabajo.ORDEN_TRABAJO_ID
-                //                    join producto in _entidad.PRODUCTO on detalleOrdenTrabajo.PRODUCTO_ID equals producto.PRODUCTO_ID
-                //                    join historialProceso in _entidad.HISTORIAL_PROCESO on ordenTrabajo.ORDEN_TRABAJO_ID equals
-                //                        historialProceso.ORDEN_TRABAJO_ID
-                //                    //where ordenTrabajo.PUNTO_VENTA_ID == 
-                //                    select new NumeroPrendaDTOs {NombreProducto = producto.NOMBRE,Cantidad = detalleOrdenTrabajo.CANTIDAD};
-
-                return _numeroPrendaDtOses;
+              return _numeroPrendaDtOses;
             }
             catch (Exception ex)
             {
@@ -355,16 +429,7 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                     _estadoCuentaDtOses.Add(_estadoCuentaDtOs);
 
                 }
-                ////group new { p, bp } by new { p.SomeId } into pg
-                //var estadosCuenta = from ordenTrabajo in _entidad.ORDEN_TRABAJO
-                //                    join detalleOrdenTrabajo in _entidad.DETALLE_ORDEN_TRABAJO on ordenTrabajo.ORDEN_TRABAJO_ID equals
-                //                        detalleOrdenTrabajo.ORDEN_TRABAJO_ID
-                //                    join producto in _entidad.PRODUCTO on detalleOrdenTrabajo.PRODUCTO_ID equals producto.PRODUCTO_ID
-                //                    join historialProceso in _entidad.HISTORIAL_PROCESO on ordenTrabajo.ORDEN_TRABAJO_ID equals
-                //                        historialProceso.ORDEN_TRABAJO_ID
-                //                    where ordenTrabajo.PUNTO_VENTA_ID == puntoventaId && historialProceso.ETAPA_PROCESO_ID != 9
-                //                   select new EstadoCuentaDTOs { NumeroOrden = ordenTrabajo.NUMERO_ORDEN,Valor = detalleOrdenTrabajo.VALOR_TOTAL,NumeroPrenda = detalleOrdenTrabajo.CANTIDAD,FechaIngreso = ordenTrabajo.FECHA_INGRESO,Detalle = "Prueba" };
-
+                
                 return _estadoCuentaDtOses;
                 
 
@@ -377,6 +442,33 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
         }
 
 
+        /// <summary>
+        /// Metodo para extraer solo el detalle de la orden de  trabajo
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public IQueryable<DETALLE_ORDEN_TRABAJO> ObtenerDetalleOrdenTrabajoPorNumeroOrdenYPuntoVenta(string numeroOrden,
+            int puntoVentaId)
+        {
+            try
+            {
+
+                var detalleOrdenesTrabajo = from ordenTrabajo in _entidad.ORDEN_TRABAJO
+                    join detalleOrdenTrabajo in _entidad.DETALLE_ORDEN_TRABAJO on ordenTrabajo.ORDEN_TRABAJO_ID equals
+                        detalleOrdenTrabajo.ORDEN_TRABAJO_ID
+                    where ordenTrabajo.PUNTO_VENTA_ID == puntoVentaId && ordenTrabajo.NUMERO_ORDEN == numeroOrden
+                    select detalleOrdenTrabajo;
+
+                return detalleOrdenesTrabajo;
+
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
 
 
         /// <summary>
@@ -398,9 +490,9 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                                      join producto in _entidad.PRODUCTO on detalleOrdenTrabajo.PRODUCTO_ID equals producto.PRODUCTO_ID
                                      join productoTalla in _entidad.PRODUCTO_TALLA on detalleOrdenTrabajo.PRODUCTO_TALLA_ID equals
                                      productoTalla.PRODUCTO_TALLA_ID
-                                     join color in _entidad.COLOR on detalleOrdenTrabajo.COLOR_ID equals color.COLOR_ID
-                                     join marca in _entidad.MARCA on detalleOrdenTrabajo.MARCA_ID equals marca.MARCA_ID
-                                     join material in _entidad.MATERIAL on detalleOrdenTrabajo.MATERIAL_ID equals material.MATERIAL_ID
+                                     join detallePrendaOrdenTrabajo  in  _entidad.DETALLE_PRENDA_ORDEN_TRABAJO on  detalleOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID equals  detallePrendaOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID
+                                     join color in _entidad.COLOR on detallePrendaOrdenTrabajo.COLOR_ID equals color.COLOR_ID
+                                     join marca in _entidad.MARCA on detallePrendaOrdenTrabajo.MARCA_ID equals marca.MARCA_ID
                                      join estadoPago in _entidad.ESTADO_PAGO on ordenTrabajo.ESTADO_PAGO_ID equals estadoPago.ESTADO_PAGO_ID
                                      join direccion in _entidad.DIRECCION on  individuo.INDIVIDUO_ID equals  direccion.INDIVIDUO_ID
                                      join telefono in  _entidad.TELEFONO on individuo.INDIVIDUO_ID equals telefono.INDIVIDUO_ID
@@ -431,7 +523,12 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                                          CorreoElectronico = email.DIRECCION_CORREO_ELECTRONICO,
                                          Telefono = telefono.NUMERO_TELEFONO,
                                          NombrePuntoVenta = puntoVenta.DESCRIPCION,
-                                         NombreUsuario = usuario.NOMBRE_USUARIO
+                                         NombreUsuario = usuario.NOMBRE_USUARIO,
+                                         TratamientoEspecial = detallePrendaOrdenTrabajo.TRATAMIENTO_ESPECIAL,
+                                         NumeroInternoPrenda = detallePrendaOrdenTrabajo.NUMERO_INTERNO_PRENDA,
+                                         DetallePrendaOrdenTrabajoId = detallePrendaOrdenTrabajo.DETALLE_PRENDA_ORDEN_TRABAJO_ID,
+                                         EstadoPrenda = detallePrendaOrdenTrabajo.ESTADO_PRENDA,
+                                         InformacionVisual = detallePrendaOrdenTrabajo.INFORMACION_VISUAL
                                      };
                 return ordenesTrabajo;
 
@@ -463,14 +560,14 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                 join producto in _entidad.PRODUCTO on detalleOrdenTrabajo.PRODUCTO_ID equals producto.PRODUCTO_ID
                 join productoTalla in _entidad.PRODUCTO_TALLA on detalleOrdenTrabajo.PRODUCTO_TALLA_ID equals
                 productoTalla.PRODUCTO_TALLA_ID
-                join color in _entidad.COLOR on detalleOrdenTrabajo.COLOR_ID equals color.COLOR_ID
-                join marca in _entidad.MARCA on detalleOrdenTrabajo.MARCA_ID equals marca.MARCA_ID
-                join material in _entidad.MATERIAL on detalleOrdenTrabajo.MATERIAL_ID equals material.MATERIAL_ID
+                join  detallePrendaOrdenTrabajo in _entidad.DETALLE_PRENDA_ORDEN_TRABAJO on  detalleOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID equals  detallePrendaOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID
+                join color in _entidad.COLOR on detallePrendaOrdenTrabajo.COLOR_ID equals color.COLOR_ID
+                join marca in _entidad.MARCA on detallePrendaOrdenTrabajo.MARCA_ID equals marca.MARCA_ID
                 join estadoPago in _entidad.ESTADO_PAGO on ordenTrabajo.ESTADO_PAGO_ID equals estadoPago.ESTADO_PAGO_ID
                 where EntityFunctions.TruncateTime(ordenTrabajo.FECHA_INGRESO) == fechaDesde && ordenTrabajo.PUNTO_VENTA_ID==sucursalId   
                 select  new ConsultaOrdenTrabajoDTOs { TipoLavado = tipoLavado.DESCRIPCION,EstadoPago = estadoPago.DESCRIPCION,Marca = marca.DESCRIPCION,NumeroOrden = ordenTrabajo.NUMERO_ORDEN,FechaIngreso = ordenTrabajo.FECHA_INGRESO,FechaEntrega = ordenTrabajo.FECHA_ENTREGA,ValorUnitario = detalleOrdenTrabajo.VALOR_UNITARIO,Cantidad = detalleOrdenTrabajo.CANTIDAD,Color = color.DESCRIPCION,ValorTotal = detalleOrdenTrabajo.VALOR_TOTAL,Observacion = detalleOrdenTrabajo.OBSERVACION,Prenda = producto.NOMBRE,NombreCliente = individuo.PRIMER_CAMPO + " "+ individuo.SEGUNDO_CAMPO + " "+individuo.TERCER_CAMPO + " "+individuo.CUARTO_CAMPO};
 
-                //EntityFunctions.TruncateTime(p.date) == dateWithoutTime
+          
             return ordenesTrabajo;
 
 

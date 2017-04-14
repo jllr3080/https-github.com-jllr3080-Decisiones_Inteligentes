@@ -23,6 +23,25 @@ namespace JLLR.Core.Venta.Servicio
         #region  TRANSACCIONAL
 
         /// <summary>
+        /// Graba el reverso de la transaccion reversa comision,cuenta por  cobrar y cuenta por  pagar
+        /// </summary>
+        /// <param name="parametroReversoDtOs"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabarReversoTransaccion/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        string GrabarReversoTransaccion(ParametroReversoDTOs parametroReversoDtOs);
+        
+
+        /// <summary>
+        /// Graba las comisiones  hace un asiento de  cuentas por cobrar y cuentas por pagar
+        /// </summary>
+        /// <param name="ordenTrabajoDtOs"></param>
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabarTransaccionInicialCompleta/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        string GrabarTransaccionInicialCompleta(OrdenTrabajoDTOs ordenTrabajoDtOs);
+
+        /// <summary>
         /// Obtiene todas las observaciones  de las prendas por  
         /// </summary>
         /// <returns></returns>
@@ -46,7 +65,7 @@ namespace JLLR.Core.Venta.Servicio
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(UriTemplate = "GrabarOrdenTrabajoCompleta/*", RequestFormat = WebMessageFormat.Json,ResponseFormat = WebMessageFormat.Json, Method = "POST")]
-        OrdenTrabajoModelo GrabarOrdenTrabajoCompleta(OrdenTrabajoDTOs ordenTrabajoDtOs);
+        OrdenTrabajoDTOs GrabarOrdenTrabajoCompleta(OrdenTrabajoDTOs ordenTrabajoDtOs);
 
         /// <summary>
         /// Obtiene todas las  ordenes  que estan lista para enviarse  a matriz
@@ -262,12 +281,25 @@ namespace JLLR.Core.Venta.Servicio
         List<ConsultaOrdenTrabajoDTOs> ObtenerOrdenTrabajoPorFechaIngresoYPorSucursal(string fechaDesde,
             int sucursalId);
 
+        /// <summary>
+        /// Metodo para extraer solo el detalle de la orden de  trabajo
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(
+           UriTemplate =
+               "ObtenerDetalleOrdenTrabajoPorNumeroOrdenYPuntoVenta?numeroOrden={numeroOrden}&puntoVentaId={puntoVentaId}",
+           ResponseFormat = WebMessageFormat.Json)]
+        List<DetalleOrdenTrabajoModelo> ObtenerDetalleOrdenTrabajoPorNumeroOrdenYPuntoVenta(string numeroOrden,
+            int puntoVentaId);
 
         #endregion
 
         #endregion
 
-       
+
 
 
     }

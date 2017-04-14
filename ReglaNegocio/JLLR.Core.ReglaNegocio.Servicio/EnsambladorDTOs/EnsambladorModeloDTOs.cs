@@ -71,5 +71,93 @@ namespace JLLR.Core.ReglaNegocio.Servicio.EnsambladorDTOs
         }
 
         #endregion
+
+        #region PARAMETRO DE  ENTRADA
+        /// <summary>
+        /// Convierte el modelo DTO en una entidad DTO
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public modeloDTOs.ParametroEntradaReglaNegocioDTOs CrearParametroEntradaReglaNegocioDtOs(entidadDTOs.ParametroEntradaReglaNegocioDTOs e)
+        {
+            return new modeloDTOs.ParametroEntradaReglaNegocioDTOs()
+            {
+                ProductoId = e.ProductoId,
+                Cantidad = e.Cantidad,
+                ValorTotal = e.ValorTotal,
+                ValorUnitario = e.ValorUnitario,
+                ValorPromocion = e.ValorPromocion,
+                PuntoVentaId = e.PuntoVentaId,
+                SucursalId = e.SucursalId
+              
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos  Usuario en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<modeloDTOs.ParametroEntradaReglaNegocioDTOs> CrearParametrosEntradaReglaNegocioDtOs(IQueryable<entidadDTOs.ParametroEntradaReglaNegocioDTOs> listadoModelo)
+        {
+            List<modeloDTOs.ParametroEntradaReglaNegocioDTOs> listaEntidad = new List<modeloDTOs.ParametroEntradaReglaNegocioDTOs>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearParametroEntradaReglaNegocioDtOs(modelo));
+            }
+            return listaEntidad;
+
+        }
+
+        
+
+        #endregion
+
+        #region PARAMETRO DE  SALIDA
+        /// <summary>
+        /// Convierte el modelo DTO en una entidad DTO
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public modeloDTOs.ParametroSalidaReglaNegocioDTOs CRearParametroSalidaReglaNegocioDtOs(entidadDTOs.ParametroSalidaReglaNegocioDTOs e)
+        {
+            return new modeloDTOs.ParametroSalidaReglaNegocioDTOs()
+            {
+                ProductoId = e.ProductoId,
+                Cantidad = e.Cantidad,
+                ValorTotal = e.ValorTotal,
+                ValorUnitario = e.ValorUnitario,
+                ValorDescuento = e.ValorDescuento,
+                ValorTotalPagar = e.ValorTotalPagar,
+                NombrePromocion = e.NombrePromocion,
+                PromocionId = e.PromocionId
+               
+                
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos  Usuario en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<modeloDTOs.ParametroSalidaReglaNegocioDTOs> CRearParametrosSalidaReglaNegocioDtOs(IQueryable<entidadDTOs.ParametroSalidaReglaNegocioDTOs> listadoModelo)
+        {
+            List<modeloDTOs.ParametroSalidaReglaNegocioDTOs> listaEntidad = new List<modeloDTOs.ParametroSalidaReglaNegocioDTOs>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CRearParametroSalidaReglaNegocioDtOs(modelo));
+            }
+            return listaEntidad;
+
+        }
+
+       
+
+        #endregion
     }
 }

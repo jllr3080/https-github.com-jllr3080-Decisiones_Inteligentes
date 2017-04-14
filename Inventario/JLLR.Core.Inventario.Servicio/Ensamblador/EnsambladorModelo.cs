@@ -50,7 +50,8 @@ namespace JLLR.Core.Inventario.Servicio.Ensamblador
                Modelo = modelo,
                TipoProducto = tipoProducto,
                Material = material,
-               Marca = marca
+               Marca = marca,
+               Visible = e.VISIBLE
                
                
 

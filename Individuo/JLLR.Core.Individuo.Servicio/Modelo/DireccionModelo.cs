@@ -50,6 +50,12 @@ namespace JLLR.Core.Individuo.Servicio.Modelo
         [DataMember]
         public modeloGeneral.CiudadModelo Ciudad { get; set; }
 
+        /// <summary>
+        /// Parroquia
+        /// </summary>
+        [DataMember]
+        public modeloGeneral.ParroquiaModelo Parroquia { get; set; }
+
 
         /// <summary>
         /// DescripcionDireccion

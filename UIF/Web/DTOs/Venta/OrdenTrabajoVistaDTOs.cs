@@ -22,5 +22,17 @@ namespace Web.DTOs.Venta
         /// </summary>
         
         public List<DetalleOrdenTrabajoVistaModelo> DetalleOrdenTrabajo { get; set; }
+
+        /// <summary>
+        /// Abono
+        /// </summary>
+       
+        public decimal? Abono { get; set; }
+
+        /// <summary>
+        /// PerfilId
+        /// </summary>
+       
+        public int? PerfilId { get; set; }
     }
 }

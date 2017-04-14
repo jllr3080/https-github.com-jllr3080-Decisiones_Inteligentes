@@ -11,6 +11,7 @@ using Web.DTOs.Individuo;
 using Web.Models.General;
 using Web.Models.Individuo;
 using Web.ServicioDelegado;
+using Web.Util;
 
 #endregion
 
@@ -24,9 +25,55 @@ namespace Web.Individuo
         private readonly ServicioDelegadoIndividuo _servicioDelegadoIndividuo = new ServicioDelegadoIndividuo();
         private static bool _banderaActualizacion=false;
         private static ClienteGeneralVistaDTOs _clienteGeneralVistaDtOs = null;
+        private Validacion _validacion= new Validacion();
         #endregion
 
         #region Eventos
+
+        /// <summary>
+        /// Valida el numero de  digitos  que se ingresa
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _tipoDocumento_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_tipoDocumento.SelectedItem.Value == "3")
+                    _numeroDocumento.MaxLength = 10;
+                else if (_tipoDocumento.SelectedItem.Value == "1")
+                    _numeroDocumento.MaxLength = 13;
+                else
+                    _numeroDocumento.MaxLength = 20;
+                _numeroDocumento.Text=String.Empty;
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        /// <summary>
+        /// Carga la parroquia  dependeiendo del pais, provincia  y  canton
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _ciudad_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _parroquia.DataSource = _servicioDelegadoGeneral.ObtenerParroquiasPorVariosParametros(Convert.ToInt32(_pais.SelectedItem.Value), Convert.ToInt32(_ciudad.SelectedItem.Value), Convert.ToInt32(_provincia.SelectedItem.Value));
+                _parroquia.DataBind();
+
+            }
+            catch (Exception ex)
+            {
+
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarCliente");
+            }
+        }
         /// <summary>
         /// busca  un cliente
         /// </summary>
@@ -37,7 +84,7 @@ namespace Web.Individuo
             try
             {
                  _clienteGeneralVistaDtOs =
-                    _servicioDelegadoIndividuo.ObtenerClientePorNumeroIdentificacion(_numeroDocumentoBusqueda.Text);
+                    _servicioDelegadoIndividuo.ObtenerClientePorNumeroIdentificacion(_numeroDocumentoBusqueda.Text.ToUpper());
 
                 if (_clienteGeneralVistaDtOs != null)
                 {
@@ -73,6 +120,17 @@ namespace Web.Individuo
                     _ciudad.SelectedIndex =
                         _ciudad.Items.IndexOf(
                             _ciudad.Items.FindByValue(_clienteGeneralVistaDtOs.Direccion.Ciudad.CiudadId.ToString()));
+
+
+                    _parroquia.DataSource =
+                        _servicioDelegadoGeneral.ObtenerParroquiasPorVariosParametros(
+                            _clienteGeneralVistaDtOs.Direccion.Pais.PaisId, _clienteGeneralVistaDtOs.Direccion.Ciudad.CiudadId, _clienteGeneralVistaDtOs.Direccion.Estado.EstadoId);
+                    _parroquia.DataBind();
+                    _parroquia.SelectedIndex =
+                        _parroquia.Items.IndexOf(
+                            _parroquia.Items.FindByValue(_clienteGeneralVistaDtOs.Direccion.Parroquia.ParroquiaId.ToString()));
+
+
                     _tipoDireccion.SelectedIndex =
                         _tipoDireccion.Items.IndexOf(
                             _tipoDireccion.Items.FindByValue(
@@ -115,18 +173,65 @@ namespace Web.Individuo
         {
             try
             {
-                if (_servicioDelegadoIndividuo.ValidarExistenciaClientePorNumeroIdentificacion(_numeroDocumento.Text))
+                if (_tipoDocumento.SelectedItem.Value == "3")
                 {
-                    _numeroDocumento.Text = string.Empty;
-                    Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Cliente_Existe").ToString(), "_grabarCliente");
-                    _numeroDocumento.Focus();
+                    if (_validacion.ValidacionCedula(_numeroDocumento.Text) != true)
+                    {
+                        Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Cedula_No_Valida").ToString(),
+                            "_grabarCliente");
+                        _numeroDocumento.Text = String.Empty;
+                        _numeroDocumento.Focus();
+                    }
+                    else
+                    {
+                        if (_servicioDelegadoIndividuo.ValidarExistenciaClientePorNumeroIdentificacion(_numeroDocumento.Text.ToUpper()))
+                        {
+                            _numeroDocumento.Text = string.Empty;
+                            Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Cliente_Existe").ToString(), "_grabarCliente");
+                            _numeroDocumento.Focus();
+                            _numeroDocumento.Focus();
+                        }
+                    }
+
+                }
+                else if (_tipoDocumento.SelectedItem.Value == "1")
+                {
+                    if (_validacion.ValidaPersonaNatural(_numeroDocumento.Text) != true)
+                    {
+                        Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_RUC_Persona_Natural_No_Valido").ToString(),
+                            "_grabarCliente");
+                        _numeroDocumento.Text = String.Empty;
+                        _numeroDocumento.Focus();
+                    }
+                    else
+                    {
+                        if (_servicioDelegadoIndividuo.ValidarExistenciaClientePorNumeroIdentificacion(_numeroDocumento.Text.ToUpper()))
+                        {
+                            _numeroDocumento.Text = string.Empty;
+                            Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Cliente_Existe").ToString(), "_grabarCliente");
+                            _numeroDocumento.Focus();
+                        }
+                    }
+                }
+                else
+                {
+                    if (
+                        _servicioDelegadoIndividuo.ValidarExistenciaClientePorNumeroIdentificacion(
+                            _numeroDocumento.Text.ToUpper()))
+                    {
+                        _numeroDocumento.Text = string.Empty;
+                        Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Cliente_Existe").ToString(),
+                            "_grabarCliente");
+                        _numeroDocumento.Focus();
+                    }
                 }
 
+
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
-                throw;
+
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarCliente");
             }
         }
         /// <summary>
@@ -188,6 +293,9 @@ namespace Web.Individuo
                     CiudadVistaModelo _ciudadVistaModelo = new CiudadVistaModelo();
                     _ciudadVistaModelo.CiudadId = Convert.ToInt32(_ciudad.SelectedItem.Value);
 
+                    ParroquiaVistaModelo _parroquiaVistaModelo= new ParroquiaVistaModelo();
+                    _parroquiaVistaModelo.ParroquiaId = Convert.ToInt32(_parroquia.SelectedItem.Value);
+
 
                     TipoDireccionVistaModelo _tipoDireccionVistaModelo = new TipoDireccionVistaModelo();
                     _tipoDireccionVistaModelo.TipoDireccionId = Convert.ToInt32(_tipoDireccion.SelectedItem.Value);
@@ -198,7 +306,7 @@ namespace Web.Individuo
                     _direccionVistaModelo.Estado = _estadoVistaModelo;
                     _direccionVistaModelo.Ciudad = _ciudadVistaModelo;
                     _direccionVistaModelo.TipoDireccion = _tipoDireccionVistaModelo;
-
+                    _direccionVistaModelo.Parroquia = _parroquiaVistaModelo;
                     _clienteGeneralVistaDtOs.Direccion = _direccionVistaModelo;
 
                     #endregion
@@ -271,11 +379,11 @@ namespace Web.Individuo
                     _individuoVistaModelo.TipoIndividuo = _tipoIndividuoVistaModelo;
 
 
-                    _individuoVistaModelo.PrimerCampo = _apellidoPaterno.Text;
-                    _individuoVistaModelo.SegundoCampo = _apellidoMaterno.Text;
-                    _individuoVistaModelo.TercerCampo = _primerNombre.Text;
-                    _individuoVistaModelo.CuartoCampo = _segundoNombre.Text;
-                    _individuoVistaModelo.NumeroIdentificacion = _numeroDocumento.Text;
+                    _individuoVistaModelo.PrimerCampo = _apellidoPaterno.Text.ToUpper();
+                    _individuoVistaModelo.SegundoCampo = _apellidoMaterno.Text.ToUpper();
+                    _individuoVistaModelo.TercerCampo = _primerNombre.Text.ToUpper();
+                    _individuoVistaModelo.CuartoCampo = _segundoNombre.Text.ToUpper();
+                    _individuoVistaModelo.NumeroIdentificacion = _numeroDocumento.Text.ToUpper();
                     _individuoVistaModelo.Habilitado = true;
                     _individuoVistaModelo.FechaCreacion = DateTime.Now;
                     _individuoVistaModelo.FechaModificacion = DateTime.Now;
@@ -300,17 +408,19 @@ namespace Web.Individuo
                     CiudadVistaModelo _ciudadVistaModelo = new CiudadVistaModelo();
                     _ciudadVistaModelo.CiudadId = Convert.ToInt32(_ciudad.SelectedItem.Value);
 
+                    ParroquiaVistaModelo _parroquiaVistaModelo = new ParroquiaVistaModelo();
+                    _parroquiaVistaModelo.ParroquiaId = Convert.ToInt32(_parroquia.SelectedItem.Value);
 
                     TipoDireccionVistaModelo _tipoDireccionVistaModelo = new TipoDireccionVistaModelo();
                     _tipoDireccionVistaModelo.TipoDireccionId = Convert.ToInt32(_tipoDireccion.SelectedItem.Value);
 
                     _direccionVistaModelo.Individuo = _individuoVistaModelo;
-                    _direccionVistaModelo.DescripcionDireccion = _direccion.Text;
+                    _direccionVistaModelo.DescripcionDireccion = _direccion.Text.ToUpper();
                     _direccionVistaModelo.Pais = _paisVistaModelo;
                     _direccionVistaModelo.Estado = _estadoVistaModelo;
                     _direccionVistaModelo.Ciudad = _ciudadVistaModelo;
                     _direccionVistaModelo.TipoDireccion = _tipoDireccionVistaModelo;
-
+                    _direccionVistaModelo.Parroquia = _parroquiaVistaModelo;
                     _clienteGeneralVistaDtOs.Direccion = _direccionVistaModelo;
 
                     #endregion
@@ -330,7 +440,7 @@ namespace Web.Individuo
 
                     _telefonoVistaModelo.TipoTelefono = _tipoTelefonoVistaModelo;
                     _telefonoVistaModelo.Individuo = _individuoVistaModelo;
-                    _telefonoVistaModelo.NumeroTelefono = _telefono.Text;
+                    _telefonoVistaModelo.NumeroTelefono = _telefono.Text.ToUpper();
                     _clienteGeneralVistaDtOs.Telefono = _telefonoVistaModelo;
 
                     _correoElectronicoVistaModelo.TipoCorreoElectronico = _tipoCorreoElectronicoVistaModelo;
@@ -456,10 +566,14 @@ namespace Web.Individuo
                 _provincia.DataSource =
                     _servicioDelegadoGeneral.ObtenerEstadoPorPaisId(Convert.ToInt32(_pais.SelectedItem.Value));
                 _provincia.DataBind();
+                _provincia.SelectedIndex =_provincia.Items.IndexOf(_provincia.Items.FindByValue("1"));
                 _ciudad.DataSource =
                     _servicioDelegadoGeneral.ObtenerCiudadPorPaisIdYEstadoId(Convert.ToInt32(_pais.SelectedItem.Value),
                         Convert.ToInt32(_provincia.SelectedItem.Value));
                 _ciudad.DataBind();
+                _ciudad.SelectedIndex = _ciudad.Items.IndexOf(_ciudad.Items.FindByValue("1"));
+                _parroquia.DataSource =_servicioDelegadoGeneral.ObtenerParroquiasPorVariosParametros(Convert.ToInt32(_pais.SelectedItem.Value), Convert.ToInt32(_ciudad.SelectedItem.Value), Convert.ToInt32(_provincia.SelectedItem.Value));
+                _parroquia.DataBind();
                 _tipoDireccion.DataSource = _servicioDelegadoGeneral.ObtenerTipoDirecciones();
                 _tipoDireccion.DataBind();
                 _tipoCorreo.DataSource = _servicioDelegadoGeneral.ObtenerTiposCorreoElectronico();
@@ -469,6 +583,7 @@ namespace Web.Individuo
                 _numeroDocumento.Enabled = true;
                 _tipoDocumento.Enabled = true;
                 _banderaActualizacion = false;
+                _numeroDocumento.MaxLength = 10;
             }
             catch (Exception ex)
             {
@@ -515,9 +630,11 @@ namespace Web.Individuo
 
 
 
+
+
+
         #endregion
 
-
-        
+       
     }
 }

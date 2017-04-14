@@ -124,54 +124,37 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
             {
                 ProductoId = Convert.ToInt32(e.PRODUCTO_ID)
             };
-            General.Servicio.Modelo.ColorModelo color = new General.Servicio.Modelo.ColorModelo()
-            {
-                ColorId =Convert.ToInt32( e.COLOR_ID)
-
-            };
+           
             ProductoTallaModelo _productoTalla = new ProductoTallaModelo()
             {
                 ProductoTallaId = Convert.ToInt32(e.PRODUCTO_TALLA_ID)
 
             };
 
-            General.Servicio.Modelo.MarcaModelo _marca = new General.Servicio.Modelo.MarcaModelo()
-            {
-                MarcaId = Convert.ToInt32(e.MARCA_ID)
-            };
-
-            General.Servicio.Modelo.MaterialModelo _material = new General.Servicio.Modelo.MaterialModelo()
-            {
-                MaterialId = Convert.ToInt32(e.MATERIAL_ID)
-            };
+           
+           
 
             
-            List<modelo.DetalleOrdenTrabajoObservacionModelo> _detalleOrdenTrabajoObservaciones =CrearDetalleOrdenTrabajosObservacion(e.DETALLE_ORDEN_TRABAJO_OBSERVACION);
+            
+            List<modelo.DetallePrendaOrdenTrabajoModelo> _detallePrendaOrdenTrabajoModelos = CrearDetallesPrendaOrdenTrabajo(e.DETALLE_PRENDA_ORDEN_TRABAJO);
             return new modelo.DetalleOrdenTrabajoModelo
             {
                 DetalleOrdenTrabajoId = e.DETALLE_ORDEN_TRABAJO_ID,
                 OrdenTrabajo = ordenTrabajo,
                 Cantidad = e.CANTIDAD,
-                Observacion = e.OBSERVACION,
                 PorcentajeImpuesto = e.PORCENTAJE_IMPUESTO,
                 ValorTotal = e.VALOR_TOTAL,
                 ValorUnitario = e.VALOR_UNITARIO,
                 Producto = producto,
-                Color = color,
                 ProductoTalla = _productoTalla,
-                Marca = _marca,
-                Material = _material,
-                DetalleOrdenTrabajoObservacion = _detalleOrdenTrabajoObservaciones,
-                TratamientoEspecial = e.TRATAMIENTO_ESPECIAL,
-                NumeroInternoPrenda = e.NUMERO_INTERNO_PRENDA,
                 FijadorColor = e.FIJADOR_COLOR,
                 Desengrasante = e.DESENGRASANTE,
-                NumeroLibras = e.NUMERO_LIBRAS,
-                Suavizante = e.SUAVIZANTE
-               
-               
-               
-
+                Suavizante = e.SUAVIZANTE,
+                ValorTotalUnitario = e.VALOR_TOTAL_UNITARIO,
+                 PromocionAplicada = e.PROMOCION_APLICADA,
+                 ValorDescuento = e.VALOR_DESCUENTO,
+                 DetallePrendaOrdenTrabajo = _detallePrendaOrdenTrabajoModelos
+                 
 
 
             };
@@ -226,7 +209,7 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
            
             return new modelo.DetalleOrdenTrabajoObservacionModelo
             {
-              DetalleOrdenTrabajoId = e.DETALLE_ORDEN_TRABAJO_ID,
+              DetalleOrdenTrabajoId = e.DETALLE_PRENDA_ORDEN_TRABAJO_ID,
               DetalleOrdenTrabajoObservacionId = e.DETALLE_ORDEN_TRABAJO_OBSERVACION_ID,
               Observacion = e.OBSERVACION,
               UsuarioId = e.USUARIO_ID,
@@ -281,9 +264,9 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
         public modelo.OrdenTrabajoComisionModelo CrearOrdenTrabajoComision(entidad.ORDEN_TRABAJO_COMISION e)
         {
 
-            modelo.OrdenTrabajoModelo _ordenTrabajoModelo = new modelo.OrdenTrabajoModelo
+            modelo.DetalleOrdenTrabajoModelo _detalleOrdenTrabajo = new modelo.DetalleOrdenTrabajoModelo
             {
-                OrdenTrabajoId =Convert.ToInt32(e.ORDEN_TRABAJO_ID)
+                DetalleOrdenTrabajoId = Convert.ToInt32(e.DETALLE_ORDEN_TRABAJO)
             }; 
 
             modeloParametrizacion.VentaComisionModelo _ventaComisionModelo= new modeloParametrizacion.VentaComisionModelo
@@ -293,7 +276,7 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
 
             return new modelo.OrdenTrabajoComisionModelo
             {
-                OrdenTrabajo = _ordenTrabajoModelo,
+                DetalleOrdenTrabajo = _detalleOrdenTrabajo,
                 VentaComision = _ventaComisionModelo,
                 UsuarioId = e.USUARIO_ID,
                 Valor = e.VALOR,
@@ -510,6 +493,57 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
             foreach (var entidad in listadoEntidad)
             {
                 listaModelo.Add(CrearAprobacionDescuento(entidad));
+            }
+            return listaModelo;
+
+        }
+
+
+
+        #endregion
+
+        #region  DETALLE PRENDA  ORDEN DE  TRABAJO
+        /// <summary>
+        /// Convierte el DTO de entidad a modelo
+        /// </summary>
+        /// <param name="e">Entidad</param>
+        /// <returns></returns>
+        public modelo.DetallePrendaOrdenTrabajoModelo CrearDetallePrendaOrdenTrabajo(entidad.DETALLE_PRENDA_ORDEN_TRABAJO e)
+        {
+
+            if (e == null)
+                return null;
+
+            List<modelo.DetalleOrdenTrabajoObservacionModelo> _detalleOrdenTrabajoObservaciones = CrearDetalleOrdenTrabajosObservacion(e.DETALLE_ORDEN_TRABAJO_OBSERVACION);
+            return new modelo.DetallePrendaOrdenTrabajoModelo
+            {
+                DetalleOrdenTrabajoId = e.DETALLE_ORDEN_TRABAJO_ID,
+                MarcaId = e.MARCA_ID,
+                ColorId = e.COLOR_ID,
+                NumeroInternoPrenda = e.NUMERO_INTERNO_PRENDA,
+                EstadoPrenda = e.ESTADO_PRENDA,
+                DetallePrendaOrdenTrabajoId = e.DETALLE_PRENDA_ORDEN_TRABAJO_ID,
+                InformacionVisual = e.INFORMACION_VISUAL,
+                TratamientoEspecial = e.TRATAMIENTO_ESPECIAL,
+                DetalleOrdenTrabajoObservacion = _detalleOrdenTrabajoObservaciones
+
+
+            };
+
+        }
+
+        /// <summary>
+        /// Convierte un listado de DTO en listado de  modelos de DTO
+        /// </summary>
+        /// <param name="listadoEntidad">Listado de Entidades</param>
+        /// <returns></returns>
+        public List<modelo.DetallePrendaOrdenTrabajoModelo> CrearDetallesPrendaOrdenTrabajo(ICollection<entidad.DETALLE_PRENDA_ORDEN_TRABAJO> listadoEntidad)
+        {
+            List<modelo.DetallePrendaOrdenTrabajoModelo> listaModelo = new List<modelo.DetallePrendaOrdenTrabajoModelo>();
+
+            foreach (var entidad in listadoEntidad)
+            {
+                listaModelo.Add(CrearDetallePrendaOrdenTrabajo(entidad));
             }
             return listaModelo;
 

@@ -48,7 +48,7 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
             {
                 var detalleOrdenTrabajoObservaciones =
                     from detalleOrdenTrabajoObservacion in _entidad.DETALLE_ORDEN_TRABAJO_OBSERVACION
-                    where detalleOrdenTrabajoObservacion.DETALLE_ORDEN_TRABAJO_ID == detalleOrdenTrabajoId
+                    where detalleOrdenTrabajoObservacion.DETALLE_PRENDA_ORDEN_TRABAJO_ID == detalleOrdenTrabajoId
                     select detalleOrdenTrabajoObservacion;
                 return detalleOrdenTrabajoObservaciones.OrderBy(m => m.DETALLE_ORDEN_TRABAJO_OBSERVACION_ID);
             }

@@ -33,7 +33,7 @@ namespace JLLR.Core.General.Proveedor.Negocio
         private readonly  PuntoVentaDAOs _puntoVentaDaOs= new PuntoVentaDAOs();
         private  readonly  FormaPagoDAOs _formaPagoDaOs= new FormaPagoDAOs();
         private readonly  ParametroDAOs _parametroDaOs= new ParametroDAOs();
-
+        private readonly  ParroquiaDAOs _parroquiaDaOs= new ParroquiaDAOs();
 
         #endregion
 
@@ -454,5 +454,28 @@ namespace JLLR.Core.General.Proveedor.Negocio
         }
         #endregion
 
+        #region PARROQUIA
+        /// <summary>
+        /// Obtiene  todas las parroquias  depenedinedo del pais,provincia y canton
+        /// </summary>
+        /// <param name="paisId"></param>
+        /// <param name="ciudadId"></param>
+        /// <param name="estadoId"></param>
+        /// <returns></returns>
+        public IQueryable<PARROQUIA> ObtenerParroquiasPorVariosParametros(int paisId, int ciudadId, int estadoId)
+        {
+            try
+            {
+                return _parroquiaDaOs.ObtenerParroquiasPorVariosParametros(paisId, ciudadId, estadoId);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+        #endregion
     }
 }

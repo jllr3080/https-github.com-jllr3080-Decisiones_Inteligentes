@@ -589,15 +589,6 @@ namespace Web.Venta {
         protected global::System.Web.UI.WebControls.TextBox _valorDescuento;
         
         /// <summary>
-        /// Control _valorDescuentoValidador.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator _valorDescuentoValidador;
-        
-        /// <summary>
         /// Control _valorDescuentoMascara.
         /// </summary>
         /// <remarks>
@@ -634,15 +625,6 @@ namespace Web.Venta {
         protected global::System.Web.UI.WebControls.TextBox _procentajeFranquicia;
         
         /// <summary>
-        /// Control _procentajeFranquiciaValidador1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator _procentajeFranquiciaValidador1;
-        
-        /// <summary>
         /// Control _procentajeFranquiciaMascara.
         /// </summary>
         /// <remarks>
@@ -670,15 +652,6 @@ namespace Web.Venta {
         protected global::AjaxControlToolkit.MaskedEditExtender _procentajeMatrizMascara;
         
         /// <summary>
-        /// Control _procentajeMatrizValidador2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator _procentajeMatrizValidador2;
-        
-        /// <summary>
         /// Control _labelMotivoDescuento.
         /// </summary>
         /// <remarks>
@@ -695,15 +668,6 @@ namespace Web.Venta {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox _motivoDescuento;
-        
-        /// <summary>
-        /// Control _motivoDescuentoValidador.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator _motivoDescuentoValidador;
         
         /// <summary>
         /// Control _btnAceptarCerrarOrden.

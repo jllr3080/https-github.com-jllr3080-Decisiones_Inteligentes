@@ -51,6 +51,7 @@
     <Compile Include="DAOs\DetalleOrdenTrabajoDAOs.cs" />
     <Compile Include="DAOs\DetalleOrdenTrabajoFotografiaDAOs.cs" />
     <Compile Include="DAOs\DetalleOrdenTrabajoObservacionDAOs.cs" />
+    <Compile Include="DAOs\DetallePrendaOrdenTrabajoDAOs.cs" />
     <Compile Include="DAOs\HistorialReglaDAOs.cs" />
     <Compile Include="DAOs\NumeroOrdenDAOs.cs" />
     <Compile Include="DAOs\OrdenTrabajoComisionDAOs.cs" />

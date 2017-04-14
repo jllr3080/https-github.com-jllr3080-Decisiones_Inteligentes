@@ -34,7 +34,8 @@ namespace JLLR.Core.Inventario.Servicio.Ensamblador
                MODELO_ID = m.Modelo.ModeloId,
                NOMBRE = m.Nombre,
                FECHA_CREACION = m.FechaCreacion,
-               PEDIR_MEDIDA = m.PedirMedida
+               PEDIR_MEDIDA = m.PedirMedida,
+               VISIBLE = m.Visible
 
 
             };

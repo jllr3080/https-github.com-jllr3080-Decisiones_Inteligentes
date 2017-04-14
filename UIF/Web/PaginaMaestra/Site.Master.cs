@@ -102,9 +102,11 @@ namespace Web
         {
             try
             {
+
                 _menu.Items.Clear();
                 _menu.Font.Size = 8;
-
+                
+                
                 List<AccesoVistaDTOs> lista = servicioDelegadoSeguridad.GenerarMenu(Convert.ToInt32(User.Id));
 
 
@@ -156,6 +158,7 @@ namespace Web
                 _menu.Items.Add(fe);
                 _menu.Items.Add(usuario);
                 _menu.Items.Add(cerrarSesion);
+                
 
             }
             catch (Exception ex)

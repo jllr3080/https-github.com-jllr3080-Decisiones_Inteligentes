@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 using Microsoft.Reporting.WebForms;
 using Web.Base;
 using Web.DTOs.Venta;
+using Web.Models.Venta.Negocio;
 using Web.ServicioDelegado;
 
 #endregion
@@ -36,8 +37,18 @@ namespace Web.Reporte
                 if (!IsPostBack)
                 {
                     _sucursal.DataSource =
-                        _servicioDelegadoGeneral.ObtenerPuntosVentaPorSucursalId(Convert.ToInt32(Util.Sucursal.Quito));
+                       _servicioDelegadoGeneral.ObtenerPuntosVentaPorSucursalId(Convert.ToInt32(Util.Sucursal.Quito));
                     _sucursal.DataBind();
+                    if (User.NombrePerfil != "ADMINISTRADOR" && User.NombrePerfil != "PLANTA")
+                    {
+                        _sucursal.SelectedIndex = _sucursal.Items.IndexOf(_sucursal.Items.FindByValue(User.PuntoVentaId.ToString()));
+                        _sucursal.Enabled = false;
+                    }
+                    else
+                    {
+
+                        _sucursal.Enabled = true;
+                    }
                 }
             }
             catch (Exception ex)
@@ -58,9 +69,12 @@ namespace Web.Reporte
             {
                  List<ConsultaOrdenTrabajoVistaDTOs> _listaConsultaOrdenTrabajoVistaDtOses = _servicioDelegadoVenta.ObtenerOrdenTrabajoPorNumeroOrdenYPuntoVenta(_numeroOrden.Text,
                     Convert.ToInt32(_sucursal.SelectedItem.Value));
+                List<DetalleOrdenTrabajoVistaModelo> _lisaDetalleOrdenTrabajoVistaModelos =
+                    _servicioDelegadoVenta.ObtenerDetalleOrdenTrabajoPorNumeroOrdenYPuntoVenta(_numeroOrden.Text,
+                        Convert.ToInt32(_sucursal.SelectedItem.Value));
 
-                if (_listaConsultaOrdenTrabajoVistaDtOses.Count > 0)
-                    CargaInformacionReporte(_listaConsultaOrdenTrabajoVistaDtOses);
+                if (_listaConsultaOrdenTrabajoVistaDtOses.Count > 0 && _lisaDetalleOrdenTrabajoVistaModelos.Count>0)
+                    CargaInformacionReporte(_listaConsultaOrdenTrabajoVistaDtOses, _lisaDetalleOrdenTrabajoVistaModelos);
                 else
                 {
                     Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Informacion_No_existe").ToString(), "_generarReporte");
@@ -91,7 +105,7 @@ namespace Web.Reporte
         /// <summary>
         /// Carga la informacion  del reporte
         /// </summary>
-        private void CargaInformacionReporte(List<ConsultaOrdenTrabajoVistaDTOs> _listaConsultaOrdenTrabajoVistaDtOses)
+        private void CargaInformacionReporte(List<ConsultaOrdenTrabajoVistaDTOs> _listaConsultaOrdenTrabajoVistaDtOses, List<DetalleOrdenTrabajoVistaModelo> detalleOrdenTrabajoVista )
         {
             try
             {
@@ -99,6 +113,8 @@ namespace Web.Reporte
                 string pathreport = Server.MapPath("~/Reporte/Venta/Rdlc/ReporteImpresionOrdenPlanta.rdlc");
                 _reporteImpresionOrdenPlanta.LocalReport.ReportPath = pathreport;
                 _reporteImpresionOrdenPlanta.LocalReport.DataSources.Add(new ReportDataSource("DetalleOrden", _listaConsultaOrdenTrabajoVistaDtOses));
+                _reporteImpresionOrdenPlanta.LocalReport.DataSources.Add(new ReportDataSource("DetalleValores", detalleOrdenTrabajoVista));
+                
             }
             catch (Exception)
             {

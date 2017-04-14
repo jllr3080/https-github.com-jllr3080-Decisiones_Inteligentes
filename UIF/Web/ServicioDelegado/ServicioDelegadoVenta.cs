@@ -30,6 +30,35 @@ namespace Web.ServicioDelegado
 
         #region NEGOCIO
         #region TRANSACCIONAL
+
+        /// <summary>
+        /// Graba el reverso de la transaccion reversa comision,cuenta por  cobrar y cuenta por  pagar
+        /// </summary>
+        /// <param name="parametroReversoDtOs"></param>
+        /// <returns></returns>
+        public string GrabarReversoTransaccion(ParametroReversoVistaDTOs parametroReversoDtOs)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ParametroReversoVistaDTOs));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, parametroReversoDtOs);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "GrabarReversoTransaccion", "POST", datos);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<string>(json);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
         /// <summary>
         /// Obtiene todas las observaciones  de las prendas por  
         /// </summary>
@@ -85,7 +114,7 @@ namespace Web.ServicioDelegado
         /// </summary>
         /// <param name="ordenTrabajoDtOs"></param>
         /// <returns></returns>
-        public OrdenTrabajoVistaModelo GrabarOrdenTrabajoCompleta(OrdenTrabajoVistaDTOs ordenTrabajoDtOs)
+        public OrdenTrabajoVistaDTOs GrabarOrdenTrabajoCompleta(OrdenTrabajoVistaDTOs ordenTrabajoDtOs)
         {
             try
             {
@@ -98,7 +127,7 @@ namespace Web.ServicioDelegado
                 clienteWeb.Encoding = Encoding.UTF8;
                 var json = clienteWeb.UploadString(direccionUrl + "GrabarOrdenTrabajoCompleta", "POST", datos);
                 var js = new JavaScriptSerializer();
-                return js.Deserialize<OrdenTrabajoVistaModelo>(json);
+                return js.Deserialize<OrdenTrabajoVistaDTOs>(json);
             }
             catch (Exception ex)
             {
@@ -106,7 +135,33 @@ namespace Web.ServicioDelegado
                 throw;
             }
         }
+        /// <summary>
+        /// Graba las comisiones  hace un asiento de  cuentas por cobrar y cuentas por pagar
+        /// </summary>
+        /// <param name="ordenTrabajoDtOs"></param>
 
+        public string GrabarTransaccionInicialCompleta(OrdenTrabajoVistaDTOs ordenTrabajoDtOs)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(OrdenTrabajoVistaDTOs));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, ordenTrabajoDtOs);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "GrabarTransaccionInicialCompleta", "POST", datos);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<string>(json);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         /// <summary>
         /// Obtiene todas las  ordenes  que estan lista para enviarse  a matriz
         /// </summary>
@@ -339,8 +394,34 @@ namespace Web.ServicioDelegado
                 throw;
             }
         }
+
+        /// <summary>
+        /// Metodo para extraer solo el detalle de la orden de  trabajo
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public List<DetalleOrdenTrabajoVistaModelo> ObtenerDetalleOrdenTrabajoPorNumeroOrdenYPuntoVenta(string numeroOrden,
+            int puntoVentaId)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerDetalleOrdenTrabajoPorNumeroOrdenYPuntoVenta?numeroOrden=" + numeroOrden + "&puntoVentaId=" + puntoVentaId );
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<DetalleOrdenTrabajoVistaModelo>>(json);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
-        
+
         #region DETALLE DE  ORDEN DE TRABAJO OBSERVACIONES
         /// <summary>
         /// Graba todas las observaciones de  los detalles de la orden de trabajo

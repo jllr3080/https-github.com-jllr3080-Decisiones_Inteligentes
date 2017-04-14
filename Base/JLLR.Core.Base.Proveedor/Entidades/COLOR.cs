@@ -17,7 +17,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public COLOR()
         {
-            this.DETALLE_ORDEN_TRABAJO = new HashSet<DETALLE_ORDEN_TRABAJO>();
+            this.DETALLE_PRENDA_ORDEN_TRABAJO = new HashSet<DETALLE_PRENDA_ORDEN_TRABAJO>();
         }
     
         public int COLOR_ID { get; set; }
@@ -25,6 +25,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<bool> ESTA_HABILITADO { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DETALLE_ORDEN_TRABAJO> DETALLE_ORDEN_TRABAJO { get; set; }
+        public virtual ICollection<DETALLE_PRENDA_ORDEN_TRABAJO> DETALLE_PRENDA_ORDEN_TRABAJO { get; set; }
     }
 }

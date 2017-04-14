@@ -89,6 +89,7 @@
     <Compile Include="Modelo\ModeloModelo.cs" />
     <Compile Include="Modelo\PaisModelo.cs" />
     <Compile Include="Modelo\ParametroModelo.cs" />
+    <Compile Include="Modelo\ParroquiaModelo.cs" />
     <Compile Include="Modelo\PuntoVentaModelo.cs" />
     <Compile Include="Modelo\SucursalModelo.cs" />
     <Compile Include="Modelo\TipoCorreoElectronicoModelo.cs" />

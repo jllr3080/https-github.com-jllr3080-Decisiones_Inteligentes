@@ -817,6 +817,44 @@ namespace JLLR.Core.General.Servicio.Ensamblador
         }
         #endregion
 
+        #region PARROQUIA
+        /// <summary>
+        /// Convierte el modelo en una entidad
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public entidad.PARROQUIA CrearParroquia(modelo.ParroquiaModelo m)
+        {
+            return new entidad.PARROQUIA()
+            {
+                PAIS_ID = m.PaisId,
+                CIUDAD_ID = m.CiudadId,
+                ESTADO_ID = m.EstadoId,
+                DESCRIPCION = m.Descripcion,
+                PARROQUIA_ID = m.ParroquiaId
+
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<entidad.PARROQUIA> CrearParroquias(List<modelo.ParroquiaModelo> listadoModelo)
+        {
+            List<entidad.PARROQUIA> listaEntidad = new List<entidad.PARROQUIA>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearParroquia(modelo));
+            }
+            return listaEntidad;
+
+        }
+        #endregion
+
 
     }
 }

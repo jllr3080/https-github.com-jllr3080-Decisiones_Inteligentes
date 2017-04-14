@@ -51,5 +51,17 @@ namespace Web.Models.Venta.Parametrizacion
         /// </summary>
         
         public int? PuntoVentaId { get; set; }
+
+        /// <summary>
+        ///TipoLavadoId
+        /// </summary>
+        
+        public int? TipoLavadoId { get; set; }
+
+        /// <summary>
+        ///TipoLavadoId
+        /// </summary>
+        
+        public bool? VieneRegla { get; set; }
     }
 }

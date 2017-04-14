@@ -34,10 +34,10 @@ namespace JLLR.Core.Venta.Servicio.Modelo
 
 
         /// <summary>
-        /// Orden de  trabajo
+        /// DetalleOrdenTrabajo
         /// </summary>
         [DataMember]
-        public OrdenTrabajoModelo OrdenTrabajo { get; set; }
+        public DetalleOrdenTrabajoModelo DetalleOrdenTrabajo{ get; set; }
 
         /// <summary>
         /// FechaGeneracionComision

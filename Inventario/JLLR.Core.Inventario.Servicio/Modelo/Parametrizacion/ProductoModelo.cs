@@ -63,6 +63,12 @@ namespace JLLR.Core.Inventario.Servicio.Modelo.Parametrizacion
         [DataMember]
         public bool? PedirMedida { get; set; }
 
+        /// <summary>
+        /// Visible
+        /// </summary>
+        [DataMember]
+        public bool? Visible{ get; set; }
+
     }
 
 }

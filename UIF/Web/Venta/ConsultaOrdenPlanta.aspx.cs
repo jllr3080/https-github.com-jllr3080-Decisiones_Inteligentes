@@ -23,7 +23,7 @@ namespace Web.Venta
         private readonly ServicioDelegadoVenta _servicioDelegadoVenta = new ServicioDelegadoVenta();
         private readonly ServicioDelegadoGeneral _servicioDelegadoGeneral = new ServicioDelegadoGeneral();
         private static List<ConsultaOrdenTrabajoVistaDTOs> _listaConsultaOrdenTrabajoVistaDtOses = null;
-
+        private static List<DetalleOrdenTrabajoVistaModelo> _listaDetalleOrdenTrabajoVistaModelos = null;
 
         #endregion
 
@@ -69,16 +69,16 @@ namespace Web.Venta
             {
                 if (e.Row.RowType == DataControlRowType.DataRow)
                 {
-                    _montoTotal += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ValorTotal"));
-                    _cantidadTotal += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "Cantidad"));
+                    //_montoTotal += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ValorTotal"));
+                    //_cantidadTotal += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "Cantidad"));
                 }
                 else if (e.Row.RowType == DataControlRowType.Footer)
                 {
                     e.Row.Cells[0].Text = "Totales:";
-                    e.Row.Cells[1].Text = _cantidadTotal.ToString();
+                    e.Row.Cells[1].Text = _listaDetalleOrdenTrabajoVistaModelos.Sum(a=>a.Cantidad).ToString();
                     e.Row.Cells[1].HorizontalAlign = HorizontalAlign.Left;
 
-                    e.Row.Cells[6].Text = _montoTotal.ToString("C");
+                    e.Row.Cells[6].Text = _listaDetalleOrdenTrabajoVistaModelos.Sum(a => a.ValorTotal).ToString();
                     e.Row.Cells[6].HorizontalAlign = HorizontalAlign.Right;
                     e.Row.Font.Bold = true;
                 }
@@ -105,6 +105,7 @@ namespace Web.Venta
                 _btnObservaciones_ModalPopupExtender.Show();
                 int index = Convert.ToInt32(e.CommandArgument);
                 List<DetalleOrdenTrabajoObservacionVistaDTOs> _lisaDetalleOrdenTrabajoObservacion = _servicioDelegadoVenta.ObtenerDetalleOrdenTrabajoObservacionPorDetalleOrdenTrabajoId(Convert.ToInt32(_datos.Rows[index].Cells[0].Text));
+                
                 if (_lisaDetalleOrdenTrabajoObservacion.Count > 0)
                 {
                     _detalleOrdenTrabajoId.Value = _datos.Rows[index].Cells[0].Text;
@@ -133,8 +134,19 @@ namespace Web.Venta
                 if (!IsPostBack)
                 {
                     _sucursal.DataSource =
-                        _servicioDelegadoGeneral.ObtenerPuntosVentaPorSucursalId(Convert.ToInt32(Util.Sucursal.Quito));
+                       _servicioDelegadoGeneral.ObtenerPuntosVentaPorSucursalId(Convert.ToInt32(Util.Sucursal.Quito));
                     _sucursal.DataBind();
+                    if (User.NombrePerfil != "ADMINISTRADOR" && User.NombrePerfil != "PLANTA")
+                    {
+                        _sucursal.SelectedIndex = _sucursal.Items.IndexOf(_sucursal.Items.FindByValue(User.PuntoVentaId.ToString()));
+                        _sucursal.Enabled = false;
+                    }
+                    else
+                    {
+
+                        _sucursal.Enabled = true;
+                    }
+                   
                 }
             }
             catch (Exception ex)
@@ -155,9 +167,9 @@ namespace Web.Venta
             {
                 LimpiarControles();
                 _listaConsultaOrdenTrabajoVistaDtOses = _servicioDelegadoVenta.ObtenerOrdenTrabajoPorNumeroOrdenYPuntoVenta(_numeroOrden.Text,Convert.ToInt32(_sucursal.SelectedItem.Value));
+                 _listaDetalleOrdenTrabajoVistaModelos = _servicioDelegadoVenta.ObtenerDetalleOrdenTrabajoPorNumeroOrdenYPuntoVenta(_numeroOrden.Text, Convert.ToInt32(_sucursal.SelectedItem.Value));
 
-
-                if (_listaConsultaOrdenTrabajoVistaDtOses.Count() > 0)
+                if (_listaConsultaOrdenTrabajoVistaDtOses.Count() > 0 && _listaDetalleOrdenTrabajoVistaModelos.Count>0 )
                 {
                     _datos.DataSource = _listaConsultaOrdenTrabajoVistaDtOses;
                     _datos.DataBind();

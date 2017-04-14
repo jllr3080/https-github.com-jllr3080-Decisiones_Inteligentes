@@ -185,7 +185,9 @@ namespace JLLR.Core.Individuo.Servicio.Ensamblador
               CIUDAD_ID = m.Ciudad.CiudadId,
               INDIVIDUO_ID = m.Individuo.IndividuoId,
               TIPO_DIRECCION_ID = m.TipoDireccion.TipoDireccionId,
+              PARROQUIA_ID = m.Parroquia.ParroquiaId,
               DESCRIPCION_DIRECCION=m.DescripcionDireccion
+              
 
             };
         }

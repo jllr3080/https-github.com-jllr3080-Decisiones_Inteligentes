@@ -27,6 +27,86 @@ namespace JLLR.Core.Contabilidad.Proveedor.Negocio
         #region TRANSACCIONAL
 
         /// <summary>
+        /// Obtiene el historial de las cuentas por  cobrar por numero de  orden
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <param name="sucursalId"></param>
+        /// <returns></returns>
+        public List<CuentaPorCobrarDTOs> ObtenerHistorialCuentaPorCobrarPorVariosParametros(string numeroOrden, int puntoVentaId, int sucursalId)
+        {
+            try
+            {
+                return _transaccionalDaOs.ObtenerHistorialCuentaPorCobrarPorVariosParametros(numeroOrden, puntoVentaId,
+                    sucursalId);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene el historial de las cuentas por  cobrar por numero de  orden
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <param name="sucursalId"></param>
+        /// <returns></returns>
+        public List<CuentaPorPagarDTOs> ObtenerHistorialCuentaPorPagarPorVariosParametros(string numeroOrden, int puntoVentaId, int sucursalId)
+        {
+            try
+            {
+                return _transaccionalDaOs.ObtenerHistorialCuentaPorPagarPorVariosParametros(numeroOrden, puntoVentaId,
+                    sucursalId);
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        /// <summary>
+        /// Obtiene el historial de las cuentas por  cobrar por numero de  orden
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        public List<CuentaPorPagarDTOs> ObtenerHistorialCuentaPorPagarPorNumeroOrden(string numeroOrden)
+        {
+            try
+            {
+                return _transaccionalDaOs.ObtenerHistorialCuentaPorPagarPorNumeroOrden(numeroOrden);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Graba el asiento tanto  positivo como negativo
+        /// </summary>
+        public void GrabarAsiento(AsientoDTOs asientoDtOs)
+        {
+
+            try
+            {
+                _transaccionalDaOs.GrabarAsiento(asientoDtOs);
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+
+        }
+
+
+        /// <summary>
         /// Graba la cuenta por pagar  
         /// </summary>
         /// <param name="cuentaPorCobrarDtOs"></param>
@@ -76,6 +156,28 @@ namespace JLLR.Core.Contabilidad.Proveedor.Negocio
                 throw;
             }
         }
+
+        /// <summary>
+        /// Obtener  las cuentas  por  cobrar  por  fecha desde y  hasta  y el punto de  venta
+        /// </summary>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechaHasta"></param>
+        /// <param name="sucursalId"></param>
+        /// <returns></returns>
+        public List<CuentaPorPagarDTOs> ObtenerCuentaPorPagarPorFechas(DateTime fechaDesde, DateTime fechaHasta,
+            int sucursalId)
+        {
+
+            try
+            {
+                return _transaccionalDaOs.ObtenerCuentaPorPagarPorFechas(fechaDesde,fechaHasta,sucursalId);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
         #region CUENTA POR COBRAR
@@ -117,6 +219,28 @@ namespace JLLR.Core.Contabilidad.Proveedor.Negocio
                 throw;
             }
         }
+        /// <summary>
+        /// Obtener las cuentas  por  cobrar por  fecha
+        /// </summary>
+        /// <param name="sucursalId"></param>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechaHasta"></param>
+        /// <returns></returns>
+
+        public IQueryable<CUENTA_POR_COBRAR> ObtenerCuentasPorCobrarPorFecha(int sucursalId, DateTime fechaDesde,
+            DateTime fechaHasta)
+        {
+            try
+            {
+             return _cuentaPorCobrarDaOs.ObtenerCuentasPorCobrarPorFecha(sucursalId,fechaDesde,fechaHasta);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
         #endregion
 
         #region HISTORIAL CUENTAS POR COBRAR
@@ -191,6 +315,28 @@ namespace JLLR.Core.Contabilidad.Proveedor.Negocio
             try
             {
                 _cuentaPorPagarDaOs.ActualizaCuentaPorPagar(cuentaPorPagar);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        /// <summary>
+        /// Obtener  las cuentas  por pagar por  fecha
+        /// </summary>
+        /// <param name="sucursalId"></param>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechahasta"></param>
+        /// <returns></returns>
+
+        public IQueryable<CUENTA_POR_PAGAR> ObtenerCuentaPorPagarPorFecha(int sucursalId, DateTime fechaDesde,
+            DateTime fechaHasta)
+        {
+
+            try
+            {
+                return _cuentaPorPagarDaOs.ObtenerCuentaPorPagarPorFecha(sucursalId, fechaDesde, fechaHasta);
             }
             catch (Exception)
             {
