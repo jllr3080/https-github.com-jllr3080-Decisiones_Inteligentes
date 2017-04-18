@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JLLR.Core.Base.Proveedor.DAOs;
 using JLLR.Core.Base.Proveedor.Entidades;
 
 #endregion
@@ -13,7 +14,7 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
     /// <summary>
     /// Aprobacion d e los  descuentos
     /// </summary>
-    public class AprobacionDescuentoDAOs
+    public class AprobacionDescuentoDAOs:BaseDAOs
     {
 
         /// <summary>

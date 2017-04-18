@@ -14,6 +14,9 @@
            <div class="panel-heading"><asp:Literal runat="server" ID="_litearlBusquedaPorFecha" Text="<%$ Resources:Web_es_Ec,Panel_Busqueda_Orden_Trabajo%>"/></div>
         <div class="panel-body">
             <div class="row">
+                <div class="col-md-3">
+                                <asp:Label ID="_labelSucursal" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Sucursal%>"></asp:Label>
+                  </div>   
                     <div class="col-md-3">
                         <asp:Label ID="_labelNumeroOrden" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Numero_Orden%>"></asp:Label>
                     </div>
@@ -21,6 +24,10 @@
             </div>
             
             <div class="row">
+                 <div class="col-md-3">
+                                  <asp:DropDownList ID="_sucursal" runat="server" CssClass="form-control" DataValueField="PuntoVentaId" DataTextField="Descripcion"></asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="_sucursalValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="Obligatorio" ControlToValidate="_sucursal" ></asp:RequiredFieldValidator>
+                            </div>
                     <div class="col-md-3">
                          <asp:TextBox ID="_numeroOrden" runat="server" CssClass="form-control" ValidationGroup="Obligatorio"  MaxLength="10" AutoCompleteType="Disabled"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="_numeroOrdenValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="Obligatorio" ControlToValidate="_numeroOrden" ></asp:RequiredFieldValidator>

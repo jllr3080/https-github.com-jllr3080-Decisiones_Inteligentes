@@ -5,6 +5,7 @@ using System.Data.Entity.Core.Objects.DataClasses;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JLLR.Core.Base.Proveedor.DAOs;
 using JLLR.Core.Base.Proveedor.Entidades;
 
 #endregion
@@ -13,7 +14,7 @@ namespace JLLR.Core.Inventario.Proveedor.DAOs
     /// <summary>
     /// Metodos de producto
     /// </summary>
-    public class ProductoDAOs
+    public class ProductoDAOs : BaseDAOs
     {
         /// <summary>
         /// Declaraciones e instancias

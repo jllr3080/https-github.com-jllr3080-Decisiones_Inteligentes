@@ -31,6 +31,15 @@ namespace Web.Venta {
         protected global::System.Web.UI.WebControls.Literal Literal4;
         
         /// <summary>
+        /// Control _labelSucursal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label _labelSucursal;
+        
+        /// <summary>
         /// Control labelNumeroOrden.
         /// </summary>
         /// <remarks>
@@ -38,6 +47,24 @@ namespace Web.Venta {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label labelNumeroOrden;
+        
+        /// <summary>
+        /// Control _sucursal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList _sucursal;
+        
+        /// <summary>
+        /// Control _sucursalValidador.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator _sucursalValidador;
         
         /// <summary>
         /// Control _numeroOrden.

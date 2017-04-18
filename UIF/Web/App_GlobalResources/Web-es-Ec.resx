@@ -729,4 +729,46 @@
   <data name="Mensaje_RUC_Persona_Natural_No_Valido" xml:space="preserve">
     <value>Ruc de persona natural no cumple con el digito verificador</value>
   </data>
+  <data name="Titulo_Pagina_Color" xml:space="preserve">
+    <value>Administración Color</value>
+  </data>
+  <data name="Titulo_Pagina_Comision" xml:space="preserve">
+    <value>Administración Comisión</value>
+  </data>
+  <data name="Titulo_Pagina_Marca" xml:space="preserve">
+    <value>Administración Marca</value>
+  </data>
+  <data name="Titulo_Pagina_Prenda" xml:space="preserve">
+    <value>Administración Prenda</value>
+  </data>
+  <data name="Titulo_Pagina_Promociones" xml:space="preserve">
+    <value>Administración Promocion</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Fotografias" xml:space="preserve">
+    <value>Agregar Fotografias</value>
+  </data>
+  <data name="Boton_Ingresar_Actualizar_Informacion" xml:space="preserve">
+    <value>Ingresar/Actualizar Información</value>
+  </data>
+  <data name="Label_Esta_Habilitado" xml:space="preserve">
+    <value>Esta Habilitado ?</value>
+  </data>
+  <data name="Panel_Detalle_Datos" xml:space="preserve">
+    <value>Resultado de Datos</value>
+  </data>
+  <data name="Panel_Ingreso_Datos" xml:space="preserve">
+    <value>Ingreso/Modificación de Datos</value>
+  </data>
+  <data name="Label_Editar" xml:space="preserve">
+    <value>Editar</value>
+  </data>
+  <data name="Label_Eliminar" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="Label_Habilitado" xml:space="preserve">
+    <value>Habilitado</value>
+  </data>
+  <data name="Label_Inhabilitado" xml:space="preserve">
+    <value>Inhabilitado</value>
+  </data>
 </root>

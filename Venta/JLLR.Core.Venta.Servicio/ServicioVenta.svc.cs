@@ -27,6 +27,22 @@ namespace JLLR.Core.Venta.Servicio
 
         #region TRANSACCIONAL
         #region NEGOCIO
+        /// <summary>
+        /// Graba la operacion de descuento  
+        /// </summary>
+        /// <param name="parametroDescuentoDtOs"></param>
+        public void GrabarTransaccionDescuentoOrden(ParametroDescuentoDTOs parametroDescuentoDtOs)
+        {
+            try
+            {
+                _ventaNegocio.GrabarTransaccionDescuentoOrden(parametroDescuentoDtOs);
+            }
+            catch (Exception exception)
+            {
+
+                throw;
+            }
+        }
 
         /// <summary>
         /// Graba el reverso de la transaccion reversa comision,cuenta por  cobrar y cuenta por  pagar

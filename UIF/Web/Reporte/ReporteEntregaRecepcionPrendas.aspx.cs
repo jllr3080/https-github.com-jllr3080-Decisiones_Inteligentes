@@ -6,13 +6,14 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.Reporting.WebForms;
+using Web.Base;
 using Web.DTOs.FlujoProceso;
 using Web.ServicioDelegado;
 
 #endregion
 namespace Web.Reporte
 {
-    public partial class ReporteEntregaRecepcionPrendas : System.Web.UI.Page
+    public partial class ReporteEntregaRecepcionPrendas : PaginaBase
     {
         #region Declaraciones e Intancias
         private readonly  ServicioDelegadoGeneral _servicioDelegadoGeneral= new ServicioDelegadoGeneral();
@@ -28,8 +29,19 @@ namespace Web.Reporte
             {
                 _etapaProceso.DataSource = _servicioDelegadoGeneral.ObtenerEtapasProceso();
                 _etapaProceso.DataBind();
-                _sucursal.DataSource = _servicioDelegadoGeneral.ObtenerPuntosVentaPorSucursalId(Convert.ToInt32(Util.Sucursal.Quito));
+                _sucursal.DataSource =
+                        _servicioDelegadoGeneral.ObtenerPuntosVentaPorSucursalId(Convert.ToInt32(Util.Sucursal.Quito));
                 _sucursal.DataBind();
+                if (User.NombrePerfil != "ADMINISTRADOR")
+                {
+                    _sucursal.SelectedIndex = _sucursal.Items.IndexOf(_sucursal.Items.FindByValue(User.PuntoVentaId.ToString()));
+                    _sucursal.Enabled = false;
+                }
+                else
+                {
+
+                    _sucursal.Enabled = true;
+                }
             }
         }
 

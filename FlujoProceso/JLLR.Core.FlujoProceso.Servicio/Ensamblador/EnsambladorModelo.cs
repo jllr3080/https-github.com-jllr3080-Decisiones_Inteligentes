@@ -28,8 +28,7 @@ namespace JLLR.Core.FlujoProceso.Servicio.Ensamblador
         /// <returns></returns>
         public modelo.HistorialProcesoModelo CrearHistorialProceso(entidad.HISTORIAL_PROCESO e)
         {
-            modeloGeneral.EtapaProcesoModelo etapaProceso =
-                _servicioDelegadoGeneral.ObtenerEtapaProcesoPorEtapaProcesoId(Convert.ToInt32(e.ETAPA_PROCESO_ID));
+            modeloGeneral.EtapaProcesoModelo etapaProceso =_servicioDelegadoGeneral.ObtenerEtapaProcesoPorEtapaProcesoId(Convert.ToInt32(e.ETAPA_PROCESO_ID));
             
             return new modelo.HistorialProcesoModelo
             {
@@ -47,13 +46,48 @@ namespace JLLR.Core.FlujoProceso.Servicio.Ensamblador
                 PerfilId = e.PERFIL_ID,
                 UsuarioRecibeId = e.USUARIO_RECIBE_ID,
                 UsuarioEntregaId = e.USUARIO_ENTREGA_ID,
-                PasoPorEstaEtapa = e.PASO_ESTA_ETAPA
+                PasoPorEstaEtapa = e.PASO_ESTA_ETAPA,
+                SeEnvio = e.SE_ENVIO
 
 
             };
 
         }
 
+
+        /// <summary>
+        /// Convierte el DTO de entidad a modelo
+        /// </summary>
+        /// <param name="e">Entidad</param>
+        /// <returns></returns>
+        public modelo.HistorialProcesoModelo CrearHistorialProcesosAuxiliar(entidad.HISTORIAL_PROCESO e)
+        {
+            modeloGeneral.EtapaProcesoModelo etapaProceso = new modeloGeneral.EtapaProcesoModelo();
+            etapaProceso.EtapaProcesoId =Convert.ToInt32(e.ETAPA_PROCESO_ID);
+
+            return new modelo.HistorialProcesoModelo
+            {
+                HistorialProcesoId = e.HISTORIAL_PROCESO_ID,
+                OrdenTrabajoId = Convert.ToInt32(e.ORDEN_TRABAJO_ID),
+                NumeroOrden = e.NUMERO_ORDEN,
+                FechaRegistro = e.FECHA_REGISTRO,
+                FechaInicio = e.FECHA_INICIO,
+                FechaFin = e.FECHA_FIN,
+                EtapaProceso = etapaProceso,
+                Texto = e.TEXTO,
+                PuntoVentaId = e.PUNTO_VENTA_ID,
+                SucursalId = e.SUCURSAL_ID,
+                DetalleOrdenTrabajoId = e.DETALLE_ORDEN_TRABAJO_ID,
+                PerfilId = e.PERFIL_ID,
+                UsuarioRecibeId = e.USUARIO_RECIBE_ID,
+                UsuarioEntregaId = e.USUARIO_ENTREGA_ID,
+                PasoPorEstaEtapa = e.PASO_ESTA_ETAPA,
+                SeEnvio = e.SE_ENVIO
+
+
+            };
+
+        }
         /// <summary>
         /// Convierte un listado de DTO en listado de  modelos de DTO
         /// </summary>
@@ -66,6 +100,22 @@ namespace JLLR.Core.FlujoProceso.Servicio.Ensamblador
             foreach (var entidad in listadoEntidad)
             {
                 listaModelo.Add(CrearHistorialProceso(entidad));
+            }
+            return listaModelo;
+
+        }
+        /// <summary>
+        /// Convierte un listado de DTO en listado de  modelos de DTO
+        /// </summary>
+        /// <param name="listadoEntidad">Listado de Entidades</param>
+        /// <returns></returns>
+        public List<modelo.HistorialProcesoModelo> CrearHistorialProcesosAuxiliar(IQueryable<entidad.HISTORIAL_PROCESO> listadoEntidad)
+        {
+            List<modelo.HistorialProcesoModelo> listaModelo = new List<modelo.HistorialProcesoModelo>();
+
+            foreach (var entidad in listadoEntidad)
+            {
+                listaModelo.Add(CrearHistorialProcesosAuxiliar(entidad));
             }
             return listaModelo;
 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
+using JLLR.Core.Base.Proveedor.DAOs;
 using JLLR.Core.Base.Proveedor.Entidades;
 
 #endregion
@@ -13,7 +14,7 @@ namespace JLLR.Core.Contabilidad.Proveedor.DAOs
     /// <summary>
     /// Metodos del historial de las cuentas por pagar
     /// </summary>
-   public  class HistorialCuentaPorPagarDAOs
+   public  class HistorialCuentaPorPagarDAOs : BaseDAOs
     {
         /// <summary>
         /// Declaraciones e instancias

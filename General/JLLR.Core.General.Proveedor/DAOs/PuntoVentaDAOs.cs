@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JLLR.Core.Base.Proveedor.DAOs;
 using JLLR.Core.Base.Proveedor.Entidades;
 
 #endregion
@@ -12,7 +13,7 @@ namespace JLLR.Core.General.Proveedor.DAOs
     /// <summary>
     /// Metodos de  los puntos de  venta
     /// </summary>
-    public class PuntoVentaDAOs
+    public class PuntoVentaDAOs : BaseDAOs
     {
 
         /// <summary>

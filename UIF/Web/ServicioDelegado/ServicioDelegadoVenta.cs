@@ -30,7 +30,31 @@ namespace Web.ServicioDelegado
 
         #region NEGOCIO
         #region TRANSACCIONAL
+        /// <summary>
+        /// Graba la operacion de descuento  
+        /// </summary>
+        /// <param name="parametroDescuentoDtOs"></param>
+        public void GrabarTransaccionDescuentoOrden(ParametroDescuentoVistaDTOs parametroDescuentoDtOs)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ParametroDescuentoVistaDTOs));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, parametroDescuentoDtOs);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "GrabarTransaccionDescuentoOrden", "POST", datos);
+                //var js = new JavaScriptSerializer();
+                //return js.Deserialize<string>(json);
+            }
+            catch (Exception exception)
+            {
 
+                throw;
+            }
+        }
         /// <summary>
         /// Graba el reverso de la transaccion reversa comision,cuenta por  cobrar y cuenta por  pagar
         /// </summary>

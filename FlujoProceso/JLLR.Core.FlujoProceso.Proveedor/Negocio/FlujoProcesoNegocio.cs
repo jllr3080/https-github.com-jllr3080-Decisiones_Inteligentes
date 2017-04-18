@@ -23,6 +23,25 @@ namespace JLLR.Core.FlujoProceso.Proveedor.Negocio
         #endregion
 
         #region HISTORIAL PROCESO
+
+        /// <summary>
+        /// Devuelve  todos  los  historiales de  proceso  del clciente, anulados  y  entregados
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<HISTORIAL_PROCESO> ObtenerHistorialProceso()
+        {
+            try
+            {
+               
+                return _historialProcesoDaOs.ObtenerHistorialProceso();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
         /// <summary>
         /// Graba el  historial del proceso
         /// </summary>

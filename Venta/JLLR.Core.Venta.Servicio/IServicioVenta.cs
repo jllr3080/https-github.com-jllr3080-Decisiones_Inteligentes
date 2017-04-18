@@ -23,6 +23,16 @@ namespace JLLR.Core.Venta.Servicio
         #region  TRANSACCIONAL
 
         /// <summary>
+        /// Graba la operacion de descuento  
+        /// </summary>
+        /// <param name="parametroDescuentoDtOs"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabarTransaccionDescuentoOrden/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+
+        void GrabarTransaccionDescuentoOrden(ParametroDescuentoDTOs parametroDescuentoDtOs);
+       
+
+        /// <summary>
         /// Graba el reverso de la transaccion reversa comision,cuenta por  cobrar y cuenta por  pagar
         /// </summary>
         /// <param name="parametroReversoDtOs"></param>

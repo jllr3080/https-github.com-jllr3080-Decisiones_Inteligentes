@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JLLR.Core.Base.Proveedor.DAOs;
 using JLLR.Core.Base.Proveedor.Entidades;
 
 #endregion
@@ -13,7 +14,7 @@ namespace JLLR.Core.General.Proveedor.DAOs
     /// <summary>
     /// Metodo de las  formas d e pago
     /// </summary>
-    public class FormaPagoDAOs
+    public class FormaPagoDAOs : BaseDAOs
     {
         /// <summary>
         /// Declaraciones  e instancias

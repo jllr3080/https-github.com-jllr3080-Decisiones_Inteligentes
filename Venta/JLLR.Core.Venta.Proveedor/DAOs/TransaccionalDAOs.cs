@@ -35,6 +35,48 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
 
         #region TRANSACCIONAL
 
+
+       /// <summary>
+       /// Graba el descuento de la comision por  devolucion al cliente de  algun valor
+       /// </summary>
+       /// <param name="ordenTrabajoId"></param>
+       /// <param name="usuarioId"></param>
+       /// <param name="descuentoFranquicia"></param>
+        public void  GrabarDescuentoComision(int ordenTrabajoId,int usuarioId,decimal descuentoFranquicia)
+        {
+            try
+            {
+                IQueryable<DETALLE_ORDEN_TRABAJO> detalleOrdenTrabajos =
+                    _detalleOrdenTrabajoDaOs.ObtenerDetalleOrdenTrabajosPorOrdenTrabajoId(ordenTrabajoId);
+
+
+                List<ORDEN_TRABAJO_COMISION> ordenTrabajoComisiones =
+                    _ordenTrabajoComisionDaOs.ObteneOrdenTrabajoComisionesPorListaDetalleOdenTrabajo(
+                        detalleOrdenTrabajos);
+
+                foreach (var objetoOrdenTrabajoComision in ordenTrabajoComisiones)
+                {
+                    ORDEN_TRABAJO_COMISION ordenTrabajoComision=new ORDEN_TRABAJO_COMISION();
+                    ordenTrabajoComision.DETALLE_ORDEN_TRABAJO_ID = objetoOrdenTrabajoComision.DETALLE_ORDEN_TRABAJO_ID;
+                    ordenTrabajoComision.USUARIO_ID = usuarioId;
+                    ordenTrabajoComision.FECHA_GENERACION_COMISION=DateTime.Now;
+                    ordenTrabajoComision.VALOR = descuentoFranquicia*(-1);
+                    ordenTrabajoComision.VENTA_COMISION_ID = objetoOrdenTrabajoComision.VENTA_COMISION_ID;
+                    _ordenTrabajoComisionDaOs.GrabaOrdenTrabajoComision(ordenTrabajoComision);
+                    return ;
+
+                }
+
+
+
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+
         /// <summary>
         /// Graba el reverso de las comisiones  de una orden de trabajo este es el caso de  anulacion
         /// </summary>
@@ -565,7 +607,7 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                 join marca in _entidad.MARCA on detallePrendaOrdenTrabajo.MARCA_ID equals marca.MARCA_ID
                 join estadoPago in _entidad.ESTADO_PAGO on ordenTrabajo.ESTADO_PAGO_ID equals estadoPago.ESTADO_PAGO_ID
                 where EntityFunctions.TruncateTime(ordenTrabajo.FECHA_INGRESO) == fechaDesde && ordenTrabajo.PUNTO_VENTA_ID==sucursalId   
-                select  new ConsultaOrdenTrabajoDTOs { TipoLavado = tipoLavado.DESCRIPCION,EstadoPago = estadoPago.DESCRIPCION,Marca = marca.DESCRIPCION,NumeroOrden = ordenTrabajo.NUMERO_ORDEN,FechaIngreso = ordenTrabajo.FECHA_INGRESO,FechaEntrega = ordenTrabajo.FECHA_ENTREGA,ValorUnitario = detalleOrdenTrabajo.VALOR_UNITARIO,Cantidad = detalleOrdenTrabajo.CANTIDAD,Color = color.DESCRIPCION,ValorTotal = detalleOrdenTrabajo.VALOR_TOTAL,Observacion = detalleOrdenTrabajo.OBSERVACION,Prenda = producto.NOMBRE,NombreCliente = individuo.PRIMER_CAMPO + " "+ individuo.SEGUNDO_CAMPO + " "+individuo.TERCER_CAMPO + " "+individuo.CUARTO_CAMPO};
+                select  new ConsultaOrdenTrabajoDTOs { TipoLavado = tipoLavado.DESCRIPCION,EstadoPago = estadoPago.DESCRIPCION,Marca = marca.DESCRIPCION,NumeroOrden = ordenTrabajo.NUMERO_ORDEN,FechaIngreso = ordenTrabajo.FECHA_INGRESO,FechaEntrega = ordenTrabajo.FECHA_ENTREGA,ValorUnitario = detalleOrdenTrabajo.VALOR_UNITARIO,Cantidad = detalleOrdenTrabajo.CANTIDAD,Color = color.DESCRIPCION,ValorTotal = detalleOrdenTrabajo.VALOR_TOTAL,Observacion = detalleOrdenTrabajo.OBSERVACION,Prenda = producto.NOMBRE,NombreCliente = individuo.PRIMER_CAMPO + " "+ individuo.SEGUNDO_CAMPO + " "+individuo.TERCER_CAMPO + " "+individuo.CUARTO_CAMPO,InformacionVisual = detallePrendaOrdenTrabajo.INFORMACION_VISUAL,EstadoPrenda = detallePrendaOrdenTrabajo.ESTADO_PRENDA,TratamientoEspecial = detallePrendaOrdenTrabajo.TRATAMIENTO_ESPECIAL,NumeroInternoPrenda = detallePrendaOrdenTrabajo.NUMERO_INTERNO_PRENDA};
 
           
             return ordenesTrabajo;

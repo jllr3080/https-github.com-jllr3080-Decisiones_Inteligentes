@@ -3,12 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.EnterpriseServices;
 using System.Linq;
+using System.Security.Permissions;
 using System.Web;
 using JLLR.Core.Contabilidad.Servicio.DTOs;
 using JLLR.Core.Contabilidad.Servicio.Modelo;
 using JLLR.Core.FlujoProceso.Servicio.Modelo;
 using JLLR.Core.General.Servicio.Modelo;
 using JLLR.Core.Venta.Servicio.DTOs;
+using JLLR.Core.Venta.Servicio.Ensamblador;
+using JLLR.Core.Venta.Servicio.EnsambladorDTOs;
 using JLLR.Core.Venta.Servicio.Modelo;
 using JLLR.Core.Venta.Servicio.Modelo.Parametrizacion;
 using JLLR.Core.Venta.Servicio.ServicioDelegado;
@@ -21,14 +24,18 @@ namespace JLLR.Core.Venta.Servicio.Negocio
     public class VentaNegocio
     {
 
+        #region  Declaraciones  e INstancias
         /// <summary>
         /// Declaraciones  e instancias
         /// </summary>
         private readonly  VentaTransfomadorNegocio _ventaTransfomadorNegocio= new VentaTransfomadorNegocio();
         private readonly  ServicioDelegadoContabilidad _servicioDelegadoContabilidad= new ServicioDelegadoContabilidad();
         private  readonly  ServicioDelegadoFlujoProceso _servicioDelegadoFlujoProceso= new ServicioDelegadoFlujoProceso();
-        
-        
+        private readonly EnsambladorEntidadDTOs _ensambladorEntidadDTOs = new EnsambladorEntidadDTOs();
+        private readonly EnsambladorModeloDTOs _ensambladorModeloDTOs = new EnsambladorModeloDTOs();
+        private readonly EnsambladorEntidad _ensambladorEntidad = new EnsambladorEntidad();
+        private readonly EnsambladorModelo _ensambladorModelo = new EnsambladorModelo();
+        #endregion
         /// <summary>
         /// Graba las comisiones  hace un asiento de  cuentas por cobrar y cuentas por pagar
         /// </summary>
@@ -175,65 +182,140 @@ namespace JLLR.Core.Venta.Servicio.Negocio
                         parametroReversoDtOs.NumeroOrden, parametroReversoDtOs.PuntoVentaId,
                         parametroReversoDtOs.SucursalId);
 
-                //AsientoDTOs _asientoDtOs = new AsientoDTOs();
+                AsientoDTOs _asientoDtOs = new AsientoDTOs();
 
-                //CuentaPorCobrarModelo cuentaPorCobrar = new CuentaPorCobrarModelo();
-                //cuentaPorCobrar.PuntoVentaId = cuentaPorCobrarDtOs.Select(m=>m.CuentaPorCobrar.PuntoVentaId).FirstOrDefault();
-                //cuentaPorCobrar.SucursalId = cuentaPorCobrarDtOs.Select(m => m.CuentaPorCobrar.SucursalId).FirstOrDefault();
-                //cuentaPorCobrar.ClienteId = cuentaPorCobrarDtOs.Select(m => m.CuentaPorCobrar.ClienteId).FirstOrDefault();
-                //cuentaPorCobrar.EstadoPagoId = cuentaPorCobrarDtOs.Select(m => m.CuentaPorCobrar.EstadoPagoId).FirstOrDefault(); 
-                //cuentaPorCobrar.FechaCreacion = DateTime.Now;
-                //cuentaPorCobrar.FechaModificacion = DateTime.Now;
-                //cuentaPorCobrar.FechaVencimiento = DateTime.Now;
-                //cuentaPorCobrar.NumeroFactura = cuentaPorCobrarDtOs.Select(m => m.CuentaPorCobrar.NumeroFactura).FirstOrDefault();
-                //cuentaPorCobrar.NumeroOrden = cuentaPorCobrarDtOs.Select(m => m.CuentaPorCobrar.NumeroOrden).FirstOrDefault();
-                //cuentaPorCobrar.UsuarioCreacionId = parametroReversoDtOs.UsuarioId;
-                //cuentaPorCobrar.UsuarioModificacionId = parametroReversoDtOs.UsuarioId;
-                //cuentaPorCobrar.Valor = cuentaPorCobrarDtOs.Select(m => m.CuentaPorCobrar.Valor).FirstOrDefault()*-1;
-                //cuentaPorCobrar.Saldo = cuentaPorCobrarDtOs.Select(m => m.CuentaPorCobrar.Saldo).FirstOrDefault()*-1;
-                //_asientoDtOs.CuentaPorCobrar = cuentaPorCobrar;
+                CuentaPorCobrarModelo cuentaPorCobrar = new CuentaPorCobrarModelo();
+                cuentaPorCobrar.PuntoVentaId = cuentaPorCobrarDtOs.Select(m => m.CuentaPorCobrar.PuntoVentaId).FirstOrDefault();
+                cuentaPorCobrar.SucursalId = cuentaPorCobrarDtOs.Select(m => m.CuentaPorCobrar.SucursalId).FirstOrDefault();
+                cuentaPorCobrar.ClienteId = cuentaPorCobrarDtOs.Select(m => m.CuentaPorCobrar.ClienteId).FirstOrDefault();
+                cuentaPorCobrar.EstadoPagoId = cuentaPorCobrarDtOs.Select(m => m.CuentaPorCobrar.EstadoPagoId).FirstOrDefault();
+                cuentaPorCobrar.FechaCreacion = DateTime.Now;
+                cuentaPorCobrar.FechaModificacion = DateTime.Now;
+                cuentaPorCobrar.FechaVencimiento = DateTime.Now;
+                cuentaPorCobrar.NumeroFactura = cuentaPorCobrarDtOs.Select(m => m.CuentaPorCobrar.NumeroFactura).FirstOrDefault();
+                cuentaPorCobrar.NumeroOrden = cuentaPorCobrarDtOs.Select(m => m.CuentaPorCobrar.NumeroOrden).FirstOrDefault();
+                cuentaPorCobrar.UsuarioCreacionId = parametroReversoDtOs.UsuarioId;
+                cuentaPorCobrar.UsuarioModificacionId = parametroReversoDtOs.UsuarioId;
+                cuentaPorCobrar.Valor = cuentaPorCobrarDtOs.Select(m => m.CuentaPorCobrar.Valor).FirstOrDefault() * -1;
+                cuentaPorCobrar.Saldo = cuentaPorCobrarDtOs.Select(m => m.CuentaPorCobrar.Saldo).FirstOrDefault() * -1;
+                _asientoDtOs.CuentaPorCobrar = cuentaPorCobrar;
 
-                //HistorialCuentaPorCobrarModelo historialCuentaPorCobrar = new HistorialCuentaPorCobrarModelo();
-                //historialCuentaPorCobrar.FechaCobro = DateTime.Now;
+                HistorialCuentaPorCobrarModelo historialCuentaPorCobrar = new HistorialCuentaPorCobrarModelo();
+                historialCuentaPorCobrar.FechaCobro = DateTime.Now;
 
-                //FormaPagoModelo formaPago = new FormaPagoModelo();
-                //formaPago.FormaPagoId = Convert.ToInt32(JLLR.Core.Venta.Servicio.Enums.Enum.FormaPago.Efectivo);
-                //historialCuentaPorCobrar.FormaPago = formaPago;
-                //historialCuentaPorCobrar.UsuarioId = ordenTrabajoDtOs.OrdenTrabajo.Usuario.UsuarioId;
-                //historialCuentaPorCobrar.ValorCobro = ordenTrabajoDtOs.Abono;
-                //_asientoDtOs.HistorialCuentaPorCobrar = historialCuentaPorCobrar;
+                FormaPagoModelo formaPago = new FormaPagoModelo();
+                formaPago.FormaPagoId = Convert.ToInt32(JLLR.Core.Venta.Servicio.Enums.Enum.FormaPago.Efectivo);
+                historialCuentaPorCobrar.FormaPago = formaPago;
+                historialCuentaPorCobrar.UsuarioId = parametroReversoDtOs.UsuarioId;
+                historialCuentaPorCobrar.ValorCobro = (cuentaPorCobrarDtOs.Select(m => m.CuentaPorCobrar.Valor).FirstOrDefault()+ cuentaPorCobrarDtOs.Sum(m=>m.HistorialCuentaPorCobrar.ValorCobro)) * (-1);
 
-
-                //CuentaPorPagarModelo cuentaPorPagar = new CuentaPorPagarModelo();
-
-                //cuentaPorPagar.PuntoVentaId = ordenTrabajoDtOs.OrdenTrabajo.PuntoVenta.PuntoVentaId;
-                //cuentaPorPagar.FechaCreacion = DateTime.Now;
-                //cuentaPorPagar.FechaModificacion = DateTime.Now;
-                //cuentaPorPagar.ProveedorId = Convert.ToInt32(JLLR.Core.Venta.Servicio.Enums.Enum.Proveedor.Quimica);
-                //cuentaPorPagar.UsuarioCreacionId = ordenTrabajoDtOs.OrdenTrabajo.Usuario.UsuarioId;
-                //cuentaPorPagar.UsuarioModificacionId = ordenTrabajoDtOs.OrdenTrabajo.Usuario.UsuarioId;
-                //cuentaPorPagar.FechaVencimiento = DateTime.Now;
-                //cuentaPorPagar.SucursalId = ordenTrabajoDtOs.OrdenTrabajo.Sucursal.SucursalId;
-                //cuentaPorPagar.Saldo = 0;
-                //cuentaPorPagar.Valor = valorPago;
-
-                //cuentaPorPagar.NumeroOrden = ordenTrabajoDtOs.OrdenTrabajo.NumeroOrden;
-                //cuentaPorPagar.NumeroFactura = "0";
-                //_asientoDtOs.CuentaPorPagar = cuentaPorPagar;
-
-                //HistorialCuentaPorPagarModelo historialCuentaPorPagar = new HistorialCuentaPorPagarModelo();
-                //historialCuentaPorPagar.FechaPago = DateTime.Now;
-                //historialCuentaPorPagar.UsuarioId = ordenTrabajoDtOs.OrdenTrabajo.Usuario.UsuarioId;
-                //historialCuentaPorPagar.ValorPago = 0;
-                //_asientoDtOs.HistorialCuentaPorPagar = historialCuentaPorPagar;
-
-                //_servicioDelegadoContabilidad.GrabarAsiento(_asientoDtOs);
+                _asientoDtOs.HistorialCuentaPorCobrar = historialCuentaPorCobrar;
 
 
+                CuentaPorPagarModelo cuentaPorPagar = new CuentaPorPagarModelo();
+
+                cuentaPorPagar.PuntoVentaId = cuentaPorPagarDtOses.Select(m => m.CuentaPorPagar.PuntoVentaId).FirstOrDefault();
+                cuentaPorPagar.FechaCreacion = DateTime.Now;
+                cuentaPorPagar.FechaModificacion = DateTime.Now;
+                cuentaPorPagar.ProveedorId = Convert.ToInt32(JLLR.Core.Venta.Servicio.Enums.Enum.Proveedor.Quimica);
+                cuentaPorPagar.UsuarioCreacionId = parametroReversoDtOs.UsuarioId;
+                cuentaPorPagar.UsuarioModificacionId = parametroReversoDtOs.UsuarioId;
+                cuentaPorPagar.FechaVencimiento = DateTime.Now;
+                cuentaPorPagar.SucursalId = cuentaPorPagarDtOses.Select(m => m.CuentaPorPagar.SucursalId).FirstOrDefault();
+                cuentaPorPagar.Saldo = 0;
+                cuentaPorPagar.Valor = cuentaPorPagarDtOses.Select(m => m.CuentaPorPagar.Valor).FirstOrDefault() * -1;
+                cuentaPorPagar.NumeroOrden = cuentaPorPagarDtOses.Select(m => m.CuentaPorPagar.NumeroOrden).FirstOrDefault();
+                cuentaPorPagar.NumeroFactura = "0";
+                _asientoDtOs.CuentaPorPagar = cuentaPorPagar;
+
+                HistorialCuentaPorPagarModelo historialCuentaPorPagar = new HistorialCuentaPorPagarModelo();
+                historialCuentaPorPagar.FechaPago = DateTime.Now;
+                historialCuentaPorPagar.UsuarioId = parametroReversoDtOs.UsuarioId;
+                historialCuentaPorPagar.ValorPago = 0;
+                _asientoDtOs.HistorialCuentaPorPagar = historialCuentaPorPagar;
+
+                _servicioDelegadoContabilidad.GrabarAsiento(_asientoDtOs);
+
+               
 
                 return string.Empty;
             }
             catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Graba la operacion de descuento  
+        /// </summary>
+        /// <param name="parametroDescuentoDtOs"></param>
+        public void GrabarTransaccionDescuentoOrden(ParametroDescuentoDTOs parametroDescuentoDtOs)
+        {
+            try
+            {
+                OrdenTrabajoDTOs ordenTrabajoDtOs= _ventaTransfomadorNegocio.ObtenerOrdenTrabajoPorOrdenTrabajoId(parametroDescuentoDtOs.OrdenTrabajoId);
+                List<CuentaPorCobrarDTOs> cuentaPorCobrarDtOs =
+                   _servicioDelegadoContabilidad.ObtenerHistorialCuentaPorCobrarPorVariosParametros(ordenTrabajoDtOs.OrdenTrabajo.NumeroOrden, ordenTrabajoDtOs.OrdenTrabajo.PuntoVenta.PuntoVentaId, ordenTrabajoDtOs.OrdenTrabajo.Sucursal.SucursalId);
+                List<CuentaPorPagarDTOs> cuentaPorPagarDtOses = _servicioDelegadoContabilidad.ObtenerHistorialCuentaPorPagarPorVariosParametros(ordenTrabajoDtOs.OrdenTrabajo.NumeroOrden, ordenTrabajoDtOs.OrdenTrabajo.PuntoVenta.PuntoVentaId, ordenTrabajoDtOs.OrdenTrabajo.Sucursal.SucursalId);
+
+                _ventaTransfomadorNegocio.GrabarDescuentoComision(parametroDescuentoDtOs.OrdenTrabajoId,Convert.ToInt32(parametroDescuentoDtOs.UsuarioId),Convert.ToDecimal(parametroDescuentoDtOs.ValorDescuentoFranquicia));
+                AsientoDTOs _asientoDtOs = new AsientoDTOs();
+
+                CuentaPorCobrarModelo cuentaPorCobrar = new CuentaPorCobrarModelo();
+                cuentaPorCobrar.PuntoVentaId = cuentaPorCobrarDtOs.Select(m => m.CuentaPorCobrar.PuntoVentaId).FirstOrDefault();
+                cuentaPorCobrar.SucursalId = cuentaPorCobrarDtOs.Select(m => m.CuentaPorCobrar.SucursalId).FirstOrDefault();
+                cuentaPorCobrar.ClienteId = cuentaPorCobrarDtOs.Select(m => m.CuentaPorCobrar.ClienteId).FirstOrDefault();
+                cuentaPorCobrar.EstadoPagoId = cuentaPorCobrarDtOs.Select(m => m.CuentaPorCobrar.EstadoPagoId).FirstOrDefault();
+                cuentaPorCobrar.FechaCreacion = DateTime.Now;
+                cuentaPorCobrar.FechaModificacion = DateTime.Now;
+                cuentaPorCobrar.FechaVencimiento = DateTime.Now;
+                cuentaPorCobrar.NumeroFactura = cuentaPorCobrarDtOs.Select(m => m.CuentaPorCobrar.NumeroFactura).FirstOrDefault();
+                cuentaPorCobrar.NumeroOrden = cuentaPorCobrarDtOs.Select(m => m.CuentaPorCobrar.NumeroOrden).FirstOrDefault();
+                cuentaPorCobrar.UsuarioCreacionId = parametroDescuentoDtOs.UsuarioId;
+                cuentaPorCobrar.UsuarioModificacionId = parametroDescuentoDtOs.UsuarioId;
+                cuentaPorCobrar.Valor = (-1)*((parametroDescuentoDtOs.ValorDescuentoFranquicia + parametroDescuentoDtOs.ValorDescuentoMatriz));
+                cuentaPorCobrar.Saldo =  (-1) * (parametroDescuentoDtOs.ValorDescuentoFranquicia + parametroDescuentoDtOs.ValorDescuentoMatriz);
+                _asientoDtOs.CuentaPorCobrar = cuentaPorCobrar;
+
+                HistorialCuentaPorCobrarModelo historialCuentaPorCobrar = new HistorialCuentaPorCobrarModelo();
+                historialCuentaPorCobrar.FechaCobro = DateTime.Now;
+
+                FormaPagoModelo formaPago = new FormaPagoModelo();
+                formaPago.FormaPagoId = Convert.ToInt32(JLLR.Core.Venta.Servicio.Enums.Enum.FormaPago.Efectivo);
+                historialCuentaPorCobrar.FormaPago = formaPago;
+                historialCuentaPorCobrar.UsuarioId = parametroDescuentoDtOs.UsuarioId;
+                historialCuentaPorCobrar.ValorCobro =(parametroDescuentoDtOs.ValorDescuentoFranquicia+ parametroDescuentoDtOs.ValorDescuentoMatriz)*(-1);
+
+                _asientoDtOs.HistorialCuentaPorCobrar = historialCuentaPorCobrar;
+
+
+                CuentaPorPagarModelo cuentaPorPagar = new CuentaPorPagarModelo();
+
+                cuentaPorPagar.PuntoVentaId = cuentaPorPagarDtOses.Select(m => m.CuentaPorPagar.PuntoVentaId).FirstOrDefault();
+                cuentaPorPagar.FechaCreacion = DateTime.Now;
+                cuentaPorPagar.FechaModificacion = DateTime.Now;
+                cuentaPorPagar.ProveedorId = Convert.ToInt32(JLLR.Core.Venta.Servicio.Enums.Enum.Proveedor.Quimica);
+                cuentaPorPagar.UsuarioCreacionId = parametroDescuentoDtOs.UsuarioId;
+                cuentaPorPagar.UsuarioModificacionId = parametroDescuentoDtOs.UsuarioId;
+                cuentaPorPagar.FechaVencimiento = DateTime.Now;
+                cuentaPorPagar.SucursalId = cuentaPorPagarDtOses.Select(m => m.CuentaPorPagar.SucursalId).FirstOrDefault();
+                cuentaPorPagar.Saldo = 0;
+                cuentaPorPagar.Valor = (-1) * (parametroDescuentoDtOs.ValorDescuentoMatriz);
+                cuentaPorPagar.NumeroOrden = cuentaPorPagarDtOses.Select(m => m.CuentaPorPagar.NumeroOrden).FirstOrDefault();
+                cuentaPorPagar.NumeroFactura = "0";
+                _asientoDtOs.CuentaPorPagar = cuentaPorPagar;
+
+                HistorialCuentaPorPagarModelo historialCuentaPorPagar = new HistorialCuentaPorPagarModelo();
+                historialCuentaPorPagar.FechaPago = DateTime.Now;
+                historialCuentaPorPagar.UsuarioId = parametroDescuentoDtOs.UsuarioId;
+                historialCuentaPorPagar.ValorPago = 0;
+                _asientoDtOs.HistorialCuentaPorPagar = historialCuentaPorPagar;
+
+                _servicioDelegadoContabilidad.GrabarAsiento(_asientoDtOs);
+            }
+            catch (Exception exception)
             {
                 
                 throw;

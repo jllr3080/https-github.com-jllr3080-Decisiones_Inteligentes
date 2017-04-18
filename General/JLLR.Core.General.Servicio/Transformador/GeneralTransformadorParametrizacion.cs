@@ -1,6 +1,7 @@
 ﻿#region using
 using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Web;
 using JLLR.Core.General.Servicio.Ensamblador;
@@ -33,6 +34,56 @@ namespace JLLR.Core.General.Servicio.Transformador
             try
             {
                 return _ensambladorModelo.CrearColores(_generalParametrizacion.ObetenerColores());
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        /// <summary>
+        /// Graba los colores
+        /// </summary>
+        /// <param name="color"></param>
+        public void GrabarColor(modelo.ColorModelo color)
+        {
+            try
+            {
+               _generalParametrizacion.GrabarColor(_ensambladorEntidad.CrearColor(color));
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Actualiza el color
+        /// </summary>
+        /// <param name="color"></param>
+        public void ActualizaColor(modelo.ColorModelo color)
+        {
+            try
+            {
+                _generalParametrizacion.ActualizaColor(_ensambladorEntidad.CrearColor(color));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        /// <summary>
+        /// Obtiene los  colores de las prendas
+        /// </summary>
+        /// <returns></returns>
+        public List<modelo.ColorModelo> ObetenerTodosColores()
+        {
+            try
+            {
+                return _ensambladorModelo.CrearColores(_generalParametrizacion.ObetenerTodosColores());
             }
             catch (Exception ex)
             {
@@ -101,7 +152,38 @@ namespace JLLR.Core.General.Servicio.Transformador
             }
 
         }
+        /// <summary>
+        /// Actualiza marca
+        /// </summary>
+        /// <param name="marca"></param>
+        public void ActualizaMarca(modelo.MarcaModelo marca)
+        {
+            try
+            {
+               _generalParametrizacion.ActualizaMarca(_ensambladorEntidad.CrearMarca(marca));
+            }
+            catch (Exception ex)
+            {
 
+                throw;
+            }
+        }
+        /// <summary>
+        /// Obtiene las marcas de las prendas
+        /// </summary>
+        /// <returns></returns>
+        public List<modelo.MarcaModelo> ObtenerTodasMarcas()
+        {
+            try
+            {
+                return _ensambladorModelo.CrearMarcas(_generalParametrizacion.ObtenerTodasMarcas());
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
         #region MATERIAL

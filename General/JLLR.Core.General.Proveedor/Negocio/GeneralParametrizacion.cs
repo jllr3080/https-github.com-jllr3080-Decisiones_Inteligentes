@@ -54,6 +54,57 @@ namespace JLLR.Core.General.Proveedor.Negocio
                 throw;
             }
         }
+
+        /// <summary>
+        /// Graba los colores
+        /// </summary>
+        /// <param name="color"></param>
+        public void GrabarColor(COLOR color)
+        {
+            try
+            {
+               _colorDaOs.GrabarColor(color);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Actualiza el color
+        /// </summary>
+        /// <param name="color"></param>
+        public void ActualizaColor(COLOR color)
+        {
+            try
+            {
+              _colorDaOs.ActualizaColor(color);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        /// <summary>
+        /// Obtiene los  colores de las prendas
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<COLOR> ObetenerTodosColores()
+        {
+            try
+            {
+                return _colorDaOs.ObetenerTodosColores();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
         #region MARCA
@@ -112,6 +163,39 @@ namespace JLLR.Core.General.Proveedor.Negocio
                 throw;
             }
 
+        }
+        /// <summary>
+        /// Actualiza marca
+        /// </summary>
+        /// <param name="marca"></param>
+        public void ActualizaMarca(MARCA marca)
+        {
+            try
+            {
+               _marcaDaOs.ActualizaMarca(marca);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene las marcas de las prendas
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<MARCA> ObtenerTodasMarcas()
+        {
+            try
+            {
+               return _marcaDaOs.ObtenerTodasMarcas();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
         #endregion
 

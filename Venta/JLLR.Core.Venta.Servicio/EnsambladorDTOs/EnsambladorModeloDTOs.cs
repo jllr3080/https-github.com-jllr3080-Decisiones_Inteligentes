@@ -191,7 +191,7 @@ namespace JLLR.Core.Venta.Servicio.EnsambladorDTOs
         /// </summary>
         /// <param name="listadoModelo">Listado de Modelos</param>
         /// <returns></returns>z|
-        public List<modeloDTOs.OrdenTrabajoDTOs> CrearOrdenesTrabajotOs(List<entidadDTOs.OrdenTrabajoDTOs> listadoModelo)
+        public List<modeloDTOs.OrdenTrabajoDTOs> CrearOrdenesTrabajosDtOs(List<entidadDTOs.OrdenTrabajoDTOs> listadoModelo)
         {
             List<modeloDTOs.OrdenTrabajoDTOs> listaEntidad = new List<modeloDTOs.OrdenTrabajoDTOs>();
 

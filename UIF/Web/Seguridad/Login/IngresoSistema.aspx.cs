@@ -65,6 +65,7 @@ namespace Web.Seguridad.Login
 
         }
         #endregion
+
         #region  Metodos
         /// <summary>
         /// Despliega  los mensajes    de las diferentes acciones de las  pantallas

@@ -20,12 +20,11 @@ namespace JLLR.Core.General.Proveedor.DAOs
         /// </summary>
         private readonly Decisiones_Inteligentes _entidad = new Decisiones_Inteligentes();
 
-
         /// <summary>
         /// Obtiene los  colores de las prendas
         /// </summary>
         /// <returns></returns>
-        public IQueryable<COLOR> ObetenerColores()
+        public IQueryable<COLOR> ObetenerTodosColores()
         {
             try
             {
@@ -40,5 +39,71 @@ namespace JLLR.Core.General.Proveedor.DAOs
                 throw;
             }
         }
+
+        /// <summary>
+        /// Obtiene los  colores de las prendas
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<COLOR> ObetenerColores()
+        {
+            try
+            {
+                var colores = from color in _entidad.COLOR
+                              where color.ESTA_HABILITADO==true
+                              select color;
+
+                return colores.OrderBy(m => m.DESCRIPCION);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Graba los colores
+        /// </summary>
+        /// <param name="color"></param>
+        public void GrabarColor(COLOR color)
+        {
+            try
+            {
+                _entidad.COLOR.Add(color);
+                _entidad.SaveChanges();
+
+
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Actualiza el color
+        /// </summary>
+        /// <param name="color"></param>
+        public void ActualizaColor(COLOR color)
+        {
+            try
+            {
+                var original = _entidad.COLOR.Find(color.COLOR_ID);
+
+                if (original != null)
+                {
+                    _entidad.Entry(original).CurrentValues.SetValues(color);
+                    _entidad.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
+        
     }
 }

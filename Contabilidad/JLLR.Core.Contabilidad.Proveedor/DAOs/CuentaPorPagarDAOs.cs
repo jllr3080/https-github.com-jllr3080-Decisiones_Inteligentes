@@ -5,6 +5,7 @@ using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JLLR.Core.Base.Proveedor.DAOs;
 using JLLR.Core.Base.Proveedor.Entidades;
 
 #endregion
@@ -13,7 +14,7 @@ namespace JLLR.Core.Contabilidad.Proveedor.DAOs
     /// <summary>
     /// Cuentas por  Pagar
     /// </summary>
-    public class CuentaPorPagarDAOs
+    public class CuentaPorPagarDAOs : BaseDAOs
     {
 
         /// <summary>

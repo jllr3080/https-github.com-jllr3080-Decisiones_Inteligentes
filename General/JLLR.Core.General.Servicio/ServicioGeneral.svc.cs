@@ -37,6 +37,57 @@ namespace JLLR.Core.General.Servicio
                 throw;
             }
         }
+
+        /// <summary>
+        /// Graba los colores
+        /// </summary>
+        /// <param name="color"></param>
+        public void GrabarColor(ColorModelo color)
+        {
+            try
+            {
+               _generalTransformadorParametrizacion.GrabarColor(color);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Actualiza el color
+        /// </summary>
+        /// <param name="color"></param>
+        public void ActualizaColor(ColorModelo color)
+        {
+            try
+            {
+                _generalTransformadorParametrizacion.ActualizaColor(color);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        /// <summary>
+        /// Obtiene los  colores de las prendas
+        /// </summary>
+        /// <returns></returns>
+        public List<ColorModelo> ObetenerTodosColores()
+        {
+            try
+            {
+                return _generalTransformadorParametrizacion.ObetenerTodosColores();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
         #region MARCA
@@ -96,6 +147,39 @@ namespace JLLR.Core.General.Servicio
                 throw;
             }
 
+        }
+        /// <summary>
+        /// Actualiza marca
+        /// </summary>
+        /// <param name="marca"></param>
+        public void ActualizaMarca(MarcaModelo marca)
+        {
+            try
+            {
+             
+                _generalTransformadorParametrizacion.ActualizaMarca(marca);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        /// <summary>
+        /// Obtiene las marcas de las prendas
+        /// </summary>
+        /// <returns></returns>
+        public List<MarcaModelo> ObtenerTodasMarcas()
+        {
+            try
+            {
+                return _generalTransformadorParametrizacion.ObtenerTodasMarcas();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
         #endregion
 

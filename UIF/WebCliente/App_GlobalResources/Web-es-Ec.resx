@@ -1,0 +1,780 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Boton_Abonar" xml:space="preserve">
+    <value>Agregar Abono</value>
+  </data>
+  <data name="Boton_Aceptar" xml:space="preserve">
+    <value>Aceptar</value>
+  </data>
+  <data name="Boton_Actualizar_Observacion" xml:space="preserve">
+    <value>Actualizar Observaciones</value>
+  </data>
+  <data name="Boton_Agregar_Abono" xml:space="preserve">
+    <value>Agregar Abono</value>
+  </data>
+  <data name="Boton_Agregar_Orden_Trabajo" xml:space="preserve">
+    <value>+ Agregar Prenda</value>
+  </data>
+  <data name="Boton_Anular_Orden_Trabajo" xml:space="preserve">
+    <value>Anular Orden de Trabajo</value>
+  </data>
+  <data name="Boton_Buscar" xml:space="preserve">
+    <value>Busqueda</value>
+  </data>
+  <data name="Boton_Buscar_Prendas" xml:space="preserve">
+    <value>Busqueda de Prendas </value>
+  </data>
+  <data name="Boton_Cancelar" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="Boton_Cerrar_Orden_Trabajo" xml:space="preserve">
+    <value>Cerrar la Orden de  Trabajo</value>
+  </data>
+  <data name="Boton_Crear_Cliente" xml:space="preserve">
+    <value>Crear Cliente</value>
+  </data>
+  <data name="Boton_Crear_Marca" xml:space="preserve">
+    <value>Crear Marca</value>
+  </data>
+  <data name="Boton_Crear_Modificar_Cliente" xml:space="preserve">
+    <value>Crear o Modiicar Cliente </value>
+  </data>
+  <data name="Boton_Entrega_Recepcion_Prenda" xml:space="preserve">
+    <value>Guardar Entrega/Recepción Prenda</value>
+  </data>
+  <data name="Boton_Generar_Reporte" xml:space="preserve">
+    <value>Generar Reporte</value>
+  </data>
+  <data name="Boton_Grabar_Marca" xml:space="preserve">
+    <value>Grabar Marca</value>
+  </data>
+  <data name="Boton_Guardar_Orden_Trabajo" xml:space="preserve">
+    <value>Guardar Orden de  Trabajo</value>
+  </data>
+  <data name="Boton_Ingresar_Actualizar_Informacion" xml:space="preserve">
+    <value>Ingresar/Actualizar Información</value>
+  </data>
+  <data name="Boton_Ingreso_Sistema" xml:space="preserve">
+    <value>Ingreso Sistema</value>
+  </data>
+  <data name="Boton_Limpiar" xml:space="preserve">
+    <value>Limpiar</value>
+  </data>
+  <data name="Btn_Generar_Reporte" xml:space="preserve">
+    <value>Generar Reporte</value>
+  </data>
+  <data name="Label_Apellido_Materno" xml:space="preserve">
+    <value>Apellido  Materno(*)</value>
+  </data>
+  <data name="Label_Apellido_Paterno" xml:space="preserve">
+    <value>Apellido Paterno (*)</value>
+  </data>
+  <data name="Label_Aplica_Descuento" xml:space="preserve">
+    <value>Aplica Descuento ?</value>
+  </data>
+  <data name="Label_Aplica_Promocion" xml:space="preserve">
+    <value>Aplica Promoción</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Cantidad" xml:space="preserve">
+    <value>Cantidad</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Cliente" xml:space="preserve">
+    <value>Cliente</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Codigo_Interno" xml:space="preserve">
+    <value>Código Interno</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Codigo_Orden_Trabajo" xml:space="preserve">
+    <value>Código Interno</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Color" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Cuenta_Por_Cobrar_Id" xml:space="preserve">
+    <value>Cuenta  Por Cobrar Id</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Fecha" xml:space="preserve">
+    <value>Fecha</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Fecha_Creacion" xml:space="preserve">
+    <value>Fecha Creación</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Fecha_Entrega" xml:space="preserve">
+    <value>Fecha de Entrega Orden</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Fecha_Modificacion" xml:space="preserve">
+    <value>Fecha Modificación</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Fecha_Recepcion" xml:space="preserve">
+    <value>Fecha de Recepción Orden</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Fotografias" xml:space="preserve">
+    <value>Agregar Fotografias</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Marca" xml:space="preserve">
+    <value>Marca</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Material" xml:space="preserve">
+    <value>Material</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Mostrar_Observaciones" xml:space="preserve">
+    <value>Mostrar Observaciones</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Nombre_Usuario" xml:space="preserve">
+    <value>Nombre de  Usuario</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Numero_Factura" xml:space="preserve">
+    <value>Número de Factura</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Numero_Orden" xml:space="preserve">
+    <value>Numero de Orden</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Numero_Prendas" xml:space="preserve">
+    <value>Numero de Prendas</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Observacion" xml:space="preserve">
+    <value>Observación</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Prenda" xml:space="preserve">
+    <value>Prenda</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Resumen_Cobro" xml:space="preserve">
+    <value>Resumen Cobro</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Saldo" xml:space="preserve">
+    <value>Saldo</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Talla" xml:space="preserve">
+    <value>Talla</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Valor" xml:space="preserve">
+    <value>Valor</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Valor_Total" xml:space="preserve">
+    <value>Valor Total</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Valor_Unitario" xml:space="preserve">
+    <value>Valor Unitario</value>
+  </data>
+  <data name="Label_Cantidad" xml:space="preserve">
+    <value>Cantidad</value>
+  </data>
+  <data name="Label_Ciudad" xml:space="preserve">
+    <value>Ciudad (*)</value>
+  </data>
+  <data name="Label_Codigo_Interno" xml:space="preserve">
+    <value>Código Interno</value>
+  </data>
+  <data name="Label_Codigo_Promocion" xml:space="preserve">
+    <value>Código Promoción</value>
+  </data>
+  <data name="Label_Color" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="Label_Contrasena" xml:space="preserve">
+    <value>Contrasena (*)</value>
+  </data>
+  <data name="Label_Desengrasante" xml:space="preserve">
+    <value>Desengrasante</value>
+  </data>
+  <data name="Label_Detalle_Reporte" xml:space="preserve">
+    <value>Detalle del Reporte</value>
+  </data>
+  <data name="Label_Dias_Credito" xml:space="preserve">
+    <value>Días de Crédito</value>
+  </data>
+  <data name="Label_Dia_Entrega" xml:space="preserve">
+    <value>Dia de Entrega</value>
+  </data>
+  <data name="Label_Direccion" xml:space="preserve">
+    <value>Dirección (*)</value>
+  </data>
+  <data name="Label_Direccion_Cliente" xml:space="preserve">
+    <value>Dirección del Cliente</value>
+  </data>
+  <data name="Label_Direccion_Correo" xml:space="preserve">
+    <value>Dirección de Correo (*)</value>
+  </data>
+  <data name="Label_Editar" xml:space="preserve">
+    <value>Editar</value>
+  </data>
+  <data name="Label_Eliminar" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="Label_Entrega_Matriz" xml:space="preserve">
+    <value>Envió  Hacia Matriz</value>
+  </data>
+  <data name="Label_Estado_Pago" xml:space="preserve">
+    <value>Estado de Pago</value>
+  </data>
+  <data name="Label_Estado_Prenda" xml:space="preserve">
+    <value>Estado de la Prenda</value>
+  </data>
+  <data name="Label_Esta_Habilitado" xml:space="preserve">
+    <value>Esta Habilitado ?</value>
+  </data>
+  <data name="Label_Etapa_Proceso" xml:space="preserve">
+    <value>Etapa de Proceso Origen</value>
+  </data>
+  <data name="Label_Etapa_Proceso_Destino" xml:space="preserve">
+    <value>Etapa de Proceso Destino</value>
+  </data>
+  <data name="Label_Fecha" xml:space="preserve">
+    <value>Fecha de Ingreso</value>
+  </data>
+  <data name="Label_Fecha_Desde" xml:space="preserve">
+    <value>Fecha Desde</value>
+  </data>
+  <data name="Label_Fecha_Entrega" xml:space="preserve">
+    <value>Fecha de Entrega</value>
+  </data>
+  <data name="Label_Fecha_Entrega_Real" xml:space="preserve">
+    <value>Fecha de Entrega Efectiva</value>
+  </data>
+  <data name="Label_Fecha_Entrega_Registrada" xml:space="preserve">
+    <value>Fecha de Entrega Propuesta</value>
+  </data>
+  <data name="Label_Fecha_Hasta" xml:space="preserve">
+    <value>Fecha Hasta</value>
+  </data>
+  <data name="Label_Fecha_Ingreso_Orden_Trabajo" xml:space="preserve">
+    <value>Fecha Orden de  Trabajo</value>
+  </data>
+  <data name="Label_Fecha_Nacimiento" xml:space="preserve">
+    <value>Fecha de Nacimiento (*)</value>
+  </data>
+  <data name="Label_Fijado_Color" xml:space="preserve">
+    <value>Fijador de Color</value>
+  </data>
+  <data name="Label_Forma_Pago_Opcional" xml:space="preserve">
+    <value>Forma de Pago</value>
+  </data>
+  <data name="Label_Genero" xml:space="preserve">
+    <value>Genero (*)</value>
+  </data>
+  <data name="Label_Habilitado" xml:space="preserve">
+    <value>Habilitado</value>
+  </data>
+  <data name="Label_Informacion_Visual" xml:space="preserve">
+    <value>Información Visual</value>
+  </data>
+  <data name="Label_Inhabilitado" xml:space="preserve">
+    <value>Inhabilitado</value>
+  </data>
+  <data name="Label_Marca" xml:space="preserve">
+    <value>Marca</value>
+  </data>
+  <data name="Label_Material" xml:space="preserve">
+    <value>Material </value>
+  </data>
+  <data name="Label_Motivo_Descuento" xml:space="preserve">
+    <value>Motivo de Descuento</value>
+  </data>
+  <data name="Label_Nombre_Cliente" xml:space="preserve">
+    <value>Nombre del Cliente</value>
+  </data>
+  <data name="Label_Nombre_Perfil" xml:space="preserve">
+    <value>Nombre del Perfil </value>
+  </data>
+  <data name="Label_Nombre_Representante_Legal" xml:space="preserve">
+    <value>Nombre Representante Legal</value>
+  </data>
+  <data name="Label_Numero_Documento" xml:space="preserve">
+    <value>Numero de Documento</value>
+  </data>
+  <data name="Label_Numero_Interno" xml:space="preserve">
+    <value>Número Interno Prenda</value>
+  </data>
+  <data name="Label_Numero_Libras" xml:space="preserve">
+    <value>Número de Libras</value>
+  </data>
+  <data name="Label_Numero_Orden" xml:space="preserve">
+    <value>Numero de  Orden</value>
+  </data>
+  <data name="Label_Numero_Orden_Manual" xml:space="preserve">
+    <value>Número de Orden Manual</value>
+  </data>
+  <data name="Label_Numero_Telefono" xml:space="preserve">
+    <value>Numero de Telefono (*)</value>
+  </data>
+  <data name="Label_Observacion" xml:space="preserve">
+    <value>Observación</value>
+  </data>
+  <data name="Label_Observaciones_Anulacion" xml:space="preserve">
+    <value>Porque la anulación ?</value>
+  </data>
+  <data name="Label_Pais" xml:space="preserve">
+    <value>Pais (*)</value>
+  </data>
+  <data name="Label_Parroquia" xml:space="preserve">
+    <value>Parroquia</value>
+  </data>
+  <data name="Label_Porcentaje_Franquicia" xml:space="preserve">
+    <value>Valor Propuesto  Franquicia</value>
+  </data>
+  <data name="Label_Porcentaje_Matriz" xml:space="preserve">
+    <value>Valor Propuesto Matriz </value>
+  </data>
+  <data name="Label_Prenda" xml:space="preserve">
+    <value>Prenda</value>
+  </data>
+  <data name="Label_Primer_Nombre" xml:space="preserve">
+    <value>Primer Nombre (*)</value>
+  </data>
+  <data name="Label_Promociones_Vigentes" xml:space="preserve">
+    <value>Promociones Vigentes</value>
+  </data>
+  <data name="Label_Promocion_Aplicada" xml:space="preserve">
+    <value>Promoción Aplicada</value>
+  </data>
+  <data name="Label_Provincia" xml:space="preserve">
+    <value>Provincia (*)</value>
+  </data>
+  <data name="Label_Razon_Social" xml:space="preserve">
+    <value>Razón Social de la Empresa</value>
+  </data>
+  <data name="Label_Segundo_Nombre" xml:space="preserve">
+    <value>Segundo Nombre (*)</value>
+  </data>
+  <data name="Label_Suavizante" xml:space="preserve">
+    <value>Suavizante</value>
+  </data>
+  <data name="Label_Sucursal" xml:space="preserve">
+    <value>Sucursal</value>
+  </data>
+  <data name="Label_Talla" xml:space="preserve">
+    <value>Talla</value>
+  </data>
+  <data name="Label_Telefono_Cliente" xml:space="preserve">
+    <value>Telefono de Cliente</value>
+  </data>
+  <data name="Label_Tipo_Correo" xml:space="preserve">
+    <value>Tipo de Correo (*)</value>
+  </data>
+  <data name="Label_Tipo_Direccion" xml:space="preserve">
+    <value>Tipo Direccion (*)</value>
+  </data>
+  <data name="Label_Tipo_Documento" xml:space="preserve">
+    <value>Tipo de Documento (*)</value>
+  </data>
+  <data name="Label_Tipo_Lavado" xml:space="preserve">
+    <value>Tipo de Lavado</value>
+  </data>
+  <data name="Label_Tipo_Telefono" xml:space="preserve">
+    <value>Tipo de Telefono (*)</value>
+  </data>
+  <data name="Label_Tratamiento_Especial" xml:space="preserve">
+    <value>Tratamiento Especial de la Prenda ?</value>
+  </data>
+  <data name="Label_Usuario" xml:space="preserve">
+    <value>Usuario (*)</value>
+  </data>
+  <data name="Label_Usuario_No_Obligatorio" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="Label_Valor_Abonar" xml:space="preserve">
+    <value>Valor del Abono</value>
+  </data>
+  <data name="Label_Valor_Aprobado_Franquicia" xml:space="preserve">
+    <value>Valor Aprobado Franquicia</value>
+  </data>
+  <data name="Label_Valor_Aprobado_Matriz" xml:space="preserve">
+    <value>Valor Aprobado Matríz</value>
+  </data>
+  <data name="Label_Valor_Descuento" xml:space="preserve">
+    <value>Valor Descuento</value>
+  </data>
+  <data name="Label_Valor_Total" xml:space="preserve">
+    <value>Valor Total</value>
+  </data>
+  <data name="Label_Valor_Total_Libra" xml:space="preserve">
+    <value>Valor Total Libras</value>
+  </data>
+  <data name="Label_Valor_Total_Pagar" xml:space="preserve">
+    <value>Valor Total a Pagar</value>
+  </data>
+  <data name="Label_Valor_Unitario" xml:space="preserve">
+    <value>Valor Unitario</value>
+  </data>
+  <data name="Label_Valor_Unitario_Libras" xml:space="preserve">
+    <value>Valor por Libra</value>
+  </data>
+  <data name="Literal_Agregar_Abono" xml:space="preserve">
+    <value>Agregar Abono</value>
+  </data>
+  <data name="Literal_Anular_Orden" xml:space="preserve">
+    <value>Anular Orden</value>
+  </data>
+  <data name="Literal_Cerrar_Orden" xml:space="preserve">
+    <value>Cerrar la Orden</value>
+  </data>
+  <data name="Literal_Datos_Pago" xml:space="preserve">
+    <value>Datos de Pago</value>
+  </data>
+  <data name="Marca_Agua_Fecha" xml:space="preserve">
+    <value>dd/mm/yyyy</value>
+  </data>
+  <data name="Mensaje_Abono_Completo" xml:space="preserve">
+    <value>El abono no aplica ya tiene abonada la cuenta totalmente</value>
+  </data>
+  <data name="Mensaje_Abono_Excede" xml:space="preserve">
+    <value>El abono no puede exceder a la suma total  de la orden</value>
+  </data>
+  <data name="Mensaje_Cedula_No_Valida" xml:space="preserve">
+    <value>Cedula  no cumple con el digito verificador</value>
+  </data>
+  <data name="Mensaje_Cliente_Existe" xml:space="preserve">
+    <value>El cliente esta creado  ya no se puede ingresar  nuevamente el cliente</value>
+  </data>
+  <data name="Mensaje_Cliente_No_Existe" xml:space="preserve">
+    <value>Cliente no existe  verifique   la información</value>
+  </data>
+  <data name="Mensaje_Error_Sistema" xml:space="preserve">
+    <value>Error contacte con el administrador</value>
+  </data>
+  <data name="Mensaje_Exitoso" xml:space="preserve">
+    <value>Operación exitosa</value>
+  </data>
+  <data name="Mensaje_Informacion_No_existe" xml:space="preserve">
+    <value>No existe información</value>
+  </data>
+  <data name="Mensaje_Marca_Existe" xml:space="preserve">
+    <value>La marca  ya se encuentra registrada </value>
+  </data>
+  <data name="Mensaje_Mayor_Veinte_Prendas" xml:space="preserve">
+    <value>La orden de  trabajo no debe de  tener más de 20 prendas</value>
+  </data>
+  <data name="Mensaje_No_Tiene_Comision" xml:space="preserve">
+    <value>Este usuario no es franquicia y no tiene  parametrizada una comisión no puede  cancelar la orden</value>
+  </data>
+  <data name="Mensaje_Numero_Orden_Existe" xml:space="preserve">
+    <value>Número de orden existe, no puede ingresar</value>
+  </data>
+  <data name="Mensaje_Numero_Prendas_No_Coincide" xml:space="preserve">
+    <value>El numero de  prendas  no coincide  con la información ingresada en el detalle</value>
+  </data>
+  <data name="Mensaje_Obligatorio" xml:space="preserve">
+    <value>Dato Obligatorio</value>
+  </data>
+  <data name="Mensaje_Orden_Cerrada" xml:space="preserve">
+    <value>La orden se encuentra cerrada  o anulada, la orden solo esta disponible como consulta</value>
+  </data>
+  <data name="Mensaje_Orden_Trabajo_No_Existe" xml:space="preserve">
+    <value>No existe información con esa  orden de trabajo</value>
+  </data>
+  <data name="Mensaje_RUC_Persona_Natural_No_Valido" xml:space="preserve">
+    <value>Ruc de persona natural no cumple con el digito verificador</value>
+  </data>
+  <data name="Mensaje_Sistema" xml:space="preserve">
+    <value>Mensaje del Sistema</value>
+  </data>
+  <data name="Mensaje_Valor_Abono_Mayo_PagoTotal" xml:space="preserve">
+    <value>El valor de abono es mayor que el valor total, revise los valores</value>
+  </data>
+  <data name="Opcion_Edredones" xml:space="preserve">
+    <value> Lavado de  Prendas</value>
+  </data>
+  <data name="Opcion_Libras" xml:space="preserve">
+    <value> Lavado  por Libras</value>
+  </data>
+  <data name="Panel_Aprobacion_Descuento" xml:space="preserve">
+    <value>Datos de Aprobación Descuento</value>
+  </data>
+  <data name="Panel_Busqueda_Cliente" xml:space="preserve">
+    <value>Busqueda del Cliente Por  Numero de Identificación</value>
+  </data>
+  <data name="Panel_Busqueda_Estado_Cuenta" xml:space="preserve">
+    <value>Parámetros Estado de Cuenta Por Sucursal</value>
+  </data>
+  <data name="Panel_Busqueda_Orden_Trabajo" xml:space="preserve">
+    <value>Busqueda Orden de Trabajo</value>
+  </data>
+  <data name="Panel_Busqueda_Proveedor" xml:space="preserve">
+    <value>Busqueda del Proveedor Por Numero de Identificación</value>
+  </data>
+  <data name="Panel_Busqueda_Reporte_Diario_Fecha" xml:space="preserve">
+    <value>Busqueda por Fecha </value>
+  </data>
+  <data name="Panel_Cabecera_Cuenta_Por_Cobrar" xml:space="preserve">
+    <value>Busqueda de  Cuentas  Por Cobrar</value>
+  </data>
+  <data name="Panel_Cabecera_Cuenta_Por_Pagar" xml:space="preserve">
+    <value>Busqueda de Cuentas  Por Pagar por Fecha</value>
+  </data>
+  <data name="Panel_Cabecera_Orden_Trabajo" xml:space="preserve">
+    <value>Encabezado Orden de Trabajo</value>
+  </data>
+  <data name="Panel_Creacion_Marca" xml:space="preserve">
+    <value>Creación de Marca</value>
+  </data>
+  <data name="Panel_Datos_Aprobacion_Descuento" xml:space="preserve">
+    <value>Listado de Ordenes de Aprobación</value>
+  </data>
+  <data name="Panel_Datos_Direccion_Proveedor" xml:space="preserve">
+    <value>Datos Dirección Proveedor</value>
+  </data>
+  <data name="Panel_Datos_Domicilio_Cliente" xml:space="preserve">
+    <value>Datos Domicilio Cliente</value>
+  </data>
+  <data name="Panel_Datos_Generales_Cliente" xml:space="preserve">
+    <value>Datos Generales Cliente</value>
+  </data>
+  <data name="Panel_Datos_Generales_Proveedor" xml:space="preserve">
+    <value>Datos Generales Proveedor</value>
+  </data>
+  <data name="Panel_Datos_Telefono_Mail_Cliente" xml:space="preserve">
+    <value>Datos de Telefono y Mail del Cliente</value>
+  </data>
+  <data name="Panel_Datos_Telefono_Mail_Proveedor" xml:space="preserve">
+    <value>Datos de Telefono y Mail del Proveedor</value>
+  </data>
+  <data name="Panel_Detalle_Datos" xml:space="preserve">
+    <value>Resultado de Datos</value>
+  </data>
+  <data name="Panel_Detalle_Orden_Trabajo" xml:space="preserve">
+    <value>Detalle Orden de  Trabajo</value>
+  </data>
+  <data name="Panel_Entrega_Recepcion_Seguridad" xml:space="preserve">
+    <value>Ingrese los accesos  para la recepción de la mercaderia</value>
+  </data>
+  <data name="Panel_Estadistica_Prenda" xml:space="preserve">
+    <value>Parámetros  por Prenda</value>
+  </data>
+  <data name="Panel_Forma_Pago" xml:space="preserve">
+    <value>Datos de Pago</value>
+  </data>
+  <data name="Panel_Historial_Pago" xml:space="preserve">
+    <value>Historial Pago</value>
+  </data>
+  <data name="Panel_Historial_Proceso" xml:space="preserve">
+    <value>Historial  Proceso y Pago</value>
+  </data>
+  <data name="Panel_Ingreso_Datos" xml:space="preserve">
+    <value>Ingreso/Modificación de Datos</value>
+  </data>
+  <data name="Panel_Ingreso_Sistema" xml:space="preserve">
+    <value>Ingrese Sus Credenciales de Acceso</value>
+  </data>
+  <data name="Panel_Listado_Prenda" xml:space="preserve">
+    <value>Listado de  Prendas</value>
+  </data>
+  <data name="Panel_Orden_Trabajo" xml:space="preserve">
+    <value>Datos de la Orden de  Trabajo</value>
+  </data>
+  <data name="Titulo_Detalle_Orden" xml:space="preserve">
+    <value>Datos del Detalle  de la Orden</value>
+  </data>
+  <data name="Titulo_Estadistica_General_Prendas" xml:space="preserve">
+    <value>Estadistica General Prenda</value>
+  </data>
+  <data name="Titulo_Estado_Cuenta" xml:space="preserve">
+    <value>Estado de  Cuenta</value>
+  </data>
+  <data name="Titulo_Impresion_Orden" xml:space="preserve">
+    <value>Impresión Orden</value>
+  </data>
+  <data name="Titulo_Impresion_Orden_Planta" xml:space="preserve">
+    <value>Impresión Orden Planta</value>
+  </data>
+  <data name="Titulo_Ingreso_Sistema" xml:space="preserve">
+    <value>Bienvenido al Sistema de la Química</value>
+  </data>
+  <data name="Titulo_Pagina_Aprobacion_Descuento" xml:space="preserve">
+    <value>Aprobación  Descuento</value>
+  </data>
+  <data name="Titulo_Pagina_Arqueo_Caja" xml:space="preserve">
+    <value>Arqueo Caja</value>
+  </data>
+  <data name="Titulo_Pagina_Cliente" xml:space="preserve">
+    <value>Cliente</value>
+  </data>
+  <data name="Titulo_Pagina_Color" xml:space="preserve">
+    <value>Administración Color</value>
+  </data>
+  <data name="Titulo_Pagina_Comision" xml:space="preserve">
+    <value>Administración Comisión</value>
+  </data>
+  <data name="Titulo_Pagina_Consulta_Orden_Planta" xml:space="preserve">
+    <value>Consulta  Orden Planta</value>
+  </data>
+  <data name="Titulo_Pagina_Consulta_Orden_Trabajo" xml:space="preserve">
+    <value>Consulta Orden de Trabajo</value>
+  </data>
+  <data name="Titulo_Pagina_Cuenta_Por_Cobrar" xml:space="preserve">
+    <value>Cuentas Por Cobrar</value>
+  </data>
+  <data name="Titulo_Pagina_Cuenta_Por_Pagar" xml:space="preserve">
+    <value>Cuenta Por Pagar</value>
+  </data>
+  <data name="Titulo_Pagina_Entrega_Recepcion" xml:space="preserve">
+    <value>Entrega/Recepción de Prendas</value>
+  </data>
+  <data name="Titulo_Pagina_Impresion_Corta" xml:space="preserve">
+    <value>Reporte Impresión Corta</value>
+  </data>
+  <data name="Titulo_Pagina_Marca" xml:space="preserve">
+    <value>Administración Marca</value>
+  </data>
+  <data name="Titulo_Pagina_Orden_Trabajo" xml:space="preserve">
+    <value>Orden de Trabajo</value>
+  </data>
+  <data name="Titulo_Pagina_Prenda" xml:space="preserve">
+    <value>Administración Prenda</value>
+  </data>
+  <data name="Titulo_Pagina_Promociones" xml:space="preserve">
+    <value>Administración Promocion</value>
+  </data>
+  <data name="Titulo_Pagina_Proveedor" xml:space="preserve">
+    <value>Administración de Proveedores</value>
+  </data>
+  <data name="Titulo_Pagina_Reporte_Cuenta_Por_Cobrar" xml:space="preserve">
+    <value>Reporte de Cuentas Por Cobrar</value>
+  </data>
+  <data name="Titulo_Pagina_Reporte_Cuenta_Por_Pagar" xml:space="preserve">
+    <value>Reporte de Cuentas Por Pagar</value>
+  </data>
+  <data name="Titulo_Pagina_Reporte_Entrega_Recepcion_Prendas" xml:space="preserve">
+    <value>Reporte Entrega/Recepción de Prendas</value>
+  </data>
+  <data name="Titulo_Pagina_Reporte_Prenda_Marca" xml:space="preserve">
+    <value>Reporte Prenda Marca</value>
+  </data>
+  <data name="Titulo_Pagina_Vendedor" xml:space="preserve">
+    <value>Administración Vendedores</value>
+  </data>
+  <data name="Titulo_Pie_Pagina_Sistema" xml:space="preserve">
+    <value>Sistema Decisiones Inteligentes Desarrollado por Rodrigo Utreras y Jorge López</value>
+  </data>
+  <data name="Titulo_Pie_Pagina_Sistema1" xml:space="preserve">
+    <value>Sistema Decisiones Inteligentes Desarrollado por Rodrigo Utreras y Jorge López</value>
+  </data>
+  <data name="Titulo_Reporte_Diario" xml:space="preserve">
+    <value>Reporte Diario</value>
+  </data>
+  <data name="Titulo_Sistema" xml:space="preserve">
+    <value>Decisiones Inteligentes</value>
+  </data>
+  <data name="Titulo_Sistema1" xml:space="preserve">
+    <value>Decisiones Inteligentes</value>
+  </data>
+  <data name="WaterMarke_Fecha" xml:space="preserve">
+    <value>dd/mm/yyyy</value>
+  </data>
+</root>

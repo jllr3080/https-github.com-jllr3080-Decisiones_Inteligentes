@@ -119,6 +119,30 @@ namespace JLLR.Core.FlujoProceso.Proveedor.DAOs
             }
         }
 
+        /// <summary>
+        /// Devuelve  todos  los  historiales de  proceso  del clciente, anulados  y  entregados
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<HISTORIAL_PROCESO> ObtenerHistorialProceso()
+        {
+            try
+            {
+                var historialProcesos = from historialProceso in _entidad.HISTORIAL_PROCESO
+                    where
+                        historialProceso.SE_ENVIO != true &&
+                        (historialProceso.ETAPA_PROCESO_ID == 1 ||
+                         historialProceso.ETAPA_PROCESO_ID == 8 || historialProceso.ETAPA_PROCESO_ID == 9 || historialProceso.ETAPA_PROCESO_ID == 7)
+                    select historialProceso;
+
+                return historialProcesos;
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
 
     }
 }

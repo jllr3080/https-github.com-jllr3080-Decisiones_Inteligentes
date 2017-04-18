@@ -28,6 +28,24 @@ namespace JLLR.Core.FlujoProceso.Servicio.Transformador
         #endregion
 
         #region HISTORIAL PROCESO
+
+        /// <summary>
+        /// Devuelve  todos  los  historiales de  proceso  del clciente, anulados  y  entregados
+        /// </summary>
+        /// <returns></returns>
+        public List<HistorialProcesoModelo> ObtenerHistorialProceso()
+        {
+            try
+            {
+
+                return _ensambladorModelo.CrearHistorialProcesosAuxiliar(_flujoProcesoNegocio.ObtenerHistorialProceso());
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         /// <summary>
         /// Graba el  historial del proceso
         /// </summary>

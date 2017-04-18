@@ -17,6 +17,13 @@ namespace JLLR.Core.FlujoProceso.Servicio
         #region HISTORIAL PROCESO
 
         /// <summary>
+        /// Devuelve  todos  los  historiales de  proceso  del clciente, anulados  y  entregados
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(UriTemplate ="ObtenerHistorialProceso",ResponseFormat = WebMessageFormat.Json)]
+        List<HistorialProcesoModelo> ObtenerHistorialProceso();
+        /// <summary>
         /// Graba el  historial del proceso
         /// </summary>
         [OperationContract]

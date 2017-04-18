@@ -15,11 +15,11 @@ namespace JLLR.Core.Base.Proveedor.Entidades
     public partial class DETALLE_TRABAJO_FOTOGRAFIA
     {
         public int DETALLE_TRABAJO_FOTOGRAFIA_ID { get; set; }
-        public Nullable<int> DETALLE_ORDEN_TRABAJO_ID { get; set; }
         public string DIRECCION_FOTOGRAFIA { get; set; }
         public Nullable<int> USUARIO_ID { get; set; }
         public Nullable<System.DateTime> FECHA_REGISTRO { get; set; }
+        public Nullable<int> DETALLE_PRENDA_ORDEN_TRABAJO_ID { get; set; }
     
-        public virtual DETALLE_ORDEN_TRABAJO DETALLE_ORDEN_TRABAJO { get; set; }
+        public virtual DETALLE_PRENDA_ORDEN_TRABAJO DETALLE_PRENDA_ORDEN_TRABAJO { get; set; }
     }
 }

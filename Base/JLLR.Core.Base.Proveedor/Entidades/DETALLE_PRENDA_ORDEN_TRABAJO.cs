@@ -18,6 +18,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public DETALLE_PRENDA_ORDEN_TRABAJO()
         {
             this.DETALLE_ORDEN_TRABAJO_OBSERVACION = new HashSet<DETALLE_ORDEN_TRABAJO_OBSERVACION>();
+            this.DETALLE_TRABAJO_FOTOGRAFIA = new HashSet<DETALLE_TRABAJO_FOTOGRAFIA>();
         }
     
         public int DETALLE_PRENDA_ORDEN_TRABAJO_ID { get; set; }
@@ -34,5 +35,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual DETALLE_ORDEN_TRABAJO DETALLE_ORDEN_TRABAJO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETALLE_ORDEN_TRABAJO_OBSERVACION> DETALLE_ORDEN_TRABAJO_OBSERVACION { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DETALLE_TRABAJO_FOTOGRAFIA> DETALLE_TRABAJO_FOTOGRAFIA { get; set; }
     }
 }

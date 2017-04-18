@@ -127,7 +127,7 @@ namespace Web.Venta
                 if (_listaCuentaPorCobrarVistaDtOses.Count > 0)
                 {
                         CuentaPorCobrarVistaModelo _cuentaPorCobrarVistaModelo = _listaCuentaPorCobrarVistaDtOses.Select(b => b.CuentaPorCobrar).FirstOrDefault();
-                        _cuentaPorCobrarVistaModelo.Saldo = _listaDetalleOrdenTrabajoVistaModelos.Sum(m => m.ValorTotal) -   Convert.ToDecimal(_valorAbonar.Text);
+                        _cuentaPorCobrarVistaModelo.Saldo = _listaCuentaPorCobrarVistaDtOses.Select(m => m.CuentaPorCobrar.Saldo).FirstOrDefault() -   Convert.ToDecimal(_valorAbonar.Text);
                         _servicioDelegadoContabilidad.ActualizaCuentaPorCobrar(_cuentaPorCobrarVistaModelo);
 
                         HistorialCuentaPorCobrarVistaModelo _historialCuentaPorCobrar =
@@ -290,8 +290,7 @@ namespace Web.Venta
                 {
 
                      CuentaPorCobrarVistaModelo _cuentaPorCobrarVistaModelo= _listaCuentaPorCobrarVistaDtOses.Select(b => b.CuentaPorCobrar).FirstOrDefault();
-                    _cuentaPorCobrarVistaModelo.Saldo = _cuentaPorCobrarVistaModelo.Saldo +
-                                                        Convert.ToDecimal(_valorTotal.Text);
+                    _cuentaPorCobrarVistaModelo.Saldo = _cuentaPorCobrarVistaModelo.Saldo - Convert.ToDecimal(_valorTotal.Text);
                       _servicioDelegadoContabilidad.ActualizaCuentaPorCobrar(_cuentaPorCobrarVistaModelo);
                       HistorialCuentaPorCobrarVistaModelo _historialCuentaPorCobrar =new HistorialCuentaPorCobrarVistaModelo();
                     _historialCuentaPorCobrar.UsuarioId = User.Id;
@@ -552,7 +551,23 @@ namespace Web.Venta
             try
             {
                 if (!IsPostBack)
-                BloquearControles();
+                {
+                    _sucursal.DataSource =
+                      _servicioDelegadoGeneral.ObtenerPuntosVentaPorSucursalId(Convert.ToInt32(Util.Sucursal.Quito));
+                    _sucursal.DataBind();
+                    if (User.NombrePerfil != "ADMINISTRADOR" )
+                    {
+                        _sucursal.SelectedIndex = _sucursal.Items.IndexOf(_sucursal.Items.FindByValue(User.PuntoVentaId.ToString()));
+                        _sucursal.Enabled = false;
+                    }
+                    else
+                    {
+
+                        _sucursal.Enabled = true;
+                    }
+                    BloquearControles();
+                }
+                
             }
             catch (Exception ex)
             {
@@ -572,12 +587,12 @@ namespace Web.Venta
             try
             {
                 _listaConsultaOrdenTrabajoVistaDtOses= _servicioDelegadoVenta.ObtenerOrdenTrabajoPorNumeroOrdenYPuntoVenta(_numeroOrden.Text,
-                      Convert.ToInt32(User.PuntoVentaId));
+                      Convert.ToInt32(_sucursal.SelectedItem.Value));
 
 
                 if (_listaConsultaOrdenTrabajoVistaDtOses.Count() >0)
                 {
-                    _listaDetalleOrdenTrabajoVistaModelos = _servicioDelegadoVenta.ObtenerDetalleOrdenTrabajoPorNumeroOrdenYPuntoVenta(_numeroOrden.Text,Convert.ToInt32(User.PuntoVentaId));
+                    _listaDetalleOrdenTrabajoVistaModelos = _servicioDelegadoVenta.ObtenerDetalleOrdenTrabajoPorNumeroOrdenYPuntoVenta(_numeroOrden.Text,Convert.ToInt32(_sucursal.SelectedItem.Value));
 
                     foreach (ConsultaOrdenTrabajoVistaDTOs consultaOrdenTrabajoVista in _listaConsultaOrdenTrabajoVistaDtOses)
                     {

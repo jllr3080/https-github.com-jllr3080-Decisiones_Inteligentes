@@ -90,10 +90,15 @@ namespace Web.Venta
                 _aprobacionDescuentoVista.FechaAprobacion= DateTime.Now;
                 _aprobacionDescuentoVista.ValorMatrizAprobacion =Convert.ToDecimal(_valorAprobadoMatriz.Text);
                 _aprobacionDescuentoVista.ValorFranquiciaAprobacion = Convert.ToDecimal(_valorAprobadoFranquicia.Text);
-
                 _servicioDelegadoVenta.GrabarAprobacionDescuento(_aprobacionDescuentoVista);
                 _ordenTrabajoDescuentoVista.EstadoProceso = true;
                 _servicioDelegadoVenta.ActualizarOrdenTrabajoDescuento(_ordenTrabajoDescuentoVista);
+                ParametroDescuentoVistaDTOs _parametroDescuentoVistaDtOs= new ParametroDescuentoVistaDTOs();
+                _parametroDescuentoVistaDtOs.OrdenTrabajoId =Convert.ToInt32(_ordenTrabajoDescuentoVista.OrdenTrabajo.OrdenTrabajoId);
+                _parametroDescuentoVistaDtOs.UsuarioId = User.Id;
+                _parametroDescuentoVistaDtOs.ValorDescuentoFranquicia= Convert.ToDecimal(_valorAprobadoFranquicia.Text);
+                _parametroDescuentoVistaDtOs.ValorDescuentoMatriz= Convert.ToDecimal(_valorAprobadoMatriz.Text);
+                _servicioDelegadoVenta.GrabarTransaccionDescuentoOrden(_parametroDescuentoVistaDtOs);
                 CargaDatos();
                 LimpiarControles();
 
@@ -172,6 +177,8 @@ namespace Web.Venta
                 _porcentajeFranquicia.Text = String.Empty;
                 _porcentajeMatriz.Text = String.Empty;
                 _ordenTrabajoDescuentoVista = null;
+                _valorAprobadoFranquicia.Text= String.Empty;
+                _valorAprobadoMatriz.Text=String.Empty;
             }
             catch (Exception)
             {

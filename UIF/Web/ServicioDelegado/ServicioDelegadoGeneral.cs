@@ -44,8 +44,78 @@ namespace Web.ServicioDelegado
                 throw;
             }
         }
+
+        /// <summary>
+        /// Graba los colores
+        /// </summary>
+        /// <param name="color"></param>
+        public void GrabarColor(ColorVistaModelo color)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ColorVistaModelo));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, color);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "GrabarColor", "POST", datos);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Actualiza el color
+        /// </summary>
+        /// <param name="color"></param>
+        public void ActualizaColor(ColorVistaModelo color)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ColorVistaModelo));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, color);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "ActualizaColor", "POST", datos);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        /// <summary>
+        /// Obtiene los  colores de las prendas
+        /// </summary>
+        /// <returns></returns>
+        public List<ColorVistaModelo> ObetenerTodosColores()
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObetenerTodosColores");
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<ColorVistaModelo>>(json);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
-        
+
         #region MARCA
 
         /// <summary>
@@ -57,6 +127,8 @@ namespace Web.ServicioDelegado
              try
                 {
                     var clienteWeb = new WebClient();
+                    clienteWeb.Headers["content-type"] = "application/json";
+                    clienteWeb.Encoding = Encoding.UTF8;
                     var json = clienteWeb.DownloadString(direccionUrl + "ObtenerMarcas");
                     var js = new JavaScriptSerializer();
                     return js.Deserialize<List<MarcaVistaModelo>>(json);
@@ -107,6 +179,8 @@ namespace Web.ServicioDelegado
             try
             {
                 var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
                 var json = clienteWeb.DownloadString(direccionUrl + "ValidarSiExisteMarcaPorDescripcion?descripcion="+ descripcion);
                 var js = new JavaScriptSerializer();
                 return js.Deserialize<MarcaVistaModelo>(json);
@@ -119,6 +193,52 @@ namespace Web.ServicioDelegado
                 throw;
             }
 
+        }
+        /// <summary>
+        /// Actualiza marca
+        /// </summary>
+        /// <param name="marca"></param>
+        public void ActualizaMarca(MarcaVistaModelo marca)
+        {
+            try
+            {
+
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(MarcaVistaModelo));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, marca);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "ActualizaMarca", "POST", datos);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        /// <summary>
+        /// Obtiene las marcas de las prendas
+        /// </summary>
+        /// <returns></returns>
+        public List<MarcaVistaModelo> ObtenerTodasMarcas()
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerTodasMarcas");
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<MarcaVistaModelo>>(json);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
         #endregion
 

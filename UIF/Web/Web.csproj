@@ -204,6 +204,7 @@
     <Content Include="Content\Imagen\CerrarSesion.png" />
     <Content Include="Content\Imagen\Editar.png" />
     <Content Include="Content\Imagen\F25_.gif" />
+    <Content Include="Content\Imagen\Fotografia.png" />
     <Content Include="Content\Imagen\ImagenInicial.png" />
     <Content Include="Content\Imagen\Logo_Pagina_Inicio.png" />
     <Content Include="Content\Imagen\Logo_Principal.png" />
@@ -225,6 +226,11 @@
     <Content Include="PaginaMaestra\Login.Master" />
     <None Include="Properties\PublishProfiles\Administrador.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Parametrizacion\Color.aspx" />
+    <Content Include="Parametrizacion\Comision.aspx" />
+    <Content Include="Parametrizacion\Marca.aspx" />
+    <Content Include="Parametrizacion\Prenda.aspx" />
+    <Content Include="Parametrizacion\Promocion.aspx" />
     <Content Include="Reporte\ReporteCuentasPorCobrar.aspx" />
     <Content Include="Reporte\ReporteCuentasPorPagar.aspx" />
     <Content Include="Reporte\ReporteDiario.aspx" />
@@ -352,6 +358,7 @@
     <Compile Include="DTOs\Venta\NumeroPrendaVistaDTOs.cs" />
     <Compile Include="DTOs\Venta\OrdenTrabajoDescuentoVistaDTO.cs" />
     <Compile Include="DTOs\Venta\OrdenTrabajoVistaDTOs.cs" />
+    <Compile Include="DTOs\Venta\ParametroDescuentoVistaDTOs.cs" />
     <Compile Include="DTOs\Venta\ParametroReversoVistaDTOs.cs" />
     <Compile Include="DTOs\Venta\PrendaMarcaVistaDTOs.cs" />
     <Compile Include="FE\FacturaElectronica.aspx.cs">
@@ -475,6 +482,41 @@
     </Compile>
     <Compile Include="PaginaMaestra\Login.Master.designer.cs">
       <DependentUpon>Login.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Parametrizacion\Color.aspx.cs">
+      <DependentUpon>Color.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametrizacion\Color.aspx.designer.cs">
+      <DependentUpon>Color.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametrizacion\Comision.aspx.cs">
+      <DependentUpon>Comision.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametrizacion\Comision.aspx.designer.cs">
+      <DependentUpon>Comision.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametrizacion\Marca.aspx.cs">
+      <DependentUpon>Marca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametrizacion\Marca.aspx.designer.cs">
+      <DependentUpon>Marca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametrizacion\Prenda.aspx.cs">
+      <DependentUpon>Prenda.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametrizacion\Prenda.aspx.designer.cs">
+      <DependentUpon>Prenda.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametrizacion\Promocion.aspx.cs">
+      <DependentUpon>Promocion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametrizacion\Promocion.aspx.designer.cs">
+      <DependentUpon>Promocion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reporte\ReporteCuentasPorCobrar.aspx.cs">
@@ -656,7 +698,6 @@
     <Folder Include="Models\Produccion\" />
     <Folder Include="Models\RRHH\" />
     <Folder Include="Models\Seguridad\Parametrizacion\" />
-    <Folder Include="Parametrizacion\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\Web-es-Ec.resx">

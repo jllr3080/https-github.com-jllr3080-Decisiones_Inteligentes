@@ -18,6 +18,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public ETAPA_PROCESO()
         {
             this.HISTORIAL_PROCESO = new HashSet<HISTORIAL_PROCESO>();
+            this.PROCESO = new HashSet<PROCESO>();
         }
     
         public int ETAPA_PROCESO_ID { get; set; }
@@ -27,5 +28,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HISTORIAL_PROCESO> HISTORIAL_PROCESO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PROCESO> PROCESO { get; set; }
     }
 }

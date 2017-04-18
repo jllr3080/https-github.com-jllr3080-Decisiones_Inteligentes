@@ -32,6 +32,24 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
         #region NEGOCIO
 
         #region  TRANSACCIONAL
+        /// <summary>
+        /// Graba el descuento de la comision por  devolucion al cliente de  algun valor
+        /// </summary>
+        /// <param name="ordenTrabajoId"></param>
+        /// <param name="usuarioId"></param>
+        /// <param name="descuentoFranquicia"></param>
+        public void GrabarDescuentoComision(int ordenTrabajoId, int usuarioId, decimal descuentoFranquicia)
+        {
+            try
+            {
+              _transaccionalDaOs.GrabarDescuentoComision(ordenTrabajoId,usuarioId,descuentoFranquicia);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         /// <summary>
         /// Graba el reverso de las comisiones  de una orden de trabajo este es el caso de  anulacion

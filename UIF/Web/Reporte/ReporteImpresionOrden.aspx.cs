@@ -21,6 +21,7 @@ namespace Web.Reporte
 
         #region Declaraciones e Instancias
         private readonly ServicioDelegadoVenta _servicioDelegadoVenta = new ServicioDelegadoVenta();
+        private readonly ServicioDelegadoGeneral _servicioDelegadoGeneral = new ServicioDelegadoGeneral();
         #endregion
 
         #region Eventos
@@ -34,9 +35,21 @@ namespace Web.Reporte
         {
             try
             {
-               
 
-                
+
+                _sucursal.DataSource =
+                      _servicioDelegadoGeneral.ObtenerPuntosVentaPorSucursalId(Convert.ToInt32(Util.Sucursal.Quito));
+                _sucursal.DataBind();
+                if (User.NombrePerfil != "ADMINISTRADOR" )
+                {
+                    _sucursal.SelectedIndex = _sucursal.Items.IndexOf(_sucursal.Items.FindByValue(User.PuntoVentaId.ToString()));
+                    _sucursal.Enabled = false;
+                }
+                else
+                {
+
+                    _sucursal.Enabled = true;
+                }
 
 
             }
@@ -58,10 +71,10 @@ namespace Web.Reporte
             try
             {
                 List<ConsultaOrdenTrabajoVistaDTOs> _listaConsultaOrdenTrabajoVistaDtOses = _servicioDelegadoVenta.ObtenerOrdenTrabajoPorNumeroOrdenYPuntoVenta(_numeroOrden.Text,
-                    Convert.ToInt32(User.PuntoVentaId));
+                    Convert.ToInt32(_sucursal.SelectedItem.Value));
                 List<DetalleOrdenTrabajoVistaModelo> _listaDetalleOrdenTrabajoVistaModelos =
                     _servicioDelegadoVenta.ObtenerDetalleOrdenTrabajoPorNumeroOrdenYPuntoVenta(_numeroOrden.Text,
-                        Convert.ToInt32(User.PuntoVentaId));
+                        Convert.ToInt32(_sucursal.SelectedItem.Value));
 
                 if (_listaConsultaOrdenTrabajoVistaDtOses.Count > 0 && _listaDetalleOrdenTrabajoVistaModelos.Count>0)
                 {

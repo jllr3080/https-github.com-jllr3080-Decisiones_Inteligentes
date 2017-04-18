@@ -22,6 +22,7 @@ namespace JLLR.Core.General.Proveedor.DAOs
         private readonly Decisiones_Inteligentes _entidad = new Decisiones_Inteligentes();
 
 
+
         /// <summary>
         /// Obtiene las marcas de las prendas
         /// </summary>
@@ -31,6 +32,7 @@ namespace JLLR.Core.General.Proveedor.DAOs
             try
             {
                 var marcas = from marca in _entidad.MARCA
+                             where marca.ESTA_HABILITADO==true
                              select marca;
 
                 return marcas.OrderBy(m => m.DESCRIPCION);
@@ -84,6 +86,47 @@ namespace JLLR.Core.General.Proveedor.DAOs
                 throw;
             }
 
+        }
+        /// <summary>
+        /// Actualiza marca
+        /// </summary>
+        /// <param name="marca"></param>
+        public void ActualizaMarca(MARCA marca)
+        {
+            try
+            {
+                var original = _entidad.MARCA.Find(marca.MARCA_ID);
+
+                if (original != null)
+                {
+                    _entidad.Entry(original).CurrentValues.SetValues(marca);
+                    _entidad.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        /// <summary>
+        /// Obtiene las marcas de las prendas
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<MARCA> ObtenerTodasMarcas()
+        {
+            try
+            {
+                var marcas = from marca in _entidad.MARCA
+                            select marca;
+
+                return marcas.OrderBy(m => m.DESCRIPCION);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }

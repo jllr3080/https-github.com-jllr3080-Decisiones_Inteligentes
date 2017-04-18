@@ -131,11 +131,12 @@
                   <div class="col-md-3">
                             <asp:TextBox ID="_valorAprobadoFranquicia" runat="server" ValidationGroup="Aprobacion" CssClass="form-control"  ></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="Aprobacion" ControlToValidate="_valor" ></asp:RequiredFieldValidator>
-                        
+                            <cc1:MaskedEditExtender ID="_valorAprobadoFranquiciaExtensor" runat="server" TargetControlID="_valorAprobadoFranquicia" Mask="999.99" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus" OnInvalidCssClass="MaskedEditError" MaskType="Number" InputDirection="RightToLeft" AcceptNegative="Left" DisplayMoney="Left" ErrorTooltipEnabled="True" /> 
                     </div>
                  <div class="col-md-3">
                             <asp:TextBox ID="_valorAprobadoMatriz" runat="server" ValidationGroup="Aprobacion" CssClass="form-control"  ></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="Aprobacion" ControlToValidate="_motivo" ></asp:RequiredFieldValidator>
+                            <cc1:MaskedEditExtender ID="_valorAprobadoMatrizExtensor" runat="server" TargetControlID="_valorAprobadoMatriz" Mask="999.99" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus" OnInvalidCssClass="MaskedEditError" MaskType="Number" InputDirection="RightToLeft" AcceptNegative="Left" DisplayMoney="Left" ErrorTooltipEnabled="True" /> 
                         
                     </div>
 

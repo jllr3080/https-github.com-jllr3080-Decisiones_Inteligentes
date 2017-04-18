@@ -102,6 +102,12 @@ namespace JLLR.Core.FlujoProceso.Servicio.Modelo
         /// </summary>
         [DataMember]
         public bool? PasoPorEstaEtapa { get; set; }
+
+        /// <summary>
+        /// SeEnvio
+        /// </summary>
+        [DataMember]
+        public bool? SeEnvio { get; set; }
     }
 
 }

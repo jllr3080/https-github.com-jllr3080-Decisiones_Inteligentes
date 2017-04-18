@@ -26,6 +26,33 @@ namespace JLLR.Core.General.Servicio
         [WebGet(UriTemplate = "ObetenerColores", ResponseFormat = WebMessageFormat.Json)]
         List<ColorModelo> ObetenerColores();
 
+
+        /// <summary>
+        /// Graba los colores
+        /// </summary>
+        /// <param name="color"></param>
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabarColor/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void GrabarColor(ColorModelo color);
+
+        /// <summary>
+        /// Actualiza el color
+        /// </summary>
+        /// <param name="color"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "ActualizaColor/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void ActualizaColor(ColorModelo color);
+
+        /// <summary>
+        /// Obtiene los  colores de las prendas
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(UriTemplate = "ObetenerTodosColores", ResponseFormat = WebMessageFormat.Json)]
+        List<ColorModelo> ObetenerTodosColores();
+       
+       
         #endregion
 
         #region MARCA
@@ -55,7 +82,23 @@ namespace JLLR.Core.General.Servicio
         [OperationContract]
         [WebGet(UriTemplate = "ValidarSiExisteMarcaPorDescripcion?descripcion={descripcion}", ResponseFormat = WebMessageFormat.Json)]
         MarcaModelo ValidarSiExisteMarcaPorDescripcion(string descripcion);
-        
+
+        /// <summary>
+        /// Actualiza marca
+        /// </summary>
+        /// <param name="marca"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "ActualizaMarca/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void ActualizaMarca(MarcaModelo marca);
+
+        /// <summary>
+        /// Obtiene las marcas de las prendas
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(UriTemplate = "ObtenerTodasMarcas", ResponseFormat = WebMessageFormat.Json)]
+        List<MarcaModelo> ObtenerTodasMarcas();
+       
         #endregion
 
         #region MATERIAL

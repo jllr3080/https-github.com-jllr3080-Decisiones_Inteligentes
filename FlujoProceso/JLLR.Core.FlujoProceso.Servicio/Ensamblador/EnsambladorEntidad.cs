@@ -39,7 +39,8 @@ namespace JLLR.Core.FlujoProceso.Servicio.Ensamblador
                USUARIO_RECIBE_ID = m.UsuarioRecibeId,
                PERFIL_ID = m.PerfilId,
                DETALLE_ORDEN_TRABAJO_ID = m.DetalleOrdenTrabajoId,
-               PASO_ESTA_ETAPA = m.PasoPorEstaEtapa
+               PASO_ESTA_ETAPA = m.PasoPorEstaEtapa,
+               SE_ENVIO = m.SeEnvio
             };
         }
 

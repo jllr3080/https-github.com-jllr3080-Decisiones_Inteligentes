@@ -81,6 +81,7 @@
     <Compile Include="DTOs\NumeroPrendaDTOs.cs" />
     <Compile Include="DTOs\OrdenTrabajoDescuentoDTO.cs" />
     <Compile Include="DTOs\OrdenTrabajoDTOs.cs" />
+    <Compile Include="DTOs\ParametroDescuentoDTOs.cs" />
     <Compile Include="DTOs\ParametroReversoDTOs.cs" />
     <Compile Include="DTOs\PrendaMarcaDTOs.cs" />
     <Compile Include="EnsambladorDTOs\EnsambladorEntidadDTOs.cs" />
