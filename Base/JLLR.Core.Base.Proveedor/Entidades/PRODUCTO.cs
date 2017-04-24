@@ -34,6 +34,8 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<int> UNIDAD_MEDIDA_ID { get; set; }
         public Nullable<int> MODELO_ID { get; set; }
         public Nullable<bool> VISIBLE { get; set; }
+        public Nullable<int> TIEMPO_ENTREGA { get; set; }
+        public Nullable<bool> PRENDA_ESPECIAL { get; set; }
     
         public virtual MARCA MARCA { get; set; }
         public virtual MATERIAL MATERIAL { get; set; }

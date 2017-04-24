@@ -1,8 +1,10 @@
-﻿                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         #region using
+﻿#region using
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -31,9 +33,120 @@ namespace Web.Venta
         private static List<DetalleOrdenTrabajoVistaModelo> _listaDetalleOrdenTrabajoVistaModelos= null;
         private static List<HistorialProcesoVistaModelo> _listaHistorialProcesoVistaModelos = null;
         private static  List<CuentaPorCobrarVistaDTOs>  _listaCuentaPorCobrarVistaDtOses = null;
+
+        private static List<DetalleOrdenTrabajoFotografiaVistaDTOs> _listaDetalleOrdenTrabajoFotografiaVistaDtOses =
+            null; 
         #endregion
 
         #region Eventos
+        
+        /// <summary>
+        /// Metodo para visualizar la  imagen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _datosFotografia_OnRowCommand(object sender, GridViewCommandEventArgs e)
+        {
+
+            try
+            {
+              if (e.CommandName == "VerFotografia")
+                {
+                    int index = Convert.ToInt32(e.CommandArgument);
+
+                    DetalleOrdenTrabajoFotografiaVistaModelo imagenindividua =
+                        _listaDetalleOrdenTrabajoFotografiaVistaDtOses.Where(
+                            a =>
+                                a.DetalleOrdenTrabajoFotografia.DetalleOrdenTrabajoFotografiaId.Equals(
+                                    Convert.ToInt32(_datosFotografia.Rows[index].Cells[0].Text)))
+                            .Select(a => a.DetalleOrdenTrabajoFotografia).FirstOrDefault();
+                    Session["Registro"] = imagenindividua;
+                    _btnVisualizar_ModalPopupExtender.TargetControlID = "_btnBuscar";
+                    _btnVisualizar_ModalPopupExtender.Show();
+                   
+
+                }
+            }
+            catch (ThreadAbortException ex)
+            {
+
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_btnBuscar");
+            }
+        }
+
+        /// <summary>
+        /// Agrega las fotografias 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _btnAgregarDireccionFotografia_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                
+
+                if (_direccionFotografia.FileBytes.Length <= 1048576)
+                {
+                    if (_direccionFotografia.HasFile)
+
+                    {
+                        bool extensionValida = false;
+                        string extension = System.IO.Path.GetExtension(_direccionFotografia.FileName).ToLower();
+                        String[] allowedExtensions ={".png", ".jpeg", ".jpg"};
+                        for (int i = 0; i < allowedExtensions.Length; i++)
+                        {
+                            if (extension == allowedExtensions[i])
+                            {
+                                extensionValida = true;
+                            }
+                        }
+                        if (extensionValida)
+                        { 
+                        using (BinaryReader reader = new BinaryReader(_direccionFotografia.PostedFile.InputStream))
+                        {
+                            byte[] image = reader.ReadBytes(_direccionFotografia.PostedFile.ContentLength);
+                            DetalleOrdenTrabajoFotografiaVistaModelo _detalleOrdenTrabajoFotografiaVistaModelo =
+                                new DetalleOrdenTrabajoFotografiaVistaModelo();
+                            DetallePrendaOrdenTrabajoVistaModelo _detallePrendaOrdenTrabajo =
+                                new DetallePrendaOrdenTrabajoVistaModelo();
+                            _detallePrendaOrdenTrabajo.DetallePrendaOrdenTrabajoId =
+                                Convert.ToInt32(_detallePrendaId.Value);
+                            _detalleOrdenTrabajoFotografiaVistaModelo.DetallePrendaOrdenTrabajo =
+                                _detallePrendaOrdenTrabajo;
+                            _detalleOrdenTrabajoFotografiaVistaModelo.FechaRegistro = DateTime.Now;
+                            _detalleOrdenTrabajoFotografiaVistaModelo.UsuarioId = User.Id;
+                            _detalleOrdenTrabajoFotografiaVistaModelo.ImagenPrenda = image;
+                            _servicioDelegadoVenta.GrabarDetalleOrdenFotografia(
+                                _detalleOrdenTrabajoFotografiaVistaModelo);
+
+
+
+
+                        }
+                        }
+                        else
+                        {
+                            Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Formato_No_Valido").ToString(), "_btnBuscar");
+                        }
+
+
+
+                    }
+                    else
+                    {
+                        Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Imagen_No_Cargada").ToString(), "_btnBuscar");
+                    }
+
+                }
+                else
+                    Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Tamano_No_Valido").ToString(), "_btnBuscar");
+            }
+            catch (Exception)
+            {
+
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_btnBuscar");
+            }
+        }
         /// <summary>
         /// Si esta checkeado valida  que  los validadores se activen
         /// </summary>
@@ -55,7 +168,7 @@ namespace Web.Venta
             catch (Exception)
             {
 
-                throw;
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_btnBuscar");
             }
 
         }
@@ -442,8 +555,19 @@ namespace Web.Venta
 
                     
                 }
+                if (e.CommandName == "Fotografia")
+                {
+                    int index = Convert.ToInt32(e.CommandArgument);
+                    _btnAgregarFotografia_ModalPopupExtender.TargetControlID = "_btnBuscar";
+                    _btnAgregarFotografia_ModalPopupExtender.Show();
+                    _detallePrendaId.Value = _datos.Rows[index].Cells[0].Text;
+                    _listaDetalleOrdenTrabajoFotografiaVistaDtOses = _servicioDelegadoVenta.ObtenerDetalleOrdenTrabajoFotografiaDtOsesPorDetallePrendaId(
+                            Convert.ToInt32(_detallePrendaId.Value));
+                    _datosFotografia.DataSource = _listaDetalleOrdenTrabajoFotografiaVistaDtOses;
+                    _datosFotografia.DataBind();
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_btnBuscar");
@@ -550,7 +674,7 @@ namespace Web.Venta
         {
             try
             {
-                if (!IsPostBack)
+               if (!IsPostBack)
                 {
                     _sucursal.DataSource =
                       _servicioDelegadoGeneral.ObtenerPuntosVentaPorSucursalId(Convert.ToInt32(Util.Sucursal.Quito));
@@ -667,12 +791,15 @@ namespace Web.Venta
             _datosObservaciones.DataBind();
             _datosPago.DataSource=null;
             _datosPago.DataBind();
+            _datosFotografia.DataSource = null;
+            _datosFotografia.DataBind();
             _valorTotal.Text=String.Empty;
             _observacionAnularOrden.Text=String.Empty;
             _observacion.Text=String.Empty;
             _listaConsultaOrdenTrabajoVistaDtOses =  new List<ConsultaOrdenTrabajoVistaDTOs>();
             _listaHistorialProcesoVistaModelos = new List<HistorialProcesoVistaModelo>();
             _listaCuentaPorCobrarVistaDtOses = new List<CuentaPorCobrarVistaDTOs>();
+            _listaDetalleOrdenTrabajoFotografiaVistaDtOses= new List<DetalleOrdenTrabajoFotografiaVistaDTOs>();
 
         }
 

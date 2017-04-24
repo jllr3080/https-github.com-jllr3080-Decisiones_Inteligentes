@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="DAOs\TransaccionalDAOs.cs" />
     <Compile Include="DAOs\UsuarioDAOS.cs" />
+    <Compile Include="DAOs\UsuarioPerfilDAOs.cs" />
     <Compile Include="DTOs\AccesoDTOs.cs" />
     <Compile Include="DTOs\UsuarioDTOs.cs" />
     <Compile Include="Negocio\SeguridadNegocio.cs" />

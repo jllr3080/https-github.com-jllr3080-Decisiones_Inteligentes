@@ -61,7 +61,7 @@
                    
                     <br />
                      <div class="collapse navbar-collapse">
-                             <asp:Menu ID="_menu" runat="server" Orientation="Horizontal" ItemWrap="True" PathSeparator="  "  CssClass="Menu" ></asp:Menu>
+                             <asp:Menu ID="_menu" runat="server" Orientation="Horizontal" ItemWrap="True" PathSeparator="  "  CssClass="Menu"  Width="80%"></asp:Menu>
                        
                 </div>
                    

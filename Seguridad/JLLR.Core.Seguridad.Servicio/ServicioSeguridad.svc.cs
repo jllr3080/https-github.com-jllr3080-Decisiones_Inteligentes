@@ -7,6 +7,7 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using JLLR.Core.Seguridad.Servicio.DTOs;
+using JLLR.Core.Seguridad.Servicio.Modelo;
 using JLLR.Core.Seguridad.Servicio.Transformador;
 #endregion
 namespace JLLR.Core.Seguridad.Servicio
@@ -52,6 +53,47 @@ namespace JLLR.Core.Seguridad.Servicio
             try
             {
                 return _seguridadTransformadorNegocio.GenerarMenu(usuarioId);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region USUARIO
+        /// <summary>
+        /// Graba el usuario
+        /// </summary>
+        /// <param name="usuario"></param>
+        public UsuarioModelo GrabarUsuario(UsuarioModelo usuario)
+        {
+
+            try
+            {
+             return _seguridadTransformadorNegocio.GrabarUsuario(usuario);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+
+        }
+        #endregion
+
+        #region USUARIO PERFIL
+        /// <summary>
+        /// Graba  Usuario Perfil
+        /// </summary>
+        /// <param name="usuarioPerfil"></param>
+        public void GrabarUsuarioPerfil(UsuarioPerfilModelo usuarioPerfil)
+        {
+            try
+            {
+               _seguridadTransformadorNegocio.GrabarUsuarioPerfil(usuarioPerfil);
             }
             catch (Exception ex)
             {

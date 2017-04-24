@@ -7,6 +7,8 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using JLLR.Core.Seguridad.Servicio.DTOs;
+using JLLR.Core.Seguridad.Servicio.Modelo;
+
 #endregion
 
 namespace JLLR.Core.Seguridad.Servicio
@@ -39,9 +41,32 @@ namespace JLLR.Core.Seguridad.Servicio
 
         #endregion
 
+        #region USUARIO
+
+        /// <summary>
+        /// Graba el usuario
+        /// </summary>
+        /// <param name="usuario"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabarUsuario/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        UsuarioModelo GrabarUsuario(UsuarioModelo usuario);
+
+        #endregion
+
+        #region USUARIO PERFIL
+
+        /// <summary>
+        /// Graba  Usuario Perfil
+        /// </summary>
+        /// <param name="usuarioPerfil"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabarUsuarioPerfil/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void GrabarUsuarioPerfil(UsuarioPerfilModelo usuarioPerfil);
+
+        #endregion
 
     }
 
 
-    
+
 }

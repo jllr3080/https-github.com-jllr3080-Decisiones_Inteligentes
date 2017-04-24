@@ -36,7 +36,35 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
         #region TRANSACCIONAL
 
 
-       /// <summary>
+        /// <summary>
+        /// Obtiene  el detalle  de las  fotografias   guardadas
+        /// </summary>
+        /// <param name="detallePrendaOrdenTrabajoId"></param>
+        /// <returns></returns>
+        public IQueryable<DetalleOrdenTrabajoFotografiaDTOs>
+            ObtenerDetalleOrdenTrabajoFotografiaDtOsesPorDetallePrendaId(int detallePrendaOrdenTrabajoId)
+        {
+            try
+            {
+                var detalleOrdenTrabajoFotografias =
+                    from detalleOrdenTrabajoFotografia in _entidad.DETALLE_TRABAJO_FOTOGRAFIA
+                    join usuario in _entidad.USUARIO on detalleOrdenTrabajoFotografia.USUARIO_ID equals
+                        usuario.USUARIO_ID
+                    where  detalleOrdenTrabajoFotografia.DETALLE_PRENDA_ORDEN_TRABAJO_ID == detallePrendaOrdenTrabajoId
+                    select new DetalleOrdenTrabajoFotografiaDTOs {NombreUsuario = usuario.NOMBRE_USUARIO,DetalleOrdenTrabajoFotografia = detalleOrdenTrabajoFotografia};
+
+                return detalleOrdenTrabajoFotografias;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+
+        }
+
+
+        /// <summary>
        /// Graba el descuento de la comision por  devolucion al cliente de  algun valor
        /// </summary>
        /// <param name="ordenTrabajoId"></param>
@@ -418,13 +446,13 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
         /// <param name="fechaHasta"></param>
         /// <returns></returns>
 
-        public List<NumeroPrendaDTOs> ObtenerNumeroPrendasPorFecha(DateTime fechaDesde, DateTime fechaHasta)
+        public List<NumeroPrendaDTOs> ObtenerNumeroPrendasPorFecha(DateTime fechaDesde, DateTime fechaHasta,int sucursalId)
         {
             try
             {
 
                 
-                var numeroPrendas = _entidad.ESTADISTICA_PRENDA(fechaDesde, fechaHasta);
+                var numeroPrendas = _entidad.ESTADISTICA_PRENDA(fechaDesde, fechaHasta, sucursalId);
                 
                 List<NumeroPrendaDTOs>  _numeroPrendaDtOses= new List<NumeroPrendaDTOs>();
                 foreach (var numeroPrenda in numeroPrendas)

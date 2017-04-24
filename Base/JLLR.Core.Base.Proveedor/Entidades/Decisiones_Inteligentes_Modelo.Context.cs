@@ -128,10 +128,12 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual DbSet<ORDEN_TRABAJO_COMISION> ORDEN_TRABAJO_COMISION { get; set; }
         public virtual DbSet<DETALLE_ORDEN_TRABAJO_OBSERVACION> DETALLE_ORDEN_TRABAJO_OBSERVACION { get; set; }
         public virtual DbSet<VENTA_COMISION> VENTA_COMISION { get; set; }
-        public virtual DbSet<DETALLE_TRABAJO_FOTOGRAFIA> DETALLE_TRABAJO_FOTOGRAFIA { get; set; }
         public virtual DbSet<PROCESO> PROCESO { get; set; }
+        public virtual DbSet<DETALLE_TRABAJO_FOTOGRAFIA> DETALLE_TRABAJO_FOTOGRAFIA { get; set; }
+        public virtual DbSet<ENTREGA_URGENCIA> ENTREGA_URGENCIA { get; set; }
+        public virtual DbSet<HISTORIAL_RECLAMO_REPROCESO_PRENDA> HISTORIAL_RECLAMO_REPROCESO_PRENDA { get; set; }
     
-        public virtual ObjectResult<ESTADISTICA_PRENDA_Result> ESTADISTICA_PRENDA(Nullable<System.DateTime> fECHADESDE, Nullable<System.DateTime> fECHAHASTA)
+        public virtual ObjectResult<ESTADISTICA_PRENDA_Result> ESTADISTICA_PRENDA(Nullable<System.DateTime> fECHADESDE, Nullable<System.DateTime> fECHAHASTA, Nullable<int> sUCURSALID)
         {
             var fECHADESDEParameter = fECHADESDE.HasValue ?
                 new ObjectParameter("FECHADESDE", fECHADESDE) :
@@ -141,7 +143,11 @@ namespace JLLR.Core.Base.Proveedor.Entidades
                 new ObjectParameter("FECHAHASTA", fECHAHASTA) :
                 new ObjectParameter("FECHAHASTA", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ESTADISTICA_PRENDA_Result>("ESTADISTICA_PRENDA", fECHADESDEParameter, fECHAHASTAParameter);
+            var sUCURSALIDParameter = sUCURSALID.HasValue ?
+                new ObjectParameter("SUCURSALID", sUCURSALID) :
+                new ObjectParameter("SUCURSALID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ESTADISTICA_PRENDA_Result>("ESTADISTICA_PRENDA", fECHADESDEParameter, fECHAHASTAParameter, sUCURSALIDParameter);
         }
     
         public virtual ObjectResult<ESTADO_CUENTA_Result> ESTADO_CUENTA(Nullable<int> pUNTOVENTAID, Nullable<System.DateTime> fECHADESDE, Nullable<System.DateTime> fECHAHASTA)

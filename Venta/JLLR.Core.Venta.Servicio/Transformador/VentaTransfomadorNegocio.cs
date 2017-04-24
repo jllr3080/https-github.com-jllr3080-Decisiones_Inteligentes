@@ -37,6 +37,31 @@ namespace JLLR.Core.Venta.Servicio.Transformador
 
 
         #region TRANSACCIONAL
+
+        /// <summary>
+        /// Obtiene  el detalle  de las  fotografias   guardadas
+        /// </summary>
+        /// <param name="detallePrendaOrdenTrabajoId"></param>
+        /// <returns></returns>
+        public List<DetalleOrdenTrabajoFotografiaDTOs>
+            ObtenerDetalleOrdenTrabajoFotografiaDtOsesPorDetallePrendaId(int detallePrendaOrdenTrabajoId)
+        {
+            try
+            {
+                return
+                    _ensambladorModeloDTOs.CrearDetalleOrdenTrabajoFotografiaDtOses(
+                        _ventaNegocio.ObtenerDetalleOrdenTrabajoFotografiaDtOsesPorDetallePrendaId(
+                            detallePrendaOrdenTrabajoId));
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
         /// <summary>
         /// Graba el descuento de la comision por  devolucion al cliente de  algun valor
         /// </summary>
@@ -317,14 +342,14 @@ namespace JLLR.Core.Venta.Servicio.Transformador
         /// <param name="fechaHasta"></param>
         /// <returns></returns>
 
-        public List<NumeroPrendaDTOs> ObtenerNumeroPrendasPorFecha(DateTime fechaDesde, DateTime fechaHasta)
+        public List<NumeroPrendaDTOs> ObtenerNumeroPrendasPorFecha(DateTime fechaDesde, DateTime fechaHasta, int sucursalId)
         {
             try
             {
 
                 return
                     _ensambladorModeloDTOs.CrearNumeroPrendasDtOs(_ventaNegocio.ObtenerNumeroPrendasPorFecha(
-                        fechaDesde, fechaHasta));
+                        fechaDesde, fechaHasta, sucursalId));
 
 
             }
@@ -523,7 +548,25 @@ namespace JLLR.Core.Venta.Servicio.Transformador
         }
         #endregion
 
+        #region DETALLE  ORDEN  TRABAJO  FOTOGRAFIA
+        /// <summary>
+        /// Graba la fotografia  que se  genero en la orden de trabajo
+        /// </summary>
+        /// <param name="detalleTrabajoFotografia"></param>
+        public void GrabarDetalleOrdenFotografia(DetalleOrdenTrabajoFotografiaModelo detalleTrabajoFotografia)
+        {
+            try
+            {
+               _ventaNegocio.GrabarDetalleOrdenFotografia(_ensambladorEntidad.CrearDetalleTrabajoFotografia(detalleTrabajoFotografia));
 
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
 
         #endregion
 

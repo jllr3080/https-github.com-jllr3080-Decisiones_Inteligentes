@@ -38,6 +38,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<bool> ENVIO_MATRIZ { get; set; }
         public Nullable<bool> SE_ENVIO { get; set; }
         public string NUMERO_ORDEN_MANUAL { get; set; }
+        public Nullable<int> ENTREGA_URGENCIA_ID { get; set; }
     
         public virtual CLIENTE CLIENTE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -52,5 +53,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual ICollection<ORDEN_TRABAJO_DESCUENTO> ORDEN_TRABAJO_DESCUENTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETALLE_ORDEN_TRABAJO> DETALLE_ORDEN_TRABAJO { get; set; }
+        public virtual ENTREGA_URGENCIA ENTREGA_URGENCIA { get; set; }
     }
 }

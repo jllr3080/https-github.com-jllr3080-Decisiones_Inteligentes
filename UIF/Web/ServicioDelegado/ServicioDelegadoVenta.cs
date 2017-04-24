@@ -29,7 +29,38 @@ namespace Web.ServicioDelegado
         private static string direccionUrl = "http://localhost/Decisiones_Inteligentes_Venta/ServicioVenta.svc/";
 
         #region NEGOCIO
+
         #region TRANSACCIONAL
+
+        /// <summary>
+        /// Obtiene  el detalle  de las  fotografias   guardadas
+        /// </summary>
+        /// <param name="detallePrendaOrdenTrabajoId"></param>
+        /// <returns></returns>
+        public List<DetalleOrdenTrabajoFotografiaVistaDTOs>
+            ObtenerDetalleOrdenTrabajoFotografiaDtOsesPorDetallePrendaId(int detallePrendaOrdenTrabajoId)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerDetalleOrdenTrabajoFotografiaDtOsesPorDetallePrendaId?detallePrendaOrdenTrabajoId=" + detallePrendaOrdenTrabajoId);
+                var js = new JavaScriptSerializer();
+                js.MaxJsonLength=Int32.MaxValue;
+                
+                return js.Deserialize<List<DetalleOrdenTrabajoFotografiaVistaDTOs>>(json);
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
         /// <summary>
         /// Graba la operacion de descuento  
         /// </summary>
@@ -322,7 +353,7 @@ namespace Web.ServicioDelegado
         /// <param name="fechaHasta"></param>
         /// <returns></returns>
 
-        public List<NumeroPrendaVistaDTOs> ObtenerNumeroPrendasPorFecha(string fechaDesde, string fechaHasta)
+        public List<NumeroPrendaVistaDTOs> ObtenerNumeroPrendasPorFecha(string fechaDesde, string fechaHasta, int sucursalId)
         {
             try
             {
@@ -330,7 +361,7 @@ namespace Web.ServicioDelegado
                 var clienteWeb = new WebClient();
                 clienteWeb.Headers["content-type"] = "application/json";
                 clienteWeb.Encoding = Encoding.UTF8;
-                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerNumeroPrendasPorFecha?fechaDesde=" + fechaDesde + "&fechaHasta=" + fechaHasta);
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerNumeroPrendasPorFecha?fechaDesde=" + fechaDesde + "&fechaHasta=" + fechaHasta + "&sucursalId="+ sucursalId);
                 var js = new JavaScriptSerializer();
                 return js.Deserialize<List<NumeroPrendaVistaDTOs>>(json);
 
@@ -671,6 +702,33 @@ namespace Web.ServicioDelegado
                 clienteWeb.Headers["content-type"] = "application/json";
                 clienteWeb.Encoding = Encoding.UTF8;
                 var json = clienteWeb.UploadString(direccionUrl + "GrabarAprobacionDescuento ", "POST", datos);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region DETALLE  ORDEN  TRABAJO  FOTOGRAFIA
+        /// <summary>
+        /// Graba la fotografia  que se  genero en la orden de trabajo
+        /// </summary>
+        /// <param name="detalleTrabajoFotografia"></param>
+        public void GrabarDetalleOrdenFotografia(DetalleOrdenTrabajoFotografiaVistaModelo detalleTrabajoFotografia)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(DetalleOrdenTrabajoFotografiaVistaModelo));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, detalleTrabajoFotografia);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "GrabarDetalleOrdenFotografia ", "POST", datos);
+
             }
             catch (Exception ex)
             {

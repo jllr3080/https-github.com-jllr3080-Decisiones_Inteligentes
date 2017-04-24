@@ -27,6 +27,28 @@ namespace JLLR.Core.Venta.Servicio
 
         #region TRANSACCIONAL
         #region NEGOCIO
+
+        /// <summary>
+        /// Obtiene  el detalle  de las  fotografias   guardadas
+        /// </summary>
+        /// <param name="detallePrendaOrdenTrabajoId"></param>
+        /// <returns></returns>
+        public List<DetalleOrdenTrabajoFotografiaDTOs>
+            ObtenerDetalleOrdenTrabajoFotografiaDtOsesPorDetallePrendaId(int detallePrendaOrdenTrabajoId)
+        {
+            try
+            {
+                return
+                    _ventaTransformadorNegocio.ObtenerDetalleOrdenTrabajoFotografiaDtOsesPorDetallePrendaId(
+                        detallePrendaOrdenTrabajoId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
         /// <summary>
         /// Graba la operacion de descuento  
         /// </summary>
@@ -415,12 +437,12 @@ namespace JLLR.Core.Venta.Servicio
         /// <param name="fechaHasta"></param>
         /// <returns></returns>
 
-        public List<NumeroPrendaDTOs> ObtenerNumeroPrendasPorFecha(string fechaDesde, string fechaHasta)
+        public List<NumeroPrendaDTOs> ObtenerNumeroPrendasPorFecha(string fechaDesde, string fechaHasta,int sucursalId)
         {
             try
             {
 
-                return _ventaTransformadorNegocio.ObtenerNumeroPrendasPorFecha(Convert.ToDateTime(fechaDesde),Convert.ToDateTime(fechaHasta));
+                return _ventaTransformadorNegocio.ObtenerNumeroPrendasPorFecha(Convert.ToDateTime(fechaDesde),Convert.ToDateTime(fechaHasta), sucursalId);
 
 
 
@@ -521,6 +543,25 @@ namespace JLLR.Core.Venta.Servicio
         }
         #endregion
 
+        #region DETALLE  ORDEN  TRABAJO  FOTOGRAFIA
+        /// <summary>
+        /// Graba la fotografia  que se  genero en la orden de trabajo
+        /// </summary>
+        /// <param name="detalleTrabajoFotografia"></param>
+        public void GrabarDetalleOrdenFotografia(DetalleOrdenTrabajoFotografiaModelo detalleTrabajoFotografia)
+        {
+            try
+            {
+               _ventaTransformadorNegocio.GrabarDetalleOrdenFotografia(detalleTrabajoFotografia);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
         #endregion
     }
 }

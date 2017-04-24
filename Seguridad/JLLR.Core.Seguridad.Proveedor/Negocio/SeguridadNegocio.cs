@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JLLR.Core.Base.Proveedor.Entidades;
 using JLLR.Core.Seguridad.Proveedor.DAOs;
 using JLLR.Core.Seguridad.Proveedor.DTOs;
 
@@ -18,7 +19,11 @@ namespace JLLR.Core.Seguridad.Proveedor.Negocio
     {
         #region DECLARACIONES  E INSTANCIAS
         private readonly TransaccionalDAOs _transaccionalDaOs= new TransaccionalDAOs();
+        private readonly  UsuarioPerfilDAOs _usuarioPerfilDaOs= new UsuarioPerfilDAOs();
+        private readonly  UsuarioDAOS _usuarioDaos= new UsuarioDAOS();
         #endregion
+
+
         #region TRANSACCIONAL
         /// <summary>
         /// Ingresa al sistema 
@@ -50,6 +55,47 @@ namespace JLLR.Core.Seguridad.Proveedor.Negocio
             try
             {
                 return _transaccionalDaOs.GenerarMenu(usuarioId);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region USUARIO
+        /// <summary>
+        /// Graba el usuario
+        /// </summary>
+        /// <param name="usuario"></param>
+        public USUARIO GrabarUsuario(USUARIO usuario)
+        {
+
+            try
+            {
+              return _usuarioDaos.GrabarUsuario(usuario);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+
+        }
+        #endregion
+
+        #region USUARIO PERFIL
+        /// <summary>
+        /// Graba  Usuario Perfil
+        /// </summary>
+        /// <param name="usuarioPerfil"></param>
+        public void GrabarUsuarioPerfil(USUARIO_PERFIL usuarioPerfil)
+        {
+            try
+            {
+            _usuarioPerfilDaOs.GrabarUsuarioPerfil(usuarioPerfil);
             }
             catch (Exception ex)
             {

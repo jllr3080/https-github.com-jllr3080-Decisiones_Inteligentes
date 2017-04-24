@@ -771,4 +771,25 @@
   <data name="Label_Inhabilitado" xml:space="preserve">
     <value>Inhabilitado</value>
   </data>
+  <data name="Label_Agregar_Fotografia" xml:space="preserve">
+    <value>Agregar Fotografía</value>
+  </data>
+  <data name="Label_Direccion_Fotografia" xml:space="preserve">
+    <value>Dirección de la Fotografía Tamaño Máximo (1 Mb)</value>
+  </data>
+  <data name="Literal_Agregar_Fotografia" xml:space="preserve">
+    <value>Agregar Fotografía</value>
+  </data>
+  <data name="Label_Visualizar_Fotografia" xml:space="preserve">
+    <value>Visualizar Fotografía</value>
+  </data>
+  <data name="Mensaje_Formato_No_Valido" xml:space="preserve">
+    <value>La imagen no tiene un formato valido, jpeg, jpg o png</value>
+  </data>
+  <data name="Mensaje_Imagen_No_Cargada" xml:space="preserve">
+    <value>La imagen no esta cargada correctamente, por favor  seleccione   nuevamente la imagen</value>
+  </data>
+  <data name="Mensaje_Tamano_No_Valido" xml:space="preserve">
+    <value>El tamaño de  la imagen no es  válido, máximo  1mb</value>
+  </data>
 </root>

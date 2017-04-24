@@ -1,4 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Web.SiteMaster" %>
+<%@ Import Namespace="Web.Venta" %>
 <%@ Register TagPrefix="cc1" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=16.1.1.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
 <!DOCTYPE html>
 
@@ -25,7 +26,7 @@
 </head>
 <body onload="nobackbutton();">
     <form runat="server">
-        <asp:ScriptManager runat="server">
+        <asp:ScriptManager runat="server" ID="script">
             <Scripts>
                 <%--Para obtener más información sobre cómo agrupar scripts en ScriptManager, consulte http://go.microsoft.com/fwlink/?LinkID=301884 --%>
                 <%--Scripts de marco--%>
@@ -87,6 +88,7 @@
                 <p>&copy; <%: DateTime.Now.Year %> - <asp:Literal runat="server" Text="<%$ Resources:Web_es_Ec,Titulo_Pie_Pagina_Sistema%>"></asp:Literal></p>
             </footer>
         </div>
+                    
         </ContentTemplate>
                 <Triggers>
                     <asp:AsyncPostBackTrigger ControlID="_menu"  EventName="Load"  />
@@ -100,7 +102,7 @@
                 </div>
             </div>
         </ProgressTemplate>
-
+       
     </asp:UpdateProgress>
     </form>
 </body>

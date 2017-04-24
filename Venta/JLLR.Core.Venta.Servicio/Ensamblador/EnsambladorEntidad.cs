@@ -95,6 +95,8 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                 VALOR_DESCUENTO = m.ValorDescuento,
                 PROMOCION_APLICADA = m.PromocionAplicada,
                 DETALLE_PRENDA_ORDEN_TRABAJO = _listaDetallePrendaOrdenTrabajos
+                
+
 
 
             };
@@ -331,6 +333,39 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
         }
         #endregion
 
+        #region DETALLE ORDEN DE  TRABAJO  FOTOGRAFIA
+        /// <summary>
+        /// Convierte el modelo en una entidad
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public entidad.DETALLE_TRABAJO_FOTOGRAFIA CrearDetalleTrabajoFotografia(modelo.DetalleOrdenTrabajoFotografiaModelo m)
+        {
+            if (m == null)
+                return null;
+           
+            return new entidad.DETALLE_TRABAJO_FOTOGRAFIA()
+            {
+                USUARIO_ID = m.UsuarioId,
+                DETALLE_PRENDA_ORDEN_TRABAJO_ID = m.DetallePrendaOrdenTrabajo.DetallePrendaOrdenTrabajoId,
+                DETALLE_TRABAJO_FOTOGRAFIA_ID = m.DetalleOrdenTrabajoFotografiaId,
+                FECHA_REGISTRO = m.FechaRegistro,
+                IMAGEN_PRENDA = m.ImagenPrenda
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<entidad.DETALLE_TRABAJO_FOTOGRAFIA> CrearDetalleTrabajoFotografias(List<Modelo.DetalleOrdenTrabajoFotografiaModelo> listadoModelo)
+        {
+            return listadoModelo.Select(CrearDetalleTrabajoFotografia).ToList();
+        }
+
+        #endregion
 
         #endregion
 

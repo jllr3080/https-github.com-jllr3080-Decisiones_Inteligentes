@@ -30,6 +30,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<int> PERFIL_ID { get; set; }
         public Nullable<bool> PASO_ESTA_ETAPA { get; set; }
         public Nullable<bool> SE_ENVIO { get; set; }
+        public Nullable<bool> ENTREGA_PARCIAL { get; set; }
     
         public virtual ETAPA_PROCESO ETAPA_PROCESO { get; set; }
         public virtual ORDEN_TRABAJO ORDEN_TRABAJO { get; set; }

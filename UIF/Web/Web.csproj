@@ -291,6 +291,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="PaginaMaestra\Site.Mobile.Master" />
     <Content Include="Views\web.config" />
+    <Content Include="Venta\ManejadorImagen.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -465,8 +466,12 @@
     <Compile Include="Models\Inventario\Parametrizacion\TipoProductoVistaModelo.cs" />
     <Compile Include="Models\ReglaNegocio\AccionReglaVistaModelo.cs" />
     <Compile Include="Models\ReglaNegocio\ReglaVistaModelo.cs" />
+    <Compile Include="Models\Seguridad\Negocio\PerfilVistaModelo.cs" />
+    <Compile Include="Models\Seguridad\Negocio\UsuarioPerfilVistaModelo.cs" />
     <Compile Include="Models\Seguridad\Negocio\UsuarioVistaModelo.cs" />
     <Compile Include="Models\Venta\Negocio\AprobacionDescuentoVistaModelo.cs" />
+    <Compile Include="Models\Venta\Negocio\DetalleOrdenTrabajoFotografiaVistaDTOs.cs" />
+    <Compile Include="Models\Venta\Negocio\DetalleOrdenTrabajoFotografiaVistaModelo.cs" />
     <Compile Include="Models\Venta\Negocio\DetalleOrdenTrabajoObservacionVistaModelo.cs" />
     <Compile Include="Models\Venta\Negocio\DetalleOrdenTrabajoVistaModelo.cs" />
     <Compile Include="Models\Venta\Negocio\DetallePrendaOrdenTrabajoVistaModelo.cs" />
@@ -673,6 +678,9 @@
     </Compile>
     <Compile Include="Venta\ConsultaOrdenTrabajo.aspx.designer.cs">
       <DependentUpon>ConsultaOrdenTrabajo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Venta\ManejadorImagen.ashx.cs">
+      <DependentUpon>ManejadorImagen.ashx</DependentUpon>
     </Compile>
     <Compile Include="Venta\OrdenTrabajo.aspx.cs">
       <DependentUpon>OrdenTrabajo.aspx</DependentUpon>

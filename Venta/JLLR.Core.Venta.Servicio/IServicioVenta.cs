@@ -22,6 +22,17 @@ namespace JLLR.Core.Venta.Servicio
 
         #region  TRANSACCIONAL
 
+
+        /// <summary>
+        /// Obtiene  el detalle  de las  fotografias   guardadas
+        /// </summary>
+        /// <param name="detallePrendaOrdenTrabajoId"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(UriTemplate = "ObtenerDetalleOrdenTrabajoFotografiaDtOsesPorDetallePrendaId?detallePrendaOrdenTrabajoId={detallePrendaOrdenTrabajoId}", ResponseFormat = WebMessageFormat.Json)]
+        List<DetalleOrdenTrabajoFotografiaDTOs>
+            ObtenerDetalleOrdenTrabajoFotografiaDtOsesPorDetallePrendaId(int detallePrendaOrdenTrabajoId);
+      
         /// <summary>
         /// Graba la operacion de descuento  
         /// </summary>
@@ -241,9 +252,9 @@ namespace JLLR.Core.Venta.Servicio
         [OperationContract]
         [WebGet(
             UriTemplate =
-                "ObtenerNumeroPrendasPorFecha?fechaDesde={fechaDesde}&fechaHasta={fechaHasta}",
+                "ObtenerNumeroPrendasPorFecha?fechaDesde={fechaDesde}&fechaHasta={fechaHasta}&sucursalId={sucursalId}",
             ResponseFormat = WebMessageFormat.Json)]
-        List<NumeroPrendaDTOs> ObtenerNumeroPrendasPorFecha(string fechaDesde, string fechaHasta);
+        List<NumeroPrendaDTOs> ObtenerNumeroPrendasPorFecha(string fechaDesde, string fechaHasta, int sucursalId);
 
 
         /// <summary>
@@ -304,6 +315,20 @@ namespace JLLR.Core.Venta.Servicio
            ResponseFormat = WebMessageFormat.Json)]
         List<DetalleOrdenTrabajoModelo> ObtenerDetalleOrdenTrabajoPorNumeroOrdenYPuntoVenta(string numeroOrden,
             int puntoVentaId);
+
+        #endregion
+
+
+        #region DETALLE  ORDEN  TRABAJO  FOTOGRAFIA
+
+        /// <summary>
+        /// Graba la fotografia  que se  genero en la orden de trabajo
+        /// </summary>
+        /// <param name="detalleTrabajoFotografia"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabarDetalleOrdenFotografia/*", RequestFormat = WebMessageFormat.Json,
+         ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void GrabarDetalleOrdenFotografia(DetalleOrdenTrabajoFotografiaModelo detalleTrabajoFotografia);
 
         #endregion
 

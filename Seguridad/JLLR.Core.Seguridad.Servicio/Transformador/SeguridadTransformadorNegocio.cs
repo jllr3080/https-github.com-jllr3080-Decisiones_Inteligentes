@@ -4,11 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using JLLR.Core.Seguridad.Proveedor.Negocio;
+using JLLR.Core.Seguridad.Servicio.Ensamblador;
 using dtoProveedor= JLLR.Core.Seguridad.Proveedor.DTOs;
 using  dtoServicio=JLLR.Core.Seguridad.Servicio.DTOs;
 using entidad=JLLR.Core.Seguridad.Proveedor;
 //using modelo=JLLR.Core.Seguridad.Servicio.
 using JLLR.Core.Seguridad.Servicio.EnsambladorDTOs;
+using JLLR.Core.Seguridad.Servicio.Modelo;
+
 #endregion
 namespace JLLR.Core.Seguridad.Servicio.Transformador
 {
@@ -21,6 +24,8 @@ namespace JLLR.Core.Seguridad.Servicio.Transformador
         private readonly  SeguridadNegocio _seguridadNegocio= new SeguridadNegocio();
         private readonly EnsambladorEntidadDTOs _ensambladorDtOs = new EnsambladorEntidadDTOs();
         private readonly EnsambladorModeloDTOs _ensambladorModeloDtOs= new EnsambladorModeloDTOs();
+        private readonly  EnsambladorEntidad _ensambladorEntidad= new EnsambladorEntidad();
+        private readonly EnsambladorModelo _ensambladorModelo= new EnsambladorModelo();
 
 
         #endregion
@@ -58,6 +63,47 @@ namespace JLLR.Core.Seguridad.Servicio.Transformador
             try
             {
                 return _ensambladorModeloDtOs.CrearAccesosDTOs(_seguridadNegocio.GenerarMenu(usuarioId));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region USUARIO
+        /// <summary>
+        /// Graba el usuario
+        /// </summary>
+        /// <param name="usuario"></param>
+        public UsuarioModelo GrabarUsuario(UsuarioModelo usuario)
+        {
+
+            try
+            {
+                return  _ensambladorModelo.CrearUsuario(_seguridadNegocio.GrabarUsuario(_ensambladorEntidad.CrearUsuario(usuario)));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+
+        }
+        #endregion
+
+        #region USUARIO PERFIL
+        /// <summary>
+        /// Graba  Usuario Perfil
+        /// </summary>
+        /// <param name="usuarioPerfil"></param>
+        public void GrabarUsuarioPerfil(UsuarioPerfilModelo usuarioPerfil)
+        {
+            try
+            {
+               _seguridadNegocio.GrabarUsuarioPerfil(_ensambladorEntidad.CrearUsuarioPerfil(usuarioPerfil));
             }
             catch (Exception ex)
             {

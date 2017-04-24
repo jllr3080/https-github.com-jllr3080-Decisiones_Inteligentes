@@ -27,7 +27,7 @@ namespace WebCliente
             {
                 if (User == null)
 
-                    Response.Redirect("~/Seguridad/Login/IngresoSistema.aspx");
+                    Response.Redirect("~/Seguridad/IngresoSistema.aspx");
                 else
                     CargarMenu();
             }

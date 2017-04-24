@@ -80,7 +80,9 @@
     <Compile Include="EnsambladorDTOs\EnsambladorModeloDTOs.cs" />
     <Compile Include="Ensamblador\EnsambladorEntidad.cs" />
     <Compile Include="Ensamblador\EnsambladorModelo.cs" />
+    <Compile Include="Modelo\PerfilModelo.cs" />
     <Compile Include="Modelo\UsuarioModelo.cs" />
+    <Compile Include="Modelo\UsuarioPerfilModelo.cs" />
     <Compile Include="ServicioSeguridad.svc.cs">
       <DependentUpon>ServicioSeguridad.svc</DependentUpon>
     </Compile>
@@ -101,6 +103,18 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Base\JLLR.Core.Base.Proveedor\JLLR.Core.Base.Proveedor.csproj">
+      <Project>{7b02ff61-3c7a-4a7d-b1a8-c62710253a1b}</Project>
+      <Name>JLLR.Core.Base.Proveedor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\General\JLLR.Core.General.Servicio\JLLR.Core.General.Servicio.csproj">
+      <Project>{FA1CB8EE-77D8-41C6-BB31-FEE6716B8CF8}</Project>
+      <Name>JLLR.Core.General.Servicio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Individuo\JLLR.Core.Individuo.Servicio\JLLR.Core.Individuo.Servicio.csproj">
+      <Project>{01c917b9-f3b5-4e6f-b98a-5f16ceb8b59c}</Project>
+      <Name>JLLR.Core.Individuo.Servicio</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JLLR.Core.Seguridad.Proveedor\JLLR.Core.Seguridad.Proveedor.csproj">
       <Project>{ed6c8c40-149f-42f6-b167-6f22625ec61e}</Project>
       <Name>JLLR.Core.Seguridad.Proveedor</Name>

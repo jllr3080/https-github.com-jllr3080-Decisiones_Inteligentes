@@ -232,10 +232,14 @@
         <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_VENTA_COMISION_VS_VENDEDOR" />
         <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_VENTA_COMISION_VS_TIPO_LAVADO" />
         <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_VENTA_COMISION" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DETALLE_TRABAJO_FOTOGRAFIA" Width="1.5" PointX="31" PointY="11.5" />
-        <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DPOT" />
         <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PROCESO" Width="1.5" PointX="12.75" PointY="59.5" />
         <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_PROCESO_VS_ETAPA_PROCESO" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DETALLE_TRABAJO_FOTOGRAFIA" Width="1.5" PointX="31" PointY="11.5" />
+        <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DPOT" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ENTREGA_URGENCIA" Width="1.5" PointX="5.375" PointY="9.875" />
+        <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_ENTREGA_URGENCIA" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.HISTORIAL_RECLAMO_REPROCESO_PRENDA" Width="1.5" PointX="31" PointY="4.5" />
+        <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_HISTORIA_RECLAMO_VS_DETALLE_PRENDA_ORDEN_TRABAJO" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

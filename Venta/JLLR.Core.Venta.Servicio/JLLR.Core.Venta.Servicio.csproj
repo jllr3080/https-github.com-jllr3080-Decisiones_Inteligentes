@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTOs\ConsultaOrdenTrabajoDTOs.cs" />
+    <Compile Include="DTOs\DetalleOrdenTrabajoFotografiaDTOs.cs" />
     <Compile Include="DTOs\DetalleOrdenTrabajoObservacionDTOs.cs" />
     <Compile Include="DTOs\EstadoCuentaDTOs.cs" />
     <Compile Include="DTOs\NumeroPrendaDTOs.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Ensamblador\EnsambladorModelo.cs" />
     <Compile Include="Enums\Enum.cs" />
     <Compile Include="Modelo\AprobacionDescuentoModelo.cs" />
+    <Compile Include="Modelo\DetalleOrdenTrabajoFotografiaModelo.cs" />
     <Compile Include="Modelo\DetalleOrdenTrabajoModelo.cs" />
     <Compile Include="Modelo\DetalleOrdenTrabajoObservacionModelo.cs" />
     <Compile Include="Modelo\DetallePrendaOrdenTrabajoModelo.cs" />

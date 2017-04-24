@@ -553,6 +553,55 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
 
         #endregion
 
+        #region  DETALLE PRENDA  ORDEN DE  TRABAJO FOTOGRAFIA
+        /// <summary>
+        /// Convierte el DTO de entidad a modelo
+        /// </summary>
+        /// <param name="e">Entidad</param>
+        /// <returns></returns>
+        public modelo.DetalleOrdenTrabajoFotografiaModelo CrearDetalleOrdenTrabajoFotografia(entidad.DETALLE_TRABAJO_FOTOGRAFIA e)
+        {
+
+            if (e == null)
+                return null;
+
+            modelo.DetallePrendaOrdenTrabajoModelo _detallePrendaOrdenTrabajo= new modelo.DetallePrendaOrdenTrabajoModelo();
+            _detallePrendaOrdenTrabajo.DetallePrendaOrdenTrabajoId = Convert.ToInt32(e.DETALLE_PRENDA_ORDEN_TRABAJO_ID);
+      
+            return new modelo.DetalleOrdenTrabajoFotografiaModelo
+            {
+               DetalleOrdenTrabajoFotografiaId = e.DETALLE_TRABAJO_FOTOGRAFIA_ID,
+               FechaRegistro = e.FECHA_REGISTRO,
+               ImagenPrenda = e.IMAGEN_PRENDA,
+               UsuarioId = e.USUARIO_ID,
+               DetallePrendaOrdenTrabajo = _detallePrendaOrdenTrabajo
+
+
+            };
+
+        }
+
+        /// <summary>
+        /// Convierte un listado de DTO en listado de  modelos de DTO
+        /// </summary>
+        /// <param name="listadoEntidad">Listado de Entidades</param>
+        /// <returns></returns>
+        public List<modelo.DetalleOrdenTrabajoFotografiaModelo> CrearDetalleOrdenTrabajoFotografias(ICollection<entidad.DETALLE_TRABAJO_FOTOGRAFIA> listadoEntidad)
+        {
+            List<modelo.DetalleOrdenTrabajoFotografiaModelo> listaModelo = new List<modelo.DetalleOrdenTrabajoFotografiaModelo>();
+
+            foreach (var entidad in listadoEntidad)
+            {
+                listaModelo.Add(CrearDetalleOrdenTrabajoFotografia(entidad));
+            }
+            return listaModelo;
+
+        }
+
+
+
+        #endregion
+
         #endregion
 
         #region PARAMETRIZACION

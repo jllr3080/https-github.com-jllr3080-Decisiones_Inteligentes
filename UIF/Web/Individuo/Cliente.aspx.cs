@@ -10,6 +10,7 @@ using Web.Base;
 using Web.DTOs.Individuo;
 using Web.Models.General;
 using Web.Models.Individuo;
+using Web.Models.Seguridad.Negocio;
 using Web.ServicioDelegado;
 using Web.Util;
 
@@ -23,6 +24,7 @@ namespace Web.Individuo
 
         private readonly ServicioDelegadoGeneral _servicioDelegadoGeneral = new ServicioDelegadoGeneral();
         private readonly ServicioDelegadoIndividuo _servicioDelegadoIndividuo = new ServicioDelegadoIndividuo();
+        private readonly  ServicioDelegadoSeguridad _servicioDelegadoSeguridad= new ServicioDelegadoSeguridad();
         private static bool _banderaActualizacion=false;
         private static ClienteGeneralVistaDTOs _clienteGeneralVistaDtOs = null;
         private Validacion _validacion= new Validacion();
@@ -360,7 +362,45 @@ namespace Web.Individuo
 
                     #endregion
 
-                    _servicioDelegadoIndividuo.GrabarCliente(_clienteGeneralVistaDtOs);
+                    #region GRABA AL CLIENTE COMO USUARIO 
+                    ClienteVistaModelo _clienteVistaDtOs= _servicioDelegadoIndividuo.GrabarCliente(_clienteGeneralVistaDtOs);
+                    
+
+                    UsuarioVistaModelo _usuarioVistaModelo= new UsuarioVistaModelo();
+                    _usuarioVistaModelo.ClaveUsuario = _numeroDocumento.Text;
+                    _usuarioVistaModelo.NombreUsuario = _numeroDocumento.Text;
+                    _usuarioVistaModelo.DiasVigencia = 365;
+                    _usuarioVistaModelo.FechaCreacion = DateTime.Now;
+                    _usuarioVistaModelo.Habilitado = true;
+                    _usuarioVistaModelo.HabilitadoSeguridad = true;
+
+                    SucursalVistaModelo _sucursalVistaModelo = new SucursalVistaModelo();
+                    _sucursalVistaModelo.SucursalId = Convert.ToInt32(User.SucursalId);
+                    _usuarioVistaModelo.Sucursal = _sucursalVistaModelo;
+
+                    PuntoVentaVistaModelo _puntoVentaVistaModelo= new PuntoVentaVistaModelo();
+                    _puntoVentaVistaModelo.PuntoVentaId = Convert.ToInt32(User.PuntoVentaId);
+                    _usuarioVistaModelo.PuntoVenta = _puntoVentaVistaModelo;
+
+                    IndividuoVistaModelo _individuoVista= new IndividuoVistaModelo();
+                    _individuoVista.IndividuoId =Convert.ToInt32(_clienteVistaDtOs.Individuo.IndividuoId);
+                    _usuarioVistaModelo.Individuo = _individuoVista;
+
+                    _usuarioVistaModelo = _servicioDelegadoSeguridad.GrabarUsuario(_usuarioVistaModelo);
+
+                    UsuarioPerfilVistaModelo _usuarioPerfilVistaModelo= new UsuarioPerfilVistaModelo();
+                    _usuarioPerfilVistaModelo.Usuario = _usuarioVistaModelo;
+
+                   PerfilVistaModelo _perfilVista= new PerfilVistaModelo();
+                    _perfilVista.PerfilId = 5;
+                    _usuarioPerfilVistaModelo.Perfil = _perfilVista;
+                    _servicioDelegadoSeguridad.GrabarUsuarioPerfil(_usuarioPerfilVistaModelo);
+                #endregion
+
+
+
+
+
                 }
                 else
                 {

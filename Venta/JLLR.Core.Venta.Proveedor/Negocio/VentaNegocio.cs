@@ -26,12 +26,36 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
         private readonly  HistorialReglaDAOs _historialReglaDaOs= new HistorialReglaDAOs();
         private readonly  OrdenTrabajoDescuentoDAOs _ordenTrabajoDescuentoDaOs= new OrdenTrabajoDescuentoDAOs();
         private readonly  AprobacionDescuentoDAOs _aprobacionDescuentoDaOs= new AprobacionDescuentoDAOs();
+        private readonly  DetalleOrdenTrabajoFotografiaDAOs _detalleOrdenTrabajoFotografiaDaOs= new DetalleOrdenTrabajoFotografiaDAOs();
         #endregion
 
 
         #region NEGOCIO
 
         #region  TRANSACCIONAL
+
+        /// <summary>
+        /// Obtiene  el detalle  de las  fotografias   guardadas
+        /// </summary>
+        /// <param name="detallePrendaOrdenTrabajoId"></param>
+        /// <returns></returns>
+        public IQueryable<DetalleOrdenTrabajoFotografiaDTOs>
+            ObtenerDetalleOrdenTrabajoFotografiaDtOsesPorDetallePrendaId(int detallePrendaOrdenTrabajoId)
+        {
+            try
+            {
+                return
+                    _transaccionalDaOs.ObtenerDetalleOrdenTrabajoFotografiaDtOsesPorDetallePrendaId(
+                        detallePrendaOrdenTrabajoId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
         /// <summary>
         /// Graba el descuento de la comision por  devolucion al cliente de  algun valor
         /// </summary>
@@ -365,7 +389,25 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
         }
         #endregion
 
+        #region DETALLE  ORDEN  TRABAJO  FOTOGRAFIA
+        /// <summary>
+        /// Graba la fotografia  que se  genero en la orden de trabajo
+        /// </summary>
+        /// <param name="detalleTrabajoFotografia"></param>
+        public void GrabarDetalleOrdenFotografia(DETALLE_TRABAJO_FOTOGRAFIA detalleTrabajoFotografia)
+        {
+            try
+            {
+                _detalleOrdenTrabajoFotografiaDaOs.GrabarDetalleOrdenFotografia(detalleTrabajoFotografia);
 
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
         #endregion
 
         #region REPORTES
@@ -397,12 +439,12 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
         /// <param name="fechaHasta"></param>
         /// <returns></returns>
 
-        public List<NumeroPrendaDTOs> ObtenerNumeroPrendasPorFecha(DateTime fechaDesde, DateTime fechaHasta)
+        public List<NumeroPrendaDTOs> ObtenerNumeroPrendasPorFecha(DateTime fechaDesde, DateTime fechaHasta, int sucursalId)
         {
             try
             {
 
-             return _transaccionalDaOs.ObtenerNumeroPrendasPorFecha(fechaDesde,fechaHasta);
+             return _transaccionalDaOs.ObtenerNumeroPrendasPorFecha(fechaDesde,fechaHasta, sucursalId);
             }
             catch (Exception ex)
             {

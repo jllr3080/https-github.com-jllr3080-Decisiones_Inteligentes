@@ -379,6 +379,7 @@
           <Property Name="PERFIL_ID" Type="int" />
           <Property Name="PASO_ESTA_ETAPA" Type="bit" />
           <Property Name="SE_ENVIO" Type="bit" />
+          <Property Name="ENTREGA_PARCIAL" Type="bit" />
         </EntityType>
         <EntityType Name="PROCESO">
           <Key>
@@ -438,6 +439,14 @@
           </Key>
           <Property Name="DIA_ID" Type="int" Nullable="false" />
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="50" />
+          <Property Name="ESTA_HABILITADO" Type="bit" />
+        </EntityType>
+        <EntityType Name="ENTREGA_URGENCIA">
+          <Key>
+            <PropertyRef Name="ENTREGA_URGENCIA_ID" />
+          </Key>
+          <Property Name="ENTREGA_URGENCIA_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="100" />
           <Property Name="ESTA_HABILITADO" Type="bit" />
         </EntityType>
         <EntityType Name="ESPECIALIDAD_EMPLEADO">
@@ -766,6 +775,8 @@
           <Property Name="UNIDAD_MEDIDA_ID" Type="int" />
           <Property Name="MODELO_ID" Type="int" />
           <Property Name="VISIBLE" Type="bit" />
+          <Property Name="TIEMPO_ENTREGA" Type="int" />
+          <Property Name="PRENDA_ESPECIAL" Type="bit" />
         </EntityType>
         <EntityType Name="PRODUCTO_PRECIO">
           <Key>
@@ -959,6 +970,8 @@
           <Property Name="VALOR_TOTAL_UNITARIO" Type="decimal" Precision="18" Scale="4" />
           <Property Name="VALOR_DESCUENTO" Type="decimal" Precision="18" Scale="4" />
           <Property Name="PROMOCION_APLICADA" Type="int" />
+          <Property Name="VALOR_EXTRA" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="APLICO_VALOR_EXTRA" Type="bit" />
         </EntityType>
         <EntityType Name="DETALLE_ORDEN_TRABAJO_OBSERVACION">
           <Key>
@@ -988,10 +1001,21 @@
             <PropertyRef Name="DETALLE_TRABAJO_FOTOGRAFIA_ID" />
           </Key>
           <Property Name="DETALLE_TRABAJO_FOTOGRAFIA_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DIRECCION_FOTOGRAFIA" Type="varchar" MaxLength="150" />
           <Property Name="USUARIO_ID" Type="int" />
           <Property Name="FECHA_REGISTRO" Type="datetime" />
           <Property Name="DETALLE_PRENDA_ORDEN_TRABAJO_ID" Type="int" />
+          <Property Name="IMAGEN_PRENDA" Type="image" />
+        </EntityType>
+        <EntityType Name="HISTORIAL_RECLAMO_REPROCESO_PRENDA">
+          <Key>
+            <PropertyRef Name="HISTORIAL_RECLAMO_REPROCESO_PRENDA_ID" />
+          </Key>
+          <Property Name="HISTORIAL_RECLAMO_REPROCESO_PRENDA_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DETALLE_PRENDA_ORDEN_TRABAJO_ID" Type="int" />
+          <Property Name="FECHA" Type="datetime" />
+          <Property Name="PORQUE_REPROCESO" Type="varchar" MaxLength="150" />
+          <Property Name="USUARIO_ID" Type="int" />
+          <Property Name="FECHA_ENTREGA" Type="datetime" />
         </EntityType>
         <EntityType Name="HISTORIAL_REGLA">
           <Key>
@@ -1032,6 +1056,7 @@
           <Property Name="ENVIO_MATRIZ" Type="bit" />
           <Property Name="SE_ENVIO" Type="bit" />
           <Property Name="NUMERO_ORDEN_MANUAL" Type="varchar" MaxLength="20" />
+          <Property Name="ENTREGA_URGENCIA_ID" Type="int" />
         </EntityType>
         <EntityType Name="ORDEN_TRABAJO_COMISION">
           <Key>
@@ -1737,6 +1762,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_HISTORIA_RECLAMO_VS_DETALLE_PRENDA_ORDEN_TRABAJO">
+          <End Role="DETALLE_PRENDA_ORDEN_TRABAJO" Type="Self.DETALLE_PRENDA_ORDEN_TRABAJO" Multiplicity="0..1" />
+          <End Role="HISTORIAL_RECLAMO_REPROCESO_PRENDA" Type="Self.HISTORIAL_RECLAMO_REPROCESO_PRENDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DETALLE_PRENDA_ORDEN_TRABAJO">
+              <PropertyRef Name="DETALLE_PRENDA_ORDEN_TRABAJO_ID" />
+            </Principal>
+            <Dependent Role="HISTORIAL_RECLAMO_REPROCESO_PRENDA">
+              <PropertyRef Name="DETALLE_PRENDA_ORDEN_TRABAJO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_HISTORIA_REGLA_VS_ORDEN_TRABAJO">
           <End Role="ORDEN_TRABAJO" Type="Self.ORDEN_TRABAJO" Multiplicity="0..1" />
           <End Role="HISTORIAL_REGLA" Type="Self.HISTORIAL_REGLA" Multiplicity="*" />
@@ -1962,6 +1999,18 @@
             </Principal>
             <Dependent Role="ORDEN_TRABAJO">
               <PropertyRef Name="CLIENTE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDEN_TRABAJO_VS_ENTREGA_URGENCIA">
+          <End Role="ENTREGA_URGENCIA" Type="Self.ENTREGA_URGENCIA" Multiplicity="0..1" />
+          <End Role="ORDEN_TRABAJO" Type="Self.ORDEN_TRABAJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ENTREGA_URGENCIA">
+              <PropertyRef Name="ENTREGA_URGENCIA_ID" />
+            </Principal>
+            <Dependent Role="ORDEN_TRABAJO">
+              <PropertyRef Name="ENTREGA_URGENCIA_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2604,6 +2653,7 @@
         <Function Name="ESTADISTICA_PRENDA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="REPORTE">
           <Parameter Name="FECHADESDE" Type="datetime" Mode="In" />
           <Parameter Name="FECHAHASTA" Type="datetime" Mode="In" />
+          <Parameter Name="SUCURSALID" Type="int" Mode="In" />
         </Function>
         <Function Name="ESTADO_CUENTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="REPORTE">
           <Parameter Name="PUNTOVENTAID" Type="int" Mode="In" />
@@ -2648,6 +2698,7 @@
           <EntitySet Name="COLOR" EntityType="Self.COLOR" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="CONDICION_IMPUESTO" EntityType="Self.CONDICION_IMPUESTO" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="DIA" EntityType="Self.DIA" Schema="PARAMETRO" store:Type="Tables" />
+          <EntitySet Name="ENTREGA_URGENCIA" EntityType="Self.ENTREGA_URGENCIA" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="ESPECIALIDAD_EMPLEADO" EntityType="Self.ESPECIALIDAD_EMPLEADO" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="ESTADO_CIVIL" EntityType="Self.ESTADO_CIVIL" Schema="PARAMETRO" store:Type="Tables" />
           <EntitySet Name="ESTADO_COMPROBANTE_ELECTRONICO" EntityType="Self.ESTADO_COMPROBANTE_ELECTRONICO" Schema="PARAMETRO" store:Type="Tables" />
@@ -2708,6 +2759,7 @@
           <EntitySet Name="DETALLE_ORDEN_TRABAJO_OBSERVACION" EntityType="Self.DETALLE_ORDEN_TRABAJO_OBSERVACION" Schema="VENTA" store:Type="Tables" />
           <EntitySet Name="DETALLE_PRENDA_ORDEN_TRABAJO" EntityType="Self.DETALLE_PRENDA_ORDEN_TRABAJO" Schema="VENTA" store:Type="Tables" />
           <EntitySet Name="DETALLE_TRABAJO_FOTOGRAFIA" EntityType="Self.DETALLE_TRABAJO_FOTOGRAFIA" Schema="VENTA" store:Type="Tables" />
+          <EntitySet Name="HISTORIAL_RECLAMO_REPROCESO_PRENDA" EntityType="Self.HISTORIAL_RECLAMO_REPROCESO_PRENDA" Schema="VENTA" store:Type="Tables" />
           <EntitySet Name="HISTORIAL_REGLA" EntityType="Self.HISTORIAL_REGLA" Schema="VENTA" store:Type="Tables" />
           <EntitySet Name="NUMERACION_ORDEN" EntityType="Self.NUMERACION_ORDEN" Schema="VENTA" store:Type="Tables" />
           <EntitySet Name="ORDEN_TRABAJO" EntityType="Self.ORDEN_TRABAJO" Schema="VENTA" store:Type="Tables" />
@@ -2934,6 +2986,10 @@
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="HISTORIAL_USUARIO" EntitySet="HISTORIAL_USUARIO" />
           </AssociationSet>
+          <AssociationSet Name="FK_HISTORIA_RECLAMO_VS_DETALLE_PRENDA_ORDEN_TRABAJO" Association="Self.FK_HISTORIA_RECLAMO_VS_DETALLE_PRENDA_ORDEN_TRABAJO">
+            <End Role="DETALLE_PRENDA_ORDEN_TRABAJO" EntitySet="DETALLE_PRENDA_ORDEN_TRABAJO" />
+            <End Role="HISTORIAL_RECLAMO_REPROCESO_PRENDA" EntitySet="HISTORIAL_RECLAMO_REPROCESO_PRENDA" />
+          </AssociationSet>
           <AssociationSet Name="FK_HISTORIA_REGLA_VS_ORDEN_TRABAJO" Association="Self.FK_HISTORIA_REGLA_VS_ORDEN_TRABAJO">
             <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
             <End Role="HISTORIAL_REGLA" EntitySet="HISTORIAL_REGLA" />
@@ -3008,6 +3064,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_ORDEN_TRABAJO_VS_CLIENTE" Association="Self.FK_ORDEN_TRABAJO_VS_CLIENTE">
             <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDEN_TRABAJO_VS_ENTREGA_URGENCIA" Association="Self.FK_ORDEN_TRABAJO_VS_ENTREGA_URGENCIA">
+            <End Role="ENTREGA_URGENCIA" EntitySet="ENTREGA_URGENCIA" />
             <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
           </AssociationSet>
           <AssociationSet Name="FK_ORDEN_TRABAJO_VS_ESTADO_PAGO" Association="Self.FK_ORDEN_TRABAJO_VS_ESTADO_PAGO">
@@ -3706,6 +3766,8 @@
           <NavigationProperty Name="ACCION_REGLA" Relationship="Decisiones_Inteligentes_Modelo.FK_ACCION_REGLA_VS_PRODUCTO" FromRole="PRODUCTO" ToRole="ACCION_REGLA" />
           <Property Name="VISIBLE" Type="Boolean" />
           <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_VS_PRODUCTO" FromRole="PRODUCTO" ToRole="DETALLE_ORDEN_TRABAJO" />
+          <Property Name="TIEMPO_ENTREGA" Type="Int32" />
+          <Property Name="PRENDA_ESPECIAL" Type="Boolean" />
         </EntityType>
         <EntityType Name="PRODUCTO_PRECIO">
           <Key>
@@ -4924,6 +4986,7 @@
           <FunctionImport Name="ESTADISTICA_PRENDA" ReturnType="Collection(Decisiones_Inteligentes_Modelo.ESTADISTICA_PRENDA_Result)">
             <Parameter Name="FECHADESDE" Mode="In" Type="DateTime" />
             <Parameter Name="FECHAHASTA" Mode="In" Type="DateTime" />
+            <Parameter Name="SUCURSALID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ESTADO_CUENTA" ReturnType="Collection(Decisiones_Inteligentes_Modelo.ESTADO_CUENTA_Result)">
             <Parameter Name="PUNTOVENTAID" Mode="In" Type="Int32" />
@@ -5042,15 +5105,25 @@
             <End Role="VENTA_COMISION" EntitySet="VENTA_COMISION" />
             <End Role="ORDEN_TRABAJO_COMISION" EntitySet="ORDEN_TRABAJO_COMISION" />
           </AssociationSet>
+          <EntitySet Name="PROCESO" EntityType="Decisiones_Inteligentes_Modelo.PROCESO" />
+          <AssociationSet Name="FK_PROCESO_VS_ETAPA_PROCESO" Association="Decisiones_Inteligentes_Modelo.FK_PROCESO_VS_ETAPA_PROCESO">
+            <End Role="ETAPA_PROCESO" EntitySet="ETAPA_PROCESO" />
+            <End Role="PROCESO" EntitySet="PROCESO" />
+          </AssociationSet>
           <EntitySet Name="DETALLE_TRABAJO_FOTOGRAFIA" EntityType="Decisiones_Inteligentes_Modelo.DETALLE_TRABAJO_FOTOGRAFIA" />
           <AssociationSet Name="FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DPOT" Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DPOT">
             <End Role="DETALLE_PRENDA_ORDEN_TRABAJO" EntitySet="DETALLE_PRENDA_ORDEN_TRABAJO" />
             <End Role="DETALLE_TRABAJO_FOTOGRAFIA" EntitySet="DETALLE_TRABAJO_FOTOGRAFIA" />
           </AssociationSet>
-          <EntitySet Name="PROCESO" EntityType="Decisiones_Inteligentes_Modelo.PROCESO" />
-          <AssociationSet Name="FK_PROCESO_VS_ETAPA_PROCESO" Association="Decisiones_Inteligentes_Modelo.FK_PROCESO_VS_ETAPA_PROCESO">
-            <End Role="ETAPA_PROCESO" EntitySet="ETAPA_PROCESO" />
-            <End Role="PROCESO" EntitySet="PROCESO" />
+          <EntitySet Name="ENTREGA_URGENCIA" EntityType="Decisiones_Inteligentes_Modelo.ENTREGA_URGENCIA" />
+          <AssociationSet Name="FK_ORDEN_TRABAJO_VS_ENTREGA_URGENCIA" Association="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_ENTREGA_URGENCIA">
+            <End Role="ENTREGA_URGENCIA" EntitySet="ENTREGA_URGENCIA" />
+            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
+          </AssociationSet>
+          <EntitySet Name="HISTORIAL_RECLAMO_REPROCESO_PRENDA" EntityType="Decisiones_Inteligentes_Modelo.HISTORIAL_RECLAMO_REPROCESO_PRENDA" />
+          <AssociationSet Name="FK_HISTORIA_RECLAMO_VS_DETALLE_PRENDA_ORDEN_TRABAJO" Association="Decisiones_Inteligentes_Modelo.FK_HISTORIA_RECLAMO_VS_DETALLE_PRENDA_ORDEN_TRABAJO">
+            <End Role="DETALLE_PRENDA_ORDEN_TRABAJO" EntitySet="DETALLE_PRENDA_ORDEN_TRABAJO" />
+            <End Role="HISTORIAL_RECLAMO_REPROCESO_PRENDA" EntitySet="HISTORIAL_RECLAMO_REPROCESO_PRENDA" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="HISTORIAL_PROCESO">
@@ -5075,6 +5148,7 @@
           <Property Name="PASO_ESTA_ETAPA" Type="Boolean" />
           <NavigationProperty Name="ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_PROCESO_VS_ORDEN_TRABAJO" FromRole="HISTORIAL_PROCESO" ToRole="ORDEN_TRABAJO" />
           <Property Name="SE_ENVIO" Type="Boolean" />
+          <Property Name="ENTREGA_PARCIAL" Type="Boolean" />
         </EntityType>
         <EntityType Name="ETAPA_PROCESO">
           <Key>
@@ -6247,6 +6321,8 @@
           <NavigationProperty Name="HISTORIAL_REGLA" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIA_REGLA_VS_ORDEN_TRABAJO" FromRole="ORDEN_TRABAJO" ToRole="HISTORIAL_REGLA" />
           <NavigationProperty Name="ORDEN_TRABAJO_DESCUENTO" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_DESCUENTO_VS_ORDEN_TRABAJO" FromRole="ORDEN_TRABAJO" ToRole="ORDEN_TRABAJO_DESCUENTO" />
           <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO" FromRole="ORDEN_TRABAJO" ToRole="DETALLE_ORDEN_TRABAJO" />
+          <Property Name="ENTREGA_URGENCIA_ID" Type="Int32" />
+          <NavigationProperty Name="ENTREGA_URGENCIA" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_ENTREGA_URGENCIA" FromRole="ORDEN_TRABAJO" ToRole="ENTREGA_URGENCIA" />
         </EntityType>
         <Association Name="FK_ORDEN_TRABAJO_VS_CLIENTE">
           <End Type="Decisiones_Inteligentes_Modelo.CLIENTE" Role="CLIENTE" Multiplicity="0..1" />
@@ -6497,6 +6573,8 @@
           <NavigationProperty Name="ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="ORDEN_TRABAJO" />
           <NavigationProperty Name="DETALLE_PRENDA_ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_PRENDA_VS_DETALLE_ORDEN_TRABAJO" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="DETALLE_PRENDA_ORDEN_TRABAJO" />
           <NavigationProperty Name="ORDEN_TRABAJO_COMISION" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_COMISION_VS_DOT" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="ORDEN_TRABAJO_COMISION" />
+          <Property Name="VALOR_EXTRA" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="APLICO_VALOR_EXTRA" Type="Boolean" />
         </EntityType>
         <EntityType Name="DETALLE_PRENDA_ORDEN_TRABAJO">
           <Key>
@@ -6515,6 +6593,7 @@
           <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_PRENDA_VS_DETALLE_ORDEN_TRABAJO" FromRole="DETALLE_PRENDA_ORDEN_TRABAJO" ToRole="DETALLE_ORDEN_TRABAJO" />
           <NavigationProperty Name="DETALLE_ORDEN_TRABAJO_OBSERVACION" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_OBSERVACION_VS_DPOT" FromRole="DETALLE_PRENDA_ORDEN_TRABAJO" ToRole="DETALLE_ORDEN_TRABAJO_OBSERVACION" />
           <NavigationProperty Name="DETALLE_TRABAJO_FOTOGRAFIA" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DPOT" FromRole="DETALLE_PRENDA_ORDEN_TRABAJO" ToRole="DETALLE_TRABAJO_FOTOGRAFIA" />
+          <NavigationProperty Name="HISTORIAL_RECLAMO_REPROCESO_PRENDA" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIA_RECLAMO_VS_DETALLE_PRENDA_ORDEN_TRABAJO" FromRole="DETALLE_PRENDA_ORDEN_TRABAJO" ToRole="HISTORIAL_RECLAMO_REPROCESO_PRENDA" />
         </EntityType>
         <Association Name="FK_DETALLE_PRENDA_VS_COLOR">
           <End Type="Decisiones_Inteligentes_Modelo.COLOR" Role="COLOR" Multiplicity="0..1" />
@@ -6678,29 +6757,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="DETALLE_TRABAJO_FOTOGRAFIA">
-          <Key>
-            <PropertyRef Name="DETALLE_TRABAJO_FOTOGRAFIA_ID" />
-          </Key>
-          <Property Name="DETALLE_TRABAJO_FOTOGRAFIA_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DIRECCION_FOTOGRAFIA" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="USUARIO_ID" Type="Int32" />
-          <Property Name="FECHA_REGISTRO" Type="DateTime" Precision="3" />
-          <Property Name="DETALLE_PRENDA_ORDEN_TRABAJO_ID" Type="Int32" />
-          <NavigationProperty Name="DETALLE_PRENDA_ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DPOT" FromRole="DETALLE_TRABAJO_FOTOGRAFIA" ToRole="DETALLE_PRENDA_ORDEN_TRABAJO" />
-        </EntityType>
-        <Association Name="FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DPOT">
-          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_PRENDA_ORDEN_TRABAJO" Role="DETALLE_PRENDA_ORDEN_TRABAJO" Multiplicity="0..1" />
-          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_TRABAJO_FOTOGRAFIA" Role="DETALLE_TRABAJO_FOTOGRAFIA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DETALLE_PRENDA_ORDEN_TRABAJO">
-              <PropertyRef Name="DETALLE_PRENDA_ORDEN_TRABAJO_ID" />
-            </Principal>
-            <Dependent Role="DETALLE_TRABAJO_FOTOGRAFIA">
-              <PropertyRef Name="DETALLE_PRENDA_ORDEN_TRABAJO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="PROCESO">
           <Key>
             <PropertyRef Name="PROCESO_ID" />
@@ -6724,6 +6780,74 @@
             </Principal>
             <Dependent Role="PROCESO">
               <PropertyRef Name="ETAPA_PROCESO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DETALLE_TRABAJO_FOTOGRAFIA">
+          <Key>
+            <PropertyRef Name="DETALLE_TRABAJO_FOTOGRAFIA_ID" />
+          </Key>
+          <Property Name="DETALLE_TRABAJO_FOTOGRAFIA_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USUARIO_ID" Type="Int32" />
+          <Property Name="FECHA_REGISTRO" Type="DateTime" Precision="3" />
+          <Property Name="DETALLE_PRENDA_ORDEN_TRABAJO_ID" Type="Int32" />
+          <Property Name="IMAGEN_PRENDA" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="DETALLE_PRENDA_ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DPOT" FromRole="DETALLE_TRABAJO_FOTOGRAFIA" ToRole="DETALLE_PRENDA_ORDEN_TRABAJO" />
+        </EntityType>
+        <Association Name="FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DPOT">
+          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_PRENDA_ORDEN_TRABAJO" Role="DETALLE_PRENDA_ORDEN_TRABAJO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_TRABAJO_FOTOGRAFIA" Role="DETALLE_TRABAJO_FOTOGRAFIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DETALLE_PRENDA_ORDEN_TRABAJO">
+              <PropertyRef Name="DETALLE_PRENDA_ORDEN_TRABAJO_ID" />
+            </Principal>
+            <Dependent Role="DETALLE_TRABAJO_FOTOGRAFIA">
+              <PropertyRef Name="DETALLE_PRENDA_ORDEN_TRABAJO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ENTREGA_URGENCIA">
+          <Key>
+            <PropertyRef Name="ENTREGA_URGENCIA_ID" />
+          </Key>
+          <Property Name="ENTREGA_URGENCIA_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ESTA_HABILITADO" Type="Boolean" />
+          <NavigationProperty Name="ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_ENTREGA_URGENCIA" FromRole="ENTREGA_URGENCIA" ToRole="ORDEN_TRABAJO" />
+        </EntityType>
+        <Association Name="FK_ORDEN_TRABAJO_VS_ENTREGA_URGENCIA">
+          <End Type="Decisiones_Inteligentes_Modelo.ENTREGA_URGENCIA" Role="ENTREGA_URGENCIA" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO" Role="ORDEN_TRABAJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ENTREGA_URGENCIA">
+              <PropertyRef Name="ENTREGA_URGENCIA_ID" />
+            </Principal>
+            <Dependent Role="ORDEN_TRABAJO">
+              <PropertyRef Name="ENTREGA_URGENCIA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="HISTORIAL_RECLAMO_REPROCESO_PRENDA">
+          <Key>
+            <PropertyRef Name="HISTORIAL_RECLAMO_REPROCESO_PRENDA_ID" />
+          </Key>
+          <Property Name="HISTORIAL_RECLAMO_REPROCESO_PRENDA_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DETALLE_PRENDA_ORDEN_TRABAJO_ID" Type="Int32" />
+          <Property Name="FECHA" Type="DateTime" Precision="3" />
+          <Property Name="PORQUE_REPROCESO" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="USUARIO_ID" Type="Int32" />
+          <Property Name="FECHA_ENTREGA" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="DETALLE_PRENDA_ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIA_RECLAMO_VS_DETALLE_PRENDA_ORDEN_TRABAJO" FromRole="HISTORIAL_RECLAMO_REPROCESO_PRENDA" ToRole="DETALLE_PRENDA_ORDEN_TRABAJO" />
+        </EntityType>
+        <Association Name="FK_HISTORIA_RECLAMO_VS_DETALLE_PRENDA_ORDEN_TRABAJO">
+          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_PRENDA_ORDEN_TRABAJO" Role="DETALLE_PRENDA_ORDEN_TRABAJO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.HISTORIAL_RECLAMO_REPROCESO_PRENDA" Role="HISTORIAL_RECLAMO_REPROCESO_PRENDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DETALLE_PRENDA_ORDEN_TRABAJO">
+              <PropertyRef Name="DETALLE_PRENDA_ORDEN_TRABAJO_ID" />
+            </Principal>
+            <Dependent Role="HISTORIAL_RECLAMO_REPROCESO_PRENDA">
+              <PropertyRef Name="DETALLE_PRENDA_ORDEN_TRABAJO_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7153,6 +7277,8 @@
           <EntitySetMapping Name="PRODUCTO">
             <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.PRODUCTO">
               <MappingFragment StoreEntitySet="PRODUCTO">
+                <ScalarProperty Name="PRENDA_ESPECIAL" ColumnName="PRENDA_ESPECIAL" />
+                <ScalarProperty Name="TIEMPO_ENTREGA" ColumnName="TIEMPO_ENTREGA" />
                 <ScalarProperty Name="VISIBLE" ColumnName="VISIBLE" />
                 <ScalarProperty Name="PRODUCTO_ID" ColumnName="PRODUCTO_ID" />
                 <ScalarProperty Name="TIPO_PRODUCTO_ID" ColumnName="TIPO_PRODUCTO_ID" />
@@ -7330,6 +7456,7 @@
           <EntitySetMapping Name="HISTORIAL_PROCESO">
             <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.HISTORIAL_PROCESO">
               <MappingFragment StoreEntitySet="HISTORIAL_PROCESO">
+                <ScalarProperty Name="ENTREGA_PARCIAL" ColumnName="ENTREGA_PARCIAL" />
                 <ScalarProperty Name="SE_ENVIO" ColumnName="SE_ENVIO" />
                 <ScalarProperty Name="PASO_ESTA_ETAPA" ColumnName="PASO_ESTA_ETAPA" />
                 <ScalarProperty Name="PERFIL_ID" ColumnName="PERFIL_ID" />
@@ -7784,6 +7911,7 @@
           <EntitySetMapping Name="ORDEN_TRABAJO">
             <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO">
               <MappingFragment StoreEntitySet="ORDEN_TRABAJO">
+                <ScalarProperty Name="ENTREGA_URGENCIA_ID" ColumnName="ENTREGA_URGENCIA_ID" />
                 <ScalarProperty Name="NUMERO_ORDEN_MANUAL" ColumnName="NUMERO_ORDEN_MANUAL" />
                 <ScalarProperty Name="SE_ENVIO" ColumnName="SE_ENVIO" />
                 <ScalarProperty Name="ENVIO_MATRIZ" ColumnName="ENVIO_MATRIZ" />
@@ -7829,6 +7957,8 @@
           <EntitySetMapping Name="DETALLE_ORDEN_TRABAJO">
             <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO">
               <MappingFragment StoreEntitySet="DETALLE_ORDEN_TRABAJO">
+                <ScalarProperty Name="APLICO_VALOR_EXTRA" ColumnName="APLICO_VALOR_EXTRA" />
+                <ScalarProperty Name="VALOR_EXTRA" ColumnName="VALOR_EXTRA" />
                 <ScalarProperty Name="PROMOCION_APLICADA" ColumnName="PROMOCION_APLICADA" />
                 <ScalarProperty Name="VALOR_DESCUENTO" ColumnName="VALOR_DESCUENTO" />
                 <ScalarProperty Name="VALOR_TOTAL_UNITARIO" ColumnName="VALOR_TOTAL_UNITARIO" />
@@ -7901,17 +8031,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DETALLE_TRABAJO_FOTOGRAFIA">
-            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.DETALLE_TRABAJO_FOTOGRAFIA">
-              <MappingFragment StoreEntitySet="DETALLE_TRABAJO_FOTOGRAFIA">
-                <ScalarProperty Name="DETALLE_PRENDA_ORDEN_TRABAJO_ID" ColumnName="DETALLE_PRENDA_ORDEN_TRABAJO_ID" />
-                <ScalarProperty Name="FECHA_REGISTRO" ColumnName="FECHA_REGISTRO" />
-                <ScalarProperty Name="USUARIO_ID" ColumnName="USUARIO_ID" />
-                <ScalarProperty Name="DIRECCION_FOTOGRAFIA" ColumnName="DIRECCION_FOTOGRAFIA" />
-                <ScalarProperty Name="DETALLE_TRABAJO_FOTOGRAFIA_ID" ColumnName="DETALLE_TRABAJO_FOTOGRAFIA_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PROCESO">
             <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.PROCESO">
               <MappingFragment StoreEntitySet="PROCESO">
@@ -7923,6 +8042,38 @@
                 <ScalarProperty Name="SUCURSAL_ID" ColumnName="SUCURSAL_ID" />
                 <ScalarProperty Name="ETAPA_PROCESO_ID" ColumnName="ETAPA_PROCESO_ID" />
                 <ScalarProperty Name="PROCESO_ID" ColumnName="PROCESO_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLE_TRABAJO_FOTOGRAFIA">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.DETALLE_TRABAJO_FOTOGRAFIA">
+              <MappingFragment StoreEntitySet="DETALLE_TRABAJO_FOTOGRAFIA">
+                <ScalarProperty Name="IMAGEN_PRENDA" ColumnName="IMAGEN_PRENDA" />
+                <ScalarProperty Name="DETALLE_PRENDA_ORDEN_TRABAJO_ID" ColumnName="DETALLE_PRENDA_ORDEN_TRABAJO_ID" />
+                <ScalarProperty Name="FECHA_REGISTRO" ColumnName="FECHA_REGISTRO" />
+                <ScalarProperty Name="USUARIO_ID" ColumnName="USUARIO_ID" />
+                <ScalarProperty Name="DETALLE_TRABAJO_FOTOGRAFIA_ID" ColumnName="DETALLE_TRABAJO_FOTOGRAFIA_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ENTREGA_URGENCIA">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.ENTREGA_URGENCIA">
+              <MappingFragment StoreEntitySet="ENTREGA_URGENCIA">
+                <ScalarProperty Name="ESTA_HABILITADO" ColumnName="ESTA_HABILITADO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="ENTREGA_URGENCIA_ID" ColumnName="ENTREGA_URGENCIA_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HISTORIAL_RECLAMO_REPROCESO_PRENDA">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.HISTORIAL_RECLAMO_REPROCESO_PRENDA">
+              <MappingFragment StoreEntitySet="HISTORIAL_RECLAMO_REPROCESO_PRENDA">
+                <ScalarProperty Name="FECHA_ENTREGA" ColumnName="FECHA_ENTREGA" />
+                <ScalarProperty Name="USUARIO_ID" ColumnName="USUARIO_ID" />
+                <ScalarProperty Name="PORQUE_REPROCESO" ColumnName="PORQUE_REPROCESO" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="DETALLE_PRENDA_ORDEN_TRABAJO_ID" ColumnName="DETALLE_PRENDA_ORDEN_TRABAJO_ID" />
+                <ScalarProperty Name="HISTORIAL_RECLAMO_REPROCESO_PRENDA_ID" ColumnName="HISTORIAL_RECLAMO_REPROCESO_PRENDA_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

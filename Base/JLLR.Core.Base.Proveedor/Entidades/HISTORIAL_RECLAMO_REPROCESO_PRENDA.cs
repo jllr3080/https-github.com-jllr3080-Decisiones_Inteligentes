@@ -12,13 +12,14 @@ namespace JLLR.Core.Base.Proveedor.Entidades
     using System;
     using System.Collections.Generic;
     
-    public partial class DETALLE_TRABAJO_FOTOGRAFIA
+    public partial class HISTORIAL_RECLAMO_REPROCESO_PRENDA
     {
-        public int DETALLE_TRABAJO_FOTOGRAFIA_ID { get; set; }
-        public Nullable<int> USUARIO_ID { get; set; }
-        public Nullable<System.DateTime> FECHA_REGISTRO { get; set; }
+        public long HISTORIAL_RECLAMO_REPROCESO_PRENDA_ID { get; set; }
         public Nullable<int> DETALLE_PRENDA_ORDEN_TRABAJO_ID { get; set; }
-        public byte[] IMAGEN_PRENDA { get; set; }
+        public Nullable<System.DateTime> FECHA { get; set; }
+        public string PORQUE_REPROCESO { get; set; }
+        public Nullable<int> USUARIO_ID { get; set; }
+        public Nullable<System.DateTime> FECHA_ENTREGA { get; set; }
     
         public virtual DETALLE_PRENDA_ORDEN_TRABAJO DETALLE_PRENDA_ORDEN_TRABAJO { get; set; }
     }

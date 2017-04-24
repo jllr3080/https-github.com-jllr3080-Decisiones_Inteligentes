@@ -8,36 +8,35 @@ using JLLR.Core.Base.Proveedor.DAOs;
 using JLLR.Core.Base.Proveedor.Entidades;
 
 #endregion
-namespace JLLR.Core.Venta.Proveedor.DAOs
+namespace JLLR.Core.Seguridad.Proveedor.DAOs
 {
-    public class DetalleOrdenTrabajoFotografiaDAOs:BaseDAOs
+    /// <summary>
+    /// Metodos  de  Usuario Perfil
+    /// </summary>
+    public class UsuarioPerfilDAOs:BaseDAOs
     {
-
         /// <summary>
         /// Declaraciones  e instancias
         /// </summary>
-         private  readonly Decisiones_Inteligentes _entidad= new Decisiones_Inteligentes();
-
+        private readonly  Decisiones_Inteligentes _entidad= new Decisiones_Inteligentes();
 
         /// <summary>
-        /// Graba la fotografia  que se  genero en la orden de trabajo
+        /// Graba  Usuario Perfil
         /// </summary>
-        /// <param name="detalleTrabajoFotografia"></param>
-        public void GrabarDetalleOrdenFotografia(DETALLE_TRABAJO_FOTOGRAFIA detalleTrabajoFotografia)
+        /// <param name="usuarioPerfil"></param>
+        public void GrabarUsuarioPerfil(USUARIO_PERFIL usuarioPerfil)
         {
             try
             {
-                _entidad.DETALLE_TRABAJO_FOTOGRAFIA.Add(detalleTrabajoFotografia);
+                _entidad.USUARIO_PERFIL.Add(usuarioPerfil);
                 _entidad.SaveChanges();
-               
             }
             catch (Exception ex)
             {
-                
+
                 throw;
             }
         }
 
-        
     }
 }

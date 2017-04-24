@@ -37,6 +37,8 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<decimal> VALOR_TOTAL_UNITARIO { get; set; }
         public Nullable<decimal> VALOR_DESCUENTO { get; set; }
         public Nullable<int> PROMOCION_APLICADA { get; set; }
+        public Nullable<decimal> VALOR_EXTRA { get; set; }
+        public Nullable<bool> APLICO_VALOR_EXTRA { get; set; }
     
         public virtual PRODUCTO PRODUCTO { get; set; }
         public virtual ORDEN_TRABAJO ORDEN_TRABAJO { get; set; }

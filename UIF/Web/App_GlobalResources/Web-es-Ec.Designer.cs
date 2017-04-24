@@ -250,6 +250,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Agregar Fotografía.
+        /// </summary>
+        internal static string Label_Agregar_Fotografia {
+            get {
+                return ResourceManager.GetString("Label_Agregar_Fotografia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Apellido  Materno(*).
         /// </summary>
         internal static string Label_Apellido_Materno {
@@ -642,6 +651,15 @@ namespace Resources {
         internal static string Label_Direccion_Correo {
             get {
                 return ResourceManager.GetString("Label_Direccion_Correo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Dirección de la Fotografía Tamaño Máximo (1 Mb).
+        /// </summary>
+        internal static string Label_Direccion_Fotografia {
+            get {
+                return ResourceManager.GetString("Label_Direccion_Fotografia", resourceCulture);
             }
         }
         
@@ -1258,11 +1276,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Visualizar Fotografía.
+        /// </summary>
+        internal static string Label_Visualizar_Fotografia {
+            get {
+                return ResourceManager.GetString("Label_Visualizar_Fotografia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Agregar Abono.
         /// </summary>
         internal static string Literal_Agregar_Abono {
             get {
                 return ResourceManager.GetString("Literal_Agregar_Abono", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Agregar Fotografía.
+        /// </summary>
+        internal static string Literal_Agregar_Fotografia {
+            get {
+                return ResourceManager.GetString("Literal_Agregar_Fotografia", resourceCulture);
             }
         }
         
@@ -1366,6 +1402,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a La imagen no tiene un formato valido, jpeg, jpg o png.
+        /// </summary>
+        internal static string Mensaje_Formato_No_Valido {
+            get {
+                return ResourceManager.GetString("Mensaje_Formato_No_Valido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La imagen no esta cargada correctamente, por favor  seleccione   nuevamente la imagen.
+        /// </summary>
+        internal static string Mensaje_Imagen_No_Cargada {
+            get {
+                return ResourceManager.GetString("Mensaje_Imagen_No_Cargada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a No existe información.
         /// </summary>
         internal static string Mensaje_Informacion_No_existe {
@@ -1461,6 +1515,15 @@ namespace Resources {
         internal static string Mensaje_Sistema {
             get {
                 return ResourceManager.GetString("Mensaje_Sistema", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El tamaño de  la imagen no es  válido, máximo  1mb.
+        /// </summary>
+        internal static string Mensaje_Tamano_No_Valido {
+            get {
+                return ResourceManager.GetString("Mensaje_Tamano_No_Valido", resourceCulture);
             }
         }
         

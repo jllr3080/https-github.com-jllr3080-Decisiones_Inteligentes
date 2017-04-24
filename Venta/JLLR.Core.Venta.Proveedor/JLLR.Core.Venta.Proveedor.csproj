@@ -60,6 +60,7 @@
     <Compile Include="DAOs\TransaccionalDAOs.cs" />
     <Compile Include="DAOs\VentaComisionDAOs.cs" />
     <Compile Include="DTOs\ConsultaOrdenTrabajoDTOs.cs" />
+    <Compile Include="DTOs\DetalleOrdenTrabajoFotografiaDTOs.cs" />
     <Compile Include="DTOs\DetalleOrdenTrabajoObservacionDTOs.cs" />
     <Compile Include="DTOs\EstadoCuentaDTOs.cs" />
     <Compile Include="DTOs\NumeroPrendaDTOs.cs" />

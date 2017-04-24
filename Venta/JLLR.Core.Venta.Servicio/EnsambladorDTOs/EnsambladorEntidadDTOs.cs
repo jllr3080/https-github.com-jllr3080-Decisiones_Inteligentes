@@ -23,6 +23,41 @@ namespace JLLR.Core.Venta.Servicio.EnsambladorDTOs
         private readonly ensamblador.EnsambladorModelo _ensambladorModelo= new ensamblador.EnsambladorModelo();
         #endregion
 
+        #region DETALLE ORDEN TRABAJO FOTOGRAFIA
+        /// <summary>
+        /// Convierte el modelo DTO en una entidad DTO
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public entidadDTOs.DetalleOrdenTrabajoFotografiaDTOs CrearDetalleOrdenTrabajoFotografiaDtOs(modeloDTOs.DetalleOrdenTrabajoFotografiaDTOs m)
+        {
+            return new entidadDTOs.DetalleOrdenTrabajoFotografiaDTOs()
+            {
+                NombreUsuario = m.NombreUsuario,
+                DetalleOrdenTrabajoFotografia = _ensambladorEntidad.CrearDetalleTrabajoFotografia(m.DetalleOrdenTrabajoFotografia)
+              
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos  Usuario en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<entidadDTOs.DetalleOrdenTrabajoFotografiaDTOs> CrearDetalleOrdenTrabajoFotografiaDtOses(IQueryable<modeloDTOs.DetalleOrdenTrabajoFotografiaDTOs> listadoModelo)
+        {
+            List<entidadDTOs.DetalleOrdenTrabajoFotografiaDTOs> listaEntidad = new List<entidadDTOs.DetalleOrdenTrabajoFotografiaDTOs>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearDetalleOrdenTrabajoFotografiaDtOs(modelo));
+            }
+            return listaEntidad;
+
+        }
+
+        #endregion
 
         #region PRENDA MARCA DTO
         /// <summary>
