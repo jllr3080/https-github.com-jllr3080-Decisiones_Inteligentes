@@ -34,6 +34,8 @@ namespace JLLR.Core.General.Proveedor.Negocio
         private  readonly  FormaPagoDAOs _formaPagoDaOs= new FormaPagoDAOs();
         private readonly  ParametroDAOs _parametroDaOs= new ParametroDAOs();
         private readonly  ParroquiaDAOs _parroquiaDaOs= new ParroquiaDAOs();
+        private readonly EntregaUrgenciaDAOs _enetrEntregaUrgenciaDaOs= new EntregaUrgenciaDAOs();
+        private readonly  TipoReprocesoDAOs _tipoReprocesoDaOs= new TipoReprocesoDAOs();
 
         #endregion
 
@@ -559,6 +561,45 @@ namespace JLLR.Core.General.Proveedor.Negocio
                 throw;
             }
 
+        }
+        #endregion
+
+        #region ENTREGA URGENCIA
+        /// <summary>
+        /// Entrega  urgencia
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<ENTREGA_URGENCIA> ObtenerEntregaUrgencias()
+        {
+            try
+            {
+
+                return _enetrEntregaUrgenciaDaOs.ObtenerEntregaUrgencias();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region TIPO PROCESO
+        /// <summary>
+        /// Obtiene los tipos de  reproceso
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<TIPO_REPROCESO> ObtenerTipoReprocesos()
+        {
+            try
+            {
+                return _tipoReprocesoDaOs.ObtenerTipoReprocesos();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
         #endregion
     }

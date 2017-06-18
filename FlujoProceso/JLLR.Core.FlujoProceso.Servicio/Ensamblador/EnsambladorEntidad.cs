@@ -62,5 +62,81 @@ namespace JLLR.Core.FlujoProceso.Servicio.Ensamblador
 
         }
         #endregion
+
+        #region HISTORIAL RECLAMO REPROCESO PRENDA
+        /// <summary>
+        /// Convierte el modelo en una entidad
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public entidad.HISTORIAL_RECLAMO_REPROCESO_PRENDA CrearHistorialReclamoReprocesoPrenda(modelo.HistorialReclamoReprocesoPrendaModelo m)
+        {
+            return new entidad.HISTORIAL_RECLAMO_REPROCESO_PRENDA()
+            {
+               USUARIO_ID = m.UsuarioId,
+               DETALLE_PRENDA_ORDEN_TRABAJO_ID = m.DetallePrendaOrdenTrabajoId,
+               FECHA = m.Fecha,
+               FECHA_ENTREGA = m.FechaEntrega,
+               HISTORIAL_RECLAMO_REPROCESO_PRENDA_ID = m.HistorialReclamoReprocesoPrendaId,
+               PORQUE_REPROCESO = m.PorqueReproceso
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<entidad.HISTORIAL_RECLAMO_REPROCESO_PRENDA> CrearHistorialReclamoReprocesoPrendas(List<Modelo.HistorialReclamoReprocesoPrendaModelo> listadoModelo)
+        {
+            List<entidad.HISTORIAL_RECLAMO_REPROCESO_PRENDA> listaEntidad = new List<entidad.HISTORIAL_RECLAMO_REPROCESO_PRENDA>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearHistorialReclamoReprocesoPrenda(modelo));
+            }
+            return listaEntidad;
+
+        }
+        #endregion
+
+
+        #region HISTORIAL REPROCESO
+        /// <summary>
+        /// Convierte el modelo en una entidad
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public entidad.HISTORIAL_REPROCESO CrearHistorialReproceso(modelo.HistorialReprocesoModelo m)
+        {
+            return new entidad.HISTORIAL_REPROCESO()
+            {
+                HISTORIAL_REPROCESO_ID = m.HistorialReprocesoId,
+                HISTORIAL_PROCESO_ID = m.HistorialProceso.HistorialProcesoId,
+                DETALLE_PRENDA_ORDEN_TRABAJO_ID = m.DetallePrendaOrdenTrabajoId,
+                MOTIVO = m.Motivo
+                
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<entidad.HISTORIAL_REPROCESO> CrearHistorialReprocesos(List<Modelo.HistorialReprocesoModelo> listadoModelo)
+        {
+            List<entidad.HISTORIAL_REPROCESO> listaEntidad = new List<entidad.HISTORIAL_REPROCESO>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearHistorialReproceso(modelo));
+            }
+            return listaEntidad;
+
+        }
+        #endregion
     }
 }

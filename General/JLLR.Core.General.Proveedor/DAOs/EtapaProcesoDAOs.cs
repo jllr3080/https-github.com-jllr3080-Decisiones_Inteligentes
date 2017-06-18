@@ -28,6 +28,7 @@ namespace JLLR.Core.General.Proveedor.DAOs
             try
             {
                 var etapasProceso=  from  etapaProceso in  _entidad.ETAPA_PROCESO
+                                    where etapaProceso.ESTA_HABILITADO==true
                                     select etapaProceso;
                 return etapasProceso.OrderBy(m=>m.DESCRIPCION) ;
             }

@@ -162,6 +162,87 @@ namespace Web.ServicioDelegado
 
         #endregion
 
+        /// <summary>
+        /// Graba  el historial de  los reprocesos
+        /// </summary>
+        /// <param name="historialReprocesoDtOs"></param>
+        public void GrabarHistorialReprocesos(HistorialReprocesoVistaDTOs historialReprocesoDtOs)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(HistorialReprocesoVistaDTOs));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, historialReprocesoDtOs);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "GrabarHistorialReprocesos", "POST", datos);
+                var js = new JavaScriptSerializer();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+
+        #endregion
+
+        #region HISTORIAL RECLAMO  REPROCESO PRENDA
+
+        /// <summary>
+        /// Obtiene el historial de reproceso de las prendas
+        /// </summary>
+        /// <param name="detallePrendaOrdenTrabajoId"></param>
+        /// <returns></returns>
+        public List<HistorialReclamoReprocesoPrendaVistaModelo>
+            ObtenerHistorialReclamoReprocesoPrendaPorDetallePrendaOrdenTrabajoId(int detallePrendaOrdenTrabajoId)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerHistorialReclamoReprocesoPrendaPorDetallePrendaOrdenTrabajoId?detallePrendaOrdenTrabajoId=" + detallePrendaOrdenTrabajoId);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<HistorialReclamoReprocesoPrendaVistaModelo>>(json);
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Graba el  historial del reproceso de prendas   y los reclamos 
+        /// </summary>
+        /// <param name="historialReclamoReprocesoPrenda"></param>
+        public void GrabarHistorialReclamoReprocesoPrenda(
+            HistorialReclamoReprocesoPrendaVistaModelo historialReclamoReprocesoPrenda)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(HistorialReclamoReprocesoPrendaVistaModelo));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, historialReclamoReprocesoPrenda);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "GrabarHistorialReclamoReprocesoPrenda", "POST", datos);
+                var js = new JavaScriptSerializer();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
     }
 }

@@ -103,13 +103,13 @@ namespace Web.Venta {
         protected global::System.Web.UI.WebControls.Label _labelFecha;
         
         /// <summary>
-        /// Control _labelFechaEntrega.
+        /// Control _labelTipoEntrega.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label _labelFechaEntrega;
+        protected global::System.Web.UI.WebControls.Label _labelTipoEntrega;
         
         /// <summary>
         /// Control _sucursal.
@@ -166,40 +166,13 @@ namespace Web.Venta {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator _fechaValidador;
         
         /// <summary>
-        /// Control _fechaEntrega.
+        /// Control _tipoEntrega.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _fechaEntrega;
-        
-        /// <summary>
-        /// Control _fechaEntregaValidador.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator _fechaEntregaValidador;
-        
-        /// <summary>
-        /// Control _fechaEntregaExtensor.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender _fechaEntregaExtensor;
-        
-        /// <summary>
-        /// Control _fechaEntregaMarcaAgua.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.TextBoxWatermarkExtender _fechaEntregaMarcaAgua;
+        protected global::System.Web.UI.WebControls.DropDownList _tipoEntrega;
         
         /// <summary>
         /// Control _labelCliente.
@@ -643,6 +616,15 @@ namespace Web.Venta {
         protected global::System.Web.UI.WebControls.Literal _literaldatosPago;
         
         /// <summary>
+        /// Control _labelFechaEntrega.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label _labelFechaEntrega;
+        
+        /// <summary>
         /// Control _labelNumeroOrdenManual.
         /// </summary>
         /// <remarks>
@@ -668,6 +650,42 @@ namespace Web.Venta {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label _labelValorPago;
+        
+        /// <summary>
+        /// Control _fechaEntrega.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox _fechaEntrega;
+        
+        /// <summary>
+        /// Control _fechaEntregaValidador.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator _fechaEntregaValidador;
+        
+        /// <summary>
+        /// Control _fechaEntregaExtensor.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender _fechaEntregaExtensor;
+        
+        /// <summary>
+        /// Control _fechaEntregaMarcaAgua.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TextBoxWatermarkExtender _fechaEntregaMarcaAgua;
         
         /// <summary>
         /// Control _numeroOrdenManual.

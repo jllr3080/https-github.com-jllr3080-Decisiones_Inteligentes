@@ -35,6 +35,39 @@ namespace Web.Logistica
         #endregion
 
         #region  Eventos
+        /// <summary>
+        /// Carga  todos los  items
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _todos_OnCheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+
+                foreach (GridViewRow row in _datos.Rows)
+                {
+                    if (row.RowType == DataControlRowType.DataRow)
+                    {
+                        CheckBox _todos = (row.Cells[0].FindControl("_todos") as CheckBox);
+                        CheckBox _aceptarEntrega = (row.Cells[0].FindControl("_aceptarEntrega") as CheckBox);
+                        if (_todos.Checked == true)
+                            _aceptarEntrega.Checked = true;
+                        else
+                            _aceptarEntrega.Checked = false;
+
+
+
+                    }
+                }
+            }
+            catch
+                (Exception)
+            {
+
+                throw;
+            }
+        }
 
         /// <summary>
         /// Carga la informacion de las prendas
@@ -333,6 +366,7 @@ namespace Web.Logistica
 
 
         #endregion
+
 
        
     }

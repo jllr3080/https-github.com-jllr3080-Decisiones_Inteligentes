@@ -855,6 +855,76 @@ namespace JLLR.Core.General.Servicio.Ensamblador
         }
         #endregion
 
+        #region ENTREGA URGENCIA
+        /// <summary>
+        /// Convierte el modelo en una entidad
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public entidad.ENTREGA_URGENCIA CrearEntregaUrgencia(modelo.EntregaUrgenciaModelo m)
+        {
+            return new entidad.ENTREGA_URGENCIA()
+            {
+                ENTREGA_URGENCIA_ID = m.EntregaUrgenciaId,
+                DESCRIPCION = m.Descripcion,
+                ESTA_HABILITADO = m.EstaHabilitado
 
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<entidad.ENTREGA_URGENCIA> CrearEntregaUrgencias(List<modelo.EntregaUrgenciaModelo> listadoModelo)
+        {
+            List<entidad.ENTREGA_URGENCIA> listaEntidad = new List<entidad.ENTREGA_URGENCIA>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearEntregaUrgencia(modelo));
+            }
+            return listaEntidad;
+
+        }
+        #endregion
+
+        #region TIPO DE REPROCESO
+        /// <summary>
+        /// Convierte el modelo en una entidad
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public entidad.TIPO_REPROCESO CrearTipoReproceso(modelo.TipoReprocesoModelo m)
+        {
+            return new entidad.TIPO_REPROCESO()
+            {
+             TIPO_REPROCESO_ID = m.TipoReprocesoId,
+                DESCRIPCION = m.Descripcion,
+                ESTA_HABILITADO = m.EstaHabilitado
+
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<entidad.TIPO_REPROCESO> CrearTipoReprocesos(List<modelo.TipoReprocesoModelo> listadoModelo)
+        {
+            List<entidad.TIPO_REPROCESO> listaEntidad = new List<entidad.TIPO_REPROCESO>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearTipoReproceso(modelo));
+            }
+            return listaEntidad;
+
+        }
+        #endregion
     }
 }

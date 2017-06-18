@@ -110,8 +110,8 @@ namespace Web
                 List<AccesoVistaDTOs> lista = servicioDelegadoSeguridad.GenerarMenu(Convert.ToInt32(User.Id));
 
 
-                
-                var emision = new MenuItem("VENTA") { Selectable = false };
+                var inicio = new MenuItem("INICIO") {NavigateUrl = "~/Inicio/Default.aspx" };
+                var venta = new MenuItem("VENTA") { Selectable = false };
                 var administracion = new MenuItem("ADMINISTRACION") { Selectable = false };
                 var contabilidad= new MenuItem("CONTABILIDAD") { Selectable = false };
                 var logistica = new MenuItem("LOGISTICA") { Selectable = false };
@@ -120,12 +120,12 @@ namespace Web
                 var seguridades = new MenuItem("SEGURIDADES") { Selectable = false };
                 //var inventario = new MenuItem("INVENTARIO") { Selectable = false };
                 var fe = new MenuItem("FE") { Selectable = false };
-                var usuario = new MenuItem("Usuario : " + User.NombreUsuario) { Selectable = true };
-                var cerrarSesion = new MenuItem("Cerrar Sesión") { NavigateUrl = "~/Seguridad/Login/IngresoSistema.aspx" };
+                var usuario = new MenuItem("USUARIO : " + User.NombreUsuario) { Selectable = true };
+                var cerrarSesion = new MenuItem("CERRAR SESION") { NavigateUrl = "~/Seguridad/Login/IngresoSistema.aspx" };
                 foreach (var usuarioAccesoDTO in lista)
                 {
                     if (usuarioAccesoDTO.Modulo == "VENTA")
-                        emision.ChildItems.Add(new MenuItem(usuarioAccesoDTO.SubModulo, usuarioAccesoDTO.SubModulo) { NavigateUrl = usuarioAccesoDTO.Url });
+                        venta.ChildItems.Add(new MenuItem(usuarioAccesoDTO.SubModulo, usuarioAccesoDTO.SubModulo) { NavigateUrl = usuarioAccesoDTO.Url });
                     else if (usuarioAccesoDTO.Modulo == "ADMINISTRACION")
                         administracion.ChildItems.Add(new MenuItem(usuarioAccesoDTO.SubModulo, usuarioAccesoDTO.SubModulo) { NavigateUrl = usuarioAccesoDTO.Url });
                     else if (usuarioAccesoDTO.Modulo == "CONTABILIDAD")
@@ -146,16 +146,14 @@ namespace Web
 
 
                 }
-
-                _menu.Items.Add(emision);
+                _menu.Items.Add(inicio);
                 _menu.Items.Add(administracion);
                 _menu.Items.Add(contabilidad);
-                //_menu.Items.Add(produccion);
-                //_menu.Items.Add(rrhh);
+                _menu.Items.Add(fe);
                 _menu.Items.Add(logistica);
+                _menu.Items.Add(venta);
                 _menu.Items.Add(seguridades);
                 //_menu.Items.Add(inventario);
-                _menu.Items.Add(fe);
                 _menu.Items.Add(usuario);
                 _menu.Items.Add(cerrarSesion);
                 

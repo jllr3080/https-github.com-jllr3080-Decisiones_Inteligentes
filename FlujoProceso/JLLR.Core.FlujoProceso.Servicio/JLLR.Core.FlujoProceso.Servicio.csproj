@@ -73,11 +73,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTOs\HistorialProcesoDTOs.cs" />
+    <Compile Include="DTOs\HistorialReprocesoDTOs.cs" />
     <Compile Include="EnsambladorDTOs\EnsambladorEntidadDTOs.cs" />
     <Compile Include="EnsambladorDTOs\EnsambladorModeloDTOs.cs" />
     <Compile Include="Ensamblador\EnsambladorEntidad.cs" />
     <Compile Include="Ensamblador\EnsambladorModelo.cs" />
+    <Compile Include="Modelo\DetalleHistorialReprocesoModelo.cs" />
     <Compile Include="Modelo\HistorialProcesoModelo.cs" />
+    <Compile Include="Modelo\HistorialReclamoReprocesoPrendaModelo.cs" />
+    <Compile Include="Modelo\HistorialReprocesoModelo.cs" />
     <Compile Include="ServicioDelegado\ServicioDelegadoGeneral.cs" />
     <Compile Include="ServicioFlujoProceso.svc.cs">
       <DependentUpon>ServicioFlujoProceso.svc</DependentUpon>

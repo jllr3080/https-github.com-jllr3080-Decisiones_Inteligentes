@@ -108,6 +108,12 @@ namespace JLLR.Core.FlujoProceso.Servicio.Modelo
         /// </summary>
         [DataMember]
         public bool? SeEnvio { get; set; }
+
+        /// <summary>
+        /// EntregaParcial
+        /// </summary>
+        [DataMember]
+        public bool? EntregaParcial { get; set; }
     }
 
 }

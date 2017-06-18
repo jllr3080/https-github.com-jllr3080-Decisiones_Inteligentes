@@ -644,5 +644,30 @@ namespace Web.ServicioDelegado
 
         }
         #endregion
+
+        #region ENTREGA URGENCIA
+        /// <summary>
+        /// Entrega  urgencia
+        /// </summary>
+        /// <returns></returns>
+        public List<EntregaUrgenciaVistaModelo> ObtenerEntregaUrgencias()
+        {
+            try
+            {
+
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerEntregaUrgencias");
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<EntregaUrgenciaVistaModelo>>(json);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
     }
 }

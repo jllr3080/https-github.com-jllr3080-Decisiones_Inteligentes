@@ -6,25 +6,25 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
+              <Width>5.43513cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>3.63223cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>3.19757cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>6.62382cm</Width>
+            </TablixColumn>
+            <TablixColumn>
               <Width>3.88875cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>5.88667cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>2.5cm</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>2.5cm</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>2.5cm</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>5.25167cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -42,7 +42,7 @@
                             <TextRun>
                               <Value>Prenda</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -75,7 +75,7 @@
                             <TextRun>
                               <Value>Marca</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -108,7 +108,7 @@
                             <TextRun>
                               <Value>Color</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -139,9 +139,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Informacion Visual</Value>
+                              <Value>Información Visual</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -174,7 +174,7 @@
                             <TextRun>
                               <Value>Numero Interno Prenda</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -207,7 +207,7 @@
                             <TextRun>
                               <Value>Tratamiento Especial</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -240,7 +240,7 @@
                             <TextRun>
                               <Value>Estado Prenda</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -278,7 +278,7 @@
                             <TextRun>
                               <Value>=Fields!Prenda.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -310,7 +310,7 @@
                             <TextRun>
                               <Value>=Fields!Marca.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -342,7 +342,7 @@
                             <TextRun>
                               <Value>=Fields!Color.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -374,7 +374,7 @@
                             <TextRun>
                               <Value>=Fields!InformacionVisual.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -406,7 +406,7 @@
                             <TextRun>
                               <Value>=Fields!NumeroInternoPrenda.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -438,7 +438,8 @@
                             <TextRun>
                               <Value>=Fields!TratamientoEspecial.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>8pt</FontSize>
+                                <Color>Lime</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -470,7 +471,7 @@
                             <TextRun>
                               <Value>=Fields!EstadoPrenda.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>8pt</FontSize>
                                 <Color>Red</Color>
                               </Style>
                             </TextRun>
@@ -518,10 +519,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DetalleOrden</DataSetName>
-        <Top>0.14111cm</Top>
+        <Top>0.45861cm</Top>
         <Left>0.19105cm</Left>
         <Height>1.2cm</Height>
-        <Width>18.88875cm</Width>
+        <Width>33.91583cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -562,7 +563,7 @@
                             <TextRun>
                               <Value>Cantidad</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -595,7 +596,7 @@
                             <TextRun>
                               <Value>Valor Unitario</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -628,7 +629,7 @@
                             <TextRun>
                               <Value>Valor Total Unitario</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -661,7 +662,7 @@
                             <TextRun>
                               <Value>Valor Descuento</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -694,7 +695,7 @@
                             <TextRun>
                               <Value>Valor Total</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -732,12 +733,13 @@
                             <TextRun>
                               <Value>=Fields!Cantidad.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Cantidad</rd:DefaultName>
@@ -765,8 +767,7 @@
                             <TextRun>
                               <Value>=Fields!ValorUnitario.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
+                                <FontSize>9pt</FontSize>
                                 <Format>'$'0.00;('$'0.00)</Format>
                                 <rd:FormatSymbolCulture>es-EC</rd:FormatSymbolCulture>
                               </Style>
@@ -800,8 +801,7 @@
                             <TextRun>
                               <Value>=Fields!ValorTotalUnitario.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
+                                <FontSize>9pt</FontSize>
                                 <Format>'$'0.00;('$'0.00)</Format>
                                 <rd:FormatSymbolCulture>es-EC</rd:FormatSymbolCulture>
                               </Style>
@@ -835,8 +835,7 @@
                             <TextRun>
                               <Value>=Fields!ValorDescuento.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
+                                <FontSize>9pt</FontSize>
                                 <Format>'$'0.00;('$'0.00)</Format>
                                 <rd:FormatSymbolCulture>es-EC</rd:FormatSymbolCulture>
                               </Style>
@@ -870,7 +869,7 @@
                             <TextRun>
                               <Value>=Fields!ValorTotal.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <Format>'$'0.00;('$'0.00)</Format>
                               </Style>
                             </TextRun>
@@ -900,31 +899,32 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Cantidad1">
+                    <Textbox Name="Textbox47">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!Cantidad.Value, "DetalleValores").ToString()</Value>
+                              <Value>=Sum(Fields!Cantidad.Value)</Value>
                               <Style>
-                                <FontSize>8pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Format>0.00;(0.00)</Format>
+                                <rd:FormatSymbolCulture>es-EC</rd:FormatSymbolCulture>
                               </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Right</TextAlign>
+                            <TextAlign>Left</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Cantidad1</rd:DefaultName>
-                      <ZIndex>2</ZIndex>
+                      <rd:DefaultName>Textbox43</rd:DefaultName>
                       <Style>
                         <Border>
-                          <Style>None</Style>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
                         </Border>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -936,7 +936,7 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox48">
+                    <Textbox Name="Textbox49">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -944,21 +944,30 @@
                           <TextRuns>
                             <TextRun>
                               <Value />
-                              <Style />
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                                <Format>'$'0.00;('$'0.00)</Format>
+                                <rd:FormatSymbolCulture>es-EC</rd:FormatSymbolCulture>
+                              </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox48</rd:DefaultName>
+                      <rd:DefaultName>Textbox43</rd:DefaultName>
                       <Style>
                         <Border>
-                          <Style>None</Style>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
                         </Border>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>es-EC</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -974,7 +983,7 @@
                             <TextRun>
                               <Value>=Sum(Fields!ValorTotalUnitario.Value)</Value>
                               <Style>
-                                <FontSize>8pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Format>'$'0.00;('$'0.00)</Format>
                                 <rd:FormatSymbolCulture>es-EC</rd:FormatSymbolCulture>
@@ -1012,7 +1021,7 @@
                             <TextRun>
                               <Value>=Sum(Fields!ValorDescuento.Value)</Value>
                               <Style>
-                                <FontSize>8pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Format>'$'0.00;('$'0.00)</Format>
                                 <rd:FormatSymbolCulture>es-EC</rd:FormatSymbolCulture>
@@ -1050,7 +1059,7 @@
                             <TextRun>
                               <Value>=Sum(Fields!ValorTotal.Value)</Value>
                               <Style>
-                                <FontSize>8pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Format>'$'0.00;('$'0.00)</Format>
                               </Style>
@@ -1103,7 +1112,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DetalleValores</DataSetName>
-        <Top>2.19563cm</Top>
+        <Top>2.83063cm</Top>
         <Left>0.1282cm</Left>
         <Height>1.8cm</Height>
         <Width>18.9516cm</Width>
@@ -1115,10 +1124,15 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>2in</Height>
-    <Style />
+    <Height>3.45833in</Height>
+    <Style>
+      <Border>
+        <Style>None</Style>
+      </Border>
+      <BackgroundColor>#14aab4</BackgroundColor>
+    </Style>
   </Body>
-  <Width>7.78027in</Width>
+  <Width>14.25082in</Width>
   <Page>
     <PageHeader>
       <Height>3.64271cm</Height>
@@ -1129,10 +1143,9 @@
           <Source>Embedded</Source>
           <Value>Logo_Principal</Value>
           <Sizing>FitProportional</Sizing>
-          <Top>0.67386cm</Top>
-          <Left>1.5798cm</Left>
-          <Height>2.24111cm</Height>
-          <Width>2.5cm</Width>
+          <Left>0.73313cm</Left>
+          <Height>3.46632cm</Height>
+          <Width>3.99756cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1401,7 +1414,7 @@
       </ReportItems>
       <Style>
         <Border>
-          <Style>None</Style>
+          <Style>Solid</Style>
         </Border>
       </Style>
     </PageHeader>

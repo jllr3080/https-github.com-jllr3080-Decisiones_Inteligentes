@@ -27,9 +27,9 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public string DESCRIPCION { get; set; }
     
         public virtual CIUDAD CIUDAD { get; set; }
-        public virtual ESTADO ESTADO { get; set; }
-        public virtual PAIS PAIS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DIRECCION> DIRECCION { get; set; }
+        public virtual ESTADO ESTADO { get; set; }
+        public virtual PAIS PAIS { get; set; }
     }
 }

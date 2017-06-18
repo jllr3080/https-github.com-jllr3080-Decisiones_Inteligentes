@@ -18,10 +18,11 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public USUARIO()
         {
             this.CONTROL_USUARIO = new HashSet<CONTROL_USUARIO>();
+            this.CABECERA_MOVIMIENTO_FE = new HashSet<CABECERA_MOVIMIENTO_FE>();
             this.HISTORIAL_USUARIO = new HashSet<HISTORIAL_USUARIO>();
+            this.DETALLE_VENTA_COMISION_INDUSTRIALES = new HashSet<DETALLE_VENTA_COMISION_INDUSTRIALES>();
             this.USUARIO_PERFIL = new HashSet<USUARIO_PERFIL>();
             this.USUARIO_PREGUNTA_SEGURIDAD = new HashSet<USUARIO_PREGUNTA_SEGURIDAD>();
-            this.CABECERA_MOVIMIENTO_FE = new HashSet<CABECERA_MOVIMIENTO_FE>();
         }
     
         public int USUARIO_ID { get; set; }
@@ -37,17 +38,19 @@ namespace JLLR.Core.Base.Proveedor.Entidades
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONTROL_USUARIO> CONTROL_USUARIO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CABECERA_MOVIMIENTO_FE> CABECERA_MOVIMIENTO_FE { get; set; }
+        public virtual INDIVIDUO INDIVIDUO { get; set; }
         public virtual PUNTO_VENTA PUNTO_VENTA { get; set; }
         public virtual SUCURSAL SUCURSAL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HISTORIAL_USUARIO> HISTORIAL_USUARIO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DETALLE_VENTA_COMISION_INDUSTRIALES> DETALLE_VENTA_COMISION_INDUSTRIALES { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USUARIO_PERFIL> USUARIO_PERFIL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USUARIO_PREGUNTA_SEGURIDAD> USUARIO_PREGUNTA_SEGURIDAD { get; set; }
         public virtual USUARIO_SEGURIDAD USUARIO_SEGURIDAD { get; set; }
-        public virtual INDIVIDUO INDIVIDUO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CABECERA_MOVIMIENTO_FE> CABECERA_MOVIMIENTO_FE { get; set; }
     }
 }

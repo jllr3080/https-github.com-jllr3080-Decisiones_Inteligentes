@@ -50,8 +50,8 @@
                         <asp:Label ID="_labelFecha" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Fecha%>"></asp:Label>
                         
                     </div>
-                    <div class="col-md-3">
-                        <asp:Label ID="_labelFechaEntrega" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Fecha_Entrega%>"></asp:Label>
+                  <div class="col-md-3">
+                        <asp:Label ID="_labelTipoEntrega" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Tipo_Entrega%>"></asp:Label>
                         
                     </div>
                     
@@ -73,14 +73,12 @@
                         <asp:RequiredFieldValidator ID="_fechaValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GuardarOrden" ControlToValidate="_fecha" ></asp:RequiredFieldValidator>
                         
                     </div>
-                     <div class="col-md-3">
-                         <asp:TextBox ID="_fechaEntrega" runat="server" class="form-control" ValidationGroup="GuardarOrden"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="_fechaEntregaValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GuardarOrden" ControlToValidate="_fechaEntrega" ></asp:RequiredFieldValidator>
-                           <ajaxToolkit:CalendarExtender ID="_fechaEntregaExtensor" runat="server" BehaviorID="_fechaEntrega_CalendarExtender" TargetControlID="_fechaEntrega" Format="dd/MM/yyyy"  />
-                        <ajaxToolkit:TextBoxWatermarkExtender id="_fechaEntregaMarcaAgua" runat="server" targetcontrolid="_fechaEntrega" enabled="True" watermarktext="<%$ Resources:Web_es_Ec,Marca_Agua_Fecha%>"></ajaxToolkit:TextBoxWatermarkExtender>  
+                   <div class="col-md-3">
+                         <asp:DropDownList ID="_tipoEntrega" runat="server" CssClass="form-control" ValidationGroup="GuardarOrden" DataTextField="Descripcion" DataValueField="EntregaUrgenciaId" ></asp:DropDownList>
                         
-
+                        
                     </div>
+                    
                     
             </div>
             <br>
@@ -340,6 +338,10 @@
                 
              
             <div class="row">
+                  <div class="col-md-3">
+                        <asp:Label ID="_labelFechaEntrega" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Fecha_Entrega%>"></asp:Label>
+                        
+                    </div>
                  <div class="col-md-3">
                         <asp:Label ID="_labelNumeroOrdenManual" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Numero_Orden_Manual%>"></asp:Label>
                     </div>
@@ -355,7 +357,14 @@
                    
             </div>
              <div class="row">
-                 
+                  <div class="col-md-3">
+                         <asp:TextBox ID="_fechaEntrega" runat="server" class="form-control" ValidationGroup="GuardarOrden"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="_fechaEntregaValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GuardarOrden" ControlToValidate="_fechaEntrega" ></asp:RequiredFieldValidator>
+                           <ajaxToolkit:CalendarExtender ID="_fechaEntregaExtensor" runat="server" BehaviorID="_fechaEntrega_CalendarExtender" TargetControlID="_fechaEntrega" Format="dd/MM/yyyy"  />
+                        <ajaxToolkit:TextBoxWatermarkExtender id="_fechaEntregaMarcaAgua" runat="server" targetcontrolid="_fechaEntrega" enabled="True" watermarktext="<%$ Resources:Web_es_Ec,Marca_Agua_Fecha%>"></ajaxToolkit:TextBoxWatermarkExtender>  
+                        
+
+                    </div>
                   <div class="col-md-3">
                          <asp:TextBox ID="_numeroOrdenManual" runat="server" class="form-control" ValidationGroup="GuardarOrden" TextMode="Number" ></asp:TextBox>
                         <asp:RequiredFieldValidator ID="_numeroOrdenManualValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="GuardarOrden" ControlToValidate="_numeroOrdenManual" ></asp:RequiredFieldValidator>

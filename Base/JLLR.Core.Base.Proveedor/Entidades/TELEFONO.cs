@@ -19,7 +19,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<int> TIPO_TELEFONO_ID { get; set; }
         public string NUMERO_TELEFONO { get; set; }
     
-        public virtual TIPO_TELEFONO TIPO_TELEFONO { get; set; }
         public virtual INDIVIDUO INDIVIDUO { get; set; }
+        public virtual TIPO_TELEFONO TIPO_TELEFONO { get; set; }
     }
 }

@@ -17,12 +17,12 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public int SECUENCIALES_SRI_ID { get; set; }
         public Nullable<int> PUNTO_VENTA_ID { get; set; }
         public Nullable<int> SUCURSAL_ID { get; set; }
+        public Nullable<int> TIPO_COMPROBANTE_ID { get; set; }
         public string SECUENCIAL_TEXTO { get; set; }
         public Nullable<int> SECUENCIAL_NUMERO { get; set; }
         public string ESTABLECIMIENTO { get; set; }
         public string TEXTO_PUNTO_EMISION { get; set; }
         public Nullable<int> TIPO_OPERACION_SRI { get; set; }
-        public Nullable<int> TIPO_COMPROBANTE_ID { get; set; }
     
         public virtual PUNTO_VENTA PUNTO_VENTA { get; set; }
         public virtual SUCURSAL SUCURSAL { get; set; }

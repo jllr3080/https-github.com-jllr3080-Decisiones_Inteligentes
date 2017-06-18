@@ -327,6 +327,31 @@ namespace JLLR.Core.General.Servicio
 
         #endregion
 
+        #region ENTREGA URGENCIA
+
+        /// <summary>
+        /// Entrega  urgencia
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(UriTemplate = "ObtenerEntregaUrgencias",
+            ResponseFormat = WebMessageFormat.Json)]
+        List<EntregaUrgenciaModelo> ObtenerEntregaUrgencias();
+
+        #endregion
+
+        #region TIPO PROCESO
+
+        /// <summary>
+        /// Obtiene los tipos de  reproceso
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(UriTemplate = "ObtenerTipoReprocesos",ResponseFormat = WebMessageFormat.Json)]
+        List<TipoReprocesoModelo> ObtenerTipoReprocesos();
+
+        #endregion
+
     }
 
 

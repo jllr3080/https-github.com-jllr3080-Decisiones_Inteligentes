@@ -17,6 +17,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public VENDEDOR()
         {
+            this.VENTA_COMISION_INDUSTRIALES = new HashSet<VENTA_COMISION_INDUSTRIALES>();
             this.VENTA_COMISION = new HashSet<VENTA_COMISION>();
         }
     
@@ -26,6 +27,8 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<bool> HABILITADO { get; set; }
     
         public virtual INDIVIDUO INDIVIDUO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VENTA_COMISION_INDUSTRIALES> VENTA_COMISION_INDUSTRIALES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VENTA_COMISION> VENTA_COMISION { get; set; }
     }

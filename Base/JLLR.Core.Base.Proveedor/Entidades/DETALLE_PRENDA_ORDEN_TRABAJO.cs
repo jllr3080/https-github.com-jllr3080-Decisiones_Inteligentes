@@ -20,6 +20,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
             this.DETALLE_ORDEN_TRABAJO_OBSERVACION = new HashSet<DETALLE_ORDEN_TRABAJO_OBSERVACION>();
             this.DETALLE_TRABAJO_FOTOGRAFIA = new HashSet<DETALLE_TRABAJO_FOTOGRAFIA>();
             this.HISTORIAL_RECLAMO_REPROCESO_PRENDA = new HashSet<HISTORIAL_RECLAMO_REPROCESO_PRENDA>();
+            this.HISTORIAL_REPROCESO = new HashSet<HISTORIAL_REPROCESO>();
         }
     
         public int DETALLE_PRENDA_ORDEN_TRABAJO_ID { get; set; }
@@ -40,5 +41,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual ICollection<DETALLE_TRABAJO_FOTOGRAFIA> DETALLE_TRABAJO_FOTOGRAFIA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HISTORIAL_RECLAMO_REPROCESO_PRENDA> HISTORIAL_RECLAMO_REPROCESO_PRENDA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HISTORIAL_REPROCESO> HISTORIAL_REPROCESO { get; set; }
     }
 }

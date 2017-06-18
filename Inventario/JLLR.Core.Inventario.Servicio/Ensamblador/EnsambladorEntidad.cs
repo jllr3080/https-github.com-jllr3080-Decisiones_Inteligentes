@@ -35,7 +35,9 @@ namespace JLLR.Core.Inventario.Servicio.Ensamblador
                NOMBRE = m.Nombre,
                FECHA_CREACION = m.FechaCreacion,
                PEDIR_MEDIDA = m.PedirMedida,
-               VISIBLE = m.Visible
+               VISIBLE = m.Visible,
+               TIEMPO_ENTREGA =m.TiempoEntrega,
+               PRENDA_ESPECIAL = m.PrendaEspecial
 
 
             };

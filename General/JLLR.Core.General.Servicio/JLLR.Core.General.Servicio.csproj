@@ -79,10 +79,12 @@
     <Compile Include="Ensamblador\EnsambladorModelo.cs" />
     <Compile Include="Modelo\CiudadModelo.cs" />
     <Compile Include="Modelo\ColorModelo.cs" />
+    <Compile Include="Modelo\EntregaUrgenciaModelo.cs" />
     <Compile Include="Modelo\EstadoModelo.cs" />
     <Compile Include="Modelo\EstadoPagoModelo.cs" />
     <Compile Include="Modelo\EtapaProcesoModelo.cs" />
     <Compile Include="Modelo\FormaPagoModelo.cs" />
+    <Compile Include="Modelo\TipoReprocesoModelo.cs" />
     <Compile Include="Modelo\ImpuestoModelo.cs" />
     <Compile Include="Modelo\MarcaModelo.cs" />
     <Compile Include="Modelo\MaterialModelo.cs" />

@@ -58,6 +58,18 @@ namespace JLLR.Core.Venta.Servicio.Modelo
         [DataMember]
         public decimal? Valor { get; set; }
 
+        /// <summary>
+        /// ValorIndustriales
+        /// </summary>
+        [DataMember]
+        public decimal? ValorIndustriales { get; set; }
+
+        /// <summary>
+        /// ValorComisionIndustrialesId
+        /// </summary>
+        [DataMember]
+        public int? DetalleVentaComisionIndustrialesId { get; set; }
+
 
 
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using JLLR.Core.Venta.Proveedor.Negocio;
+using JLLR.Core.Venta.Proveedor.Validacion;
 using JLLR.Core.Venta.Servicio.DTOs;
 using JLLR.Core.Venta.Servicio.Modelo;
 using JLLR.Core.Venta.Servicio.EnsambladorDTOs;
@@ -29,6 +30,7 @@ namespace JLLR.Core.Venta.Servicio.Transformador
         private readonly EnsambladorModelo _ensambladorModelo = new EnsambladorModelo();
         private readonly  ensambladorLogistica.EnsambladorModelo _ensambladorModeloLogistica= new ensambladorLogistica.EnsambladorModelo();
         private  readonly ensambladorLogistica.EnsambladorEntidad _ensambladorEntidadLogistica= new ensambladorLogistica.EnsambladorEntidad();
+        private readonly  ValidacionVenta _validacionVenta= new ValidacionVenta();
 
         #endregion
 
@@ -593,6 +595,57 @@ namespace JLLR.Core.Venta.Servicio.Transformador
                 throw;
             }
         }
+        #endregion
+        #endregion
+
+        #region VALIDACION
+
+        #region ORDEN TRABAJO
+
+        /// <summary>
+        ///  Obtiene el numero de  ordenes que fueron asignadas  como urgentes
+        /// </summary>
+        /// <param name="sucursalId"></param>
+        /// <returns></returns>
+        public int ObtenerNumeroEntregaUrgentesPorFechaActual(int sucursalId)
+        {
+            try
+            {
+                return _validacionVenta.ObtenerNumeroEntregaUrgentesPorFechaActual(sucursalId);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+
+        #region VENTA COMISION  INDUSTRIALES
+
+
+        /// <summary>
+        /// Obtiene el valor de la venta de  industriales
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public VentaComisionIndustrialesDTOs ObtenerComisionIndustrialesPorPuntoVenta(int puntoVentaId)
+        {
+            try
+            {
+                return
+                    _ensambladorModeloDTOs.CrearVentaComisionIndustrialesDtOs(
+                        _ventaNegocio.ObtenerComisionIndustrialesPorPuntoVenta(puntoVentaId));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+
         #endregion
         #endregion
 

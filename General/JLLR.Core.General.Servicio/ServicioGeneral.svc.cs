@@ -547,5 +547,44 @@ namespace JLLR.Core.General.Servicio
         }
         #endregion
 
+        #region ENTREGA URGENCIA
+        /// <summary>
+        /// Entrega  urgencia
+        /// </summary>
+        /// <returns></returns>
+        public List<EntregaUrgenciaModelo> ObtenerEntregaUrgencias()
+        {
+            try
+            {
+
+                return _generalTransformadorParametrizacion.ObtenerEntregaUrgencias();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region TIPO PROCESO
+        /// <summary>
+        /// Obtiene los tipos de  reproceso
+        /// </summary>
+        /// <returns></returns>
+        public List<TipoReprocesoModelo> ObtenerTipoReprocesos()
+        {
+            try
+            {
+                return _generalTransformadorParametrizacion.ObtenerTipoReprocesos();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
     }
 }

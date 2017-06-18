@@ -68,8 +68,8 @@ namespace JLLR.Core.Seguridad.Proveedor.DAOs
                     join acceso in entidad.ACCESO on accesoPerfil.ACCESO_ID equals acceso.ACCESO_ID
                     join modulo in entidad.MODULO on acceso.MODULO_ID equals modulo.MODULO_ID
                     join submodulo in entidad.SUBMODULO on acceso.SUBMODULO_ID equals submodulo.SUBMODULO_ID
-                    where usuario.USUARIO_ID == usuarioId && usuario.HABILITADO == true
-                    select new AccesoDTOs {AccesoId = acceso.ACCESO_ID,Acceso = acceso.DESCRIPCION,ModuloId =modulo.MODULO_ID,Modulo = modulo.DESCRIPCION,SubModulo = submodulo.DESCRIPCION,SubmoduloId = submodulo.SUBMODULO_ID,Url = acceso.URL};
+                    where usuario.USUARIO_ID == usuarioId && usuario.HABILITADO == true && acceso.ESTA_HABILITADO==true
+                              select new AccesoDTOs {AccesoId = acceso.ACCESO_ID,Acceso = acceso.DESCRIPCION,ModuloId =modulo.MODULO_ID,Modulo = modulo.DESCRIPCION,SubModulo = submodulo.DESCRIPCION,SubmoduloId = submodulo.SUBMODULO_ID,Url = acceso.URL};
                 return accesos.OrderBy(m =>m.Acceso);
             }
             catch (Exception ex)

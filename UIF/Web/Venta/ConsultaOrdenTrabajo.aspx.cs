@@ -2,14 +2,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Net.Mime;
 using System.Threading;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Web.Base;
 using Web.DTOs.Contabilidad;
+using Web.DTOs.FlujoProceso;
 using Web.DTOs.Venta;
 using Web.Models.Contabilidad;
 using Web.Models.FlujoProceso;
@@ -33,13 +37,98 @@ namespace Web.Venta
         private static List<DetalleOrdenTrabajoVistaModelo> _listaDetalleOrdenTrabajoVistaModelos= null;
         private static List<HistorialProcesoVistaModelo> _listaHistorialProcesoVistaModelos = null;
         private static  List<CuentaPorCobrarVistaDTOs>  _listaCuentaPorCobrarVistaDtOses = null;
-
-        private static List<DetalleOrdenTrabajoFotografiaVistaDTOs> _listaDetalleOrdenTrabajoFotografiaVistaDtOses =
-            null; 
+        private static List<DetalleOrdenTrabajoFotografiaVistaDTOs> _listaDetalleOrdenTrabajoFotografiaVistaDtOses =null;
         #endregion
 
         #region Eventos
-        
+
+        /// <summary>
+        /// Graba la prenda a eprocesar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _botonGrabarReproceso_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                HistorialReprocesoVistaDTOs _historialReprocesoVistaDtOs = new HistorialReprocesoVistaDTOs();
+
+                HistorialProcesoVistaModelo _historialProcesoVista = new HistorialProcesoVistaModelo();
+                //GUarda el proceso inicial que es la entrega del cliente hacia  la franquicia
+                _historialProcesoVista.OrdenTrabajoId = _listaConsultaOrdenTrabajoVistaDtOses.Select(m => m.OrdenTrabajoId).First(); 
+                EtapaProcesoVistaModelo _etapaProcesoVistaModelo = new EtapaProcesoVistaModelo();
+                _etapaProcesoVistaModelo.EtapaProcesoId = Convert.ToInt32(Util.EtapaProceso.EntregaFranquiciaHaciaCliente);
+                _historialProcesoVista.EtapaProceso = _etapaProcesoVistaModelo;
+                _historialProcesoVista.FechaRegistro = DateTime.Now;
+                _historialProcesoVista.FechaInicio = DateTime.Now;
+                _historialProcesoVista.FechaFin = DateTime.Now;
+                _historialProcesoVista.SucursalId = User.SucursalId;
+                _historialProcesoVista.PuntoVentaId = User.PuntoVentaId;
+                _historialProcesoVista.NumeroOrden = _listaConsultaOrdenTrabajoVistaDtOses.Select(m => m.NumeroOrden).First().ToString();
+               // _servicioDelegadoFlujoProceso.GrabarHistorialProceso(_historialProcesoVista);
+                //_listaHistorialProcesoVistaModelos = _servicioDelegadoFlujoProceso.ObtenerHIstorialProcesosPorNumeroOrden(_numeroOrden.Text);
+                _historialReprocesoVistaDtOs.HistorialProceso = _historialProcesoVista;
+
+                List<HistorialReprocesoVistaModelo> _listaHistorialReproceso = new List<HistorialReprocesoVistaModelo>();
+
+                foreach (GridViewRow row in _datosReproceso.Rows)
+                {
+                    if (row.RowType == DataControlRowType.DataRow)
+                    {
+                        CheckBox _reproceso = (row.Cells[0].FindControl("_reproceso") as CheckBox);
+                        if (_reproceso.Checked == true)
+                        {
+                            TextBox _motivoReproceso = (row.Cells[0].FindControl("_motivoReproceso") as TextBox);
+                            HistorialReprocesoVistaModelo _historialReprocesoVistaModelo= new HistorialReprocesoVistaModelo();
+                            _historialReprocesoVistaModelo.DetallePrendaOrdenTrabajoId =Convert.ToInt64(row.Cells[0].Text);
+                            _historialReprocesoVistaModelo.Motivo = _motivoReproceso.Text.ToUpper();
+                            _historialReprocesoVistaModelo.HistorialProceso = _historialProcesoVista;
+                            _listaHistorialReproceso.Add(_historialReprocesoVistaModelo);
+                        }
+                    }
+                }
+                _historialReprocesoVistaDtOs.HistorialReprocesos = _listaHistorialReproceso;
+
+               _servicioDelegadoFlujoProceso.GrabarHistorialReprocesos(_historialReprocesoVistaDtOs);
+            }
+            catch (Exception ex)
+            {
+
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_btnBuscar");
+            }
+        }
+
+        /// <summary>
+        /// Genera  reproceso
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _reproceso_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                int ordenCerrada = Convert.ToInt32(_listaHistorialProcesoVistaModelos.Where(a => a.EtapaProceso.EtapaProcesoId.Equals(Convert.ToInt32(Util.EtapaProceso.EntregaFranquiciaHaciaCliente))).Select(b => b.EtapaProceso.EtapaProcesoId).FirstOrDefault().ToString());
+                int ordenAnulada = Convert.ToInt32(_listaHistorialProcesoVistaModelos.Where(a => a.EtapaProceso.EtapaProcesoId.Equals(Convert.ToInt32(Util.EtapaProceso.AnulacionOrdenTrabajo))).Select(b => b.EtapaProceso.EtapaProcesoId).FirstOrDefault().ToString());
+
+                if (ordenCerrada == Convert.ToInt32(Util.EtapaProceso.EntregaFranquiciaHaciaCliente) || ordenAnulada == Convert.ToInt32(Util.EtapaProceso.AnulacionOrdenTrabajo))
+                    Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Orden_Cerrada").ToString(), "_btnBuscar");
+                else
+                {
+                    _botonReproceso_ModalPopupExtender.TargetControlID = "_btnBuscar";
+                    _botonReproceso_ModalPopupExtender.Show();
+                    _datosReproceso.DataSource = _listaConsultaOrdenTrabajoVistaDtOses;
+                    _datosReproceso.DataBind();
+                }
+              
+
+            }
+            catch (Exception ex)
+            {
+
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_btnBuscar");
+            }
+              
+        }
         /// <summary>
         /// Metodo para visualizar la  imagen
         /// </summary>
@@ -74,6 +163,59 @@ namespace Web.Venta
             }
         }
 
+
+        /// <summary>
+        /// Guarda la  imagen
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="path"></param>
+        /// <param name="fileName"></param>
+        /// <param name="fileExt"></param>
+        /// <returns></returns>
+        private bool GuardarImage(HttpPostedFileBase file, string path, string fileName, string fileExt)
+        {
+            try
+            {
+                System.Drawing.Image imagen = System.Drawing.Image.FromStream(file.InputStream);
+                Bitmap bmp1 = new Bitmap(imagen);
+                ImageCodecInfo jpgEncoder = GetEncoder(ImageFormat.Jpeg);
+                // Create an Encoder object based on the GUID
+                // for the Quality parameter category.
+                System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
+
+                // Create an EncoderParameters object.
+                // An EncoderParameters object has an array of EncoderParameter
+                // objects. In this case, there is only one
+                // EncoderParameter object in the array.
+                EncoderParameters myEncoderParameters = new EncoderParameters(1);
+                EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 50); //0 el máximo de compresión y 100 el mínimo
+
+                myEncoderParameters.Param[0] = myEncoderParameter;
+                bmp1.Save(Path.Combine(path, fileName), jpgEncoder, myEncoderParameters);
+
+                return true;
+            }
+            catch (System.IO.IOException ex)
+            {
+                return false;
+            }
+        }
+
+        private ImageCodecInfo GetEncoder(ImageFormat format)
+        {
+
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
+
+            foreach (ImageCodecInfo codec in codecs)
+            {
+                if (codec.FormatID == format.Guid)
+                {
+                    return codec;
+                }
+            }
+            return null;
+        }
+
         /// <summary>
         /// Agrega las fotografias 
         /// </summary>
@@ -100,11 +242,31 @@ namespace Web.Venta
                                 extensionValida = true;
                             }
                         }
+
                         if (extensionValida)
                         { 
                         using (BinaryReader reader = new BinaryReader(_direccionFotografia.PostedFile.InputStream))
                         {
-                            byte[] image = reader.ReadBytes(_direccionFotografia.PostedFile.ContentLength);
+
+                                //System.Drawing.Image imagen = System.Drawing.Image.FromStream(_direccionFotografia.PostedFile.InputStream);
+                                //Bitmap bmp1 = new Bitmap(imagen);
+
+                                //ImageCodecInfo jpgEncoder = GetEncoder(ImageFormat.Jpeg);
+                                //// Create an Encoder object based on the GUID
+                                //// for the Quality parameter category.
+                                //System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
+
+                                //// Create an EncoderParameters object.
+                                //// An EncoderParameters object has an array of EncoderParameter
+                                //// objects. In this case, there is only one
+                                //// EncoderParameter object in the array.
+                                //EncoderParameters myEncoderParameters = new EncoderParameters(1);
+                                //EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 50); //0 el máximo de compresión y 100 el mínimo
+
+                                //myEncoderParameters.Param[0] = myEncoderParameter;
+
+                                //bmp1.Save(Path.Combine("C:\\Prueba\\", "prueba.Jpeg"), jpgEncoder, myEncoderParameters);
+                                byte[] image = reader.ReadBytes(_direccionFotografia.PostedFile.ContentLength);
                             DetalleOrdenTrabajoFotografiaVistaModelo _detalleOrdenTrabajoFotografiaVistaModelo =
                                 new DetalleOrdenTrabajoFotografiaVistaModelo();
                             DetallePrendaOrdenTrabajoVistaModelo _detallePrendaOrdenTrabajo =
@@ -115,9 +277,12 @@ namespace Web.Venta
                                 _detallePrendaOrdenTrabajo;
                             _detalleOrdenTrabajoFotografiaVistaModelo.FechaRegistro = DateTime.Now;
                             _detalleOrdenTrabajoFotografiaVistaModelo.UsuarioId = User.Id;
+                                
                             _detalleOrdenTrabajoFotografiaVistaModelo.ImagenPrenda = image;
                             _servicioDelegadoVenta.GrabarDetalleOrdenFotografia(
                                 _detalleOrdenTrabajoFotografiaVistaModelo);
+                                
+                              
 
 
 
@@ -141,7 +306,7 @@ namespace Web.Venta
                 else
                     Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Tamano_No_Valido").ToString(), "_btnBuscar");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_btnBuscar");
@@ -812,10 +977,13 @@ namespace Web.Venta
             _anularOrden.Enabled = false;
             _btnAceptarObservaciones.Enabled = false;
             _abonar.Enabled = false;
+            _reproceso.Enabled = false;
             _cerrarOrdenTrabajo.CssClass= "btn btn-primary";
             _anularOrden.CssClass= "btn btn-primary";
             _btnAceptarObservaciones.CssClass= "btn btn-primary";
             _abonar.CssClass= "btn btn-primary";
+            _reproceso.CssClass = "btn btn-primary";
+
         }
 
         /// <summary>
@@ -828,6 +996,7 @@ namespace Web.Venta
             _anularOrden.Enabled = true;
             _btnAceptarObservaciones.Enabled = true;
             _abonar.Enabled = true;
+            _reproceso.Enabled = true;
         }
 
         /// <summary>

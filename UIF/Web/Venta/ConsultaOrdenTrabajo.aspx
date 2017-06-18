@@ -200,8 +200,8 @@
  <nav>
         <asp:Button ID="_cerrarOrdenTrabajo" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Cerrar_Orden_Trabajo%>"  ValidationGroup="GuardarOrden" class="btn btn-primary" OnClick="_cerrarOrdenTrabajo_Click" />
         <asp:Button ID="_anularOrden" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Anular_Orden_Trabajo%>"  ValidationGroup="GuardarOrden" class="btn btn-primary" OnClick="_anularOrden_Click"  />
-        
         <asp:Button ID="_abonar" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Abonar%>"  ValidationGroup="AbonarOrden" class="btn btn-primary" OnClick="_abonar_Click"  />
+        <asp:Button ID="_reproceso" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Reproceso%>"  ValidationGroup="Reproceso" class="btn btn-primary"  OnClick="_reproceso_OnClick"  />
         <asp:Button ID="_cancelar" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Cancelar%>"  class="btn btn-primary" OnClick="_cancelar_Click" />
 
     </nav>
@@ -549,6 +549,63 @@
                         </div>
                         <div class="modal-footer">
                             <asp:Button ID="_btnCancelaVisualizarImagen" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Cancelar%>"  class="btn btn-primary" data-dismiss="modal" />
+                        </div>
+                    </asp:Panel>
+     </div>
+     </div>
+    
+     <div class="row" >
+                  <div class="col-md-12" >
+                <asp:Button ID="_botonReproceso" runat="server" Text="" Visible="false" />
+                    <cc1:ModalPopupExtender ID="_botonReproceso_ModalPopupExtender" PopupControlID="_panelReproceso" runat="server" BehaviorID="_botonReproceso_ModalPopupExtender" TargetControlID="_botonReproceso" BackgroundCssClass="modal-Backgoround" X="250" OnCancelScript="_botonCancelarReproceso" OnOkScript="_botonGrabarReproceso"  Y="50">
+                    </cc1:ModalPopupExtender>
+                    <asp:Panel ID="_panelReproceso" runat="server" Style="display: none; background-color: white; width: 80%; height:auto;align-content:center ">
+                        <div class="modal-header">
+                            <h4 class="modal-title"><asp:Literal ID="Literal5" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Reproceso%>"></asp:Literal></h4>
+                        </div>
+                        <div class="modal-body">
+                            
+                            <div class="row">
+                                    <div class="col-md-12">
+                                        <asp:GridView ID="_datosReproceso" runat="server" AutoGenerateColumns="False" OnRowCommand="_datos_RowCommand" Width="100%"  ShowFooter="True" >
+                            <Columns>
+                                <asp:BoundField DataField="DetallePrendaOrdenTrabajoId" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Codigo_Orden_Trabajo%>" />
+                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Prenda%>" DataField="Prenda" />
+                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Marca%>" DataField="Marca" />
+                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Color%>" DataField="Color" />
+                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Informacion_Visual%>" DataField="InformacionVisual" />
+                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Estado_Prenda%>" DataField="EstadoPrenda" />
+                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Numero_Interno%>" DataField="NumeroInternoPrenda"  >
+                                <ItemStyle HorizontalAlign="Right" VerticalAlign="Middle" />
+                                </asp:BoundField>
+                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Tratamiento_Especial%>" DataField="TratamientoEspecial" />
+                                
+                                <asp:TemplateField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Envio_Reproceso%>" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle">
+                                    <ItemTemplate >
+                                        <asp:CheckBox ID="_reproceso" runat="server" />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                 <asp:TemplateField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Observacion_Reproceso%>" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle">
+                                    <ItemTemplate>
+                                        <asp:TextBox ID="_motivoReproceso" runat="server" class="form-control" ValidationGroup="Reproceso"  ></asp:TextBox>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                             <HeaderStyle CssClass="tableCabecera" ></HeaderStyle>
+                             <RowStyle CssClass="tableItem"></RowStyle>
+                             <FooterStyle CssClass="tablePiePagina"></FooterStyle>
+                        </asp:GridView>
+                                          
+                                     </div>
+                                    
+                              </div>
+                            
+                           
+                          
+                        </div>
+                        <div class="modal-footer">
+                            <asp:Button ID="_botonGrabarReproceso" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Reproceso%>" class="btn btn-primary" data-dismiss="modal"   OnClick="_botonGrabarReproceso_OnClick" ValidationGroup="Reproceso"/>
+                            <asp:Button ID="_botonCancelarReproceso" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Cancelar%>"  class="btn btn-primary" data-dismiss="modal" />
                         </div>
                     </asp:Panel>
      </div>

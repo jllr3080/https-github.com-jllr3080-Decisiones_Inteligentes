@@ -97,5 +97,11 @@ namespace Web.Models.Venta.Negocio
         /// NumeroOrdenManual
         /// </summary>
         public string NumeroOrdenManual { get; set; }
+
+        /// <summary>
+        /// EntregaUrgencia
+        /// </summary>
+        
+        public EntregaUrgenciaVistaModelo EntregaUrgencia { get; set; }
     }
 }

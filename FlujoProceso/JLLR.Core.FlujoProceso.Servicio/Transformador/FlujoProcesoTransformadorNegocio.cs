@@ -156,6 +156,69 @@ namespace JLLR.Core.FlujoProceso.Servicio.Transformador
 
         #endregion
 
+
+        /// <summary>
+        /// Graba  el historial de  los reprocesos
+        /// </summary>
+        /// <param name="historialReprocesoDtOs"></param>
+        public void GrabarHistorialReprocesos(HistorialReprocesoDTOs historialReprocesoDtOs)
+        {
+            try
+            {
+                _flujoProcesoNegocio.GrabarHistorialReprocesos(_ensambladorEntidadDTOs.CrearHistorialReprocesoDtOs(historialReprocesoDtOs));
+
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+
+        }
+        #endregion
+
+        #region HISTORIAL RECLAMO  REPROCESO PRENDA
+
+        /// <summary>
+        /// Obtiene el historial de reproceso de las prendas
+        /// </summary>
+        /// <param name="detallePrendaOrdenTrabajoId"></param>
+        /// <returns></returns>
+        public List<HistorialReclamoReprocesoPrendaModelo>
+            ObtenerHistorialReclamoReprocesoPrendaPorDetallePrendaOrdenTrabajoId(int detallePrendaOrdenTrabajoId)
+        {
+            try
+            {
+                return
+                    _ensambladorModelo.CrearHistorialReclamoReprocesoPrendas(
+                        _flujoProcesoNegocio.ObtenerHistorialReclamoReprocesoPrendaPorDetallePrendaOrdenTrabajoId(
+                            detallePrendaOrdenTrabajoId));
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Graba el  historial del reproceso de prendas   y los reclamos 
+        /// </summary>
+        /// <param name="historialReclamoReprocesoPrenda"></param>
+        public void GrabarHistorialReclamoReprocesoPrenda(
+            HistorialReclamoReprocesoPrendaModelo historialReclamoReprocesoPrenda)
+        {
+            try
+            {
+               _flujoProcesoNegocio.GrabarHistorialReclamoReprocesoPrenda(_ensambladorEntidad.CrearHistorialReclamoReprocesoPrenda(historialReclamoReprocesoPrenda));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
     }
 }

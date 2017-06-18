@@ -14,6 +14,12 @@ namespace JLLR.Core.Base.Proveedor.Entidades
     
     public partial class HISTORIAL_PROCESO
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public HISTORIAL_PROCESO()
+        {
+            this.HISTORIAL_REPROCESO = new HashSet<HISTORIAL_REPROCESO>();
+        }
+    
         public int HISTORIAL_PROCESO_ID { get; set; }
         public Nullable<long> ORDEN_TRABAJO_ID { get; set; }
         public Nullable<int> ETAPA_PROCESO_ID { get; set; }
@@ -34,5 +40,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
     
         public virtual ETAPA_PROCESO ETAPA_PROCESO { get; set; }
         public virtual ORDEN_TRABAJO ORDEN_TRABAJO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HISTORIAL_REPROCESO> HISTORIAL_REPROCESO { get; set; }
     }
 }

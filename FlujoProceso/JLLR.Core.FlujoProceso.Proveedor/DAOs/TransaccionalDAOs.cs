@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using JLLR.Core.Base.Proveedor.DAOs;
@@ -18,6 +19,8 @@ namespace JLLR.Core.FlujoProceso.Proveedor.DAOs
     {
         #region Declaracion e Instancias
         private readonly  Decisiones_Inteligentes _entidad= new Decisiones_Inteligentes();
+        private readonly  HistorialProcesoDAOs _historialProcesoDaOs= new HistorialProcesoDAOs();
+        private readonly  HistorialReprocesoDAOs _historialReprocesoDaOs= new HistorialReprocesoDAOs();
         #endregion
 
         #region REPORTES
@@ -75,6 +78,43 @@ namespace JLLR.Core.FlujoProceso.Proveedor.DAOs
                 throw;
             }
         }
+
+        #endregion
+
+        #region  TRANSACCIONAL
+
+        
+        /// <summary>
+        /// Graba  el historial de  los reprocesos
+        /// </summary>
+        /// <param name="historialReprocesoDtOs"></param>
+        public void GrabarHistorialReprocesos(HistorialReprocesoDTOs historialReprocesoDtOs)
+        {
+            using (System.Transactions.TransactionScope transaction = new System.Transactions.TransactionScope())
+                {
+                    try
+                    {
+
+                        HISTORIAL_PROCESO historialProceso =_historialProcesoDaOs.GrabarHistorialProceso(historialReprocesoDtOs.HistorialProceso);
+
+                        foreach (HISTORIAL_REPROCESO  historialReproceso in historialReprocesoDtOs.HistorialReprocesos)
+                        {
+                            historialReproceso.HISTORIAL_PROCESO_ID = historialProceso.HISTORIAL_PROCESO_ID;
+                            _historialReprocesoDaOs.GrabarHistorialReproceso(historialReproceso);
+                        }
+                        
+                        transaction.Complete();
+                    
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(ex.Message);
+                    }
+                }
+
+         }
+           
+        
 
         #endregion
     }

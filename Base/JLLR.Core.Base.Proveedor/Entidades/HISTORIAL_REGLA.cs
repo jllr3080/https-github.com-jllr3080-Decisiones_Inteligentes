@@ -14,12 +14,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
     
     public partial class HISTORIAL_REGLA
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public HISTORIAL_REGLA()
-        {
-            this.ORDEN_TRABAJO_DESCUENTO = new HashSet<ORDEN_TRABAJO_DESCUENTO>();
-        }
-    
         public long HISTORIAL_REGLA_ID { get; set; }
         public Nullable<long> ORDEN_TRABAJO_ID { get; set; }
         public Nullable<int> ACCION_REGLA_ID { get; set; }
@@ -27,8 +21,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<int> USUARIO_ID { get; set; }
     
         public virtual ACCION_REGLA ACCION_REGLA { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ORDEN_TRABAJO_DESCUENTO> ORDEN_TRABAJO_DESCUENTO { get; set; }
         public virtual ORDEN_TRABAJO ORDEN_TRABAJO { get; set; }
     }
 }

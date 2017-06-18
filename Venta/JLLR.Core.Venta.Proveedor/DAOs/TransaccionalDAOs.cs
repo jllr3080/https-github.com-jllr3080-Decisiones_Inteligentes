@@ -486,7 +486,7 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
             {
 
 
-                var estadosCuenta = _entidad.ESTADO_CUENTA(puntoventaId,fechaDesde, fechaHasta);
+                var estadosCuenta = _entidad.ESTADO_CUENTA_V1(puntoventaId,fechaDesde, fechaHasta);
                 List<EstadoCuentaDTOs> _estadoCuentaDtOses = new List<EstadoCuentaDTOs>();
                 foreach (var estadoCuenta in estadosCuenta)
                 {
@@ -495,7 +495,10 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                     _estadoCuentaDtOs.Detalle = estadoCuenta.DETALLE;
                     _estadoCuentaDtOs.FechaIngreso = estadoCuenta.FECHA_INGRESO;
                     _estadoCuentaDtOs.NumeroPrenda = estadoCuenta.CANTIDAD;
-                    _estadoCuentaDtOs.Valor = estadoCuenta.VALOR;
+                    _estadoCuentaDtOs.ValorTotal = estadoCuenta.VALOR_TOTAL;
+                    _estadoCuentaDtOs.ValorFranquicia = estadoCuenta.VALOR_FRANQUICIA;
+                    _estadoCuentaDtOs.ValorIndustriales = estadoCuenta.VALOR_INDUSTRIALES;
+                    _estadoCuentaDtOs.ValorQuimica = estadoCuenta.VALOR_QUIMICA;
                     _estadoCuentaDtOses.Add(_estadoCuentaDtOs);
 
                 }
@@ -648,6 +651,41 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                 throw;
             }
         }
+
+        #region VENTA COMISION  INDUSTRIALES
+
+
+        /// <summary>
+        /// Obtiene el valor de la venta de  industriales
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public VentaComisionIndustrialesDTOs ObtenerComisionIndustrialesPorPuntoVenta(int puntoVentaId)
+        {
+            try
+            {
+                var comisionIndustriales = from comisionIndustrial in _entidad.VENTA_COMISION_INDUSTRIALES
+                    join detalleComisionIndustriales in _entidad.DETALLE_VENTA_COMISION_INDUSTRIALES on
+                        comisionIndustrial.VENTA_COMISION_INDUSTRIALES_ID equals
+                        detalleComisionIndustriales.VENTA_COMISION_INDUSTRIALES_ID
+                    where comisionIndustrial.PUNTO_VENTA_ID == puntoVentaId
+                    select new VentaComisionIndustrialesDTOs()
+                    {
+                        VentaComisionIndustriales = comisionIndustrial,
+                        DetalleVentaComisionIndustriales = (List<DETALLE_VENTA_COMISION_INDUSTRIALES>)(comisionIndustrial.DETALLE_VENTA_COMISION_INDUSTRIALES)
+                    };
+
+                 return comisionIndustriales.FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+
+        }
+
+        #endregion
 
         #endregion
     }

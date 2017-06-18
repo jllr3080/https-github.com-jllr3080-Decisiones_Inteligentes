@@ -25,8 +25,8 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<int> INDIVIDUO_ID { get; set; }
         public Nullable<System.DateTime> FECHA_NACIMIENTO { get; set; }
     
-        public virtual TIPO_GENERO TIPO_GENERO { get; set; }
         public virtual INDIVIDUO INDIVIDUO { get; set; }
+        public virtual TIPO_GENERO TIPO_GENERO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ORDEN_TRABAJO> ORDEN_TRABAJO { get; set; }
     }

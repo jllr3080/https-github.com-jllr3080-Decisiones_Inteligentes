@@ -17,18 +17,19 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CONDICION_IMPUESTO()
         {
-            this.PORCENTAJE_IMPUESTO = new HashSet<PORCENTAJE_IMPUESTO>();
             this.PROVEEDOR_IMPUESTO = new HashSet<PROVEEDOR_IMPUESTO>();
+            this.PORCENTAJE_IMPUESTO = new HashSet<PORCENTAJE_IMPUESTO>();
         }
     
         public int CONDICION_IMPUESTO_ID { get; set; }
         public Nullable<int> IMPUESTO_ID { get; set; }
         public Nullable<bool> HABILITADO { get; set; }
+        public string DESCRIPCION { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PORCENTAJE_IMPUESTO> PORCENTAJE_IMPUESTO { get; set; }
+        public virtual ICollection<PROVEEDOR_IMPUESTO> PROVEEDOR_IMPUESTO { get; set; }
         public virtual IMPUESTO IMPUESTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PROVEEDOR_IMPUESTO> PROVEEDOR_IMPUESTO { get; set; }
+        public virtual ICollection<PORCENTAJE_IMPUESTO> PORCENTAJE_IMPUESTO { get; set; }
     }
 }

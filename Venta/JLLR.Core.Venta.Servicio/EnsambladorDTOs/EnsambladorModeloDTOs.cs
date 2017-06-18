@@ -175,7 +175,10 @@ namespace JLLR.Core.Venta.Servicio.EnsambladorDTOs
             return new modeloDTOs.EstadoCuentaDTOs()
             {
               Detalle = e.Detalle,
-              Valor=e.Valor,
+              ValorTotal= e.ValorTotal,
+              ValorFranquicia = e.ValorFranquicia,
+              ValorIndustriales = e.ValorIndustriales,
+              ValorQuimica = e.ValorQuimica,
               NumeroOrden=e.NumeroOrden,
               NumeroPrenda = e.NumeroPrenda,
               FechaIngreso = e.FechaIngreso
@@ -334,6 +337,42 @@ namespace JLLR.Core.Venta.Servicio.EnsambladorDTOs
 
         }
         #endregion
+
+        #region VENTA COMISION INDSTRIALES DTO
+        /// <summary>
+        /// Convierte el modelo DTO en una entidad DTO
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public modeloDTOs.VentaComisionIndustrialesDTOs CrearVentaComisionIndustrialesDtOs(entidadDTOs.VentaComisionIndustrialesDTOs e)
+        {
+            return new modeloDTOs.VentaComisionIndustrialesDTOs()
+            {
+              VentaComisionIndustriales = _ensambladorModelo.CrearVentaComisionIndustriales(e.VentaComisionIndustriales),
+              DetalleVentaComisionIndustriales = _ensambladorModelo.CreardeDetalleVentaComisionesIndustriales(e.DetalleVentaComisionIndustriales),
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos  Usuario en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<modeloDTOs.VentaComisionIndustrialesDTOs> CrearVentaComisionesIndustrialesDtOs(IQueryable<entidadDTOs.VentaComisionIndustrialesDTOs> listadoModelo)
+        {
+            List<modeloDTOs.VentaComisionIndustrialesDTOs> listaEntidad = new List<modeloDTOs.VentaComisionIndustrialesDTOs>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearVentaComisionIndustrialesDtOs(modelo));
+            }
+            return listaEntidad;
+
+        }
+        #endregion
+
+
 
     }
 }

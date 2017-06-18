@@ -85,6 +85,7 @@
     <Compile Include="DTOs\ParametroDescuentoDTOs.cs" />
     <Compile Include="DTOs\ParametroReversoDTOs.cs" />
     <Compile Include="DTOs\PrendaMarcaDTOs.cs" />
+    <Compile Include="DTOs\VentaComisionIndustrialesDTOs.cs" />
     <Compile Include="EnsambladorDTOs\EnsambladorEntidadDTOs.cs" />
     <Compile Include="EnsambladorDTOs\EnsambladorModeloDTOs.cs" />
     <Compile Include="Ensamblador\EnsambladorEntidad.cs" />
@@ -99,7 +100,9 @@
     <Compile Include="Modelo\OrdenTrabajoComisionModelo.cs" />
     <Compile Include="Modelo\OrdenTrabajoDescuentoModelo.cs" />
     <Compile Include="Modelo\OrdenTrabajoModelo.cs" />
+    <Compile Include="Modelo\Parametrizacion\DetalleVentaComisionIndustrialesModelo.cs" />
     <Compile Include="Modelo\Parametrizacion\NumeroOrdenModelo.cs" />
+    <Compile Include="Modelo\Parametrizacion\VentaComisionIndustrialesModelo.cs" />
     <Compile Include="Modelo\Parametrizacion\VentaComisionModelo.cs" />
     <Compile Include="Negocio\VentaNegocio.cs" />
     <Compile Include="ServicioDelegado\ServicioDelegadoContabilidad.cs" />

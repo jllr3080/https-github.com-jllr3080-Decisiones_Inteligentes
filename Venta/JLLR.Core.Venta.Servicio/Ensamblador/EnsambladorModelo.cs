@@ -64,6 +64,11 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
             {
                 EstadoPagoId = Convert.ToInt32(e.ESTADO_PAGO_ID)
             };
+
+            EntregaUrgenciaModelo _entregaUrgencia = new EntregaUrgenciaModelo()
+            {
+                EntregaUrgenciaId = Convert.ToInt32(e.ENTREGA_URGENCIA_ID)
+            };
             return new modelo.OrdenTrabajoModelo
             {
                 OrdenTrabajoId = e.ORDEN_TRABAJO_ID,
@@ -79,7 +84,8 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                 EstadoPago = _estadoPago,
                 SeEnvio = e.SE_ENVIO,
                 EnvioMatriz = e.ENVIO_MATRIZ,
-                NumeroOrdenManual = e.NUMERO_ORDEN_MANUAL
+                NumeroOrdenManual = e.NUMERO_ORDEN_MANUAL,
+                EntregaUrgencia = _entregaUrgencia
 
             };
 
@@ -281,7 +287,9 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                 UsuarioId = e.USUARIO_ID,
                 Valor = e.VALOR,
                 FechaGeneracionComision = e.FECHA_GENERACION_COMISION,
-                OrdenTrabajoComisionId = e.ORDEN_TRABAJO_COMISION_ID
+                OrdenTrabajoComisionId = e.ORDEN_TRABAJO_COMISION_ID,
+                DetalleVentaComisionIndustrialesId = e.DETALLE_VENTA_COMISION_INDUSTRIALES_ID,
+                ValorIndustriales = e.VALOR_INDUSTRIALES
 
             };
 
@@ -696,6 +704,98 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
         }
 
         #endregion
+
+        #region  VENTA COMISION  INDUSTRIALES
+        /// <summary>
+        /// Convierte el DTO de entidad a modelo
+        /// </summary>
+        /// <param name="e">Entidad</param>
+        /// <returns></returns>
+        public modeloParametrizacion.VentaComisionIndustrialesModelo CrearVentaComisionIndustriales(entidad.VENTA_COMISION_INDUSTRIALES e)
+        {
+            if (e == null)
+                return null;
+
+            return new modeloParametrizacion.VentaComisionIndustrialesModelo
+            {
+               PuntoVentaId = e.PUNTO_VENTA_ID,
+               SucursalId = e.SUCURSAL_ID,
+               VentaComisionIndustrialesId = e.VENTA_COMISION_INDUSTRIALES_ID,
+               VendedorId = e.VENDEDOR_ID,
+               FechaComision = e.FECHA_COMISION
+            };
+
+        }
+
+        /// <summary>
+        /// Convierte un listado de DTO en listado de  modelos de DTO
+        /// </summary>
+        /// <param name="listadoEntidad">Listado de Entidades</param>
+        /// <returns></returns>
+        public List<modeloParametrizacion.VentaComisionIndustrialesModelo> CrearVentaComisionesIndustriales(IQueryable<entidad.VENTA_COMISION_INDUSTRIALES> listadoEntidad)
+        {
+            List<modeloParametrizacion.VentaComisionIndustrialesModelo> listaModelo = new List<modeloParametrizacion.VentaComisionIndustrialesModelo>();
+
+            foreach (var entidad in listadoEntidad)
+            {
+                listaModelo.Add(CrearVentaComisionIndustriales(entidad));
+            }
+            return listaModelo;
+
+        }
+
+        #endregion
+
+        #region DETALLE VENTA COMISION  INDUSTRIALES
+        /// <summary>
+        /// Convierte el DTO de entidad a modelo
+        /// </summary>
+        /// <param name="e">Entidad</param>
+        /// <returns></returns>
+        public modeloParametrizacion.DetalleVentaComisionIndustrialesModelo CreardeDetalleVentaComisionIndustriales(entidad.DETALLE_VENTA_COMISION_INDUSTRIALES e)
+        {
+            if (e == null)
+                return null;
+
+            ProductoPrecioModelo _productoPrecio= new ProductoPrecioModelo();
+            _productoPrecio.ProductoPrecioId = Convert.ToInt32(e.PRODUCTO_PRECIO_ID);
+
+            modeloParametrizacion.VentaComisionIndustrialesModelo _ventaComisionIndustriales= new modeloParametrizacion.VentaComisionIndustrialesModelo();
+            _ventaComisionIndustriales.VentaComisionIndustrialesId = Convert.ToInt32(e.VENTA_COMISION_INDUSTRIALES_ID);
+
+            return new modeloParametrizacion.DetalleVentaComisionIndustrialesModelo
+            {
+               UsuarioId = e.USUARIO_ID,
+               FechaCreacion = e.FECHA_CREACION,
+               EstaHabilitado = e.ESTA_HABILITADO,
+               DetalleVentaComisionIndustrialesId = e.DETALLE_VENTA_COMISION_INDUSTRIALES_ID,
+               Porcentaje = e.PORCENTAJE,
+               ProductoPrecio = _productoPrecio,
+               VentaComisionIndustriales = _ventaComisionIndustriales
+               
+            };
+
+        }
+
+        /// <summary>
+        /// Convierte un listado de DTO en listado de  modelos de DTO
+        /// </summary>
+        /// <param name="listadoEntidad">Listado de Entidades</param>
+        /// <returns></returns>
+        public List<modeloParametrizacion.DetalleVentaComisionIndustrialesModelo> CreardeDetalleVentaComisionesIndustriales(List<entidad.DETALLE_VENTA_COMISION_INDUSTRIALES> listadoEntidad)
+        {
+            List<modeloParametrizacion.DetalleVentaComisionIndustrialesModelo> listaModelo = new List<modeloParametrizacion.DetalleVentaComisionIndustrialesModelo>();
+
+            foreach (var entidad in listadoEntidad)
+            {
+                listaModelo.Add(CreardeDetalleVentaComisionIndustriales(entidad));
+            }
+            return listaModelo;
+
+        }
+
+        #endregion
+
         #endregion
     }
 }

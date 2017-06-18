@@ -26,12 +26,13 @@ namespace JLLR.Core.FlujoProceso.Proveedor.DAOs
         /// <summary>
         /// Graba el  historial del proceso
         /// </summary>
-        public void GrabarHistorialProceso(HISTORIAL_PROCESO historialProceso)
+        public HISTORIAL_PROCESO GrabarHistorialProceso(HISTORIAL_PROCESO historialProceso)
         {
             try
             {
                 _entidad.HISTORIAL_PROCESO.Add(historialProceso);
                 _entidad.SaveChanges();
+                return historialProceso; 
 
 
             }

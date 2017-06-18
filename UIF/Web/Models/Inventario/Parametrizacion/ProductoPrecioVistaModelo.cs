@@ -49,5 +49,7 @@ namespace Web.Models.Inventario.Parametrizacion
         /// </summary>
         
         public Boolean? Modificable { get; set; }
+
+      
     }
 }

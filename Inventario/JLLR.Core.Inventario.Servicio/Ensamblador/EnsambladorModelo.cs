@@ -51,7 +51,9 @@ namespace JLLR.Core.Inventario.Servicio.Ensamblador
                TipoProducto = tipoProducto,
                Material = material,
                Marca = marca,
-               Visible = e.VISIBLE
+               Visible = e.VISIBLE,
+               PrendaEspecial = e.PRENDA_ESPECIAL,
+               TiempoEntrega = e.TIEMPO_ENTREGA
                
                
 

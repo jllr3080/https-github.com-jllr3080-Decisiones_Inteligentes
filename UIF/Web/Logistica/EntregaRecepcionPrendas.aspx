@@ -56,6 +56,9 @@
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                      <asp:TemplateField>
+                                         <HeaderTemplate>
+                                             <asp:CheckBox ID="_todos" class="form-control" runat="server" AutoPostBack="True" OnCheckedChanged="_todos_OnCheckedChanged" />
+                                         </HeaderTemplate>
                                         <ItemTemplate>
                                             <asp:CheckBox ID="_aceptarEntrega" class="form-control" runat="server"  />
                                         </ItemTemplate>

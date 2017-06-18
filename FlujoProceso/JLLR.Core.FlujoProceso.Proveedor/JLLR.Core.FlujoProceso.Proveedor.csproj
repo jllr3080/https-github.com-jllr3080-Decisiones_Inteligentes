@@ -38,6 +38,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,8 +48,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAOs\HistorialProcesoDAOs.cs" />
+    <Compile Include="DAOs\HistorialReclamoReprocesoPrendaDAOs.cs" />
+    <Compile Include="DAOs\HistorialReprocesoDAOs.cs" />
     <Compile Include="DAOs\TransaccionalDAOs.cs" />
     <Compile Include="DTOs\HistorialProcesoDTOs.cs" />
+    <Compile Include="DTOs\HistorialReprocesoDTOs.cs" />
     <Compile Include="Negocio\FlujoProcesoNegocio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

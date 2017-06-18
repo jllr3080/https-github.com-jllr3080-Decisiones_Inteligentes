@@ -17,12 +17,12 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SUCURSAL()
         {
-            this.SECUENCIALES_SRI = new HashSet<SECUENCIALES_SRI>();
-            this.PUNTO_VENTA = new HashSet<PUNTO_VENTA>();
-            this.USUARIO = new HashSet<USUARIO>();
-            this.PORCENTAJE_IMPUESTO_SUCURSAL = new HashSet<PORCENTAJE_IMPUESTO_SUCURSAL>();
             this.CABECERA_FACTURACION = new HashSet<CABECERA_FACTURACION>();
+            this.SECUENCIALES_SRI = new HashSet<SECUENCIALES_SRI>();
+            this.PORCENTAJE_IMPUESTO_SUCURSAL = new HashSet<PORCENTAJE_IMPUESTO_SUCURSAL>();
+            this.PUNTO_VENTA = new HashSet<PUNTO_VENTA>();
             this.REGLA = new HashSet<REGLA>();
+            this.USUARIO = new HashSet<USUARIO>();
         }
     
         public int SUCURSAL_ID { get; set; }
@@ -30,16 +30,16 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<bool> ESTA_HABILITADO { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CABECERA_FACTURACION> CABECERA_FACTURACION { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SECUENCIALES_SRI> SECUENCIALES_SRI { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PUNTO_VENTA> PUNTO_VENTA { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<USUARIO> USUARIO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PORCENTAJE_IMPUESTO_SUCURSAL> PORCENTAJE_IMPUESTO_SUCURSAL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CABECERA_FACTURACION> CABECERA_FACTURACION { get; set; }
+        public virtual ICollection<PUNTO_VENTA> PUNTO_VENTA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<REGLA> REGLA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<USUARIO> USUARIO { get; set; }
     }
 }

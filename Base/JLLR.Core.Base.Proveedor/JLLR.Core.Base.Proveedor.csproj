@@ -124,6 +124,9 @@
     <Compile Include="Entidades\DETALLE_ARQUEO_CAJA.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entidades\DETALLE_HISTORIAL_REPROCESO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entidades\DETALLE_IMPUESTO_MOVIMIENTO_FACTURA.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
@@ -140,6 +143,9 @@
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\DETALLE_TRABAJO_FOTOGRAFIA.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\DETALLE_VENTA_COMISION_INDUSTRIALES.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\DIA.cs">
@@ -170,6 +176,9 @@
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\ESTADO_CUENTA_Result.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\ESTADO_CUENTA_V1_Result.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\ESTADO_PAGO.cs">
@@ -203,6 +212,9 @@
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\HISTORIAL_REGLA.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\HISTORIAL_REPROCESO.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\HISTORIAL_USUARIO.cs">
@@ -355,6 +367,9 @@
     <Compile Include="Entidades\TIPO_REGLA.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entidades\TIPO_REPROCESO.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entidades\TIPO_ROL_INDIVIDUO.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
@@ -380,6 +395,9 @@
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\VENTA_COMISION.cs">
+      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\VENTA_COMISION_INDUSTRIALES.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\VISITA.cs">

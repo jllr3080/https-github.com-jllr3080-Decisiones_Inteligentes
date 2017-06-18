@@ -99,5 +99,18 @@ namespace Web.Models.FlujoProceso
         /// </summary>
         
         public bool? PasoPorEstaEtapa { get; set; }
+
+
+        /// <summary>
+        /// SeEnvio
+        /// </summary>
+
+        public bool? SeEnvio { get; set; }
+
+        /// <summary>
+        /// EntregaParcial
+        /// </summary>
+     
+        public bool? EntregaParcial { get; set; }
     }
 }

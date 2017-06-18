@@ -228,6 +228,8 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Parametrizacion\Color.aspx" />
     <Content Include="Parametrizacion\Comision.aspx" />
+    <Content Include="Parametrizacion\ComisionIndustriales.aspx" />
+    <Content Include="Parametrizacion\Feriado.aspx" />
     <Content Include="Parametrizacion\Marca.aspx" />
     <Content Include="Parametrizacion\Prenda.aspx" />
     <Content Include="Parametrizacion\Promocion.aspx" />
@@ -341,6 +343,7 @@
     <Compile Include="DTOs\Contabilidad\CuentaPorCobrarVistaDTOs .cs" />
     <Compile Include="DTOs\Contabilidad\CuentaPorPagarVistaDTOs .cs" />
     <Compile Include="DTOs\FlujoProceso\HistorialProcesoVistaDTOs.cs" />
+    <Compile Include="DTOs\FlujoProceso\HistorialReprocesoVistaDTOs.cs" />
     <Compile Include="DTOs\Individuo\ClienteGeneralVistaDTOs.cs" />
     <Compile Include="DTOs\Individuo\ClienteVistaDTOs.cs" />
     <Compile Include="DTOs\Individuo\ProveedorVistaDTOs.cs.cs" />
@@ -426,8 +429,11 @@
     <Compile Include="Models\Contabilidad\HistorialCuentaPorCobrarVistaModelo.cs" />
     <Compile Include="Models\Contabilidad\HistorialCuentaPorPagarVistaModelo.cs" />
     <Compile Include="Models\FlujoProceso\HistorialProcesoVistaModelo.cs" />
+    <Compile Include="Models\FlujoProceso\HistorialReclamoReprocesoPrendaVistaModelo.cs" />
+    <Compile Include="Models\FlujoProceso\HistorialReprocesoVistaModelo.cs" />
     <Compile Include="Models\General\CiudadVistaModelo.cs" />
     <Compile Include="Models\General\ColorVistaModelo.cs" />
+    <Compile Include="Models\General\EntregaUrgenciaVistaModelo.cs" />
     <Compile Include="Models\General\EstadoVistaModelo.cs" />
     <Compile Include="Models\General\EstadoPagoVistaModelo.cs" />
     <Compile Include="Models\General\EtapaProcesoVistaModelo.cs" />
@@ -501,6 +507,20 @@
     </Compile>
     <Compile Include="Parametrizacion\Comision.aspx.designer.cs">
       <DependentUpon>Comision.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametrizacion\ComisionIndustriales.aspx.cs">
+      <DependentUpon>ComisionIndustriales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametrizacion\ComisionIndustriales.aspx.designer.cs">
+      <DependentUpon>ComisionIndustriales.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametrizacion\Feriado.aspx.cs">
+      <DependentUpon>Feriado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametrizacion\Feriado.aspx.designer.cs">
+      <DependentUpon>Feriado.aspx</DependentUpon>
     </Compile>
     <Compile Include="Parametrizacion\Marca.aspx.cs">
       <DependentUpon>Marca.aspx</DependentUpon>

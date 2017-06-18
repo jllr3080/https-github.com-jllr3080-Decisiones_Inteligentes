@@ -64,5 +64,17 @@ namespace Web.Models.Inventario.Parametrizacion
         /// </summary>
 
         public bool? Visible { get; set; }
+
+        /// <summary>
+        /// TiempoEntrega
+        /// </summary>
+
+        public int? TiempoEntrega { get; set; }
+
+        /// <summary>
+        /// PrendaEspecial
+        /// </summary>
+
+        public bool? PrendaEspecial { get; set; }
     }
 }

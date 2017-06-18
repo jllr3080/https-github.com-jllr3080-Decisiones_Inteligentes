@@ -241,6 +241,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Reprocesar .
+        /// </summary>
+        internal static string Boton_Reproceso {
+            get {
+                return ResourceManager.GetString("Boton_Reproceso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Generar Reporte.
         /// </summary>
         internal static string Btn_Generar_Reporte {
@@ -345,6 +354,15 @@ namespace Resources {
         internal static string Label_Cabecera_Grid_Cuenta_Por_Cobrar_Id {
             get {
                 return ResourceManager.GetString("Label_Cabecera_Grid_Cuenta_Por_Cobrar_Id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Envió Reproceso ?.
+        /// </summary>
+        internal static string Label_Cabecera_Grid_Envio_Reproceso {
+            get {
+                return ResourceManager.GetString("Label_Cabecera_Grid_Envio_Reproceso", resourceCulture);
             }
         }
         
@@ -471,6 +489,15 @@ namespace Resources {
         internal static string Label_Cabecera_Grid_Observacion {
             get {
                 return ResourceManager.GetString("Label_Cabecera_Grid_Observacion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Observación Reproceso.
+        /// </summary>
+        internal static string Label_Cabecera_Grid_Observacion_Reproceso {
+            get {
+                return ResourceManager.GetString("Label_Cabecera_Grid_Observacion_Reproceso", resourceCulture);
             }
         }
         
@@ -889,6 +916,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Motivo de Reproceso.
+        /// </summary>
+        internal static string Label_Motivo_Reproceso {
+            get {
+                return ResourceManager.GetString("Label_Motivo_Reproceso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Nombre del Cliente.
         /// </summary>
         internal static string Label_Nombre_Cliente {
@@ -1078,6 +1114,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Prendas Reproceso.
+        /// </summary>
+        internal static string Label_Reproceso {
+            get {
+                return ResourceManager.GetString("Label_Reproceso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Segundo Nombre (*).
         /// </summary>
         internal static string Label_Segundo_Nombre {
@@ -1146,6 +1191,15 @@ namespace Resources {
         internal static string Label_Tipo_Documento {
             get {
                 return ResourceManager.GetString("Label_Tipo_Documento", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tipo de  Entrega.
+        /// </summary>
+        internal static string Label_Tipo_Entrega {
+            get {
+                return ResourceManager.GetString("Label_Tipo_Entrega", resourceCulture);
             }
         }
         
@@ -1474,6 +1528,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Ya  no puede  ingresar  estas prendas como urgentes  ya supero el numero máximo de  envió urgentes.
+        /// </summary>
+        internal static string Mensaje_Numero_Prenda_Urgente {
+            get {
+                return ResourceManager.GetString("Mensaje_Numero_Prenda_Urgente", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Dato Obligatorio.
         /// </summary>
         internal static string Mensaje_Obligatorio {
@@ -1497,6 +1560,15 @@ namespace Resources {
         internal static string Mensaje_Orden_Trabajo_No_Existe {
             get {
                 return ResourceManager.GetString("Mensaje_Orden_Trabajo_No_Existe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a En la orden de producción no se debe de  mezclar ordenes especiales con normales realice otra orden de producción para prendas normales o especiales.
+        /// </summary>
+        internal static string Mensaje_Prenda_Especial {
+            get {
+                return ResourceManager.GetString("Mensaje_Prenda_Especial", resourceCulture);
             }
         }
         
@@ -1956,6 +2028,15 @@ namespace Resources {
         internal static string Titulo_Pagina_Impresion_Corta {
             get {
                 return ResourceManager.GetString("Titulo_Pagina_Impresion_Corta", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Inicio.
+        /// </summary>
+        internal static string Titulo_Pagina_Inicio {
+            get {
+                return ResourceManager.GetString("Titulo_Pagina_Inicio", resourceCulture);
             }
         }
         

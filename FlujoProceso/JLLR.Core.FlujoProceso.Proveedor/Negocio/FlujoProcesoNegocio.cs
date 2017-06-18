@@ -20,6 +20,9 @@ namespace JLLR.Core.FlujoProceso.Proveedor.Negocio
         #region Declaracion e Instancias
         private readonly  HistorialProcesoDAOs _historialProcesoDaOs= new HistorialProcesoDAOs();
         private  readonly  TransaccionalDAOs _transaccionalDaOs= new TransaccionalDAOs();
+        private readonly  HistorialReclamoReprocesoPrendaDAOs _historialReclamoReprocesoPrendaDaOs= new HistorialReclamoReprocesoPrendaDAOs();
+        private readonly  HistorialReprocesoDAOs _historialReprocesoDaOs= new HistorialReprocesoDAOs();
+        
         #endregion
 
         #region HISTORIAL PROCESO
@@ -146,7 +149,89 @@ namespace JLLR.Core.FlujoProceso.Proveedor.Negocio
         }
 
         #endregion
-        
+
+
+        /// <summary>
+        /// Graba  el historial de  los reprocesos
+        /// </summary>
+        /// <param name="historialReprocesoDtOs"></param>
+        public void GrabarHistorialReprocesos(HistorialReprocesoDTOs historialReprocesoDtOs)
+        {
+            try
+            {
+                _transaccionalDaOs.GrabarHistorialReprocesos(historialReprocesoDtOs);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
         #endregion
+
+        #region HISTORIAL RECLAMO  REPROCESO PRENDA
+
+        /// <summary>
+        /// Obtiene el historial de reproceso de las prendas
+        /// </summary>
+        /// <param name="detallePrendaOrdenTrabajoId"></param>
+        /// <returns></returns>
+        public IQueryable<HISTORIAL_RECLAMO_REPROCESO_PRENDA>
+            ObtenerHistorialReclamoReprocesoPrendaPorDetallePrendaOrdenTrabajoId(int detallePrendaOrdenTrabajoId)
+        {
+            try
+            {
+             return _historialReclamoReprocesoPrendaDaOs.ObtenerHistorialReclamoReprocesoPrendaPorDetallePrendaOrdenTrabajoId(detallePrendaOrdenTrabajoId);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Graba el  historial del reproceso de prendas   y los reclamos 
+        /// </summary>
+        /// <param name="historialReclamoReprocesoPrenda"></param>
+        public void GrabarHistorialReclamoReprocesoPrenda(
+            HISTORIAL_RECLAMO_REPROCESO_PRENDA historialReclamoReprocesoPrenda)
+        {
+            try
+            {
+                 _historialReclamoReprocesoPrendaDaOs.GrabarHistorialReclamoReprocesoPrenda(historialReclamoReprocesoPrenda);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region HISTORIAL REPROCESO
+        /// <summary>
+        /// Graba el  historial del reproceso de prendas   y los reclamos 
+        /// </summary>
+        /// <param name="historialReclamoReprocesoPrenda"></param>
+        public void GrabarHistorialReproceso(HISTORIAL_REPROCESO historialReproceso)
+        {
+            try
+            {
+                _historialReprocesoDaOs.GrabarHistorialReproceso(historialReproceso);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+
+            }
+        }
+        #endregion
+
+
+      
     }
 }

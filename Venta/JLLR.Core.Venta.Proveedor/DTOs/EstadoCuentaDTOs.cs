@@ -26,7 +26,23 @@ namespace JLLR.Core.Venta.Proveedor.DTOs
         /// <summary>
         /// Fecha de  Ingreso
         /// </summary>
-        public decimal? Valor{ get; set; }
+        public decimal? ValorTotal{ get; set; }
+
+
+        /// <summary>
+        /// ValorFranquicia
+        /// </summary>
+        public decimal? ValorFranquicia { get; set; }
+
+        /// <summary>
+        /// ValorQuimica
+        /// </summary>
+        public decimal? ValorQuimica { get; set; }
+
+        /// <summary>
+        /// ValorIndustriales
+        /// </summary>
+        public decimal? ValorIndustriales{ get; set; }
 
         /// <summary>
         /// Fecha de  Ingreso

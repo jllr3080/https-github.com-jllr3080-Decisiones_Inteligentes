@@ -94,7 +94,7 @@
                     <asp:AsyncPostBackTrigger ControlID="_menu"  EventName="Load"  />
                 </Triggers>
             </asp:UpdatePanel>
-           <asp:UpdateProgress ID="upGetDocs" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
+        <asp:UpdateProgress ID="upGetDocs" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
             <ProgressTemplate>
             <div style="position:fixed;top:0px;bottom:0px;left:0;right:0;overflow:hidden;padding:0;margin:0;background-color:black;filter:alpha(opacity=80);opacity:0.8;z-index:100000;" id="Background">
                 <div id="Progress"  style="border-style: none;border-color: inherit;border-width: 0px;position:fixed;top:34%;left:40%;height:48%;width:20%;z-index:100001;background-color:#FFFFFF;background-repeat: no-repeat;background-position:center;background-image:url('../Content/Imagen/F25_.gif');" >

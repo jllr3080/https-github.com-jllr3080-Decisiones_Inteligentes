@@ -24,9 +24,9 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<int> TIPO_ROL_INDIVIDUO_ID { get; set; }
         public Nullable<int> INDIVIDUO_ID { get; set; }
     
-        public virtual TIPO_ROL_INDIVIDUO TIPO_ROL_INDIVIDUO { get; set; }
-        public virtual INDIVIDUO INDIVIDUO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CABECERA_MOVIMIENTO_FE> CABECERA_MOVIMIENTO_FE { get; set; }
+        public virtual INDIVIDUO INDIVIDUO { get; set; }
+        public virtual TIPO_ROL_INDIVIDUO TIPO_ROL_INDIVIDUO { get; set; }
     }
 }

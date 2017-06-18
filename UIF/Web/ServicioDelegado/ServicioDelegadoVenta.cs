@@ -738,5 +738,36 @@ namespace Web.ServicioDelegado
         }
         #endregion
         #endregion
+
+        #region VALIDACION
+
+        #region ORDEN TRABAJO
+
+        /// <summary>
+        ///  Obtiene el numero de  ordenes que fueron asignadas  como urgentes
+        /// </summary>
+        /// <param name="sucursalId"></param>
+        /// <returns></returns>
+        public int ObtenerNumeroEntregaUrgentesPorFechaActual(int sucursalId)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerNumeroEntregaUrgentesPorFechaActual?sucursalId="+ sucursalId);
+                var js = new JavaScriptSerializer();
+                js.MaxJsonLength = Int32.MaxValue;
+
+                return js.Deserialize<int>(json);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+        #endregion
     }
 }

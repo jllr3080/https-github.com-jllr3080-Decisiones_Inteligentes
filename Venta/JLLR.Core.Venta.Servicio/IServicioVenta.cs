@@ -333,7 +333,25 @@ namespace JLLR.Core.Venta.Servicio
         #endregion
 
         #endregion
+        #region VALIDACION
 
+        #region ORDEN TRABAJO
+
+        /// <summary>
+        ///  Obtiene el numero de  ordenes que fueron asignadas  como urgentes
+        /// </summary>
+        /// <param name="sucursalId"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(UriTemplate = "ObtenerNumeroEntregaUrgentesPorFechaActual?sucursalId={sucursalId}", ResponseFormat = WebMessageFormat.Json)]
+
+     
+        int ObtenerNumeroEntregaUrgentesPorFechaActual(int sucursalId);
+
+
+        #endregion
+
+        #endregion
 
 
 

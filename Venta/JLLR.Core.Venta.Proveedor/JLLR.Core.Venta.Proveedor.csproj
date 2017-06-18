@@ -52,6 +52,7 @@
     <Compile Include="DAOs\DetalleOrdenTrabajoFotografiaDAOs.cs" />
     <Compile Include="DAOs\DetalleOrdenTrabajoObservacionDAOs.cs" />
     <Compile Include="DAOs\DetallePrendaOrdenTrabajoDAOs.cs" />
+    <Compile Include="DAOs\DetalleVentaComisionIndustrialesDAOs.cs" />
     <Compile Include="DAOs\HistorialReglaDAOs.cs" />
     <Compile Include="DAOs\NumeroOrdenDAOs.cs" />
     <Compile Include="DAOs\OrdenTrabajoComisionDAOs.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="DAOs\OrdenTrabajoDescuentoDAOs.cs" />
     <Compile Include="DAOs\TransaccionalDAOs.cs" />
     <Compile Include="DAOs\VentaComisionDAOs.cs" />
+    <Compile Include="DAOs\VentaComisionIndustrialesDAOs.cs" />
     <Compile Include="DTOs\ConsultaOrdenTrabajoDTOs.cs" />
     <Compile Include="DTOs\DetalleOrdenTrabajoFotografiaDTOs.cs" />
     <Compile Include="DTOs\DetalleOrdenTrabajoObservacionDTOs.cs" />
@@ -67,14 +69,14 @@
     <Compile Include="DTOs\OrdenTrabajoDescuentoDTO.cs" />
     <Compile Include="DTOs\OrdenTrabajoDTOs.cs" />
     <Compile Include="DTOs\PrendaMarcaDTOs.cs" />
+    <Compile Include="DTOs\VentaComisionIndustrialesDTOs.cs" />
     <Compile Include="Negocio\VentaNegocio.cs" />
     <Compile Include="Negocio\VentaParametrizacion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\Enum.cs" />
+    <Compile Include="Validacion\ValidacionVenta.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Validacion\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\Base\JLLR.Core.Base.Proveedor\JLLR.Core.Base.Proveedor.csproj">
       <Project>{7b02ff61-3c7a-4a7d-b1a8-c62710253a1b}</Project>

@@ -27,10 +27,10 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public string PUNTO_EMISION { get; set; }
         public string SECUENCIAL { get; set; }
     
+        public virtual CABECERA_FACTURACION CABECERA_FACTURACION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CABECERA_MOVIMIENTO_FACTURA> CABECERA_MOVIMIENTO_FACTURA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CABECERA_MOVIMIENTO_FE> CABECERA_MOVIMIENTO_FE { get; set; }
-        public virtual CABECERA_FACTURACION CABECERA_FACTURACION { get; set; }
     }
 }

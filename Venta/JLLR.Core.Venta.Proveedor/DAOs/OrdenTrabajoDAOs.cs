@@ -1,6 +1,7 @@
 ﻿#region using
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -91,6 +92,37 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
 
                 return _ordenTrabajoDtOses.FirstOrDefault();
                 
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+        /// <summary>
+        ///  Obtiene el numero de  ordenes que fueron asignadas  como urgentes
+        /// </summary>
+        /// <param name="sucursalId"></param>
+        /// <returns></returns>
+        public int ObtenerNumeroEntregaUrgentesPorFechaActual( int sucursalId)
+        {
+            try
+            {
+                string fechaString= DateTime.Now.Date.ToShortDateString();
+                DateTime fecha = Convert.ToDateTime(fechaString);
+
+                var numerosEntregaUrgente = from ordenTrabajo in _entidad.ORDEN_TRABAJO
+                    where EntityFunctions.TruncateTime(ordenTrabajo.FECHA_INGRESO) == fecha && ordenTrabajo.PUNTO_VENTA_ID==sucursalId
+                                            select ordenTrabajo;
+
+                int contador = 0;
+                foreach (var ordenTrabajo in numerosEntregaUrgente)
+                {
+                    if (ordenTrabajo.ENTREGA_URGENCIA_ID == 2)
+                        contador += 1;
+                }
+
+                return contador;
             }
             catch (Exception ex)
             {

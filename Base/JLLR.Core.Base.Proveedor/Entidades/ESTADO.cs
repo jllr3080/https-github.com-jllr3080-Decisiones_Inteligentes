@@ -18,8 +18,8 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public ESTADO()
         {
             this.CIUDAD = new HashSet<CIUDAD>();
-            this.PARROQUIA = new HashSet<PARROQUIA>();
             this.DIRECCION = new HashSet<DIRECCION>();
+            this.PARROQUIA = new HashSet<PARROQUIA>();
         }
     
         public int ESTADO_ID { get; set; }
@@ -28,10 +28,10 @@ namespace JLLR.Core.Base.Proveedor.Entidades
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CIUDAD> CIUDAD { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DIRECCION> DIRECCION { get; set; }
         public virtual PAIS PAIS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PARROQUIA> PARROQUIA { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DIRECCION> DIRECCION { get; set; }
     }
 }

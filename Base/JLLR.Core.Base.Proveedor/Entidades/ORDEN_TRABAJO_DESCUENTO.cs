@@ -36,7 +36,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<APROBACION_DESCUENTO> APROBACION_DESCUENTO { get; set; }
-        public virtual HISTORIAL_REGLA HISTORIAL_REGLA { get; set; }
         public virtual ORDEN_TRABAJO ORDEN_TRABAJO { get; set; }
     }
 }

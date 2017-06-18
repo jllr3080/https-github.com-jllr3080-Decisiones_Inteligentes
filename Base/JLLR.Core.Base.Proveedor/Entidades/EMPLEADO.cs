@@ -28,7 +28,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
     
         public virtual ESPECIALIDAD_EMPLEADO ESPECIALIDAD_EMPLEADO { get; set; }
         public virtual ESTADO_CIVIL ESTADO_CIVIL { get; set; }
-        public virtual NIVEL_EDUCACION NIVEL_EDUCACION { get; set; }
         public virtual INDIVIDUO INDIVIDUO { get; set; }
+        public virtual NIVEL_EDUCACION NIVEL_EDUCACION { get; set; }
     }
 }

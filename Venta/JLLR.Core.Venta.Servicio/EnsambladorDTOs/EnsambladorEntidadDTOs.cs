@@ -181,7 +181,10 @@ namespace JLLR.Core.Venta.Servicio.EnsambladorDTOs
             return new entidadDTOs.EstadoCuentaDTOs()
             {
                NumeroOrden = m.NumeroOrden,
-               Valor = m.Valor,
+               ValorTotal = m.ValorTotal,
+               ValorFranquicia = m.ValorFranquicia,
+               ValorIndustriales = m.ValorIndustriales,
+               ValorQuimica = m.ValorQuimica,
                NumeroPrenda = m.NumeroPrenda,
                FechaIngreso = m.FechaIngreso,
                Detalle = m.Detalle
@@ -304,7 +307,6 @@ namespace JLLR.Core.Venta.Servicio.EnsambladorDTOs
         }
         #endregion
 
-
         #region ORDEN TRABAJO  DESCUENTO DTO
         /// <summary>
         /// Convierte el modelo DTO en una entidad DTO
@@ -333,6 +335,40 @@ namespace JLLR.Core.Venta.Servicio.EnsambladorDTOs
             foreach (var modelo in listadoModelo)
             {
                 listaEntidad.Add(CrearOrdenTrabajoDescuentoDto(modelo));
+            }
+            return listaEntidad;
+
+        }
+        #endregion
+
+        #region VENTA COMISION INDUSTRUALES
+        /// <summary>
+        /// Convierte el modelo DTO en una entidad DTO
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public entidadDTOs.VentaComisionIndustrialesDTOs CrearVentaComisionIndustrialesDtOs(modeloDTOs.VentaComisionIndustrialesDTOs m)
+        {
+            return new entidadDTOs.VentaComisionIndustrialesDTOs()
+            {
+               VentaComisionIndustriales = _ensambladorEntidad.CrearVentaComisionIndustriales(m.VentaComisionIndustriales),
+               DetalleVentaComisionIndustriales = _ensambladorEntidad.CrearDetalleVentaComisionesIndustriales(m.DetalleVentaComisionIndustriales)
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos  Usuario en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<entidadDTOs.VentaComisionIndustrialesDTOs> CrearVentaComisionesIndustrialesDtOs(List<modeloDTOs.VentaComisionIndustrialesDTOs> listadoModelo)
+        {
+            List<entidadDTOs.VentaComisionIndustrialesDTOs> listaEntidad = new List<entidadDTOs.VentaComisionIndustrialesDTOs>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearVentaComisionIndustrialesDtOs(modelo));
             }
             return listaEntidad;
 

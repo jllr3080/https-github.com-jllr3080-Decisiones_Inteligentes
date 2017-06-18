@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using JLLR.Core.Venta.Proveedor.Validacion;
 using JLLR.Core.Venta.Servicio.DTOs;
 using JLLR.Core.Venta.Servicio.Modelo;
 using JLLR.Core.Venta.Servicio.Modelo.Parametrizacion;
@@ -23,6 +24,7 @@ namespace JLLR.Core.Venta.Servicio
         #region  DECLARACIONES  E INSTANCIAS
         private readonly VentaTransfomadorNegocio _ventaTransformadorNegocio = new VentaTransfomadorNegocio();
         private  readonly  VentaNegocio _ventaNegocio= new VentaNegocio();
+        
         #endregion
 
         #region TRANSACCIONAL
@@ -554,6 +556,30 @@ namespace JLLR.Core.Venta.Servicio
             {
                _ventaTransformadorNegocio.GrabarDetalleOrdenFotografia(detalleTrabajoFotografia);
 
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+        #endregion
+
+        #region VALIDACION
+
+        #region ORDEN TRABAJO
+
+        /// <summary>
+        ///  Obtiene el numero de  ordenes que fueron asignadas  como urgentes
+        /// </summary>
+        /// <param name="sucursalId"></param>
+        /// <returns></returns>
+        public int ObtenerNumeroEntregaUrgentesPorFechaActual(int sucursalId)
+        {
+            try
+            {
+                return _ventaTransformadorNegocio.ObtenerNumeroEntregaUrgentesPorFechaActual(sucursalId);
             }
             catch (Exception ex)
             {

@@ -792,4 +792,31 @@
   <data name="Mensaje_Tamano_No_Valido" xml:space="preserve">
     <value>El tamaño de  la imagen no es  válido, máximo  1mb</value>
   </data>
+  <data name="Label_Tipo_Entrega" xml:space="preserve">
+    <value>Tipo de  Entrega</value>
+  </data>
+  <data name="Boton_Reproceso" xml:space="preserve">
+    <value>Reprocesar </value>
+  </data>
+  <data name="Label_Reproceso" xml:space="preserve">
+    <value>Prendas Reproceso</value>
+  </data>
+  <data name="Mensaje_Numero_Prenda_Urgente" xml:space="preserve">
+    <value>Ya  no puede  ingresar  estas prendas como urgentes  ya supero el numero máximo de  envió urgentes</value>
+  </data>
+  <data name="Mensaje_Prenda_Especial" xml:space="preserve">
+    <value>En la orden de producción no se debe de  mezclar ordenes especiales con normales realice otra orden de producción para prendas normales o especiales</value>
+  </data>
+  <data name="Label_Motivo_Reproceso" xml:space="preserve">
+    <value>Motivo de Reproceso</value>
+  </data>
+  <data name="Titulo_Pagina_Inicio" xml:space="preserve">
+    <value>Inicio</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Envio_Reproceso" xml:space="preserve">
+    <value>Envió Reproceso ?</value>
+  </data>
+  <data name="Label_Cabecera_Grid_Observacion_Reproceso" xml:space="preserve">
+    <value>Observación Reproceso</value>
+  </data>
 </root>

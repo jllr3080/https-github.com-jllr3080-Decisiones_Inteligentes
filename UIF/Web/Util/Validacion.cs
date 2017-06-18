@@ -88,5 +88,31 @@ namespace Web.Util
                 throw;
             }
         }
+
+        /// <summary>
+        /// CAlcula cuando  es jueves y le suma   dias para  ver cuando retorna las prendas
+        /// </summary>
+        /// <returns></returns>
+        public int CalculoDias()
+        {
+            try
+            {
+                int dias = 0;
+                int day = ((int)DateTime.Now.DayOfWeek == 0) ? 7 : (int)DateTime.Now.DayOfWeek;
+                if (day >= 4)
+                {
+                    dias =5;
+                }
+               
+
+                return dias;
+
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
     }
 }

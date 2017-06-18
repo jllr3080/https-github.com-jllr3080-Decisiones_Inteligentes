@@ -878,7 +878,79 @@ namespace JLLR.Core.General.Servicio.Ensamblador
 
         #endregion
 
+        #region  ENTREGA URGENCIA
+        /// <summary>
+        /// Convierte el DTO de entidad a modelo
+        /// </summary>
+        /// <param name="e">Entidad</param>
+        /// <returns></returns>
+        public Modelo.EntregaUrgenciaModelo CrearEntregaUrgencia(entidad.ENTREGA_URGENCIA e)
+        {
+            return new modelo.EntregaUrgenciaModelo
+            {
+               EntregaUrgenciaId = e.ENTREGA_URGENCIA_ID,
+               Descripcion = e.DESCRIPCION,
+               EstaHabilitado = e.ESTA_HABILITADO
 
+            };
+
+        }
+
+        /// <summary>
+        /// Convierte un listado de DTO en listado de  modelos de DTO
+        /// </summary>
+        /// <param name="listadoEntidad">Listado de Entidades</param>
+        /// <returns></returns>
+        public List<modelo.EntregaUrgenciaModelo> CrearEntregaUrgencias(IQueryable<entidad.ENTREGA_URGENCIA> listadoEntidad)
+        {
+            List<modelo.EntregaUrgenciaModelo> listaModelo = new List<modelo.EntregaUrgenciaModelo>();
+
+            foreach (var entidad in listadoEntidad)
+            {
+                listaModelo.Add(CrearEntregaUrgencia(entidad));
+            }
+            return listaModelo;
+
+        }
+
+        #endregion
+
+        #region  TIPO DE REPROCESO
+        /// <summary>
+        /// Convierte el DTO de entidad a modelo
+        /// </summary>
+        /// <param name="e">Entidad</param>
+        /// <returns></returns>
+        public Modelo.TipoReprocesoModelo CrearTipoReproceso(entidad.TIPO_REPROCESO e)
+        {
+            return new modelo.TipoReprocesoModelo
+            {
+                TipoReprocesoId = e.TIPO_REPROCESO_ID,
+                Descripcion = e.DESCRIPCION,
+                EstaHabilitado = e.ESTA_HABILITADO
+
+            };
+
+        }
+
+        /// <summary>
+        /// Convierte un listado de DTO en listado de  modelos de DTO
+        /// </summary>
+        /// <param name="listadoEntidad">Listado de Entidades</param>
+        /// <returns></returns>
+        public List<modelo.TipoReprocesoModelo> CrearTipoReprocesos(IQueryable<entidad.TIPO_REPROCESO> listadoEntidad)
+        {
+            List<modelo.TipoReprocesoModelo> listaModelo = new List<modelo.TipoReprocesoModelo>();
+
+            foreach (var entidad in listadoEntidad)
+            {
+                listaModelo.Add(CrearTipoReproceso(entidad));
+            }
+            return listaModelo;
+
+        }
+
+        #endregion
     }
 
 }

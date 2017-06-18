@@ -14,6 +14,12 @@ namespace JLLR.Core.Base.Proveedor.Entidades
     
     public partial class PRODUCTO_PRECIO
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public PRODUCTO_PRECIO()
+        {
+            this.DETALLE_VENTA_COMISION_INDUSTRIALES = new HashSet<DETALLE_VENTA_COMISION_INDUSTRIALES>();
+        }
+    
         public int PRODUCTO_PRECIO_ID { get; set; }
         public Nullable<int> PRODUCTO_ID { get; set; }
         public Nullable<decimal> PRECIO { get; set; }
@@ -23,6 +29,8 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<int> PRODUCTO_TALLA_ID { get; set; }
     
         public virtual PRODUCTO PRODUCTO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DETALLE_VENTA_COMISION_INDUSTRIALES> DETALLE_VENTA_COMISION_INDUSTRIALES { get; set; }
         public virtual PRODUCTO_TALLA PRODUCTO_TALLA { get; set; }
     }
 }

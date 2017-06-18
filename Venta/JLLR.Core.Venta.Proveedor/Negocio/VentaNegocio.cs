@@ -170,7 +170,30 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
 
         }
 
-       
+        #region VENTA COMISION  INDUSTRIALES
+
+
+        /// <summary>
+        /// Obtiene el valor de la venta de  industriales
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public VentaComisionIndustrialesDTOs ObtenerComisionIndustrialesPorPuntoVenta(int puntoVentaId)
+        {
+            try
+            {
+               return _transaccionalDaOs.ObtenerComisionIndustrialesPorPuntoVenta(puntoVentaId);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+
+        #endregion
+
         #endregion
 
         #region ORDEN TRABAJO

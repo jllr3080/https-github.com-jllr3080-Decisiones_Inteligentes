@@ -43,7 +43,8 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                ESTADO_PAGO_ID = m.EstadoPago.EstadoPagoId,
                SE_ENVIO = m.SeEnvio,
                ENVIO_MATRIZ = m.EnvioMatriz,
-               NUMERO_ORDEN_MANUAL = m.NumeroOrdenManual
+               NUMERO_ORDEN_MANUAL = m.NumeroOrdenManual,
+               ENTREGA_URGENCIA_ID = m.EntregaUrgencia.EntregaUrgenciaId
             };
         }
 
@@ -168,7 +169,9 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                 USUARIO_ID = m.UsuarioId,
                 VALOR = m.Valor,
                 VENTA_COMISION_ID = m.VentaComision.VentaComisionId,
-                DETALLE_ORDEN_TRABAJO_ID= m.DetalleOrdenTrabajo.DetalleOrdenTrabajoId
+                DETALLE_ORDEN_TRABAJO_ID= m.DetalleOrdenTrabajo.DetalleOrdenTrabajoId,
+                VALOR_INDUSTRIALES = m.ValorIndustriales,
+                DETALLE_VENTA_COMISION_INDUSTRIALES_ID = m.DetalleVentaComisionIndustrialesId
             
             };
         }
@@ -453,6 +456,86 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
         }
         #endregion
 
+
+        #region VENTA COMISION INDUSTRIALES
+        /// <summary>
+        /// Convierte el modelo en una entidad
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public entidad.VENTA_COMISION_INDUSTRIALES CrearVentaComisionIndustriales(modeloParametrizacion.VentaComisionIndustrialesModelo m)
+        {
+            return new entidad.VENTA_COMISION_INDUSTRIALES()
+            {
+              PUNTO_VENTA_ID = m.PuntoVentaId,
+              SUCURSAL_ID = m.SucursalId,
+              VENDEDOR_ID = m.VendedorId,
+              FECHA_COMISION = m.FechaComision,
+              VENTA_COMISION_INDUSTRIALES_ID = m.VentaComisionIndustrialesId
+
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<entidad.VENTA_COMISION_INDUSTRIALES> CrearVentaComisionesIndustriales(List<modeloParametrizacion.VentaComisionIndustrialesModelo> listadoModelo)
+        {
+            List<entidad.VENTA_COMISION_INDUSTRIALES> listaEntidad = new List<entidad.VENTA_COMISION_INDUSTRIALES>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearVentaComisionIndustriales(modelo));
+            }
+            return listaEntidad;
+
+        }
+        #endregion
+
+
+        #region DETALLE VENTA COMISION INDUSTRIALES
+        /// <summary>
+        /// Convierte el modelo en una entidad
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public entidad.DETALLE_VENTA_COMISION_INDUSTRIALES CrearDetalleVentaComisionIndustriales(modeloParametrizacion.DetalleVentaComisionIndustrialesModelo m)
+        {
+            return new entidad.DETALLE_VENTA_COMISION_INDUSTRIALES()
+            {
+                VENTA_COMISION_INDUSTRIALES_ID = m.VentaComisionIndustriales.VentaComisionIndustrialesId,
+                DETALLE_VENTA_COMISION_INDUSTRIALES_ID = m.DetalleVentaComisionIndustrialesId,
+                PRODUCTO_PRECIO_ID = m.ProductoPrecio.ProductoPrecioId,
+                ESTA_HABILITADO = m.EstaHabilitado,
+                FECHA_CREACION = m.FechaCreacion,
+                PORCENTAJE = m.Porcentaje,
+                USUARIO_ID = m.UsuarioId
+
+
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<entidad.DETALLE_VENTA_COMISION_INDUSTRIALES> CrearDetalleVentaComisionesIndustriales(List<modeloParametrizacion.DetalleVentaComisionIndustrialesModelo> listadoModelo)
+        {
+            List<entidad.DETALLE_VENTA_COMISION_INDUSTRIALES> listaEntidad = new List<entidad.DETALLE_VENTA_COMISION_INDUSTRIALES>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearDetalleVentaComisionIndustriales(modelo));
+            }
+            return listaEntidad;
+
+        }
+        #endregion
 
         #endregion
     }

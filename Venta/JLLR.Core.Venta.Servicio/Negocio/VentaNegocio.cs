@@ -55,6 +55,25 @@ namespace JLLR.Core.Venta.Servicio.Negocio
                   _ventaTransfomadorNegocio.ObtenerbVentaComisionPorVariosParametros(
                       ordenTrabajoDtOs.OrdenTrabajo.Sucursal.SucursalId,
                       ordenTrabajoDtOs.OrdenTrabajo.PuntoVenta.PuntoVentaId, vieneRegla, ordenTrabajoDtOs.OrdenTrabajo.TipoLavado.TipoLavadoId,Convert.ToInt32(detalleOrdenTrabajo.PromocionAplicada));
+
+                    VentaComisionIndustrialesDTOs listaVentaComisionIndustrialesDtOses =
+                        _ventaTransfomadorNegocio.ObtenerComisionIndustrialesPorPuntoVenta(
+                            ordenTrabajoDtOs.OrdenTrabajo.PuntoVenta.PuntoVentaId);
+
+                    decimal porcentajeIndustriales = 0;
+                    int ventaComisionIndustrialesId = 0;
+                    foreach (var detalleVentaComisionIndustriales in listaVentaComisionIndustrialesDtOses.DetalleVentaComisionIndustriales)
+                    {
+                        //if (detalleVentaComisionIndustriales.ProductoPrecio.ProductoTalla.ProductoTallaId ==
+                        //    detalleOrdenTrabajo.ProductoTalla.ProductoTallaId)
+                        //{ 
+                            porcentajeIndustriales =Convert.ToDecimal(detalleVentaComisionIndustriales.Porcentaje);
+                            ventaComisionIndustrialesId =
+                                detalleVentaComisionIndustriales.DetalleVentaComisionIndustrialesId;
+                        //}
+
+                    }
+
                     OrdenTrabajoComisionModelo _ordenTrabajoComision=new OrdenTrabajoComisionModelo();
                     _ordenTrabajoComision.DetalleOrdenTrabajo = detalleOrdenTrabajo;
                     _ordenTrabajoComision.FechaGeneracionComision=DateTime.Now;
@@ -62,6 +81,11 @@ namespace JLLR.Core.Venta.Servicio.Negocio
                     _ordenTrabajoComision.VentaComision = _ventaComisionModelo;
                     _ordenTrabajoComision.Valor = (detalleOrdenTrabajo.ValorTotal*
                                                    _ventaComisionModelo.PorcentajeComision)/100;
+                    _ordenTrabajoComision.DetalleVentaComisionIndustrialesId = ventaComisionIndustrialesId;
+                    decimal totalQuimica=Convert.ToDecimal(detalleOrdenTrabajo.ValorTotal) -Convert.ToDecimal((detalleOrdenTrabajo.ValorTotal *
+                                                   _ventaComisionModelo.PorcentajeComision) / 100);
+                    _ordenTrabajoComision.ValorIndustriales= (totalQuimica *
+                                                   porcentajeIndustriales) / 100;
                     _ventaTransfomadorNegocio.GrabaOrdenTrabajoComision(_ordenTrabajoComision);
                     porcentajeMatriz = 100 -Convert.ToDecimal(_ventaComisionModelo.PorcentajeComision);
                     valorPago+= (Convert.ToDecimal(detalleOrdenTrabajo.ValorTotal * porcentajeMatriz)) /100;

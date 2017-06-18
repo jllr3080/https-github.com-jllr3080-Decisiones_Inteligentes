@@ -17,8 +17,8 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PORCENTAJE_IMPUESTO()
         {
-            this.PORCENTAJE_IMPUESTO_SUCURSAL = new HashSet<PORCENTAJE_IMPUESTO_SUCURSAL>();
             this.PROVEEDOR_IMPUESTO = new HashSet<PROVEEDOR_IMPUESTO>();
+            this.PORCENTAJE_IMPUESTO_SUCURSAL = new HashSet<PORCENTAJE_IMPUESTO_SUCURSAL>();
         }
     
         public int PORCENTAJE_IMPUESTO_ID { get; set; }
@@ -26,12 +26,12 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<int> GRUPO_IMPUESTO_ID { get; set; }
         public Nullable<int> CONDICION_IMPUESTO_ID { get; set; }
     
-        public virtual CONDICION_IMPUESTO CONDICION_IMPUESTO { get; set; }
-        public virtual GRUPO_IMPUESTO GRUPO_IMPUESTO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PORCENTAJE_IMPUESTO_SUCURSAL> PORCENTAJE_IMPUESTO_SUCURSAL { get; set; }
-        public virtual IMPUESTO IMPUESTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PROVEEDOR_IMPUESTO> PROVEEDOR_IMPUESTO { get; set; }
+        public virtual CONDICION_IMPUESTO CONDICION_IMPUESTO { get; set; }
+        public virtual GRUPO_IMPUESTO GRUPO_IMPUESTO { get; set; }
+        public virtual IMPUESTO IMPUESTO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PORCENTAJE_IMPUESTO_SUCURSAL> PORCENTAJE_IMPUESTO_SUCURSAL { get; set; }
     }
 }

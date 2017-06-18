@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="DAOs\CiudadDAOs.cs" />
     <Compile Include="DAOs\ColorDAOs.cs" />
+    <Compile Include="DAOs\EntregaUrgenciaDAOs.cs" />
     <Compile Include="DAOs\EstadoPagoDAOs.cs" />
     <Compile Include="DAOs\EtapaProcesoDAOs.cs" />
     <Compile Include="DAOs\FormaPagoDAOs.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="DAOs\TipoGeneroDAOs.cs" />
     <Compile Include="DAOs\TipoIdentificacionDAOs.cs" />
     <Compile Include="DAOs\TipoLavadoDAOs.cs" />
+    <Compile Include="DAOs\TipoReprocesoDAOs.cs" />
     <Compile Include="DAOs\TipoRolIndividuoDAOs.cs" />
     <Compile Include="DAOs\TipoTelefonoDAOs.cs" />
     <Compile Include="Negocio\GeneralNegocio.cs" />

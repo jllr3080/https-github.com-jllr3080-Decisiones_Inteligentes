@@ -69,6 +69,18 @@ namespace JLLR.Core.Inventario.Servicio.Modelo.Parametrizacion
         [DataMember]
         public bool? Visible{ get; set; }
 
+        /// <summary>
+        /// TiempoEntrega
+        /// </summary>
+        [DataMember]
+        public int? TiempoEntrega { get; set; }
+
+        /// <summary>
+        /// PrendaEspecial
+        /// </summary>
+        [DataMember]
+        public bool? PrendaEspecial { get; set; }
+
     }
 
 }
