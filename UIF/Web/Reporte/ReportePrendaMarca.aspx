@@ -16,13 +16,16 @@
            <div class="panel-heading"><asp:Literal runat="server" ID="_litearlBusquedaPorFecha" Text="<%$ Resources:Web_es_Ec,Panel_Busqueda_Orden_Trabajo%>"/></div>
         <div class="panel-body">
             <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <asp:Label ID="_labelNumeroOrden" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Prenda%>"></asp:Label>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <asp:Label ID="_labelMarca" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Marca%>"></asp:Label>
                     </div>
-                    <div class="col-md-3">
+                     <div class="col-md-2">
+                        <asp:Label ID="_labelColor" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Color%>"></asp:Label>
+                    </div>
+                    <div class="col-md-2">
                         <asp:Label ID="_labelFechaDesde" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Fecha%>"></asp:Label>
                     </div>
                     
@@ -30,16 +33,20 @@
             </div>
             
             <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                      <asp:DropDownList ID="_prenda" runat="server" CssClass="form-control" ValidationGroup="Obligatorio" DataTextField="Nombre" DataValueField="ProductoId" ></asp:DropDownList>
                      <asp:RequiredFieldValidator ID="_prendaValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="Obligatorio" ControlToValidate="_prenda" ></asp:RequiredFieldValidator>
                      
                     </div>
-                   <div class="col-md-3">
+                   <div class="col-md-2">
                          <asp:DropDownList ID="_marca" runat="server" CssClass="form-control" ValidationGroup="Obligatorio" DataTextField="Descripcion" DataValueField="MarcaId" ></asp:DropDownList>
                      <asp:RequiredFieldValidator ID="_marcavalidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="Obligatorio" ControlToValidate="_marca" ></asp:RequiredFieldValidator>
                     </div>
-                   <div class="col-md-3">
+                     <div class="col-md-2">
+                         <asp:DropDownList ID="_color" runat="server" CssClass="form-control" ValidationGroup="Obligatorio" DataTextField="Descripcion" DataValueField="ColorId" ></asp:DropDownList>
+                     <asp:RequiredFieldValidator ID="_colorValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="Obligatorio" ControlToValidate="_color" ></asp:RequiredFieldValidator>
+                    </div>
+                   <div class="col-md-2">
                          <asp:TextBox ID="_fechaDesde" runat="server" CssClass="form-control"></asp:TextBox>
                             <ajaxToolkit:CalendarExtender ID="_fechaDesdeExtensor" runat="server" BehaviorID="_fechaDesde_CalendarExtender" TargetControlID="_fechaDesde" Format="dd/MM/yyyy"  />
                             <ajaxToolkit:TextBoxWatermarkExtender id="_fechaDesdeMarcaAgua" runat="server" targetcontrolid="_fechaDesde" enabled="True" watermarktext="<%$ Resources:Web_es_Ec,Marca_Agua_Fecha%>"></ajaxToolkit:TextBoxWatermarkExtender>  

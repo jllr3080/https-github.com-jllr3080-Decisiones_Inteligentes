@@ -128,6 +128,8 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                     {
                         ORDEN_TRABAJO_COMISION ordenTrabajoComision= new ORDEN_TRABAJO_COMISION();
                         ordenTrabajoComision.VALOR = objetoOrdenTrabajoComision.VALOR*-1;
+                        ordenTrabajoComision.VALOR_INDUSTRIALES = objetoOrdenTrabajoComision.VALOR_INDUSTRIALES*-1;
+                        ordenTrabajoComision.VALOR_QUIMICA = objetoOrdenTrabajoComision.VALOR_QUIMICA*-1;
                         ordenTrabajoComision.DETALLE_ORDEN_TRABAJO_ID =
                             objetoOrdenTrabajoComision.DETALLE_ORDEN_TRABAJO_ID;
                         ordenTrabajoComision.FECHA_GENERACION_COMISION=DateTime.Now;
@@ -234,6 +236,7 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
 
                     foreach (var detalleOrdenTrabajo in ordenTrabajoDtOs.DetalleOrdenTrabajos)
                     {
+                        detalleOrdenTrabajo.VALOR_IMPUESTO = (detalleOrdenTrabajo.VALOR_TOTAL* detalleOrdenTrabajo.PORCENTAJE_IMPUESTO)/100;
                         detalleOrdenTrabajo.ORDEN_TRABAJO_ID = ordenTrabajo.ORDEN_TRABAJO_ID;
                         DETALLE_ORDEN_TRABAJO _detalleOrdenTrabajo=  _detalleOrdenTrabajoDaOs.GrabarDetelleOrdenTrabajo(detalleOrdenTrabajo);
                      }
@@ -361,7 +364,7 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
         /// <param name="marcaId"></param>
         /// <param name="fecha"></param>
         /// <returns></returns>
-        public IQueryable<PrendaMarcaDTOs> ObtenerPrendayMarcaPorVariosParametros(int prendaId, int marcaId, DateTime fecha)
+        public IQueryable<PrendaMarcaDTOs> ObtenerPrendayMarcaPorVariosParametros(int prendaId, int marcaId, DateTime fecha,int colorId)
         {
             try
             {
@@ -379,6 +382,37 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                                            historialProceso.ORDEN_TRABAJO_ID
                                        where  EntityFunctions.TruncateTime(ordenTrabajo.FECHA_INGRESO) == fecha && detallePrendaOrdenTrabajo.MARCA_ID == marcaId
                                        select new PrendaMarcaDTOs() { NumeroOrden = ordenTrabajo.NUMERO_ORDEN, FechaIngreso = ordenTrabajo.FECHA_INGRESO, NombreSucursal = puntoventa.DESCRIPCION, NombrePrenda = producto.NOMBRE, NombreMarca = marca.DESCRIPCION };
+
+                    return prendaMarcas;
+                }
+                else if (colorId != -1)
+                {
+                    var prendaMarcas = from ordenTrabajo in _entidad.ORDEN_TRABAJO
+                                       join detalleOrdenTrabajo in _entidad.DETALLE_ORDEN_TRABAJO on ordenTrabajo.ORDEN_TRABAJO_ID
+                                           equals
+                                           detalleOrdenTrabajo.ORDEN_TRABAJO_ID
+                                       join producto in _entidad.PRODUCTO on detalleOrdenTrabajo.PRODUCTO_ID equals
+                                           producto.PRODUCTO_ID
+                                       join puntoventa in _entidad.PUNTO_VENTA on ordenTrabajo.PUNTO_VENTA_ID equals
+                                           puntoventa.PUNTO_VENTA_ID
+                                       join detallePrendaOrdenTrabajo in _entidad.DETALLE_PRENDA_ORDEN_TRABAJO on
+                                           detalleOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID equals
+                                           detallePrendaOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID
+                                       join marca in _entidad.MARCA on detallePrendaOrdenTrabajo.MARCA_ID equals marca.MARCA_ID
+                                       join historialProceso in _entidad.HISTORIAL_PROCESO on ordenTrabajo.ORDEN_TRABAJO_ID equals
+                                           historialProceso.ORDEN_TRABAJO_ID
+                                       where
+                                           EntityFunctions.TruncateTime(ordenTrabajo.FECHA_INGRESO) == fecha &&
+                                           detallePrendaOrdenTrabajo.COLOR_ID == colorId
+                                       select
+                                           new PrendaMarcaDTOs()
+                                           {
+                                               NumeroOrden = ordenTrabajo.NUMERO_ORDEN,
+                                               FechaIngreso = ordenTrabajo.FECHA_INGRESO,
+                                               NombreSucursal = puntoventa.DESCRIPCION,
+                                               NombrePrenda = producto.NOMBRE,
+                                               NombreMarca = marca.DESCRIPCION
+                                           };
 
                     return prendaMarcas;
                 }
@@ -416,17 +450,31 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                 else
                 {
                     var prendaMarcas = from ordenTrabajo in _entidad.ORDEN_TRABAJO
-                                       join detalleOrdenTrabajo in _entidad.DETALLE_ORDEN_TRABAJO on ordenTrabajo.ORDEN_TRABAJO_ID equals
-                                           detalleOrdenTrabajo.ORDEN_TRABAJO_ID
-                                       join producto in _entidad.PRODUCTO on detalleOrdenTrabajo.PRODUCTO_ID equals producto.PRODUCTO_ID
-                                       join puntoventa in _entidad.PUNTO_VENTA on ordenTrabajo.PUNTO_VENTA_ID equals
-                                           puntoventa.PUNTO_VENTA_ID
-                                       join detallePrendaOrdenTrabajo in _entidad.DETALLE_PRENDA_ORDEN_TRABAJO on detalleOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID equals detallePrendaOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID
-                                       join marca in _entidad.MARCA on detallePrendaOrdenTrabajo.MARCA_ID equals marca.MARCA_ID
-                                       join historialProceso in _entidad.HISTORIAL_PROCESO on ordenTrabajo.ORDEN_TRABAJO_ID equals
-                                           historialProceso.ORDEN_TRABAJO_ID
-                                       where EntityFunctions.TruncateTime(ordenTrabajo.FECHA_INGRESO) == fecha && detalleOrdenTrabajo.PRODUCTO_ID == prendaId && detallePrendaOrdenTrabajo.MARCA_ID == marcaId
-                                       select new PrendaMarcaDTOs() { NumeroOrden = ordenTrabajo.NUMERO_ORDEN, FechaIngreso = ordenTrabajo.FECHA_INGRESO, NombreSucursal = puntoventa.DESCRIPCION, NombrePrenda = producto.NOMBRE, NombreMarca = marca.DESCRIPCION };
+                        join detalleOrdenTrabajo in _entidad.DETALLE_ORDEN_TRABAJO on ordenTrabajo.ORDEN_TRABAJO_ID
+                            equals
+                            detalleOrdenTrabajo.ORDEN_TRABAJO_ID
+                        join producto in _entidad.PRODUCTO on detalleOrdenTrabajo.PRODUCTO_ID equals
+                            producto.PRODUCTO_ID
+                        join puntoventa in _entidad.PUNTO_VENTA on ordenTrabajo.PUNTO_VENTA_ID equals
+                            puntoventa.PUNTO_VENTA_ID
+                        join detallePrendaOrdenTrabajo in _entidad.DETALLE_PRENDA_ORDEN_TRABAJO on
+                            detalleOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID equals
+                            detallePrendaOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID
+                        join marca in _entidad.MARCA on detallePrendaOrdenTrabajo.MARCA_ID equals marca.MARCA_ID
+                        join historialProceso in _entidad.HISTORIAL_PROCESO on ordenTrabajo.ORDEN_TRABAJO_ID equals
+                            historialProceso.ORDEN_TRABAJO_ID
+                        where
+                            EntityFunctions.TruncateTime(ordenTrabajo.FECHA_INGRESO) == fecha &&
+                            detalleOrdenTrabajo.PRODUCTO_ID == prendaId && detallePrendaOrdenTrabajo.MARCA_ID == marcaId
+                        select
+                            new PrendaMarcaDTOs()
+                            {
+                                NumeroOrden = ordenTrabajo.NUMERO_ORDEN,
+                                FechaIngreso = ordenTrabajo.FECHA_INGRESO,
+                                NombreSucursal = puntoventa.DESCRIPCION,
+                                NombrePrenda = producto.NOMBRE,
+                                NombreMarca = marca.DESCRIPCION
+                            };
 
                     return prendaMarcas;
                 }

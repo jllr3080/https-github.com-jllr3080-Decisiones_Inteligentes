@@ -31,6 +31,13 @@ namespace JLLR.Core.FlujoProceso.Servicio.Modelo
         public int? DetallePrendaOrdenTrabajoId { get; set; }
 
 
-       
+        /// <summary>
+        /// FechaEstimadaEntrega
+        /// </summary>
+        [DataMember]
+        public DateTime? FechaEstimadaEntrega { get; set; }
+
+
+
     }
 }

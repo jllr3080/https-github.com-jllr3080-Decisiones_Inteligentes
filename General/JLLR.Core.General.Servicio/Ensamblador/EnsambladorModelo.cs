@@ -951,6 +951,45 @@ namespace JLLR.Core.General.Servicio.Ensamblador
         }
 
         #endregion
+
+        #region MES
+        /// <summary>
+        /// Convierte el DTO de entidad a modelo
+        /// </summary>
+        /// <param name="e">Entidad</param>
+        /// <returns></returns>
+        public Modelo.MesModelo CrearMes(entidad.MES e)
+        {
+            return new modelo.MesModelo
+            {
+               MesId = e.MES_ID,
+                Descripcion = e.DESCRIPCION,
+                EstaHabilitado = e.ESTA_HABILITADO,
+                FechaHasta = e.FECHA_DESDE,
+                FechaDesde = e.FECHA_HASTA
+
+            };
+
+        }
+
+        /// <summary>
+        /// Convierte un listado de DTO en listado de  modelos de DTO
+        /// </summary>
+        /// <param name="listadoEntidad">Listado de Entidades</param>
+        /// <returns></returns>
+        public List<modelo.MesModelo> CrearMeses(IQueryable<entidad.MES> listadoEntidad)
+        {
+            List<modelo.MesModelo> listaModelo = new List<modelo.MesModelo>();
+
+            foreach (var entidad in listadoEntidad)
+            {
+                listaModelo.Add(CrearMes(entidad));
+            }
+            return listaModelo;
+
+        }
+
+        #endregion
     }
 
 }

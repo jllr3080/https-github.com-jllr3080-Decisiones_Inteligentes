@@ -328,14 +328,14 @@ namespace Web.ServicioDelegado
         /// <param name="marcaId"></param>
         /// <param name="fecha"></param>
         /// <returns></returns>
-        public List<PrendaMarcaVistaDTOs> ObtenerPrendayMarcaPorVariosParametros(int prendaId, int marcaId, string fecha)
+        public List<PrendaMarcaVistaDTOs> ObtenerPrendayMarcaPorVariosParametros(int prendaId, int marcaId, string fecha, int colorId)
         {
             try
             {
                 var clienteWeb = new WebClient();
                 clienteWeb.Headers["content-type"] = "application/json";
                 clienteWeb.Encoding = Encoding.UTF8;
-                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerPrendayMarcaPorVariosParametros?prendaId=" + prendaId + "&marcaId=" + marcaId+ "&fecha="+ fecha);
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerPrendayMarcaPorVariosParametros?prendaId=" + prendaId + "&marcaId=" + marcaId+ "&fecha="+ fecha+ "&colorId=" + colorId);
                 var js = new JavaScriptSerializer();
                 return js.Deserialize<List<PrendaMarcaVistaDTOs>>(json);
             }

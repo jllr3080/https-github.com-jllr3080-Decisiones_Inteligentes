@@ -418,11 +418,11 @@ namespace JLLR.Core.Venta.Servicio
         /// <param name="marcaId"></param>
         /// <param name="fecha"></param>
         /// <returns></returns>
-        public List<PrendaMarcaDTOs> ObtenerPrendayMarcaPorVariosParametros(int prendaId, int marcaId, string fecha)
+        public List<PrendaMarcaDTOs> ObtenerPrendayMarcaPorVariosParametros(int prendaId, int marcaId, string fecha, int colorId    )
         {
             try
             {
-                return _ventaTransformadorNegocio.ObtenerPrendayMarcaPorVariosParametros(prendaId, marcaId,Convert.ToDateTime(fecha));
+                return _ventaTransformadorNegocio.ObtenerPrendayMarcaPorVariosParametros(prendaId, marcaId,Convert.ToDateTime(fecha),colorId);
 
             }
             catch (Exception ex)

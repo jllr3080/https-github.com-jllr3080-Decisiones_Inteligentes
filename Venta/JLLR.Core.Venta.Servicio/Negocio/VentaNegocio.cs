@@ -82,10 +82,16 @@ namespace JLLR.Core.Venta.Servicio.Negocio
                     _ordenTrabajoComision.Valor = (detalleOrdenTrabajo.ValorTotal*
                                                    _ventaComisionModelo.PorcentajeComision)/100;
                     _ordenTrabajoComision.DetalleVentaComisionIndustrialesId = ventaComisionIndustrialesId;
-                    decimal totalQuimica=Convert.ToDecimal(detalleOrdenTrabajo.ValorTotal) -Convert.ToDecimal((detalleOrdenTrabajo.ValorTotal *
-                                                   _ventaComisionModelo.PorcentajeComision) / 100);
-                    _ordenTrabajoComision.ValorIndustriales= (totalQuimica *
+                   
+                    _ordenTrabajoComision.ValorIndustriales= (detalleOrdenTrabajo.ValorTotalUnitario *
                                                    porcentajeIndustriales) / 100;
+                    decimal quimica =Convert.ToDecimal( detalleOrdenTrabajo.ValorTotal - _ordenTrabajoComision.Valor -
+                                      _ordenTrabajoComision.ValorIndustriales);
+
+                    decimal diferencia =Convert.ToDecimal(detalleOrdenTrabajo.ValorTotal -
+                                         (_ordenTrabajoComision.Valor + _ordenTrabajoComision.ValorIndustriales +
+                                          quimica));
+                    _ordenTrabajoComision.ValorQuimica = quimica+ diferencia;
                     _ventaTransfomadorNegocio.GrabaOrdenTrabajoComision(_ordenTrabajoComision);
                     porcentajeMatriz = 100 -Convert.ToDecimal(_ventaComisionModelo.PorcentajeComision);
                     valorPago+= (Convert.ToDecimal(detalleOrdenTrabajo.ValorTotal * porcentajeMatriz)) /100;
@@ -160,7 +166,7 @@ namespace JLLR.Core.Venta.Servicio.Negocio
                 _historialProcesoVista.UsuarioEntregaId = ordenTrabajoDtOs.OrdenTrabajo.Usuario.UsuarioId;
                 _historialProcesoVista.PerfilId =ordenTrabajoDtOs.PerfilId;
                 _historialProcesoVista.PasoPorEstaEtapa = false;
-                _servicioDelegadoFlujoProceso.GrabarHistorialProceso(_historialProcesoVista);
+                _servicioDelegadoFlujoProceso.GrabarHistorialProcesoSinRetorno(_historialProcesoVista);
 
                 return ordenTrabajoDtOs.OrdenTrabajo.NumeroOrden;
 
@@ -194,7 +200,7 @@ namespace JLLR.Core.Venta.Servicio.Negocio
                 _historialProcesoVista.PuntoVentaId = parametroReversoDtOs.PuntoVentaId;
                 _historialProcesoVista.NumeroOrden = parametroReversoDtOs.NumeroOrden;
                 _historialProcesoVista.Texto = parametroReversoDtOs.Texto;
-                _servicioDelegadoFlujoProceso.GrabarHistorialProceso(_historialProcesoVista);
+                _servicioDelegadoFlujoProceso.GrabarHistorialProcesoSinRetorno(_historialProcesoVista);
 
                 _ventaTransfomadorNegocio.GrabarReversoOrdenTrabajoComision(parametroReversoDtOs.OrdenTrabajoId, parametroReversoDtOs.UsuarioId);
 

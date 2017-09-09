@@ -25,12 +25,13 @@ namespace JLLR.Core.FlujoProceso.Proveedor.DAOs
         /// Graba el  historial del reproceso de prendas   y los reclamos 
         /// </summary>
         /// <param name="historialReclamoReprocesoPrenda"></param>
-        public void GrabarHistorialReproceso(HISTORIAL_REPROCESO historialReproceso)
+        public HISTORIAL_REPROCESO GrabarHistorialReproceso(HISTORIAL_REPROCESO historialReproceso)
         {
             try
             {
                 _entidad.HISTORIAL_REPROCESO.Add(historialReproceso);
                 _entidad.SaveChanges();
+                return historialReproceso;
             }
             catch (Exception ex)
             {

@@ -44,5 +44,10 @@ namespace JLLR.Core.Individuo.Servicio.DTOs
         /// </summary>
         [DataMember]
         public string TelefonoCliente { get; set; }
+        /// <summary>
+        ///NumeroDocumento
+        /// </summary>
+        [DataMember]
+        public string NumeroDocumento { get; set; }
     }
 }

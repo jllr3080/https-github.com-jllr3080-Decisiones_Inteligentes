@@ -186,6 +186,90 @@ namespace JLLR.Core.Contabilidad.Servicio.Ensamblador
         }
         #endregion
 
+        #region CIERRE DE MES
+
+        /// <summary>
+        /// Convierte el modelo en una entidad
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public entidad.CIERRE_MES CrearCierreMes(modelo.CierreMesModelo m)
+        {
+            return new entidad.CIERRE_MES()
+            {
+               CIERRE_MES_ID = m.CierreMesId,
+               SUCURSAL_ID = m.Sucursal.SucursalId,
+               PUNTO_VENTA_ID = m.PuntoVenta.PuntoVentaId,
+               USUARIO_ID = m.Usuario.UsuarioId,
+               CUENTA_POR_PAGAR_ID = m.CuentaPorPagar.CuentaPorPagarId,
+               MES_ID = m.Mes.MesId,
+               VALOR = m.Valor,
+               FECHA_CREACION = m.FechaCreacion
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<entidad.CIERRE_MES> CrearCierreMeses(List<Modelo.CierreMesModelo> listadoModelo)
+        {
+            List<entidad.CIERRE_MES> listaEntidad = new List<entidad.CIERRE_MES>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearCierreMes(modelo));
+            }
+            return listaEntidad;
+
+        }
+        #endregion
+
+        #region APLICACION DE PAGO
+
+        /// <summary>
+        /// Convierte el modelo en una entidad
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public entidad.APLICACION_PAGO CrearAplicacionPago(modelo.AplicacionPagoModelo m)
+        {
+            return new entidad.APLICACION_PAGO()
+            {
+               APLICACION_PAGO_ID = m.AplicacionPagoId,
+               CIERRE_MES_ID = m.CierreMes.CierreMesId,
+               VALOR = m.Valor,
+               FECHA_CREACION = m.FechaCreacion,
+               ESTA_VALIDADO = m.EstaValidado,
+               NUMERO_DOCUMENTO = m.NumeroDocumento,
+               FECHA_DEPOSITO = m.FechaDeposito,
+               FECHA_VALIDACION = m.FechaValidacion,
+               DOCUMENTO = m.Documento,
+               USUARIO_APLICA_ID = m.UsuarioAplicaId,
+               USUARIO_VALIDA_ID = m.UsuarioValidaId
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<entidad.APLICACION_PAGO> CrearAplicacionesPago(List<Modelo.AplicacionPagoModelo> listadoModelo)
+        {
+            List<entidad.APLICACION_PAGO> listaEntidad = new List<entidad.APLICACION_PAGO>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearAplicacionPago(modelo));
+            }
+            return listaEntidad;
+
+        }
+        #endregion
 
     }
 }

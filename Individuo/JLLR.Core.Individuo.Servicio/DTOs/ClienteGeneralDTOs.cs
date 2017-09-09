@@ -34,6 +34,12 @@ namespace JLLR.Core.Individuo.Servicio.DTOs
         public DireccionModelo Direccion { get; set; }
 
         /// <summary>
+        /// Telefono del cliente 
+        /// </summary>
+        [DataMember]
+        public List<TelefonoModelo> Telefonos { get; set; }
+
+        /// <summary>
         /// Telefono
         /// </summary>
         [DataMember]
@@ -50,5 +56,18 @@ namespace JLLR.Core.Individuo.Servicio.DTOs
         /// </summary>
         [DataMember]
         public IndividuoRolModelo IndividuoRol { get; set; }
+
+        /// <summary>
+        /// NombreCompleto
+        /// </summary>
+        [DataMember]
+        public string NombreCompleto { get; set; }
+
+
+        /// <summary>
+        /// DireccionCompleta
+        /// </summary>
+        [DataMember]
+        public string DireccionCompleta { get; set; }
     }
 }

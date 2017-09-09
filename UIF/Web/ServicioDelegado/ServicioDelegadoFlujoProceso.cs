@@ -30,7 +30,7 @@ namespace Web.ServicioDelegado
         /// <summary>
         /// Graba el  historial del proceso
         /// </summary>
-        public void GrabarHistorialProceso(HistorialProcesoVistaModelo historialProcesoVistaModelo)
+        public HistorialProcesoVistaModelo GrabarHistorialProceso(HistorialProcesoVistaModelo historialProcesoVistaModelo)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace Web.ServicioDelegado
                 clienteWeb.Encoding = Encoding.UTF8;
                 var json = clienteWeb.UploadString(direccionUrl + "GrabarHistorialProceso", "POST", datos);
                 var js = new JavaScriptSerializer();
-               
+                return js.Deserialize<HistorialProcesoVistaModelo>(json);
             }
             catch (Exception ex)
             {
@@ -163,6 +163,31 @@ namespace Web.ServicioDelegado
         #endregion
 
         /// <summary>
+        /// Obtiene el lsitado de  las ordenes de reproceso
+        /// </summary>
+        /// <param name="detalleOrdenTrabajoId"></param>
+        /// <returns></returns>
+        public List<DetalleHistorialReprocesoVistaDTOs> ObtenerDetalleHistorialReprocesosPorDetalleOrdenTrabajoId(
+            int detalleOrdenTrabajoId)
+        {
+
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerDetalleHistorialReprocesosPorDetalleOrdenTrabajoId?detalleOrdenTrabajoId=" + detalleOrdenTrabajoId);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<DetalleHistorialReprocesoVistaDTOs>>(json);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Graba  el historial de  los reprocesos
         /// </summary>
         /// <param name="historialReprocesoDtOs"></param>
@@ -187,7 +212,32 @@ namespace Web.ServicioDelegado
             }
 
         }
+        /// <summary>
+        /// Reporte de  reproceso por prenda
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechaHasta"></param>
+        /// <returns></returns>
+        public List<ReprocesoVistaDTOs> ObtenerReprocesoPorVariosParametros(int puntoVentaId, string fechaDesde, string fechaHasta)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerReprocesoPorVariosParametros?puntoVentaId=" + puntoVentaId+ "&fechaDesde="+ fechaDesde+ "&fechaHasta="+ fechaHasta);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<ReprocesoVistaDTOs>>(json);
 
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
         #region HISTORIAL RECLAMO  REPROCESO PRENDA
@@ -243,6 +293,63 @@ namespace Web.ServicioDelegado
                 throw;
             }
         }
+        #endregion
+
+        #region HISTORIAL REPROCESO
+        /// <summary>
+        /// Graba el  historial del reproceso de prendas   y los reclamos 
+        /// </summary>
+        /// <param name="historialReclamoReprocesoPrenda"></param>
+        public HistorialReprocesoVistaModelo GrabarHistorialReproceso(HistorialReprocesoVistaModelo historialReproceso)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(HistorialReprocesoVistaModelo));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, historialReproceso);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "GrabarHistorialReproceso", "POST", datos);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<HistorialReprocesoVistaModelo>(json);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+
+            }
+        }
+        #endregion
+
+        #region DETALLE  HISTORIAL  PRENDA
+        /// <summary>
+        /// Grabar el detalle
+        /// </summary>
+        /// <param name="detalleHistorialReproceso"></param>
+        public void GrabarDetalleHistorialReproceso(DetalleHistorialReprocesoVistaModelo detalleHistorialReproceso)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(DetalleHistorialReprocesoVistaModelo));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, detalleHistorialReproceso);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "GrabarDetalleHistorialReproceso", "POST", datos);
+                var js = new JavaScriptSerializer();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
         #endregion
     }
 }

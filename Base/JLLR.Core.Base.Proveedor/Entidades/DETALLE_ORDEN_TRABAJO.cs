@@ -41,6 +41,9 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<bool> APLICO_VALOR_EXTRA { get; set; }
         public Nullable<decimal> VALOR_COMISION_INDUSTRIALES { get; set; }
         public Nullable<decimal> VALOR_IMPUESTO { get; set; }
+        public Nullable<bool> OBJETO_OLVIDADO { get; set; }
+        public Nullable<bool> SOLO_PLANCHADO { get; set; }
+        public Nullable<bool> PORCENTAJE_ADICIONAL { get; set; }
     
         public virtual PRODUCTO PRODUCTO { get; set; }
         public virtual ORDEN_TRABAJO ORDEN_TRABAJO { get; set; }

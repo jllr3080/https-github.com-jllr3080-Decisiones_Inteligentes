@@ -61,5 +61,28 @@ namespace Web.Models.Individuo
         /// </summary>
 
         public string DescripcionDireccion { get; set; }
+
+
+        /// <summary>
+        /// CallePrincipal
+        /// </summary>
+        
+        public string CallePrincipal { get; set; }
+
+        /// <summary>
+        /// CalleSecundaria
+        /// </summary>
+        public string CalleSecundaria { get; set; }
+
+        /// <summary>
+        /// NumeroCasa
+        /// </summary>
+        public string NumeroCasa { get; set; }
+
+
+        /// <summary>
+        /// Referencia
+        /// </summary>
+        public string Referencia { get; set; }
     }
 }

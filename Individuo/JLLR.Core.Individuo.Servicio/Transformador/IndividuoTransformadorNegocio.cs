@@ -30,6 +30,25 @@ namespace JLLR.Core.Individuo.Servicio.Transformador
         #region TRANSACCIONAL
 
         #region CLIENTE
+
+        /// <summary>
+        /// Obtiene el cliente completo por  numero  de documento
+        /// </summary>
+        /// <param name="primerApellido"></param>
+        /// <param name="segundoApellido"></param>
+        /// <returns></returns>
+        public List<ClienteGeneralDTOs> ObtenerClientePorApellidos(string primerApellido, string segundoApellido)
+        {
+            try
+            {
+                return  _ensambladorModeloDtOs.CrearClientesGeneralDTOs(_individuoNegocio.ObtenerClientePorApellidos(primerApellido, segundoApellido));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         /// <summary>
         /// Obtiene   la informacion del cliente
         /// </summary>
@@ -41,6 +60,25 @@ namespace JLLR.Core.Individuo.Servicio.Transformador
             {
                 
                 return _ensambladorModeloDtOs.CrearClienteDTOs(_individuoNegocio.ObtenerDatosClientePorNumeroIdentificacion(numeroIdentificacion));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene   la informacion del cliente
+        /// </summary>
+        /// <param name="apellidoPaterno"></param>
+        /// <param name="apellidoMaterno"></param>
+        /// <returns></returns>
+        public List<ClienteDTOs> ObtenerDatosClientePorApellidos(string apellidoPaterno, string apellidoMaterno)
+        {
+            try
+            {
+                return _ensambladorModeloDtOs.CrearClientesDTOs(_individuoNegocio.ObtenerDatosClientePorApellidos(apellidoPaterno,apellidoMaterno));
             }
             catch (Exception ex)
             {

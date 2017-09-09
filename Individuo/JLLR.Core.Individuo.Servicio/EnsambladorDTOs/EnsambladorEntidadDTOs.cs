@@ -33,7 +33,8 @@ namespace JLLR.Core.Individuo.Servicio.EnsambladorDTOs
              TelefonoCliente = m.TelefonoCliente,
              DireccionCliente = m.DireccionCliente,
              NombreCompleto = m.NombreCompleto,
-             ClienteId = m.ClienteId
+             ClienteId = m.ClienteId,
+             NumeroDocumento = m.NumeroDocumento
             };
         }
 
@@ -73,7 +74,10 @@ namespace JLLR.Core.Individuo.Servicio.EnsambladorDTOs
                Telefono = _ensambladorEntidad.CrearTelefono(m.Telefono),
                CorreoElectronico = _ensambladorEntidad.CrearCorreoElectronico(m.CorreoElectronico),
                Cliente = _ensambladorEntidad.CrearCliente(m.Cliente),
-               IndividuoRol = _ensambladorEntidad.CrearIndividuoRol(m.IndividuoRol)
+               IndividuoRol = _ensambladorEntidad.CrearIndividuoRol(m.IndividuoRol),
+               NombreCompleto = m.NombreCompleto,
+               DireccionCompleta = m.DireccionCompleta,
+               Telefonos = _ensambladorEntidad.CrearTelefonos(m.Telefonos)
 
             };
         }

@@ -22,6 +22,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<int> DETALLE_ORDEN_TRABAJO_ID { get; set; }
         public Nullable<decimal> VALOR_INDUSTRIALES { get; set; }
         public Nullable<int> DETALLE_VENTA_COMISION_INDUSTRIALES_ID { get; set; }
+        public Nullable<decimal> VALOR_QUIMICA { get; set; }
     
         public virtual DETALLE_ORDEN_TRABAJO DETALLE_ORDEN_TRABAJO { get; set; }
         public virtual DETALLE_VENTA_COMISION_INDUSTRIALES DETALLE_VENTA_COMISION_INDUSTRIALES { get; set; }

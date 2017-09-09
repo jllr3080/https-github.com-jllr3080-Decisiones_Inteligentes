@@ -21,6 +21,16 @@ namespace JLLR.Core.Individuo.Servicio
         #region TRANSACCIONAL
 
         #region CLIENTE
+
+        /// <summary>
+        /// Obtiene el cliente completo por  numero  de documento
+        /// </summary>
+        /// <param name="primerApellido"></param>
+        /// <param name="segundoApellido"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(UriTemplate = "ObtenerClientePorApellidos?primerApellido={primerApellido}&segundoApellido={segundoApellido}", ResponseFormat = WebMessageFormat.Json)]
+        List<ClienteGeneralDTOs> ObtenerClientePorApellidos(string primerApellido, string segundoApellido);
         /// <summary>
         /// Obtiene   la informacion del cliente
         /// </summary>
@@ -30,6 +40,16 @@ namespace JLLR.Core.Individuo.Servicio
         [WebGet(UriTemplate = "ObtenerDatosClientePorNumeroIdentificacion?numeroIdentificacion={numeroIdentificacion}", ResponseFormat = WebMessageFormat.Json)]
         ClienteDTOs ObtenerDatosClientePorNumeroIdentificacion(string numeroIdentificacion);
 
+
+        /// <summary>
+        /// Obtiene   la informacion del cliente
+        /// </summary>
+        /// <param name="apellidoPaterno"></param>
+        /// <param name="apellidoMaterno"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(UriTemplate = "ObtenerDatosClientePorApellidos?apellidoPaterno={apellidoPaterno}&apellidoMaterno={apellidoMaterno}", ResponseFormat = WebMessageFormat.Json)]
+        List<ClienteDTOs> ObtenerDatosClientePorApellidos(string apellidoPaterno, string apellidoMaterno);
 
         /// <summary>
         /// Grabar cliente

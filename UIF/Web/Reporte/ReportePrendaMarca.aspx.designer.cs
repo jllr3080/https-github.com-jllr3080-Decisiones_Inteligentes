@@ -49,6 +49,15 @@ namespace Web.Reporte {
         protected global::System.Web.UI.WebControls.Label _labelMarca;
         
         /// <summary>
+        /// Control _labelColor.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label _labelColor;
+        
+        /// <summary>
         /// Control _labelFechaDesde.
         /// </summary>
         /// <remarks>
@@ -92,6 +101,24 @@ namespace Web.Reporte {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator _marcavalidador;
+        
+        /// <summary>
+        /// Control _color.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList _color;
+        
+        /// <summary>
+        /// Control _colorValidador.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator _colorValidador;
         
         /// <summary>
         /// Control _fechaDesde.

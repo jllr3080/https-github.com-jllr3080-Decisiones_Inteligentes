@@ -36,6 +36,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<bool> VISIBLE { get; set; }
         public Nullable<int> TIEMPO_ENTREGA { get; set; }
         public Nullable<bool> PRENDA_ESPECIAL { get; set; }
+        public Nullable<int> NUMERO_PRENDAS { get; set; }
     
         public virtual MARCA MARCA { get; set; }
         public virtual MATERIAL MATERIAL { get; set; }

@@ -137,6 +137,9 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual DbSet<DETALLE_HISTORIAL_REPROCESO> DETALLE_HISTORIAL_REPROCESO { get; set; }
         public virtual DbSet<TIPO_REPROCESO> TIPO_REPROCESO { get; set; }
         public virtual DbSet<HISTORIAL_REPROCESO> HISTORIAL_REPROCESO { get; set; }
+        public virtual DbSet<APLICACION_PAGO> APLICACION_PAGO { get; set; }
+        public virtual DbSet<CIERRE_MES> CIERRE_MES { get; set; }
+        public virtual DbSet<MES> MES { get; set; }
     
         public virtual ObjectResult<ESTADISTICA_PRENDA_Result> ESTADISTICA_PRENDA(Nullable<System.DateTime> fECHADESDE, Nullable<System.DateTime> fECHAHASTA, Nullable<int> sUCURSALID)
         {

@@ -31,6 +31,25 @@ namespace JLLR.Core.Individuo.Proveedor.Negocio
         #region CLIENTE
 
         /// <summary>
+        /// Obtiene el cliente completo por  numero  de documento
+        /// </summary>
+        /// <param name="primerApellido"></param>
+        /// <param name="segundoApellido"></param>
+        /// <returns></returns>
+        public IQueryable<ClienteGeneralDTOs> ObtenerClientePorApellidos(string primerApellido, string segundoApellido)
+        {
+            try
+            {
+                return _transaccionalDaOs.ObtenerClientePorApellidos(primerApellido, segundoApellido);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Obtiene   la informacion del cliente
         /// </summary>
         /// <param name="numeroIdentificacion"></param>
@@ -40,6 +59,25 @@ namespace JLLR.Core.Individuo.Proveedor.Negocio
             try
             {
                 return _transaccionalDaOs.ObtenerDatosClientePorNumeroIdentificacion(numeroIdentificacion);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene   la informacion del cliente
+        /// </summary>
+        /// <param name="apellidoPaterno"></param>
+        /// <param name="apellidoMaterno"></param>
+        /// <returns></returns>
+        public IQueryable<ClienteDTOs> ObtenerDatosClientePorApellidos(string apellidoPaterno, string apellidoMaterno)
+        {
+            try
+            {
+                return _transaccionalDaOs.ObtenerDatosClientePorApellidos(apellidoPaterno,apellidoMaterno);
             }
             catch (Exception ex)
             {

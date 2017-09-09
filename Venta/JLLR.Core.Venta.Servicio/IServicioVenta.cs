@@ -240,9 +240,9 @@ namespace JLLR.Core.Venta.Servicio
         [OperationContract]
         [WebGet(
             UriTemplate =
-                "ObtenerPrendayMarcaPorVariosParametros?prendaId={prendaId}&marcaId={marcaId}&fecha={fecha}",
+                "ObtenerPrendayMarcaPorVariosParametros?prendaId={prendaId}&marcaId={marcaId}&fecha={fecha}&colorId={colorId}",
             ResponseFormat = WebMessageFormat.Json)]
-        List<PrendaMarcaDTOs> ObtenerPrendayMarcaPorVariosParametros(int prendaId, int marcaId, string fecha);
+        List<PrendaMarcaDTOs> ObtenerPrendayMarcaPorVariosParametros(int prendaId, int marcaId, string fecha,int colorId);
         /// <summary>
         /// Obtiene el reporte de   numero de  prendas por  fecha  desde y fecha hasta
         /// </summary>

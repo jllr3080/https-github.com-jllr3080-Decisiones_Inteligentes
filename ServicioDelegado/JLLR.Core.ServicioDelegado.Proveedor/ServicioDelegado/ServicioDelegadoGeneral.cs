@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JLLR.Core.ServicioDelegado.Proveedor
+namespace JLLR.Core.ServicioDelegado.Proveedor.ServicioDelegado
 {
-    public class Class1
+    class ServicioDelegadoGeneral
     {
     }
 }

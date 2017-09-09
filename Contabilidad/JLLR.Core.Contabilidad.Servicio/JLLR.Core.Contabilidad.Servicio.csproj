@@ -80,6 +80,8 @@
     <Compile Include="EnsambladorDTOs\EnsambladorModeloDTOs.cs" />
     <Compile Include="Ensamblador\EnsambladorEntidad.cs" />
     <Compile Include="Ensamblador\EnsambladorModelo.cs" />
+    <Compile Include="Modelo\AplicacionPagoModelo.cs" />
+    <Compile Include="Modelo\CierreMesModelo.cs" />
     <Compile Include="Modelo\CuentaPorCobrarModelo.cs" />
     <Compile Include="Modelo\CuentaPorPagarModelo.cs" />
     <Compile Include="Modelo\HistorialCuentaPorCobrarModelo.cs" />
@@ -116,6 +118,10 @@
     <ProjectReference Include="..\..\Individuo\JLLR.Core.Individuo.Servicio\JLLR.Core.Individuo.Servicio.csproj">
       <Project>{01c917b9-f3b5-4e6f-b98a-5f16ceb8b59c}</Project>
       <Name>JLLR.Core.Individuo.Servicio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Seguridad\JLLR.Core.Seguridad.Servicio\JLLR.Core.Seguridad.Servicio.csproj">
+      <Project>{5bd7a3af-b149-42de-ab94-bf2959ffa5f5}</Project>
+      <Name>JLLR.Core.Seguridad.Servicio</Name>
     </ProjectReference>
     <ProjectReference Include="..\JLLR.Core.Contabilidad.Proveedor\JLLR.Core.Contabilidad.Proveedor.csproj">
       <Project>{15f85319-533e-42b4-8779-83435b28257f}</Project>

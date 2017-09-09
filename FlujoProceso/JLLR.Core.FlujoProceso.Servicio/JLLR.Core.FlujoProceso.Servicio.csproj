@@ -72,8 +72,10 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTOs\DetalleHistorialReprocesoDTOs.cs" />
     <Compile Include="DTOs\HistorialProcesoDTOs.cs" />
     <Compile Include="DTOs\HistorialReprocesoDTOs.cs" />
+    <Compile Include="DTOs\ReprocesoDTOs.cs" />
     <Compile Include="EnsambladorDTOs\EnsambladorEntidadDTOs.cs" />
     <Compile Include="EnsambladorDTOs\EnsambladorModeloDTOs.cs" />
     <Compile Include="Ensamblador\EnsambladorEntidad.cs" />

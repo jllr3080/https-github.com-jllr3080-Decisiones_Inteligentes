@@ -25,6 +25,25 @@ namespace JLLR.Core.Individuo.Servicio
         #region TRANSACCIONAL
 
         #region CLIENTE
+
+        /// <summary>
+        /// Obtiene el cliente completo por  numero  de documento
+        /// </summary>
+        /// <param name="primerApellido"></param>
+        /// <param name="segundoApellido"></param>
+        /// <returns></returns>
+        public List<ClienteGeneralDTOs> ObtenerClientePorApellidos(string primerApellido, string segundoApellido)
+        {
+            try
+            {
+                return _individuoTransformadorNegocio.ObtenerClientePorApellidos(primerApellido, segundoApellido);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         /// <summary>
         /// Obtiene   la informacion del cliente
         /// </summary>
@@ -35,6 +54,25 @@ namespace JLLR.Core.Individuo.Servicio
             try
             {
                 return _individuoTransformadorNegocio.ObtenerDatosClientePorNumeroIdentificacion(numeroIdentificacion);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene   la informacion del cliente
+        /// </summary>
+        /// <param name="apellidoPaterno"></param>
+        /// <param name="apellidoMaterno"></param>
+        /// <returns></returns>
+        public List<ClienteDTOs> ObtenerDatosClientePorApellidos(string apellidoPaterno, string apellidoMaterno)
+        {
+            try
+            {
+                return _individuoTransformadorNegocio.ObtenerDatosClientePorApellidos(apellidoPaterno,apellidoMaterno);
             }
             catch (Exception ex)
             {

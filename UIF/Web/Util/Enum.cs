@@ -5,6 +5,11 @@ using System.Web;
 
 namespace Web.Util
 {
+    public enum EdadCliente
+    {
+        Edad=18
+    }
+
     public enum TipoIndividuo
     {
         PersonaNatural = 1,

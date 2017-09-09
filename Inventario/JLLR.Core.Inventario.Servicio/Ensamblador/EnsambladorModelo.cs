@@ -53,7 +53,8 @@ namespace JLLR.Core.Inventario.Servicio.Ensamblador
                Marca = marca,
                Visible = e.VISIBLE,
                PrendaEspecial = e.PRENDA_ESPECIAL,
-               TiempoEntrega = e.TIEMPO_ENTREGA
+               TiempoEntrega = e.TIEMPO_ENTREGA,
+               NumeroPrendas = e.NUMERO_PRENDAS
                
                
 

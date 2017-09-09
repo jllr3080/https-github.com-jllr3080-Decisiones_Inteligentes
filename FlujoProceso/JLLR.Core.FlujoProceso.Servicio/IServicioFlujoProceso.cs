@@ -28,7 +28,7 @@ namespace JLLR.Core.FlujoProceso.Servicio
         /// </summary>
         [OperationContract]
         [WebInvoke(UriTemplate = "GrabarHistorialProceso/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
-        void GrabarHistorialProceso(HistorialProcesoModelo historialProceso);
+        HistorialProcesoModelo GrabarHistorialProceso(HistorialProcesoModelo historialProceso);
 
 
         /// <summary>
@@ -102,6 +102,29 @@ namespace JLLR.Core.FlujoProceso.Servicio
         [WebInvoke(UriTemplate = "GrabarHistorialReprocesos/*", RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json, Method = "POST")]
         void GrabarHistorialReprocesos(HistorialReprocesoDTOs historialReprocesoDtOs);
+
+        /// <summary>
+        /// Obtiene el lsitado de  las ordenes de reproceso
+        /// </summary>
+        /// <param name="detalleOrdenTrabajoId"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(UriTemplate = "ObtenerDetalleHistorialReprocesosPorDetalleOrdenTrabajoId?detalleOrdenTrabajoId={detalleOrdenTrabajoId}", ResponseFormat = WebMessageFormat.Json)]
+        List<DetalleHistorialReprocesoDTOs> ObtenerDetalleHistorialReprocesosPorDetalleOrdenTrabajoId(
+            int detalleOrdenTrabajoId);
+
+        /// <summary>
+        /// Reporte de  reproceso por prenda
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechaHasta"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(UriTemplate = "ObtenerReprocesoPorVariosParametros?puntoVentaId={puntoVentaId}&fechaDesde={fechaDesde}&fechaHasta={fechaHasta}", ResponseFormat = WebMessageFormat.Json)]
+        List<ReprocesoDTOs> ObtenerReprocesoPorVariosParametros(int puntoVentaId, string fechaDesde,
+            string fechaHasta);
+
         #endregion
 
         #region HISTORIAL RECLAMO  REPROCESO PRENDA
@@ -125,6 +148,39 @@ namespace JLLR.Core.FlujoProceso.Servicio
         [WebInvoke(UriTemplate = "GrabarHistorialReclamoReprocesoPrenda/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
         void GrabarHistorialReclamoReprocesoPrenda(
             HistorialReclamoReprocesoPrendaModelo historialReclamoReprocesoPrenda);
+
+        #endregion
+
+        #region HISTORIAL REPROCESO
+
+        /// <summary>
+        /// Graba el  historial del reproceso de prendas   y los reclamos 
+        /// </summary>
+        /// <param name="historialReclamoReprocesoPrenda"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabarHistorialReproceso/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        HistorialReprocesoModelo GrabarHistorialReproceso(HistorialReprocesoModelo historialReproceso);
+
+        /// <summary>
+        /// Graba el  historial del reproceso de prendas   y los reclamos 
+        /// </summary>
+        /// <param name="historialReproceso"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabarHistorialProcesoSinRetorno/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void GrabarHistorialProcesoSinRetorno(HistorialProcesoModelo historialReproceso);
+
+        #endregion
+
+        #region DETALLE  HISTORIAL  PRENDA
+
+        /// <summary>
+        /// Grabar el detalle
+        /// </summary>
+        /// <param name="detalleHistorialReproceso"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabarDetalleHistorialReproceso/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void GrabarDetalleHistorialReproceso(DetalleHistorialReprocesoModelo detalleHistorialReproceso);
+
 
         #endregion
     }

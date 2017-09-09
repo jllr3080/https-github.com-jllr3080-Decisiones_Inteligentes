@@ -23,6 +23,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
             this.DETALLE_VENTA_COMISION_INDUSTRIALES = new HashSet<DETALLE_VENTA_COMISION_INDUSTRIALES>();
             this.USUARIO_PERFIL = new HashSet<USUARIO_PERFIL>();
             this.USUARIO_PREGUNTA_SEGURIDAD = new HashSet<USUARIO_PREGUNTA_SEGURIDAD>();
+            this.CIERRE_MES = new HashSet<CIERRE_MES>();
         }
     
         public int USUARIO_ID { get; set; }
@@ -52,5 +53,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USUARIO_PREGUNTA_SEGURIDAD> USUARIO_PREGUNTA_SEGURIDAD { get; set; }
         public virtual USUARIO_SEGURIDAD USUARIO_SEGURIDAD { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CIERRE_MES> CIERRE_MES { get; set; }
     }
 }

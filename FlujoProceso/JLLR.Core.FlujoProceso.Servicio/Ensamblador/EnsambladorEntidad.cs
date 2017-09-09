@@ -101,7 +101,6 @@ namespace JLLR.Core.FlujoProceso.Servicio.Ensamblador
         }
         #endregion
 
-
         #region HISTORIAL REPROCESO
         /// <summary>
         /// Convierte el modelo en una entidad
@@ -115,7 +114,7 @@ namespace JLLR.Core.FlujoProceso.Servicio.Ensamblador
                 HISTORIAL_REPROCESO_ID = m.HistorialReprocesoId,
                 HISTORIAL_PROCESO_ID = m.HistorialProceso.HistorialProcesoId,
                 DETALLE_PRENDA_ORDEN_TRABAJO_ID = m.DetallePrendaOrdenTrabajoId,
-                MOTIVO = m.Motivo
+                FECHA_ESTIMADA_ENTREGA = m.FechaEstimadaEntrega
                 
             };
         }
@@ -133,6 +132,43 @@ namespace JLLR.Core.FlujoProceso.Servicio.Ensamblador
             foreach (var modelo in listadoModelo)
             {
                 listaEntidad.Add(CrearHistorialReproceso(modelo));
+            }
+            return listaEntidad;
+
+        }
+        #endregion
+
+        #region DETALLE HISTORIAL REPROCESO
+        /// <summary>
+        /// Convierte el modelo en una entidad
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public entidad.DETALLE_HISTORIAL_REPROCESO CrearDetalleHistorialReproceso(modelo.DetalleHistorialReprocesoModelo m)
+        {
+            return new entidad.DETALLE_HISTORIAL_REPROCESO()
+            {
+               DETALLE_HISTORIAL_REPROCESO_ID = m.DetalleHistorialReprocesoId,
+               HISTORIAL_REPROCESO_ID = m.HistorialReproceso.HistorialReprocesoId,
+               TIPO_REPROCESO_ID = m.TipoReproceso.TipoReprocesoId,
+               MOTIVO =  m.Motivo
+
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<entidad.DETALLE_HISTORIAL_REPROCESO> CrearDetalleHistorialReprocesos(List<Modelo.DetalleHistorialReprocesoModelo> listadoModelo)
+        {
+            List<entidad.DETALLE_HISTORIAL_REPROCESO> listaEntidad = new List<entidad.DETALLE_HISTORIAL_REPROCESO>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearDetalleHistorialReproceso(modelo));
             }
             return listaEntidad;
 

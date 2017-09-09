@@ -322,13 +322,13 @@ namespace JLLR.Core.Venta.Servicio.Transformador
         /// <param name="marcaId"></param>
         /// <param name="fecha"></param>
         /// <returns></returns>
-        public List<PrendaMarcaDTOs> ObtenerPrendayMarcaPorVariosParametros(int prendaId, int marcaId, DateTime fecha)
+        public List<PrendaMarcaDTOs> ObtenerPrendayMarcaPorVariosParametros(int prendaId, int marcaId, DateTime fecha,int colorId)
         {
             try
             {
                 return
                     _ensambladorModeloDTOs.CrearPrendaMarcasDtOs(
-                        _ventaNegocio.ObtenerPrendayMarcaPorVariosParametros(prendaId, marcaId, fecha));
+                        _ventaNegocio.ObtenerPrendayMarcaPorVariosParametros(prendaId, marcaId, fecha, colorId));
             }
             catch (Exception ex)
             {

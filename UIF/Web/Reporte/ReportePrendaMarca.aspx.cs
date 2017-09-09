@@ -53,7 +53,7 @@ namespace Web.Reporte
         {
             try
             {
-                List<PrendaMarcaVistaDTOs> _lista = _servicioDelegadoVenta.ObtenerPrendayMarcaPorVariosParametros(Convert.ToInt32(_prenda.SelectedItem.Value),Convert.ToInt32(_marca.SelectedItem.Value),_fechaDesde.Text);
+                List<PrendaMarcaVistaDTOs> _lista = _servicioDelegadoVenta.ObtenerPrendayMarcaPorVariosParametros(Convert.ToInt32(_prenda.SelectedItem.Value),Convert.ToInt32(_marca.SelectedItem.Value),_fechaDesde.Text,Convert.ToInt32(_color.SelectedItem.Value));
 
                 if (_lista.Count > 0)
                     CargaInformacionReporte(_lista);
@@ -100,6 +100,8 @@ namespace Web.Reporte
                 _prenda.DataBind();
                 _marca.DataSource = _servicioDelegadoGeneral.ObtenerMarcas();
                 _marca.DataBind();
+                _color.DataSource = _servicioDelegadoGeneral.ObetenerColores();
+                _color.DataBind();
                 _fechaDesde.Text = DateTime.Now.ToShortDateString();
 
                 ListItem _item = new ListItem();
@@ -107,8 +109,12 @@ namespace Web.Reporte
                 _item.Text = "NINGUNO";
                 _prenda.Items.Add(_item);
                 _marca.Items.Add(_item);
+                _color.Items.Add(_item);
                 _prenda.SelectedIndex=_prenda.Items.IndexOf(_prenda.Items.FindByValue("-1"));
                 _marca.SelectedIndex=_marca.Items.IndexOf(_marca.Items.FindByValue("-1"));
+                _color.SelectedIndex = _color.Items.IndexOf(_color.Items.FindByValue("-1"));
+
+
 
 
             }

@@ -95,7 +95,8 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                 VALOR_TOTAL_UNITARIO = m.ValorTotalUnitario,
                 VALOR_DESCUENTO = m.ValorDescuento,
                 PROMOCION_APLICADA = m.PromocionAplicada,
-                DETALLE_PRENDA_ORDEN_TRABAJO = _listaDetallePrendaOrdenTrabajos
+                DETALLE_PRENDA_ORDEN_TRABAJO = _listaDetallePrendaOrdenTrabajos,
+                VALOR_IMPUESTO = m.ValorImpuesto
                 
 
 
@@ -171,7 +172,8 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                 VENTA_COMISION_ID = m.VentaComision.VentaComisionId,
                 DETALLE_ORDEN_TRABAJO_ID= m.DetalleOrdenTrabajo.DetalleOrdenTrabajoId,
                 VALOR_INDUSTRIALES = m.ValorIndustriales,
-                DETALLE_VENTA_COMISION_INDUSTRIALES_ID = m.DetalleVentaComisionIndustrialesId
+                DETALLE_VENTA_COMISION_INDUSTRIALES_ID = m.DetalleVentaComisionIndustrialesId,
+                VALOR_QUIMICA = m.ValorQuimica
             
             };
         }

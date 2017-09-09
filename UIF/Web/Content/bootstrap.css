@@ -5647,6 +5647,7 @@ body.modal-open,
     background-color:black;
     filter:alpha(opacity=90);
     opacity:0.8;
+  
 }
 .modal.fade .modal-dialog {
   -webkit-transform: translate(0, -25%);
@@ -6904,3 +6905,16 @@ td.visible-print {
     color: Black;
 }
 
+.handleImage 
+{
+    width:20px;
+height:20px;
+background-color:Red ;
+}
+.resizingImage {
+    padding:0px;
+border-style:solid;
+border-width:2px;
+border-color:Green;
+cursor:se-resize;
+}

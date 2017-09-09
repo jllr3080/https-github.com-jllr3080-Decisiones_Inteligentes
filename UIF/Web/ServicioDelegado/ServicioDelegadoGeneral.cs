@@ -669,5 +669,29 @@ namespace Web.ServicioDelegado
             }
         }
         #endregion
+
+        #region TIPO PROCESO
+        /// <summary>
+        /// Obtiene los tipos de  reproceso
+        /// </summary>
+        /// <returns></returns>
+        public List<TipoReprocesoVistaModelo> ObtenerTipoReprocesos()
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerTipoReprocesos");
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<TipoReprocesoVistaModelo>>(json);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
     }
 }

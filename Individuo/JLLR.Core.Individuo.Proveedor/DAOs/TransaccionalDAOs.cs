@@ -51,11 +51,12 @@ namespace JLLR.Core.Individuo.Proveedor.DAOs
                         {
                             ClienteId = cliente.CLIENTE_ID,
                             IndividuoId = individuo.INDIVIDUO_ID,
-                            DireccionCliente = direccion.DESCRIPCION_DIRECCION,
+                            DireccionCliente = direccion.CALLE_PRINCIPAL + "-" + direccion.CALLE_SECUNDARIA + "-" + direccion.NUMERO_CASA + "-" + direccion.REFERENCIA,
                             TelefonoCliente = telefono.NUMERO_TELEFONO,
                             NombreCompleto =
                                 individuo.PRIMER_CAMPO + " " + individuo.SEGUNDO_CAMPO + " " + individuo.TERCER_CAMPO +
-                                " " + individuo.CUARTO_CAMPO
+                                " " + individuo.CUARTO_CAMPO,
+                            NumeroDocumento = individuo.NUMERO_IDENTIFICACION
                         };
 
               
@@ -70,6 +71,46 @@ namespace JLLR.Core.Individuo.Proveedor.DAOs
             }
         }
 
+
+        /// <summary>
+        /// Obtiene   la informacion del cliente
+        /// </summary>
+        /// <param name="apellidoPaterno"></param>
+        /// <param name="apellidoMaterno"></param>
+        /// <returns></returns>
+        public IQueryable<ClienteDTOs> ObtenerDatosClientePorApellidos(string apellidoPaterno,string apellidoMaterno )
+        {
+            try
+            {
+                var clientes = from individuo in entidad.INDIVIDUO
+                               join cliente in entidad.CLIENTE on individuo.INDIVIDUO_ID equals cliente.INDIVIDUO_ID
+                               join direccion in entidad.DIRECCION on individuo.INDIVIDUO_ID equals direccion.INDIVIDUO_ID
+                               join telefono in entidad.TELEFONO on individuo.INDIVIDUO_ID equals telefono.INDIVIDUO_ID
+                               where individuo.PRIMER_CAMPO == apellidoPaterno || individuo.SEGUNDO_CAMPO==apellidoMaterno
+                               select
+                                   new ClienteDTOs
+                                   {
+                                       ClienteId = cliente.CLIENTE_ID,
+                                       IndividuoId = individuo.INDIVIDUO_ID,
+                                       DireccionCliente = direccion.CALLE_PRINCIPAL + "-" + direccion.CALLE_SECUNDARIA + "-" + direccion.NUMERO_CASA + "-" + direccion.REFERENCIA,
+                                       TelefonoCliente = telefono.NUMERO_TELEFONO,
+                                       NombreCompleto =
+                                           individuo.PRIMER_CAMPO + " " + individuo.SEGUNDO_CAMPO + " " + individuo.TERCER_CAMPO +
+                                           " " + individuo.CUARTO_CAMPO,
+                                       NumeroDocumento = individuo.NUMERO_IDENTIFICACION
+                                   };
+
+
+                return clientes;
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
 
         /// <summary>
         /// Grabar cliente
@@ -94,9 +135,14 @@ namespace JLLR.Core.Individuo.Proveedor.DAOs
                     clienteGeneralDtOs.Direccion.INDIVIDUO_ID = individuo.INDIVIDUO_ID;
                     _direccionDaOs.GrabarDireccion(clienteGeneralDtOs.Direccion);
 
+
+                    foreach (var telefono in clienteGeneralDtOs.Telefonos)
+                    {
+                       telefono.INDIVIDUO_ID = individuo.INDIVIDUO_ID;
+                        _telefonoDaOs.GrabarTelefono(telefono);
+                    }
                     //Graba el telefono
-                    clienteGeneralDtOs.Telefono.INDIVIDUO_ID = individuo.INDIVIDUO_ID;
-                    _telefonoDaOs.GrabarTelefono(clienteGeneralDtOs.Telefono);
+                   
 
 
                     //Graba el correo electronico
@@ -145,8 +191,12 @@ namespace JLLR.Core.Individuo.Proveedor.DAOs
                     _direccionDaOs.ActualizaDireccion(clienteGeneralDtOs.Direccion);
 
                     //Graba el telefono
+
+                    foreach (var telefono in clienteGeneralDtOs.Telefonos)
+                    {
+                        _telefonoDaOs.ActualizaTelefono(telefono);
+                    }
                     
-                    _telefonoDaOs.ActualizaTelefono(clienteGeneralDtOs.Telefono);
 
 
                     //Graba el correo electronico
@@ -197,7 +247,10 @@ namespace JLLR.Core.Individuo.Proveedor.DAOs
                         IndividuoRol = individuoRol,
                         CorreoElectronico = email,
                         Direccion = direccion,
-                        Telefono = telefono
+                        Telefono = telefono,
+                        NombreCompleto = individuo.PRIMER_CAMPO + " " + individuo.SEGUNDO_CAMPO + " " + individuo.TERCER_CAMPO +
+                                           " " + individuo.CUARTO_CAMPO,
+                        DireccionCompleta = direccion.CALLE_PRINCIPAL + "-" + direccion.CALLE_SECUNDARIA + "-" + direccion.NUMERO_CASA + "-" + direccion.REFERENCIA,
                     };
 
                 return clientes.FirstOrDefault();
@@ -205,6 +258,50 @@ namespace JLLR.Core.Individuo.Proveedor.DAOs
             catch (Exception ex)
             {
                 
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Obtiene el cliente completo por  numero  de documento
+        /// </summary>
+        /// <param name="primerApellido"></param>
+        /// <param name="segundoApellido"></param>
+        /// <returns></returns>
+        public IQueryable<ClienteGeneralDTOs> ObtenerClientePorApellidos(string primerApellido, string segundoApellido)
+        {
+            try
+            {
+                var clientes = from cliente in _entidad.CLIENTE
+                               join individuo in _entidad.INDIVIDUO on cliente.INDIVIDUO_ID equals individuo.INDIVIDUO_ID
+                               join direccion in _entidad.DIRECCION on individuo.INDIVIDUO_ID equals direccion.INDIVIDUO_ID
+                               join telefono in _entidad.TELEFONO on individuo.INDIVIDUO_ID equals telefono.INDIVIDUO_ID
+                               join email in _entidad.E_MAIL on individuo.INDIVIDUO_ID equals email.INDIVIDUO_ID
+                               join individuoRol in _entidad.INDIVIDUO_ROL on individuo.INDIVIDUO_ID equals
+                                   individuoRol.INDIVIDUO_ID
+                               where
+                                   individuo.PRIMER_CAMPO == primerApellido || individuo.SEGUNDO_CAMPO== segundoApellido &&
+                                   individuoRol.TIPO_ROL_INDIVIDUO_ID == 1
+                               select new ClienteGeneralDTOs()
+                               {
+                                   Cliente = cliente,
+                                   Individuo = individuo,
+                                   IndividuoRol = individuoRol,
+                                   CorreoElectronico = email,
+                                   Direccion = direccion,
+                                   Telefono = telefono,
+                                   NombreCompleto = individuo.PRIMER_CAMPO + " " + individuo.SEGUNDO_CAMPO + " " + individuo.TERCER_CAMPO +
+                                           " " + individuo.CUARTO_CAMPO,
+                                   DireccionCompleta = direccion.CALLE_PRINCIPAL + "-" + direccion.CALLE_SECUNDARIA + "-" + direccion.NUMERO_CASA + "-" + direccion.REFERENCIA,
+
+                               };
+
+                return clientes.OrderBy(m=>m.Individuo.PRIMER_CAMPO);
+            }
+            catch (Exception ex)
+            {
+
                 throw;
             }
         }

@@ -1,6 +1,7 @@
 ﻿#region using
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -113,8 +114,93 @@ namespace JLLR.Core.FlujoProceso.Proveedor.DAOs
                 }
 
          }
-           
-        
+
+
+
+        /// <summary>
+        /// Obtiene el lsitado de  las ordenes de reproceso
+        /// </summary>
+        /// <param name="detalleOrdenTrabajoId"></param>
+        /// <returns></returns>
+        public IQueryable<DetalleHistorialReprocesoDTOs> ObtenerDetalleHistorialReprocesosPorDetalleOrdenTrabajoId(
+            int detalleOrdenTrabajoId)
+        {
+
+            try
+            {
+                var detalleHistorialReprocesos = from historialReproceso in _entidad.HISTORIAL_REPROCESO
+                    join detalleHistorialReproceso in _entidad.DETALLE_HISTORIAL_REPROCESO on
+                        historialReproceso.HISTORIAL_REPROCESO_ID equals
+                        detalleHistorialReproceso.HISTORIAL_REPROCESO_ID
+                    join tipoReproceso in _entidad.TIPO_REPROCESO on detalleHistorialReproceso.TIPO_REPROCESO_ID equals
+                        tipoReproceso.TIPO_REPROCESO_ID
+                                                 where historialReproceso.DETALLE_PRENDA_ORDEN_TRABAJO_ID== detalleOrdenTrabajoId
+                                                 select new DetalleHistorialReprocesoDTOs()
+                    {
+                        Motivo = detalleHistorialReproceso.MOTIVO,
+                        TipoMotivoProceso = tipoReproceso.DESCRIPCION
+                                                 };
+                return detalleHistorialReprocesos;
+
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Reporte de  reproceso por prenda
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechaHasta"></param>
+        /// <returns></returns>
+        public IQueryable<ReprocesoDTOs> ObtenerReprocesoPorVariosParametros(int puntoVentaId, DateTime fechaDesde,DateTime fechaHasta)
+        {
+            try
+            {
+                var reprocesos = from HP in _entidad.HISTORIAL_PROCESO
+                    join HRP in _entidad.HISTORIAL_REPROCESO on HP.HISTORIAL_PROCESO_ID equals HRP.HISTORIAL_PROCESO_ID
+                    join DHR in _entidad.DETALLE_HISTORIAL_REPROCESO on HRP.HISTORIAL_REPROCESO_ID equals
+                        DHR.HISTORIAL_REPROCESO_ID
+                    join DP in _entidad.DETALLE_PRENDA_ORDEN_TRABAJO on HRP.DETALLE_PRENDA_ORDEN_TRABAJO_ID equals
+                        DP.DETALLE_PRENDA_ORDEN_TRABAJO_ID
+                    join C in _entidad.COLOR on DP.COLOR_ID equals C.COLOR_ID
+                    join M in _entidad.MARCA on DP.MARCA_ID equals M.MARCA_ID
+                    join TP in _entidad.TIPO_REPROCESO on DHR.TIPO_REPROCESO_ID equals TP.TIPO_REPROCESO_ID
+                    join DOT in _entidad.DETALLE_ORDEN_TRABAJO on DP.DETALLE_ORDEN_TRABAJO_ID equals
+                        DOT.DETALLE_ORDEN_TRABAJO_ID
+                    join P in _entidad.PRODUCTO on DOT.PRODUCTO_ID equals P.PRODUCTO_ID
+                    where
+                        HP.PUNTO_VENTA_ID == puntoVentaId &&
+                        EntityFunctions.TruncateTime(HP.FECHA_REGISTRO) >= fechaDesde &&
+                        EntityFunctions.TruncateTime(HP.FECHA_REGISTRO) <= fechaHasta
+                    select new ReprocesoDTOs()
+                    {
+                        NumeroOrden = HP.NUMERO_ORDEN,
+                        TratamientoEspecial = DP.TRATAMIENTO_ESPECIAL,
+                        Motivo = DHR.MOTIVO,
+                        InformacionVisual = DP.INFORMACION_VISUAL,
+                        EstadoPrenda = DP.ESTADO_PRENDA,
+                        TipoReproceso = TP.DESCRIPCION,
+                        NombrePrenda = P.NOMBRE,
+                        Marca = M.DESCRIPCION,
+                        Color = C.DESCRIPCION,
+                        FechaReproceso = HP.FECHA_REGISTRO
+                    };
+
+                return reprocesos;
+
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
 
         #endregion
     }

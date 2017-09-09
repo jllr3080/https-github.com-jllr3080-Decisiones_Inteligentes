@@ -30,10 +30,11 @@ namespace Web.Models.FlujoProceso
         public Int64 DetallePrendaOrdenTrabajoId { get; set; }
 
 
+
         /// <summary>
-        /// Motivo
+        /// FechaEstimadaEntrega
         /// </summary>
-      
-        public string Motivo { get; set; }
+        
+        public DateTime? FechaEstimadaEntrega { get; set; }
     }
 }

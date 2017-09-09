@@ -23,6 +23,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public long HISTORIAL_REPROCESO_ID { get; set; }
         public Nullable<int> HISTORIAL_PROCESO_ID { get; set; }
         public Nullable<int> DETALLE_PRENDA_ORDEN_TRABAJO_ID { get; set; }
+        public Nullable<System.DateTime> FECHA_ESTIMADA_ENTREGA { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETALLE_HISTORIAL_REPROCESO> DETALLE_HISTORIAL_REPROCESO { get; set; }

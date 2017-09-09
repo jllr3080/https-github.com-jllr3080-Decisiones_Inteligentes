@@ -26,7 +26,7 @@ namespace JLLR.Core.Venta.Servicio.ServicioDelegado
         /// <summary>
         /// Graba el  historial del proceso
         /// </summary>
-        public void GrabarHistorialProceso(HistorialProcesoModelo historialProcesoVistaModelo)
+        public void GrabarHistorialProcesoSinRetorno(HistorialProcesoModelo historialProcesoVistaModelo)
         {
             try
             {
@@ -37,8 +37,9 @@ namespace JLLR.Core.Venta.Servicio.ServicioDelegado
                 WebClient clienteWeb = new WebClient();
                 clienteWeb.Headers["content-type"] = "application/json";
                 clienteWeb.Encoding = Encoding.UTF8;
-                var json = clienteWeb.UploadString(direccionUrl + "GrabarHistorialProceso", "POST", datos);
+                var json = clienteWeb.UploadString(direccionUrl + "GrabarHistorialProcesoSinRetorno", "POST", datos);
                 var js = new JavaScriptSerializer();
+         
 
             }
             catch (Exception ex)

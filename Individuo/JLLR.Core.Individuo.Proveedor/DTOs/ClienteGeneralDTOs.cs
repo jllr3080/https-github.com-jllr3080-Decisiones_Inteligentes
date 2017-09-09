@@ -32,7 +32,7 @@ namespace JLLR.Core.Individuo.Proveedor.DTOs
         /// <summary>
         /// Telefono del cliente 
         /// </summary>
-        public TELEFONO Telefono  { get; set; }
+        public List<TELEFONO> Telefonos  { get; set; }
 
         /// <summary>
         /// Correo electronico del cliente 
@@ -43,5 +43,23 @@ namespace JLLR.Core.Individuo.Proveedor.DTOs
         /// IndividuoRol
         /// </summary>
         public INDIVIDUO_ROL IndividuoRol { get; set; }
+
+        /// <summary>
+        /// NombreCompleto
+        /// </summary>
+
+        public string NombreCompleto { get; set; }
+
+
+        /// <summary>
+        /// DireccionCompleta
+        /// </summary>
+
+        public string DireccionCompleta { get; set; }
+
+        /// <summary>
+        /// Telefono del cliente 
+        /// </summary>
+        public TELEFONO Telefono { get; set; }
     }
 }

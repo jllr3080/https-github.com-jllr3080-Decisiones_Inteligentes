@@ -62,5 +62,30 @@ namespace JLLR.Core.Individuo.Servicio.Modelo
         /// </summary>
         [DataMember]
         public string DescripcionDireccion { get; set; }
+
+        /// <summary>
+        /// CallePrincipal
+        /// </summary>
+        [DataMember]
+        public string CallePrincipal { get; set; }
+
+        /// <summary>
+        /// CalleSecundaria
+        /// </summary>
+        [DataMember]
+        public string CalleSecundaria { get; set; }
+
+        /// <summary>
+        /// NumeroCasa
+        /// </summary>
+        [DataMember]
+        public string NumeroCasa { get; set; }
+
+
+        /// <summary>
+        /// Referencia
+        /// </summary>
+        [DataMember]
+        public string Referencia { get; set; }
     }
 }

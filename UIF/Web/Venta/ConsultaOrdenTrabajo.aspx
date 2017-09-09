@@ -1,4 +1,4 @@
-﻿ <%@ Page Title="<%$ Resources:Web_es_Ec,Titulo_Pagina_Consulta_Orden_Trabajo%>" Language="C#" MasterPageFile="~/PaginaMaestra/Site.Master" AutoEventWireup="true" CodeBehind="ConsultaOrdenTrabajo.aspx.cs" Inherits="Web.Venta.ConsultaOrdenTrabajo" MaintainScrollPositionOnPostback="true"%>
+﻿  <%@ Page Title="<%$ Resources:Web_es_Ec,Titulo_Pagina_Consulta_Orden_Trabajo%>" Language="C#" MasterPageFile="~/PaginaMaestra/Site.Master" AutoEventWireup="true" CodeBehind="ConsultaOrdenTrabajo.aspx.cs" Inherits="Web.Venta.ConsultaOrdenTrabajo" MaintainScrollPositionOnPostback="true"%>
 <%@ Register TagPrefix="cc1" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=16.1.1.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server" ClientIDMode="AutoID">
     <br>
@@ -136,6 +136,11 @@
                                 </asp:BoundField>
                                 <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Tratamiento_Especial%>" DataField="TratamientoEspecial" />
                                 
+                                <asp:TemplateField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Reproceso%>" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle">
+                                    <ItemTemplate >
+                                        <asp:ImageButton ID="_imgReproceso" runat="server" ImageUrl="~/Content/Imagen/Reproceso.png"  CommandName="Reproceso" CommandArgument="<%# ((GridViewRow)Container).RowIndex %>" />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                                 <asp:TemplateField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Mostrar_Observaciones%>" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle">
                                     <ItemTemplate >
                                         <asp:ImageButton ID="_imgObservaciones" runat="server" ImageUrl="~/Content/Imagen/Observar.png"  CommandName="Observacion" CommandArgument="<%# ((GridViewRow)Container).RowIndex %>" />
@@ -200,8 +205,9 @@
  <nav>
         <asp:Button ID="_cerrarOrdenTrabajo" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Cerrar_Orden_Trabajo%>"  ValidationGroup="GuardarOrden" class="btn btn-primary" OnClick="_cerrarOrdenTrabajo_Click" />
         <asp:Button ID="_anularOrden" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Anular_Orden_Trabajo%>"  ValidationGroup="GuardarOrden" class="btn btn-primary" OnClick="_anularOrden_Click"  />
+        <asp:Button ID="_anularPrenda" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Anular_Prenda%>"  ValidationGroup="AnularOrden" class="btn btn-primary" OnClick="_anularPrenda_OnClick"  />
         <asp:Button ID="_abonar" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Abonar%>"  ValidationGroup="AbonarOrden" class="btn btn-primary" OnClick="_abonar_Click"  />
-        <asp:Button ID="_reproceso" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Reproceso%>"  ValidationGroup="Reproceso" class="btn btn-primary"  OnClick="_reproceso_OnClick"  />
+
         <asp:Button ID="_cancelar" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Cancelar%>"  class="btn btn-primary" OnClick="_cancelar_Click" />
 
     </nav>
@@ -451,7 +457,7 @@
                                     <div class="col-md-6">
                                         <asp:TextBox ID="_valorAbonar" runat="server" class="form-control" ValidationGroup="Abonar"  ></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="_valorAbonarValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="Abonar" ControlToValidate="_valorAbonar" ></asp:RequiredFieldValidator>
-                                     <cc1:MaskedEditExtender ID="_valorAbonarExtensor" runat="server" TargetControlID="_valorAbonar" Mask="999.99" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus" OnInvalidCssClass="MaskedEditError" MaskType="Number" InputDirection="RightToLeft" AcceptNegative="Left" DisplayMoney="Left" ErrorTooltipEnabled="True" />
+                                     <cc1:MaskedEditExtender ID="_valorAbonarExtensor" runat="server" TargetControlID="_valorAbonar" Mask="999.99" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus" OnInvalidCssClass="MaskedEditError" MaskType="Number" InputDirection="RightToLeft"  DisplayMoney="Left" ErrorTooltipEnabled="True" />
 
                                     </div>
                                     
@@ -540,7 +546,20 @@
                             <div class="row">
                                     <div class="col-md-12">
                                         
-                                      <iframe runat="server" id="_imagen" src="ManejadorImagen.ashx" style="width: 100%; height: 400px" ></iframe>
+                                    <%--<ajaxToolkit:ResizableControlExtender ID="ResizableControlExtender1" runat="server" TargetControlID="_panelFoto" 
+                                            MinimumWidth="100"
+                                            MinimumHeight="100"
+                                            MaximumWidth="800"
+                                            MaximumHeight="800"
+                                            HandleCssClass="handleImage"
+                                            ResizableCssClass="resizingImage"
+                                            HandleOffsetX="3"
+                                            HandleOffsetY="3" />--%>
+                                        
+                                        <%--<asp:panel runat="server" ID="_panelFoto" >--%>
+                                            <iframe runat="server" id="_imagen" src="ManejadorImagen.ashx"  scrolling="no" style="resize: both" ></iframe>
+                                        <%--</asp:panel>--%>
+                                      
                                          
                                     </div>
                                     
@@ -557,7 +576,7 @@
      <div class="row" >
                   <div class="col-md-12" >
                 <asp:Button ID="_botonReproceso" runat="server" Text="" Visible="false" />
-                    <cc1:ModalPopupExtender ID="_botonReproceso_ModalPopupExtender" PopupControlID="_panelReproceso" runat="server" BehaviorID="_botonReproceso_ModalPopupExtender" TargetControlID="_botonReproceso" BackgroundCssClass="modal-Backgoround" X="250" OnCancelScript="_botonCancelarReproceso" OnOkScript="_botonGrabarReproceso"  Y="50">
+                    <cc1:ModalPopupExtender ID="_botonReproceso_ModalPopupExtender" PopupControlID="_panelReproceso" runat="server" BehaviorID="_botonReproceso_ModalPopupExtender" TargetControlID="_botonReproceso" BackgroundCssClass="modal-Backgoround" X="250" OnCancelScript="_botonCancelarReproceso" OnOkScript="_botonGrabarReproceso"  Y="50"  >
                     </cc1:ModalPopupExtender>
                     <asp:Panel ID="_panelReproceso" runat="server" Style="display: none; background-color: white; width: 80%; height:auto;align-content:center ">
                         <div class="modal-header">
@@ -566,36 +585,58 @@
                         <div class="modal-body">
                             
                             <div class="row">
+                                    <div class="col-md-3">
+                                       
+                                            <asp:Label ID="_labelTipoMotivoReproceso" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Tipo_Motivo_Reproceso%>"></asp:Label>
+                                     </div>
+                                     <div class="col-md-3">
+                                       
+                                            <asp:Label ID="_labelMotivo" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Motivo_Reproceso%>"></asp:Label>
+                                     </div>
+
+                                    <div class="col-md-3">
+                                       
+                                            <asp:Label ID="_labelFechaEstimadaEntrega" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Fecha_Estimada_Entrega%>"></asp:Label>
+                                     </div>
+                                    
+                              </div>
+                            
+                             <div class="row">
+                                    <div class="col-md-3">
+                                       
+                                           <asp:DropDownList ID="_tipoMotivoReproceso" runat="server" CssClass="form-control" DataValueField="TipoReprocesoId" DataTextField="Descripcion"></asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="_tipoMotivoReprocesoValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="Reproceso" ControlToValidate="_tipoMotivoReproceso" ></asp:RequiredFieldValidator>   
+                                     </div>
+                                     <div class="col-md-3">
+                                        <asp:TextBox ID="_motivo" runat="server" ValidationGroup="AnularOrden" CssClass="form-control" AutoCompleteType="Disabled"  ></asp:TextBox>
+
+                                         <asp:RequiredFieldValidator ID="_motivoValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="Reproceso" ControlToValidate="_motivo" ></asp:RequiredFieldValidator>
+                                         <asp:HiddenField ID="_detallePrendaOrdenTrabajoId" runat="server" />  
+                                     </div>
+                                 <div class="col-md-3">
+                                                    <asp:TextBox ID="_fechaEstimadaEntrega" runat="server" CssClass="form-control"></asp:TextBox>
+                                                    <ajaxToolkit:CalendarExtender ID="_fechaEstimadaEntregaExtensor" runat="server" BehaviorID="_fechaEstimadaEntrega_CalendarExtender" TargetControlID="_fechaEstimadaEntrega" Format="dd/MM/yyyy"  />
+                                                    <ajaxToolkit:TextBoxWatermarkExtender id="_fechaEstimadaEntregaMarcaAgua" runat="server" targetcontrolid="_fechaEstimadaEntrega" enabled="True" watermarktext="<%$ Resources:Web_es_Ec,Marca_Agua_Fecha%>"></ajaxToolkit:TextBoxWatermarkExtender>  
+                                                    <asp:RequiredFieldValidator ID="_fechaEstimadaEntregaValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="Obligatorio" ControlToValidate="_fechaEstimadaEntrega" ></asp:RequiredFieldValidator>
+                                            </div>
+                              </div>
+                            
+                             
+                             <div class="row">
                                     <div class="col-md-12">
-                                        <asp:GridView ID="_datosReproceso" runat="server" AutoGenerateColumns="False" OnRowCommand="_datos_RowCommand" Width="100%"  ShowFooter="True" >
-                            <Columns>
-                                <asp:BoundField DataField="DetallePrendaOrdenTrabajoId" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Codigo_Orden_Trabajo%>" />
-                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Prenda%>" DataField="Prenda" />
-                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Marca%>" DataField="Marca" />
-                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Color%>" DataField="Color" />
-                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Informacion_Visual%>" DataField="InformacionVisual" />
-                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Estado_Prenda%>" DataField="EstadoPrenda" />
-                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Numero_Interno%>" DataField="NumeroInternoPrenda"  >
-                                <ItemStyle HorizontalAlign="Right" VerticalAlign="Middle" />
-                                </asp:BoundField>
-                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Tratamiento_Especial%>" DataField="TratamientoEspecial" />
-                                
-                                <asp:TemplateField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Envio_Reproceso%>" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle">
-                                    <ItemTemplate >
-                                        <asp:CheckBox ID="_reproceso" runat="server" />
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                 <asp:TemplateField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Observacion_Reproceso%>" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle">
-                                    <ItemTemplate>
-                                        <asp:TextBox ID="_motivoReproceso" runat="server" class="form-control" ValidationGroup="Reproceso"  ></asp:TextBox>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                            </Columns>
-                             <HeaderStyle CssClass="tableCabecera" ></HeaderStyle>
-                             <RowStyle CssClass="tableItem"></RowStyle>
-                             <FooterStyle CssClass="tablePiePagina"></FooterStyle>
-                        </asp:GridView>
-                                          
+                                        DetalleHistorialReproceso
+                                       
+                                        <asp:GridView ID="_datosReproceso" runat="server" Width="100%" AutoGenerateColumns="False" >
+                                             <Columns>
+                                             <asp:BoundField DataField="TipoMotivoProceso" HeaderText="<%$ Resources:Web_es_Ec,Label_Tipo_Motivo_Proceso%>" />
+                                             <asp:BoundField DataField="Motivo" HeaderText="<%$ Resources:Web_es_Ec,Label_Motivo%>" />
+                                           
+                                            </Columns>
+                                             <HeaderStyle CssClass="tableCabecera" ></HeaderStyle>
+                                             <FooterStyle CssClass="tablePiePagina"></FooterStyle>
+
+                                        </asp:GridView>    
+                                            
                                      </div>
                                     
                               </div>

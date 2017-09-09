@@ -23,6 +23,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
             this.PUNTO_VENTA = new HashSet<PUNTO_VENTA>();
             this.REGLA = new HashSet<REGLA>();
             this.USUARIO = new HashSet<USUARIO>();
+            this.CIERRE_MES = new HashSet<CIERRE_MES>();
         }
     
         public int SUCURSAL_ID { get; set; }
@@ -41,5 +42,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual ICollection<REGLA> REGLA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USUARIO> USUARIO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CIERRE_MES> CIERRE_MES { get; set; }
     }
 }

@@ -442,11 +442,11 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
         /// <param name="marcaId"></param>
         /// <param name="fecha"></param>
         /// <returns></returns>
-        public IQueryable<PrendaMarcaDTOs> ObtenerPrendayMarcaPorVariosParametros(int prendaId, int marcaId, DateTime fecha)
+        public IQueryable<PrendaMarcaDTOs> ObtenerPrendayMarcaPorVariosParametros(int prendaId, int marcaId, DateTime fecha, int colorId)
         {
             try
             {
-               return _transaccionalDaOs.ObtenerPrendayMarcaPorVariosParametros(prendaId,marcaId,fecha);
+               return _transaccionalDaOs.ObtenerPrendayMarcaPorVariosParametros(prendaId,marcaId,fecha, colorId);
             }
             catch (Exception ex)
             {

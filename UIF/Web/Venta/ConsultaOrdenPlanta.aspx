@@ -54,13 +54,17 @@
                                 <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Estado_Prenda%>" DataField="EstadoPrenda" />
                                 <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Numero_Interno%>" DataField="NumeroInternoPrenda" />
                                 <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Tratamiento_Especial%>" DataField="TratamientoEspecial" />
-                                
+                                  <asp:TemplateField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Reproceso%>" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle">
+                                    <ItemTemplate >
+                                        <asp:ImageButton ID="_imgReproceso" runat="server" ImageUrl="~/Content/Imagen/Reproceso.png"  CommandName="Reproceso" CommandArgument="<%# ((GridViewRow)Container).RowIndex %>" />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                                 <asp:TemplateField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Mostrar_Observaciones%>">
                                     <ItemTemplate>
                                         <asp:ImageButton ID="_imgObservaciones" runat="server" ImageUrl="~/Content/Imagen/Observar.png"  CommandName="Observacion" CommandArgument="<%# ((GridViewRow)Container).RowIndex %>" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                 <asp:TemplateField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Fotografias%>">
+                                 <asp:TemplateField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Fotografias%>" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle">
                                     <ItemTemplate>
                                         <asp:ImageButton ID="_imgFotografias" runat="server" ImageUrl="~/Content/Imagen/Fotografia.png"  CommandName="Fotografia" CommandArgument="<%# ((GridViewRow)Container).RowIndex %>" />
                                     </ItemTemplate>
@@ -140,6 +144,187 @@
                         <div class="modal-footer">
                             <asp:Button ID="_btnAceptarObservaciones" runat="server" Text="Agregar Observacion" class="btn btn-primary" data-dismiss="modal" OnClick="_btnAceptarObservaciones_Click" ValidationGroup="AgregarObservacion" />
                             <asp:Button ID="_btnCancelarObservaciones" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Cancelar%>" class="btn btn-primary" data-dismiss="modal" />
+                        </div>
+                    </asp:Panel>
+     </div>
+     </div>
+    
+     <div class="row" >
+                  <div class="col-md-12" >
+                <asp:Button ID="_botonReproceso" runat="server" Text="" Visible="false" />
+                    <cc1:ModalPopupExtender ID="_botonReproceso_ModalPopupExtender" PopupControlID="_panelReproceso" runat="server" BehaviorID="_botonReproceso_ModalPopupExtender" TargetControlID="_botonReproceso" BackgroundCssClass="modal-Backgoround" X="250" OnCancelScript="_botonCancelarReproceso" OnOkScript="_botonGrabarReproceso"  Y="50"  >
+                    </cc1:ModalPopupExtender>
+                    <asp:Panel ID="_panelReproceso" runat="server" Style="display: none; background-color: white; width: 80%; height:auto;align-content:center ">
+                        <div class="modal-header">
+                            <h4 class="modal-title"><asp:Literal ID="Literal5" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Reproceso%>"></asp:Literal></h4>
+                        </div>
+                        <div class="modal-body">
+                            
+                            <div class="row">
+                                    <div class="col-md-3">
+                                       
+                                            <asp:Label ID="_labelTipoMotivoReproceso" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Tipo_Motivo_Reproceso%>"></asp:Label>
+                                     </div>
+                                     <div class="col-md-3">
+                                       
+                                            <asp:Label ID="_labelMotivo" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Motivo_Reproceso%>"></asp:Label>
+                                     </div>
+                                 <div class="col-md-3">
+                                       
+                                            <asp:Label ID="_labelFechaEstimadaEntrega" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Fecha_Estimada_Entrega%>"></asp:Label>
+                                     </div>
+                                    
+                              </div>
+                            
+                             <div class="row">
+                                    <div class="col-md-3">
+                                       
+                                           <asp:DropDownList ID="_tipoMotivoReproceso" runat="server" CssClass="form-control" DataValueField="TipoReprocesoId" DataTextField="Descripcion"></asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="_tipoMotivoReprocesoValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="Reproceso" ControlToValidate="_tipoMotivoReproceso" ></asp:RequiredFieldValidator>   
+                                     </div>
+                                     <div class="col-md-3">
+                                        <asp:TextBox ID="_motivo" runat="server" ValidationGroup="AnularOrden" CssClass="form-control" AutoCompleteType="Disabled"  ></asp:TextBox>
+
+                                         <asp:RequiredFieldValidator ID="_motivoValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="Reproceso" ControlToValidate="_motivo" ></asp:RequiredFieldValidator>
+                                         <asp:HiddenField ID="_detallePrendaOrdenTrabajoId" runat="server" />  
+                                     </div>
+                                   <div class="col-md-3">
+                                                    <asp:TextBox ID="_fechaEstimadaEntrega" runat="server" CssClass="form-control"></asp:TextBox>
+                                                    <ajaxToolkit:CalendarExtender ID="_fechaEstimadaEntregaExtensor" runat="server" BehaviorID="_fechaEstimadaEntrega_CalendarExtender" TargetControlID="_fechaEstimadaEntrega" Format="dd/MM/yyyy"  />
+                                                    <ajaxToolkit:TextBoxWatermarkExtender id="_fechaEstimadaEntregaMarcaAgua" runat="server" targetcontrolid="_fechaEstimadaEntrega" enabled="True" watermarktext="<%$ Resources:Web_es_Ec,Marca_Agua_Fecha%>"></ajaxToolkit:TextBoxWatermarkExtender>  
+                                                    <asp:RequiredFieldValidator ID="_fechaEstimadaEntregaValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="Obligatorio" ControlToValidate="_fechaEstimadaEntrega" ></asp:RequiredFieldValidator>
+                                            </div>
+                                    
+                              </div>
+                            
+                             
+                             <div class="row">
+                                    <div class="col-md-12">
+                                        DetalleHistorialReproceso
+                                       
+                                        <asp:GridView ID="_datosReproceso" runat="server" Width="100%" AutoGenerateColumns="False" >
+                                             <Columns>
+                                             <asp:BoundField DataField="TipoMotivoProceso" HeaderText="<%$ Resources:Web_es_Ec,Label_Tipo_Motivo_Proceso%>" />
+                                             <asp:BoundField DataField="Motivo" HeaderText="<%$ Resources:Web_es_Ec,Label_Motivo%>" />
+                                           
+                                            </Columns>
+                                             <HeaderStyle CssClass="tableCabecera" ></HeaderStyle>
+                                             <FooterStyle CssClass="tablePiePagina"></FooterStyle>
+
+                                        </asp:GridView>    
+                                            
+                                     </div>
+                                    
+                              </div>
+                            
+                           
+                          
+                        </div>
+                        <div class="modal-footer">
+                            <asp:Button ID="_botonGrabarReproceso" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Reproceso%>" class="btn btn-primary" data-dismiss="modal"   OnClick="_botonGrabarReproceso_OnClick" ValidationGroup="Reproceso"/>
+                            <asp:Button ID="_botonCancelarReproceso" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Cancelar%>"  class="btn btn-primary" data-dismiss="modal" />
+                        </div>
+                    </asp:Panel>
+     </div>
+     </div>
+     <div class="row" >
+                  <div class="col-md-12" >
+                <asp:Button ID="_btnVisualizarImagen" runat="server" Text="" Visible="false" />
+                    <cc1:ModalPopupExtender ID="_btnVisualizar_ModalPopupExtender" PopupControlID="_panelVisualizarImagen" runat="server" BehaviorID="_btnVisualizar_ModalPopupExtender" TargetControlID="_btnVisualizarImagen" BackgroundCssClass="modal-Backgoround" X="250" OnCancelScript="_btnCancelaVisualizarImagen"  Y="50">
+                    </cc1:ModalPopupExtender>
+                    <asp:Panel ID="_panelVisualizarImagen" runat="server" Style="display: none; background-color: white; width: 80%; height:auto;align-content:center ">
+                        <div class="modal-header">
+                            <h4 class="modal-title"><asp:Literal ID="Literal3" runat="server" Text="<%$ Resources:Web_es_Ec,Literal_Agregar_Fotografia%>"></asp:Literal></h4>
+                        </div>
+                        <div class="modal-body">
+                            
+                            <div class="row">
+                                    <div class="col-md-12">
+                                        
+                                    <%--<ajaxToolkit:ResizableControlExtender ID="ResizableControlExtender1" runat="server" TargetControlID="_panelFoto" 
+                                            MinimumWidth="100"
+                                            MinimumHeight="100"
+                                            MaximumWidth="800"
+                                            MaximumHeight="800"
+                                            HandleCssClass="handleImage"
+                                            ResizableCssClass="resizingImage"
+                                            HandleOffsetX="3"
+                                            HandleOffsetY="3" />--%>
+                                        
+                                        <%--<asp:panel runat="server" ID="_panelFoto" >--%>
+                                            <iframe runat="server" id="_imagen" src="ManejadorImagen.ashx"  scrolling="no" style="resize: both" ></iframe>
+                                        <%--</asp:panel>--%>
+                                      
+                                         
+                                    </div>
+                                    
+                              </div>
+                          
+                        </div>
+                        <div class="modal-footer">
+                            <asp:Button ID="_btnCancelaVisualizarImagen" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Cancelar%>"  class="btn btn-primary" data-dismiss="modal" />
+                        </div>
+                    </asp:Panel>
+     </div>
+     </div>
+    
+     <div class="row" >
+                  <div class="col-md-12" >
+                <asp:Button ID="_btnAgregarFotografia" runat="server" Text="" Visible="false" />
+                    <cc1:ModalPopupExtender ID="_btnAgregarFotografia_ModalPopupExtender" PopupControlID="_panelFotografia" runat="server" BehaviorID="_btnAgregarFotografia_ModalPopupExtender" TargetControlID="_btnAgregarFotografia" BackgroundCssClass="modal-Backgoround" X="350" OnCancelScript="_btnCancelarFotografia" OnOkScript="_btnAgregarDireccionFotografia" Y="50">
+                    </cc1:ModalPopupExtender>
+                    <asp:Panel ID="_panelFotografia" runat="server" Style="display: none; background-color: white; width: 30%; height: auto;align-content:center ">
+                        <div class="modal-header">
+                            <h4 class="modal-title"><asp:Literal ID="Literal2" runat="server" Text="<%$ Resources:Web_es_Ec,Literal_Agregar_Fotografia%>"></asp:Literal></h4>
+                        </div>
+                        <div class="modal-body">
+                            
+                            <div class="row">
+                                    <div class="col-md-12">
+                                        
+                                       <asp:GridView ID="_datosFotografia" runat="server" Width="100%" AutoGenerateColumns="False" OnRowCommand="_datosFotografia_OnRowCommand">
+                                             <Columns>
+                                             <asp:BoundField DataField="DetalleOrdenTrabajoFotografia.DetalleOrdenTrabajoFotografiaId" HeaderText="<%$ Resources:Web_es_Ec,Label_Codigo_Interno%>" />
+                                             <asp:BoundField DataField="NombreUsuario" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Nombre_Usuario%>" />
+                                             <asp:BoundField DataField="DetalleOrdenTrabajoFotografia.FechaRegistro" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Fecha%>" DataFormatString="{0:d}" />
+                                                 <asp:TemplateField HeaderText="<%$ Resources:Web_es_Ec,Label_Visualizar_Fotografia%>" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle">
+                                            <ItemTemplate>
+                                                <asp:ImageButton ID="_imgFotografias" runat="server" ImageUrl="~/Content/Imagen/Fotografia.png"  CommandName="VerFotografia" CommandArgument="<%# ((GridViewRow)Container).RowIndex %>" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            </Columns>
+                                             <HeaderStyle CssClass="tableCabecera" ></HeaderStyle>
+                                             <FooterStyle CssClass="tablePiePagina"></FooterStyle>
+
+                                        </asp:GridView>      
+                                    </div>
+                                    
+                              </div>
+                            <br/>
+                             <div class="row">
+                                    <div class="col-md-6">
+                                        <asp:Label ID="_labelDireccionFotografia" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Direccion_Fotografia%>"></asp:Label>
+                                    </div>
+                                    
+                              </div>
+                              <div class="row">
+                                    <div class="col-md-6">
+                                         <asp:UpdatePanel runat="server" ID="updatepanel1">
+                                          <Triggers><asp:PostBackTrigger ControlID="_btnAgregarDireccionFotografia" /></Triggers>
+                                        
+                                          <ContentTemplate>
+                                          <asp:FileUpload runat="server" ID="_direccionFotografia" class="btn btn-primary"  ></asp:FileUpload>
+                                          </ContentTemplate>
+                                      </asp:UpdatePanel>
+                                    
+                                        <asp:HiddenField ID="_detallePrendaId" runat="server" />
+                                    </div>
+                                    
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <asp:Button ID="_btnAgregarDireccionFotografia" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Agregar_Fotografia%>" class="btn btn-primary" data-dismiss="modal"   OnClick="_btnAgregarDireccionFotografia_OnClick"/>
+                            <asp:Button ID="_btnCancelarFotografia" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Cancelar%>"  class="btn btn-primary" data-dismiss="modal" />
                         </div>
                     </asp:Panel>
      </div>

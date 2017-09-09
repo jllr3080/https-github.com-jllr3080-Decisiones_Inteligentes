@@ -182,9 +182,9 @@ namespace JLLR.Core.FlujoProceso.Servicio.Ensamblador
             return new modelo.HistorialReprocesoModelo
             {
               DetallePrendaOrdenTrabajoId = e.DETALLE_PRENDA_ORDEN_TRABAJO_ID,
-              Motivo = e.MOTIVO,
-              HistorialProceso = _historialProceso,
-              HistorialReprocesoId = e.HISTORIAL_REPROCESO_ID
+             HistorialProceso = _historialProceso,
+              HistorialReprocesoId = e.HISTORIAL_REPROCESO_ID,
+              FechaEstimadaEntrega = e.FECHA_ESTIMADA_ENTREGA
 
             };
 
@@ -219,6 +219,73 @@ namespace JLLR.Core.FlujoProceso.Servicio.Ensamblador
             foreach (var entidad in listadoEntidad)
             {
                 listaModelo.Add(CrearHistorialReproceso(entidad));
+            }
+            return listaModelo;
+
+        }
+
+        #endregion
+
+
+        #region  DETALLE HISTORIAL REPROCESO
+        /// <summary>
+        /// Convierte el DTO de entidad a modelo
+        /// </summary>
+        /// <param name="e">Entidad</param>
+        /// <returns></returns>
+        public modelo.DetalleHistorialReprocesoModelo CrearDetalleHistorialReproceso(entidad.DETALLE_HISTORIAL_REPROCESO e)
+        {
+
+            modelo.HistorialReprocesoModelo _historialProceso= new Modelo.HistorialReprocesoModelo
+            {
+                HistorialReprocesoId = Convert.ToInt32(e.HISTORIAL_REPROCESO_ID)
+            };
+
+            modeloGeneral.TipoReprocesoModelo _tipoReproceso = new modeloGeneral.TipoReprocesoModelo
+            {
+                TipoReprocesoId = Convert.ToInt32(e.TIPO_REPROCESO_ID)
+            };
+
+            return new modelo.DetalleHistorialReprocesoModelo
+            {
+              HistorialReproceso = _historialProceso,
+              Motivo = e.MOTIVO,
+              TipoReproceso = _tipoReproceso,
+              DetalleHistorialReprocesoId = e.DETALLE_HISTORIAL_REPROCESO_ID
+
+            };
+
+        }
+
+        /// <summary>
+        /// Convierte un listado de DTO en listado de  modelos de DTO
+        /// </summary>
+        /// <param name="listadoEntidad">Listado de Entidades</param>
+        /// <returns></returns>
+        public List<modelo.DetalleHistorialReprocesoModelo> CrearDetalleHistorialReprocesos(IQueryable<entidad.DETALLE_HISTORIAL_REPROCESO> listadoEntidad)
+        {
+            List<modelo.DetalleHistorialReprocesoModelo> listaModelo = new List<modelo.DetalleHistorialReprocesoModelo>();
+
+            foreach (var entidad in listadoEntidad)
+            {
+                listaModelo.Add(CrearDetalleHistorialReproceso(entidad));
+            }
+            return listaModelo;
+
+        }
+
+        /// <summary>
+        /// Convierte un listado de DTO en listado de  modelos de DTO
+        /// </summary>
+        /// <param name="listadoEntidad">Listado de Entidades</param>
+        /// <returns></returns>
+        public List<modelo.DetalleHistorialReprocesoModelo> CrearDetalleHistorialReprocesos(List<entidad.DETALLE_HISTORIAL_REPROCESO> listadoEntidad)
+        {
+            List<modelo.DetalleHistorialReprocesoModelo> listaModelo = new List<modelo.DetalleHistorialReprocesoModelo>();
+
+            foreach (var entidad in listadoEntidad)
+            {
+                listaModelo.Add(CrearDetalleHistorialReproceso(entidad));
             }
             return listaModelo;
 

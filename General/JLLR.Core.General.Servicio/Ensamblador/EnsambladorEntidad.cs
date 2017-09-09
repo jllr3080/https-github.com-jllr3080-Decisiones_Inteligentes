@@ -926,5 +926,43 @@ namespace JLLR.Core.General.Servicio.Ensamblador
 
         }
         #endregion
+
+        #region MES
+        /// <summary>
+        /// Convierte el modelo en una entidad
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public entidad.MES CrearMes(modelo.MesModelo m)
+        {
+            return new entidad.MES()
+            {
+                MES_ID = m.MesId,
+                DESCRIPCION = m.Descripcion,
+                ESTA_HABILITADO = m.EstaHabilitado,
+                FECHA_DESDE = m.FechaDesde,
+                FECHA_HASTA = m.FechaHasta
+
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<entidad.MES> CrearMeses(List<modelo.MesModelo> listadoModelo)
+        {
+            List<entidad.MES> listaEntidad = new List<entidad.MES>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearMes(modelo));
+            }
+            return listaEntidad;
+
+        }
+        #endregion
     }
 }

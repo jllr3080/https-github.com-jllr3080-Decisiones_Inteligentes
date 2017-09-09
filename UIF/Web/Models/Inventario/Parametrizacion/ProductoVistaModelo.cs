@@ -76,5 +76,11 @@ namespace Web.Models.Inventario.Parametrizacion
         /// </summary>
 
         public bool? PrendaEspecial { get; set; }
+
+        /// <summary>
+        /// NumeroPrendas
+        /// </summary>
+        
+        public int? NumeroPrendas { get; set; }
     }
 }

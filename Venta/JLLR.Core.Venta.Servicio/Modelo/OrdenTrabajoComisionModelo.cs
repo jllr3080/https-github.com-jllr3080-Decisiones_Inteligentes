@@ -65,6 +65,12 @@ namespace JLLR.Core.Venta.Servicio.Modelo
         public decimal? ValorIndustriales { get; set; }
 
         /// <summary>
+        /// ValorQuimica
+        /// </summary>
+        [DataMember]
+        public decimal? ValorQuimica { get; set; }
+
+        /// <summary>
         /// ValorComisionIndustrialesId
         /// </summary>
         [DataMember]

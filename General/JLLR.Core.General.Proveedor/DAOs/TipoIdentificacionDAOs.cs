@@ -31,6 +31,7 @@ namespace JLLR.Core.General.Proveedor.DAOs
             {
 
                 var tipoIdentificaciones = from tipoIdentificacion in _entidad.TIPO_IDENTIFICACION
+                                           where tipoIdentificacion.POR_DEFECTO==true
                                   select tipoIdentificacion;
 
                 return tipoIdentificaciones.OrderBy(m=>m.DESCRIPCION);

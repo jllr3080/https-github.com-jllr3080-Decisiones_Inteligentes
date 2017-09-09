@@ -37,5 +37,11 @@ namespace Web.DTOs.Individuo
         /// </summary>
         public string TelefonoCliente { get; set; }
 
+        /// <summary>
+        ///NumeroDocumento
+        /// </summary>
+        
+        public string NumeroDocumento { get; set; }
+
     }
 }

@@ -242,7 +242,11 @@ namespace JLLR.Core.Individuo.Servicio.Ensamblador
                Pais = _pais,
                Ciudad = _ciudad,
                Estado =_estado,
-               Parroquia = _parroquia
+               Parroquia = _parroquia,
+               CallePrincipal = e.CALLE_PRINCIPAL,
+               NumeroCasa = e.NUMERO_CASA,
+               CalleSecundaria = e.CALLE_SECUNDARIA,
+               Referencia = e.REFERENCIA
                
 
             };
@@ -276,6 +280,8 @@ namespace JLLR.Core.Individuo.Servicio.Ensamblador
         /// <returns></returns>
         public modelo.TelefonoModelo CrearTelefono(entidad.TELEFONO e)
         {
+            if (e == null)
+                return null;
             modelo.IndividuoModelo _individuo = new modelo.IndividuoModelo();
             _individuo.IndividuoId = Convert.ToInt32(e.INDIVIDUO_ID);
 
@@ -302,6 +308,26 @@ namespace JLLR.Core.Individuo.Servicio.Ensamblador
         /// <returns></returns>
         public List<modelo.TelefonoModelo> CrearTelefonos(IQueryable<entidad.TELEFONO> listadoEntidad)
         {
+            List<modelo.TelefonoModelo> listaModelo = new List<modelo.TelefonoModelo>();
+
+            foreach (var entidad in listadoEntidad)
+            {
+                listaModelo.Add(CrearTelefono(entidad));
+            }
+            return listaModelo;
+
+        }
+
+        /// <summary>
+        /// Convierte un listado de DTO en listado de  modelos de DTO
+        /// </summary>
+        /// <param name="listadoEntidad">Listado de Entidades</param>
+        /// <returns></returns>
+        public List<modelo.TelefonoModelo> CrearColeccionTelefonos(List<entidad.TELEFONO> listadoEntidad)
+        {
+
+            if (listadoEntidad == null)
+                return null;
             List<modelo.TelefonoModelo> listaModelo = new List<modelo.TelefonoModelo>();
 
             foreach (var entidad in listadoEntidad)

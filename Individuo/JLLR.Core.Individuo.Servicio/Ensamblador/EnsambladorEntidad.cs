@@ -186,7 +186,11 @@ namespace JLLR.Core.Individuo.Servicio.Ensamblador
               INDIVIDUO_ID = m.Individuo.IndividuoId,
               TIPO_DIRECCION_ID = m.TipoDireccion.TipoDireccionId,
               PARROQUIA_ID = m.Parroquia.ParroquiaId,
-              DESCRIPCION_DIRECCION=m.DescripcionDireccion
+              DESCRIPCION_DIRECCION=m.DescripcionDireccion,
+              CALLE_PRINCIPAL = m.CallePrincipal,
+              CALLE_SECUNDARIA = m.CalleSecundaria,
+              NUMERO_CASA = m.NumeroCasa,
+              REFERENCIA = m.Referencia
               
 
             };

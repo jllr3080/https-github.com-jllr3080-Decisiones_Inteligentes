@@ -27,6 +27,30 @@ namespace Web.ServicioDelegado
 
 
         #region TRANSACCIONAL
+
+        /// <summary>
+        /// Obtiene el cliente completo por  numero  de documento
+        /// </summary>
+        /// <param name="primerApellido"></param>
+        /// <param name="segundoApellido"></param>
+        /// <returns></returns>
+        public List<ClienteGeneralVistaDTOs> ObtenerClientePorApellidos(string primerApellido, string segundoApellido)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerClientePorApellidos?primerApellido=" + primerApellido + "&segundoApellido=" + segundoApellido);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<ClienteGeneralVistaDTOs>>(json);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         /// <summary>
         /// Obtiene   la informacion del cliente
         /// </summary>
@@ -42,6 +66,30 @@ namespace Web.ServicioDelegado
                 var json = clienteWeb.DownloadString(direccionUrl + "ObtenerDatosClientePorNumeroIdentificacion?numeroIdentificacion=" + numeroIdentificacion);
                 var js = new JavaScriptSerializer();
                 return js.Deserialize<ClienteVistaDTOs>(json);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene   la informacion del cliente
+        /// </summary>
+        /// <param name="apellidoPaterno"></param>
+        /// <param name="apellidoMaterno"></param>
+        public List<ClienteVistaDTOs> ObtenerDatosClientePorApellidos (string apellidoPaterno, string apellidoMaterno)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerDatosClientePorApellidos?apellidoPaterno=" + apellidoPaterno+ "&apellidoMaterno="+ apellidoMaterno);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<ClienteVistaDTOs>>(json);
 
             }
             catch (Exception ex)

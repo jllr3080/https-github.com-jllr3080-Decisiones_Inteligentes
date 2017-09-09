@@ -148,10 +148,10 @@ namespace Web
                 }
                 _menu.Items.Add(inicio);
                 _menu.Items.Add(administracion);
+                _menu.Items.Add(venta);
+                _menu.Items.Add(logistica);
                 _menu.Items.Add(contabilidad);
                 _menu.Items.Add(fe);
-                _menu.Items.Add(logistica);
-                _menu.Items.Add(venta);
                 _menu.Items.Add(seguridades);
                 //_menu.Items.Add(inventario);
                 _menu.Items.Add(usuario);

@@ -36,11 +36,11 @@ namespace JLLR.Core.FlujoProceso.Servicio
         /// <summary>
         /// Graba el  historial del proceso
         /// </summary>
-        public void GrabarHistorialProceso(HistorialProcesoModelo historialProceso)
+        public HistorialProcesoModelo GrabarHistorialProceso(HistorialProcesoModelo historialProceso)
         {
             try
             {
-                _flujoProcesoTransformadorNegocio.GrabarHistorialProceso(historialProceso);
+              return  _flujoProcesoTransformadorNegocio.GrabarHistorialProceso(historialProceso);
             }
             catch (Exception ex)
             {
@@ -48,6 +48,24 @@ namespace JLLR.Core.FlujoProceso.Servicio
                 throw;
             }
         }
+
+        /// <summary>
+        /// Graba el  historial del proceso
+        /// </summary>
+        public void GrabarHistorialProcesoSinRetorno(HistorialProcesoModelo historialProceso)
+        {
+            try
+            {
+                 _flujoProcesoTransformadorNegocio.GrabarHistorialProcesoSinRetorno(historialProceso);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        
 
         /// <summary>
         /// Obtener el historial del proceso por numero  de orden
@@ -158,7 +176,50 @@ namespace JLLR.Core.FlujoProceso.Servicio
             }
 
         }
+        /// <summary>
+        /// Obtiene el lsitado de  las ordenes de reproceso
+        /// </summary>
+        /// <param name="detalleOrdenTrabajoId"></param>
+        /// <returns></returns>
+        public List<DetalleHistorialReprocesoDTOs> ObtenerDetalleHistorialReprocesosPorDetalleOrdenTrabajoId(
+            int detalleOrdenTrabajoId)
+        {
 
+            try
+            {
+                return
+                    _flujoProcesoTransformadorNegocio.ObtenerDetalleHistorialReprocesosPorDetalleOrdenTrabajoId(
+                        detalleOrdenTrabajoId);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Reporte de  reproceso por prenda
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechaHasta"></param>
+        /// <returns></returns>
+        public List<ReprocesoDTOs> ObtenerReprocesoPorVariosParametros(int puntoVentaId, string fechaDesde, string fechaHasta)
+        {
+            try
+            {
+                return _flujoProcesoTransformadorNegocio.ObtenerReprocesoPorVariosParametros(puntoVentaId,Convert.ToDateTime(fechaDesde),Convert.ToDateTime(fechaHasta));
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
         #region HISTORIAL RECLAMO  REPROCESO PRENDA
@@ -204,6 +265,46 @@ namespace JLLR.Core.FlujoProceso.Servicio
                 throw;
             }
         }
+        #endregion
+
+        #region HISTORIAL REPROCESO
+        /// <summary>
+        /// Graba el  historial del reproceso de prendas   y los reclamos 
+        /// </summary>
+        /// <param name="historialReclamoReprocesoPrenda"></param>
+        public HistorialReprocesoModelo GrabarHistorialReproceso(HistorialReprocesoModelo historialReproceso)
+        {
+            try
+            {
+               return _flujoProcesoTransformadorNegocio.GrabarHistorialReproceso(historialReproceso);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+
+            }
+        }
+        #endregion
+
+        #region DETALLE  HISTORIAL  PRENDA
+        /// <summary>
+        /// Grabar el detalle
+        /// </summary>
+        /// <param name="detalleHistorialReproceso"></param>
+        public void GrabarDetalleHistorialReproceso(DetalleHistorialReprocesoModelo detalleHistorialReproceso)
+        {
+            try
+            {
+                _flujoProcesoTransformadorNegocio.GrabarDetalleHistorialReproceso(detalleHistorialReproceso);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
         #endregion
     }
 }

@@ -45,13 +45,15 @@
                             <asp:BoundField DataField="CuentaPorCobrar.NumeroOrden" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Numero_Orden%>" />
                             <asp:BoundField DataField="CuentaPorCobrar.NumeroFactura" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Numero_Factura%>" />
                             <asp:BoundField DataField="CuentaPorCobrar.Valor" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Valor%>" DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" ItemStyle-VerticalAlign="Middle" />
-                            <asp:BoundField DataField="CuentaPorCobrar.Saldo" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Saldo%>" DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" ItemStyle-VerticalAlign="Middle" />
+                             <asp:BoundField DataField="HistorialCuentaPorCobrar.ValorCobro" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Valor_Abono%>" DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" ItemStyle-VerticalAlign="Middle" />
+                                <asp:BoundField DataField="CuentaPorCobrar.Saldo" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Valor%>" DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" ItemStyle-VerticalAlign="Middle" />
+                            
                                 <asp:TemplateField>
                                     <ItemTemplate>
                                         <asp:ImageButton ID="_imgResumenCobro" runat="server" ImageUrl="~/Content/Imagen/Editar.png" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Resumen_Cobro%>" CommandName="Historial" CommandArgument="<%# ((GridViewRow)Container).RowIndex %>" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
-
+                                
                             </Columns>
                            <HeaderStyle CssClass="tableCabecera" ></HeaderStyle>
                         <FooterStyle CssClass="tablePiePagina"></FooterStyle>

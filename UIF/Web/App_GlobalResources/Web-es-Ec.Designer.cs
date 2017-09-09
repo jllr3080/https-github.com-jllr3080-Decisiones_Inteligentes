@@ -106,11 +106,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a + Agregar Telefonos.
+        /// </summary>
+        internal static string Boton_Agregar_Telefono {
+            get {
+                return ResourceManager.GetString("Boton_Agregar_Telefono", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Anular Orden de Trabajo.
         /// </summary>
         internal static string Boton_Anular_Orden_Trabajo {
             get {
                 return ResourceManager.GetString("Boton_Anular_Orden_Trabajo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Anular Prenda.
+        /// </summary>
+        internal static string Boton_Anular_Prenda {
+            get {
+                return ResourceManager.GetString("Boton_Anular_Prenda", resourceCulture);
             }
         }
         
@@ -268,7 +286,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Apellido  Materno(*).
+        ///   Busca una cadena traducida similar a Apellido  Materno.
         /// </summary>
         internal static string Label_Apellido_Materno {
             get {
@@ -300,6 +318,15 @@ namespace Resources {
         internal static string Label_Aplica_Promocion {
             get {
                 return ResourceManager.GetString("Label_Aplica_Promocion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Apellido Materno.
+        /// </summary>
+        internal static string Label_Busqueda_Apellido_Materno {
+            get {
+                return ResourceManager.GetString("Label_Busqueda_Apellido_Materno", resourceCulture);
             }
         }
         
@@ -412,7 +439,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Agregar Fotografias.
+        ///   Busca una cadena traducida similar a Fotografias.
         /// </summary>
         internal static string Label_Cabecera_Grid_Fotografias {
             get {
@@ -439,7 +466,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Mostrar Observaciones.
+        ///   Busca una cadena traducida similar a Observaciones.
         /// </summary>
         internal static string Label_Cabecera_Grid_Mostrar_Observaciones {
             get {
@@ -511,6 +538,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Reproceso.
+        /// </summary>
+        internal static string Label_Cabecera_Grid_Reproceso {
+            get {
+                return ResourceManager.GetString("Label_Cabecera_Grid_Reproceso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Resumen Cobro.
         /// </summary>
         internal static string Label_Cabecera_Grid_Resumen_Cobro {
@@ -547,6 +583,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Abono.
+        /// </summary>
+        internal static string Label_Cabecera_Grid_Valor_Abono {
+            get {
+                return ResourceManager.GetString("Label_Cabecera_Grid_Valor_Abono", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Valor Total.
         /// </summary>
         internal static string Label_Cabecera_Grid_Valor_Total {
@@ -561,6 +606,33 @@ namespace Resources {
         internal static string Label_Cabecera_Grid_Valor_Unitario {
             get {
                 return ResourceManager.GetString("Label_Cabecera_Grid_Valor_Unitario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Número de Documento.
+        /// </summary>
+        internal static string Label_Cabecera_Numero_Documento {
+            get {
+                return ResourceManager.GetString("Label_Cabecera_Numero_Documento", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Calle Principal (*).
+        /// </summary>
+        internal static string Label_Calle_Principal {
+            get {
+                return ResourceManager.GetString("Label_Calle_Principal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Calle Secundaria (*).
+        /// </summary>
+        internal static string Label_Calle_Secundaria {
+            get {
+                return ResourceManager.GetString("Label_Calle_Secundaria", resourceCulture);
             }
         }
         
@@ -691,6 +763,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Dirección .
+        /// </summary>
+        internal static string Label_Direccion_Personal {
+            get {
+                return ResourceManager.GetString("Label_Direccion_Personal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Editar.
         /// </summary>
         internal static string Label_Editar {
@@ -808,6 +889,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Fecha Estimada de Entrega.
+        /// </summary>
+        internal static string Label_Fecha_Estimada_Entrega {
+            get {
+                return ResourceManager.GetString("Label_Fecha_Estimada_Entrega", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Fecha Hasta.
         /// </summary>
         internal static string Label_Fecha_Hasta {
@@ -889,6 +979,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Mapa de  Parroquias.
+        /// </summary>
+        internal static string Label_Mapa_Parroquias {
+            get {
+                return ResourceManager.GetString("Label_Mapa_Parroquias", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Marca.
         /// </summary>
         internal static string Label_Marca {
@@ -903,6 +1002,15 @@ namespace Resources {
         internal static string Label_Material {
             get {
                 return ResourceManager.GetString("Label_Material", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Motivo de Reproceso.
+        /// </summary>
+        internal static string Label_Motivo {
+            get {
+                return ResourceManager.GetString("Label_Motivo", resourceCulture);
             }
         }
         
@@ -934,6 +1042,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Apellido y Nombres.
+        /// </summary>
+        internal static string Label_Nombre_Completo {
+            get {
+                return ResourceManager.GetString("Label_Nombre_Completo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Nombre del Perfil .
         /// </summary>
         internal static string Label_Nombre_Perfil {
@@ -952,7 +1069,16 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Numero de Documento.
+        ///   Busca una cadena traducida similar a Número de Casa (*).
+        /// </summary>
+        internal static string Label_Numero_Casa {
+            get {
+                return ResourceManager.GetString("Label_Numero_Casa", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Numero de Documento (*).
         /// </summary>
         internal static string Label_Numero_Documento {
             get {
@@ -961,7 +1087,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Número Interno Prenda.
+        ///   Busca una cadena traducida similar a Número Etiqueta.
         /// </summary>
         internal static string Label_Numero_Interno {
             get {
@@ -997,11 +1123,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a El total de prendas a ingresar:.
+        /// </summary>
+        internal static string Label_Numero_Prendas {
+            get {
+                return ResourceManager.GetString("Label_Numero_Prendas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Numero de Telefono (*).
         /// </summary>
         internal static string Label_Numero_Telefono {
             get {
                 return ResourceManager.GetString("Label_Numero_Telefono", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Objeto Olvidado.
+        /// </summary>
+        internal static string Label_Objeto_Olvidado {
+            get {
+                return ResourceManager.GetString("Label_Objeto_Olvidado", resourceCulture);
             }
         }
         
@@ -1033,6 +1177,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Parametro de  Busqueda 2.
+        /// </summary>
+        internal static string Label_Parametro_Dos {
+            get {
+                return ResourceManager.GetString("Label_Parametro_Dos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Parametro de Busqueda 1.
+        /// </summary>
+        internal static string Label_Parametro_Uno {
+            get {
+                return ResourceManager.GetString("Label_Parametro_Uno", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Parroquia.
         /// </summary>
         internal static string Label_Parroquia {
@@ -1047,6 +1209,15 @@ namespace Resources {
         internal static string Label_Porcentaje_Franquicia {
             get {
                 return ResourceManager.GetString("Label_Porcentaje_Franquicia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a 30 %  ADICIONAL.
+        /// </summary>
+        internal static string Label_Porcentaje_Manchado {
+            get {
+                return ResourceManager.GetString("Label_Porcentaje_Manchado", resourceCulture);
             }
         }
         
@@ -1105,11 +1276,20 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Razón Social de la Empresa.
+        ///   Busca una cadena traducida similar a Razón Social de la Empresa (*).
         /// </summary>
         internal static string Label_Razon_Social {
             get {
                 return ResourceManager.GetString("Label_Razon_Social", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Referencia (*).
+        /// </summary>
+        internal static string Label_Referencia {
+            get {
+                return ResourceManager.GetString("Label_Referencia", resourceCulture);
             }
         }
         
@@ -1123,11 +1303,38 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Revisión Prenda Cliente?.
+        /// </summary>
+        internal static string Label_Revision_Prendas {
+            get {
+                return ResourceManager.GetString("Label_Revision_Prendas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Segundo Nombre (*).
         /// </summary>
         internal static string Label_Segundo_Nombre {
             get {
                 return ResourceManager.GetString("Label_Segundo_Nombre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Seleccionar .
+        /// </summary>
+        internal static string Label_Seleccionar {
+            get {
+                return ResourceManager.GetString("Label_Seleccionar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Solo Planchado.
+        /// </summary>
+        internal static string Label_Solo_Planchado {
+            get {
+                return ResourceManager.GetString("Label_Solo_Planchado", resourceCulture);
             }
         }
         
@@ -1164,6 +1371,24 @@ namespace Resources {
         internal static string Label_Telefono_Cliente {
             get {
                 return ResourceManager.GetString("Label_Telefono_Cliente", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Telefóno Personal.
+        /// </summary>
+        internal static string Label_Telefono_Personal {
+            get {
+                return ResourceManager.GetString("Label_Telefono_Personal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Busqueda  Por :.
+        /// </summary>
+        internal static string Label_Tipo_Busqueda {
+            get {
+                return ResourceManager.GetString("Label_Tipo_Busqueda", resourceCulture);
             }
         }
         
@@ -1209,6 +1434,24 @@ namespace Resources {
         internal static string Label_Tipo_Lavado {
             get {
                 return ResourceManager.GetString("Label_Tipo_Lavado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tipo de Reproceso.
+        /// </summary>
+        internal static string Label_Tipo_Motivo_Proceso {
+            get {
+                return ResourceManager.GetString("Label_Tipo_Motivo_Proceso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tipo de Reproceso.
+        /// </summary>
+        internal static string Label_Tipo_Motivo_Reproceso {
+            get {
+                return ResourceManager.GetString("Label_Tipo_Motivo_Reproceso", resourceCulture);
             }
         }
         
@@ -1438,6 +1681,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Correo electrónico no valido.
+        /// </summary>
+        internal static string Mensaje_Correo_No_Valido {
+            get {
+                return ResourceManager.GetString("Mensaje_Correo_No_Valido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La edad del cliente es menor a 15 años no se puede registrar este  cliente.
+        /// </summary>
+        internal static string Mensaje_Edad_Menor {
+            get {
+                return ResourceManager.GetString("Mensaje_Edad_Menor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Error contacte con el administrador.
         /// </summary>
         internal static string Mensaje_Error_Sistema {
@@ -1636,7 +1897,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Busqueda del Cliente Por  Numero de Identificación.
+        ///   Busca una cadena traducida similar a Busqueda del Cliente Por  Apellido y Numero de Identificación.
         /// </summary>
         internal static string Panel_Busqueda_Cliente {
             get {
@@ -2145,6 +2406,15 @@ namespace Resources {
         internal static string Titulo_Reporte_Diario {
             get {
                 return ResourceManager.GetString("Titulo_Reporte_Diario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reporte de Reproceso de Prendas.
+        /// </summary>
+        internal static string Titulo_Reporte_Reproceso {
+            get {
+                return ResourceManager.GetString("Titulo_Reporte_Reproceso", resourceCulture);
             }
         }
         

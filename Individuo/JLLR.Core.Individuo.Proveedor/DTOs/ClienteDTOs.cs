@@ -37,6 +37,11 @@ namespace JLLR.Core.Individuo.Proveedor.DTOs
         /// </summary>
         public string TelefonoCliente { get; set; }
 
+        /// <summary>
+        ///NumeroDocumento
+        /// </summary>
+        public string NumeroDocumento { get; set; }
+
 
 
     }

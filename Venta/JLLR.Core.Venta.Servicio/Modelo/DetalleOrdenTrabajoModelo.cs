@@ -60,6 +60,13 @@ namespace JLLR.Core.Venta.Servicio.Modelo
         [DataMember]
         public decimal? PorcentajeImpuesto { get; set; }
 
+
+        /// <summary>
+        /// ValorImpuesto
+        /// </summary>
+        [DataMember]
+        public decimal? ValorImpuesto { get; set; }
+
         /// <summary>
         /// Valor total + iva
         /// </summary>

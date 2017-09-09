@@ -22,6 +22,7 @@ namespace JLLR.Core.FlujoProceso.Proveedor.Negocio
         private  readonly  TransaccionalDAOs _transaccionalDaOs= new TransaccionalDAOs();
         private readonly  HistorialReclamoReprocesoPrendaDAOs _historialReclamoReprocesoPrendaDaOs= new HistorialReclamoReprocesoPrendaDAOs();
         private readonly  HistorialReprocesoDAOs _historialReprocesoDaOs= new HistorialReprocesoDAOs();
+        private readonly  DetalleHistorialReprocesoDAOs detalleHistorialReprocesoDaOs = new DetalleHistorialReprocesoDAOs();
         
         #endregion
 
@@ -48,11 +49,11 @@ namespace JLLR.Core.FlujoProceso.Proveedor.Negocio
         /// <summary>
         /// Graba el  historial del proceso
         /// </summary>
-        public void GrabarHistorialProceso(HISTORIAL_PROCESO historialProceso)
+        public HISTORIAL_PROCESO GrabarHistorialProceso(HISTORIAL_PROCESO historialProceso)
         {
             try
             {
-              _historialProcesoDaOs.GrabarHistorialProceso(historialProceso);
+             return  _historialProcesoDaOs.GrabarHistorialProceso(historialProceso);
             }
             catch (Exception ex)
             {
@@ -168,6 +169,49 @@ namespace JLLR.Core.FlujoProceso.Proveedor.Negocio
             }
         }
 
+        /// <summary>
+        /// Obtiene el lsitado de  las ordenes de reproceso
+        /// </summary>
+        /// <param name="detalleOrdenTrabajoId"></param>
+        /// <returns></returns>
+        public IQueryable<DetalleHistorialReprocesoDTOs> ObtenerDetalleHistorialReprocesosPorDetalleOrdenTrabajoId(
+            int detalleOrdenTrabajoId)
+        {
+
+            try
+            {
+                return
+                    _transaccionalDaOs.ObtenerDetalleHistorialReprocesosPorDetalleOrdenTrabajoId(detalleOrdenTrabajoId);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Reporte de  reproceso por prenda
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechaHasta"></param>
+        /// <returns></returns>
+        public IQueryable<ReprocesoDTOs> ObtenerReprocesoPorVariosParametros(int puntoVentaId, DateTime fechaDesde, DateTime fechaHasta)
+        {
+            try
+            {
+               return _transaccionalDaOs.ObtenerReprocesoPorVariosParametros(puntoVentaId,fechaDesde,fechaHasta);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         #endregion
 
         #region HISTORIAL RECLAMO  REPROCESO PRENDA
@@ -216,11 +260,11 @@ namespace JLLR.Core.FlujoProceso.Proveedor.Negocio
         /// Graba el  historial del reproceso de prendas   y los reclamos 
         /// </summary>
         /// <param name="historialReclamoReprocesoPrenda"></param>
-        public void GrabarHistorialReproceso(HISTORIAL_REPROCESO historialReproceso)
+        public HISTORIAL_REPROCESO GrabarHistorialReproceso(HISTORIAL_REPROCESO historialReproceso)
         {
             try
             {
-                _historialReprocesoDaOs.GrabarHistorialReproceso(historialReproceso);
+               return _historialReprocesoDaOs.GrabarHistorialReproceso(historialReproceso);
             }
             catch (Exception ex)
             {
@@ -231,7 +275,27 @@ namespace JLLR.Core.FlujoProceso.Proveedor.Negocio
         }
         #endregion
 
+        #region DETALLE  HISTORIAL  PRENDA
+        /// <summary>
+        /// Grabar el detalle
+        /// </summary>
+        /// <param name="detalleHistorialReproceso"></param>
+        public void GrabarDetalleHistorialReproceso(DETALLE_HISTORIAL_REPROCESO detalleHistorialReproceso)
+        {
+            try
+            {
+                detalleHistorialReprocesoDaOs.GrabarDetalleHistorialReproceso(detalleHistorialReproceso);
+            }
+            catch (Exception ex)
+            {
 
-      
+                throw;
+            }
+        }
+
+        #endregion
+
+
+
     }
 }

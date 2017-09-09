@@ -194,7 +194,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Contabilidad\AplicarPago.aspx" />
+    <Content Include="Contabilidad\AprobarPago.aspx" />
     <Content Include="Contabilidad\ArqueoCaja.aspx" />
+    <Content Include="Contabilidad\CierreMes.aspx" />
     <Content Include="Contabilidad\CuentasPorCobrar.aspx" />
     <Content Include="Contabilidad\CuentasPorPagar.aspx" />
     <Content Include="Content\bootstrap.css" />
@@ -210,6 +213,9 @@
     <Content Include="Content\Imagen\Logo_Principal.png" />
     <Content Include="Content\Imagen\Nuevo.png" />
     <Content Include="Content\Imagen\Observar.png" />
+    <Content Include="Content\Imagen\ParroquiasQuito.png" />
+    <Content Include="Content\Imagen\Reproceso.png" />
+    <Content Include="Content\Imagen\Seleccionar.png" />
     <Content Include="Content\Imagen\usuario.png" />
     <Content Include="Content\Site.css" />
     <Content Include="FE\FacturaElectronica.aspx" />
@@ -243,6 +249,7 @@
     <Content Include="Reporte\ReporteImpresionOrdenPlanta.aspx" />
     <Content Include="Reporte\ReporteImpresionRapida.aspx" />
     <Content Include="Reporte\ReportePrendaMarca.aspx" />
+    <Content Include="Reporte\ReporteReproceso.aspx" />
     <Content Include="RRHH\MultaEmpleado.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -319,12 +326,33 @@
     <Compile Include="Base\PaginaBaseMaestra.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Contabilidad\AplicarPago.aspx.cs">
+      <DependentUpon>AplicarPago.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\AplicarPago.aspx.designer.cs">
+      <DependentUpon>AplicarPago.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contabilidad\AprobarPago.aspx.cs">
+      <DependentUpon>AprobarPago.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\AprobarPago.aspx.designer.cs">
+      <DependentUpon>AprobarPago.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Contabilidad\ArqueoCaja.aspx.cs">
       <DependentUpon>ArqueoCaja.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Contabilidad\ArqueoCaja.aspx.designer.cs">
       <DependentUpon>ArqueoCaja.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contabilidad\CierreMes.aspx.cs">
+      <DependentUpon>CierreMes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\CierreMes.aspx.designer.cs">
+      <DependentUpon>CierreMes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Contabilidad\CuentasPorCobrar.aspx.cs">
       <DependentUpon>CuentasPorCobrar.aspx</DependentUpon>
@@ -342,8 +370,10 @@
     </Compile>
     <Compile Include="DTOs\Contabilidad\CuentaPorCobrarVistaDTOs .cs" />
     <Compile Include="DTOs\Contabilidad\CuentaPorPagarVistaDTOs .cs" />
+    <Compile Include="DTOs\FlujoProceso\DetalleHistorialReprocesoVistaDTOs.cs" />
     <Compile Include="DTOs\FlujoProceso\HistorialProcesoVistaDTOs.cs" />
     <Compile Include="DTOs\FlujoProceso\HistorialReprocesoVistaDTOs.cs" />
+    <Compile Include="DTOs\FlujoProceso\ReprocesoVistaDTOs.cs" />
     <Compile Include="DTOs\Individuo\ClienteGeneralVistaDTOs.cs" />
     <Compile Include="DTOs\Individuo\ClienteVistaDTOs.cs" />
     <Compile Include="DTOs\Individuo\ProveedorVistaDTOs.cs.cs" />
@@ -428,10 +458,12 @@
     <Compile Include="Models\Contabilidad\CuentaPorPagarVistaModelo.cs" />
     <Compile Include="Models\Contabilidad\HistorialCuentaPorCobrarVistaModelo.cs" />
     <Compile Include="Models\Contabilidad\HistorialCuentaPorPagarVistaModelo.cs" />
+    <Compile Include="Models\FlujoProceso\DetalleHistorialReprocesoVistaModelo.cs" />
     <Compile Include="Models\FlujoProceso\HistorialProcesoVistaModelo.cs" />
     <Compile Include="Models\FlujoProceso\HistorialReclamoReprocesoPrendaVistaModelo.cs" />
     <Compile Include="Models\FlujoProceso\HistorialReprocesoVistaModelo.cs" />
     <Compile Include="Models\General\CiudadVistaModelo.cs" />
+    <Compile Include="Models\General\ColeccionVistaModelo.cs" />
     <Compile Include="Models\General\ColorVistaModelo.cs" />
     <Compile Include="Models\General\EntregaUrgenciaVistaModelo.cs" />
     <Compile Include="Models\General\EstadoVistaModelo.cs" />
@@ -456,6 +488,7 @@
     <Compile Include="Models\General\TipoLavadoVistaModelo.cs" />
     <Compile Include="Models\General\TipoProductoVistaModelo.cs" />
     <Compile Include="Models\General\TipoReglaVistaModelo.cs" />
+    <Compile Include="Models\General\TipoReprocesoVistaModelo.cs" />
     <Compile Include="Models\General\TipoRolIndividuoVistaModelo.cs" />
     <Compile Include="Models\General\TipoTelefonoVistaModelo.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -614,6 +647,13 @@
     <Compile Include="Reporte\ReportePrendaMarca.aspx.designer.cs">
       <DependentUpon>ReportePrendaMarca.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reporte\ReporteReproceso.aspx.cs">
+      <DependentUpon>ReporteReproceso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reporte\ReporteReproceso.aspx.designer.cs">
+      <DependentUpon>ReporteReproceso.aspx</DependentUpon>
+    </Compile>
     <Compile Include="RRHH\MultaEmpleado.aspx.cs">
       <DependentUpon>MultaEmpleado.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -676,6 +716,7 @@
     <Compile Include="ServicioDelegado\ServicioDelegadoSeguridad.cs" />
     <Compile Include="ServicioDelegado\ServicioDelegadoVenta.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Util\Colecciones.cs" />
     <Compile Include="Util\Enum.cs" />
     <Compile Include="Util\Validacion.cs" />
     <Compile Include="Venta\AprobacionDescuento.aspx.cs">
@@ -737,6 +778,7 @@
     <EmbeddedResource Include="Reporte\Contabilidad\ReporteCuentaPorCobrar.rdlc" />
     <EmbeddedResource Include="Reporte\Contabilidad\ReporteCuentaPorPagar.rdlc" />
     <EmbeddedResource Include="Reporte\FlujoProceso\ReporteEntregaRecepcioPrendas.rdlc" />
+    <EmbeddedResource Include="Reporte\FlujoProceso\ReporteReproceso.rdlc" />
     <EmbeddedResource Include="Reporte\Venta\Rdlc\ReporteDiario.rdlc" />
     <EmbeddedResource Include="Reporte\Venta\Rdlc\ReporteEstadisticaGeneralPrendas.rdlc" />
     <EmbeddedResource Include="Reporte\Venta\Rdlc\ReporteEstadoCuenta.rdlc" />

@@ -33,12 +33,117 @@ namespace Web.Venta
         private readonly ServicioDelegadoGeneral _servicioDelegadoGeneral = new ServicioDelegadoGeneral();
         private static OrdenTrabajoVistaDTOs _ordenTrabajoVistaDtOs = new OrdenTrabajoVistaDTOs();
         private static ClienteVistaDTOs clienteVistaDtOs = new ClienteVistaDTOs();
+        private  static  List<ClienteVistaDTOs>  listaClienteVistaDtOses= new List<ClienteVistaDTOs>();
         private static List<DetalleOrdenTrabajoVistaModelo> _listaTrabajoVistaDtOs =new List<DetalleOrdenTrabajoVistaModelo>();
         private readonly  ServicioDelegadoReglaNegocio _servicioDelegadoReglaNegocio= new ServicioDelegadoReglaNegocio();
-
+        private static List<ProductoVistaModelo> _productoVista=null;
+        private readonly Util.Colecciones _colecciones = new Colecciones();
         #endregion
 
         #region Eventos
+        /// <summary>
+        /// Cambia  el tipo de  busqueda
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _tipoBusqueda_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_tipoBusqueda.SelectedItem.Value.ToString() == "1")
+                {
+                    _numeroDocumentoBusqueda.Text = String.Empty;
+                    _numeroDocumentoBusqueda.ReadOnly = false;
+                    _parametroDos.Text = String.Empty;
+                    _parametroDos.ReadOnly = true;
+                    _labelNumeroDocumentoBusqueda.Text = GetGlobalResourceObject("Web_es_Ec", "Label_Numero_Documento").ToString();
+                    _labelParametroDos.Text = String.Empty;
+
+
+                }
+                else if (_tipoBusqueda.SelectedItem.Value.ToString() == "-1")
+                {
+
+                    _labelNumeroDocumentoBusqueda.Text = String.Empty;
+                    _labelParametroDos.Text = String.Empty;
+                    _numeroDocumentoBusqueda.Text = String.Empty;
+                    _numeroDocumentoBusqueda.ReadOnly = true;
+
+                    _parametroDos.Text = String.Empty;
+                    _parametroDos.ReadOnly = true;
+                }
+                else if (_tipoBusqueda.SelectedItem.Value.ToString() == "2")
+                {
+                    _numeroDocumentoBusqueda.Text = String.Empty;
+                    _numeroDocumentoBusqueda.ReadOnly = false;
+                    _parametroDos.Text = String.Empty;
+                    _parametroDos.ReadOnly = false;
+                    _labelNumeroDocumentoBusqueda.Text = GetGlobalResourceObject("Web_es_Ec", "Label_Apellido_Paterno").ToString();
+                    _labelParametroDos.Text = GetGlobalResourceObject("Web_es_Ec", "Label_Busqueda_Apellido_Materno").ToString();
+
+                }
+                if (_tipoBusqueda.SelectedItem.Value.ToString() == "3")
+                {
+                    _numeroDocumentoBusqueda.Text = String.Empty;
+                    _numeroDocumentoBusqueda.ReadOnly = false;
+                    _parametroDos.Text = String.Empty;
+                    _parametroDos.ReadOnly = true;
+                    _labelNumeroDocumentoBusqueda.Text = GetGlobalResourceObject("Web_es_Ec", "Label_Razon_Social").ToString();
+                    _labelParametroDos.Text = String.Empty;
+
+
+
+                }
+
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+        /// <summary>
+        /// Selecciona los  clientes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+        protected void _clientes_OnRowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            try
+            {
+
+                int index = Convert.ToInt32(e.CommandArgument);
+                if (e.CommandName == "Seleccionar")
+                {
+
+                    clienteVistaDtOs = listaClienteVistaDtOses.Find(m => m.NombreCompleto == _clientes.Rows[index].Cells[0].Text);
+
+                    if (clienteVistaDtOs != null)
+                    {
+                        _cliente.Text = clienteVistaDtOs.NombreCompleto;
+                        _direccion.Text = clienteVistaDtOs.DireccionCliente;
+                        _telefono.Text = clienteVistaDtOs.TelefonoCliente;
+                    }
+                    else
+                    {
+                        Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Cliente_No_Existe").ToString(), "_grabarOrdenTrabajo");
+                    }
+                  
+
+                }
+
+             
+
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -158,6 +263,8 @@ namespace Web.Venta
         {
             try
             {
+
+               //if (_detalleOrdenTrabajoVista.DetallePrendaOrdenTrabajo.Find())
                 List<DetalleOrdenTrabajoObservacionVistaModelo> _listaDetalleOrdenTrabajoObservacion = new List<DetalleOrdenTrabajoObservacionVistaModelo>();
                 DetalleOrdenTrabajoObservacionVistaModelo _detalleOrdenTrabajoObservacion = new DetalleOrdenTrabajoObservacionVistaModelo();
                 _detalleOrdenTrabajoObservacion.UsuarioId = User.Id;
@@ -433,6 +540,7 @@ namespace Web.Venta
                 {
                     _btnDetalleOrden_ModalPopupExtender.TargetControlID = "_grabarOrdenTrabajo";
                     _btnDetalleOrden_ModalPopupExtender.Show();
+                    
                     _colorDetalle.DataSource = _servicioDelegadoGeneral.ObetenerColores();
                     _colorDetalle.DataBind();
                     _marcaDetalle.DataSource = _servicioDelegadoGeneral.ObtenerMarcas();
@@ -443,6 +551,7 @@ namespace Web.Venta
                     _informacionVisualDetalle.Text=String.Empty;
                     _nombreMarca.Value = _datos.Rows[index].Cells[1].Text;
                     DetalleOrdenTrabajoVistaModelo _detalleOrdenTrabajoVista = _listaTrabajoVistaDtOs.Find(m => m.Producto.Nombre == _nombreMarca.Value.ToString());
+                   _numeroPrendas.Text = (_productoVista.Find(m=>m.ProductoId== _detalleOrdenTrabajoVista.Producto.ProductoId).NumeroPrendas* _detalleOrdenTrabajoVista.Cantidad).ToString();
                     _detallePrenda.DataSource = _detalleOrdenTrabajoVista.DetallePrendaOrdenTrabajo;
                     _detallePrenda.DataBind();
 
@@ -467,8 +576,7 @@ namespace Web.Venta
                 //InicializarVariables();
                 //LimpiarDetalleOrdenTrabajo();
                 //CargarDetalleOrdenTrabajo();
-
-                List<ProductoVistaModelo>  _productoVista= _servicioDelegadoInventario.ObtenerProductoPorTipoProductoId(Convert.ToInt32(Util.TipoProducto.Servicio));
+                // _productoVista= _servicioDelegadoInventario.ObtenerProductoPorTipoProductoId(Convert.ToInt32(Util.TipoProducto.Servicio));
                 if (Convert.ToInt32(_tipoLavado.SelectedItem.Value) == Convert.ToInt32(Util.TipoLavado.LavadoSeco))
                 {
                     _prenda.DataSource = _productoVista;
@@ -772,8 +880,24 @@ namespace Web.Venta
         {
             try
             {
+
+                if (_tipoBusqueda.SelectedItem.Value=="1")
                 clienteVistaDtOs =
-                   _servicioDelegadoIndividuo.ObtenerDatosClientePorNumeroIdentificacion(_numeroDocumento.Text.ToUpper());
+                   _servicioDelegadoIndividuo.ObtenerDatosClientePorNumeroIdentificacion(_numeroDocumentoBusqueda.Text.ToUpper());
+                else
+                {
+                    listaClienteVistaDtOses= _servicioDelegadoIndividuo.ObtenerDatosClientePorApellidos(_numeroDocumentoBusqueda.Text.ToUpper(), _parametroDos.Text.ToUpper());
+
+                    if (listaClienteVistaDtOses.Count>0)
+                    { 
+                    _clientes.DataSource = listaClienteVistaDtOses;
+                    _clientes.DataBind();
+                    _btnCliente_ModalPopupExtender.TargetControlID = "_grabarOrdenTrabajo";
+                    _btnCliente_ModalPopupExtender.Show();
+                    }
+                    else
+                        Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Cliente_No_Existe").ToString(), "_grabarOrdenTrabajo");
+                }
 
                 if (clienteVistaDtOs != null)
                 {
@@ -803,7 +927,7 @@ namespace Web.Venta
         {
             try
             {
-                _numeroDocumento.Text = string.Empty;
+                _numeroDocumentoBusqueda.Text = string.Empty;
 
 
             }
@@ -837,6 +961,7 @@ namespace Web.Venta
             _ordenTrabajoVistaDtOs = new OrdenTrabajoVistaDTOs();
             clienteVistaDtOs = new ClienteVistaDTOs();
             _listaTrabajoVistaDtOs = new List<DetalleOrdenTrabajoVistaModelo>();
+            _productoVista= new  List<ProductoVistaModelo>();
 
         }
 
@@ -898,7 +1023,8 @@ namespace Web.Venta
                 _estadoPago.SelectedIndex = _estadoPago.Items.IndexOf(_estadoPago.Items.FindByValue("1"));
                 _labelValorPago.Visible = false;
                 _valorPago.Visible = false;
-                _prenda.DataSource= _servicioDelegadoInventario.ObtenerProductoPorTipoProductoId(Convert.ToInt32(Util.TipoProducto.Servicio));
+                _productoVista = _servicioDelegadoInventario.ObtenerProductoPorTipoProductoId(Convert.ToInt32(Util.TipoProducto.Servicio));
+                _prenda.DataSource = _productoVista;
                 _prenda.DataBind();
 
                 _talla.DataSource =
@@ -917,7 +1043,23 @@ namespace Web.Venta
                 _envioMatriz.Enabled = false;
                 _tipoEntrega.DataSource = _servicioDelegadoGeneral.ObtenerEntregaUrgencias();
                 _tipoEntrega.DataBind();
-               
+                bool fechaBloqueada =
+                 Convert.ToBoolean(_servicioDelegadoGeneral.ObtenerParametroPorDescripcion("BLOQUEAR_FECHA_ENTREGA").Boolenao);
+
+                if (fechaBloqueada == true)
+                    _fechaEntrega.ReadOnly = true;
+                else
+                    _fechaEntrega.ReadOnly = false;
+
+                _tipoBusqueda.DataSource = _colecciones.ObtenerTipoDocumentos();
+                _tipoBusqueda.DataBind();
+                _tipoBusqueda.SelectedIndex = _tipoBusqueda.Items.IndexOf(_tipoBusqueda.Items.FindByValue("-1"));
+                _numeroDocumentoBusqueda.Text = String.Empty;
+                _numeroDocumentoBusqueda.ReadOnly = true;
+
+                _parametroDos.Text = String.Empty;
+                _parametroDos.ReadOnly = true;
+
 
 
             }
@@ -1039,13 +1181,15 @@ namespace Web.Venta
                     ProductoVistaModelo _productoVista = new ProductoVistaModelo
                 {
                     ProductoId = Convert.ToInt32(_prenda.SelectedItem.Value),
-                    Nombre = _prenda.SelectedItem.Text.ToUpper()
+                    Nombre = _prenda.SelectedItem.Text.ToUpper(),
+                    NumeroPrendas = 2
 
                 };
                 ProductoTallaVistaModelo _productoTallaVista = new ProductoTallaVistaModelo
                 {
                     ProductoTallaId = Convert.ToInt32(_talla.SelectedItem.Value),
                     Descripcion = _talla.SelectedItem.Text.ToUpper()
+                    
                 };
                 
                 ImpuestoVistaModelo _impuestoVista = new ImpuestoVistaModelo
@@ -1220,6 +1364,6 @@ namespace Web.Venta
 
         #endregion
 
-        
+       
     }
 }

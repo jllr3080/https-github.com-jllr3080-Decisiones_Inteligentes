@@ -41,7 +41,25 @@ namespace Web.Venta
         #endregion
 
         #region Eventos
+        /// <summary>
+        /// Anula a la prenda
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _anularPrenda_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
 
+            }
+            catch (Exception)
+            {
+                    
+                throw;
+            }
+
+
+        }
         /// <summary>
         /// Graba la prenda a eprocesar
         /// </summary>
@@ -57,7 +75,7 @@ namespace Web.Venta
                 //GUarda el proceso inicial que es la entrega del cliente hacia  la franquicia
                 _historialProcesoVista.OrdenTrabajoId = _listaConsultaOrdenTrabajoVistaDtOses.Select(m => m.OrdenTrabajoId).First(); 
                 EtapaProcesoVistaModelo _etapaProcesoVistaModelo = new EtapaProcesoVistaModelo();
-                _etapaProcesoVistaModelo.EtapaProcesoId = Convert.ToInt32(Util.EtapaProceso.EntregaFranquiciaHaciaCliente);
+                _etapaProcesoVistaModelo.EtapaProcesoId = Convert.ToInt32(Util.EtapaProceso.EntregaClienteHaciaFranquicia);
                 _historialProcesoVista.EtapaProceso = _etapaProcesoVistaModelo;
                 _historialProcesoVista.FechaRegistro = DateTime.Now;
                 _historialProcesoVista.FechaInicio = DateTime.Now;
@@ -65,31 +83,24 @@ namespace Web.Venta
                 _historialProcesoVista.SucursalId = User.SucursalId;
                 _historialProcesoVista.PuntoVentaId = User.PuntoVentaId;
                 _historialProcesoVista.NumeroOrden = _listaConsultaOrdenTrabajoVistaDtOses.Select(m => m.NumeroOrden).First().ToString();
-               // _servicioDelegadoFlujoProceso.GrabarHistorialProceso(_historialProcesoVista);
-                //_listaHistorialProcesoVistaModelos = _servicioDelegadoFlujoProceso.ObtenerHIstorialProcesosPorNumeroOrden(_numeroOrden.Text);
-                _historialReprocesoVistaDtOs.HistorialProceso = _historialProcesoVista;
+                HistorialProcesoVistaModelo historialProcesoVistaModelo= _servicioDelegadoFlujoProceso.GrabarHistorialProceso(_historialProcesoVista);
 
-                List<HistorialReprocesoVistaModelo> _listaHistorialReproceso = new List<HistorialReprocesoVistaModelo>();
+                HistorialReprocesoVistaModelo historialReprocesoVista= new HistorialReprocesoVistaModelo();
+                historialReprocesoVista.HistorialProceso = historialProcesoVistaModelo;
+                historialReprocesoVista.DetallePrendaOrdenTrabajoId = Convert.ToInt32(_detallePrendaOrdenTrabajoId.Value);
 
-                foreach (GridViewRow row in _datosReproceso.Rows)
-                {
-                    if (row.RowType == DataControlRowType.DataRow)
-                    {
-                        CheckBox _reproceso = (row.Cells[0].FindControl("_reproceso") as CheckBox);
-                        if (_reproceso.Checked == true)
-                        {
-                            TextBox _motivoReproceso = (row.Cells[0].FindControl("_motivoReproceso") as TextBox);
-                            HistorialReprocesoVistaModelo _historialReprocesoVistaModelo= new HistorialReprocesoVistaModelo();
-                            _historialReprocesoVistaModelo.DetallePrendaOrdenTrabajoId =Convert.ToInt64(row.Cells[0].Text);
-                            _historialReprocesoVistaModelo.Motivo = _motivoReproceso.Text.ToUpper();
-                            _historialReprocesoVistaModelo.HistorialProceso = _historialProcesoVista;
-                            _listaHistorialReproceso.Add(_historialReprocesoVistaModelo);
-                        }
-                    }
-                }
-                _historialReprocesoVistaDtOs.HistorialReprocesos = _listaHistorialReproceso;
 
-               _servicioDelegadoFlujoProceso.GrabarHistorialReprocesos(_historialReprocesoVistaDtOs);
+                historialReprocesoVista= _servicioDelegadoFlujoProceso.GrabarHistorialReproceso(historialReprocesoVista);
+
+
+                DetalleHistorialReprocesoVistaModelo detalleHistorialReproceso= new DetalleHistorialReprocesoVistaModelo();
+                detalleHistorialReproceso.HistorialReproceso = historialReprocesoVista;
+                detalleHistorialReproceso.Motivo = _motivo.Text.ToUpper();
+                TipoReprocesoVistaModelo _tipoReproceso= new TipoReprocesoVistaModelo();
+                _tipoReproceso.TipoReprocesoId = Convert.ToInt32(_tipoMotivoReproceso.SelectedItem.Value);
+                detalleHistorialReproceso.TipoReproceso = _tipoReproceso;
+                _servicioDelegadoFlujoProceso.GrabarDetalleHistorialReproceso(detalleHistorialReproceso);
+               
             }
             catch (Exception ex)
             {
@@ -98,37 +109,7 @@ namespace Web.Venta
             }
         }
 
-        /// <summary>
-        /// Genera  reproceso
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void _reproceso_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                int ordenCerrada = Convert.ToInt32(_listaHistorialProcesoVistaModelos.Where(a => a.EtapaProceso.EtapaProcesoId.Equals(Convert.ToInt32(Util.EtapaProceso.EntregaFranquiciaHaciaCliente))).Select(b => b.EtapaProceso.EtapaProcesoId).FirstOrDefault().ToString());
-                int ordenAnulada = Convert.ToInt32(_listaHistorialProcesoVistaModelos.Where(a => a.EtapaProceso.EtapaProcesoId.Equals(Convert.ToInt32(Util.EtapaProceso.AnulacionOrdenTrabajo))).Select(b => b.EtapaProceso.EtapaProcesoId).FirstOrDefault().ToString());
-
-                if (ordenCerrada == Convert.ToInt32(Util.EtapaProceso.EntregaFranquiciaHaciaCliente) || ordenAnulada == Convert.ToInt32(Util.EtapaProceso.AnulacionOrdenTrabajo))
-                    Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Orden_Cerrada").ToString(), "_btnBuscar");
-                else
-                {
-                    _botonReproceso_ModalPopupExtender.TargetControlID = "_btnBuscar";
-                    _botonReproceso_ModalPopupExtender.Show();
-                    _datosReproceso.DataSource = _listaConsultaOrdenTrabajoVistaDtOses;
-                    _datosReproceso.DataBind();
-                }
-              
-
-            }
-            catch (Exception ex)
-            {
-
-                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_btnBuscar");
-            }
-              
-        }
+        
         /// <summary>
         /// Metodo para visualizar la  imagen
         /// </summary>
@@ -731,6 +712,41 @@ namespace Web.Venta
                     _datosFotografia.DataSource = _listaDetalleOrdenTrabajoFotografiaVistaDtOses;
                     _datosFotografia.DataBind();
                 }
+                if (e.CommandName=="Reproceso")
+                {
+                     int index = Convert.ToInt32(e.CommandArgument);
+                    int ordenCerrada = Convert.ToInt32(_listaHistorialProcesoVistaModelos.Where(a => a.EtapaProceso.EtapaProcesoId.Equals(Convert.ToInt32(Util.EtapaProceso.EntregaFranquiciaHaciaCliente))).Select(b => b.EtapaProceso.EtapaProcesoId).FirstOrDefault().ToString());
+                    int ordenAnulada = Convert.ToInt32(_listaHistorialProcesoVistaModelos.Where(a => a.EtapaProceso.EtapaProcesoId.Equals(Convert.ToInt32(Util.EtapaProceso.AnulacionOrdenTrabajo))).Select(b => b.EtapaProceso.EtapaProcesoId).FirstOrDefault().ToString());
+
+                    if (ordenCerrada == Convert.ToInt32(Util.EtapaProceso.EntregaFranquiciaHaciaCliente) || ordenAnulada == Convert.ToInt32(Util.EtapaProceso.AnulacionOrdenTrabajo))
+                        Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Orden_Cerrada").ToString(), "_btnBuscar");
+                    else
+                    {
+                       
+                        _tipoMotivoReproceso.DataSource = _servicioDelegadoGeneral.ObtenerTipoReprocesos();
+                        _tipoMotivoReproceso.DataBind();
+                        _detallePrendaOrdenTrabajoId.Value = _datos.Rows[index].Cells[0].Text;
+                        List<DetalleHistorialReprocesoVistaDTOs> lisaDetalleHistorialReprocesoVistaDtOses = _servicioDelegadoFlujoProceso.ObtenerDetalleHistorialReprocesosPorDetalleOrdenTrabajoId(Convert.ToInt32(_datos.Rows[index].Cells[0].Text));
+                        _datosReproceso.DataSource = lisaDetalleHistorialReprocesoVistaDtOses;
+                        _datosReproceso.DataBind();
+                        _motivo.Text=String.Empty;
+                        _botonReproceso_ModalPopupExtender.TargetControlID = "_btnBuscar";
+                        _botonReproceso_ModalPopupExtender.Show();
+                        if (lisaDetalleHistorialReprocesoVistaDtOses.Count() == 0)
+                        {
+                            _fechaEstimadaEntrega.Text = DateTime.Now.AddDays(2).ToShortDateString();
+                            _fechaEstimadaEntrega.ReadOnly = false;
+                        }
+                        else
+                        {
+                        
+                        _fechaEstimadaEntrega.Text = DateTime.Now.AddDays(2).ToShortDateString();
+                        _fechaEstimadaEntrega.ReadOnly = true;
+                        }
+
+
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -844,7 +860,7 @@ namespace Web.Venta
                     _sucursal.DataSource =
                       _servicioDelegadoGeneral.ObtenerPuntosVentaPorSucursalId(Convert.ToInt32(Util.Sucursal.Quito));
                     _sucursal.DataBind();
-                    if (User.NombrePerfil != "ADMINISTRADOR" )
+                    if (User.NombrePerfil != "ADMINISTRADOR"  )
                     {
                         _sucursal.SelectedIndex = _sucursal.Items.IndexOf(_sucursal.Items.FindByValue(User.PuntoVentaId.ToString()));
                         _sucursal.Enabled = false;
@@ -977,12 +993,12 @@ namespace Web.Venta
             _anularOrden.Enabled = false;
             _btnAceptarObservaciones.Enabled = false;
             _abonar.Enabled = false;
-            _reproceso.Enabled = false;
+            
             _cerrarOrdenTrabajo.CssClass= "btn btn-primary";
             _anularOrden.CssClass= "btn btn-primary";
             _btnAceptarObservaciones.CssClass= "btn btn-primary";
             _abonar.CssClass= "btn btn-primary";
-            _reproceso.CssClass = "btn btn-primary";
+            
 
         }
 
@@ -996,7 +1012,7 @@ namespace Web.Venta
             _anularOrden.Enabled = true;
             _btnAceptarObservaciones.Enabled = true;
             _abonar.Enabled = true;
-            _reproceso.Enabled = true;
+            
         }
 
         /// <summary>
@@ -1032,6 +1048,7 @@ namespace Web.Venta
 
         #endregion
 
-       
+
+        
     }
 }

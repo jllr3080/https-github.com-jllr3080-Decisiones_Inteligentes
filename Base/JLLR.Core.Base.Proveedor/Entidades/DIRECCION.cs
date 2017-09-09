@@ -22,6 +22,10 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<int> TIPO_DIRECCION_ID { get; set; }
         public string DESCRIPCION_DIRECCION { get; set; }
         public Nullable<int> PARROQUIA_ID { get; set; }
+        public string CALLE_PRINCIPAL { get; set; }
+        public string CALLE_SECUNDARIA { get; set; }
+        public string NUMERO_CASA { get; set; }
+        public string REFERENCIA { get; set; }
     
         public virtual CIUDAD CIUDAD { get; set; }
         public virtual ESTADO ESTADO { get; set; }

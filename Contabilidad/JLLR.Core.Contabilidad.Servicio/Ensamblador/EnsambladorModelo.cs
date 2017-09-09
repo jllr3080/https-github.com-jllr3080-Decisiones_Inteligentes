@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using JLLR.Core.Seguridad.Servicio.Modelo;
 using entidad = JLLR.Core.Base.Proveedor.Entidades;
 using modelo = JLLR.Core.Contabilidad.Servicio.Modelo;
 using modeloGeneral = JLLR.Core.General.Servicio.Modelo;
@@ -193,6 +194,129 @@ namespace JLLR.Core.Contabilidad.Servicio.Ensamblador
             foreach (var entidad in listadoEntidad)
             {
                 listaModelo.Add(CrearHistorialCuentaPorPagar(entidad));
+            }
+            return listaModelo;
+
+        }
+
+        #endregion
+
+        #region  CIERRE MES
+        /// <summary>
+        /// Convierte el DTO de entidad a modelo
+        /// </summary>
+        /// <param name="e">Entidad</param>
+        /// <returns></returns>
+        public modelo.CierreMesModelo CrearCierre(entidad.CIERRE_MES e)
+        {
+            modeloGeneral.SucursalModelo _sucursal = new modeloGeneral.SucursalModelo()
+            {
+                SucursalId = Convert.ToInt32(e.SUCURSAL_ID)
+            };
+
+            modeloGeneral.PuntoVentaModelo _puntoVenta = new modeloGeneral.PuntoVentaModelo()
+            {
+                PuntoVentaId = Convert.ToInt32(e.PUNTO_VENTA_ID)
+            };
+            UsuarioModelo _usuario = new UsuarioModelo()
+            {
+                UsuarioId = Convert.ToInt32(e.USUARIO_ID)
+            };
+            modelo.CuentaPorPagarModelo _cuentaPorPagar = new modelo.CuentaPorPagarModelo()
+            {
+                CuentaPorPagarId = Convert.ToInt32(e.CUENTA_POR_PAGAR_ID)
+            };
+
+            modeloGeneral.MesModelo _mes = new modeloGeneral.MesModelo()
+            {
+                MesId = Convert.ToInt32(e.MES_ID)
+            };
+
+
+
+            return new modelo.CierreMesModelo
+            {
+                CierreMesId = e.CIERRE_MES_ID,
+                Sucursal = _sucursal,
+                CuentaPorPagar = _cuentaPorPagar,
+                FechaCreacion = e.FECHA_CREACION,
+                Valor = e.VALOR,
+                PuntoVenta = _puntoVenta,
+                Usuario = _usuario,
+                Mes = _mes
+
+             
+            };
+
+        }
+
+        /// <summary>
+        /// Convierte un listado de DTO en listado de  modelos de DTO
+        /// </summary>
+        /// <param name="listadoEntidad">Listado de Entidades</param>
+        /// <returns></returns>
+        public List<modelo.CierreMesModelo> CrearCierres(IQueryable<entidad.CIERRE_MES> listadoEntidad)
+        {
+            List<modelo.CierreMesModelo> listaModelo = new List<modelo.CierreMesModelo>();
+
+            foreach (var entidad in listadoEntidad)
+            {
+                listaModelo.Add(CrearCierre(entidad));
+            }
+            return listaModelo;
+
+        }
+
+        #endregion
+
+        #region  APLICACION DE  PAGO
+        /// <summary>
+        /// Convierte el DTO de entidad a modelo
+        /// </summary>
+        /// <param name="e">Entidad</param>
+        /// <returns></returns>
+        public modelo.AplicacionPagoModelo CrearAplicacionPago(entidad.APLICACION_PAGO e)
+        {
+
+
+            modelo.CierreMesModelo cierreMes = new modelo.CierreMesModelo()
+            {
+                CierreMesId = Convert.ToInt32(e.CIERRE_MES_ID)
+            };
+
+
+            return new modelo.AplicacionPagoModelo
+            {
+               FechaCreacion = e.FECHA_CREACION,
+               Valor = e.VALOR,
+               CierreMes = cierreMes,
+               NumeroDocumento = e.NUMERO_DOCUMENTO,
+               EstaValidado = e.ESTA_VALIDADO,
+               AplicacionPagoId = e.APLICACION_PAGO_ID,
+               FechaDeposito = e.FECHA_DEPOSITO,
+               UsuarioAplicaId = e.USUARIO_APLICA_ID,
+               Documento = e.DOCUMENTO,
+               FechaValidacion = e.FECHA_VALIDACION,
+               UsuarioValidaId = e.USUARIO_VALIDA_ID
+
+
+
+            };
+
+        }
+
+        /// <summary>
+        /// Convierte un listado de DTO en listado de  modelos de DTO
+        /// </summary>
+        /// <param name="listadoEntidad">Listado de Entidades</param>
+        /// <returns></returns>
+        public List<modelo.AplicacionPagoModelo> CrearAplicacionesPago(IQueryable<entidad.APLICACION_PAGO> listadoEntidad)
+        {
+            List<modelo.AplicacionPagoModelo> listaModelo = new List<modelo.AplicacionPagoModelo>();
+
+            foreach (var entidad in listadoEntidad)
+            {
+                listaModelo.Add(CrearAplicacionPago(entidad));
             }
             return listaModelo;
 

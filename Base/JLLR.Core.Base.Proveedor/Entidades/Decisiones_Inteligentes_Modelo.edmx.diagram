@@ -5,113 +5,113 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="5eb8e97452c3448ab4281015474d7d18" Name="Diagram1" ZoomLevel="62">
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.CONTROL_USUARIO" Width="1.5" PointX="16.5" PointY="44.125" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ARQUEO_CAJA" Width="1.5" PointX="9.75" PointY="5" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.CUENTA_POR_COBRAR" Width="1.5" PointX="12" PointY="94.5" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.CUENTA_POR_PAGAR" Width="1.5" PointX="7.75" PointY="1" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DETALLE_ARQUEO_CAJA" Width="1.5" PointX="12" PointY="5.5" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.HISTORIAL_CUENTA_POR_COBRAR" Width="1.5" PointX="14.25" PointY="69.25" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.HISTORIAL_CUENTA_POR_PAGAR" Width="1.5" PointX="10" PointY="1.75" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.CABECERA_FACTURACION" Width="1.5" PointX="1.5" PointY="53.375" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.CABECERA_MOVIMIENTO_FACTURA" Width="1.5" PointX="3" PointY="30.375" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.CABECERA_MOVIMIENTO_FE" Width="1.5" PointX="3" PointY="45.25" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.CABECERA_MOVIMIENTO_TRIBUTARIO" Width="1.5" PointX="0.75" PointY="43.125" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DETALLE_IMPUESTO_MOVIMIENTO_FACTURA" Width="1.5" PointX="7.5" PointY="30.625" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DETALLE_MOVIMIENTO_FACTURA" Width="1.5" PointX="5.25" PointY="30" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.SECUENCIALES_SRI" Width="1.5" PointX="20.25" PointY="50.875" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.CIUDAD" Width="1.5" PointX="9" PointY="61.75" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.CLIENTE" Width="1.5" PointX="8.25" PointY="41.375" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DIRECCION" Width="1.5" PointX="11.25" PointY="46.625" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.E_MAIL" Width="1.5" PointX="8.25" PointY="47.375" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.EMPLEADO" Width="1.5" PointX="14.25" PointY="46.5" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ESTADO" Width="1.5" PointX="6.75" PointY="61.875" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.INDIVIDUO" Width="1.5" PointX="6" PointY="45.75" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.INDIVIDUO_BANCO" Width="1.5" PointX="11.25" PointY="43.125" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.INDIVIDUO_ROL" Width="1.5" PointX="8.25" PointY="44.375" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PAIS" Width="1.5" PointX="4.5" PointY="61.875" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PARROQUIA" Width="1.5" PointX="9" PointY="65" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PROVEEDOR" Width="1.5" PointX="11.25" PointY="51.25" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PROVEEDOR_IMPUESTO" Width="1.5" PointX="13.5" PointY="52" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TELEFONO" Width="1.5" PointX="8.25" PointY="50.375" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.VENDEDOR" Width="1.5" PointX="8.25" PointY="83.5" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.AGENDA_VISITA" Width="1.5" PointX="7.5" PointY="11" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.HISTORIAL_PROCESO" Width="1.5" PointX="12.75" PointY="34.125" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PROCESO" Width="1.5" PointX="12.75" PointY="80.125" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.VISITA" Width="1.5" PointX="5.25" PointY="10.625" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.BANCO" Width="1.5" PointX="0.75" PointY="5.75" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.COLOR" Width="1.5" PointX="15.75" PointY="28.625" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.CONDICION_IMPUESTO" Width="1.5" PointX="11.25" PointY="90.875" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DIA" Width="1.5" PointX="5.25" PointY="7.25" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ENTREGA_URGENCIA" Width="1.5" PointX="8.25" PointY="54.25" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ESPECIALIDAD_EMPLEADO" Width="1.5" PointX="12" PointY="67.625" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ESTADO_CIVIL" Width="1.5" PointX="12" PointY="61.125" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ESTADO_COMPROBANTE_ELECTRONICO" Width="1.5" PointX="0.75" PointY="66" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ESTADO_PAGO" Width="1.5" PointX="8.25" PointY="36" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ETAPA_PROCESO" Width="1.5" PointX="10.5" PointY="55.375" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.FORMA_PAGO" Width="1.5" PointX="9" PointY="69.5" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.GRUPO_IMPUESTO" Width="1.5" PointX="11.25" PointY="73" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.IMPUESTO" Width="1.5" PointX="9" PointY="72.75" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.MARCA" Width="1.5" PointX="11.25" PointY="16.25" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.MATERIAL" Width="1.5" PointX="11.25" PointY="19.125" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.MENSAJE" Width="1.5" PointX="0.75" PointY="36.625" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.MODELO" Width="1.5" PointX="11.25" PointY="24.25" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.MONEDA" Width="1.5" PointX="0.75" PointY="39.5" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.NIVEL_EDUCACION" Width="1.5" PointX="12" PointY="70.125" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PARAMETRO" Width="1.5" PointX="12.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PORCENTAJE_IMPUESTO" Width="1.5" PointX="11.25" PointY="76.375" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PORCENTAJE_IMPUESTO_SUCURSAL" Width="1.5" PointX="15.5" PointY="56.25" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PUNTO_VENTA" Width="1.5" PointX="12" PointY="29.75" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.RUTA" Width="1.5" PointX="3" PointY="13" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.SUCURSAL" Width="1.5" PointX="9.75" PointY="29.875" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_AMBIENTE" Width="1.5" PointX="1.5" PointY="58.25" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_COMPROBANTE" Width="1.5" PointX="0.75" PointY="63.375" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_CORREO_ELECTRONICO" Width="1.5" PointX="6" PointY="52.625" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_CUENTA_BANCARIA" Width="1.5" PointX="9" PointY="58.625" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_DIRECCION" Width="1.5" PointX="9" PointY="27.25" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_EMISION" Width="1.5" PointX="1.5" PointY="60.75" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_GENERO" Width="1.5" PointX="6" PointY="39.75" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_IDENTIFICACION" Width="1.5" PointX="0.75" PointY="47.375" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_INDIVIDUO" Width="1.5" PointX="3.75" PointY="42.625" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_LAVADO" Width="1.5" PointX="8.25" PointY="38.375" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_MENSAJE" Width="1.5" PointX="1.5" PointY="33.875" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_REGLA" Width="1.5" PointX="12" PointY="12.625" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_ROL_INDIVIDUO" Width="1.5" PointX="6" PointY="42.75" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_TELEFONO" Width="1.5" PointX="6" PointY="55.625" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.UNIDAD_MEDIDA" Width="1.5" PointX="11.25" PointY="21.75" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ZONA" Width="1.5" PointX="0.75" PointY="9.125" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.GRUPO_PRODUCTO" Width="1.5" PointX="13.5" PointY="16.625" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PRODUCTO" Width="1.5" PointX="13.5" PointY="19.875" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PRODUCTO_PRECIO" Width="1.5" PointX="14.25" PointY="63.625" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PRODUCTO_TALLA" Width="1.5" PointX="12" PointY="64.125" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PRODUCTO_VS_GRUPO_PRODUCTO" Width="1.5" PointX="15.75" PointY="21.5" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_PRODUCTO" Width="1.5" PointX="11.25" PointY="27.125" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ACCION_REGLA" Width="1.5" PointX="16.5" PointY="12.25" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.REGLA" Width="1.5" PointX="14.25" PointY="11.5" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ACCESO" Width="1.5" PointX="5.25" PointY="2.5" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ACCESO_PERFIL" Width="1.5" PointX="22.5" PointY="28" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.HISTORIAL_USUARIO" Width="1.5" PointX="16.5" PointY="50" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.MODULO" Width="1.5" PointX="0.75" PointY="3" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PERFIL" Width="1.5" PointX="17.25" PointY="53.625" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PREGUNTA_SEGURIDAD" Width="1.5" PointX="17.25" PointY="41.625" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.SUBMODULO" Width="1.5" PointX="3" PointY="2.875" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.USUARIO" Width="1.5" PointX="14.25" PointY="40.125" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.USUARIO_PERFIL" Width="1.5" PointX="19.5" PointY="41.5" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.USUARIO_PREGUNTA_SEGURIDAD" Width="1.5" PointX="19.5" PointY="38.375" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.USUARIO_SEGURIDAD" Width="1.5" PointX="16.5" PointY="38.75" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.APROBACION_DESCUENTO" Width="1.5" PointX="19" PointY="46.875" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO" Width="1.5" PointX="15.75" PointY="31.75" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO_OBSERVACION" Width="1.5" PointX="20.25" PointY="20.5" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DETALLE_PRENDA_ORDEN_TRABAJO" Width="1.5" PointX="18" PointY="30.5" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DETALLE_TRABAJO_FOTOGRAFIA" Width="1.5" PointX="20.25" PointY="28.375" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DETALLE_VENTA_COMISION_INDUSTRIALES" Width="1.5" PointX="16.5" PointY="63.5" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.HISTORIAL_RECLAMO_REPROCESO_PRENDA" Width="1.5" PointX="20.25" PointY="24.375" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.HISTORIAL_REGLA" Width="1.5" PointX="18.75" PointY="35.375" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.NUMERACION_ORDEN" Width="1.5" PointX="10.5" PointY="9.25" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO" Width="1.5" PointX="10.5" PointY="36.75" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO_COMISION" Width="1.5" PointX="18.75" PointY="57.5" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO_DESCUENTO" Width="1.5" PointX="12.75" PointY="56" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.VENTA_COMISION" Width="1.5" PointX="10.5" PointY="82.875" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.VENTA_COMISION_INDUSTRIALES" Width="1.5" PointX="10.5" PointY="87.75" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.CONTROL_USUARIO" Width="1.5" PointX="7.5" PointY="19" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ARQUEO_CAJA" Width="1.5" PointX="17.75" PointY="1.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.CUENTA_POR_COBRAR" Width="1.5" PointX="9" PointY="39.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.CUENTA_POR_PAGAR" Width="1.5" PointX="14.75" PointY="16.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DETALLE_ARQUEO_CAJA" Width="1.5" PointX="20" PointY="1.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.HISTORIAL_CUENTA_POR_COBRAR" Width="1.5" PointX="11.25" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.HISTORIAL_CUENTA_POR_PAGAR" Width="1.5" PointX="17" PointY="16.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.CABECERA_FACTURACION" Width="1.5" PointX="1.5" PointY="23.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.CABECERA_MOVIMIENTO_FACTURA" Width="1.5" PointX="3" PointY="37.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.CABECERA_MOVIMIENTO_FE" Width="1.5" PointX="3" PointY="15.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.CABECERA_MOVIMIENTO_TRIBUTARIO" Width="1.5" PointX="0.75" PointY="19.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DETALLE_IMPUESTO_MOVIMIENTO_FACTURA" Width="1.5" PointX="7.5" PointY="37.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DETALLE_MOVIMIENTO_FACTURA" Width="1.5" PointX="5.25" PointY="37.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.SECUENCIALES_SRI" Width="1.5" PointX="5.25" PointY="19.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.CIUDAD" Width="1.5" PointX="6" PointY="28.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.CLIENTE" Width="1.5" PointX="5.25" PointY="11.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DIRECCION" Width="1.5" PointX="8.25" PointY="15.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.E_MAIL" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.EMPLEADO" Width="1.5" PointX="8.25" PointY="11.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ESTADO" Width="1.5" PointX="3.75" PointY="28.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.INDIVIDUO" Width="1.5" PointX="3" PointY="13.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.INDIVIDUO_BANCO" Width="1.5" PointX="5.25" PointY="15.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.INDIVIDUO_ROL" Width="1.5" PointX="8.25" PointY="13.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PAIS" Width="1.5" PointX="1.5" PointY="28.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PARROQUIA" Width="1.5" PointX="6" PointY="31.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PROVEEDOR" Width="1.5" PointX="8.25" PointY="9.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PROVEEDOR_IMPUESTO" Width="1.5" PointX="10.5" PointY="9.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TELEFONO" Width="1.5" PointX="5.25" PointY="17.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.VENDEDOR" Width="1.5" PointX="5.25" PointY="26.375" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.AGENDA_VISITA" Width="1.5" PointX="21.5" PointY="5.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.HISTORIAL_PROCESO" Width="1.5" PointX="12.75" PointY="9.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PROCESO" Width="1.5" PointX="12.75" PointY="17.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.VISITA" Width="1.5" PointX="19.25" PointY="5.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.BANCO" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.COLOR" Width="1.5" PointX="12.75" PointY="6" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.CONDICION_IMPUESTO" Width="1.5" PointX="8.25" PointY="4.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DIA" Width="1.5" PointX="19.25" PointY="3.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ENTREGA_URGENCIA" Width="1.5" PointX="8.25" PointY="21.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ESPECIALIDAD_EMPLEADO" Width="1.5" PointX="6" PointY="2.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ESTADO_CIVIL" Width="1.5" PointX="6" PointY="4.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ESTADO_COMPROBANTE_ELECTRONICO" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ESTADO_PAGO" Width="1.5" PointX="8.25" PointY="3.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ETAPA_PROCESO" Width="1.5" PointX="10.5" PointY="7.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.FORMA_PAGO" Width="1.5" PointX="6" PointY="7.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.GRUPO_IMPUESTO" Width="1.5" PointX="8.25" PointY="6.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.IMPUESTO" Width="1.5" PointX="6" PointY="6.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.MARCA" Width="1.5" PointX="12.75" PointY="7.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.MATERIAL" Width="1.5" PointX="8.25" PointY="29" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.MENSAJE" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.MODELO" Width="1.5" PointX="8.25" PointY="31.375" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.MONEDA" Width="1.5" PointX="0.75" PointY="10" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.NIVEL_EDUCACION" Width="1.5" PointX="6" PointY="21.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PARAMETRO" Width="1.5" PointX="2.75" PointY="1.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PORCENTAJE_IMPUESTO" Width="1.5" PointX="8.25" PointY="7.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PORCENTAJE_IMPUESTO_SUCURSAL" Width="1.5" PointX="10.5" PointY="17.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PUNTO_VENTA" Width="1.5" PointX="3" PointY="17.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.RUTA" Width="1.5" PointX="17" PointY="6" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.SUCURSAL" Width="1.5" PointX="0.75" PointY="17.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_AMBIENTE" Width="1.5" PointX="1.5" PointY="25.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_COMPROBANTE" Width="1.5" PointX="0.75" PointY="21.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_CORREO_ELECTRONICO" Width="1.5" PointX="3" PointY="9.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_CUENTA_BANCARIA" Width="1.5" PointX="3" PointY="19.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_DIRECCION" Width="1.5" PointX="6" PointY="30.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_EMISION" Width="1.5" PointX="1.5" PointY="26.375" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_GENERO" Width="1.5" PointX="3" PointY="11.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_IDENTIFICACION" Width="1.5" PointX="0.75" PointY="15.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_INDIVIDUO" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_LAVADO" Width="1.5" PointX="8.25" PointY="1.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_MENSAJE" Width="1.5" PointX="1.5" PointY="7.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_REGLA" Width="1.5" PointX="6" PointY="24.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_ROL_INDIVIDUO" Width="1.5" PointX="6" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_TELEFONO" Width="1.5" PointX="3" PointY="21.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.UNIDAD_MEDIDA" Width="1.5" PointX="8.25" PointY="30.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ZONA" Width="1.5" PointX="14.75" PointY="5.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.GRUPO_PRODUCTO" Width="1.5" PointX="10.5" PointY="28.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PRODUCTO" Width="1.5" PointX="10.5" PointY="30.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PRODUCTO_PRECIO" Width="1.5" PointX="7.5" PointY="23.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PRODUCTO_TALLA" Width="1.5" PointX="5.25" PointY="23.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PRODUCTO_VS_GRUPO_PRODUCTO" Width="1.5" PointX="12.75" PointY="30.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_PRODUCTO" Width="1.5" PointX="8.25" PointY="32.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ACCION_REGLA" Width="1.5" PointX="10.5" PointY="24.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.REGLA" Width="1.5" PointX="8.25" PointY="24.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ACCESO" Width="1.5" PointX="15.25" PointY="2.375" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ACCESO_PERFIL" Width="1.5" PointX="17.5" PointY="19.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.HISTORIAL_USUARIO" Width="1.5" PointX="7.5" PointY="20.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.MODULO" Width="1.5" PointX="10.75" PointY="1.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PERFIL" Width="1.5" PointX="8.25" PointY="35.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.PREGUNTA_SEGURIDAD" Width="1.5" PointX="8.25" PointY="33.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.SUBMODULO" Width="1.5" PointX="13" PointY="3" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.USUARIO" Width="1.5" PointX="5.25" PointY="13.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.USUARIO_PERFIL" Width="1.5" PointX="10.5" PointY="15.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.USUARIO_PREGUNTA_SEGURIDAD" Width="1.5" PointX="10.5" PointY="13.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.USUARIO_SEGURIDAD" Width="1.5" PointX="7.5" PointY="17.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.APROBACION_DESCUENTO" Width="1.5" PointX="15" PointY="14" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO" Width="1.5" PointX="12.75" PointY="21.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO_OBSERVACION" Width="1.5" PointX="17.25" PointY="10.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DETALLE_PRENDA_ORDEN_TRABAJO" Width="1.5" PointX="15" PointY="12.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DETALLE_TRABAJO_FOTOGRAFIA" Width="1.5" PointX="17.25" PointY="12.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DETALLE_VENTA_COMISION_INDUSTRIALES" Width="1.5" PointX="9.75" PointY="20.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.HISTORIAL_RECLAMO_REPROCESO_PRENDA" Width="1.5" PointX="17.25" PointY="11.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.HISTORIAL_REGLA" Width="1.5" PointX="12.75" PointY="13.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.NUMERACION_ORDEN" Width="1.5" PointX="10.5" PointY="22.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO" Width="1.5" PointX="10.5" PointY="11.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO_COMISION" Width="1.5" PointX="15" PointY="19.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO_DESCUENTO" Width="1.5" PointX="12.75" PointY="16.375" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.VENTA_COMISION" Width="1.5" PointX="7.5" PointY="26.375" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.VENTA_COMISION_INDUSTRIALES" Width="1.5" PointX="7.5" PointY="27.5" IsExpanded="false" />
         <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_CONTROL_USUARIO_VS_USUARIO" />
         <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_ARQUEO_CAJA_VS_ARQUEO_CAJA" />
         <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_CUENTA_POR_COBRAR_VS_CUENTA_POR_COBRAR" />
@@ -246,13 +246,22 @@
         <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_HISTORIA_REGLA_VS_ORDEN_TRABAJO" />
         <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_DESCUENTO_VS_ORDEN_TRABAJO" />
         <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_VENTA_COMISION" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DETALLE_HISTORIAL_REPROCESO" Width="1.5" PointX="23.5" PointY="33.75" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_REPROCESO" Width="1.5" PointX="21.25" PointY="44.875" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.DETALLE_HISTORIAL_REPROCESO" Width="1.5" PointX="17.25" PointY="8.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.TIPO_REPROCESO" Width="1.5" PointX="15" PointY="7.75" IsExpanded="false" />
         <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_HISTORIAL_PROCESO_VS_TIPO_REPROCESO" />
-        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.HISTORIAL_REPROCESO" Width="1.5" PointX="21.25" PointY="33.625" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.HISTORIAL_REPROCESO" Width="1.5" PointX="15" PointY="9.75" IsExpanded="false" />
         <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_HISTORIAL_PROCESO_VS_HISTORIAL_PROCESO" />
         <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_PROCESO_VS_HISTORIAL_REPROCESO" />
         <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_REPROCESO_VS_DETALLE_PODT" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.APLICACION_PAGO" Width="1.5" PointX="22.25" PointY="14.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.CIERRE_MES" Width="1.5" PointX="20" PointY="14.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="Decisiones_Inteligentes_Modelo.MES" Width="1.5" PointX="17.75" PointY="20.875" IsExpanded="false" />
+        <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_APLICACION_PAGO_VS_CIERRE_MES" />
+        <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_CIERRE_MES_VS_CUENTA_POR_PAGAR" />
+        <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_CIERRE_MES_VS_MES" />
+        <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_CIERRE_MES_VS_PUNTO_VENTA" />
+        <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_CIERRE_MES_VS_SUCURSAL" />
+        <AssociationConnector Association="Decisiones_Inteligentes_Modelo.FK_CIERRE_MES_VS_USUARIO" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
