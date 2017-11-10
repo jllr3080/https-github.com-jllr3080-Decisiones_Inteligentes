@@ -85,7 +85,10 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                 SeEnvio = e.SE_ENVIO,
                 EnvioMatriz = e.ENVIO_MATRIZ,
                 NumeroOrdenManual = e.NUMERO_ORDEN_MANUAL,
-                EntregaUrgencia = _entregaUrgencia
+                EntregaUrgencia = _entregaUrgencia,
+                EsTemporal = e.ES_TEMPORAL,
+                ObjetoOlvidado = e.OBJETO_OLVIDADO,
+                RevisionPrendaCliente = e.REVISO_PRENDA_CLIENTE
 
             };
 
@@ -131,14 +134,7 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                 ProductoId = Convert.ToInt32(e.PRODUCTO_ID)
             };
            
-            ProductoTallaModelo _productoTalla = new ProductoTallaModelo()
-            {
-                ProductoTallaId = Convert.ToInt32(e.PRODUCTO_TALLA_ID)
-
-            };
-
-            
-           
+          
 
             
             
@@ -152,7 +148,6 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                 ValorTotal = e.VALOR_TOTAL,
                 ValorUnitario = e.VALOR_UNITARIO,
                 Producto = producto,
-                ProductoTalla = _productoTalla,
                 FijadorColor = e.FIJADOR_COLOR,
                 Desengrasante = e.DESENGRASANTE,
                 Suavizante = e.SUAVIZANTE,
@@ -160,7 +155,10 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                  PromocionAplicada = e.PROMOCION_APLICADA,
                  ValorDescuento = e.VALOR_DESCUENTO,
                  DetallePrendaOrdenTrabajo = _detallePrendaOrdenTrabajoModelos,
-                 ValorImpuesto = e.VALOR_IMPUESTO
+                 ValorImpuesto = e.VALOR_IMPUESTO,
+                 DetalleOrdenTrabajoAnuladaId = e.DETALLE_ORDEN_ANULADA_TRABAJO_ID,
+                 PorcentajeAdicional = e.PORCENTAJE_ADICIONAL,
+               SoloPlanchado = e.SOLO_PLANCHADO
                
                  
 

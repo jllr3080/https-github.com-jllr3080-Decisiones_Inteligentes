@@ -965,8 +965,8 @@ namespace JLLR.Core.General.Servicio.Ensamblador
                MesId = e.MES_ID,
                 Descripcion = e.DESCRIPCION,
                 EstaHabilitado = e.ESTA_HABILITADO,
-                FechaHasta = e.FECHA_DESDE,
-                FechaDesde = e.FECHA_HASTA
+                FechaHasta = e.FECHA_HASTA,
+                FechaDesde = e.FECHA_DESDE
 
             };
 

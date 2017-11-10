@@ -18,10 +18,9 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public PRODUCTO()
         {
             this.ACCION_REGLA = new HashSet<ACCION_REGLA>();
-            this.DETALLE_ORDEN_TRABAJO = new HashSet<DETALLE_ORDEN_TRABAJO>();
             this.PRODUCTO_VS_GRUPO_PRODUCTO = new HashSet<PRODUCTO_VS_GRUPO_PRODUCTO>();
             this.PRODUCTO_PRECIO = new HashSet<PRODUCTO_PRECIO>();
-            this.PRODUCTO_TALLA = new HashSet<PRODUCTO_TALLA>();
+            this.DETALLE_ORDEN_TRABAJO = new HashSet<DETALLE_ORDEN_TRABAJO>();
         }
     
         public int PRODUCTO_ID { get; set; }
@@ -37,6 +36,8 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<int> TIEMPO_ENTREGA { get; set; }
         public Nullable<bool> PRENDA_ESPECIAL { get; set; }
         public Nullable<int> NUMERO_PRENDAS { get; set; }
+        public Nullable<bool> ESTA_HABILITADO { get; set; }
+        public Nullable<int> USUARIO_ID { get; set; }
     
         public virtual MARCA MARCA { get; set; }
         public virtual MATERIAL MATERIAL { get; set; }
@@ -45,13 +46,11 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ACCION_REGLA> ACCION_REGLA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DETALLE_ORDEN_TRABAJO> DETALLE_ORDEN_TRABAJO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODUCTO_VS_GRUPO_PRODUCTO> PRODUCTO_VS_GRUPO_PRODUCTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODUCTO_PRECIO> PRODUCTO_PRECIO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PRODUCTO_TALLA> PRODUCTO_TALLA { get; set; }
         public virtual TIPO_PRODUCTO TIPO_PRODUCTO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DETALLE_ORDEN_TRABAJO> DETALLE_ORDEN_TRABAJO { get; set; }
     }
 }

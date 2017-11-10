@@ -28,6 +28,7 @@ namespace JLLR.Core.General.Proveedor.DAOs
             try
             {
                 var meses = from mes in _entidad.MES
+                            where mes.ESTA_HABILITADO==true
                     select mes;
 
                 return meses.OrderBy(m=>m.DESCRIPCION);

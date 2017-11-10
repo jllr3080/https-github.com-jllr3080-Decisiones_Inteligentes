@@ -120,6 +120,7 @@ namespace Web
                 var seguridades = new MenuItem("SEGURIDADES") { Selectable = false };
                 //var inventario = new MenuItem("INVENTARIO") { Selectable = false };
                 var fe = new MenuItem("FE") { Selectable = false };
+                var manual= new MenuItem("?") { Selectable = false };
                 var usuario = new MenuItem("USUARIO : " + User.NombreUsuario) { Selectable = true };
                 var cerrarSesion = new MenuItem("CERRAR SESION") { NavigateUrl = "~/Seguridad/Login/IngresoSistema.aspx" };
                 foreach (var usuarioAccesoDTO in lista)
@@ -153,6 +154,7 @@ namespace Web
                 _menu.Items.Add(contabilidad);
                 _menu.Items.Add(fe);
                 _menu.Items.Add(seguridades);
+                _menu.Items.Add(manual);
                 //_menu.Items.Add(inventario);
                 _menu.Items.Add(usuario);
                 _menu.Items.Add(cerrarSesion);

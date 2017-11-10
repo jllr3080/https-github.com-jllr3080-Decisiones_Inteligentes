@@ -45,26 +45,59 @@ namespace JLLR.Core.Inventario.Servicio.Transformador
                 throw;
             }
         }
+
+
+        /// <summary>
+        /// Grabar  producto
+        /// </summary>
+        /// <param name="producto"></param>
+        public void GrabarProducto(modeloParametrizacion.ProductoModelo producto)
+        {
+            try
+            {
+             _inventarioParametrizacion.GrabarProducto(_ensambladorEntidad.CrearProducto(producto));
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Actualiza  el producto
+        /// </summary>
+        /// <param name="producto"></param>
+        public void ActualizarProducto(modeloParametrizacion.ProductoModelo producto)
+        {
+            try
+            {
+                _inventarioParametrizacion.ActualizarProducto(_ensambladorEntidad.CrearProducto(producto));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
         #region PRODUCTO PRECIO
 
         /// <summary>
-        /// Obtiene el precio de los productos por la talla y el codigo del producto
+        /// Obtiene  los precios de las prendas  que tengan el ultimo precio habilitado
         /// </summary>
         /// <param name="productoId"></param>
-        /// <param name="productoTallaId"></param>
         /// <returns></returns>
 
-        public List<modeloParametrizacion.ProductoPrecioModelo> ObtenerProductoPrecioPorProductoIdYProductoTallaId(int productoId,
-            int productoTallaId)
+        public List<modeloParametrizacion.ProductoPrecioModelo> ObtenerProductoPrecioPorProductoId(int productoId)
         {
             try
             {
                 return
-                    _ensambladorModelo.CrearProductosPrecio(
-                        _inventarioParametrizacion.ObtenerProductoPrecioPorProductoIdYProductoTallaId(productoId,
-                            productoTallaId));
+                    _ensambladorModelo.CrearProductosPrecio(_inventarioParametrizacion.ObtenerProductoPrecioPorProductoId(productoId));
 
             }
             catch (Exception ex)
@@ -74,22 +107,56 @@ namespace JLLR.Core.Inventario.Servicio.Transformador
             }
         }
 
-        #endregion
 
-        #region PRODUCTO TALLA
 
         /// <summary>
-        /// Obtiene las tallas  de los productos por el codigo del producto
+        /// Graba el precio  de la prenda
         /// </summary>
-        /// <param name="productoId"></param>
-        /// <returns></returns>
-        public List<modeloParametrizacion.ProductoTallaModelo> ObtenProductoTallaPorProductoId(int productoId)
+        /// <param name="productoPrecio"></param>
+        public void GrabarProductoPrecio(modeloParametrizacion.ProductoPrecioModelo productoPrecio)
         {
             try
             {
-                return
-                    _ensambladorModelo.CrearProductosTalla(
-                        _inventarioParametrizacion.ObtenProductoTallaPorProductoId(productoId));
+             _inventarioParametrizacion.GrabarProductoPrecio(_ensambladorEntidad.CrearProductoPrecio(productoPrecio));
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Actualiza los precios  de las prendas
+        /// </summary>
+        /// <param name="productoPrecio"></param>
+        public void ActualizarProductoPrecio(modeloParametrizacion.ProductoPrecioModelo productoPrecio)
+        {
+            try
+            {
+                _inventarioParametrizacion.ActualizarProductoPrecio(_ensambladorEntidad.CrearProductoPrecio(productoPrecio));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene  todos los precios de las prendas 
+        /// </summary>
+        /// <param name="productoId"></param>
+        /// <returns></returns>
+
+        public List<modeloParametrizacion.ProductoPrecioModelo> ObtenerProductoPrecioPorEstadoYProductoId(int productoId)
+        {
+            try
+            {
+              return  _ensambladorModelo.CrearProductosPrecio(
+                    _inventarioParametrizacion.ObtenerProductoPrecioPorEstadoYProductoId(productoId));
 
             }
             catch (Exception ex)
@@ -99,5 +166,7 @@ namespace JLLR.Core.Inventario.Servicio.Transformador
             }
         }
         #endregion
+
+
     }
 }

@@ -56,6 +56,7 @@
     <Compile Include="DAOs\HistorialCuentaPorCobrarDAOs.cs" />
     <Compile Include="DAOs\HistorialCuentaPorPagarDAOs.cs" />
     <Compile Include="DAOs\TransaccionalDAOs.cs" />
+    <Compile Include="DTOs\AplicacionPagoDTOs.cs" />
     <Compile Include="DTOs\AsientoDTOs.cs" />
     <Compile Include="DTOs\CuentaPorCobrarDTOs.cs" />
     <Compile Include="DTOs\CuentaPorPagarDTOs.cs" />

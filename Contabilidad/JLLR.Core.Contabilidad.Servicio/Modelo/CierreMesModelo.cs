@@ -40,11 +40,7 @@ namespace JLLR.Core.Contabilidad.Servicio.Modelo
         public UsuarioModelo Usuario { get; set; }
 
 
-        /// <summary>
-        /// CuentaPorPagar
-        /// </summary>
-        [DataMember]
-        public CuentaPorPagarModelo CuentaPorPagar { get; set; }
+       
 
         /// <summary>
         /// Mes
@@ -63,5 +59,11 @@ namespace JLLR.Core.Contabilidad.Servicio.Modelo
         /// </summary>
         [DataMember]
         public decimal? Valor { get; set; }
+
+        /// <summary>
+        /// AplicacionPendiente
+        /// </summary>
+        [DataMember]
+        public bool? AplicacionPendiente { get; set; }
     }
 }

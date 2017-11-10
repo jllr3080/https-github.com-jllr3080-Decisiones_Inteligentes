@@ -128,5 +128,44 @@ namespace JLLR.Core.Contabilidad.Servicio.EnsambladorDTOs
 
         }
         #endregion
+
+        #region APLICACION PAGO DTO
+        /// <summary>
+        /// Convierte el modelo DTO en una entidad DTO
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public modeloDTOs.AplicacionPagoDTOs CrearAplicacionPagoDtOs(entidadDTOs.AplicacionPagoDTOs e)
+        { 
+            return new modeloDTOs.AplicacionPagoDTOs()
+            {
+              FechaCierreMes = e.FechaCierreMes,
+              Mes = e.Mes,
+              UsuarioAplicacion = e.UsuarioAplicacion,
+              ValorCierre = e.ValorCierre,
+              PuntoVenta = e.PuntoVenta,
+              AplicacionPago = _ensambladorModelo.CrearAplicacionPago(e.AplicacionPago)
+
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos  Usuario en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<modeloDTOs.AplicacionPagoDTOs> CrearAplicacionPagoDtOses(IQueryable<entidadDTOs.AplicacionPagoDTOs> listadoModelo)
+        {
+            List<modeloDTOs.AplicacionPagoDTOs> listaEntidad = new List<modeloDTOs.AplicacionPagoDTOs>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearAplicacionPagoDtOs(modelo));
+            }
+            return listaEntidad;
+
+        }
+        #endregion
     }
 }

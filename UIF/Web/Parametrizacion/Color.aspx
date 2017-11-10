@@ -60,7 +60,7 @@
         <div class="panel-body">
             <div class="row">
                      <div class="col-md-12">
-                                 <asp:GridView ID="_datos" runat="server" AutoGenerateColumns="False"  ShowFooter="True" Width="100%" OnRowCommand="_datos_RowCommand" OnRowDataBound="_datos_RowDataBound" >
+                                 <asp:GridView ID="_datos" runat="server" AutoGenerateColumns="False"  ShowFooter="True" Width="100%" OnRowCommand="_datos_RowCommand" OnRowDataBound="_datos_RowDataBound" AllowPaging="True" PageSize="5" OnPageIndexChanging="_datos_PageIndexChanging" >
                                     <Columns>
                                         <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Codigo_Interno%>" DataField="ColorId" />
                                       <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Color%>" DataField="Descripcion" />

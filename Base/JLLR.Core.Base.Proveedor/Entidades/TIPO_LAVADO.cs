@@ -18,8 +18,8 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public TIPO_LAVADO()
         {
             this.NUMERACION_ORDEN = new HashSet<NUMERACION_ORDEN>();
-            this.ORDEN_TRABAJO = new HashSet<ORDEN_TRABAJO>();
             this.VENTA_COMISION = new HashSet<VENTA_COMISION>();
+            this.ORDEN_TRABAJO = new HashSet<ORDEN_TRABAJO>();
         }
     
         public int TIPO_LAVADO_ID { get; set; }
@@ -29,8 +29,8 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NUMERACION_ORDEN> NUMERACION_ORDEN { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ORDEN_TRABAJO> ORDEN_TRABAJO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VENTA_COMISION> VENTA_COMISION { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ORDEN_TRABAJO> ORDEN_TRABAJO { get; set; }
     }
 }

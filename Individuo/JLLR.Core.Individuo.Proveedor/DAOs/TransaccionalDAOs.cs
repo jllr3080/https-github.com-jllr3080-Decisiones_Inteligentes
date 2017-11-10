@@ -192,15 +192,17 @@ namespace JLLR.Core.Individuo.Proveedor.DAOs
 
                     //Graba el telefono
 
+                    if (clienteGeneralDtOs.Telefonos !=null)
+                    { 
                     foreach (var telefono in clienteGeneralDtOs.Telefonos)
                     {
                         _telefonoDaOs.ActualizaTelefono(telefono);
                     }
-                    
+                    }
 
 
                     //Graba el correo electronico
-                    
+
                     _correoElectronicoDaOs.ActualizaCorreoElectronico(clienteGeneralDtOs.CorreoElectronico);
 
                     //Graba el correo electronico

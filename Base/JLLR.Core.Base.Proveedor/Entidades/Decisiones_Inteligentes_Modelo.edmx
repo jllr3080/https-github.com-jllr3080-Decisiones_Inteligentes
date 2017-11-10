@@ -54,10 +54,10 @@
           <Property Name="SUCURSAL_ID" Type="int" />
           <Property Name="PUNTO_VENTA_ID" Type="int" />
           <Property Name="USUARIO_ID" Type="int" />
-          <Property Name="CUENTA_POR_PAGAR_ID" Type="bigint" />
           <Property Name="MES_ID" Type="int" />
           <Property Name="FECHA_CREACION" Type="datetime" />
           <Property Name="VALOR" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="APLICACION_PENDIENTE" Type="bit" />
         </EntityType>
         <EntityType Name="CUENTA_POR_COBRAR">
           <Key>
@@ -95,6 +95,7 @@
           <Property Name="VALOR" Type="decimal" Precision="18" Scale="2" />
           <Property Name="NUMERO_FACTURA" Type="varchar" MaxLength="50" />
           <Property Name="NUMERO_ORDEN" Type="varchar" MaxLength="20" />
+          <Property Name="CIERRE_MES_ID" Type="int" />
         </EntityType>
         <EntityType Name="DETALLE_ARQUEO_CAJA">
           <Key>
@@ -847,6 +848,8 @@
           <Property Name="TIEMPO_ENTREGA" Type="int" />
           <Property Name="PRENDA_ESPECIAL" Type="bit" />
           <Property Name="NUMERO_PRENDAS" Type="int" />
+          <Property Name="ESTA_HABILITADO" Type="bit" />
+          <Property Name="USUARIO_ID" Type="int" />
         </EntityType>
         <EntityType Name="PRODUCTO_PRECIO">
           <Key>
@@ -859,14 +862,6 @@
           <Property Name="ESTA_HABILITADO" Type="bit" />
           <Property Name="MODIFICABLE" Type="bit" />
           <Property Name="PRODUCTO_TALLA_ID" Type="int" />
-        </EntityType>
-        <EntityType Name="PRODUCTO_TALLA">
-          <Key>
-            <PropertyRef Name="PRODUCTO_TALLA_ID" />
-          </Key>
-          <Property Name="PRODUCTO_TALLA_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PRODUCTO_ID" Type="int" />
-          <Property Name="DESCRIPCION" Type="varchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="PRODUCTO_VS_GRUPO_PRODUCTO">
           <Key>
@@ -1031,8 +1026,6 @@
           <Property Name="VALOR_UNITARIO" Type="decimal" Precision="18" Scale="4" />
           <Property Name="PORCENTAJE_IMPUESTO" Type="decimal" Precision="8" Scale="4" />
           <Property Name="VALOR_TOTAL" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="OBSERVACION" Type="varchar" MaxLength="100" />
-          <Property Name="PRODUCTO_TALLA_ID" Type="int" />
           <Property Name="PORCENTAJE_IMPUESTO_SUCURSAL_ID" Type="int" />
           <Property Name="SUAVIZANTE" Type="bit" />
           <Property Name="DESENGRASANTE" Type="bit" />
@@ -1044,9 +1037,9 @@
           <Property Name="APLICO_VALOR_EXTRA" Type="bit" />
           <Property Name="VALOR_COMISION_INDUSTRIALES" Type="decimal" Precision="18" Scale="4" />
           <Property Name="VALOR_IMPUESTO" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="OBJETO_OLVIDADO" Type="bit" />
           <Property Name="SOLO_PLANCHADO" Type="bit" />
           <Property Name="PORCENTAJE_ADICIONAL" Type="bit" />
+          <Property Name="DETALLE_ORDEN_ANULADA_TRABAJO_ID" Type="int" />
         </EntityType>
         <EntityType Name="DETALLE_ORDEN_TRABAJO_OBSERVACION">
           <Key>
@@ -1145,6 +1138,8 @@
           <Property Name="NUMERO_ORDEN_MANUAL" Type="varchar" MaxLength="20" />
           <Property Name="ENTREGA_URGENCIA_ID" Type="int" />
           <Property Name="ES_TEMPORAL" Type="bit" />
+          <Property Name="OBJETO_OLVIDADO" Type="varchar" MaxLength="50" />
+          <Property Name="REVISO_PRENDA_CLIENTE" Type="bit" />
         </EntityType>
         <EntityType Name="ORDEN_TRABAJO_COMISION">
           <Key>
@@ -1503,18 +1498,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CIERRE_MES_VS_CUENTA_POR_PAGAR">
-          <End Role="CUENTA_POR_PAGAR" Type="Self.CUENTA_POR_PAGAR" Multiplicity="0..1" />
-          <End Role="CIERRE_MES" Type="Self.CIERRE_MES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CUENTA_POR_PAGAR">
-              <PropertyRef Name="CUENTA_POR_PAGAR_ID" />
-            </Principal>
-            <Dependent Role="CIERRE_MES">
-              <PropertyRef Name="CUENTA_POR_PAGAR_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CIERRE_MES_VS_MES">
           <End Role="MES" Type="Self.MES" Multiplicity="0..1" />
           <End Role="CIERRE_MES" Type="Self.CIERRE_MES" Multiplicity="*" />
@@ -1632,6 +1615,18 @@
             </Principal>
             <Dependent Role="CONTROL_USUARIO">
               <PropertyRef Name="USUARIO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUENTA_POR_PAGAR_VS_CIERRE_MES">
+          <End Role="CIERRE_MES" Type="Self.CIERRE_MES" Multiplicity="0..1" />
+          <End Role="CUENTA_POR_PAGAR" Type="Self.CUENTA_POR_PAGAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CIERRE_MES">
+              <PropertyRef Name="CIERRE_MES_ID" />
+            </Principal>
+            <Dependent Role="CUENTA_POR_PAGAR">
+              <PropertyRef Name="CIERRE_MES_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2451,30 +2446,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PRODUCTO_PRECIO_VS_PRODUCTO_TALLA">
-          <End Role="PRODUCTO_TALLA" Type="Self.PRODUCTO_TALLA" Multiplicity="0..1" />
-          <End Role="PRODUCTO_PRECIO" Type="Self.PRODUCTO_PRECIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PRODUCTO_TALLA">
-              <PropertyRef Name="PRODUCTO_TALLA_ID" />
-            </Principal>
-            <Dependent Role="PRODUCTO_PRECIO">
-              <PropertyRef Name="PRODUCTO_TALLA_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PRODUCTO_TALLA_VS_PRODUCTO">
-          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="0..1" />
-          <End Role="PRODUCTO_TALLA" Type="Self.PRODUCTO_TALLA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PRODUCTO">
-              <PropertyRef Name="PRODUCTO_ID" />
-            </Principal>
-            <Dependent Role="PRODUCTO_TALLA">
-              <PropertyRef Name="PRODUCTO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PRODUCTO_VS_GRUPO_PODUCTO_1">
           <End Role="GRUPO_PRODUCTO" Type="Self.GRUPO_PRODUCTO" Multiplicity="0..1" />
           <End Role="PRODUCTO_VS_GRUPO_PRODUCTO" Type="Self.PRODUCTO_VS_GRUPO_PRODUCTO" Multiplicity="*" />
@@ -3030,7 +3001,6 @@
           <EntitySet Name="GRUPO_PRODUCTO" EntityType="Self.GRUPO_PRODUCTO" Schema="PRODUCTO" store:Type="Tables" />
           <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="PRODUCTO" store:Type="Tables" />
           <EntitySet Name="PRODUCTO_PRECIO" EntityType="Self.PRODUCTO_PRECIO" Schema="PRODUCTO" store:Type="Tables" />
-          <EntitySet Name="PRODUCTO_TALLA" EntityType="Self.PRODUCTO_TALLA" Schema="PRODUCTO" store:Type="Tables" />
           <EntitySet Name="PRODUCTO_VS_GRUPO_PRODUCTO" EntityType="Self.PRODUCTO_VS_GRUPO_PRODUCTO" Schema="PRODUCTO" store:Type="Tables" />
           <EntitySet Name="TIPO_PRODUCTO" EntityType="Self.TIPO_PRODUCTO" Schema="PRODUCTO" store:Type="Tables" />
           <EntitySet Name="ACCION_REGLA" EntityType="Self.ACCION_REGLA" Schema="REGLA" store:Type="Tables" />
@@ -3160,10 +3130,6 @@
             <End Role="TIPO_IDENTIFICACION" EntitySet="TIPO_IDENTIFICACION" />
             <End Role="CABECERA_MOVIMIENTO_FE" EntitySet="CABECERA_MOVIMIENTO_FE" />
           </AssociationSet>
-          <AssociationSet Name="FK_CIERRE_MES_VS_CUENTA_POR_PAGAR" Association="Self.FK_CIERRE_MES_VS_CUENTA_POR_PAGAR">
-            <End Role="CUENTA_POR_PAGAR" EntitySet="CUENTA_POR_PAGAR" />
-            <End Role="CIERRE_MES" EntitySet="CIERRE_MES" />
-          </AssociationSet>
           <AssociationSet Name="FK_CIERRE_MES_VS_MES" Association="Self.FK_CIERRE_MES_VS_MES">
             <End Role="MES" EntitySet="MES" />
             <End Role="CIERRE_MES" EntitySet="CIERRE_MES" />
@@ -3203,6 +3169,10 @@
           <AssociationSet Name="FK_CONTROL_USUARIO_VS_USUARIO" Association="Self.FK_CONTROL_USUARIO_VS_USUARIO">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="CONTROL_USUARIO" EntitySet="CONTROL_USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUENTA_POR_PAGAR_VS_CIERRE_MES" Association="Self.FK_CUENTA_POR_PAGAR_VS_CIERRE_MES">
+            <End Role="CIERRE_MES" EntitySet="CIERRE_MES" />
+            <End Role="CUENTA_POR_PAGAR" EntitySet="CUENTA_POR_PAGAR" />
           </AssociationSet>
           <AssociationSet Name="FK_DETALLE_ARQUEO_CAJA_VS_ARQUEO_CAJA" Association="Self.FK_DETALLE_ARQUEO_CAJA_VS_ARQUEO_CAJA">
             <End Role="ARQUEO_CAJA" EntitySet="ARQUEO_CAJA" />
@@ -3476,14 +3446,6 @@
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
             <End Role="PRODUCTO_PRECIO" EntitySet="PRODUCTO_PRECIO" />
           </AssociationSet>
-          <AssociationSet Name="FK_PRODUCTO_PRECIO_VS_PRODUCTO_TALLA" Association="Self.FK_PRODUCTO_PRECIO_VS_PRODUCTO_TALLA">
-            <End Role="PRODUCTO_TALLA" EntitySet="PRODUCTO_TALLA" />
-            <End Role="PRODUCTO_PRECIO" EntitySet="PRODUCTO_PRECIO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PRODUCTO_TALLA_VS_PRODUCTO" Association="Self.FK_PRODUCTO_TALLA_VS_PRODUCTO">
-            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
-            <End Role="PRODUCTO_TALLA" EntitySet="PRODUCTO_TALLA" />
-          </AssociationSet>
           <AssociationSet Name="FK_PRODUCTO_VS_GRUPO_PODUCTO_1" Association="Self.FK_PRODUCTO_VS_GRUPO_PODUCTO_1">
             <End Role="GRUPO_PRODUCTO" EntitySet="GRUPO_PRODUCTO" />
             <End Role="PRODUCTO_VS_GRUPO_PRODUCTO" EntitySet="PRODUCTO_VS_GRUPO_PRODUCTO" />
@@ -3655,7 +3617,6 @@
           <EntitySet Name="CONTROL_USUARIO" EntityType="Decisiones_Inteligentes_Modelo.CONTROL_USUARIO" />
           <EntitySet Name="ARQUEO_CAJA" EntityType="Decisiones_Inteligentes_Modelo.ARQUEO_CAJA" />
           <EntitySet Name="CUENTA_POR_COBRAR" EntityType="Decisiones_Inteligentes_Modelo.CUENTA_POR_COBRAR" />
-          <EntitySet Name="CUENTA_POR_PAGAR" EntityType="Decisiones_Inteligentes_Modelo.CUENTA_POR_PAGAR" />
           <EntitySet Name="DETALLE_ARQUEO_CAJA" EntityType="Decisiones_Inteligentes_Modelo.DETALLE_ARQUEO_CAJA" />
           <EntitySet Name="HISTORIAL_CUENTA_POR_COBRAR" EntityType="Decisiones_Inteligentes_Modelo.HISTORIAL_CUENTA_POR_COBRAR" />
           <EntitySet Name="HISTORIAL_CUENTA_POR_PAGAR" EntityType="Decisiones_Inteligentes_Modelo.HISTORIAL_CUENTA_POR_PAGAR" />
@@ -3729,7 +3690,6 @@
           <EntitySet Name="GRUPO_PRODUCTO" EntityType="Decisiones_Inteligentes_Modelo.GRUPO_PRODUCTO" />
           <EntitySet Name="PRODUCTO" EntityType="Decisiones_Inteligentes_Modelo.PRODUCTO" />
           <EntitySet Name="PRODUCTO_PRECIO" EntityType="Decisiones_Inteligentes_Modelo.PRODUCTO_PRECIO" />
-          <EntitySet Name="PRODUCTO_TALLA" EntityType="Decisiones_Inteligentes_Modelo.PRODUCTO_TALLA" />
           <EntitySet Name="PRODUCTO_VS_GRUPO_PRODUCTO" EntityType="Decisiones_Inteligentes_Modelo.PRODUCTO_VS_GRUPO_PRODUCTO" />
           <EntitySet Name="TIPO_PRODUCTO" EntityType="Decisiones_Inteligentes_Modelo.TIPO_PRODUCTO" />
           <EntitySet Name="ACCION_REGLA" EntityType="Decisiones_Inteligentes_Modelo.ACCION_REGLA" />
@@ -3746,7 +3706,6 @@
           <EntitySet Name="USUARIO_PREGUNTA_SEGURIDAD" EntityType="Decisiones_Inteligentes_Modelo.USUARIO_PREGUNTA_SEGURIDAD" />
           <EntitySet Name="USUARIO_SEGURIDAD" EntityType="Decisiones_Inteligentes_Modelo.USUARIO_SEGURIDAD" />
           <EntitySet Name="APROBACION_DESCUENTO" EntityType="Decisiones_Inteligentes_Modelo.APROBACION_DESCUENTO" />
-          <EntitySet Name="DETALLE_ORDEN_TRABAJO" EntityType="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO" />
           <EntitySet Name="DETALLE_ORDEN_TRABAJO_OBSERVACION" EntityType="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO_OBSERVACION" />
           <EntitySet Name="DETALLE_PRENDA_ORDEN_TRABAJO" EntityType="Decisiones_Inteligentes_Modelo.DETALLE_PRENDA_ORDEN_TRABAJO" />
           <EntitySet Name="DETALLE_TRABAJO_FOTOGRAFIA" EntityType="Decisiones_Inteligentes_Modelo.DETALLE_TRABAJO_FOTOGRAFIA" />
@@ -3754,8 +3713,6 @@
           <EntitySet Name="HISTORIAL_RECLAMO_REPROCESO_PRENDA" EntityType="Decisiones_Inteligentes_Modelo.HISTORIAL_RECLAMO_REPROCESO_PRENDA" />
           <EntitySet Name="HISTORIAL_REGLA" EntityType="Decisiones_Inteligentes_Modelo.HISTORIAL_REGLA" />
           <EntitySet Name="NUMERACION_ORDEN" EntityType="Decisiones_Inteligentes_Modelo.NUMERACION_ORDEN" />
-          <EntitySet Name="ORDEN_TRABAJO" EntityType="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO" />
-          <EntitySet Name="ORDEN_TRABAJO_COMISION" EntityType="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO_COMISION" />
           <EntitySet Name="ORDEN_TRABAJO_DESCUENTO" EntityType="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO_DESCUENTO" />
           <EntitySet Name="VENTA_COMISION" EntityType="Decisiones_Inteligentes_Modelo.VENTA_COMISION" />
           <EntitySet Name="VENTA_COMISION_INDUSTRIALES" EntityType="Decisiones_Inteligentes_Modelo.VENTA_COMISION_INDUSTRIALES" />
@@ -3770,10 +3727,6 @@
           <AssociationSet Name="FK_HISTORIAL_CUENTA_POR_COBRAR_VS_CUENTA_POR_COBRAR" Association="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_CUENTA_POR_COBRAR_VS_CUENTA_POR_COBRAR">
             <End Role="CUENTA_POR_COBRAR" EntitySet="CUENTA_POR_COBRAR" />
             <End Role="HISTORIAL_CUENTA_POR_COBRAR" EntitySet="HISTORIAL_CUENTA_POR_COBRAR" />
-          </AssociationSet>
-          <AssociationSet Name="FK_HISTORIAL_CUENTA_POR_PAGAR_VS_CUENTA_POR_PAGAR" Association="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_CUENTA_POR_PAGAR_VS_CUENTA_POR_PAGAR">
-            <End Role="CUENTA_POR_PAGAR" EntitySet="CUENTA_POR_PAGAR" />
-            <End Role="HISTORIAL_CUENTA_POR_PAGAR" EntitySet="HISTORIAL_CUENTA_POR_PAGAR" />
           </AssociationSet>
           <AssociationSet Name="FK_HISTORIAL_CUENTA_COBRAR_VS_FORMA_PAGO" Association="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_CUENTA_COBRAR_VS_FORMA_PAGO">
             <End Role="FORMA_PAGO" EntitySet="FORMA_PAGO" />
@@ -3878,10 +3831,6 @@
           <AssociationSet Name="FK_CLIENTE_VS_TIPO_GENERO" Association="Decisiones_Inteligentes_Modelo.FK_CLIENTE_VS_TIPO_GENERO">
             <End Role="TIPO_GENERO" EntitySet="TIPO_GENERO" />
             <End Role="CLIENTE" EntitySet="CLIENTE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ORDEN_TRABAJO_VS_CLIENTE" Association="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_CLIENTE">
-            <End Role="CLIENTE" EntitySet="CLIENTE" />
-            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
           </AssociationSet>
           <AssociationSet Name="FK_DIRECCION_VS_ESTADO" Association="Decisiones_Inteligentes_Modelo.FK_DIRECCION_VS_ESTADO">
             <End Role="ESTADO" EntitySet="ESTADO" />
@@ -4027,10 +3976,6 @@
             <End Role="ETAPA_PROCESO" EntitySet="ETAPA_PROCESO" />
             <End Role="HISTORIAL_PROCESO" EntitySet="HISTORIAL_PROCESO" />
           </AssociationSet>
-          <AssociationSet Name="FK_HISTORIAL_PROCESO_VS_ORDEN_TRABAJO" Association="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_PROCESO_VS_ORDEN_TRABAJO">
-            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
-            <End Role="HISTORIAL_PROCESO" EntitySet="HISTORIAL_PROCESO" />
-          </AssociationSet>
           <AssociationSet Name="FK_PROCESO_VS_ETAPA_PROCESO" Association="Decisiones_Inteligentes_Modelo.FK_PROCESO_VS_ETAPA_PROCESO">
             <End Role="ETAPA_PROCESO" EntitySet="ETAPA_PROCESO" />
             <End Role="PROCESO" EntitySet="PROCESO" />
@@ -4054,14 +3999,6 @@
           <AssociationSet Name="FK_PORCENTAJE_IMPUESTO_VS_CONDICION_IMPUESTO" Association="Decisiones_Inteligentes_Modelo.FK_PORCENTAJE_IMPUESTO_VS_CONDICION_IMPUESTO">
             <End Role="CONDICION_IMPUESTO" EntitySet="CONDICION_IMPUESTO" />
             <End Role="PORCENTAJE_IMPUESTO" EntitySet="PORCENTAJE_IMPUESTO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ORDEN_TRABAJO_VS_ENTREGA_URGENCIA" Association="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_ENTREGA_URGENCIA">
-            <End Role="ENTREGA_URGENCIA" EntitySet="ENTREGA_URGENCIA" />
-            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ORDEN_TRABAJO_VS_ESTADO_PAGO" Association="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_ESTADO_PAGO">
-            <End Role="ESTADO_PAGO" EntitySet="ESTADO_PAGO" />
-            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
           </AssociationSet>
           <AssociationSet Name="FK_GRUPO_IMPUESTO_VS_IMPUESTO" Association="Decisiones_Inteligentes_Modelo.FK_GRUPO_IMPUESTO_VS_IMPUESTO">
             <End Role="IMPUESTO" EntitySet="IMPUESTO" />
@@ -4135,10 +4072,6 @@
             <End Role="TIPO_LAVADO" EntitySet="TIPO_LAVADO" />
             <End Role="NUMERACION_ORDEN" EntitySet="NUMERACION_ORDEN" />
           </AssociationSet>
-          <AssociationSet Name="FK_ORDEN_TRABAJO_VS_TIPO_LAVADO" Association="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_TIPO_LAVADO">
-            <End Role="TIPO_LAVADO" EntitySet="TIPO_LAVADO" />
-            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
-          </AssociationSet>
           <AssociationSet Name="FK_VENTA_COMISION_VS_TIPO_LAVADO" Association="Decisiones_Inteligentes_Modelo.FK_VENTA_COMISION_VS_TIPO_LAVADO">
             <End Role="TIPO_LAVADO" EntitySet="TIPO_LAVADO" />
             <End Role="VENTA_COMISION" EntitySet="VENTA_COMISION" />
@@ -4159,10 +4092,6 @@
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
             <End Role="ACCION_REGLA" EntitySet="ACCION_REGLA" />
           </AssociationSet>
-          <AssociationSet Name="FK_DETALLE_ORDEN_TRABAJO_VS_PRODUCTO" Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_VS_PRODUCTO">
-            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
-            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
-          </AssociationSet>
           <AssociationSet Name="FK_PRODUCTO_GRUPO_VS_PRODUCTO" Association="Decisiones_Inteligentes_Modelo.FK_PRODUCTO_GRUPO_VS_PRODUCTO">
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
             <End Role="PRODUCTO_VS_GRUPO_PRODUCTO" EntitySet="PRODUCTO_VS_GRUPO_PRODUCTO" />
@@ -4171,10 +4100,6 @@
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
             <End Role="PRODUCTO_PRECIO" EntitySet="PRODUCTO_PRECIO" />
           </AssociationSet>
-          <AssociationSet Name="FK_PRODUCTO_TALLA_VS_PRODUCTO" Association="Decisiones_Inteligentes_Modelo.FK_PRODUCTO_TALLA_VS_PRODUCTO">
-            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
-            <End Role="PRODUCTO_TALLA" EntitySet="PRODUCTO_TALLA" />
-          </AssociationSet>
           <AssociationSet Name="FK_PRODUCTO_VS_TIPO_PRODUCTO" Association="Decisiones_Inteligentes_Modelo.FK_PRODUCTO_VS_TIPO_PRODUCTO">
             <End Role="TIPO_PRODUCTO" EntitySet="TIPO_PRODUCTO" />
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
@@ -4182,10 +4107,6 @@
           <AssociationSet Name="FK_DETALLE_VENTA_COMISION_INDUSTRIALES_VS_PRODUCTO_PRECIO" Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_VENTA_COMISION_INDUSTRIALES_VS_PRODUCTO_PRECIO">
             <End Role="PRODUCTO_PRECIO" EntitySet="PRODUCTO_PRECIO" />
             <End Role="DETALLE_VENTA_COMISION_INDUSTRIALES" EntitySet="DETALLE_VENTA_COMISION_INDUSTRIALES" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PRODUCTO_PRECIO_VS_PRODUCTO_TALLA" Association="Decisiones_Inteligentes_Modelo.FK_PRODUCTO_PRECIO_VS_PRODUCTO_TALLA">
-            <End Role="PRODUCTO_TALLA" EntitySet="PRODUCTO_TALLA" />
-            <End Role="PRODUCTO_PRECIO" EntitySet="PRODUCTO_PRECIO" />
           </AssociationSet>
           <AssociationSet Name="FK_ACCION_REGLA_VS_REGLA" Association="Decisiones_Inteligentes_Modelo.FK_ACCION_REGLA_VS_REGLA">
             <End Role="REGLA" EntitySet="REGLA" />
@@ -4243,25 +4164,9 @@
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="USUARIO_SEGURIDAD" EntitySet="USUARIO_SEGURIDAD" />
           </AssociationSet>
-          <AssociationSet Name="FK_APROBACION_DESCUENTO_VS_ORDEN_TRABAJO" Association="Decisiones_Inteligentes_Modelo.FK_APROBACION_DESCUENTO_VS_ORDEN_TRABAJO">
-            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
-            <End Role="APROBACION_DESCUENTO" EntitySet="APROBACION_DESCUENTO" />
-          </AssociationSet>
           <AssociationSet Name="FK_APROBACION_DESCUENTO_VS_ORDEN_TRABAJO_DESCUENTO" Association="Decisiones_Inteligentes_Modelo.FK_APROBACION_DESCUENTO_VS_ORDEN_TRABAJO_DESCUENTO">
             <End Role="ORDEN_TRABAJO_DESCUENTO" EntitySet="ORDEN_TRABAJO_DESCUENTO" />
             <End Role="APROBACION_DESCUENTO" EntitySet="APROBACION_DESCUENTO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO" Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO">
-            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
-            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DETALLE_PRENDA_VS_DETALLE_ORDEN_TRABAJO" Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_PRENDA_VS_DETALLE_ORDEN_TRABAJO">
-            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
-            <End Role="DETALLE_PRENDA_ORDEN_TRABAJO" EntitySet="DETALLE_PRENDA_ORDEN_TRABAJO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ORDEN_TRABAJO_COMISION_VS_DOT" Association="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_COMISION_VS_DOT">
-            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
-            <End Role="ORDEN_TRABAJO_COMISION" EntitySet="ORDEN_TRABAJO_COMISION" />
           </AssociationSet>
           <AssociationSet Name="FK_DETALLE_ORDEN_TRABAJO_OBSERVACION_VS_DPOT" Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_OBSERVACION_VS_DPOT">
             <End Role="DETALLE_PRENDA_ORDEN_TRABAJO" EntitySet="DETALLE_PRENDA_ORDEN_TRABAJO" />
@@ -4278,22 +4183,6 @@
           <AssociationSet Name="FK_DETALLE_VENTA_COMISION_INDUSTRIALES_VS_VCI" Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_VENTA_COMISION_INDUSTRIALES_VS_VCI">
             <End Role="VENTA_COMISION_INDUSTRIALES" EntitySet="VENTA_COMISION_INDUSTRIALES" />
             <End Role="DETALLE_VENTA_COMISION_INDUSTRIALES" EntitySet="DETALLE_VENTA_COMISION_INDUSTRIALES" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ORDEN_TRABAJO_VS_DETALLE_VENTA_COMISION_INDUSTRIALES" Association="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_DETALLE_VENTA_COMISION_INDUSTRIALES">
-            <End Role="DETALLE_VENTA_COMISION_INDUSTRIALES" EntitySet="DETALLE_VENTA_COMISION_INDUSTRIALES" />
-            <End Role="ORDEN_TRABAJO_COMISION" EntitySet="ORDEN_TRABAJO_COMISION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_HISTORIA_REGLA_VS_ORDEN_TRABAJO" Association="Decisiones_Inteligentes_Modelo.FK_HISTORIA_REGLA_VS_ORDEN_TRABAJO">
-            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
-            <End Role="HISTORIAL_REGLA" EntitySet="HISTORIAL_REGLA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ORDEN_TRABAJO_DESCUENTO_VS_ORDEN_TRABAJO" Association="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_DESCUENTO_VS_ORDEN_TRABAJO">
-            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
-            <End Role="ORDEN_TRABAJO_DESCUENTO" EntitySet="ORDEN_TRABAJO_DESCUENTO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ORDEN_TRABAJO_VS_VENTA_COMISION" Association="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_VENTA_COMISION">
-            <End Role="VENTA_COMISION" EntitySet="VENTA_COMISION" />
-            <End Role="ORDEN_TRABAJO_COMISION" EntitySet="ORDEN_TRABAJO_COMISION" />
           </AssociationSet>
           <FunctionImport Name="ESTADO_CUENTA_V1" ReturnType="Collection(Decisiones_Inteligentes_Modelo.ESTADO_CUENTA_V1_Result)">
             <Parameter Name="PUNTOVENTAID" Mode="In" Type="Int32" />
@@ -4320,15 +4209,12 @@
             <End Role="HISTORIAL_REPROCESO" EntitySet="HISTORIAL_REPROCESO" />
           </AssociationSet>
           <EntitySet Name="APLICACION_PAGO" EntityType="Decisiones_Inteligentes_Modelo.APLICACION_PAGO" />
-          <EntitySet Name="CIERRE_MES" EntityType="Decisiones_Inteligentes_Modelo.CIERRE_MES" />
           <EntitySet Name="MES" EntityType="Decisiones_Inteligentes_Modelo.MES" />
+          <EntitySet Name="CIERRE_MES" EntityType="Decisiones_Inteligentes_Modelo.CIERRE_MES" />
+          <EntitySet Name="CUENTA_POR_PAGAR" EntityType="Decisiones_Inteligentes_Modelo.CUENTA_POR_PAGAR" />
           <AssociationSet Name="FK_APLICACION_PAGO_VS_CIERRE_MES" Association="Decisiones_Inteligentes_Modelo.FK_APLICACION_PAGO_VS_CIERRE_MES">
             <End Role="CIERRE_MES" EntitySet="CIERRE_MES" />
             <End Role="APLICACION_PAGO" EntitySet="APLICACION_PAGO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CIERRE_MES_VS_CUENTA_POR_PAGAR" Association="Decisiones_Inteligentes_Modelo.FK_CIERRE_MES_VS_CUENTA_POR_PAGAR">
-            <End Role="CUENTA_POR_PAGAR" EntitySet="CUENTA_POR_PAGAR" />
-            <End Role="CIERRE_MES" EntitySet="CIERRE_MES" />
           </AssociationSet>
           <AssociationSet Name="FK_CIERRE_MES_VS_MES" Association="Decisiones_Inteligentes_Modelo.FK_CIERRE_MES_VS_MES">
             <End Role="MES" EntitySet="MES" />
@@ -4345,6 +4231,73 @@
           <AssociationSet Name="FK_CIERRE_MES_VS_USUARIO" Association="Decisiones_Inteligentes_Modelo.FK_CIERRE_MES_VS_USUARIO">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="CIERRE_MES" EntitySet="CIERRE_MES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUENTA_POR_PAGAR_VS_CIERRE_MES" Association="Decisiones_Inteligentes_Modelo.FK_CUENTA_POR_PAGAR_VS_CIERRE_MES">
+            <End Role="CIERRE_MES" EntitySet="CIERRE_MES" />
+            <End Role="CUENTA_POR_PAGAR" EntitySet="CUENTA_POR_PAGAR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HISTORIAL_CUENTA_POR_PAGAR_VS_CUENTA_POR_PAGAR" Association="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_CUENTA_POR_PAGAR_VS_CUENTA_POR_PAGAR">
+            <End Role="CUENTA_POR_PAGAR" EntitySet="CUENTA_POR_PAGAR" />
+            <End Role="HISTORIAL_CUENTA_POR_PAGAR" EntitySet="HISTORIAL_CUENTA_POR_PAGAR" />
+          </AssociationSet>
+          <EntitySet Name="ORDEN_TRABAJO_COMISION" EntityType="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO_COMISION" />
+          <AssociationSet Name="FK_ORDEN_TRABAJO_VS_DETALLE_VENTA_COMISION_INDUSTRIALES" Association="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_DETALLE_VENTA_COMISION_INDUSTRIALES">
+            <End Role="DETALLE_VENTA_COMISION_INDUSTRIALES" EntitySet="DETALLE_VENTA_COMISION_INDUSTRIALES" />
+            <End Role="ORDEN_TRABAJO_COMISION" EntitySet="ORDEN_TRABAJO_COMISION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDEN_TRABAJO_VS_VENTA_COMISION" Association="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_VENTA_COMISION">
+            <End Role="VENTA_COMISION" EntitySet="VENTA_COMISION" />
+            <End Role="ORDEN_TRABAJO_COMISION" EntitySet="ORDEN_TRABAJO_COMISION" />
+          </AssociationSet>
+          <EntitySet Name="DETALLE_ORDEN_TRABAJO" EntityType="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO" />
+          <EntitySet Name="ORDEN_TRABAJO" EntityType="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO" />
+          <AssociationSet Name="FK_ORDEN_TRABAJO_VS_CLIENTE" Association="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_CLIENTE">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HISTORIAL_PROCESO_VS_ORDEN_TRABAJO" Association="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_PROCESO_VS_ORDEN_TRABAJO">
+            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
+            <End Role="HISTORIAL_PROCESO" EntitySet="HISTORIAL_PROCESO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDEN_TRABAJO_VS_ENTREGA_URGENCIA" Association="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_ENTREGA_URGENCIA">
+            <End Role="ENTREGA_URGENCIA" EntitySet="ENTREGA_URGENCIA" />
+            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDEN_TRABAJO_VS_ESTADO_PAGO" Association="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_ESTADO_PAGO">
+            <End Role="ESTADO_PAGO" EntitySet="ESTADO_PAGO" />
+            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDEN_TRABAJO_VS_TIPO_LAVADO" Association="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_TIPO_LAVADO">
+            <End Role="TIPO_LAVADO" EntitySet="TIPO_LAVADO" />
+            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE_ORDEN_TRABAJO_VS_PRODUCTO" Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_VS_PRODUCTO">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APROBACION_DESCUENTO_VS_ORDEN_TRABAJO" Association="Decisiones_Inteligentes_Modelo.FK_APROBACION_DESCUENTO_VS_ORDEN_TRABAJO">
+            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
+            <End Role="APROBACION_DESCUENTO" EntitySet="APROBACION_DESCUENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO" Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO">
+            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
+            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE_PRENDA_VS_DETALLE_ORDEN_TRABAJO" Association="Decisiones_Inteligentes_Modelo.FK_DETALLE_PRENDA_VS_DETALLE_ORDEN_TRABAJO">
+            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
+            <End Role="DETALLE_PRENDA_ORDEN_TRABAJO" EntitySet="DETALLE_PRENDA_ORDEN_TRABAJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDEN_TRABAJO_COMISION_VS_DOT" Association="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_COMISION_VS_DOT">
+            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
+            <End Role="ORDEN_TRABAJO_COMISION" EntitySet="ORDEN_TRABAJO_COMISION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HISTORIA_REGLA_VS_ORDEN_TRABAJO" Association="Decisiones_Inteligentes_Modelo.FK_HISTORIA_REGLA_VS_ORDEN_TRABAJO">
+            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
+            <End Role="HISTORIAL_REGLA" EntitySet="HISTORIAL_REGLA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDEN_TRABAJO_DESCUENTO_VS_ORDEN_TRABAJO" Association="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_DESCUENTO_VS_ORDEN_TRABAJO">
+            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
+            <End Role="ORDEN_TRABAJO_DESCUENTO" EntitySet="ORDEN_TRABAJO_DESCUENTO" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="ESTADISTICA_PRENDA_Result">
@@ -4404,26 +4357,6 @@
           <Property Name="NUMERO_ORDEN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="ESTADO_PAGO_ID" Type="Int32" />
           <NavigationProperty Name="HISTORIAL_CUENTA_POR_COBRAR" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_CUENTA_POR_COBRAR_VS_CUENTA_POR_COBRAR" FromRole="CUENTA_POR_COBRAR" ToRole="HISTORIAL_CUENTA_POR_COBRAR" />
-        </EntityType>
-        <EntityType Name="CUENTA_POR_PAGAR">
-          <Key>
-            <PropertyRef Name="CUENTA_POR_PAGAR_ID" />
-          </Key>
-          <Property Name="CUENTA_POR_PAGAR_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PROVEDOR_ID" Type="Int64" />
-          <Property Name="FECHA_CREACION" Type="DateTime" Precision="3" />
-          <Property Name="FECHA_MODIFICACION" Type="DateTime" Precision="3" />
-          <Property Name="USUARIO_CREACION_ID" Type="Int32" />
-          <Property Name="USUARIO_MODIFICACION_ID" Type="Int32" />
-          <Property Name="FECHA_VENCIMIENTO" Type="DateTime" Precision="3" />
-          <Property Name="SUCURSAL_ID" Type="Int32" />
-          <Property Name="PUNTO_VENTA_ID" Type="Int32" />
-          <Property Name="SALDO" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="VALOR" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="NUMERO_FACTURA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NUMERO_ORDEN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="HISTORIAL_CUENTA_POR_PAGAR" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_CUENTA_POR_PAGAR_VS_CUENTA_POR_PAGAR" FromRole="CUENTA_POR_PAGAR" ToRole="HISTORIAL_CUENTA_POR_PAGAR" />
-          <NavigationProperty Name="CIERRE_MES" Relationship="Decisiones_Inteligentes_Modelo.FK_CIERRE_MES_VS_CUENTA_POR_PAGAR" FromRole="CUENTA_POR_PAGAR" ToRole="CIERRE_MES" />
         </EntityType>
         <EntityType Name="DETALLE_ARQUEO_CAJA">
           <Key>
@@ -4834,8 +4767,8 @@
           <Property Name="SE_ENVIO" Type="Boolean" />
           <Property Name="ENTREGA_PARCIAL" Type="Boolean" />
           <NavigationProperty Name="ETAPA_PROCESO" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_PROCESO_VS_ETAPA_PROCESO" FromRole="HISTORIAL_PROCESO" ToRole="ETAPA_PROCESO" />
-          <NavigationProperty Name="ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_PROCESO_VS_ORDEN_TRABAJO" FromRole="HISTORIAL_PROCESO" ToRole="ORDEN_TRABAJO" />
           <NavigationProperty Name="HISTORIAL_REPROCESO" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_PROCESO_VS_HISTORIAL_REPROCESO" FromRole="HISTORIAL_PROCESO" ToRole="HISTORIAL_REPROCESO" />
+          <NavigationProperty Name="ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_PROCESO_VS_ORDEN_TRABAJO" FromRole="HISTORIAL_PROCESO" ToRole="ORDEN_TRABAJO" />
         </EntityType>
         <EntityType Name="PROCESO">
           <Key>
@@ -5231,8 +5164,8 @@
           <Property Name="DESCRIPCION" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
           <Property Name="ESTA_HABILITADO" Type="Boolean" />
           <NavigationProperty Name="NUMERACION_ORDEN" Relationship="Decisiones_Inteligentes_Modelo.FK_NUMERACION_ORDEN_VS_TIPO_LAVADO" FromRole="TIPO_LAVADO" ToRole="NUMERACION_ORDEN" />
-          <NavigationProperty Name="ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_TIPO_LAVADO" FromRole="TIPO_LAVADO" ToRole="ORDEN_TRABAJO" />
           <NavigationProperty Name="VENTA_COMISION" Relationship="Decisiones_Inteligentes_Modelo.FK_VENTA_COMISION_VS_TIPO_LAVADO" FromRole="TIPO_LAVADO" ToRole="VENTA_COMISION" />
+          <NavigationProperty Name="ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_TIPO_LAVADO" FromRole="TIPO_LAVADO" ToRole="ORDEN_TRABAJO" />
         </EntityType>
         <EntityType Name="TIPO_MENSAJE">
           <Key>
@@ -5317,12 +5250,13 @@
           <NavigationProperty Name="MODELO" Relationship="Decisiones_Inteligentes_Modelo.FK_PRODUCTO_VS_MODELO" FromRole="PRODUCTO" ToRole="MODELO" />
           <NavigationProperty Name="UNIDAD_MEDIDA" Relationship="Decisiones_Inteligentes_Modelo.FK_PRODUCTO_VS_UNIDAD_MEDIDA" FromRole="PRODUCTO" ToRole="UNIDAD_MEDIDA" />
           <NavigationProperty Name="ACCION_REGLA" Relationship="Decisiones_Inteligentes_Modelo.FK_ACCION_REGLA_VS_PRODUCTO" FromRole="PRODUCTO" ToRole="ACCION_REGLA" />
-          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_VS_PRODUCTO" FromRole="PRODUCTO" ToRole="DETALLE_ORDEN_TRABAJO" />
           <NavigationProperty Name="PRODUCTO_VS_GRUPO_PRODUCTO" Relationship="Decisiones_Inteligentes_Modelo.FK_PRODUCTO_GRUPO_VS_PRODUCTO" FromRole="PRODUCTO" ToRole="PRODUCTO_VS_GRUPO_PRODUCTO" />
           <NavigationProperty Name="PRODUCTO_PRECIO" Relationship="Decisiones_Inteligentes_Modelo.FK_PRODUCTO_PRECIO_VS_PRODUCTO" FromRole="PRODUCTO" ToRole="PRODUCTO_PRECIO" />
-          <NavigationProperty Name="PRODUCTO_TALLA" Relationship="Decisiones_Inteligentes_Modelo.FK_PRODUCTO_TALLA_VS_PRODUCTO" FromRole="PRODUCTO" ToRole="PRODUCTO_TALLA" />
           <NavigationProperty Name="TIPO_PRODUCTO" Relationship="Decisiones_Inteligentes_Modelo.FK_PRODUCTO_VS_TIPO_PRODUCTO" FromRole="PRODUCTO" ToRole="TIPO_PRODUCTO" />
           <Property Name="NUMERO_PRENDAS" Type="Int32" />
+          <Property Name="ESTA_HABILITADO" Type="Boolean" />
+          <Property Name="USUARIO_ID" Type="Int32" />
+          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_VS_PRODUCTO" FromRole="PRODUCTO" ToRole="DETALLE_ORDEN_TRABAJO" />
         </EntityType>
         <EntityType Name="PRODUCTO_PRECIO">
           <Key>
@@ -5337,17 +5271,6 @@
           <Property Name="PRODUCTO_TALLA_ID" Type="Int32" />
           <NavigationProperty Name="PRODUCTO" Relationship="Decisiones_Inteligentes_Modelo.FK_PRODUCTO_PRECIO_VS_PRODUCTO" FromRole="PRODUCTO_PRECIO" ToRole="PRODUCTO" />
           <NavigationProperty Name="DETALLE_VENTA_COMISION_INDUSTRIALES" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_VENTA_COMISION_INDUSTRIALES_VS_PRODUCTO_PRECIO" FromRole="PRODUCTO_PRECIO" ToRole="DETALLE_VENTA_COMISION_INDUSTRIALES" />
-          <NavigationProperty Name="PRODUCTO_TALLA" Relationship="Decisiones_Inteligentes_Modelo.FK_PRODUCTO_PRECIO_VS_PRODUCTO_TALLA" FromRole="PRODUCTO_PRECIO" ToRole="PRODUCTO_TALLA" />
-        </EntityType>
-        <EntityType Name="PRODUCTO_TALLA">
-          <Key>
-            <PropertyRef Name="PRODUCTO_TALLA_ID" />
-          </Key>
-          <Property Name="PRODUCTO_TALLA_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PRODUCTO_ID" Type="Int32" />
-          <Property Name="DESCRIPCION" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="PRODUCTO" Relationship="Decisiones_Inteligentes_Modelo.FK_PRODUCTO_TALLA_VS_PRODUCTO" FromRole="PRODUCTO_TALLA" ToRole="PRODUCTO" />
-          <NavigationProperty Name="PRODUCTO_PRECIO" Relationship="Decisiones_Inteligentes_Modelo.FK_PRODUCTO_PRECIO_VS_PRODUCTO_TALLA" FromRole="PRODUCTO_TALLA" ToRole="PRODUCTO_PRECIO" />
         </EntityType>
         <EntityType Name="PRODUCTO_VS_GRUPO_PRODUCTO">
           <Key>
@@ -5539,40 +5462,8 @@
           <Property Name="FECHA_APROBACION" Type="DateTime" Precision="3" />
           <Property Name="VALOR_FRANQUICIA_APROBACION" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="VALOR_MATRIZ_APROBACION" Type="Decimal" Precision="18" Scale="2" />
-          <NavigationProperty Name="ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_APROBACION_DESCUENTO_VS_ORDEN_TRABAJO" FromRole="APROBACION_DESCUENTO" ToRole="ORDEN_TRABAJO" />
           <NavigationProperty Name="ORDEN_TRABAJO_DESCUENTO" Relationship="Decisiones_Inteligentes_Modelo.FK_APROBACION_DESCUENTO_VS_ORDEN_TRABAJO_DESCUENTO" FromRole="APROBACION_DESCUENTO" ToRole="ORDEN_TRABAJO_DESCUENTO" />
-        </EntityType>
-        <EntityType Name="DETALLE_ORDEN_TRABAJO">
-          <Key>
-            <PropertyRef Name="DETALLE_ORDEN_TRABAJO_ID" />
-          </Key>
-          <Property Name="DETALLE_ORDEN_TRABAJO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ORDEN_TRABAJO_ID" Type="Int64" />
-          <Property Name="PRODUCTO_ID" Type="Int32" />
-          <Property Name="CANTIDAD" Type="Decimal" Precision="8" Scale="2" />
-          <Property Name="VALOR_UNITARIO" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="PORCENTAJE_IMPUESTO" Type="Decimal" Precision="8" Scale="4" />
-          <Property Name="VALOR_TOTAL" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="OBSERVACION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="PRODUCTO_TALLA_ID" Type="Int32" />
-          <Property Name="PORCENTAJE_IMPUESTO_SUCURSAL_ID" Type="Int32" />
-          <Property Name="SUAVIZANTE" Type="Boolean" />
-          <Property Name="DESENGRASANTE" Type="Boolean" />
-          <Property Name="FIJADOR_COLOR" Type="Boolean" />
-          <Property Name="VALOR_TOTAL_UNITARIO" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="VALOR_DESCUENTO" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="PROMOCION_APLICADA" Type="Int32" />
-          <Property Name="VALOR_EXTRA" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="APLICO_VALOR_EXTRA" Type="Boolean" />
-          <Property Name="VALOR_COMISION_INDUSTRIALES" Type="Decimal" Precision="18" Scale="4" />
-          <NavigationProperty Name="PRODUCTO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_VS_PRODUCTO" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="PRODUCTO" />
-          <NavigationProperty Name="ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="ORDEN_TRABAJO" />
-          <NavigationProperty Name="DETALLE_PRENDA_ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_PRENDA_VS_DETALLE_ORDEN_TRABAJO" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="DETALLE_PRENDA_ORDEN_TRABAJO" />
-          <NavigationProperty Name="ORDEN_TRABAJO_COMISION" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_COMISION_VS_DOT" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="ORDEN_TRABAJO_COMISION" />
-          <Property Name="VALOR_IMPUESTO" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="OBJETO_OLVIDADO" Type="Boolean" />
-          <Property Name="SOLO_PLANCHADO" Type="Boolean" />
-          <Property Name="PORCENTAJE_ADICIONAL" Type="Boolean" />
+          <NavigationProperty Name="ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_APROBACION_DESCUENTO_VS_ORDEN_TRABAJO" FromRole="APROBACION_DESCUENTO" ToRole="ORDEN_TRABAJO" />
         </EntityType>
         <EntityType Name="DETALLE_ORDEN_TRABAJO_OBSERVACION">
           <Key>
@@ -5599,11 +5490,11 @@
           <Property Name="TRATAMIENTO_ESPECIAL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="COLOR" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_PRENDA_VS_COLOR" FromRole="DETALLE_PRENDA_ORDEN_TRABAJO" ToRole="COLOR" />
           <NavigationProperty Name="MARCA" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_PRENDA_VS_MARCA" FromRole="DETALLE_PRENDA_ORDEN_TRABAJO" ToRole="MARCA" />
-          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_PRENDA_VS_DETALLE_ORDEN_TRABAJO" FromRole="DETALLE_PRENDA_ORDEN_TRABAJO" ToRole="DETALLE_ORDEN_TRABAJO" />
           <NavigationProperty Name="DETALLE_ORDEN_TRABAJO_OBSERVACION" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_OBSERVACION_VS_DPOT" FromRole="DETALLE_PRENDA_ORDEN_TRABAJO" ToRole="DETALLE_ORDEN_TRABAJO_OBSERVACION" />
           <NavigationProperty Name="DETALLE_TRABAJO_FOTOGRAFIA" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_TRABAJO_FOTOGRAFIA_VS_DPOT" FromRole="DETALLE_PRENDA_ORDEN_TRABAJO" ToRole="DETALLE_TRABAJO_FOTOGRAFIA" />
           <NavigationProperty Name="HISTORIAL_RECLAMO_REPROCESO_PRENDA" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIA_RECLAMO_VS_DETALLE_PRENDA_ORDEN_TRABAJO" FromRole="DETALLE_PRENDA_ORDEN_TRABAJO" ToRole="HISTORIAL_RECLAMO_REPROCESO_PRENDA" />
           <NavigationProperty Name="HISTORIAL_REPROCESO" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_REPROCESO_VS_DETALLE_PODT" FromRole="DETALLE_PRENDA_ORDEN_TRABAJO" ToRole="HISTORIAL_REPROCESO" />
+          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_PRENDA_VS_DETALLE_ORDEN_TRABAJO" FromRole="DETALLE_PRENDA_ORDEN_TRABAJO" ToRole="DETALLE_ORDEN_TRABAJO" />
         </EntityType>
         <EntityType Name="DETALLE_TRABAJO_FOTOGRAFIA">
           <Key>
@@ -5667,53 +5558,6 @@
           <Property Name="NUMERO_ORDEN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="NUMERO" Type="Int32" />
           <NavigationProperty Name="TIPO_LAVADO" Relationship="Decisiones_Inteligentes_Modelo.FK_NUMERACION_ORDEN_VS_TIPO_LAVADO" FromRole="NUMERACION_ORDEN" ToRole="TIPO_LAVADO" />
-        </EntityType>
-        <EntityType Name="ORDEN_TRABAJO">
-          <Key>
-            <PropertyRef Name="ORDEN_TRABAJO_ID" />
-          </Key>
-          <Property Name="ORDEN_TRABAJO_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CLIENTE_ID" Type="Int32" />
-          <Property Name="TIPO_LAVADO_ID" Type="Int32" />
-          <Property Name="PUNTO_VENTA_ID" Type="Int32" />
-          <Property Name="FECHA_INGRESO" Type="DateTime" Precision="3" />
-          <Property Name="FECHA_ENTREGA" Type="DateTime" Precision="3" />
-          <Property Name="USUARIO_ID" Type="Int32" />
-          <Property Name="NRO_IMPRESION" Type="Int32" />
-          <Property Name="SUCURSAL_ID" Type="Int32" />
-          <Property Name="ESTADO_PAGO_ID" Type="Int32" />
-          <Property Name="NUMERO_ORDEN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="ENVIO_MATRIZ" Type="Boolean" />
-          <Property Name="SE_ENVIO" Type="Boolean" />
-          <Property Name="NUMERO_ORDEN_MANUAL" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="ENTREGA_URGENCIA_ID" Type="Int32" />
-          <NavigationProperty Name="CLIENTE" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_CLIENTE" FromRole="ORDEN_TRABAJO" ToRole="CLIENTE" />
-          <NavigationProperty Name="HISTORIAL_PROCESO" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_PROCESO_VS_ORDEN_TRABAJO" FromRole="ORDEN_TRABAJO" ToRole="HISTORIAL_PROCESO" />
-          <NavigationProperty Name="ENTREGA_URGENCIA" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_ENTREGA_URGENCIA" FromRole="ORDEN_TRABAJO" ToRole="ENTREGA_URGENCIA" />
-          <NavigationProperty Name="ESTADO_PAGO" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_ESTADO_PAGO" FromRole="ORDEN_TRABAJO" ToRole="ESTADO_PAGO" />
-          <NavigationProperty Name="TIPO_LAVADO" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_TIPO_LAVADO" FromRole="ORDEN_TRABAJO" ToRole="TIPO_LAVADO" />
-          <NavigationProperty Name="APROBACION_DESCUENTO" Relationship="Decisiones_Inteligentes_Modelo.FK_APROBACION_DESCUENTO_VS_ORDEN_TRABAJO" FromRole="ORDEN_TRABAJO" ToRole="APROBACION_DESCUENTO" />
-          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO" FromRole="ORDEN_TRABAJO" ToRole="DETALLE_ORDEN_TRABAJO" />
-          <NavigationProperty Name="HISTORIAL_REGLA" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIA_REGLA_VS_ORDEN_TRABAJO" FromRole="ORDEN_TRABAJO" ToRole="HISTORIAL_REGLA" />
-          <NavigationProperty Name="ORDEN_TRABAJO_DESCUENTO" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_DESCUENTO_VS_ORDEN_TRABAJO" FromRole="ORDEN_TRABAJO" ToRole="ORDEN_TRABAJO_DESCUENTO" />
-          <Property Name="ES_TEMPORAL" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="ORDEN_TRABAJO_COMISION">
-          <Key>
-            <PropertyRef Name="ORDEN_TRABAJO_COMISION_ID" />
-          </Key>
-          <Property Name="ORDEN_TRABAJO_COMISION_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VENTA_COMISION_ID" Type="Int32" />
-          <Property Name="FECHA_GENERACION_COMISION" Type="DateTime" Precision="3" />
-          <Property Name="USUARIO_ID" Type="Int32" />
-          <Property Name="VALOR" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="DETALLE_ORDEN_TRABAJO_ID" Type="Int32" />
-          <Property Name="VALOR_INDUSTRIALES" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="DETALLE_VENTA_COMISION_INDUSTRIALES_ID" Type="Int32" />
-          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_COMISION_VS_DOT" FromRole="ORDEN_TRABAJO_COMISION" ToRole="DETALLE_ORDEN_TRABAJO" />
-          <NavigationProperty Name="DETALLE_VENTA_COMISION_INDUSTRIALES" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_DETALLE_VENTA_COMISION_INDUSTRIALES" FromRole="ORDEN_TRABAJO_COMISION" ToRole="DETALLE_VENTA_COMISION_INDUSTRIALES" />
-          <NavigationProperty Name="VENTA_COMISION" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_VENTA_COMISION" FromRole="ORDEN_TRABAJO_COMISION" ToRole="VENTA_COMISION" />
-          <Property Name="VALOR_QUIMICA" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="ORDEN_TRABAJO_DESCUENTO">
           <Key>
@@ -5798,18 +5642,6 @@
             </Principal>
             <Dependent Role="HISTORIAL_CUENTA_POR_COBRAR">
               <PropertyRef Name="CUENTA_POR_COBRAR_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_HISTORIAL_CUENTA_POR_PAGAR_VS_CUENTA_POR_PAGAR">
-          <End Type="Decisiones_Inteligentes_Modelo.CUENTA_POR_PAGAR" Role="CUENTA_POR_PAGAR" Multiplicity="0..1" />
-          <End Type="Decisiones_Inteligentes_Modelo.HISTORIAL_CUENTA_POR_PAGAR" Role="HISTORIAL_CUENTA_POR_PAGAR" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CUENTA_POR_PAGAR">
-              <PropertyRef Name="CUENTA_POR_PAGAR_ID" />
-            </Principal>
-            <Dependent Role="HISTORIAL_CUENTA_POR_PAGAR">
-              <PropertyRef Name="CUENTA_POR_PAGAR_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6122,18 +5954,6 @@
             </Principal>
             <Dependent Role="CLIENTE">
               <PropertyRef Name="TIPO_GENERO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ORDEN_TRABAJO_VS_CLIENTE">
-          <End Type="Decisiones_Inteligentes_Modelo.CLIENTE" Role="CLIENTE" Multiplicity="0..1" />
-          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO" Role="ORDEN_TRABAJO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CLIENTE">
-              <PropertyRef Name="CLIENTE_ID" />
-            </Principal>
-            <Dependent Role="ORDEN_TRABAJO">
-              <PropertyRef Name="CLIENTE_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6569,18 +6389,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_HISTORIAL_PROCESO_VS_ORDEN_TRABAJO">
-          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO" Role="ORDEN_TRABAJO" Multiplicity="0..1" />
-          <End Type="Decisiones_Inteligentes_Modelo.HISTORIAL_PROCESO" Role="HISTORIAL_PROCESO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ORDEN_TRABAJO">
-              <PropertyRef Name="ORDEN_TRABAJO_ID" />
-            </Principal>
-            <Dependent Role="HISTORIAL_PROCESO">
-              <PropertyRef Name="ORDEN_TRABAJO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PROCESO_VS_ETAPA_PROCESO">
           <End Type="Decisiones_Inteligentes_Modelo.ETAPA_PROCESO" Role="ETAPA_PROCESO" Multiplicity="0..1" />
           <End Type="Decisiones_Inteligentes_Modelo.PROCESO" Role="PROCESO" Multiplicity="*" />
@@ -6650,30 +6458,6 @@
             </Principal>
             <Dependent Role="PORCENTAJE_IMPUESTO">
               <PropertyRef Name="CONDICION_IMPUESTO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ORDEN_TRABAJO_VS_ENTREGA_URGENCIA">
-          <End Type="Decisiones_Inteligentes_Modelo.ENTREGA_URGENCIA" Role="ENTREGA_URGENCIA" Multiplicity="0..1" />
-          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO" Role="ORDEN_TRABAJO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ENTREGA_URGENCIA">
-              <PropertyRef Name="ENTREGA_URGENCIA_ID" />
-            </Principal>
-            <Dependent Role="ORDEN_TRABAJO">
-              <PropertyRef Name="ENTREGA_URGENCIA_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ORDEN_TRABAJO_VS_ESTADO_PAGO">
-          <End Type="Decisiones_Inteligentes_Modelo.ESTADO_PAGO" Role="ESTADO_PAGO" Multiplicity="0..1" />
-          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO" Role="ORDEN_TRABAJO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ESTADO_PAGO">
-              <PropertyRef Name="ESTADO_PAGO_ID" />
-            </Principal>
-            <Dependent Role="ORDEN_TRABAJO">
-              <PropertyRef Name="ESTADO_PAGO_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6893,18 +6677,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ORDEN_TRABAJO_VS_TIPO_LAVADO">
-          <End Type="Decisiones_Inteligentes_Modelo.TIPO_LAVADO" Role="TIPO_LAVADO" Multiplicity="0..1" />
-          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO" Role="ORDEN_TRABAJO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TIPO_LAVADO">
-              <PropertyRef Name="TIPO_LAVADO_ID" />
-            </Principal>
-            <Dependent Role="ORDEN_TRABAJO">
-              <PropertyRef Name="TIPO_LAVADO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_VENTA_COMISION_VS_TIPO_LAVADO">
           <End Type="Decisiones_Inteligentes_Modelo.TIPO_LAVADO" Role="TIPO_LAVADO" Multiplicity="0..1" />
           <End Type="Decisiones_Inteligentes_Modelo.VENTA_COMISION" Role="VENTA_COMISION" Multiplicity="*" />
@@ -6965,18 +6737,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DETALLE_ORDEN_TRABAJO_VS_PRODUCTO">
-          <End Type="Decisiones_Inteligentes_Modelo.PRODUCTO" Role="PRODUCTO" Multiplicity="0..1" />
-          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO" Role="DETALLE_ORDEN_TRABAJO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PRODUCTO">
-              <PropertyRef Name="PRODUCTO_ID" />
-            </Principal>
-            <Dependent Role="DETALLE_ORDEN_TRABAJO">
-              <PropertyRef Name="PRODUCTO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PRODUCTO_GRUPO_VS_PRODUCTO">
           <End Type="Decisiones_Inteligentes_Modelo.PRODUCTO" Role="PRODUCTO" Multiplicity="0..1" />
           <End Type="Decisiones_Inteligentes_Modelo.PRODUCTO_VS_GRUPO_PRODUCTO" Role="PRODUCTO_VS_GRUPO_PRODUCTO" Multiplicity="*" />
@@ -6997,18 +6757,6 @@
               <PropertyRef Name="PRODUCTO_ID" />
             </Principal>
             <Dependent Role="PRODUCTO_PRECIO">
-              <PropertyRef Name="PRODUCTO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PRODUCTO_TALLA_VS_PRODUCTO">
-          <End Type="Decisiones_Inteligentes_Modelo.PRODUCTO" Role="PRODUCTO" Multiplicity="0..1" />
-          <End Type="Decisiones_Inteligentes_Modelo.PRODUCTO_TALLA" Role="PRODUCTO_TALLA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PRODUCTO">
-              <PropertyRef Name="PRODUCTO_ID" />
-            </Principal>
-            <Dependent Role="PRODUCTO_TALLA">
               <PropertyRef Name="PRODUCTO_ID" />
             </Dependent>
           </ReferentialConstraint>
@@ -7034,18 +6782,6 @@
             </Principal>
             <Dependent Role="DETALLE_VENTA_COMISION_INDUSTRIALES">
               <PropertyRef Name="PRODUCTO_PRECIO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PRODUCTO_PRECIO_VS_PRODUCTO_TALLA">
-          <End Type="Decisiones_Inteligentes_Modelo.PRODUCTO_TALLA" Role="PRODUCTO_TALLA" Multiplicity="0..1" />
-          <End Type="Decisiones_Inteligentes_Modelo.PRODUCTO_PRECIO" Role="PRODUCTO_PRECIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PRODUCTO_TALLA">
-              <PropertyRef Name="PRODUCTO_TALLA_ID" />
-            </Principal>
-            <Dependent Role="PRODUCTO_PRECIO">
-              <PropertyRef Name="PRODUCTO_TALLA_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7217,18 +6953,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_APROBACION_DESCUENTO_VS_ORDEN_TRABAJO">
-          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO" Role="ORDEN_TRABAJO" Multiplicity="0..1" />
-          <End Type="Decisiones_Inteligentes_Modelo.APROBACION_DESCUENTO" Role="APROBACION_DESCUENTO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ORDEN_TRABAJO">
-              <PropertyRef Name="ORDEN_TRABAJO_ID" />
-            </Principal>
-            <Dependent Role="APROBACION_DESCUENTO">
-              <PropertyRef Name="ORDEN_TRABAJO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_APROBACION_DESCUENTO_VS_ORDEN_TRABAJO_DESCUENTO">
           <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO_DESCUENTO" Role="ORDEN_TRABAJO_DESCUENTO" Multiplicity="0..1" />
           <End Type="Decisiones_Inteligentes_Modelo.APROBACION_DESCUENTO" Role="APROBACION_DESCUENTO" Multiplicity="*" />
@@ -7238,42 +6962,6 @@
             </Principal>
             <Dependent Role="APROBACION_DESCUENTO">
               <PropertyRef Name="ORDEN_TRABAJO_DESCUENTO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO">
-          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO" Role="ORDEN_TRABAJO" Multiplicity="0..1" />
-          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO" Role="DETALLE_ORDEN_TRABAJO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ORDEN_TRABAJO">
-              <PropertyRef Name="ORDEN_TRABAJO_ID" />
-            </Principal>
-            <Dependent Role="DETALLE_ORDEN_TRABAJO">
-              <PropertyRef Name="ORDEN_TRABAJO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DETALLE_PRENDA_VS_DETALLE_ORDEN_TRABAJO">
-          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO" Role="DETALLE_ORDEN_TRABAJO" Multiplicity="0..1" />
-          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_PRENDA_ORDEN_TRABAJO" Role="DETALLE_PRENDA_ORDEN_TRABAJO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DETALLE_ORDEN_TRABAJO">
-              <PropertyRef Name="DETALLE_ORDEN_TRABAJO_ID" />
-            </Principal>
-            <Dependent Role="DETALLE_PRENDA_ORDEN_TRABAJO">
-              <PropertyRef Name="DETALLE_ORDEN_TRABAJO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ORDEN_TRABAJO_COMISION_VS_DOT">
-          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO" Role="DETALLE_ORDEN_TRABAJO" Multiplicity="0..1" />
-          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO_COMISION" Role="ORDEN_TRABAJO_COMISION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DETALLE_ORDEN_TRABAJO">
-              <PropertyRef Name="DETALLE_ORDEN_TRABAJO_ID" />
-            </Principal>
-            <Dependent Role="ORDEN_TRABAJO_COMISION">
-              <PropertyRef Name="DETALLE_ORDEN_TRABAJO_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7322,54 +7010,6 @@
             </Principal>
             <Dependent Role="DETALLE_VENTA_COMISION_INDUSTRIALES">
               <PropertyRef Name="VENTA_COMISION_INDUSTRIALES_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ORDEN_TRABAJO_VS_DETALLE_VENTA_COMISION_INDUSTRIALES">
-          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_VENTA_COMISION_INDUSTRIALES" Role="DETALLE_VENTA_COMISION_INDUSTRIALES" Multiplicity="0..1" />
-          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO_COMISION" Role="ORDEN_TRABAJO_COMISION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DETALLE_VENTA_COMISION_INDUSTRIALES">
-              <PropertyRef Name="DETALLE_VENTA_COMISION_INDUSTRIALES_ID" />
-            </Principal>
-            <Dependent Role="ORDEN_TRABAJO_COMISION">
-              <PropertyRef Name="DETALLE_VENTA_COMISION_INDUSTRIALES_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_HISTORIA_REGLA_VS_ORDEN_TRABAJO">
-          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO" Role="ORDEN_TRABAJO" Multiplicity="0..1" />
-          <End Type="Decisiones_Inteligentes_Modelo.HISTORIAL_REGLA" Role="HISTORIAL_REGLA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ORDEN_TRABAJO">
-              <PropertyRef Name="ORDEN_TRABAJO_ID" />
-            </Principal>
-            <Dependent Role="HISTORIAL_REGLA">
-              <PropertyRef Name="ORDEN_TRABAJO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ORDEN_TRABAJO_DESCUENTO_VS_ORDEN_TRABAJO">
-          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO" Role="ORDEN_TRABAJO" Multiplicity="0..1" />
-          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO_DESCUENTO" Role="ORDEN_TRABAJO_DESCUENTO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ORDEN_TRABAJO">
-              <PropertyRef Name="ORDEN_TRABAJO_ID" />
-            </Principal>
-            <Dependent Role="ORDEN_TRABAJO_DESCUENTO">
-              <PropertyRef Name="ORDEN_TRABAJO_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ORDEN_TRABAJO_VS_VENTA_COMISION">
-          <End Type="Decisiones_Inteligentes_Modelo.VENTA_COMISION" Role="VENTA_COMISION" Multiplicity="0..1" />
-          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO_COMISION" Role="ORDEN_TRABAJO_COMISION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VENTA_COMISION">
-              <PropertyRef Name="VENTA_COMISION_ID" />
-            </Principal>
-            <Dependent Role="ORDEN_TRABAJO_COMISION">
-              <PropertyRef Name="VENTA_COMISION_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7476,28 +7116,9 @@
           <Property Name="FECHA_DEPOSITO" Type="DateTime" Precision="3" />
           <Property Name="FECHA_VALIDACION" Type="DateTime" Precision="3" />
           <Property Name="DOCUMENTO" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="CIERRE_MES" Relationship="Decisiones_Inteligentes_Modelo.FK_APLICACION_PAGO_VS_CIERRE_MES" FromRole="APLICACION_PAGO" ToRole="CIERRE_MES" />
           <Property Name="USUARIO_APLICA_ID" Type="Int32" />
           <Property Name="USUARIO_VALIDA_ID" Type="Int32" />
-        </EntityType>
-        <EntityType Name="CIERRE_MES">
-          <Key>
-            <PropertyRef Name="CIERRE_MES_ID" />
-          </Key>
-          <Property Name="CIERRE_MES_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SUCURSAL_ID" Type="Int32" />
-          <Property Name="PUNTO_VENTA_ID" Type="Int32" />
-          <Property Name="USUARIO_ID" Type="Int32" />
-          <Property Name="CUENTA_POR_PAGAR_ID" Type="Int64" />
-          <Property Name="MES_ID" Type="Int32" />
-          <Property Name="FECHA_CREACION" Type="DateTime" Precision="3" />
-          <Property Name="VALOR" Type="Decimal" Precision="18" Scale="6" />
-          <NavigationProperty Name="APLICACION_PAGO" Relationship="Decisiones_Inteligentes_Modelo.FK_APLICACION_PAGO_VS_CIERRE_MES" FromRole="CIERRE_MES" ToRole="APLICACION_PAGO" />
-          <NavigationProperty Name="CUENTA_POR_PAGAR" Relationship="Decisiones_Inteligentes_Modelo.FK_CIERRE_MES_VS_CUENTA_POR_PAGAR" FromRole="CIERRE_MES" ToRole="CUENTA_POR_PAGAR" />
-          <NavigationProperty Name="MES" Relationship="Decisiones_Inteligentes_Modelo.FK_CIERRE_MES_VS_MES" FromRole="CIERRE_MES" ToRole="MES" />
-          <NavigationProperty Name="PUNTO_VENTA" Relationship="Decisiones_Inteligentes_Modelo.FK_CIERRE_MES_VS_PUNTO_VENTA" FromRole="CIERRE_MES" ToRole="PUNTO_VENTA" />
-          <NavigationProperty Name="SUCURSAL" Relationship="Decisiones_Inteligentes_Modelo.FK_CIERRE_MES_VS_SUCURSAL" FromRole="CIERRE_MES" ToRole="SUCURSAL" />
-          <NavigationProperty Name="USUARIO" Relationship="Decisiones_Inteligentes_Modelo.FK_CIERRE_MES_VS_USUARIO" FromRole="CIERRE_MES" ToRole="USUARIO" />
+          <NavigationProperty Name="CIERRE_MES" Relationship="Decisiones_Inteligentes_Modelo.FK_APLICACION_PAGO_VS_CIERRE_MES" FromRole="APLICACION_PAGO" ToRole="CIERRE_MES" />
         </EntityType>
         <EntityType Name="MES">
           <Key>
@@ -7510,6 +7131,46 @@
           <Property Name="FECHA_HASTA" Type="DateTime" Precision="3" />
           <NavigationProperty Name="CIERRE_MES" Relationship="Decisiones_Inteligentes_Modelo.FK_CIERRE_MES_VS_MES" FromRole="MES" ToRole="CIERRE_MES" />
         </EntityType>
+        <EntityType Name="CIERRE_MES">
+          <Key>
+            <PropertyRef Name="CIERRE_MES_ID" />
+          </Key>
+          <Property Name="CIERRE_MES_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SUCURSAL_ID" Type="Int32" />
+          <Property Name="PUNTO_VENTA_ID" Type="Int32" />
+          <Property Name="USUARIO_ID" Type="Int32" />
+          <Property Name="MES_ID" Type="Int32" />
+          <Property Name="FECHA_CREACION" Type="DateTime" Precision="3" />
+          <Property Name="VALOR" Type="Decimal" Precision="18" Scale="6" />
+          <NavigationProperty Name="APLICACION_PAGO" Relationship="Decisiones_Inteligentes_Modelo.FK_APLICACION_PAGO_VS_CIERRE_MES" FromRole="CIERRE_MES" ToRole="APLICACION_PAGO" />
+          <NavigationProperty Name="MES" Relationship="Decisiones_Inteligentes_Modelo.FK_CIERRE_MES_VS_MES" FromRole="CIERRE_MES" ToRole="MES" />
+          <NavigationProperty Name="PUNTO_VENTA" Relationship="Decisiones_Inteligentes_Modelo.FK_CIERRE_MES_VS_PUNTO_VENTA" FromRole="CIERRE_MES" ToRole="PUNTO_VENTA" />
+          <NavigationProperty Name="SUCURSAL" Relationship="Decisiones_Inteligentes_Modelo.FK_CIERRE_MES_VS_SUCURSAL" FromRole="CIERRE_MES" ToRole="SUCURSAL" />
+          <NavigationProperty Name="USUARIO" Relationship="Decisiones_Inteligentes_Modelo.FK_CIERRE_MES_VS_USUARIO" FromRole="CIERRE_MES" ToRole="USUARIO" />
+          <NavigationProperty Name="CUENTA_POR_PAGAR" Relationship="Decisiones_Inteligentes_Modelo.FK_CUENTA_POR_PAGAR_VS_CIERRE_MES" FromRole="CIERRE_MES" ToRole="CUENTA_POR_PAGAR" />
+          <Property Name="APLICACION_PENDIENTE" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="CUENTA_POR_PAGAR">
+          <Key>
+            <PropertyRef Name="CUENTA_POR_PAGAR_ID" />
+          </Key>
+          <Property Name="CUENTA_POR_PAGAR_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PROVEDOR_ID" Type="Int64" />
+          <Property Name="FECHA_CREACION" Type="DateTime" Precision="3" />
+          <Property Name="FECHA_MODIFICACION" Type="DateTime" Precision="3" />
+          <Property Name="USUARIO_CREACION_ID" Type="Int32" />
+          <Property Name="USUARIO_MODIFICACION_ID" Type="Int32" />
+          <Property Name="FECHA_VENCIMIENTO" Type="DateTime" Precision="3" />
+          <Property Name="SUCURSAL_ID" Type="Int32" />
+          <Property Name="PUNTO_VENTA_ID" Type="Int32" />
+          <Property Name="SALDO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="VALOR" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NUMERO_FACTURA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NUMERO_ORDEN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CIERRE_MES_ID" Type="Int32" />
+          <NavigationProperty Name="CIERRE_MES" Relationship="Decisiones_Inteligentes_Modelo.FK_CUENTA_POR_PAGAR_VS_CIERRE_MES" FromRole="CUENTA_POR_PAGAR" ToRole="CIERRE_MES" />
+          <NavigationProperty Name="HISTORIAL_CUENTA_POR_PAGAR" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_CUENTA_POR_PAGAR_VS_CUENTA_POR_PAGAR" FromRole="CUENTA_POR_PAGAR" ToRole="HISTORIAL_CUENTA_POR_PAGAR" />
+        </EntityType>
         <Association Name="FK_APLICACION_PAGO_VS_CIERRE_MES">
           <End Type="Decisiones_Inteligentes_Modelo.CIERRE_MES" Role="CIERRE_MES" Multiplicity="0..1" />
           <End Type="Decisiones_Inteligentes_Modelo.APLICACION_PAGO" Role="APLICACION_PAGO" Multiplicity="*" />
@@ -7519,18 +7180,6 @@
             </Principal>
             <Dependent Role="APLICACION_PAGO">
               <PropertyRef Name="CIERRE_MES_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CIERRE_MES_VS_CUENTA_POR_PAGAR">
-          <End Type="Decisiones_Inteligentes_Modelo.CUENTA_POR_PAGAR" Role="CUENTA_POR_PAGAR" Multiplicity="0..1" />
-          <End Type="Decisiones_Inteligentes_Modelo.CIERRE_MES" Role="CIERRE_MES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CUENTA_POR_PAGAR">
-              <PropertyRef Name="CUENTA_POR_PAGAR_ID" />
-            </Principal>
-            <Dependent Role="CIERRE_MES">
-              <PropertyRef Name="CUENTA_POR_PAGAR_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7579,6 +7228,277 @@
             </Principal>
             <Dependent Role="CIERRE_MES">
               <PropertyRef Name="USUARIO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUENTA_POR_PAGAR_VS_CIERRE_MES">
+          <End Type="Decisiones_Inteligentes_Modelo.CIERRE_MES" Role="CIERRE_MES" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.CUENTA_POR_PAGAR" Role="CUENTA_POR_PAGAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CIERRE_MES">
+              <PropertyRef Name="CIERRE_MES_ID" />
+            </Principal>
+            <Dependent Role="CUENTA_POR_PAGAR">
+              <PropertyRef Name="CIERRE_MES_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HISTORIAL_CUENTA_POR_PAGAR_VS_CUENTA_POR_PAGAR">
+          <End Type="Decisiones_Inteligentes_Modelo.CUENTA_POR_PAGAR" Role="CUENTA_POR_PAGAR" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.HISTORIAL_CUENTA_POR_PAGAR" Role="HISTORIAL_CUENTA_POR_PAGAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUENTA_POR_PAGAR">
+              <PropertyRef Name="CUENTA_POR_PAGAR_ID" />
+            </Principal>
+            <Dependent Role="HISTORIAL_CUENTA_POR_PAGAR">
+              <PropertyRef Name="CUENTA_POR_PAGAR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ORDEN_TRABAJO_COMISION">
+          <Key>
+            <PropertyRef Name="ORDEN_TRABAJO_COMISION_ID" />
+          </Key>
+          <Property Name="ORDEN_TRABAJO_COMISION_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VENTA_COMISION_ID" Type="Int32" />
+          <Property Name="FECHA_GENERACION_COMISION" Type="DateTime" Precision="3" />
+          <Property Name="USUARIO_ID" Type="Int32" />
+          <Property Name="VALOR" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DETALLE_ORDEN_TRABAJO_ID" Type="Int32" />
+          <Property Name="VALOR_INDUSTRIALES" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DETALLE_VENTA_COMISION_INDUSTRIALES_ID" Type="Int32" />
+          <Property Name="VALOR_QUIMICA" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="DETALLE_VENTA_COMISION_INDUSTRIALES" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_DETALLE_VENTA_COMISION_INDUSTRIALES" FromRole="ORDEN_TRABAJO_COMISION" ToRole="DETALLE_VENTA_COMISION_INDUSTRIALES" />
+          <NavigationProperty Name="VENTA_COMISION" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_VENTA_COMISION" FromRole="ORDEN_TRABAJO_COMISION" ToRole="VENTA_COMISION" />
+          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_COMISION_VS_DOT" FromRole="ORDEN_TRABAJO_COMISION" ToRole="DETALLE_ORDEN_TRABAJO" />
+        </EntityType>
+        <Association Name="FK_ORDEN_TRABAJO_VS_DETALLE_VENTA_COMISION_INDUSTRIALES">
+          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_VENTA_COMISION_INDUSTRIALES" Role="DETALLE_VENTA_COMISION_INDUSTRIALES" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO_COMISION" Role="ORDEN_TRABAJO_COMISION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DETALLE_VENTA_COMISION_INDUSTRIALES">
+              <PropertyRef Name="DETALLE_VENTA_COMISION_INDUSTRIALES_ID" />
+            </Principal>
+            <Dependent Role="ORDEN_TRABAJO_COMISION">
+              <PropertyRef Name="DETALLE_VENTA_COMISION_INDUSTRIALES_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDEN_TRABAJO_VS_VENTA_COMISION">
+          <End Type="Decisiones_Inteligentes_Modelo.VENTA_COMISION" Role="VENTA_COMISION" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO_COMISION" Role="ORDEN_TRABAJO_COMISION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTA_COMISION">
+              <PropertyRef Name="VENTA_COMISION_ID" />
+            </Principal>
+            <Dependent Role="ORDEN_TRABAJO_COMISION">
+              <PropertyRef Name="VENTA_COMISION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DETALLE_ORDEN_TRABAJO">
+          <Key>
+            <PropertyRef Name="DETALLE_ORDEN_TRABAJO_ID" />
+          </Key>
+          <Property Name="DETALLE_ORDEN_TRABAJO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ORDEN_TRABAJO_ID" Type="Int64" />
+          <Property Name="PRODUCTO_ID" Type="Int32" />
+          <Property Name="CANTIDAD" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="VALOR_UNITARIO" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="PORCENTAJE_IMPUESTO" Type="Decimal" Precision="8" Scale="4" />
+          <Property Name="VALOR_TOTAL" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="PORCENTAJE_IMPUESTO_SUCURSAL_ID" Type="Int32" />
+          <Property Name="SUAVIZANTE" Type="Boolean" />
+          <Property Name="DESENGRASANTE" Type="Boolean" />
+          <Property Name="FIJADOR_COLOR" Type="Boolean" />
+          <Property Name="VALOR_TOTAL_UNITARIO" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="VALOR_DESCUENTO" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="PROMOCION_APLICADA" Type="Int32" />
+          <Property Name="VALOR_EXTRA" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="APLICO_VALOR_EXTRA" Type="Boolean" />
+          <Property Name="VALOR_COMISION_INDUSTRIALES" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="VALOR_IMPUESTO" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="SOLO_PLANCHADO" Type="Boolean" />
+          <Property Name="PORCENTAJE_ADICIONAL" Type="Boolean" />
+          <Property Name="DETALLE_ORDEN_ANULADA_TRABAJO_ID" Type="Int32" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_VS_PRODUCTO" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="PRODUCTO" />
+          <NavigationProperty Name="ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="ORDEN_TRABAJO" />
+          <NavigationProperty Name="DETALLE_PRENDA_ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_PRENDA_VS_DETALLE_ORDEN_TRABAJO" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="DETALLE_PRENDA_ORDEN_TRABAJO" />
+          <NavigationProperty Name="ORDEN_TRABAJO_COMISION" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_COMISION_VS_DOT" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="ORDEN_TRABAJO_COMISION" />
+        </EntityType>
+        <EntityType Name="ORDEN_TRABAJO">
+          <Key>
+            <PropertyRef Name="ORDEN_TRABAJO_ID" />
+          </Key>
+          <Property Name="ORDEN_TRABAJO_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CLIENTE_ID" Type="Int32" />
+          <Property Name="TIPO_LAVADO_ID" Type="Int32" />
+          <Property Name="PUNTO_VENTA_ID" Type="Int32" />
+          <Property Name="FECHA_INGRESO" Type="DateTime" Precision="3" />
+          <Property Name="FECHA_ENTREGA" Type="DateTime" Precision="3" />
+          <Property Name="USUARIO_ID" Type="Int32" />
+          <Property Name="NRO_IMPRESION" Type="Int32" />
+          <Property Name="SUCURSAL_ID" Type="Int32" />
+          <Property Name="ESTADO_PAGO_ID" Type="Int32" />
+          <Property Name="NUMERO_ORDEN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ENVIO_MATRIZ" Type="Boolean" />
+          <Property Name="SE_ENVIO" Type="Boolean" />
+          <Property Name="NUMERO_ORDEN_MANUAL" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ENTREGA_URGENCIA_ID" Type="Int32" />
+          <Property Name="ES_TEMPORAL" Type="Boolean" />
+          <Property Name="OBJETO_OLVIDADO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="REVISO_PRENDA_CLIENTE" Type="Boolean" />
+          <NavigationProperty Name="CLIENTE" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_CLIENTE" FromRole="ORDEN_TRABAJO" ToRole="CLIENTE" />
+          <NavigationProperty Name="HISTORIAL_PROCESO" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIAL_PROCESO_VS_ORDEN_TRABAJO" FromRole="ORDEN_TRABAJO" ToRole="HISTORIAL_PROCESO" />
+          <NavigationProperty Name="ENTREGA_URGENCIA" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_ENTREGA_URGENCIA" FromRole="ORDEN_TRABAJO" ToRole="ENTREGA_URGENCIA" />
+          <NavigationProperty Name="ESTADO_PAGO" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_ESTADO_PAGO" FromRole="ORDEN_TRABAJO" ToRole="ESTADO_PAGO" />
+          <NavigationProperty Name="TIPO_LAVADO" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_VS_TIPO_LAVADO" FromRole="ORDEN_TRABAJO" ToRole="TIPO_LAVADO" />
+          <NavigationProperty Name="APROBACION_DESCUENTO" Relationship="Decisiones_Inteligentes_Modelo.FK_APROBACION_DESCUENTO_VS_ORDEN_TRABAJO" FromRole="ORDEN_TRABAJO" ToRole="APROBACION_DESCUENTO" />
+          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO" FromRole="ORDEN_TRABAJO" ToRole="DETALLE_ORDEN_TRABAJO" />
+          <NavigationProperty Name="HISTORIAL_REGLA" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIA_REGLA_VS_ORDEN_TRABAJO" FromRole="ORDEN_TRABAJO" ToRole="HISTORIAL_REGLA" />
+          <NavigationProperty Name="ORDEN_TRABAJO_DESCUENTO" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_DESCUENTO_VS_ORDEN_TRABAJO" FromRole="ORDEN_TRABAJO" ToRole="ORDEN_TRABAJO_DESCUENTO" />
+        </EntityType>
+        <Association Name="FK_ORDEN_TRABAJO_VS_CLIENTE">
+          <End Type="Decisiones_Inteligentes_Modelo.CLIENTE" Role="CLIENTE" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO" Role="ORDEN_TRABAJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="CLIENTE_ID" />
+            </Principal>
+            <Dependent Role="ORDEN_TRABAJO">
+              <PropertyRef Name="CLIENTE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HISTORIAL_PROCESO_VS_ORDEN_TRABAJO">
+          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO" Role="ORDEN_TRABAJO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.HISTORIAL_PROCESO" Role="HISTORIAL_PROCESO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN_TRABAJO">
+              <PropertyRef Name="ORDEN_TRABAJO_ID" />
+            </Principal>
+            <Dependent Role="HISTORIAL_PROCESO">
+              <PropertyRef Name="ORDEN_TRABAJO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDEN_TRABAJO_VS_ENTREGA_URGENCIA">
+          <End Type="Decisiones_Inteligentes_Modelo.ENTREGA_URGENCIA" Role="ENTREGA_URGENCIA" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO" Role="ORDEN_TRABAJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ENTREGA_URGENCIA">
+              <PropertyRef Name="ENTREGA_URGENCIA_ID" />
+            </Principal>
+            <Dependent Role="ORDEN_TRABAJO">
+              <PropertyRef Name="ENTREGA_URGENCIA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDEN_TRABAJO_VS_ESTADO_PAGO">
+          <End Type="Decisiones_Inteligentes_Modelo.ESTADO_PAGO" Role="ESTADO_PAGO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO" Role="ORDEN_TRABAJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO_PAGO">
+              <PropertyRef Name="ESTADO_PAGO_ID" />
+            </Principal>
+            <Dependent Role="ORDEN_TRABAJO">
+              <PropertyRef Name="ESTADO_PAGO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDEN_TRABAJO_VS_TIPO_LAVADO">
+          <End Type="Decisiones_Inteligentes_Modelo.TIPO_LAVADO" Role="TIPO_LAVADO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO" Role="ORDEN_TRABAJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_LAVADO">
+              <PropertyRef Name="TIPO_LAVADO_ID" />
+            </Principal>
+            <Dependent Role="ORDEN_TRABAJO">
+              <PropertyRef Name="TIPO_LAVADO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE_ORDEN_TRABAJO_VS_PRODUCTO">
+          <End Type="Decisiones_Inteligentes_Modelo.PRODUCTO" Role="PRODUCTO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO" Role="DETALLE_ORDEN_TRABAJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="PRODUCTO_ID" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN_TRABAJO">
+              <PropertyRef Name="PRODUCTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APROBACION_DESCUENTO_VS_ORDEN_TRABAJO">
+          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO" Role="ORDEN_TRABAJO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.APROBACION_DESCUENTO" Role="APROBACION_DESCUENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN_TRABAJO">
+              <PropertyRef Name="ORDEN_TRABAJO_ID" />
+            </Principal>
+            <Dependent Role="APROBACION_DESCUENTO">
+              <PropertyRef Name="ORDEN_TRABAJO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO">
+          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO" Role="ORDEN_TRABAJO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO" Role="DETALLE_ORDEN_TRABAJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN_TRABAJO">
+              <PropertyRef Name="ORDEN_TRABAJO_ID" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN_TRABAJO">
+              <PropertyRef Name="ORDEN_TRABAJO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE_PRENDA_VS_DETALLE_ORDEN_TRABAJO">
+          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO" Role="DETALLE_ORDEN_TRABAJO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_PRENDA_ORDEN_TRABAJO" Role="DETALLE_PRENDA_ORDEN_TRABAJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DETALLE_ORDEN_TRABAJO">
+              <PropertyRef Name="DETALLE_ORDEN_TRABAJO_ID" />
+            </Principal>
+            <Dependent Role="DETALLE_PRENDA_ORDEN_TRABAJO">
+              <PropertyRef Name="DETALLE_ORDEN_TRABAJO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDEN_TRABAJO_COMISION_VS_DOT">
+          <End Type="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO" Role="DETALLE_ORDEN_TRABAJO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO_COMISION" Role="ORDEN_TRABAJO_COMISION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DETALLE_ORDEN_TRABAJO">
+              <PropertyRef Name="DETALLE_ORDEN_TRABAJO_ID" />
+            </Principal>
+            <Dependent Role="ORDEN_TRABAJO_COMISION">
+              <PropertyRef Name="DETALLE_ORDEN_TRABAJO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HISTORIA_REGLA_VS_ORDEN_TRABAJO">
+          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO" Role="ORDEN_TRABAJO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.HISTORIAL_REGLA" Role="HISTORIAL_REGLA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN_TRABAJO">
+              <PropertyRef Name="ORDEN_TRABAJO_ID" />
+            </Principal>
+            <Dependent Role="HISTORIAL_REGLA">
+              <PropertyRef Name="ORDEN_TRABAJO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDEN_TRABAJO_DESCUENTO_VS_ORDEN_TRABAJO">
+          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO" Role="ORDEN_TRABAJO" Multiplicity="0..1" />
+          <End Type="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO_DESCUENTO" Role="ORDEN_TRABAJO_DESCUENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN_TRABAJO">
+              <PropertyRef Name="ORDEN_TRABAJO_ID" />
+            </Principal>
+            <Dependent Role="ORDEN_TRABAJO_DESCUENTO">
+              <PropertyRef Name="ORDEN_TRABAJO_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7651,25 +7571,6 @@
                 <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
                 <ScalarProperty Name="CLIENTE_ID" ColumnName="CLIENTE_ID" />
                 <ScalarProperty Name="CUENTA_POR_COBRAR_ID" ColumnName="CUENTA_POR_COBRAR_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CUENTA_POR_PAGAR">
-            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.CUENTA_POR_PAGAR">
-              <MappingFragment StoreEntitySet="CUENTA_POR_PAGAR">
-                <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
-                <ScalarProperty Name="NUMERO_FACTURA" ColumnName="NUMERO_FACTURA" />
-                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
-                <ScalarProperty Name="SALDO" ColumnName="SALDO" />
-                <ScalarProperty Name="PUNTO_VENTA_ID" ColumnName="PUNTO_VENTA_ID" />
-                <ScalarProperty Name="SUCURSAL_ID" ColumnName="SUCURSAL_ID" />
-                <ScalarProperty Name="FECHA_VENCIMIENTO" ColumnName="FECHA_VENCIMIENTO" />
-                <ScalarProperty Name="USUARIO_MODIFICACION_ID" ColumnName="USUARIO_MODIFICACION_ID" />
-                <ScalarProperty Name="USUARIO_CREACION_ID" ColumnName="USUARIO_CREACION_ID" />
-                <ScalarProperty Name="FECHA_MODIFICACION" ColumnName="FECHA_MODIFICACION" />
-                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
-                <ScalarProperty Name="PROVEDOR_ID" ColumnName="PROVEDOR_ID" />
-                <ScalarProperty Name="CUENTA_POR_PAGAR_ID" ColumnName="CUENTA_POR_PAGAR_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -8445,6 +8346,8 @@
           <EntitySetMapping Name="PRODUCTO">
             <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.PRODUCTO">
               <MappingFragment StoreEntitySet="PRODUCTO">
+                <ScalarProperty Name="USUARIO_ID" ColumnName="USUARIO_ID" />
+                <ScalarProperty Name="ESTA_HABILITADO" ColumnName="ESTA_HABILITADO" />
                 <ScalarProperty Name="NUMERO_PRENDAS" ColumnName="NUMERO_PRENDAS" />
                 <ScalarProperty Name="PRENDA_ESPECIAL" ColumnName="PRENDA_ESPECIAL" />
                 <ScalarProperty Name="TIEMPO_ENTREGA" ColumnName="TIEMPO_ENTREGA" />
@@ -8471,15 +8374,6 @@
                 <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
                 <ScalarProperty Name="PRODUCTO_ID" ColumnName="PRODUCTO_ID" />
                 <ScalarProperty Name="PRODUCTO_PRECIO_ID" ColumnName="PRODUCTO_PRECIO_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PRODUCTO_TALLA">
-            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.PRODUCTO_TALLA">
-              <MappingFragment StoreEntitySet="PRODUCTO_TALLA">
-                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
-                <ScalarProperty Name="PRODUCTO_ID" ColumnName="PRODUCTO_ID" />
-                <ScalarProperty Name="PRODUCTO_TALLA_ID" ColumnName="PRODUCTO_TALLA_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -8651,35 +8545,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DETALLE_ORDEN_TRABAJO">
-            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO">
-              <MappingFragment StoreEntitySet="DETALLE_ORDEN_TRABAJO">
-                <ScalarProperty Name="PORCENTAJE_ADICIONAL" ColumnName="PORCENTAJE_ADICIONAL" />
-                <ScalarProperty Name="SOLO_PLANCHADO" ColumnName="SOLO_PLANCHADO" />
-                <ScalarProperty Name="OBJETO_OLVIDADO" ColumnName="OBJETO_OLVIDADO" />
-                <ScalarProperty Name="VALOR_IMPUESTO" ColumnName="VALOR_IMPUESTO" />
-                <ScalarProperty Name="VALOR_COMISION_INDUSTRIALES" ColumnName="VALOR_COMISION_INDUSTRIALES" />
-                <ScalarProperty Name="APLICO_VALOR_EXTRA" ColumnName="APLICO_VALOR_EXTRA" />
-                <ScalarProperty Name="VALOR_EXTRA" ColumnName="VALOR_EXTRA" />
-                <ScalarProperty Name="PROMOCION_APLICADA" ColumnName="PROMOCION_APLICADA" />
-                <ScalarProperty Name="VALOR_DESCUENTO" ColumnName="VALOR_DESCUENTO" />
-                <ScalarProperty Name="VALOR_TOTAL_UNITARIO" ColumnName="VALOR_TOTAL_UNITARIO" />
-                <ScalarProperty Name="FIJADOR_COLOR" ColumnName="FIJADOR_COLOR" />
-                <ScalarProperty Name="DESENGRASANTE" ColumnName="DESENGRASANTE" />
-                <ScalarProperty Name="SUAVIZANTE" ColumnName="SUAVIZANTE" />
-                <ScalarProperty Name="PORCENTAJE_IMPUESTO_SUCURSAL_ID" ColumnName="PORCENTAJE_IMPUESTO_SUCURSAL_ID" />
-                <ScalarProperty Name="PRODUCTO_TALLA_ID" ColumnName="PRODUCTO_TALLA_ID" />
-                <ScalarProperty Name="OBSERVACION" ColumnName="OBSERVACION" />
-                <ScalarProperty Name="VALOR_TOTAL" ColumnName="VALOR_TOTAL" />
-                <ScalarProperty Name="PORCENTAJE_IMPUESTO" ColumnName="PORCENTAJE_IMPUESTO" />
-                <ScalarProperty Name="VALOR_UNITARIO" ColumnName="VALOR_UNITARIO" />
-                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
-                <ScalarProperty Name="PRODUCTO_ID" ColumnName="PRODUCTO_ID" />
-                <ScalarProperty Name="ORDEN_TRABAJO_ID" ColumnName="ORDEN_TRABAJO_ID" />
-                <ScalarProperty Name="DETALLE_ORDEN_TRABAJO_ID" ColumnName="DETALLE_ORDEN_TRABAJO_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DETALLE_ORDEN_TRABAJO_OBSERVACION">
             <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO_OBSERVACION">
               <MappingFragment StoreEntitySet="DETALLE_ORDEN_TRABAJO_OBSERVACION">
@@ -8761,43 +8626,6 @@
                 <ScalarProperty Name="SUCURSAL_ID" ColumnName="SUCURSAL_ID" />
                 <ScalarProperty Name="TIPO_LAVADO_ID" ColumnName="TIPO_LAVADO_ID" />
                 <ScalarProperty Name="NUMERACION_ORDEN_ID" ColumnName="NUMERACION_ORDEN_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ORDEN_TRABAJO">
-            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO">
-              <MappingFragment StoreEntitySet="ORDEN_TRABAJO">
-                <ScalarProperty Name="ES_TEMPORAL" ColumnName="ES_TEMPORAL" />
-                <ScalarProperty Name="ENTREGA_URGENCIA_ID" ColumnName="ENTREGA_URGENCIA_ID" />
-                <ScalarProperty Name="NUMERO_ORDEN_MANUAL" ColumnName="NUMERO_ORDEN_MANUAL" />
-                <ScalarProperty Name="SE_ENVIO" ColumnName="SE_ENVIO" />
-                <ScalarProperty Name="ENVIO_MATRIZ" ColumnName="ENVIO_MATRIZ" />
-                <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
-                <ScalarProperty Name="ESTADO_PAGO_ID" ColumnName="ESTADO_PAGO_ID" />
-                <ScalarProperty Name="SUCURSAL_ID" ColumnName="SUCURSAL_ID" />
-                <ScalarProperty Name="NRO_IMPRESION" ColumnName="NRO_IMPRESION" />
-                <ScalarProperty Name="USUARIO_ID" ColumnName="USUARIO_ID" />
-                <ScalarProperty Name="FECHA_ENTREGA" ColumnName="FECHA_ENTREGA" />
-                <ScalarProperty Name="FECHA_INGRESO" ColumnName="FECHA_INGRESO" />
-                <ScalarProperty Name="PUNTO_VENTA_ID" ColumnName="PUNTO_VENTA_ID" />
-                <ScalarProperty Name="TIPO_LAVADO_ID" ColumnName="TIPO_LAVADO_ID" />
-                <ScalarProperty Name="CLIENTE_ID" ColumnName="CLIENTE_ID" />
-                <ScalarProperty Name="ORDEN_TRABAJO_ID" ColumnName="ORDEN_TRABAJO_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ORDEN_TRABAJO_COMISION">
-            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO_COMISION">
-              <MappingFragment StoreEntitySet="ORDEN_TRABAJO_COMISION">
-                <ScalarProperty Name="VALOR_QUIMICA" ColumnName="VALOR_QUIMICA" />
-                <ScalarProperty Name="DETALLE_VENTA_COMISION_INDUSTRIALES_ID" ColumnName="DETALLE_VENTA_COMISION_INDUSTRIALES_ID" />
-                <ScalarProperty Name="VALOR_INDUSTRIALES" ColumnName="VALOR_INDUSTRIALES" />
-                <ScalarProperty Name="DETALLE_ORDEN_TRABAJO_ID" ColumnName="DETALLE_ORDEN_TRABAJO_ID" />
-                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
-                <ScalarProperty Name="USUARIO_ID" ColumnName="USUARIO_ID" />
-                <ScalarProperty Name="FECHA_GENERACION_COMISION" ColumnName="FECHA_GENERACION_COMISION" />
-                <ScalarProperty Name="VENTA_COMISION_ID" ColumnName="VENTA_COMISION_ID" />
-                <ScalarProperty Name="ORDEN_TRABAJO_COMISION_ID" ColumnName="ORDEN_TRABAJO_COMISION_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -8907,20 +8735,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CIERRE_MES">
-            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.CIERRE_MES">
-              <MappingFragment StoreEntitySet="CIERRE_MES">
-                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
-                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
-                <ScalarProperty Name="MES_ID" ColumnName="MES_ID" />
-                <ScalarProperty Name="CUENTA_POR_PAGAR_ID" ColumnName="CUENTA_POR_PAGAR_ID" />
-                <ScalarProperty Name="USUARIO_ID" ColumnName="USUARIO_ID" />
-                <ScalarProperty Name="PUNTO_VENTA_ID" ColumnName="PUNTO_VENTA_ID" />
-                <ScalarProperty Name="SUCURSAL_ID" ColumnName="SUCURSAL_ID" />
-                <ScalarProperty Name="CIERRE_MES_ID" ColumnName="CIERRE_MES_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="MES">
             <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.MES">
               <MappingFragment StoreEntitySet="MES">
@@ -8929,6 +8743,106 @@
                 <ScalarProperty Name="ESTA_HABILITADO" ColumnName="ESTA_HABILITADO" />
                 <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
                 <ScalarProperty Name="MES_ID" ColumnName="MES_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CIERRE_MES">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.CIERRE_MES">
+              <MappingFragment StoreEntitySet="CIERRE_MES">
+                <ScalarProperty Name="APLICACION_PENDIENTE" ColumnName="APLICACION_PENDIENTE" />
+                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+                <ScalarProperty Name="MES_ID" ColumnName="MES_ID" />
+                <ScalarProperty Name="USUARIO_ID" ColumnName="USUARIO_ID" />
+                <ScalarProperty Name="PUNTO_VENTA_ID" ColumnName="PUNTO_VENTA_ID" />
+                <ScalarProperty Name="SUCURSAL_ID" ColumnName="SUCURSAL_ID" />
+                <ScalarProperty Name="CIERRE_MES_ID" ColumnName="CIERRE_MES_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CUENTA_POR_PAGAR">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.CUENTA_POR_PAGAR">
+              <MappingFragment StoreEntitySet="CUENTA_POR_PAGAR">
+                <ScalarProperty Name="CIERRE_MES_ID" ColumnName="CIERRE_MES_ID" />
+                <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
+                <ScalarProperty Name="NUMERO_FACTURA" ColumnName="NUMERO_FACTURA" />
+                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+                <ScalarProperty Name="SALDO" ColumnName="SALDO" />
+                <ScalarProperty Name="PUNTO_VENTA_ID" ColumnName="PUNTO_VENTA_ID" />
+                <ScalarProperty Name="SUCURSAL_ID" ColumnName="SUCURSAL_ID" />
+                <ScalarProperty Name="FECHA_VENCIMIENTO" ColumnName="FECHA_VENCIMIENTO" />
+                <ScalarProperty Name="USUARIO_MODIFICACION_ID" ColumnName="USUARIO_MODIFICACION_ID" />
+                <ScalarProperty Name="USUARIO_CREACION_ID" ColumnName="USUARIO_CREACION_ID" />
+                <ScalarProperty Name="FECHA_MODIFICACION" ColumnName="FECHA_MODIFICACION" />
+                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+                <ScalarProperty Name="PROVEDOR_ID" ColumnName="PROVEDOR_ID" />
+                <ScalarProperty Name="CUENTA_POR_PAGAR_ID" ColumnName="CUENTA_POR_PAGAR_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDEN_TRABAJO_COMISION">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO_COMISION">
+              <MappingFragment StoreEntitySet="ORDEN_TRABAJO_COMISION">
+                <ScalarProperty Name="VALOR_QUIMICA" ColumnName="VALOR_QUIMICA" />
+                <ScalarProperty Name="DETALLE_VENTA_COMISION_INDUSTRIALES_ID" ColumnName="DETALLE_VENTA_COMISION_INDUSTRIALES_ID" />
+                <ScalarProperty Name="VALOR_INDUSTRIALES" ColumnName="VALOR_INDUSTRIALES" />
+                <ScalarProperty Name="DETALLE_ORDEN_TRABAJO_ID" ColumnName="DETALLE_ORDEN_TRABAJO_ID" />
+                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+                <ScalarProperty Name="USUARIO_ID" ColumnName="USUARIO_ID" />
+                <ScalarProperty Name="FECHA_GENERACION_COMISION" ColumnName="FECHA_GENERACION_COMISION" />
+                <ScalarProperty Name="VENTA_COMISION_ID" ColumnName="VENTA_COMISION_ID" />
+                <ScalarProperty Name="ORDEN_TRABAJO_COMISION_ID" ColumnName="ORDEN_TRABAJO_COMISION_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLE_ORDEN_TRABAJO">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO">
+              <MappingFragment StoreEntitySet="DETALLE_ORDEN_TRABAJO">
+                <ScalarProperty Name="DETALLE_ORDEN_ANULADA_TRABAJO_ID" ColumnName="DETALLE_ORDEN_ANULADA_TRABAJO_ID" />
+                <ScalarProperty Name="PORCENTAJE_ADICIONAL" ColumnName="PORCENTAJE_ADICIONAL" />
+                <ScalarProperty Name="SOLO_PLANCHADO" ColumnName="SOLO_PLANCHADO" />
+                <ScalarProperty Name="VALOR_IMPUESTO" ColumnName="VALOR_IMPUESTO" />
+                <ScalarProperty Name="VALOR_COMISION_INDUSTRIALES" ColumnName="VALOR_COMISION_INDUSTRIALES" />
+                <ScalarProperty Name="APLICO_VALOR_EXTRA" ColumnName="APLICO_VALOR_EXTRA" />
+                <ScalarProperty Name="VALOR_EXTRA" ColumnName="VALOR_EXTRA" />
+                <ScalarProperty Name="PROMOCION_APLICADA" ColumnName="PROMOCION_APLICADA" />
+                <ScalarProperty Name="VALOR_DESCUENTO" ColumnName="VALOR_DESCUENTO" />
+                <ScalarProperty Name="VALOR_TOTAL_UNITARIO" ColumnName="VALOR_TOTAL_UNITARIO" />
+                <ScalarProperty Name="FIJADOR_COLOR" ColumnName="FIJADOR_COLOR" />
+                <ScalarProperty Name="DESENGRASANTE" ColumnName="DESENGRASANTE" />
+                <ScalarProperty Name="SUAVIZANTE" ColumnName="SUAVIZANTE" />
+                <ScalarProperty Name="PORCENTAJE_IMPUESTO_SUCURSAL_ID" ColumnName="PORCENTAJE_IMPUESTO_SUCURSAL_ID" />
+                <ScalarProperty Name="VALOR_TOTAL" ColumnName="VALOR_TOTAL" />
+                <ScalarProperty Name="PORCENTAJE_IMPUESTO" ColumnName="PORCENTAJE_IMPUESTO" />
+                <ScalarProperty Name="VALOR_UNITARIO" ColumnName="VALOR_UNITARIO" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="PRODUCTO_ID" ColumnName="PRODUCTO_ID" />
+                <ScalarProperty Name="ORDEN_TRABAJO_ID" ColumnName="ORDEN_TRABAJO_ID" />
+                <ScalarProperty Name="DETALLE_ORDEN_TRABAJO_ID" ColumnName="DETALLE_ORDEN_TRABAJO_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDEN_TRABAJO">
+            <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO">
+              <MappingFragment StoreEntitySet="ORDEN_TRABAJO">
+                <ScalarProperty Name="REVISO_PRENDA_CLIENTE" ColumnName="REVISO_PRENDA_CLIENTE" />
+                <ScalarProperty Name="OBJETO_OLVIDADO" ColumnName="OBJETO_OLVIDADO" />
+                <ScalarProperty Name="ES_TEMPORAL" ColumnName="ES_TEMPORAL" />
+                <ScalarProperty Name="ENTREGA_URGENCIA_ID" ColumnName="ENTREGA_URGENCIA_ID" />
+                <ScalarProperty Name="NUMERO_ORDEN_MANUAL" ColumnName="NUMERO_ORDEN_MANUAL" />
+                <ScalarProperty Name="SE_ENVIO" ColumnName="SE_ENVIO" />
+                <ScalarProperty Name="ENVIO_MATRIZ" ColumnName="ENVIO_MATRIZ" />
+                <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
+                <ScalarProperty Name="ESTADO_PAGO_ID" ColumnName="ESTADO_PAGO_ID" />
+                <ScalarProperty Name="SUCURSAL_ID" ColumnName="SUCURSAL_ID" />
+                <ScalarProperty Name="NRO_IMPRESION" ColumnName="NRO_IMPRESION" />
+                <ScalarProperty Name="USUARIO_ID" ColumnName="USUARIO_ID" />
+                <ScalarProperty Name="FECHA_ENTREGA" ColumnName="FECHA_ENTREGA" />
+                <ScalarProperty Name="FECHA_INGRESO" ColumnName="FECHA_INGRESO" />
+                <ScalarProperty Name="PUNTO_VENTA_ID" ColumnName="PUNTO_VENTA_ID" />
+                <ScalarProperty Name="TIPO_LAVADO_ID" ColumnName="TIPO_LAVADO_ID" />
+                <ScalarProperty Name="CLIENTE_ID" ColumnName="CLIENTE_ID" />
+                <ScalarProperty Name="ORDEN_TRABAJO_ID" ColumnName="ORDEN_TRABAJO_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

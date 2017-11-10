@@ -54,7 +54,9 @@ namespace JLLR.Core.Inventario.Servicio.Ensamblador
                Visible = e.VISIBLE,
                PrendaEspecial = e.PRENDA_ESPECIAL,
                TiempoEntrega = e.TIEMPO_ENTREGA,
-               NumeroPrendas = e.NUMERO_PRENDAS
+               NumeroPrendas = e.NUMERO_PRENDAS,
+               UsuarioId = e.USUARIO_ID,
+               EstaHabilitado = e.ESTA_HABILITADO
                
                
 
@@ -94,9 +96,7 @@ namespace JLLR.Core.Inventario.Servicio.Ensamblador
             modeloParametrizacion.ProductoModelo _productoModelo= new modeloParametrizacion.ProductoModelo();
             _productoModelo.ProductoId =Convert.ToInt32(e.PRODUCTO_ID);
 
-            modeloParametrizacion.ProductoTallaModelo _productoTalla=new modeloParametrizacion.ProductoTallaModelo();
-            _productoTalla.ProductoTallaId = Convert.ToInt32(e.PRODUCTO_TALLA_ID);
-
+        
 
             return new modeloParametrizacion.ProductoPrecioModelo
             {
@@ -104,7 +104,6 @@ namespace JLLR.Core.Inventario.Servicio.Ensamblador
                 Producto = _productoModelo,
                 FechaCreacion = e.FECHA_CREACION,
                 EstaHabilitado = e.ESTA_HABILITADO,
-                ProductoTalla = _productoTalla,
                 Modificable = e.MODIFICABLE,
                 Precio = e.PRECIO
                 
@@ -131,46 +130,6 @@ namespace JLLR.Core.Inventario.Servicio.Ensamblador
 
         #endregion
 
-        #region  PRODUCTO TALLA
-        /// <summary>
-        /// Convierte el DTO de entidad a modelo
-        /// </summary>
-        /// <param name="e">Entidad</param>
-        /// <returns></returns>
-        public modeloParametrizacion.ProductoTallaModelo CrearProductoTalla(entidad.PRODUCTO_TALLA e)
-        {
-
-            modeloParametrizacion.ProductoModelo _productoModelo = new modeloParametrizacion.ProductoModelo();
-            _productoModelo.ProductoId = Convert.ToInt32(e.PRODUCTO_ID);
-
-           
-            return new modeloParametrizacion.ProductoTallaModelo
-            {
-                ProductoTallaId = e.PRODUCTO_TALLA_ID,
-                Producto = _productoModelo,
-                Descripcion = e.DESCRIPCION
-
-            };
-
-        }
-
-        /// <summary>
-        /// Convierte un listado de DTO en listado de  modelos de DTO
-        /// </summary>
-        /// <param name="listadoEntidad">Listado de Entidades</param>
-        /// <returns></returns>
-        public List<modeloParametrizacion.ProductoTallaModelo> CrearProductosTalla(IQueryable<entidad.PRODUCTO_TALLA> listadoEntidad)
-        {
-            List<modeloParametrizacion.ProductoTallaModelo> listaModelo = new List<modeloParametrizacion.ProductoTallaModelo>();
-
-            foreach (var entidad in listadoEntidad)
-            {
-                listaModelo.Add(CrearProductoTalla(entidad));
-            }
-            return listaModelo;
-
-        }
-
-        #endregion
+        
     }
 }

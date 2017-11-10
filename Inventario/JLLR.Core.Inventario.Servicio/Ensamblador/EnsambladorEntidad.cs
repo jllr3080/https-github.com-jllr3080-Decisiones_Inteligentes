@@ -38,7 +38,9 @@ namespace JLLR.Core.Inventario.Servicio.Ensamblador
                VISIBLE = m.Visible,
                TIEMPO_ENTREGA =m.TiempoEntrega,
                PRENDA_ESPECIAL = m.PrendaEspecial,
-               NUMERO_PRENDAS = m.NumeroPrendas
+               NUMERO_PRENDAS = m.NumeroPrendas,
+               USUARIO_ID = m.UsuarioId,
+               ESTA_HABILITADO = m.EstaHabilitado
 
 
             };
@@ -76,11 +78,11 @@ namespace JLLR.Core.Inventario.Servicio.Ensamblador
             {
               PRODUCTO_PRECIO_ID = m.ProductoPrecioId,
               PRODUCTO_ID = m.Producto.ProductoId,
-              PRODUCTO_TALLA_ID = m.ProductoTalla.ProductoTallaId,
               PRECIO = m.Precio,
               FECHA_CREACION = m.FechaCreacion,
               ESTA_HABILITADO = m.EstaHabilitado,
               MODIFICABLE = m.Modificable
+
             };
         }
 
@@ -103,41 +105,7 @@ namespace JLLR.Core.Inventario.Servicio.Ensamblador
         }
         #endregion
 
-        #region PRODUCTO TALLA
-        /// <summary>
-        /// Convierte el modelo en una entidad
-        /// </summary>
-        /// <param name="m"></param>
-        /// <returns></returns>
-        public entidad.PRODUCTO_TALLA CrearProductoTalla(modeloParametrizacion.ProductoTallaModelo m)
-        {
-
-            return new entidad.PRODUCTO_TALLA()
-            {
-              PRODUCTO_TALLA_ID = m.ProductoTallaId,
-              PRODUCTO_ID = m.Producto.ProductoId,
-              DESCRIPCION = m.Descripcion
-            };
-        }
-
-
-        /// <summary>
-        /// Convierte un listado de modelos en listado de entidades
-        /// </summary>
-        /// <param name="listadoModelo">Listado de Modelos</param>
-        /// <returns></returns>z|
-        public List<entidad.PRODUCTO_TALLA> CrearProductosTalla(List<modeloParametrizacion.ProductoTallaModelo> listadoModelo)
-        {
-            List<entidad.PRODUCTO_TALLA> listaEntidad = new List<entidad.PRODUCTO_TALLA>();
-
-            foreach (var modelo in listadoModelo)
-            {
-                listaEntidad.Add(CrearProductoTalla(modelo));
-            }
-            return listaEntidad;
-
-        }
-        #endregion
+        
 
     }
 }

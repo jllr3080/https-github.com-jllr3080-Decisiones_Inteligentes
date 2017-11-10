@@ -149,6 +149,17 @@ namespace Web.Parametrizacion
             }
 
         }
+
+        /// <summary>
+        /// Pagina  los datos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _datos_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            _datos.PageIndex = e.NewPageIndex;
+            CargarDatos();
+        }
         #endregion
         #region Metodos
 
@@ -188,5 +199,6 @@ namespace Web.Parametrizacion
         }
         #endregion
 
+       
     }
 }

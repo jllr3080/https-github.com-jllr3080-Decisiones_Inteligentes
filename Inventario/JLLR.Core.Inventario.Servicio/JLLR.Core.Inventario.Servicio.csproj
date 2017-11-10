@@ -77,7 +77,6 @@
     <Compile Include="Ensamblador\EnsambladorModelo.cs" />
     <Compile Include="Modelo\Parametrizacion\ProductoModelo.cs" />
     <Compile Include="Modelo\Parametrizacion\ProductoPrecioModelo.cs" />
-    <Compile Include="Modelo\Parametrizacion\ProductoTallaModelo.cs" />
     <Compile Include="Modelo\Parametrizacion\TipoProductoModelo.cs" />
     <Compile Include="ServicioInventario.svc.cs">
       <DependentUpon>ServicioInventario.svc</DependentUpon>

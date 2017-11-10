@@ -22,7 +22,14 @@ namespace JLLR.Core.Venta.Servicio
 
         #region  TRANSACCIONAL
 
-
+        /// <summary>
+        /// Obtiene las  ordenes temporales
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(UriTemplate = "ObtenerOrdenTrabajoPorEstadoTemporal?puntoVentaId={puntoVentaId}", ResponseFormat = WebMessageFormat.Json)]
+        List<OrdenTrabajoDTOs> ObtenerOrdenTrabajoPorEstadoTemporal(int puntoVentaId);
         /// <summary>
         /// Obtiene  el detalle  de las  fotografias   guardadas
         /// </summary>
@@ -332,6 +339,29 @@ namespace JLLR.Core.Venta.Servicio
 
         #endregion
 
+        #region  DETALLE PRENDA
+
+        /// <summary>
+        /// Graba la orden de trabajo
+        /// </summary>
+        /// <param name="detallePrendaOrdenTrabajo"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabarDetallePrendaOrdenTrabajo/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        DetallePrendaOrdenTrabajoModelo GrabarDetallePrendaOrdenTrabajo(
+            DetallePrendaOrdenTrabajoModelo detallePrendaOrdenTrabajo);
+
+
+
+        /// <summary>
+        /// Actualiza la orden de trabajo
+        /// </summary>
+        /// <param name="detallePrendaOrdenTrabajo"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "ActualizarDetallePrendaOrdenTrabajo/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void ActualizarDetallePrendaOrdenTrabajo(DetallePrendaOrdenTrabajoModelo detallePrendaOrdenTrabajo);
+       
+        #endregion
         #endregion
         #region VALIDACION
 

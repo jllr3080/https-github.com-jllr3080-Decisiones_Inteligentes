@@ -39,8 +39,8 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<bool> ENTREGA_PARCIAL { get; set; }
     
         public virtual ETAPA_PROCESO ETAPA_PROCESO { get; set; }
-        public virtual ORDEN_TRABAJO ORDEN_TRABAJO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HISTORIAL_REPROCESO> HISTORIAL_REPROCESO { get; set; }
+        public virtual ORDEN_TRABAJO ORDEN_TRABAJO { get; set; }
     }
 }

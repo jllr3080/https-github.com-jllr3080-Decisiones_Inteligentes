@@ -24,12 +24,7 @@ namespace JLLR.Core.Inventario.Servicio.Modelo.Parametrizacion
         [DataMember]
         public ProductoModelo Producto { get; set; }
 
-        /// <summary>
-        /// ProductoTalla
-        /// </summary>
-        [DataMember]
-        public ProductoTallaModelo ProductoTalla { get; set; }
-
+      
         /// <summary>
         /// Precio
         /// </summary>

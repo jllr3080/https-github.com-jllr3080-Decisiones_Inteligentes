@@ -88,6 +88,18 @@ namespace JLLR.Core.Inventario.Servicio.Modelo.Parametrizacion
         [DataMember]
         public int? NumeroPrendas { get; set; }
 
+        /// <summary>
+        /// EstaHabilitado
+        /// </summary>
+        [DataMember]
+        public bool? EstaHabilitado { get; set; }
+
+        /// <summary>
+        /// EstaHabilitado
+        /// </summary>
+        [DataMember]
+        public int? UsuarioId { get; set; }
+
     }
 
 }

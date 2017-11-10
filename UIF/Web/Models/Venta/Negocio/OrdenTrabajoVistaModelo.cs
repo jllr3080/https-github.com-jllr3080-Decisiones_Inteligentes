@@ -103,5 +103,23 @@ namespace Web.Models.Venta.Negocio
         /// </summary>
         
         public EntregaUrgenciaVistaModelo EntregaUrgencia { get; set; }
+
+        /// <summary>
+        /// EsTemporal
+        /// </summary>
+        
+        public bool? EsTemporal { get; set; }
+
+        /// <summary>
+        /// RevisionPrendaCliente
+        /// </summary>
+        
+        public bool? RevisionPrendaCliente { get; set; }
+
+        /// <summary>
+        /// RevisionPrendaCliente
+        /// </summary>
+      
+        public string ObjetoOlvidado { get; set; }
     }
 }

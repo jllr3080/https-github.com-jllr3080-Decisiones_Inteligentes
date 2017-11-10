@@ -48,7 +48,6 @@
   <ItemGroup>
     <Compile Include="DAOs\ProductoDAOs.cs" />
     <Compile Include="DAOs\ProductoPrecioDAOs.cs" />
-    <Compile Include="DAOs\ProductoTallaDAOs.cs" />
     <Compile Include="DAOs\TransaccionalDAOs.cs" />
     <Compile Include="Negocio\InventarioNegocio.cs" />
     <Compile Include="Negocio\InventarioParametrizacion.cs" />

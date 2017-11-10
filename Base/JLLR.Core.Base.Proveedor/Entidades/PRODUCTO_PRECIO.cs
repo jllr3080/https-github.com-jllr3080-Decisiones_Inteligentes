@@ -31,6 +31,5 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual PRODUCTO PRODUCTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETALLE_VENTA_COMISION_INDUSTRIALES> DETALLE_VENTA_COMISION_INDUSTRIALES { get; set; }
-        public virtual PRODUCTO_TALLA PRODUCTO_TALLA { get; set; }
     }
 }

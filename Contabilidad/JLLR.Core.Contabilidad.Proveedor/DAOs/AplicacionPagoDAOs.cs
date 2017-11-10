@@ -62,5 +62,27 @@ namespace JLLR.Core.Contabilidad.Proveedor.DAOs
                 throw;
             }
         }
+
+        /// <summary>
+        ///Obtiene  los pagos por cada  cierre  de  mes 
+        /// </summary>
+        /// <param name="cierreMesId"></param>
+        /// <returns></returns>
+        public IQueryable<APLICACION_PAGO> ObtenerAplicacionPagoPorCierreMesId(int cierreMesId)
+        {
+            try
+            {
+                var aplicacionesPago = from aplicacionPago in _entidad.APLICACION_PAGO
+                    where aplicacionPago.CIERRE_MES_ID == cierreMesId
+                    select aplicacionPago;
+
+                return aplicacionesPago;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
     }
 }

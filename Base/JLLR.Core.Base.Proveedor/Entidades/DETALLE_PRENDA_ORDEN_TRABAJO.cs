@@ -34,7 +34,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
     
         public virtual COLOR COLOR { get; set; }
         public virtual MARCA MARCA { get; set; }
-        public virtual DETALLE_ORDEN_TRABAJO DETALLE_ORDEN_TRABAJO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETALLE_ORDEN_TRABAJO_OBSERVACION> DETALLE_ORDEN_TRABAJO_OBSERVACION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -43,5 +42,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual ICollection<HISTORIAL_RECLAMO_REPROCESO_PRENDA> HISTORIAL_RECLAMO_REPROCESO_PRENDA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HISTORIAL_REPROCESO> HISTORIAL_REPROCESO { get; set; }
+        public virtual DETALLE_ORDEN_TRABAJO DETALLE_ORDEN_TRABAJO { get; set; }
     }
 }

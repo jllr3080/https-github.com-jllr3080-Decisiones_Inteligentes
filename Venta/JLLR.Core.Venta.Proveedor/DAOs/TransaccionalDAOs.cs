@@ -259,6 +259,35 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
             }
         }
 
+        /// <summary>
+        /// Obtiene las  ordenes temporales
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public List<OrdenTrabajoDTOs> ObtenerOrdenTrabajoPorEstadoTemporal(int puntoVentaId)
+        {
+            try
+            {
+                var ordenesTrabajo = from ordenTrabajo in _entidad.ORDEN_TRABAJO
+                    where ordenTrabajo.ES_TEMPORAL == true && ordenTrabajo.PUNTO_VENTA_ID == puntoVentaId
+                    select new OrdenTrabajoDTOs()
+                    {
+                        OrdenTrabajo = ordenTrabajo,
+                        DetalleOrdenTrabajos = (List<DETALLE_ORDEN_TRABAJO>) (ordenTrabajo.DETALLE_ORDEN_TRABAJO)
+                    };
+
+
+
+                return ordenesTrabajo.ToList();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
 
         /// <summary>
         /// Obtiene todas las  ordenes  que estan lista para enviarse  a matriz
@@ -609,8 +638,6 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                                      join individuo in _entidad.INDIVIDUO on cliente.INDIVIDUO_ID equals individuo.INDIVIDUO_ID
                                      join tipoLavado in _entidad.TIPO_LAVADO on ordenTrabajo.TIPO_LAVADO_ID equals tipoLavado.TIPO_LAVADO_ID
                                      join producto in _entidad.PRODUCTO on detalleOrdenTrabajo.PRODUCTO_ID equals producto.PRODUCTO_ID
-                                     join productoTalla in _entidad.PRODUCTO_TALLA on detalleOrdenTrabajo.PRODUCTO_TALLA_ID equals
-                                     productoTalla.PRODUCTO_TALLA_ID
                                      join detallePrendaOrdenTrabajo  in  _entidad.DETALLE_PRENDA_ORDEN_TRABAJO on  detalleOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID equals  detallePrendaOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID
                                      join color in _entidad.COLOR on detallePrendaOrdenTrabajo.COLOR_ID equals color.COLOR_ID
                                      join marca in _entidad.MARCA on detallePrendaOrdenTrabajo.MARCA_ID equals marca.MARCA_ID
@@ -634,7 +661,6 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                                          Cantidad = detalleOrdenTrabajo.CANTIDAD,
                                          Color = color.DESCRIPCION,
                                          ValorTotal = detalleOrdenTrabajo.VALOR_TOTAL,
-                                         Observacion = detalleOrdenTrabajo.OBSERVACION,
                                          Prenda = producto.NOMBRE,
                                          NombreCliente = individuo.PRIMER_CAMPO + " " + individuo.SEGUNDO_CAMPO + " " + individuo.TERCER_CAMPO + " " + individuo.CUARTO_CAMPO,
                                          EstadoPagoId = ordenTrabajo.ESTADO_PAGO_ID,
@@ -679,14 +705,12 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                 join individuo in _entidad.INDIVIDUO on cliente.INDIVIDUO_ID equals individuo.INDIVIDUO_ID
                 join tipoLavado in _entidad.TIPO_LAVADO on ordenTrabajo.TIPO_LAVADO_ID equals tipoLavado.TIPO_LAVADO_ID
                 join producto in _entidad.PRODUCTO on detalleOrdenTrabajo.PRODUCTO_ID equals producto.PRODUCTO_ID
-                join productoTalla in _entidad.PRODUCTO_TALLA on detalleOrdenTrabajo.PRODUCTO_TALLA_ID equals
-                productoTalla.PRODUCTO_TALLA_ID
                 join  detallePrendaOrdenTrabajo in _entidad.DETALLE_PRENDA_ORDEN_TRABAJO on  detalleOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID equals  detallePrendaOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID
                 join color in _entidad.COLOR on detallePrendaOrdenTrabajo.COLOR_ID equals color.COLOR_ID
                 join marca in _entidad.MARCA on detallePrendaOrdenTrabajo.MARCA_ID equals marca.MARCA_ID
                 join estadoPago in _entidad.ESTADO_PAGO on ordenTrabajo.ESTADO_PAGO_ID equals estadoPago.ESTADO_PAGO_ID
                 where EntityFunctions.TruncateTime(ordenTrabajo.FECHA_INGRESO) == fechaDesde && ordenTrabajo.PUNTO_VENTA_ID==sucursalId   
-                select  new ConsultaOrdenTrabajoDTOs { TipoLavado = tipoLavado.DESCRIPCION,EstadoPago = estadoPago.DESCRIPCION,Marca = marca.DESCRIPCION,NumeroOrden = ordenTrabajo.NUMERO_ORDEN,FechaIngreso = ordenTrabajo.FECHA_INGRESO,FechaEntrega = ordenTrabajo.FECHA_ENTREGA,ValorUnitario = detalleOrdenTrabajo.VALOR_UNITARIO,Cantidad = detalleOrdenTrabajo.CANTIDAD,Color = color.DESCRIPCION,ValorTotal = detalleOrdenTrabajo.VALOR_TOTAL,Observacion = detalleOrdenTrabajo.OBSERVACION,Prenda = producto.NOMBRE,NombreCliente = individuo.PRIMER_CAMPO + " "+ individuo.SEGUNDO_CAMPO + " "+individuo.TERCER_CAMPO + " "+individuo.CUARTO_CAMPO,InformacionVisual = detallePrendaOrdenTrabajo.INFORMACION_VISUAL,EstadoPrenda = detallePrendaOrdenTrabajo.ESTADO_PRENDA,TratamientoEspecial = detallePrendaOrdenTrabajo.TRATAMIENTO_ESPECIAL,NumeroInternoPrenda = detallePrendaOrdenTrabajo.NUMERO_INTERNO_PRENDA};
+                select  new ConsultaOrdenTrabajoDTOs { TipoLavado = tipoLavado.DESCRIPCION,EstadoPago = estadoPago.DESCRIPCION,Marca = marca.DESCRIPCION,NumeroOrden = ordenTrabajo.NUMERO_ORDEN,FechaIngreso = ordenTrabajo.FECHA_INGRESO,FechaEntrega = ordenTrabajo.FECHA_ENTREGA,ValorUnitario = detalleOrdenTrabajo.VALOR_UNITARIO,Cantidad = detalleOrdenTrabajo.CANTIDAD,Color = color.DESCRIPCION,ValorTotal = detalleOrdenTrabajo.VALOR_TOTAL,Prenda = producto.NOMBRE,NombreCliente = individuo.PRIMER_CAMPO + " "+ individuo.SEGUNDO_CAMPO + " "+individuo.TERCER_CAMPO + " "+individuo.CUARTO_CAMPO,InformacionVisual = detallePrendaOrdenTrabajo.INFORMACION_VISUAL,EstadoPrenda = detallePrendaOrdenTrabajo.ESTADO_PRENDA,TratamientoEspecial = detallePrendaOrdenTrabajo.TRATAMIENTO_ESPECIAL,NumeroInternoPrenda = detallePrendaOrdenTrabajo.NUMERO_INTERNO_PRENDA};
 
           
             return ordenesTrabajo;

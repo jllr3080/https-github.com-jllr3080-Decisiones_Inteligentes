@@ -44,7 +44,10 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                SE_ENVIO = m.SeEnvio,
                ENVIO_MATRIZ = m.EnvioMatriz,
                NUMERO_ORDEN_MANUAL = m.NumeroOrdenManual,
-               ENTREGA_URGENCIA_ID = m.EntregaUrgencia.EntregaUrgenciaId
+               ENTREGA_URGENCIA_ID = m.EntregaUrgencia.EntregaUrgenciaId,
+               ES_TEMPORAL = m.EsTemporal,
+               REVISO_PRENDA_CLIENTE = m.RevisionPrendaCliente,
+               OBJETO_OLVIDADO = m.ObjetoOlvidado
             };
         }
 
@@ -75,9 +78,8 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
         /// <returns></returns>
         public entidad.DETALLE_ORDEN_TRABAJO CrearDetalleOrdenTrabajo(modelo.DetalleOrdenTrabajoModelo m)
         {
-         
-
-            List<entidad.DETALLE_PRENDA_ORDEN_TRABAJO> _listaDetallePrendaOrdenTrabajos =
+            List<entidad.DETALLE_PRENDA_ORDEN_TRABAJO> _listaDetallePrendaOrdenTrabajos=new List<entidad.DETALLE_PRENDA_ORDEN_TRABAJO>();
+            if (m.DetallePrendaOrdenTrabajo!=null)
                 CrearDetallesPrendaOrdenTrabajo(m.DetallePrendaOrdenTrabajo);
             return new entidad.DETALLE_ORDEN_TRABAJO()
             {
@@ -88,7 +90,6 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                 VALOR_UNITARIO = m.ValorUnitario,
                 PORCENTAJE_IMPUESTO = m.PorcentajeImpuesto,
                 VALOR_TOTAL = m.ValorTotal,
-                PRODUCTO_TALLA_ID = m.ProductoTalla.ProductoTallaId,
                 SUAVIZANTE = m.Suavizante,
                 DESENGRASANTE = m.Desengrasante,
                 FIJADOR_COLOR = m.FijadorColor,
@@ -96,7 +97,11 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                 VALOR_DESCUENTO = m.ValorDescuento,
                 PROMOCION_APLICADA = m.PromocionAplicada,
                 DETALLE_PRENDA_ORDEN_TRABAJO = _listaDetallePrendaOrdenTrabajos,
-                VALOR_IMPUESTO = m.ValorImpuesto
+                VALOR_IMPUESTO = m.ValorImpuesto,
+                PORCENTAJE_ADICIONAL = m.PorcentajeAdicional,
+                SOLO_PLANCHADO = m.SoloPlanchado,
+                DETALLE_ORDEN_ANULADA_TRABAJO_ID = m.DetalleOrdenTrabajoAnuladaId
+                
                 
 
 

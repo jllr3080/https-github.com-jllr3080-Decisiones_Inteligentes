@@ -90,5 +90,11 @@ namespace JLLR.Core.Contabilidad.Servicio.Modelo
         /// </summary>
         [DataMember]
         public string NumeroOrden { get; set; }
+
+        /// <summary>
+        /// CierreMes
+        /// </summary>
+        [DataMember]
+        public CierreMesModelo CierreMes { get; set; }
     }
 }

@@ -77,7 +77,7 @@ namespace JLLR.Core.Individuo.Servicio.EnsambladorDTOs
                IndividuoRol = _ensambladorEntidad.CrearIndividuoRol(m.IndividuoRol),
                NombreCompleto = m.NombreCompleto,
                DireccionCompleta = m.DireccionCompleta,
-               Telefonos = _ensambladorEntidad.CrearTelefonos(m.Telefonos)
+               Telefonos =m.Telefonos!=null? _ensambladorEntidad.CrearTelefonos(m.Telefonos):null
 
             };
         }

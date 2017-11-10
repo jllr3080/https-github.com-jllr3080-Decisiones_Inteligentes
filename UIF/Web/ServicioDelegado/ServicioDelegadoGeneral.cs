@@ -12,7 +12,7 @@ using Web.DTOs.Contabilidad;
 using Web.DTOs.Individuo;
 using Web.Models.Contabilidad;
 using Web.Models.General;
-
+using servicio=JLLR.Core.ServicioDelegado.Proveedor;
 #endregion
 
 namespace Web.ServicioDelegado
@@ -24,6 +24,7 @@ namespace Web.ServicioDelegado
         /// </summary>
         private static string direccionUrl = "http://localhost/Decisiones_Inteligentes_General/ServicioGeneral.svc/";
         
+
         #region COLOR
         /// <summary>
         /// Obtiene los  colores de las prendas
@@ -693,5 +694,6 @@ namespace Web.ServicioDelegado
             }
         }
         #endregion
+        
     }
 }

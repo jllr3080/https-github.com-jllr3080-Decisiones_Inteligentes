@@ -109,6 +109,7 @@ namespace JLLR.Core.Contabilidad.Servicio.Ensamblador
         /// <returns></returns>
         public entidad.CUENTA_POR_PAGAR CrearCuentaPorPagar(modelo.CuentaPorPagarModelo m)
         {
+            
             return new entidad.CUENTA_POR_PAGAR()
             {
                 CUENTA_POR_PAGAR_ID = m.CuentaPorPagarId,
@@ -123,7 +124,9 @@ namespace JLLR.Core.Contabilidad.Servicio.Ensamblador
                 USUARIO_MODIFICACION_ID = m.UsuarioModificacionId,
                 NUMERO_ORDEN = m.NumeroOrden,
                 SALDO = m.Saldo,
-                VALOR = m.Valor
+                VALOR = m.Valor,
+                //condition ? first_expression : second_expression;
+                CIERRE_MES_ID = m.CierreMes!=null?m.CierreMes.CierreMesId:1
 
 
             };
@@ -201,10 +204,10 @@ namespace JLLR.Core.Contabilidad.Servicio.Ensamblador
                SUCURSAL_ID = m.Sucursal.SucursalId,
                PUNTO_VENTA_ID = m.PuntoVenta.PuntoVentaId,
                USUARIO_ID = m.Usuario.UsuarioId,
-               CUENTA_POR_PAGAR_ID = m.CuentaPorPagar.CuentaPorPagarId,
                MES_ID = m.Mes.MesId,
                VALOR = m.Valor,
-               FECHA_CREACION = m.FechaCreacion
+               FECHA_CREACION = m.FechaCreacion,
+               APLICACION_PENDIENTE = m.AplicacionPendiente
             };
         }
 

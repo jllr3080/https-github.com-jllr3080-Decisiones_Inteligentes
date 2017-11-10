@@ -18,23 +18,25 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public CIERRE_MES()
         {
             this.APLICACION_PAGO = new HashSet<APLICACION_PAGO>();
+            this.CUENTA_POR_PAGAR = new HashSet<CUENTA_POR_PAGAR>();
         }
     
         public int CIERRE_MES_ID { get; set; }
         public Nullable<int> SUCURSAL_ID { get; set; }
         public Nullable<int> PUNTO_VENTA_ID { get; set; }
         public Nullable<int> USUARIO_ID { get; set; }
-        public Nullable<long> CUENTA_POR_PAGAR_ID { get; set; }
         public Nullable<int> MES_ID { get; set; }
         public Nullable<System.DateTime> FECHA_CREACION { get; set; }
         public Nullable<decimal> VALOR { get; set; }
+        public Nullable<bool> APLICACION_PENDIENTE { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<APLICACION_PAGO> APLICACION_PAGO { get; set; }
-        public virtual CUENTA_POR_PAGAR CUENTA_POR_PAGAR { get; set; }
         public virtual MES MES { get; set; }
         public virtual PUNTO_VENTA PUNTO_VENTA { get; set; }
         public virtual SUCURSAL SUCURSAL { get; set; }
         public virtual USUARIO USUARIO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CUENTA_POR_PAGAR> CUENTA_POR_PAGAR { get; set; }
     }
 }

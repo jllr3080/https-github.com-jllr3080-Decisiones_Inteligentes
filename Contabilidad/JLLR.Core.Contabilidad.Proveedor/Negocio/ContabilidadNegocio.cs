@@ -22,6 +22,8 @@ namespace JLLR.Core.Contabilidad.Proveedor.Negocio
         private readonly  TransaccionalDAOs _transaccionalDaOs= new TransaccionalDAOs();
         private readonly  HistorialCuentaPorCobrarDAOs _historialCuentaPorCobrarDaOs= new HistorialCuentaPorCobrarDAOs();
         private readonly  HistorialCuentaPorPagarDAOs _historialCuentaPorPagarDaOs= new HistorialCuentaPorPagarDAOs();
+        private readonly  CierreMesDAOs _cierreMesDaOs=  new CierreMesDAOs();
+        private readonly  AplicacionPagoDAOs _aplicacionPagoDaOs= new AplicacionPagoDAOs();
         #endregion
 
         #region TRANSACCIONAL
@@ -178,6 +180,28 @@ namespace JLLR.Core.Contabilidad.Proveedor.Negocio
                 throw;
             }
         }
+
+
+        /// <summary>
+        /// Obtiene las aplicaciones de pago para ser validadas
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <param name="mesId"></param>
+        /// <returns></returns>
+        public IQueryable<AplicacionPagoDTOs> ObtenerAplicacionPagosPorPuntoVentaIdYMesId(int puntoVentaId, int mesId)
+        {
+            try
+            {
+                return _transaccionalDaOs.ObtenerAplicacionPagosPorPuntoVentaIdYMesId(puntoVentaId, mesId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
         #endregion
 
         #region CUENTA POR COBRAR
@@ -376,6 +400,102 @@ namespace JLLR.Core.Contabilidad.Proveedor.Negocio
             try
             {
                 _historialCuentaPorPagarDaOs.ActualizaHistorialCuentaPorPagar(historialCuentaPorPagar);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region  CIERRE MES
+        /// <summary>
+        /// Graba  el cierre  de  mes 
+        /// </summary>
+        /// <param name="cierreMes"></param>
+        /// <returns></returns>
+        public CIERRE_MES GrabarCierreMes(CIERRE_MES cierreMes)
+        {
+            try
+            {
+              return _cierreMesDaOs.GrabarCierreMes(cierreMes);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Cierre  de  mes 
+        /// </summary>
+        /// <param name="mesId"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public IQueryable<CIERRE_MES> ObtenerCierresMesPorAplicacionPendiente(int mesId, int puntoVentaId)
+        {
+            try
+            {
+                return _cierreMesDaOs.ObtenerCierresMesPorAplicacionPendiente(mesId,  puntoVentaId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region APLICACION PAGO
+        /// <summary>
+        /// Graba  el cierre  de  mes 
+        /// </summary>
+        /// <param name="aplicacionPago"></param>
+        /// <returns></returns>
+        public APLICACION_PAGO GrabaAplicacionPago(APLICACION_PAGO aplicacionPago)
+        {
+            try
+            {
+              return _aplicacionPagoDaOs.GrabaAplicacionPago(aplicacionPago);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Graba  el cierre  de  mes 
+        /// </summary>
+        /// <param name="aplicacionPago"></param>
+        /// <returns></returns>
+        public APLICACION_PAGO ActualizaAplicacionPago(APLICACION_PAGO aplicacionPago)
+        {
+            try
+            {
+                return _aplicacionPagoDaOs.ActualizaAplicacionPago(aplicacionPago);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        ///Obtiene  los pagos por cada  cierre  de  mes 
+        /// </summary>
+        /// <param name="cierreMesId"></param>
+        /// <returns></returns>
+        public IQueryable<APLICACION_PAGO> ObtenerAplicacionPagoPorCierreMesId(int cierreMesId)
+        {
+            try
+            {
+                return _aplicacionPagoDaOs.ObtenerAplicacionPagoPorCierreMesId(cierreMesId);
             }
             catch (Exception ex)
             {

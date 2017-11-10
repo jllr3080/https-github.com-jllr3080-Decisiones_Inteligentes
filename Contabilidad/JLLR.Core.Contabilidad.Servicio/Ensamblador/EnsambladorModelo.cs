@@ -122,6 +122,11 @@ namespace JLLR.Core.Contabilidad.Servicio.Ensamblador
         public modelo.CuentaPorPagarModelo CrearCuentaPorPagar(entidad.CUENTA_POR_PAGAR e)
         {
 
+            modelo.CierreMesModelo cierre=new modelo.CierreMesModelo()
+            {
+                CierreMesId = Convert.ToInt32(e.CIERRE_MES_ID)
+            };
+
             return new modelo.CuentaPorPagarModelo
             {
                 SucursalId = e.SUCURSAL_ID,
@@ -136,7 +141,8 @@ namespace JLLR.Core.Contabilidad.Servicio.Ensamblador
                 UsuarioCreacionId = e.USUARIO_CREACION_ID,
                 NumeroOrden = e.NUMERO_ORDEN,
                 Saldo = e.SALDO,
-                FechaModificacion = e.FECHA_MODIFICACION
+                FechaModificacion = e.FECHA_MODIFICACION,
+                CierreMes = cierre
 
 
             };
@@ -222,10 +228,7 @@ namespace JLLR.Core.Contabilidad.Servicio.Ensamblador
             {
                 UsuarioId = Convert.ToInt32(e.USUARIO_ID)
             };
-            modelo.CuentaPorPagarModelo _cuentaPorPagar = new modelo.CuentaPorPagarModelo()
-            {
-                CuentaPorPagarId = Convert.ToInt32(e.CUENTA_POR_PAGAR_ID)
-            };
+            
 
             modeloGeneral.MesModelo _mes = new modeloGeneral.MesModelo()
             {
@@ -238,12 +241,12 @@ namespace JLLR.Core.Contabilidad.Servicio.Ensamblador
             {
                 CierreMesId = e.CIERRE_MES_ID,
                 Sucursal = _sucursal,
-                CuentaPorPagar = _cuentaPorPagar,
                 FechaCreacion = e.FECHA_CREACION,
                 Valor = e.VALOR,
                 PuntoVenta = _puntoVenta,
                 Usuario = _usuario,
-                Mes = _mes
+                Mes = _mes,
+                AplicacionPendiente = e.APLICACION_PENDIENTE
 
              
             };

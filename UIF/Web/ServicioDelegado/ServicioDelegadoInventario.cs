@@ -7,7 +7,7 @@ using System.Text;
 using System.Web;
 using System.Web.Script.Serialization;
 using Web.DTOs.Individuo;
-using Web.Models.Inventario.Parametrizacion;
+using JLLR.Core.ServicioDelegado.Proveedor.VistaModelo.Inventario;
 
 #endregion
 namespace Web.ServicioDelegado
@@ -54,21 +54,19 @@ namespace Web.ServicioDelegado
         #region PRODUCTO PRECIO
 
         /// <summary>
-        /// Obtiene el precio de los productos por la talla y el codigo del producto
+        /// Obtiene  los precios de las prendas  que tengan el ultimo precio habilitado
         /// </summary>
         /// <param name="productoId"></param>
-        /// <param name="productoTallaId"></param>
         /// <returns></returns>
 
-        public List<ProductoPrecioVistaModelo> ObtenerProductoPrecioPorProductoIdYProductoTallaId(int productoId,
-            int productoTallaId)
+        public List<ProductoPrecioVistaModelo> ObtenerProductoPrecioPorProductoId(int productoId)
         {
             try
             {
                 var clienteWeb = new WebClient();
                 clienteWeb.Headers["content-type"] = "application/json";
                 clienteWeb.Encoding = Encoding.UTF8;
-                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerProductoPrecioPorProductoIdYProductoTallaId?productoId=" + productoId+ "&productoTallaId="+ productoTallaId);
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerProductoPrecioPorProductoId?productoId=" + productoId);
                 var js = new JavaScriptSerializer();
                 return js.Deserialize<List<ProductoPrecioVistaModelo>>(json);
 
@@ -82,30 +80,7 @@ namespace Web.ServicioDelegado
 
         #endregion
 
-        #region PRODUCTO TALLA
-
-        /// <summary>
-        /// Obtiene las tallas  de los productos por el codigo del producto
-        /// </summary>
-        /// <param name="productoId"></param>
-        /// <returns></returns>
-        public List<ProductoTallaVistaModelo> ObtenProductoTallaPorProductoId(int productoId)
-        {
-            try
-            {
-                var clienteWeb = new WebClient();
-                var json = clienteWeb.DownloadString(direccionUrl + "ObtenProductoTallaPorProductoId?productoId=" + productoId );
-                var js = new JavaScriptSerializer();
-                return js.Deserialize<List<ProductoTallaVistaModelo>>(json);
-
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
-        }
-        #endregion
+        
         #endregion
     }
 }

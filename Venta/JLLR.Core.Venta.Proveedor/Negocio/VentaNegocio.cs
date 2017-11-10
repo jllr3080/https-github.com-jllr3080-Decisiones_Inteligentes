@@ -27,12 +27,32 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
         private readonly  OrdenTrabajoDescuentoDAOs _ordenTrabajoDescuentoDaOs= new OrdenTrabajoDescuentoDAOs();
         private readonly  AprobacionDescuentoDAOs _aprobacionDescuentoDaOs= new AprobacionDescuentoDAOs();
         private readonly  DetalleOrdenTrabajoFotografiaDAOs _detalleOrdenTrabajoFotografiaDaOs= new DetalleOrdenTrabajoFotografiaDAOs();
+        private readonly  DetallePrendaOrdenTrabajoDAOs _detallePrendaOrdenTrabajoDaOs= new DetallePrendaOrdenTrabajoDAOs();
         #endregion
 
 
         #region NEGOCIO
 
         #region  TRANSACCIONAL
+        /// <summary>
+        /// Obtiene las  ordenes temporales
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public List<OrdenTrabajoDTOs> ObtenerOrdenTrabajoPorEstadoTemporal(int puntoVentaId)
+        {
+            try
+            {
+                return _transaccionalDaOs.ObtenerOrdenTrabajoPorEstadoTemporal(puntoVentaId);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
 
         /// <summary>
         /// Obtiene  el detalle  de las  fotografias   guardadas
@@ -425,6 +445,45 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
 
             }
             catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region  DETALLE PRENDA
+        /// <summary>
+        /// Graba la orden de trabajo
+        /// </summary>
+        /// <param name="ordenTrabajo"></param>
+        /// <returns></returns>
+        public DETALLE_PRENDA_ORDEN_TRABAJO GrabarDetallePrendaOrdenTrabajo(DETALLE_PRENDA_ORDEN_TRABAJO detallePrendaOrdenTrabajo)
+        {
+            try
+            {
+               return _detallePrendaOrdenTrabajoDaOs.GrabarDetallePrendaOrdenTrabajo(detallePrendaOrdenTrabajo);
+                
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
+
+        /// <summary>
+        /// Actualiza la orden de trabajo
+        /// </summary>
+        /// <param name="detallePrendaOrdenTrabajo"></param>
+        public void ActualizarDetallePrendaOrdenTrabajo(DETALLE_PRENDA_ORDEN_TRABAJO detallePrendaOrdenTrabajo)
+        {
+            try
+            {
+              _detallePrendaOrdenTrabajoDaOs.ActualizarDetallePrendaOrdenTrabajo(detallePrendaOrdenTrabajo);
+            }
+            catch (Exception)
             {
 
                 throw;

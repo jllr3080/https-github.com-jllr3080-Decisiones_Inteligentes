@@ -176,6 +176,28 @@ namespace JLLR.Core.Contabilidad.Servicio
                 throw;
             }
         }
+
+        /// <summary>
+        /// Obtiene las aplicaciones de pago para ser validadas
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <param name="mesId"></param>
+        /// <returns></returns>
+        public List<AplicacionPagoDTOs> ObtenerAplicacionPagosPorPuntoVentaIdYMesId(int puntoVentaId, int mesId)
+        {
+            try
+            {
+                return _contabilidadTransformadorNegocio.ObtenerAplicacionPagosPorPuntoVentaIdYMesId(puntoVentaId, mesId);
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
         #endregion
 
         #region CUENTA POR COBRAR
@@ -380,6 +402,105 @@ namespace JLLR.Core.Contabilidad.Servicio
             try
             {
                 _contabilidadTransformadorNegocio.ActualizaHistorialCuentaPorPagar(historialCuentaPorPagar);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region  CIERRE MES
+        /// <summary>
+        /// Graba  el cierre  de  mes 
+        /// </summary>
+        /// <param name="cierreMes"></param>
+        /// <returns></returns>
+        public CierreMesModelo GrabarCierreMes(CierreMesModelo cierreMes)
+        {
+            try
+            {
+                return _contabilidadTransformadorNegocio.GrabarCierreMes(cierreMes);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Cierre  de  mes 
+        /// </summary>
+        /// <param name="mesId"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public List<CierreMesModelo> ObtenerCierresMesPorAplicacionPendiente(int mesId, int puntoVentaId)
+        {
+            try
+            {
+                return _contabilidadTransformadorNegocio.ObtenerCierresMesPorAplicacionPendiente(mesId, puntoVentaId);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region APLICACION PAGO
+        /// <summary>
+        /// Graba  el cierre  de  mes 
+        /// </summary>
+        /// <param name="aplicacionPago"></param>
+        /// <returns></returns>
+        public AplicacionPagoModelo GrabaAplicacionPago(AplicacionPagoModelo aplicacionPago)
+        {
+            try
+            {
+                return _contabilidadTransformadorNegocio.GrabaAplicacionPago(aplicacionPago);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Graba  el cierre  de  mes 
+        /// </summary>
+        /// <param name="aplicacionPago"></param>
+        /// <returns></returns>
+        public AplicacionPagoModelo ActualizaAplicacionPago(AplicacionPagoModelo aplicacionPago)
+        {
+            try
+            {
+                return _contabilidadTransformadorNegocio.ActualizaAplicacionPago(aplicacionPago);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        ///Obtiene  los pagos por cada  cierre  de  mes 
+        /// </summary>
+        /// <param name="cierreMesId"></param>
+        /// <returns></returns>
+        public List<AplicacionPagoModelo> ObtenerAplicacionPagoPorCierreMesId(int cierreMesId)
+        {
+            try
+            {
+                return _contabilidadTransformadorNegocio.ObtenerAplicacionPagoPorCierreMesId(cierreMesId);
+
             }
             catch (Exception ex)
             {

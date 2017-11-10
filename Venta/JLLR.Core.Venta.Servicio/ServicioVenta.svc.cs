@@ -24,11 +24,31 @@ namespace JLLR.Core.Venta.Servicio
         #region  DECLARACIONES  E INSTANCIAS
         private readonly VentaTransfomadorNegocio _ventaTransformadorNegocio = new VentaTransfomadorNegocio();
         private  readonly  VentaNegocio _ventaNegocio= new VentaNegocio();
-        
+
         #endregion
 
         #region TRANSACCIONAL
         #region NEGOCIO
+
+        /// <summary>
+        /// Obtiene las  ordenes temporales
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public List<OrdenTrabajoDTOs> ObtenerOrdenTrabajoPorEstadoTemporal(int puntoVentaId)
+        {
+            try
+            {
+                return _ventaTransformadorNegocio.ObtenerOrdenTrabajoPorEstadoTemporal(puntoVentaId);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
 
         /// <summary>
         /// Obtiene  el detalle  de las  fotografias   guardadas
@@ -558,6 +578,44 @@ namespace JLLR.Core.Venta.Servicio
 
             }
             catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region  DETALLE PRENDA
+        /// <summary>
+        /// Graba la orden de trabajo
+        /// </summary>
+        /// <param name="detallePrendaOrdenTrabajo"></param>
+        /// <returns></returns>
+        public DetallePrendaOrdenTrabajoModelo GrabarDetallePrendaOrdenTrabajo(DetallePrendaOrdenTrabajoModelo detallePrendaOrdenTrabajo)
+        {
+            try
+            {
+                return _ventaTransformadorNegocio.GrabarDetallePrendaOrdenTrabajo(detallePrendaOrdenTrabajo);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
+
+        /// <summary>
+        /// Actualiza la orden de trabajo
+        /// </summary>
+        /// <param name="detallePrendaOrdenTrabajo"></param>
+        public void ActualizarDetallePrendaOrdenTrabajo(DetallePrendaOrdenTrabajoModelo detallePrendaOrdenTrabajo)
+        {
+            try
+            {
+              _ventaTransformadorNegocio.ActualizarDetallePrendaOrdenTrabajo(detallePrendaOrdenTrabajo);
+            }
+            catch (Exception)
             {
 
                 throw;

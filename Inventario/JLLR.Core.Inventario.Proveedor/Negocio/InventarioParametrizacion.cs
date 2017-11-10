@@ -21,7 +21,7 @@ namespace JLLR.Core.Inventario.Proveedor.Negocio
         
         private readonly  ProductoDAOs _productoDaOs= new ProductoDAOs();
         private  readonly  ProductoPrecioDAOs _productoPrecioDaOs= new ProductoPrecioDAOs();
-        private  readonly  ProductoTallaDAOs _productoTallaDaOs=new ProductoTallaDAOs();
+        
         #endregion
         
         #region   PRODUCTO
@@ -43,24 +43,57 @@ namespace JLLR.Core.Inventario.Proveedor.Negocio
                 throw;
             }
         }
+
+        /// <summary>
+        /// Grabar  producto
+        /// </summary>
+        /// <param name="producto"></param>
+        public void GrabarProducto(PRODUCTO producto)
+        {
+            try
+            {
+                 _productoDaOs.GrabarProducto(producto);
+             
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Actualiza  el producto
+        /// </summary>
+        /// <param name="producto"></param>
+        public void ActualizarProducto(PRODUCTO producto)
+        {
+            try
+            {
+               _productoDaOs.ActualizarProducto(producto);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
         #region PRODUCTO PRECIO
 
         /// <summary>
-        /// Obtiene el precio de los productos por la talla y el codigo del producto
+        /// Obtiene  los precios de las prendas  que tengan el ultimo precio habilitado
         /// </summary>
         /// <param name="productoId"></param>
-        /// <param name="productoTallaId"></param>
         /// <returns></returns>
 
-        public IQueryable<PRODUCTO_PRECIO> ObtenerProductoPrecioPorProductoIdYProductoTallaId(int productoId,
-            int productoTallaId)
+        public IQueryable<PRODUCTO_PRECIO> ObtenerProductoPrecioPorProductoId(int productoId)
         {
             try
             {
-                return _productoPrecioDaOs.ObtenerProductoPrecioPorProductoIdYProductoTallaId(productoId,
-                    productoTallaId);
+                return _productoPrecioDaOs.ObtenerProductoPrecioPorProductoId(productoId);
 
             }
             catch (Exception ex)
@@ -70,20 +103,16 @@ namespace JLLR.Core.Inventario.Proveedor.Negocio
             }
         }
 
-        #endregion
-
-        #region PRODUCTO TALLA
 
         /// <summary>
-        /// Obtiene las tallas  de los productos por el codigo del producto
+        /// Graba el precio  de la prenda
         /// </summary>
-        /// <param name="productoId"></param>
-        /// <returns></returns>
-        public IQueryable<PRODUCTO_TALLA> ObtenProductoTallaPorProductoId(int productoId)
+        /// <param name="productoPrecio"></param>
+        public void GrabarProductoPrecio(PRODUCTO_PRECIO productoPrecio)
         {
             try
             {
-                return _productoTallaDaOs.ObtenProductoTallaPorProductoId(productoId);
+               _productoPrecioDaOs.GrabarProductoPrecio(productoPrecio);
 
             }
             catch (Exception ex)
@@ -92,6 +121,47 @@ namespace JLLR.Core.Inventario.Proveedor.Negocio
                 throw;
             }
         }
+
+
+        /// <summary>
+        /// Actualiza los precios  de las prendas
+        /// </summary>
+        /// <param name="productoPrecio"></param>
+        public void ActualizarProductoPrecio(PRODUCTO_PRECIO productoPrecio)
+        {
+            try
+            {
+                _productoPrecioDaOs.ActualizarProductoPrecio(productoPrecio);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene  todos los precios de las prendas 
+        /// </summary>
+        /// <param name="productoId"></param>
+        /// <returns></returns>
+
+        public IQueryable<PRODUCTO_PRECIO> ObtenerProductoPrecioPorEstadoYProductoId(int productoId)
+        {
+            try
+            {
+                return _productoPrecioDaOs.ObtenerProductoPrecioPorEstadoYProductoId(productoId);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
         #endregion
+
+
     }
 }

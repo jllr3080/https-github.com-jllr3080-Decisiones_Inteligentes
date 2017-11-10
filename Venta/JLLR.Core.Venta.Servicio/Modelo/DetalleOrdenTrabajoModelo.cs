@@ -74,12 +74,7 @@ namespace JLLR.Core.Venta.Servicio.Modelo
         public decimal? ValorTotal { get; set; }
 
         
-        /// <summary>
-        /// ProductoTalla
-        /// </summary>
-        [DataMember]
-        public ProductoTallaModelo ProductoTalla { get; set; }
-
+       
         
         /// <summary>
         /// VentaComision
@@ -132,5 +127,25 @@ namespace JLLR.Core.Venta.Servicio.Modelo
         /// </summary>
         [DataMember]
         public List<DetallePrendaOrdenTrabajoModelo> DetallePrendaOrdenTrabajo { get; set; }
+
+     
+        
+        /// <summary>
+        /// SoloPlanchado
+        /// </summary>
+        [DataMember]
+        public bool? SoloPlanchado { get; set; }
+
+        /// <summary>
+        /// PorcentajeAdicional
+        /// </summary>
+        [DataMember]
+        public bool? PorcentajeAdicional { get; set; }
+
+        /// <summary>
+        /// DetalleOrdenTrabajoAnuladaId
+        /// </summary>
+        [DataMember]
+        public int? DetalleOrdenTrabajoAnuladaId { get; set; }
     }
 }

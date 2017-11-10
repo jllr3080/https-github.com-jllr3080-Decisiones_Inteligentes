@@ -306,6 +306,44 @@ namespace JLLR.Core.Contabilidad.Proveedor.DAOs
             }
         }
 
+
+
+        /// <summary>
+        /// Obtiene las aplicaciones de pago para ser validadas
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <param name="mesId"></param>
+        /// <returns></returns>
+        public IQueryable<AplicacionPagoDTOs> ObtenerAplicacionPagosPorPuntoVentaIdYMesId(int puntoVentaId, int mesId)
+        {
+            try
+            {
+                var aplicacionPagos = from aplicacionPago in _entidad.APLICACION_PAGO
+                    join cierreMes in _entidad.CIERRE_MES on aplicacionPago.CIERRE_MES_ID equals cierreMes.CIERRE_MES_ID
+                    join usuario in _entidad.USUARIO on aplicacionPago.USUARIO_APLICA_ID equals usuario.USUARIO_ID
+                    join puntoVenta in _entidad.PUNTO_VENTA on cierreMes.PUNTO_VENTA_ID equals puntoVenta.PUNTO_VENTA_ID
+                    join mes in _entidad.MES on cierreMes.MES_ID equals mes.MES_ID
+                    where cierreMes.PUNTO_VENTA_ID == puntoVentaId && cierreMes.MES_ID == mesId
+                    select new AplicacionPagoDTOs()
+                    {
+                        PuntoVenta = puntoVenta.DESCRIPCION,
+                        Mes = mes.DESCRIPCION,
+                        FechaCierreMes = cierreMes.FECHA_CREACION,
+                        ValorCierre = cierreMes.VALOR,
+                        UsuarioAplicacion = usuario.NOMBRE_USUARIO,
+                        AplicacionPago = aplicacionPago
+                    };  
+
+                return aplicacionPagos;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+
+        }
+
         #endregion
     }
 }

@@ -105,7 +105,23 @@ namespace JLLR.Core.Venta.Servicio.Modelo
         [DataMember]
         public EntregaUrgenciaModelo EntregaUrgencia { get; set; }
 
+        /// <summary>
+        /// EsTemporal
+        /// </summary>
+        [DataMember]
+        public bool? EsTemporal { get; set; }
 
+        /// <summary>
+        /// RevisionPrendaCliente
+        /// </summary>
+        [DataMember]
+        public bool? RevisionPrendaCliente { get; set; }
+
+        /// <summary>
+        /// RevisionPrendaCliente
+        /// </summary>
+        [DataMember]
+        public string ObjetoOlvidado { get; set; }
 
     }
 }

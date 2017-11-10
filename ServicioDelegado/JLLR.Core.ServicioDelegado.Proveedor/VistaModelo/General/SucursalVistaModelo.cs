@@ -5,38 +5,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 #endregion
-namespace JLLR.Core.ServicioDelegado.Proveedor.ModeloVista.General
+namespace JLLR.Core.ServicioDelegado.Proveedor.VistaModelo.General
 {
-    public class MesModeloVista
+    public class SucursalVistaModelo
     {
         /// <summary>
-        /// Mes ID
+        /// Id de la sucursal
         /// </summary>
-       
-        public int MesId { get; set; }
+        
+        public int SucursalId { get; set; }
 
         /// <summary>
-        /// Descripcion
+        /// Descripcion de la sucursal
         /// </summary>
-       
+        
         public string Descripcion { get; set; }
 
         /// <summary>
-        /// EstaHabilitado
+        /// Esta habilitado
         /// </summary>
-       
+        
         public bool? EstaHabilitado { get; set; }
 
         /// <summary>
-        /// FechaDesde
+        /// Puntos de  venta
         /// </summary>
         
-        public DateTime? FechaDesde { get; set; }
-
-        /// <summary>
-        /// FechaHasta
-        /// </summary>
-       
-        public DateTime? FechaHasta { get; set; }
+        public List<PuntoVentaVistaModelo> PuntosVenta { get; set; }
     }
 }

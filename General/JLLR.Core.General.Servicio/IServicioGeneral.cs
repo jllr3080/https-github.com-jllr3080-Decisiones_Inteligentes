@@ -352,6 +352,18 @@ namespace JLLR.Core.General.Servicio
 
         #endregion
 
+        #region MES
+
+        /// <summary>
+        /// Obtiene los meses de  cierre
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(UriTemplate = "ObtenerMeses", ResponseFormat = WebMessageFormat.Json)]
+        List<MesModelo> ObtenerMeses();
+
+        #endregion
+
     }
 
 

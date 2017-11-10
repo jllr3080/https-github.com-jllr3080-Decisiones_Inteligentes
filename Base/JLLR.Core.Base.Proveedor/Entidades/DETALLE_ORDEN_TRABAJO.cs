@@ -28,8 +28,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<decimal> VALOR_UNITARIO { get; set; }
         public Nullable<decimal> PORCENTAJE_IMPUESTO { get; set; }
         public Nullable<decimal> VALOR_TOTAL { get; set; }
-        public string OBSERVACION { get; set; }
-        public Nullable<int> PRODUCTO_TALLA_ID { get; set; }
         public Nullable<int> PORCENTAJE_IMPUESTO_SUCURSAL_ID { get; set; }
         public Nullable<bool> SUAVIZANTE { get; set; }
         public Nullable<bool> DESENGRASANTE { get; set; }
@@ -41,9 +39,9 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<bool> APLICO_VALOR_EXTRA { get; set; }
         public Nullable<decimal> VALOR_COMISION_INDUSTRIALES { get; set; }
         public Nullable<decimal> VALOR_IMPUESTO { get; set; }
-        public Nullable<bool> OBJETO_OLVIDADO { get; set; }
         public Nullable<bool> SOLO_PLANCHADO { get; set; }
         public Nullable<bool> PORCENTAJE_ADICIONAL { get; set; }
+        public Nullable<int> DETALLE_ORDEN_ANULADA_TRABAJO_ID { get; set; }
     
         public virtual PRODUCTO PRODUCTO { get; set; }
         public virtual ORDEN_TRABAJO ORDEN_TRABAJO { get; set; }

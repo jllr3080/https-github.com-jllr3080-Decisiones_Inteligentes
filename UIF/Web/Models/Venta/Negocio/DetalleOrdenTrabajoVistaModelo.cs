@@ -3,8 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using JLLR.Core.ServicioDelegado.Proveedor.VistaModelo.Inventario;
 using Web.Models.General;
-using Web.Models.Inventario.Parametrizacion;
+
 using Web.Models.Venta.Parametrizacion;
 
 #endregion
@@ -65,12 +66,7 @@ namespace Web.Models.Venta.Negocio
         
         public decimal? ValorTotal { get; set; }
 
-       
-        /// <summary>
-        /// ProductoTalla
-        /// </summary>
-        
-        public ProductoTallaVistaModelo ProductoTalla { get; set; }
+      
 
        
 
@@ -130,5 +126,26 @@ namespace Web.Models.Venta.Negocio
         /// ValorTotalDescuento
         /// </summary>
         public string NombrePromocionAplicada { get; set; }
+
+       
+
+
+        /// <summary>
+        /// SoloPlanchado
+        /// </summary>
+        
+        public bool? SoloPlanchado { get; set; }
+
+        /// <summary>
+        /// PorcentajeAdicional
+        /// </summary>
+        
+        public bool? PorcentajeAdicional { get; set; }
+
+        /// <summary>
+        /// DetalleOrdenTrabajoAnuladaId
+        /// </summary>
+        
+        public int? DetalleOrdenTrabajoAnuladaId { get; set; }
     }
 }

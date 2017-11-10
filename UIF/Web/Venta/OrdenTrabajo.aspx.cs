@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using JLLR.Core.ServicioDelegado.Proveedor.VistaModelo.Inventario;
 using Web.Base;
 using Web.DTOs.Individuo;
 using Web.DTOs.Logistica;
@@ -14,7 +15,7 @@ using Web.Models.Contabilidad;
 using Web.Models.FlujoProceso;
 using Web.Models.General;
 using Web.Models.Individuo;
-using Web.Models.Inventario.Parametrizacion;
+
 using Web.Models.Seguridad.Negocio;
 using Web.Models.Venta.Negocio;
 using Web.Models.Venta.Parametrizacion;
@@ -28,7 +29,7 @@ namespace Web.Venta
     {
         #region DECLARACIONES  E INSTANCIAS
         private readonly ServicioDelegadoIndividuo _servicioDelegadoIndividuo = new ServicioDelegadoIndividuo();
-        private readonly ServicioDelegadoInventario _servicioDelegadoInventario = new ServicioDelegadoInventario();
+        private readonly JLLR.Core.ServicioDelegado.Proveedor.ServicioDelegado.ServicioDelegadoInventario _servicioDelegadoInventario = new JLLR.Core.ServicioDelegado.Proveedor.ServicioDelegado.ServicioDelegadoInventario();
         private readonly ServicioDelegadoVenta _servicioDelegadoVenta = new ServicioDelegadoVenta();
         private readonly ServicioDelegadoGeneral _servicioDelegadoGeneral = new ServicioDelegadoGeneral();
         private static OrdenTrabajoVistaDTOs _ordenTrabajoVistaDtOs = new OrdenTrabajoVistaDTOs();
@@ -41,6 +42,62 @@ namespace Web.Venta
         #endregion
 
         #region Eventos
+
+        /// <summary>
+        /// Rebaja todo a la  mitad  y solo pueden  incluir  estas prendas 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _soloPlanchado_OnCheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_soloPlanchado.Checked==true)
+                { 
+                _valorUnitario.Text = (Convert.ToDecimal(_valorUnitario.Text)/2).ToString();
+                _valorTotal.Text = (Convert.ToDecimal(_valorTotal.Text) / 2).ToString();
+                _descuento.Text = "0";
+                _valorTotalPagar.Text = (Convert.ToDecimal(_valorTotalPagar.Text) / 2).ToString();
+                    _procentajeManchado.Checked = false;
+                }
+                else
+                {
+                    _prenda_SelectedIndexChanged(sender, e);
+                }
+
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+
+        protected void _procentajeManchado_OnCheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_procentajeManchado.Checked == true)
+                {
+                   
+                    _valorUnitario.Text = String.Format("{0:0.00}", Convert.ToDecimal(_valorUnitario.Text) * Convert.ToDecimal(0.3) + (Convert.ToDecimal(_valorUnitario.Text)));
+                    _valorTotal.Text = String.Format("{0:0.00}", Convert.ToDecimal(_valorTotal.Text) * Convert.ToDecimal(0.3) + (Convert.ToDecimal(_valorTotal.Text)));
+                    _descuento.Text = "0";
+                    _valorTotalPagar.Text = String.Format("{0:0.00}", Convert.ToDecimal(_valorTotalPagar.Text) * Convert.ToDecimal(0.3) + (Convert.ToDecimal(_valorTotalPagar.Text)));
+                    _soloPlanchado.Checked = false;
+                }
+                else
+                {
+                    _prenda_SelectedIndexChanged(sender, e);
+                }
+
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
         /// <summary>
         /// Cambia  el tipo de  busqueda
         /// </summary>
@@ -117,7 +174,7 @@ namespace Web.Venta
                 if (e.CommandName == "Seleccionar")
                 {
 
-                    clienteVistaDtOs = listaClienteVistaDtOses.Find(m => m.NombreCompleto == _clientes.Rows[index].Cells[0].Text);
+                    clienteVistaDtOs = listaClienteVistaDtOses.Find(m => m.NumeroDocumento == _clientes.Rows[index].Cells[0].Text);
 
                     if (clienteVistaDtOs != null)
                     {
@@ -595,15 +652,13 @@ namespace Web.Venta
                     _envioMatriz.Enabled = true;
 
                 }
-                _talla.DataSource =
-                        _servicioDelegadoInventario.ObtenProductoTallaPorProductoId(
-                            Convert.ToInt32(_prenda.SelectedItem.Value));
-                _talla.DataBind();
+                
+               
                 _cantidad.Text = "1";
-                List<ProductoPrecioVistaModelo> _precio =
-                    _servicioDelegadoInventario.ObtenerProductoPrecioPorProductoIdYProductoTallaId(
-                        Convert.ToInt32(_prenda.SelectedItem.Value),
-                        Convert.ToInt32(_talla.SelectedItem.Value));
+                List<ProductoPrecioVistaModelo> _precio = null;
+                    //_servicioDelegadoInventario.ObtenerProductoPrecioPorProductoIdYProductoTallaId(
+                    //    Convert.ToInt32(_prenda.SelectedItem.Value),
+                    //    Convert.ToInt32(_talla.SelectedItem.Value));
                 foreach (var productoPrecioVistaModelo in _precio)
                 {
 
@@ -716,14 +771,11 @@ namespace Web.Venta
             try
             {
 
-                _talla.DataSource =
-                    _servicioDelegadoInventario.ObtenProductoTallaPorProductoId(
-                        Convert.ToInt32(_prenda.SelectedItem.Value));
-                _talla.DataBind();
-                List<ProductoPrecioVistaModelo> _precio =
-               _servicioDelegadoInventario.ObtenerProductoPrecioPorProductoIdYProductoTallaId(
-                   Convert.ToInt32(_prenda.SelectedItem.Value),
-                   Convert.ToInt32(_talla.SelectedItem.Value));
+
+                List<ProductoPrecioVistaModelo> _precio = null;
+               //_servicioDelegadoInventario.ObtenerProductoPrecioPorProductoIdYProductoTallaId(
+               //    Convert.ToInt32(_prenda.SelectedItem.Value),
+               //    Convert.ToInt32(_talla.SelectedItem.Value));
                 foreach (var productoPrecioVistaModelo in _precio)
                 {
 
@@ -768,10 +820,10 @@ namespace Web.Venta
             try
             {
 
-                List<ProductoPrecioVistaModelo> _precio =
-               _servicioDelegadoInventario.ObtenerProductoPrecioPorProductoIdYProductoTallaId(
-                   Convert.ToInt32(_prenda.SelectedItem.Value),
-                   Convert.ToInt32(_talla.SelectedItem.Value));
+                List<ProductoPrecioVistaModelo> _precio = null;
+               //_servicioDelegadoInventario.ObtenerProductoPrecioPorProductoIdYProductoTallaId(
+               //    Convert.ToInt32(_prenda.SelectedItem.Value),
+               //    Convert.ToInt32(_talla.SelectedItem.Value));
                 foreach (var productoPrecioVistaModelo in _precio)
                 {
 
@@ -988,10 +1040,7 @@ namespace Web.Venta
 
 
                 }
-                _talla.DataSource =
-                    _servicioDelegadoInventario.ObtenProductoTallaPorProductoId(
-                        Convert.ToInt32(_prenda.SelectedItem.Value));
-                _talla.DataBind();
+           
                 _cantidad.Text = "1";
                 EjecutarPromociones();
               
@@ -1027,12 +1076,9 @@ namespace Web.Venta
                 _prenda.DataSource = _productoVista;
                 _prenda.DataBind();
 
-                _talla.DataSource =
-                        _servicioDelegadoInventario.ObtenProductoTallaPorProductoId(
-                            Convert.ToInt32(_prenda.SelectedItem.Value));
-                _talla.DataBind();
+              
                  _cantidad.Text = "1";
-                List<ProductoPrecioVistaModelo> _precio = _servicioDelegadoInventario.ObtenerProductoPrecioPorProductoIdYProductoTallaId(Convert.ToInt32(_prenda.SelectedItem.Value), Convert.ToInt32(_talla.SelectedItem.Value));
+                List<ProductoPrecioVistaModelo> _precio = null;// _servicioDelegadoInventario.ObtenerProductoPrecioPorProductoIdYProductoTallaId(Convert.ToInt32(_prenda.SelectedItem.Value), Convert.ToInt32(_talla.SelectedItem.Value));
                     foreach (var productoPrecioVistaModelo in _precio)
                     {
                         _valorUnitario.Text = String.Format("{0:0.00}", productoPrecioVistaModelo.Precio);
@@ -1185,12 +1231,7 @@ namespace Web.Venta
                     NumeroPrendas = 2
 
                 };
-                ProductoTallaVistaModelo _productoTallaVista = new ProductoTallaVistaModelo
-                {
-                    ProductoTallaId = Convert.ToInt32(_talla.SelectedItem.Value),
-                    Descripcion = _talla.SelectedItem.Text.ToUpper()
-                    
-                };
+               
                 
                 ImpuestoVistaModelo _impuestoVista = new ImpuestoVistaModelo
                 {
@@ -1203,8 +1244,7 @@ namespace Web.Venta
 
                
                 _detalleOrdenTrabajoVista.Producto = _productoVista;
-                _detalleOrdenTrabajoVista.ProductoTalla = _productoTallaVista;
-
+             
                 
 
                 _detalleOrdenTrabajoVista.Cantidad = Convert.ToInt32(_cantidad.Text);

@@ -35,7 +35,7 @@ namespace Web.Seguridad.Login
             try
             {
 
-                UsuarioVistaDTOs _usuarioVistaDtOs= servicioDelegadoSeguridad.IngresoSistema(_usuario.Text, _contrasena.Text, 1, 1);
+                UsuarioVistaDTOs _usuarioVistaDtOs= servicioDelegadoSeguridad.IngresoSistema(_usuario.Text.Trim(), _contrasena.Text.Trim(),1, 1);
 
                 if (_usuarioVistaDtOs != null)
                 {

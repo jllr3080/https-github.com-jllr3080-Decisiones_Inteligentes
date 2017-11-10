@@ -113,6 +113,19 @@ namespace JLLR.Core.Contabilidad.Servicio
             ResponseFormat = WebMessageFormat.Json)]
         List<CuentaPorPagarDTOs> ObtenerCuentaPorPagarPorFechas(string fechaDesde, string fechaHasta,
             int sucursalId);
+
+        /// <summary>
+        /// Obtiene las aplicaciones de pago para ser validadas
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <param name="mesId"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(
+           UriTemplate =
+               "ObtenerAplicacionPagosPorPuntoVentaIdYMesId?puntoVentaId={puntoVentaId}&mesId={mesId}",
+           ResponseFormat = WebMessageFormat.Json)]
+        List<AplicacionPagoDTOs> ObtenerAplicacionPagosPorPuntoVentaIdYMesId(int puntoVentaId, int mesId);
         #endregion
 
         #region CUENTA POR COBRAR
@@ -237,6 +250,70 @@ namespace JLLR.Core.Contabilidad.Servicio
             ResponseFormat = WebMessageFormat.Json, Method = "POST")]
 
         void ActualizaHistorialCuentaPorPagar(HistorialCuentaPorPagarModelo historialCuentaPorPagar);
+
+        #endregion
+
+        #region  CIERRE MES
+
+        /// <summary>
+        /// Graba  el cierre  de  mes 
+        /// </summary>
+        /// <param name="cierreMes"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabarCierreMes/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        CierreMesModelo GrabarCierreMes(CierreMesModelo cierreMes);
+
+
+
+        /// <summary>
+        /// Cierre  de  mes 
+        /// </summary>
+        /// <param name="mesId"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(
+           UriTemplate =
+               "ObtenerCierresMesPorAplicacionPendiente?mesId={mesId}&puntoVentaId={puntoVentaId}",
+           ResponseFormat = WebMessageFormat.Json)]
+        List<CierreMesModelo> ObtenerCierresMesPorAplicacionPendiente(int mesId, int puntoVentaId);
+
+        #endregion
+
+        #region APLICACION PAGO
+
+        /// <summary>
+        /// Graba  el cierre  de  mes 
+        /// </summary>
+        /// <param name="aplicacionPago"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabaAplicacionPago/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        AplicacionPagoModelo GrabaAplicacionPago(AplicacionPagoModelo aplicacionPago);
+
+
+        /// <summary>
+        /// Graba  el cierre  de  mes 
+        /// </summary>
+        /// <param name="aplicacionPago"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "ActualizaAplicacionPago/*", RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        AplicacionPagoModelo ActualizaAplicacionPago(AplicacionPagoModelo aplicacionPago);
+
+        /// <summary>
+        ///Obtiene  los pagos por cada  cierre  de  mes 
+        /// </summary>
+        /// <param name="cierreMesId"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(
+          UriTemplate =
+              "ObtenerAplicacionPagoPorCierreMesId?cierreMesId={cierreMesId}",
+          ResponseFormat = WebMessageFormat.Json)]
+        List<AplicacionPagoModelo> ObtenerAplicacionPagoPorCierreMesId(int cierreMesId);
 
         #endregion
     }

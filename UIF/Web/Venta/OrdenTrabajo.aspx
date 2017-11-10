@@ -300,12 +300,12 @@
                     </div>
                 
                      <div class="col-md-3">
-                        <asp:CheckBox ID="_soloPlanchado" runat="server" CssClass="form-control" Text="<%$ Resources:Web_es_Ec,Label_Solo_Planchado%>" Visible="True"/>
+                        <asp:CheckBox ID="_soloPlanchado" runat="server" CssClass="form-control" Text="<%$ Resources:Web_es_Ec,Label_Solo_Planchado%>" Visible="True"  OnCheckedChanged="_soloPlanchado_OnCheckedChanged" AutoPostBack="True"/>
                        
                     </div>
                 
                  <div class="col-md-3">
-                         <asp:CheckBox ID="_procentajeManchado" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Porcentaje_Manchado%>" Visible="True" CssClass="form-control"/>
+                         <asp:CheckBox ID="_procentajeManchado" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Porcentaje_Manchado%>" Visible="True" CssClass="form-control" OnCheckedChanged="_procentajeManchado_OnCheckedChanged" AutoPostBack="True"/>
                        
                     </div>
                 
@@ -674,9 +674,11 @@
                             <asp:Button ID="_grabarDetalle" runat="server" Text="Agregar Detalle Prenda" class="btn btn-primary" data-dismiss="modal" ValidationGroup="DetallePrenda" OnClick="_grabarDetalle_OnClick"/>
                             <asp:Button ID="_cancelarDetalle" runat="server" Text="Cancelar" class="btn btn-primary" data-dismiss="modal" />
                         </div>
+                             </div>
                     </asp:Panel>
-     </div>
+                   
         </div>
+      </div>
     
     
     <div class="row" >

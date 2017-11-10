@@ -28,37 +28,79 @@ namespace JLLR.Core.Inventario.Servicio
         [WebGet(UriTemplate = "ObtenerProductoPorTipoProductoId?tipoProductoId={tipoProductoId}", ResponseFormat = WebMessageFormat.Json)]
         List<modeloParametrizacion.ProductoModelo> ObtenerProductoPorTipoProductoId(int tipoProductoId);
 
+        /// <summary>
+        /// Grabar  producto
+        /// </summary>
+        /// <param name="producto"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabarProducto/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void GrabarProducto(modeloParametrizacion.ProductoModelo producto);
+
+
+        /// <summary>
+        /// Actualiza  el producto
+        /// </summary>
+        /// <param name="producto"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "ActualizarProducto/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void ActualizarProducto(modeloParametrizacion.ProductoModelo producto);
+      
+
         #endregion
 
         #region PRODUCTO PRECIO
 
         /// <summary>
-        /// Obtiene el precio de los productos por la talla y el codigo del producto
+        /// Obtiene  los precios de las prendas  que tengan el ultimo precio habilitado
         /// </summary>
         /// <param name="productoId"></param>
-        /// <param name="productoTallaId"></param>
         /// <returns></returns>
+
         [OperationContract]
-        [WebGet(UriTemplate = "ObtenerProductoPrecioPorProductoIdYProductoTallaId?productoId={productoId}&productoTallaId={productoTallaId}", ResponseFormat = WebMessageFormat.Json)]
-        List<modeloParametrizacion.ProductoPrecioModelo> ObtenerProductoPrecioPorProductoIdYProductoTallaId(
-            int productoId,
-            int productoTallaId);
+        [WebGet(
+            UriTemplate =
+                "ObtenerProductoPrecioPorProductoId?productoId={productoId}",
+            ResponseFormat = WebMessageFormat.Json)]
+        List<modeloParametrizacion.ProductoPrecioModelo> ObtenerProductoPrecioPorProductoId(int productoId);
 
 
-        #endregion
-
-        #region PRODUCTO TALLA
 
         /// <summary>
-        /// Obtiene las tallas  de los productos por el codigo del producto
+        /// Graba el precio  de la prenda
+        /// </summary>
+        /// <param name="productoPrecio"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabarProductoPrecio/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void GrabarProductoPrecio(modeloParametrizacion.ProductoPrecioModelo productoPrecio);
+
+
+
+        /// <summary>
+        /// Actualiza los precios  de las prendas
+        /// </summary>
+        /// <param name="productoPrecio"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "ActualizarProductoPrecio/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void ActualizarProductoPrecio(modeloParametrizacion.ProductoPrecioModelo productoPrecio);
+
+
+        /// <summary>
+        /// Obtiene  todos los precios de las prendas 
         /// </summary>
         /// <param name="productoId"></param>
         /// <returns></returns>
+
         [OperationContract]
-        [WebGet(UriTemplate = "ObtenProductoTallaPorProductoId?productoId={productoId}", ResponseFormat = WebMessageFormat.Json)]
-        List<modeloParametrizacion.ProductoTallaModelo> ObtenProductoTallaPorProductoId(int productoId);
+        [WebGet(
+          UriTemplate =
+              "ObtenerProductoPrecioPorEstadoYProductoId?productoId={productoId}",
+          ResponseFormat = WebMessageFormat.Json)]
+        List<modeloParametrizacion.ProductoPrecioModelo> ObtenerProductoPrecioPorEstadoYProductoId(int productoId);
+
 
         #endregion
+
+
 
         #endregion
 

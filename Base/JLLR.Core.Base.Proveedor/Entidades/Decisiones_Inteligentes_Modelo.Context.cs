@@ -30,7 +30,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual DbSet<CONTROL_USUARIO> CONTROL_USUARIO { get; set; }
         public virtual DbSet<ARQUEO_CAJA> ARQUEO_CAJA { get; set; }
         public virtual DbSet<CUENTA_POR_COBRAR> CUENTA_POR_COBRAR { get; set; }
-        public virtual DbSet<CUENTA_POR_PAGAR> CUENTA_POR_PAGAR { get; set; }
         public virtual DbSet<DETALLE_ARQUEO_CAJA> DETALLE_ARQUEO_CAJA { get; set; }
         public virtual DbSet<HISTORIAL_CUENTA_POR_COBRAR> HISTORIAL_CUENTA_POR_COBRAR { get; set; }
         public virtual DbSet<HISTORIAL_CUENTA_POR_PAGAR> HISTORIAL_CUENTA_POR_PAGAR { get; set; }
@@ -104,7 +103,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual DbSet<GRUPO_PRODUCTO> GRUPO_PRODUCTO { get; set; }
         public virtual DbSet<PRODUCTO> PRODUCTO { get; set; }
         public virtual DbSet<PRODUCTO_PRECIO> PRODUCTO_PRECIO { get; set; }
-        public virtual DbSet<PRODUCTO_TALLA> PRODUCTO_TALLA { get; set; }
         public virtual DbSet<PRODUCTO_VS_GRUPO_PRODUCTO> PRODUCTO_VS_GRUPO_PRODUCTO { get; set; }
         public virtual DbSet<TIPO_PRODUCTO> TIPO_PRODUCTO { get; set; }
         public virtual DbSet<ACCION_REGLA> ACCION_REGLA { get; set; }
@@ -121,7 +119,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual DbSet<USUARIO_PREGUNTA_SEGURIDAD> USUARIO_PREGUNTA_SEGURIDAD { get; set; }
         public virtual DbSet<USUARIO_SEGURIDAD> USUARIO_SEGURIDAD { get; set; }
         public virtual DbSet<APROBACION_DESCUENTO> APROBACION_DESCUENTO { get; set; }
-        public virtual DbSet<DETALLE_ORDEN_TRABAJO> DETALLE_ORDEN_TRABAJO { get; set; }
         public virtual DbSet<DETALLE_ORDEN_TRABAJO_OBSERVACION> DETALLE_ORDEN_TRABAJO_OBSERVACION { get; set; }
         public virtual DbSet<DETALLE_PRENDA_ORDEN_TRABAJO> DETALLE_PRENDA_ORDEN_TRABAJO { get; set; }
         public virtual DbSet<DETALLE_TRABAJO_FOTOGRAFIA> DETALLE_TRABAJO_FOTOGRAFIA { get; set; }
@@ -129,8 +126,6 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual DbSet<HISTORIAL_RECLAMO_REPROCESO_PRENDA> HISTORIAL_RECLAMO_REPROCESO_PRENDA { get; set; }
         public virtual DbSet<HISTORIAL_REGLA> HISTORIAL_REGLA { get; set; }
         public virtual DbSet<NUMERACION_ORDEN> NUMERACION_ORDEN { get; set; }
-        public virtual DbSet<ORDEN_TRABAJO> ORDEN_TRABAJO { get; set; }
-        public virtual DbSet<ORDEN_TRABAJO_COMISION> ORDEN_TRABAJO_COMISION { get; set; }
         public virtual DbSet<ORDEN_TRABAJO_DESCUENTO> ORDEN_TRABAJO_DESCUENTO { get; set; }
         public virtual DbSet<VENTA_COMISION> VENTA_COMISION { get; set; }
         public virtual DbSet<VENTA_COMISION_INDUSTRIALES> VENTA_COMISION_INDUSTRIALES { get; set; }
@@ -138,8 +133,12 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public virtual DbSet<TIPO_REPROCESO> TIPO_REPROCESO { get; set; }
         public virtual DbSet<HISTORIAL_REPROCESO> HISTORIAL_REPROCESO { get; set; }
         public virtual DbSet<APLICACION_PAGO> APLICACION_PAGO { get; set; }
-        public virtual DbSet<CIERRE_MES> CIERRE_MES { get; set; }
         public virtual DbSet<MES> MES { get; set; }
+        public virtual DbSet<CIERRE_MES> CIERRE_MES { get; set; }
+        public virtual DbSet<CUENTA_POR_PAGAR> CUENTA_POR_PAGAR { get; set; }
+        public virtual DbSet<ORDEN_TRABAJO_COMISION> ORDEN_TRABAJO_COMISION { get; set; }
+        public virtual DbSet<DETALLE_ORDEN_TRABAJO> DETALLE_ORDEN_TRABAJO { get; set; }
+        public virtual DbSet<ORDEN_TRABAJO> ORDEN_TRABAJO { get; set; }
     
         public virtual ObjectResult<ESTADISTICA_PRENDA_Result> ESTADISTICA_PRENDA(Nullable<System.DateTime> fECHADESDE, Nullable<System.DateTime> fECHAHASTA, Nullable<int> sUCURSALID)
         {

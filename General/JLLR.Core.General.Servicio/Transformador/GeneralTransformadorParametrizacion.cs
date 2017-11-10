@@ -591,5 +591,25 @@ namespace JLLR.Core.General.Servicio.Transformador
             }
         }
         #endregion
+
+        #region MES
+        /// <summary>
+        /// Obtiene los meses de  cierre
+        /// </summary>
+        /// <returns></returns>
+        public List<modelo.MesModelo> ObtenerMeses()
+        {
+            try
+            {
+                return _ensambladorModelo.CrearMeses(_generalParametrizacion.ObtenerMeses());
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
     }
 }

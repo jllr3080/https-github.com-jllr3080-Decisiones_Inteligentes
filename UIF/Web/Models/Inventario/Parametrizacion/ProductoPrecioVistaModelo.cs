@@ -20,11 +20,7 @@ namespace Web.Models.Inventario.Parametrizacion
         
         public ProductoVistaModelo Producto { get; set; }
 
-        /// <summary>
-        /// ProductoTalla
-        /// </summary>
-        
-        public ProductoTallaVistaModelo ProductoTalla { get; set; }
+       
 
         /// <summary>
         /// Precio

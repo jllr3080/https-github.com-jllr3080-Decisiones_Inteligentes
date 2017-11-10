@@ -36,6 +36,7 @@ namespace JLLR.Core.General.Proveedor.Negocio
         private readonly  ParroquiaDAOs _parroquiaDaOs= new ParroquiaDAOs();
         private readonly EntregaUrgenciaDAOs _enetrEntregaUrgenciaDaOs= new EntregaUrgenciaDAOs();
         private readonly  TipoReprocesoDAOs _tipoReprocesoDaOs= new TipoReprocesoDAOs();
+        private readonly MesDAOs _mesDaOs= new MesDAOs();
 
         #endregion
 
@@ -596,6 +597,26 @@ namespace JLLR.Core.General.Proveedor.Negocio
                 return _tipoReprocesoDaOs.ObtenerTipoReprocesos();
             }
             catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region MES
+        /// <summary>
+        /// Obtiene los meses de  cierre
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<MES> ObtenerMeses()
+        {
+            try
+            {
+                return _mesDaOs.ObtenerMeses();
+
+            }
+            catch (Exception)
             {
 
                 throw;

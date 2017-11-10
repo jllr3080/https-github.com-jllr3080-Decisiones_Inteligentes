@@ -70,9 +70,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ServicioContabilidad.svc" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTOs\AplicacionPagoDTOs.cs" />
     <Compile Include="DTOs\AsientoDTOs.cs" />
     <Compile Include="DTOs\CuentaPorCobrarDTOs.cs" />
     <Compile Include="DTOs\CuentaPorPagarDTOs.cs" />

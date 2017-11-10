@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using JLLR.Core.Base.Proveedor.Entidades;
 using JLLR.Core.Venta.Proveedor.Negocio;
 using JLLR.Core.Venta.Proveedor.Validacion;
 using JLLR.Core.Venta.Servicio.DTOs;
@@ -39,6 +40,25 @@ namespace JLLR.Core.Venta.Servicio.Transformador
 
 
         #region TRANSACCIONAL
+        /// <summary>
+        /// Obtiene las  ordenes temporales
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public List<OrdenTrabajoDTOs> ObtenerOrdenTrabajoPorEstadoTemporal(int puntoVentaId)
+        {
+            try
+            {
+                return   _ensambladorModeloDTOs.CrearOrdenesTrabajosDtOs(_ventaNegocio.ObtenerOrdenTrabajoPorEstadoTemporal(puntoVentaId));
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
 
         /// <summary>
         /// Obtiene  el detalle  de las  fotografias   guardadas
@@ -563,6 +583,44 @@ namespace JLLR.Core.Venta.Servicio.Transformador
 
             }
             catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region  DETALLE PRENDA
+        /// <summary>
+        /// Graba la orden de trabajo
+        /// </summary>
+        /// <param name="detallePrendaOrdenTrabajo"></param>
+        /// <returns></returns>
+        public DetallePrendaOrdenTrabajoModelo GrabarDetallePrendaOrdenTrabajo(DetallePrendaOrdenTrabajoModelo detallePrendaOrdenTrabajo)
+        {
+            try
+            {
+                return  _ensambladorModelo.CrearDetallePrendaOrdenTrabajo(_ventaNegocio.GrabarDetallePrendaOrdenTrabajo(_ensambladorEntidad.CrearDetallePrendaOrdenTrabajo(detallePrendaOrdenTrabajo))); 
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
+
+        /// <summary>
+        /// Actualiza la orden de trabajo
+        /// </summary>
+        /// <param name="detallePrendaOrdenTrabajo"></param>
+        public void ActualizarDetallePrendaOrdenTrabajo(DetallePrendaOrdenTrabajoModelo detallePrendaOrdenTrabajo)
+        {
+            try
+            {
+                _ventaNegocio.ActualizarDetallePrendaOrdenTrabajo(_ensambladorEntidad.CrearDetallePrendaOrdenTrabajo(detallePrendaOrdenTrabajo));
+            }
+            catch (Exception)
             {
 
                 throw;

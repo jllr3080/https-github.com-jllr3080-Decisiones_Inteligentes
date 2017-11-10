@@ -43,25 +43,58 @@ namespace JLLR.Core.Inventario.Servicio
                 throw;
             }
         }
+
+        /// <summary>
+        /// Grabar  producto
+        /// </summary>
+        /// <param name="producto"></param>
+        public void GrabarProducto(modeloParametrizacion.ProductoModelo producto)
+        {
+            try
+            {
+              _inventarioTransformadorParametrizacion.GrabarProducto(producto);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Actualiza  el producto
+        /// </summary>
+        /// <param name="producto"></param>
+        public void ActualizarProducto(modeloParametrizacion.ProductoModelo producto)
+        {
+            try
+            {
+                _inventarioTransformadorParametrizacion.ActualizarProducto(producto);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
         #region PRODUCTO PRECIO
 
         /// <summary>
-        /// Obtiene el precio de los productos por la talla y el codigo del producto
+        /// Obtiene  los precios de las prendas  que tengan el ultimo precio habilitado
         /// </summary>
         /// <param name="productoId"></param>
-        /// <param name="productoTallaId"></param>
         /// <returns></returns>
 
-        public List<modeloParametrizacion.ProductoPrecioModelo> ObtenerProductoPrecioPorProductoIdYProductoTallaId(int productoId,
-            int productoTallaId)
+        public List<modeloParametrizacion.ProductoPrecioModelo> ObtenerProductoPrecioPorProductoId(int productoId)
         {
             try
             {
                 return
-                    _inventarioTransformadorParametrizacion.ObtenerProductoPrecioPorProductoIdYProductoTallaId(
-                        productoId, productoTallaId);
+                    _inventarioTransformadorParametrizacion.ObtenerProductoPrecioPorProductoId(productoId);
 
             }
             catch (Exception ex)
@@ -71,21 +104,54 @@ namespace JLLR.Core.Inventario.Servicio
             }
         }
 
-        #endregion
-
-        #region PRODUCTO TALLA
 
         /// <summary>
-        /// Obtiene las tallas  de los productos por el codigo del producto
+        /// Graba el precio  de la prenda
         /// </summary>
-        /// <param name="productoId"></param>
-        /// <returns></returns>
-        public List<modeloParametrizacion.ProductoTallaModelo> ObtenProductoTallaPorProductoId(int productoId)
+        /// <param name="productoPrecio"></param>
+        public void GrabarProductoPrecio(modeloParametrizacion.ProductoPrecioModelo productoPrecio)
         {
             try
             {
-                return
-                    _inventarioTransformadorParametrizacion.ObtenProductoTallaPorProductoId(productoId);
+              _inventarioTransformadorParametrizacion.GrabarProductoPrecio(productoPrecio);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Actualiza los precios  de las prendas
+        /// </summary>
+        /// <param name="productoPrecio"></param>
+        public void ActualizarProductoPrecio(modeloParametrizacion.ProductoPrecioModelo productoPrecio)
+        {
+            try
+            {
+               _inventarioTransformadorParametrizacion.ActualizarProductoPrecio(productoPrecio);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene  todos los precios de las prendas 
+        /// </summary>
+        /// <param name="productoId"></param>
+        /// <returns></returns>
+
+        public List<modeloParametrizacion.ProductoPrecioModelo> ObtenerProductoPrecioPorEstadoYProductoId(int productoId)
+        {
+            try
+            {
+                return _inventarioTransformadorParametrizacion.ObtenerProductoPrecioPorEstadoYProductoId(productoId);
 
             }
             catch (Exception ex)
@@ -95,6 +161,8 @@ namespace JLLR.Core.Inventario.Servicio
             }
         }
         #endregion
+
+
         #endregion
 
     }

@@ -304,9 +304,6 @@
     <Compile Include="Entidades\PRODUCTO_PRECIO.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entidades\PRODUCTO_TALLA.cs">
-      <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
-    </Compile>
     <Compile Include="Entidades\PRODUCTO_VS_GRUPO_PRODUCTO.cs">
       <DependentUpon>Decisiones_Inteligentes_Modelo.tt</DependentUpon>
     </Compile>

@@ -211,6 +211,8 @@
     <Content Include="Content\Imagen\ImagenInicial.png" />
     <Content Include="Content\Imagen\Logo_Pagina_Inicio.png" />
     <Content Include="Content\Imagen\Logo_Principal.png" />
+    <Content Include="Content\Imagen\mas.jpg" />
+    <Content Include="Content\Imagen\menos.png" />
     <Content Include="Content\Imagen\Nuevo.png" />
     <Content Include="Content\Imagen\Observar.png" />
     <Content Include="Content\Imagen\ParroquiasQuito.png" />
@@ -238,6 +240,7 @@
     <Content Include="Parametrizacion\Feriado.aspx" />
     <Content Include="Parametrizacion\Marca.aspx" />
     <Content Include="Parametrizacion\Prenda.aspx" />
+    <Content Include="Parametrizacion\PrendaPrecio.aspx" />
     <Content Include="Parametrizacion\Promocion.aspx" />
     <Content Include="Reporte\ReporteCuentasPorCobrar.aspx" />
     <Content Include="Reporte\ReporteCuentasPorPagar.aspx" />
@@ -291,7 +294,9 @@
     <Content Include="Venta\AprobacionDescuento.aspx" />
     <Content Include="Venta\ConsultaOrdenPlanta.aspx" />
     <Content Include="Venta\ConsultaOrdenTrabajo.aspx" />
+    <Content Include="Venta\OrdenesPendientes.aspx" />
     <Content Include="Venta\OrdenTrabajo.aspx" />
+    <Content Include="Venta\OrdenTrabajoWizard.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -500,7 +505,6 @@
     <Compile Include="Models\Individuo\ProveedorVistaModelo.cs" />
     <Compile Include="Models\Individuo\TelefonoVistaModelo.cs" />
     <Compile Include="Models\Inventario\Parametrizacion\ProductoPrecioVistaModelo.cs" />
-    <Compile Include="Models\Inventario\Parametrizacion\ProductoTallaVistaModelo.cs" />
     <Compile Include="Models\Inventario\Parametrizacion\ProductoVistaModelo.cs" />
     <Compile Include="Models\Inventario\Parametrizacion\TipoProductoVistaModelo.cs" />
     <Compile Include="Models\ReglaNegocio\AccionReglaVistaModelo.cs" />
@@ -568,6 +572,13 @@
     </Compile>
     <Compile Include="Parametrizacion\Prenda.aspx.designer.cs">
       <DependentUpon>Prenda.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametrizacion\PrendaPrecio.aspx.cs">
+      <DependentUpon>PrendaPrecio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametrizacion\PrendaPrecio.aspx.designer.cs">
+      <DependentUpon>PrendaPrecio.aspx</DependentUpon>
     </Compile>
     <Compile Include="Parametrizacion\Promocion.aspx.cs">
       <DependentUpon>Promocion.aspx</DependentUpon>
@@ -743,12 +754,26 @@
     <Compile Include="Venta\ManejadorImagen.ashx.cs">
       <DependentUpon>ManejadorImagen.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Venta\OrdenesPendientes.aspx.cs">
+      <DependentUpon>OrdenesPendientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Venta\OrdenesPendientes.aspx.designer.cs">
+      <DependentUpon>OrdenesPendientes.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Venta\OrdenTrabajo.aspx.cs">
       <DependentUpon>OrdenTrabajo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Venta\OrdenTrabajo.aspx.designer.cs">
       <DependentUpon>OrdenTrabajo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Venta\OrdenTrabajoWizard.aspx.cs">
+      <DependentUpon>OrdenTrabajoWizard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Venta\OrdenTrabajoWizard.aspx.designer.cs">
+      <DependentUpon>OrdenTrabajoWizard.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
@@ -786,6 +811,12 @@
     <EmbeddedResource Include="Reporte\Venta\Rdlc\ReporteImpresionRapida.rdlc" />
     <EmbeddedResource Include="Reporte\Venta\Rdlc\ReporteOrdenTrabajo.rdlc" />
     <EmbeddedResource Include="Reporte\Venta\Rdlc\ReportePrendaMarca.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ServicioDelegado\JLLR.Core.ServicioDelegado.Proveedor\JLLR.Core.ServicioDelegado.Proveedor.csproj">
+      <Project>{9252977a-5408-4d89-9e1d-b374cabb9a71}</Project>
+      <Name>JLLR.Core.ServicioDelegado.Proveedor</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

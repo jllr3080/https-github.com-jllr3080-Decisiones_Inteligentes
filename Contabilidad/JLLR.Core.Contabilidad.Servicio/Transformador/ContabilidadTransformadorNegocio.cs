@@ -184,6 +184,29 @@ namespace JLLR.Core.Contabilidad.Servicio.Transformador
                 throw;
             }
         }
+
+        /// <summary>
+        /// Obtiene las aplicaciones de pago para ser validadas
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <param name="mesId"></param>
+        /// <returns></returns>
+        public List<AplicacionPagoDTOs> ObtenerAplicacionPagosPorPuntoVentaIdYMesId(int puntoVentaId, int mesId)
+        {
+            try
+            {
+                return
+                    _ensambladorModeloDTOs.CrearAplicacionPagoDtOses(
+                        _contabilidadNegocio.ObtenerAplicacionPagosPorPuntoVentaIdYMesId(puntoVentaId, mesId));
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
         #endregion
 
         #region CUENTA POR COBRAR
@@ -396,6 +419,113 @@ namespace JLLR.Core.Contabilidad.Servicio.Transformador
             try
             {
                 _contabilidadNegocio.ActualizaHistorialCuentaPorPagar(_ensambladorEntidad.CrearHistorialCuentaPorPagar(historialCuentaPorPagar));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region  CIERRE MES
+        /// <summary>
+        /// Graba  el cierre  de  mes 
+        /// </summary>
+        /// <param name="cierreMes"></param>
+        /// <returns></returns>
+        public CierreMesModelo GrabarCierreMes(CierreMesModelo cierreMes)
+        {
+            try
+            {
+                return
+                    _ensambladorModelo.CrearCierre(
+                        _contabilidadNegocio.GrabarCierreMes(_ensambladorEntidad.CrearCierreMes(cierreMes)));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Cierre  de  mes 
+        /// </summary>
+        /// <param name="mesId"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public List<CierreMesModelo> ObtenerCierresMesPorAplicacionPendiente(int mesId, int puntoVentaId)
+        {
+            try
+            {
+                return
+                    _ensambladorModelo.CrearCierres(_contabilidadNegocio.ObtenerCierresMesPorAplicacionPendiente(mesId,
+                        puntoVentaId));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region APLICACION PAGO
+        /// <summary>
+        /// Graba  el cierre  de  mes 
+        /// </summary>
+        /// <param name="aplicacionPago"></param>
+        /// <returns></returns>
+        public AplicacionPagoModelo GrabaAplicacionPago(AplicacionPagoModelo aplicacionPago)
+        {
+            try
+            {
+                return
+                    _ensambladorModelo.CrearAplicacionPago(
+                        _contabilidadNegocio.GrabaAplicacionPago(_ensambladorEntidad.CrearAplicacionPago(aplicacionPago)));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Graba  el cierre  de  mes 
+        /// </summary>
+        /// <param name="aplicacionPago"></param>
+        /// <returns></returns>
+        public AplicacionPagoModelo ActualizaAplicacionPago(AplicacionPagoModelo aplicacionPago)
+        {
+            try
+            {
+                return
+                    _ensambladorModelo.CrearAplicacionPago(
+                        _contabilidadNegocio.ActualizaAplicacionPago(
+                            _ensambladorEntidad.CrearAplicacionPago(aplicacionPago)));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        ///Obtiene  los pagos por cada  cierre  de  mes 
+        /// </summary>
+        /// <param name="cierreMesId"></param>
+        /// <returns></returns>
+        public List<AplicacionPagoModelo> ObtenerAplicacionPagoPorCierreMesId(int cierreMesId)
+        {
+            try
+            {
+                return
+                    _ensambladorModelo.CrearAplicacionesPago(
+                        _contabilidadNegocio.ObtenerAplicacionPagoPorCierreMesId(cierreMesId));
             }
             catch (Exception ex)
             {
