@@ -45,6 +45,31 @@ namespace JLLR.Core.General.Proveedor.DAOs
             }
         }
 
+
+
+        /// <summary>
+        /// Actualiza  los parametros
+        /// </summary>
+        /// <param name="parametro"></param>
+        public void ActualizarParametro(PARAMETRO parametro)
+        {
+            try
+            {
+                var original = _entidad.PARAMETRO.Find(parametro.PARAMETRO_ID);
+
+                if (original != null)
+                {
+                    _entidad.Entry(original).CurrentValues.SetValues(parametro);
+                    _entidad.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
     }
 }
 

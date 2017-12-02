@@ -32,6 +32,78 @@ namespace Web.ServicioDelegado
 
         #region TRANSACCIONAL
 
+
+        /// <summary>
+        /// Graba la operacion de descuento  
+        /// </summary>
+        /// <param name="parametroAnulacionDtOs"></param>
+        public void GrabarAnluacionPrenda(ParametroAnulacionVistaDTOs parametroAnulacionDtOs)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ParametroAnulacionVistaDTOs));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, parametroAnulacionDtOs);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "GrabarAnluacionPrenda", "POST", datos);
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        /// <summary>
+        /// Grabar el detallde  de las prendas
+        /// </summary>
+        /// <param name="ordenTrabajoDtOs"></param>
+
+        public void GrabarDetallePrendaCompleto(OrdenTrabajoVistaDTOs ordenTrabajoDtOs)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(OrdenTrabajoVistaDTOs));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, ordenTrabajoDtOs);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "GrabarDetallePrendaCompleto", "POST", datos);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene la impresion corta sin el detalle de las prensdas
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public List<ConsultaOrdenTrabajoVistaDTOs> ObtenerOrdenTrabajoCortaPorNumeroOrdenYPuntoVenta(string numeroOrden,
+            int puntoVentaId)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerOrdenTrabajoCortaPorNumeroOrdenYPuntoVenta?numeroOrden=" + numeroOrden + "&puntoVentaId=" + puntoVentaId);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<ConsultaOrdenTrabajoVistaDTOs>>(json);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
         /// <summary>
         /// Obtiene  el detalle  de las  fotografias   guardadas
         /// </summary>
@@ -601,6 +673,82 @@ namespace Web.ServicioDelegado
                 throw;
             }
         }
+
+
+        /// <summary>
+        /// Graba la  venta de la ocmision
+        /// </summary>
+        /// <param name="ventaComision"></param>
+
+        public void GrabarVentaComision(VentaComisionVistaModelo ventaComision)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(VentaComisionVistaModelo));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, ventaComision);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "GrabarVentaComision", "POST", datos);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Actualizar  venta de  comision
+        /// </summary>
+        /// <param name="ventaComision"></param>
+        public void ActualizarVentaComision(VentaComisionVistaModelo ventaComision)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(VentaComisionVistaModelo));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, ventaComision);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "ActualizarVentaComision", "POST", datos);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Obtiene las  venta de las comisiones
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public List<VentaComisionVistaModelo> ObtenerVentaComisiones(int puntoVentaId)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerVentaComisiones?puntoVentaId=" + puntoVentaId);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<VentaComisionVistaModelo>>(json);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
         #region HISTORIAL REGLA
@@ -760,6 +908,167 @@ namespace Web.ServicioDelegado
             }
         }
         #endregion
+
+        #region NUMERACION ORDEN
+
+
+        /// <summary>
+        /// Obtiene  todas las sucursales 
+        /// </summary>
+        /// <returns></returns>
+        public List<NumeracionOrdenVistaDTOs> ObtenerPuntosVentaCompleto()
+        {
+            try
+            {
+
+
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerPuntosVentaCompleto");
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<NumeracionOrdenVistaDTOs>>(json);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Grabar punto de  venta y numero de  orden
+        /// </summary>
+        /// <param name="numeracionOrdenDtOs"></param>
+        public void GrabarPuntoVentaCompleto(NumeracionOrdenVistaDTOs numeracionOrdenDtOs)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(NumeracionOrdenVistaDTOs));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, numeracionOrdenDtOs);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "GrabarPuntoVentaCompleto ", "POST", datos);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Grabar punto de  venta y numero de  orden
+        /// </summary>
+        /// <param name="numeracionOrdenDtOs"></param>
+        public void ActualizarPuntoVentaCompleto(NumeracionOrdenVistaDTOs numeracionOrdenDtOs)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(NumeracionOrdenVistaDTOs));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, numeracionOrdenDtOs);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "ActualizarPuntoVentaCompleto ", "POST", datos);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+
+        #endregion
+
+        #region VENTA COMISION  INDUSTRIALES
+
+        /// <summary>
+        /// Obtiene el valor de la venta de  industriales
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public List<VentaComisionIndustrialesVistaDTOs> ObtenerComisionesIndustrialesPorPuntoVenta(int puntoVentaId)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerComisionesIndustrialesPorPuntoVenta?puntoVentaId=" + puntoVentaId);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<VentaComisionIndustrialesVistaDTOs>>(json);
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        /// Grabar promociones
+        /// </summary>
+        /// <param name="ventaComisionIndustrialesDtOs"></param>
+        public void GrabarVentaComisionIndustrialesCompleto(VentaComisionIndustrialesVistaDTOs ventaComisionIndustrialesDtOs)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(VentaComisionIndustrialesVistaDTOs));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, ventaComisionIndustrialesDtOs);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "GrabarVentaComisionIndustrialesCompleto ", "POST", datos);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Actualizar promociones
+        /// </summary>
+        /// <param name="ventaComisionIndustrialesDtOs"></param>
+        public void ActualizarVentaComisionIndustrialesCompleto(VentaComisionIndustrialesVistaDTOs ventaComisionIndustrialesDtOs)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(VentaComisionIndustrialesVistaDTOs));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, ventaComisionIndustrialesDtOs);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "ActualizarVentaComisionIndustrialesCompleto ", "POST", datos);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
         #endregion
 
         #region VALIDACION

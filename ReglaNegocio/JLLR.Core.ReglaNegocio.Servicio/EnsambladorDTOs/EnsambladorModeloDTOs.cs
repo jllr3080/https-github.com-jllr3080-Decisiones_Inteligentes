@@ -17,7 +17,9 @@ namespace JLLR.Core.ReglaNegocio.Servicio.EnsambladorDTOs
     /// </summary>
     public class EnsambladorModeloDTOs
     {
-
+        #region  DECLARACIONES E  INSTANCIAS
+        private ensamblador.EnsambladorModelo _ensambladorModelo= new ensamblador.EnsambladorModelo();
+        #endregion
         #region REGLA DE  NEGOCIO
         /// <summary>
         /// Convierte el modelo DTO en una entidad DTO
@@ -156,7 +158,45 @@ namespace JLLR.Core.ReglaNegocio.Servicio.EnsambladorDTOs
 
         }
 
-       
+
+
+        #endregion
+
+        #region PARAMETRO DE  SALIDA
+        /// <summary>
+        /// Convierte el modelo DTO en una entidad DTO
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public modeloDTOs.ReglaCompletaDTOs CreaReglaCompletaDtOs(entidadDTOs.ReglaCompletaDTOs e)
+        {
+            return new modeloDTOs.ReglaCompletaDTOs()
+            {
+               Regla = _ensambladorModelo.CrearRegla(e.Regla),
+               AccionReglas = _ensambladorModelo.CrearAccionReglas(e.AccionReglas)
+
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos  Usuario en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<modeloDTOs.ReglaCompletaDTOs> CreaReglasCompletaDtOs(IQueryable<entidadDTOs.ReglaCompletaDTOs> listadoModelo)
+        {
+            List<modeloDTOs.ReglaCompletaDTOs> listaEntidad = new List<modeloDTOs.ReglaCompletaDTOs>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CreaReglaCompletaDtOs(modelo));
+            }
+            return listaEntidad;
+
+        }
+
+
 
         #endregion
     }

@@ -73,6 +73,7 @@
   <ItemGroup>
     <Compile Include="DTOs\ParametroEntradaReglaNegocioDTOs.cs" />
     <Compile Include="DTOs\ParametroSalidaReglaNegocioDTOs.cs" />
+    <Compile Include="DTOs\ReglaCompletaDTOs.cs" />
     <Compile Include="DTOs\ReglaDTOs.cs" />
     <Compile Include="EnsambladorDTOs\EnsambladorEntidadDTOs.cs" />
     <Compile Include="EnsambladorDTOs\EnsambladorModeloDTOs.cs" />
@@ -108,6 +109,10 @@
     <ProjectReference Include="..\..\General\JLLR.Core.General.Servicio\JLLR.Core.General.Servicio.csproj">
       <Project>{FA1CB8EE-77D8-41C6-BB31-FEE6716B8CF8}</Project>
       <Name>JLLR.Core.General.Servicio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Inventario\JLLR.Core.Inventario.Servicio\JLLR.Core.Inventario.Servicio.csproj">
+      <Project>{a3ee7799-0761-4e63-a4ab-ec4cf44e4a7c}</Project>
+      <Name>JLLR.Core.Inventario.Servicio</Name>
     </ProjectReference>
     <ProjectReference Include="..\JLLR.Core.ReglaNegocio.Proveedor\JLLR.Core.ReglaNegocio.Proveedor.csproj">
       <Project>{c4898767-c180-4c77-b1d5-0b33fa7b0954}</Project>

@@ -126,6 +126,40 @@ namespace JLLR.Core.Contabilidad.Servicio
                "ObtenerAplicacionPagosPorPuntoVentaIdYMesId?puntoVentaId={puntoVentaId}&mesId={mesId}",
            ResponseFormat = WebMessageFormat.Json)]
         List<AplicacionPagoDTOs> ObtenerAplicacionPagosPorPuntoVentaIdYMesId(int puntoVentaId, int mesId);
+
+        /// <summary>
+        /// Obtiene las cuentas opor  cobrar  por numero  de cedula 
+        /// </summary>
+        /// <param name="numeroIdentificacion"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <param name="sucursalId"></param>
+        /// <returns></returns>
+
+        [OperationContract]
+        [WebGet(
+           UriTemplate =
+               "ObtenerCuentasPorCobrarCompleto?numeroIdentificacion={numeroIdentificacion}&puntoVentaId={puntoVentaId}&sucursalId={sucursalId}",
+           ResponseFormat = WebMessageFormat.Json)]
+        List<CuentaPorCobrarDTOs> ObtenerCuentasPorCobrarCompleto(string numeroIdentificacion, int puntoVentaId,
+            int sucursalId);
+
+        /// <summary>
+        /// Obtiene cuentas por cobrar por fechas
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <param name="sucursalId"></param>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechaHasta"></param>
+        /// <returns></returns>
+
+        [OperationContract]
+        [WebGet(
+            UriTemplate =
+                "ObtenerCuentasPorCobrarCompletaPorFechas?puntoVentaId={puntoVentaId}&sucursalId={sucursalId}&fechaDesde={fechaDesde}&fechaHasta={fechaHasta}",
+            ResponseFormat = WebMessageFormat.Json)]
+        List<CuentaPorCobrarDTOs> ObtenerCuentasPorCobrarCompletaPorFechas(int puntoVentaId, int sucursalId,
+            string fechaDesde, string fechaHasta);
+        
         #endregion
 
         #region CUENTA POR COBRAR

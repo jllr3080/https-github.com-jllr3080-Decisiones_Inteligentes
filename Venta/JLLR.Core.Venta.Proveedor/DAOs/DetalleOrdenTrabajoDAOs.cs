@@ -65,6 +65,46 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
             }
         }
 
+        /// <summary>
+        /// Actualiza la orden de trabajo
+        /// </summary>
+        /// <param name=""></param>
+        public void ActualizarDetalleOrdenTrabajo(DETALLE_ORDEN_TRABAJO detalleOrdenTrabajo)
+        {
+            try
+            {
+                var original = _entidad.DETALLE_ORDEN_TRABAJO.Find(detalleOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID);
+
+                if (original != null)
+                {
+                    _entidad.Entry(original).CurrentValues.SetValues(detalleOrdenTrabajo);
+                    _entidad.SaveChanges();
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Encontrar el detalle de la orden  de trabajo 
+        /// </summary>
+        /// <param name="detalleOrdenTrabajoId"></param>
+        public DETALLE_ORDEN_TRABAJO ObtenerDetalleOrdenTrabajoPorId(int detalleOrdenTrabajoId)
+        {
+            try
+            {
+                return _entidad.DETALLE_ORDEN_TRABAJO.Find(detalleOrdenTrabajoId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
 
     }

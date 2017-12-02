@@ -300,12 +300,8 @@ namespace Web.Logistica
                 if (!IsPostBack)
                 {
 
-                    _nombrePerfil.Text = User.NombrePerfil;
-                    _etapaProceso.DataSource = _servicioDelegadoGeneral.ObtenerEtapasProceso();
-                    _etapaProceso.DataBind();
-                    _etapaProcesoDestino.DataSource = _servicioDelegadoGeneral.ObtenerEtapasProceso();
-                    _etapaProcesoDestino.DataBind();
-                    _listaOrdenTrabajoVistaDtOses=CargarInformacion();
+                    CargarInformacionInicial();
+                        _listaOrdenTrabajoVistaDtOses =CargarInformacion();
 
                 }
                 
@@ -320,6 +316,31 @@ namespace Web.Logistica
         #endregion
 
         #region Metodos
+
+        private void CargarInformacionInicial()
+        {
+            try
+            {
+                _nombrePerfil.Text = User.NombrePerfil;
+                EtapaProcesoVistaModelo  etapaProcesoVista= new EtapaProcesoVistaModelo();
+                etapaProcesoVista.EtapaProcesoId = -1;
+                etapaProcesoVista.Descripcion = "SELECCIONE UNA OPCION";
+                List<EtapaProcesoVistaModelo> _listaEtapaProcesoVistaModelos = _servicioDelegadoGeneral.ObtenerEtapasProceso();
+                _listaEtapaProcesoVistaModelos.Add(etapaProcesoVista);
+                
+                _etapaProceso.DataSource = _listaEtapaProcesoVistaModelos;
+                _etapaProceso.DataBind();
+                _etapaProceso.SelectedIndex = _etapaProceso.Items.IndexOf(_etapaProceso.Items.FindByValue("-1"));
+                
+                _etapaProcesoDestino.DataSource = _listaEtapaProcesoVistaModelos;
+                _etapaProcesoDestino.DataBind();
+                _etapaProcesoDestino.SelectedIndex = _etapaProcesoDestino.Items.IndexOf(_etapaProcesoDestino.Items.FindByValue("-1"));
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
 
         /// <summary>
         /// Despliega  los mensajes    de las diferentes acciones de las  pantallas

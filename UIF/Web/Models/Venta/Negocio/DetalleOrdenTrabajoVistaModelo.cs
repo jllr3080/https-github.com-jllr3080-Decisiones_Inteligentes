@@ -147,5 +147,11 @@ namespace Web.Models.Venta.Negocio
         /// </summary>
         
         public int? DetalleOrdenTrabajoAnuladaId { get; set; }
+
+        /// <summary>
+        /// EstaAulada
+        /// </summary>
+
+        public bool? EstaAulada { get; set; }
     }
 }

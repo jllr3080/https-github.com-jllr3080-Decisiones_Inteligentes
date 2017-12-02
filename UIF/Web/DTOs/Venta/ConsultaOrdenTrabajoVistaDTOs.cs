@@ -160,5 +160,11 @@ namespace Web.DTOs.Venta
         /// </summary>
         public int DetallePrendaOrdenTrabajoId { get; set; }
 
+        /// <summary>
+        ///EstaAnulada
+        /// </summary>
+        
+        public bool? EstaAnulada { get; set; }
+
     }
 }

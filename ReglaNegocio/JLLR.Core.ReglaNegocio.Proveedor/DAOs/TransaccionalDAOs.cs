@@ -102,7 +102,7 @@ namespace JLLR.Core.ReglaNegocio.Proveedor.DAOs
                     join accionRegla in _entidad.ACCION_REGLA on promocion.REGLA_ID equals accionRegla.REGLA_ID
                     where
                         promocion.PUNTO_VENTA_ID == puntoVentaId && promocion.SUCURSAL_ID == sucursalId &&
-                        accionRegla.ESTA_HABILITADO == true
+                        accionRegla.ESTA_HABILITADO == true 
                     select promocion;
 
 
@@ -118,6 +118,81 @@ namespace JLLR.Core.ReglaNegocio.Proveedor.DAOs
         }
 
 
+        #region ADMINISTRACION PROMOCIONES
+
+        /// <summary>
+        /// Grabar promociones
+        /// </summary>
+        /// <param name="reglaCompletaDtOs"></param>
+        public void GrabarPromocionesCompleta(ReglaCompletaDTOs reglaCompletaDtOs)
+        {
+            using (System.Transactions.TransactionScope transaction = new System.Transactions.TransactionScope())
+            {
+                try
+                {
+                  
+
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Actualizar promociones
+        /// </summary>
+        /// <param name="reglaCompletaDtOs"></param>
+        public void ActualizarPromocionesCompleta(ReglaCompletaDTOs reglaCompletaDtOs)
+        {
+            using (System.Transactions.TransactionScope transaction = new System.Transactions.TransactionScope())
+            {
+                try
+                {
+
+
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Obtiene las promociones
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+
+        public IQueryable<ReglaCompletaDTOs> ObtenerPromociones(int puntoVentaId)
+        {
+            try
+            {
+                var promociones = from regla in _entidad.REGLA
+                    join accionRegla in _entidad.ACCION_REGLA on regla.REGLA_ID equals accionRegla.REGLA_ID
+                                  where regla.PUNTO_VENTA_ID == puntoVentaId
+                    select new ReglaCompletaDTOs
+                    {
+                        Regla = regla,
+                        AccionReglas = regla.ACCION_REGLA.ToList()
+                    };
+
+                return promociones ;
+
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
+
+        #endregion
 
 
     }

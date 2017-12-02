@@ -288,6 +288,7 @@ namespace JLLR.Core.Individuo.Servicio.Ensamblador
 
             modeloGeneral.TipoTelefonoModelo _tipoTelefono = new modeloGeneral.TipoTelefonoModelo();
             _tipoTelefono.TipoTelefonoId = Convert.ToInt32(e.TIPO_TELEFONO_ID);
+            _tipoTelefono.Descripcion = e.TIPO_TELEFONO.DESCRIPCION;
 
             return new modelo.TelefonoModelo
             {

@@ -41,25 +41,7 @@ namespace Web.Venta
         #endregion
 
         #region Eventos
-        /// <summary>
-        /// Anula a la prenda
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void _anularPrenda_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-
-            }
-            catch (Exception)
-            {
-                    
-                throw;
-            }
-
-
-        }
+       
         /// <summary>
         /// Graba la prenda a eprocesar
         /// </summary>
@@ -354,14 +336,21 @@ namespace Web.Venta
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                //_montoTotal += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ValorTotal"));
-                //_cantidadTotal += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "Cantidad"));
+                bool estaAnulada =
+                    Convert.ToBoolean(
+                        _listaConsultaOrdenTrabajoVistaDtOses.Where(a => a.DetallePrendaOrdenTrabajoId.Equals(Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "DetallePrendaOrdenTrabajoId"))))
+                            .Select(a => a.EstaAnulada)
+                            .FirstOrDefault());
+
+
+                if (estaAnulada == true)
+                    e.Row.BackColor = System.Drawing.Color.Red;
             }
             else if (e.Row.RowType == DataControlRowType.Footer)
             {
-                
+
                 e.Row.Cells[0].Text = "Totales:";
-                e.Row.Cells[1].Text = _listaDetalleOrdenTrabajoVistaModelos.Sum(a=>a.Cantidad).ToString();
+                e.Row.Cells[1].Text = _listaDetalleOrdenTrabajoVistaModelos.Sum(a => a.Cantidad).ToString();
                 e.Row.Cells[1].HorizontalAlign = HorizontalAlign.Left;
 
                 e.Row.Cells[6].Text = _listaDetalleOrdenTrabajoVistaModelos.Sum(a => a.ValorTotal).ToString();
@@ -666,55 +655,91 @@ namespace Web.Venta
         {
             try
             {
+                int index = Convert.ToInt32(e.CommandArgument);
                 if (e.CommandName == "Observacion")
 
                 {
-                    _observacion.Text = String.Empty;
-                    _btnObservaciones_ModalPopupExtender.TargetControlID = "_btnBuscar";
-                    _btnObservaciones_ModalPopupExtender.Show();
-                    int index = Convert.ToInt32(e.CommandArgument);
-                    List<DetalleOrdenTrabajoObservacionVistaDTOs> _lisaDetalleOrdenTrabajoObservacion= _servicioDelegadoVenta.ObtenerDetalleOrdenTrabajoObservacionPorDetalleOrdenTrabajoId(Convert.ToInt32(_datos.Rows[index].Cells[0].Text));
-                    if (_lisaDetalleOrdenTrabajoObservacion.Count>0)
-                    {
-                        _datosObservaciones.DataSource = _lisaDetalleOrdenTrabajoObservacion;
-                        _datosObservaciones.DataBind();
-                    }
+                    bool estaAnulada = Convert.ToBoolean(_listaConsultaOrdenTrabajoVistaDtOses.Where(a => a.DetallePrendaOrdenTrabajoId.Equals(Convert.ToInt32(_datos.Rows[index].Cells[0].Text))).Select(a => a.EstaAnulada).FirstOrDefault());
 
-                    int ordenCerrada = Convert.ToInt32(_listaHistorialProcesoVistaModelos.Where(a => a.EtapaProceso.EtapaProcesoId.Equals(Convert.ToInt32(Util.EtapaProceso.EntregaFranquiciaHaciaCliente))).Select(b => b.EtapaProceso.EtapaProcesoId).FirstOrDefault().ToString());
-                    int ordenAnulada = Convert.ToInt32(_listaHistorialProcesoVistaModelos.Where(a => a.EtapaProceso.EtapaProcesoId.Equals(Convert.ToInt32(Util.EtapaProceso.AnulacionOrdenTrabajo))).Select(b => b.EtapaProceso.EtapaProcesoId).FirstOrDefault().ToString());
 
-                    if (ordenCerrada == Convert.ToInt32(Util.EtapaProceso.EntregaFranquiciaHaciaCliente) ||
-                        ordenAnulada == Convert.ToInt32(Util.EtapaProceso.AnulacionOrdenTrabajo))
+                    if (estaAnulada != true)
                     {
+                        _observacion.Text = String.Empty;
+                        _btnObservaciones_ModalPopupExtender.TargetControlID = "_btnBuscar";
+                        _btnObservaciones_ModalPopupExtender.Show();
                         
-                        _observacion.ReadOnly = true;
-                        _btnAceptaAnulacionOrden.Enabled = false;
-                        _btnAceptaAnulacionOrden.CssClass= "btn btn-primary";
+                        List<DetalleOrdenTrabajoObservacionVistaDTOs> _lisaDetalleOrdenTrabajoObservacion =
+                            _servicioDelegadoVenta.ObtenerDetalleOrdenTrabajoObservacionPorDetalleOrdenTrabajoId(
+                                Convert.ToInt32(_datos.Rows[index].Cells[0].Text));
+                        if (_lisaDetalleOrdenTrabajoObservacion.Count > 0)
+                        {
+                            _datosObservaciones.DataSource = _lisaDetalleOrdenTrabajoObservacion;
+                            _datosObservaciones.DataBind();
+                        }
+
+                        int ordenCerrada =
+                            Convert.ToInt32(
+                                _listaHistorialProcesoVistaModelos.Where(
+                                    a =>
+                                        a.EtapaProceso.EtapaProcesoId.Equals(
+                                            Convert.ToInt32(Util.EtapaProceso.EntregaFranquiciaHaciaCliente)))
+                                    .Select(b => b.EtapaProceso.EtapaProcesoId)
+                                    .FirstOrDefault()
+                                    .ToString());
+                        int ordenAnulada =
+                            Convert.ToInt32(
+                                _listaHistorialProcesoVistaModelos.Where(
+                                    a =>
+                                        a.EtapaProceso.EtapaProcesoId.Equals(
+                                            Convert.ToInt32(Util.EtapaProceso.AnulacionOrdenTrabajo)))
+                                    .Select(b => b.EtapaProceso.EtapaProcesoId)
+                                    .FirstOrDefault()
+                                    .ToString());
+
+                        if (ordenCerrada == Convert.ToInt32(Util.EtapaProceso.EntregaFranquiciaHaciaCliente) ||
+                            ordenAnulada == Convert.ToInt32(Util.EtapaProceso.AnulacionOrdenTrabajo))
+                        {
+
+                            _observacion.ReadOnly = true;
+                            _btnAceptaAnulacionOrden.Enabled = false;
+                            _btnAceptaAnulacionOrden.CssClass = "btn btn-primary";
+                        }
+                        else
+                        {
+
+                            _observacion.ReadOnly = false;
+                            _btnAceptaAnulacionOrden.Enabled = true;
+                            _detalleOrdenTrabajoId.Value = _datos.Rows[index].Cells[0].Text;
+                        }
                     }
                     else
-                    {
+                        Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Esta_Anulada").ToString(), "_btnBuscar");
 
-                        _observacion.ReadOnly = false;
-                        _btnAceptaAnulacionOrden.Enabled = true;
-                        _detalleOrdenTrabajoId.Value = _datos.Rows[index].Cells[0].Text;
-                    }
-
-                    
                 }
                 if (e.CommandName == "Fotografia")
                 {
-                    int index = Convert.ToInt32(e.CommandArgument);
-                    _btnAgregarFotografia_ModalPopupExtender.TargetControlID = "_btnBuscar";
-                    _btnAgregarFotografia_ModalPopupExtender.Show();
-                    _detallePrendaId.Value = _datos.Rows[index].Cells[0].Text;
-                    _listaDetalleOrdenTrabajoFotografiaVistaDtOses = _servicioDelegadoVenta.ObtenerDetalleOrdenTrabajoFotografiaDtOsesPorDetallePrendaId(
-                            Convert.ToInt32(_detallePrendaId.Value));
-                    _datosFotografia.DataSource = _listaDetalleOrdenTrabajoFotografiaVistaDtOses;
-                    _datosFotografia.DataBind();
+                    
+                    bool estaAnulada = Convert.ToBoolean(_listaConsultaOrdenTrabajoVistaDtOses.Where(a => a.DetallePrendaOrdenTrabajoId.Equals(Convert.ToInt32(_datos.Rows[index].Cells[0].Text))).Select(a => a.EstaAnulada).FirstOrDefault());
+
+
+                    if (estaAnulada != true)
+                    {
+                        
+                        _btnAgregarFotografia_ModalPopupExtender.TargetControlID = "_btnBuscar";
+                        _btnAgregarFotografia_ModalPopupExtender.Show();
+                        _detallePrendaId.Value = _datos.Rows[index].Cells[0].Text;
+                        _listaDetalleOrdenTrabajoFotografiaVistaDtOses = _servicioDelegadoVenta
+                            .ObtenerDetalleOrdenTrabajoFotografiaDtOsesPorDetallePrendaId(
+                                Convert.ToInt32(_detallePrendaId.Value));
+                        _datosFotografia.DataSource = _listaDetalleOrdenTrabajoFotografiaVistaDtOses;
+                        _datosFotografia.DataBind();
+                    }
+                    else
+                        Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Esta_Anulada").ToString(), "_btnBuscar");
                 }
                 if (e.CommandName=="Reproceso")
                 {
-                     int index = Convert.ToInt32(e.CommandArgument);
+                     
                     int ordenCerrada = Convert.ToInt32(_listaHistorialProcesoVistaModelos.Where(a => a.EtapaProceso.EtapaProcesoId.Equals(Convert.ToInt32(Util.EtapaProceso.EntregaFranquiciaHaciaCliente))).Select(b => b.EtapaProceso.EtapaProcesoId).FirstOrDefault().ToString());
                     int ordenAnulada = Convert.ToInt32(_listaHistorialProcesoVistaModelos.Where(a => a.EtapaProceso.EtapaProcesoId.Equals(Convert.ToInt32(Util.EtapaProceso.AnulacionOrdenTrabajo))).Select(b => b.EtapaProceso.EtapaProcesoId).FirstOrDefault().ToString());
 
@@ -722,8 +747,12 @@ namespace Web.Venta
                         Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Orden_Cerrada").ToString(), "_btnBuscar");
                     else
                     {
-                       
-                        _tipoMotivoReproceso.DataSource = _servicioDelegadoGeneral.ObtenerTipoReprocesos();
+                        bool estaAnulada = Convert.ToBoolean(_listaConsultaOrdenTrabajoVistaDtOses.Where(a => a.DetallePrendaOrdenTrabajoId.Equals(Convert.ToInt32(_datos.Rows[index].Cells[0].Text))).Select(a => a.EstaAnulada).FirstOrDefault());
+
+
+                        if (estaAnulada != true)
+                        {
+                            _tipoMotivoReproceso.DataSource = _servicioDelegadoGeneral.ObtenerTipoReprocesos();
                         _tipoMotivoReproceso.DataBind();
                         _detallePrendaOrdenTrabajoId.Value = _datos.Rows[index].Cells[0].Text;
                         List<DetalleHistorialReprocesoVistaDTOs> lisaDetalleHistorialReprocesoVistaDtOses = _servicioDelegadoFlujoProceso.ObtenerDetalleHistorialReprocesosPorDetalleOrdenTrabajoId(Convert.ToInt32(_datos.Rows[index].Cells[0].Text));
@@ -743,10 +772,47 @@ namespace Web.Venta
                         _fechaEstimadaEntrega.Text = DateTime.Now.AddDays(2).ToShortDateString();
                         _fechaEstimadaEntrega.ReadOnly = true;
                         }
+                        }
+                        else
+                            Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Esta_Anulada").ToString(), "_btnBuscar");
 
 
                     }
                 }
+
+                if (e.CommandName == "AnularPrenda")
+                {
+
+                    
+                        
+                    bool estaAnulada=Convert.ToBoolean(_listaConsultaOrdenTrabajoVistaDtOses.Where(a => a.DetallePrendaOrdenTrabajoId.Equals(Convert.ToInt32(_datos.Rows[index].Cells[0].Text))).Select(a => a.EstaAnulada).FirstOrDefault());
+                                                        
+
+                    if (estaAnulada!=true)
+                    {
+                   
+                    ParametroAnulacionVistaDTOs _parametroAnulacionVistaDtOs= new ParametroAnulacionVistaDTOs();
+                    _parametroAnulacionVistaDtOs.PuntoVentaId =Convert.ToInt32(User.PuntoVentaId);
+                    _parametroAnulacionVistaDtOs.SucursalId = Convert.ToInt32(User.SucursalId);
+                    _parametroAnulacionVistaDtOs.DetalleOrdenTrabajoId =Convert.ToInt32( _listaConsultaOrdenTrabajoVistaDtOses.Where(a=>a.DetallePrendaOrdenTrabajoId.Equals(Convert.ToInt32(_datos.Rows[index].Cells[0].Text))).Select(a=>a.DetalleOrdenTrabajoId).FirstOrDefault()); 
+                    _parametroAnulacionVistaDtOs.NumeroOrden = _numeroOrden.Text;
+                    _parametroAnulacionVistaDtOs.OrdenTrabajoId =Convert.ToInt32(_listaConsultaOrdenTrabajoVistaDtOses.Select(m => m.OrdenTrabajoId).First());
+                    _parametroAnulacionVistaDtOs.UsuarioId = Convert.ToInt32(User.Id);
+                    _servicioDelegadoVenta.GrabarAnluacionPrenda(_parametroAnulacionVistaDtOs);
+                        _listaConsultaOrdenTrabajoVistaDtOses = _servicioDelegadoVenta.ObtenerOrdenTrabajoPorNumeroOrdenYPuntoVenta(_numeroOrden.Text,
+                          Convert.ToInt32(_sucursal.SelectedItem.Value));
+                        _datos.DataSource = _listaConsultaOrdenTrabajoVistaDtOses;
+                        _datos.DataBind();
+                        _listaCuentaPorCobrarVistaDtOses = _servicioDelegadoContabilidad.ObtenerHistorialCuentaPorCobrarPorNumeroOrden(_numeroOrden.Text);
+                    _datosPago.DataSource = _listaCuentaPorCobrarVistaDtOses;
+                    _datosPago.DataBind();
+                        Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Orden_Anulada").ToString(), "_btnBuscar");
+                    }
+                    else
+                        Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Esta_Anulada").ToString(), "_btnBuscar");
+
+                }
+
             }
             catch (Exception ex)
             {
@@ -907,6 +973,7 @@ namespace Web.Venta
                         _tipoLavado.Text = consultaOrdenTrabajoVista.TipoLavado;
                         _estadoPago.Text = consultaOrdenTrabajoVista.EstadoPago;
                         _numeroOrdenResultado.Text = consultaOrdenTrabajoVista.NumeroOrden;
+                        _telefono.Text=consultaOrdenTrabajoVista.Telefono;
 
                     }
                     _datos.DataSource = _listaConsultaOrdenTrabajoVistaDtOses;

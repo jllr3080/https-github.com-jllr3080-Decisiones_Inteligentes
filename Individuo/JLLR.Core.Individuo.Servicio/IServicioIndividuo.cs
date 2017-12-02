@@ -135,6 +135,27 @@ namespace JLLR.Core.Individuo.Servicio
         #endregion
 
         #endregion
+
+        #region  TELEFONO
+
+        /// <summary>
+        /// Obtiene los numeros de  telefono 
+        /// </summary>
+        /// <param name="individuoId"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(UriTemplate = "ObtenerTelefonosPorIndividuoId?individuoId={individuoId}", ResponseFormat = WebMessageFormat.Json)]
+        List<TelefonoModelo> ObtenerTelefonosPorIndividuoId(int individuoId);
+
+        /// <summary>
+        /// Eliminar  los  telefonos
+        /// </summary>
+        /// <param name="telefono"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "EliminaTelefono/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void EliminaTelefono(TelefonoModelo telefono);
+
+        #endregion
     }
 
 

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
@@ -89,6 +90,89 @@ namespace JLLR.Core.ReglaNegocio.Servicio
                 throw;
             }
         }
-      #endregion
+        #endregion
+
+
+        #region REGLA
+
+        /// <summary>
+        /// Obtiene la promocion por  Id
+        /// </summary>
+        /// <param name="reglaId"></param>
+        /// <returns></returns>
+        public ReglaModelo ObtenerReglaPorId(int reglaId)
+        {
+            try
+            {
+               return _transformadoReglaNegocio.ObtenerReglaPorId(reglaId);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion      
+
+        #region ADMINISTRACION PROMOCIONES
+
+        /// <summary>
+        /// Grabar promociones
+        /// </summary>
+        /// <param name="reglaCompletaDtOs"></param>
+        public void GrabarPromocionesCompleta(ReglaCompletaDTOs reglaCompletaDtOs)
+        {
+            try
+            {
+                _transformadoReglaNegocio.GrabarPromocionesCompleta(reglaCompletaDtOs);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Actualizar promociones
+        /// </summary>
+        /// <param name="reglaCompletaDtOs"></param>
+        public void ActualizarPromocionesCompleta(ReglaCompletaDTOs reglaCompletaDtOs)
+        {
+            try
+            {
+                _transformadoReglaNegocio.ActualizarPromocionesCompleta(reglaCompletaDtOs);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Obtiene las promociones
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+
+        public List<ReglaCompletaDTOs> ObtenerPromociones(int puntoVentaId)
+        {
+            try
+            {
+                return _transformadoReglaNegocio.ObtenerPromociones(puntoVentaId);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        #endregion
     }
 }

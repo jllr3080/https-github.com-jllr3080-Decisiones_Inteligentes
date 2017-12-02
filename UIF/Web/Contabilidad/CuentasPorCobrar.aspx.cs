@@ -8,7 +8,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Web.Base;
 using Web.DTOs.Contabilidad;
+using Web.DTOs.Individuo;
 using Web.ServicioDelegado;
+using Web.Util;
 
 #endregion
 namespace Web.Contabilidad
@@ -19,9 +21,119 @@ namespace Web.Contabilidad
 
         private  readonly  ServicioDelegadoContabilidad _servicioDelegadoContabilidad= new ServicioDelegadoContabilidad();
         private static List<CuentaPorCobrarVistaDTOs> _cuentaPorCobrarVistaDtOses = null;
+        private readonly Util.Colecciones _colecciones = new Colecciones();
+        private static List<ClienteGeneralVistaDTOs> listaClienteVistaDtOses = new List<ClienteGeneralVistaDTOs>();
+        private  readonly  ServicioDelegadoIndividuo _servicioDelegadoIndividuo= new ServicioDelegadoIndividuo();
         #endregion
 
         #region Eventos
+
+
+        /// <summary>
+        /// Carga la informacion y pagina
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _datos_OnPageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            try
+            {
+                _datos.PageIndex = e.NewPageIndex;
+                _datos.DataSource = _cuentaPorCobrarVistaDtOses;
+                _datos.DataBind();
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Obtiene los tipos de  busqueda
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+        protected void _tipoBusqueda_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_tipoBusqueda.SelectedItem.Value.ToString() == "1")
+                {
+                    _numeroDocumentoBusqueda.Text = String.Empty;
+                    _numeroDocumentoBusqueda.ReadOnly = false;
+                    _parametroDos.Text = String.Empty;
+                    _parametroDos.ReadOnly = true;
+                    _labelNumeroDocumentoBusqueda.Text = GetGlobalResourceObject("Web_es_Ec", "Label_Numero_Documento").ToString();
+                    _labelParametroDos.Text = String.Empty;
+
+
+                }
+                else if (_tipoBusqueda.SelectedItem.Value.ToString() == "-1")
+                {
+
+                    _labelNumeroDocumentoBusqueda.Text = String.Empty;
+                    _labelParametroDos.Text = String.Empty;
+                    _numeroDocumentoBusqueda.Text = String.Empty;
+                    _numeroDocumentoBusqueda.ReadOnly = true;
+
+                    _parametroDos.Text = String.Empty;
+                    _parametroDos.ReadOnly = true;
+                }
+                else if (_tipoBusqueda.SelectedItem.Value.ToString() == "2")
+                {
+                    _numeroDocumentoBusqueda.Text = String.Empty;
+                    _numeroDocumentoBusqueda.ReadOnly = false;
+                    _parametroDos.Text = String.Empty;
+                    _parametroDos.ReadOnly = false;
+                    _labelNumeroDocumentoBusqueda.Text = GetGlobalResourceObject("Web_es_Ec", "Label_Apellido_Paterno").ToString();
+                    _labelParametroDos.Text = GetGlobalResourceObject("Web_es_Ec", "Label_Busqueda_Apellido_Materno").ToString();
+
+                }
+                if (_tipoBusqueda.SelectedItem.Value.ToString() == "3")
+                {
+                    _numeroDocumentoBusqueda.Text = String.Empty;
+                    _numeroDocumentoBusqueda.ReadOnly = false;
+                    _parametroDos.Text = String.Empty;
+                    _parametroDos.ReadOnly = true;
+                    _labelNumeroDocumentoBusqueda.Text = GetGlobalResourceObject("Web_es_Ec", "Label_Razon_Social").ToString();
+                    _labelParametroDos.Text = String.Empty;
+
+
+
+                }
+            }
+            catch (Exception)
+            {
+
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_btnBusquedaCliente");
+            }
+        }
+
+        protected void _clientes_OnRowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            try
+            {
+
+
+                int index = Convert.ToInt32(e.CommandArgument);
+                if (e.CommandName == "Seleccionar")
+                {
+
+                    _cuentaPorCobrarVistaDtOses = _servicioDelegadoContabilidad.ObtenerCuentasPorCobrarCompleto(_clientes.Rows[index].Cells[0].Text, Convert.ToInt32(User.PuntoVentaId), Convert.ToInt32(User.SucursalId));
+                    _datos.DataSource = _cuentaPorCobrarVistaDtOses;
+                    _datos.DataBind();
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_btnBusquedaCliente");
+            }
+        }
         /// <summary>
         /// carga el  historial de pagos
         /// </summary>
@@ -64,7 +176,8 @@ namespace Web.Contabilidad
         {
             try
             {
-                
+                if (!IsPostBack)
+                    CargarDatos();
             }
             catch (Exception ex)
             {
@@ -83,18 +196,44 @@ namespace Web.Contabilidad
         {
             try
             {
-                _cuentaPorCobrarVistaDtOses = _servicioDelegadoContabilidad.ObtenerHistorialCuentaPorCobrarPorNumeroidentificacion(_numeroDocumento.Text);
 
-                if (_cuentaPorCobrarVistaDtOses.Count > 0)
+                if (_tipoBusqueda.SelectedItem.Value.ToString() == "1")
                 {
-                    _datos.DataSource = _cuentaPorCobrarVistaDtOses;
-                    _datos.DataBind();
+                    _cuentaPorCobrarVistaDtOses = _servicioDelegadoContabilidad.ObtenerCuentasPorCobrarCompleto(_numeroDocumentoBusqueda.Text, Convert.ToInt32(User.PuntoVentaId), Convert.ToInt32(User.SucursalId));
+                    if (_cuentaPorCobrarVistaDtOses.Count > 0)
+                    {
+                        _datos.DataSource = _cuentaPorCobrarVistaDtOses;
+                        _datos.DataBind();
+                    }
+                    else
+                    {
+                        LimpiarControles();
+                        Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Informacion_No_existe").ToString(), "_btnBusquedaCliente");
+                    }
                 }
+                
                 else
                 {
-                    LimpiarControles();
-                    Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Informacion_No_existe").ToString(), "_btnBusquedaCliente");
+                    listaClienteVistaDtOses = _servicioDelegadoIndividuo.ObtenerClientePorApellidos(_numeroDocumentoBusqueda.Text.ToUpper(), _parametroDos.Text.ToUpper());
+
+                    if (listaClienteVistaDtOses.Count > 0)
+                    {
+                        _clientes.DataSource = listaClienteVistaDtOses;
+                        _clientes.DataBind();
+                        _btnCliente_ModalPopupExtender.TargetControlID = "_btnBusquedaCliente";
+                        _btnCliente_ModalPopupExtender.Show();
+                    }
+                    else
+                    {
+                        LimpiarControles();
+                        Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Informacion_No_existe").ToString(), "_grabarCliente");
+                    }
                 }
+
+
+                
+
+               
 
 
 
@@ -109,6 +248,8 @@ namespace Web.Contabilidad
 
         }
         #endregion
+
+
         #region Metodos
         /// <summary>
         /// Despliega  los mensajes    de las diferentes acciones de las  pantallas
@@ -124,13 +265,29 @@ namespace Web.Contabilidad
         }
 
 
+        private void CargarDatos()
+        {
+            try
+            {
+                _tipoBusqueda.DataSource = _colecciones.ObtenerTipoDocumentos();
+                _tipoBusqueda.DataBind();
+                _tipoBusqueda.SelectedIndex = _tipoBusqueda.Items.IndexOf(_tipoBusqueda.Items.FindByValue("-1"));
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
+
         private void LimpiarControles()
         {
             try
             {
                 _datos.DataSource = null;
                 _datos.DataBind();
-                _numeroDocumento.Text = String.Empty;
+                _numeroDocumentoBusqueda.Text = String.Empty;
             }
             catch (Exception)
             {

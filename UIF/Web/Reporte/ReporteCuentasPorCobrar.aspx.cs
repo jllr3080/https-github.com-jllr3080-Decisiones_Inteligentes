@@ -69,7 +69,7 @@ namespace Web.Reporte
                 _reporte.LocalReport.DataSources.Clear();
                 string pathreport = Server.MapPath("~/Reporte/Contabilidad/ReporteCuentaPorCobrar.rdlc");
                 _reporte.LocalReport.ReportPath = pathreport;
-                _reporte.LocalReport.DataSources.Add(new ReportDataSource("CuentaPorCobrar", _servicioDelegadoContabilidad.ObtenerCuentasPorCobrarPorFecha(Convert.ToInt32(_sucursal.SelectedItem.Value), _fechaDesde.Text, _fechaHasta.Text)));
+                _reporte.LocalReport.DataSources.Add(new ReportDataSource("CuentaPorCobrar", _servicioDelegadoContabilidad.ObtenerCuentasPorCobrarPorFechas(Convert.ToInt32(User.SucursalId), _fechaDesde.Text, _fechaHasta.Text,Convert.ToInt32(User.PuntoVentaId) )));
             }
             catch (Exception ex)
             {

@@ -207,6 +207,45 @@ namespace JLLR.Core.Individuo.Servicio.Transformador
         }
         #endregion
         #endregion
+        #region  TELEFONO
+
+        /// <summary>
+        /// Obtiene los numeros de  telefono 
+        /// </summary>
+        /// <param name="individuoId"></param>
+        /// <returns></returns>
+        public List<TelefonoModelo> ObtenerTelefonosPorIndividuoId(int individuoId)
+        {
+            try
+            {
+                return _ensambladorModelo.CrearTelefonos(_individuoNegocio.ObtenerTelefonosPorIndividuoId(individuoId));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Eliminar  los  telefonos
+        /// </summary>
+        /// <param name="telefono"></param>
+        public void EliminaTelefono(TelefonoModelo telefono)
+        {
+            try
+            {
+                _individuoNegocio.EliminaTelefono(_ensambladorEntidad.CrearTelefono(telefono));
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
 
         #region VALIDACIONES
         #region CLIENTE

@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 using JLLR.Core.Base.Proveedor.DAOs;
@@ -63,5 +64,76 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                 throw;
             }
         }
+
+        /// <summary>
+        /// Graba la  venta de la ocmision
+        /// </summary>
+        /// <param name="ventaComision"></param>
+
+        public void GrabarVentaComision(VENTA_COMISION ventaComision)
+        {
+            try
+            {
+                _entidad.VENTA_COMISION.Add(ventaComision);
+                _entidad.SaveChanges();
+                
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Actualizar  venta de  comision
+        /// </summary>
+        /// <param name="ventaComision"></param>
+        public void ActualizarVentaComision(VENTA_COMISION ventaComision)
+        {
+            try
+            {
+                var original = _entidad.VENTA_COMISION.Find(ventaComision.VENTA_COMISION_ID);
+
+                if (original != null)
+                {
+                    _entidad.Entry(original).CurrentValues.SetValues(ventaComision);
+                    _entidad.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Obtiene las  venta de las comisiones
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public IQueryable<VENTA_COMISION> ObtenerVentaComisiones(int puntoVentaId)
+        {
+            try
+            {
+                var ventaComisiones = from ventaComision in _entidad.VENTA_COMISION
+                                      where ventaComision.PUNTO_VENTA_ID==puntoVentaId
+                                      select ventaComision;
+
+                return ventaComisiones;
+
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
+
+
     }
 }

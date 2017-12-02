@@ -20,7 +20,30 @@ namespace JLLR.Core.ReglaNegocio.Proveedor.Negocio
         #region DECLARACIONES E INSTANCIAS
 
         private readonly  TransaccionalDAOs _transaccionalDaOs= new TransaccionalDAOs();
+        private readonly  ReglaDAOs _reglaDaOs= new ReglaDAOs();
         #endregion
+
+
+        #region REGLA
+
+        /// <summary>
+        /// Obtiene la promocion por  Id
+        /// </summary>
+        /// <param name="reglaId"></param>
+        /// <returns></returns>
+        public REGLA ObtenerReglaPorId(int reglaId)
+        {
+            try
+            {
+                return _reglaDaOs.ObtenerReglaPorId(reglaId);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion      
 
         #region TRANSACCIONAL
 
@@ -63,6 +86,67 @@ namespace JLLR.Core.ReglaNegocio.Proveedor.Negocio
                 throw;
             }
         }
+
+        #region ADMINISTRACION PROMOCIONES
+
+        /// <summary>
+        /// Grabar promociones
+        /// </summary>
+        /// <param name="reglaCompletaDtOs"></param>
+        public void GrabarPromocionesCompleta(ReglaCompletaDTOs reglaCompletaDtOs)
+        {
+            try
+            {
+                _transaccionalDaOs.GrabarPromocionesCompleta(reglaCompletaDtOs);
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Actualizar promociones
+        /// </summary>
+        /// <param name="reglaCompletaDtOs"></param>
+        public void ActualizarPromocionesCompleta(ReglaCompletaDTOs reglaCompletaDtOs)
+        {
+            try
+            {
+                _transaccionalDaOs.ActualizarPromocionesCompleta(reglaCompletaDtOs);
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Obtiene las promociones
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+
+        public IQueryable<ReglaCompletaDTOs> ObtenerPromociones(int puntoVentaId)
+        {
+            try
+            {
+                return _transaccionalDaOs.ObtenerPromociones(puntoVentaId);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        #endregion
         #endregion
 
         #region REGLA NEGOCIO

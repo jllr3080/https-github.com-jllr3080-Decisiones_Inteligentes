@@ -24,6 +24,29 @@ namespace JLLR.Core.ServicioDelegado.Proveedor.ServicioDelegado
         private  string direccionUrl= "http://localhost/Decisiones_Inteligentes_Inventario/ServicioInventario.svc/";
 
         #region   PRODUCTO
+
+        /// <summary>
+        /// Obtiene el producto  
+        /// </summary>
+        /// <param name="productoId"></param>
+        /// <returns></returns>
+        public ProductoVistaModelo ObtenerProductoPorId(int productoId)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerProductoPorId?productoId=" + productoId);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<ProductoVistaModelo>(json);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         /// <summary>
         /// Obtener producto por  tipo de  producto servicio o produccion etc
         /// </summary>

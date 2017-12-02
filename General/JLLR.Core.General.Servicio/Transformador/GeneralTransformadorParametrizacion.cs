@@ -508,6 +508,23 @@ namespace JLLR.Core.General.Servicio.Transformador
 
         #region PARAMETRO
         /// <summary>
+        /// Actualiza  los parametros
+        /// </summary>
+        /// <param name="parametro"></param>
+        public void ActualizarParametro(modelo.ParametroModelo parametro)
+        {
+            try
+            {
+                _generalParametrizacion.ActualizarParametro(_ensambladorEntidad.CrearParametro(parametro));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Obtiene los  parametros por descripcion
         /// </summary>
         /// <param name="descripcion"></param>

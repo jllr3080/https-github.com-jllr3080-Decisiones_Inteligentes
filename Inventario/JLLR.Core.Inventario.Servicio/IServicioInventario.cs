@@ -15,10 +15,19 @@ namespace JLLR.Core.Inventario.Servicio
     public interface IServicioInventario
     {
         #region PARAMETRIZACION
-        
+
 
         #region   PRODUCTO
 
+        /// <summary>
+        /// Obtiene el producto  
+        /// </summary>
+        /// <param name="productoId"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(UriTemplate = "ObtenerProductoPorId?productoId={productoId}", ResponseFormat = WebMessageFormat.Json)]
+        modeloParametrizacion.ProductoModelo ObtenerProductoPorId(int productoId);
+        
         /// <summary>
         /// Obtener producto por  tipo de  producto servicio o produccion etc
         /// </summary>

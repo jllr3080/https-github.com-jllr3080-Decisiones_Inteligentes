@@ -23,6 +23,35 @@ namespace JLLR.Core.Venta.Servicio
         #region  TRANSACCIONAL
 
         /// <summary>
+        /// Graba la operacion de descuento  
+        /// </summary>
+        /// <param name="parametroAnulacionDtOs"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabarAnluacionPrenda/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void GrabarAnluacionPrenda(ParametroAnulacionDTOs parametroAnulacionDtOs);
+        
+        /// <summary>
+        /// Grabar el detallde  de las prendas
+        /// </summary>
+        /// <param name="ordenTrabajoDtOs"></param>
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabarDetallePrendaCompleto/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void GrabarDetallePrendaCompleto(OrdenTrabajoDTOs ordenTrabajoDtOs);
+                /// <summary>
+        /// Obtiene la impresion corta sin el detalle de las prensdas
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        [WebGet(
+                   UriTemplate =
+                       "ObtenerOrdenTrabajoCortaPorNumeroOrdenYPuntoVenta?numeroOrden={numeroOrden}&puntoVentaId={puntoVentaId}",
+                   ResponseFormat = WebMessageFormat.Json)]
+        List<ConsultaOrdenTrabajoDTOs> ObtenerOrdenTrabajoCortaPorNumeroOrdenYPuntoVenta(string numeroOrden,
+            int puntoVentaId);
+
+        /// <summary>
         /// Obtiene las  ordenes temporales
         /// </summary>
         /// <param name="puntoVentaId"></param>
@@ -167,6 +196,36 @@ namespace JLLR.Core.Venta.Servicio
         #endregion
 
         #region  VENTA COMISION
+
+        /// <summary>
+        /// Graba la  venta de la ocmision
+        /// </summary>
+        /// <param name="ventaComision"></param>
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabarVentaComision/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void GrabarVentaComision(VentaComisionModelo ventaComision);
+
+
+
+        /// <summary>
+        /// Actualizar  venta de  comision
+        /// </summary>
+        /// <param name="ventaComision"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "ActualizarVentaComision/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void ActualizarVentaComision(VentaComisionModelo ventaComision);
+
+
+        /// <summary>
+        /// Obtiene las  venta de las comisiones
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(UriTemplate = "ObtenerVentaComisiones?puntoVentaId={puntoVentaId}", ResponseFormat = WebMessageFormat.Json)]
+        List<VentaComisionModelo> ObtenerVentaComisiones(int puntoVentaId);
+        
 
         /// <summary>
         /// Obtiene 
@@ -360,7 +419,73 @@ namespace JLLR.Core.Venta.Servicio
         [OperationContract]
         [WebInvoke(UriTemplate = "ActualizarDetallePrendaOrdenTrabajo/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
         void ActualizarDetallePrendaOrdenTrabajo(DetallePrendaOrdenTrabajoModelo detallePrendaOrdenTrabajo);
-       
+
+        #endregion
+
+        #region NUMERACION ORDEN
+
+
+        /// <summary>
+        /// Obtiene  todas las sucursales 
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(UriTemplate = "ObtenerPuntosVentaCompleto", ResponseFormat = WebMessageFormat.Json)]
+        List<NumeracionOrdenDTOs> ObtenerPuntosVentaCompleto();
+
+        /// <summary>
+        /// Grabar punto de  venta y numero de  orden
+        /// </summary>
+        /// <param name="numeracionOrdenDtOs"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabarPuntoVentaCompleto/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void GrabarPuntoVentaCompleto(NumeracionOrdenDTOs numeracionOrdenDtOs);
+
+
+
+        /// <summary>
+        /// Grabar punto de  venta y numero de  orden
+        /// </summary>
+        /// <param name="numeracionOrdenDtOs"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "ActualizarPuntoVentaCompleto/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void ActualizarPuntoVentaCompleto(NumeracionOrdenDTOs numeracionOrdenDtOs);
+
+
+
+
+        #endregion
+
+        #region VENTA COMISION  INDUSTRIALES
+
+        /// <summary>
+        /// Obtiene el valor de la venta de  industriales
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(UriTemplate = "ObtenerComisionesIndustrialesPorPuntoVenta?puntoVentaId={puntoVentaId}", ResponseFormat = WebMessageFormat.Json)]
+        List<VentaComisionIndustrialesDTOs> ObtenerComisionesIndustrialesPorPuntoVenta(int puntoVentaId);
+
+
+        /// <summary>
+        /// Grabar promociones
+        /// </summary>
+        /// <param name="ventaComisionIndustrialesDtOs"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabarVentaComisionIndustrialesCompleto/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void GrabarVentaComisionIndustrialesCompleto(VentaComisionIndustrialesDTOs ventaComisionIndustrialesDtOs);
+
+
+
+        /// <summary>
+        /// Actualizar promociones
+        /// </summary>
+        /// <param name="ventaComisionIndustrialesDtOs"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "ActualizarVentaComisionIndustrialesCompleto/*", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void ActualizarVentaComisionIndustrialesCompleto(VentaComisionIndustrialesDTOs ventaComisionIndustrialesDtOs);
+        
         #endregion
         #endregion
         #region VALIDACION

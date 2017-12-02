@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Migrations.Model;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,7 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
         private readonly  NumeroOrdenDAOs _numeroOrdenDaOs= new  NumeroOrdenDAOs();
         private readonly  DetalleOrdenTrabajoObservacionDAOs _detalleOrdenTrabajoObservacionDaOs= new DetalleOrdenTrabajoObservacionDAOs();
         private readonly  OrdenTrabajoComisionDAOs _ordenTrabajoComisionDaOs= new OrdenTrabajoComisionDAOs();
+        private readonly  DetallePrendaOrdenTrabajoDAOs _detallePrendaOrdenTrabajoDaOs= new  DetallePrendaOrdenTrabajoDAOs();
 
         #endregion
 
@@ -210,6 +212,36 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
         }
 
 
+        /// <summary>
+        /// Grabar el detallde  de las prendas
+        /// </summary>
+        /// <param name="ordenTrabajoDtOs"></param>
+
+        public void GrabarDetallePrendaCompleto(OrdenTrabajoDTOs ordenTrabajoDtOs)
+        {
+            try
+            {
+                foreach (var detalleOrdenTrabajo in ordenTrabajoDtOs.DetalleOrdenTrabajos)
+                {
+                    foreach (var detallePrendaOrdentrabajo in detalleOrdenTrabajo.DETALLE_PRENDA_ORDEN_TRABAJO)
+                    {
+                        detallePrendaOrdentrabajo.DETALLE_ORDEN_TRABAJO_ID =
+                            detalleOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID;
+                        _detallePrendaOrdenTrabajoDaOs.GrabarDetallePrendaOrdenTrabajo(detallePrendaOrdentrabajo);
+                    }
+                    ordenTrabajoDtOs.OrdenTrabajo.ES_TEMPORAL = false;
+                    _ordenTrabajoDaOs.ActualizarOrdenTrabajo(ordenTrabajoDtOs.OrdenTrabajo);
+
+
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                    
+                throw;
+            }
+        }
 
         /// <summary>
         /// Graba la orden  de trabajo de forma completa
@@ -239,7 +271,18 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                         detalleOrdenTrabajo.VALOR_IMPUESTO = (detalleOrdenTrabajo.VALOR_TOTAL* detalleOrdenTrabajo.PORCENTAJE_IMPUESTO)/100;
                         detalleOrdenTrabajo.ORDEN_TRABAJO_ID = ordenTrabajo.ORDEN_TRABAJO_ID;
                         DETALLE_ORDEN_TRABAJO _detalleOrdenTrabajo=  _detalleOrdenTrabajoDaOs.GrabarDetelleOrdenTrabajo(detalleOrdenTrabajo);
-                     }
+
+                        //if (detalleOrdenTrabajo.DETALLE_PRENDA_ORDEN_TRABAJO.Any())
+                        //{
+                        //    foreach (var detallePrendaOrdenTrabajo in detalleOrdenTrabajo.DETALLE_PRENDA_ORDEN_TRABAJO)
+                        //    {
+                        //        detallePrendaOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID =
+                        //            _detalleOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID;
+
+                        //        _detallePrendaOrdenTrabajoDaOs.GrabarDetallePrendaOrdenTrabajo(detallePrendaOrdenTrabajo);
+                        //    }
+                        //}
+                    }
                     _numeracionOrden.NUMERO += 1;
                     if (ordenTrabajoDtOs.OrdenTrabajo.TIPO_LAVADO_ID == 1)
                         _numeracionOrden .NUMERO_ORDEN= "S" + Convert.ToString(_numeracionOrden.NUMERO);
@@ -379,6 +422,84 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                 throw;
             }
         }
+
+        #endregion
+
+
+        #region NUMERACION ORDEN
+
+
+        /// <summary>
+        /// Obtiene  todas las sucursales 
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<NumeracionOrdenDTOs> ObtenerPuntosVentaCompleto()
+        {
+            try
+            {
+                 var numerosOrden=from  numeroOrden in _entidad.NUMERACION_ORDEN
+                                  join puntoVenta in _entidad.PUNTO_VENTA on  numeroOrden.PUNTO_VENTA_ID equals  puntoVenta.PUNTO_VENTA_ID
+                                  select new  NumeracionOrdenDTOs () {NumeracionOrden = numeroOrden,PuntoVenta = puntoVenta};
+
+                return numerosOrden.OrderBy(a=>a.PuntoVenta.DESCRIPCION);
+
+            }
+            catch (Exception ex)
+            {
+                    
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Grabar punto de  venta y numero de  orden
+        /// </summary>
+        /// <param name="numeracionOrdenDtOs"></param>
+        public void GrabarPuntoVentaCompleto(NumeracionOrdenDTOs numeracionOrdenDtOs)
+        {
+            try
+            {
+                _numeroOrdenDaOs.GrabarNumeroOrden(numeracionOrdenDtOs.NumeracionOrden);
+
+                _entidad.PUNTO_VENTA.Add(numeracionOrdenDtOs.PuntoVenta);
+                _entidad.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                    
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Grabar punto de  venta y numero de  orden
+        /// </summary>
+        /// <param name="numeracionOrdenDtOs"></param>
+        public void ActualizarPuntoVentaCompleto(NumeracionOrdenDTOs numeracionOrdenDtOs)
+        {
+            try
+            {
+                _numeroOrdenDaOs.ActualizarNumeroOrden(numeracionOrdenDtOs.NumeracionOrden);
+
+                var original = _entidad.PUNTO_VENTA.Find(numeracionOrdenDtOs.PuntoVenta.PUNTO_VENTA_ID);
+
+                if (original != null)
+                {
+                    _entidad.Entry(original).CurrentValues.SetValues(numeracionOrdenDtOs.PuntoVenta);
+                    _entidad.SaveChanges();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
 
         #endregion
 
@@ -622,6 +743,66 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
 
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public IQueryable<ConsultaOrdenTrabajoDTOs> ObtenerOrdenTrabajoCortaPorNumeroOrdenYPuntoVenta(string numeroOrden,
+            int puntoVentaId)
+        {
+            try
+            {
+                var ordenesTrabajo = from ordenTrabajo in _entidad.ORDEN_TRABAJO
+                                     join detalleOrdenTrabajo in _entidad.DETALLE_ORDEN_TRABAJO on ordenTrabajo.ORDEN_TRABAJO_ID equals
+                                     detalleOrdenTrabajo.ORDEN_TRABAJO_ID
+                                     join cliente in _entidad.CLIENTE on ordenTrabajo.CLIENTE_ID equals cliente.CLIENTE_ID
+                                     join individuo in _entidad.INDIVIDUO on cliente.INDIVIDUO_ID equals individuo.INDIVIDUO_ID
+                                     join tipoLavado in _entidad.TIPO_LAVADO on ordenTrabajo.TIPO_LAVADO_ID equals tipoLavado.TIPO_LAVADO_ID
+                                     join producto in _entidad.PRODUCTO on detalleOrdenTrabajo.PRODUCTO_ID equals producto.PRODUCTO_ID
+                                     join estadoPago in _entidad.ESTADO_PAGO on ordenTrabajo.ESTADO_PAGO_ID equals estadoPago.ESTADO_PAGO_ID
+                                     join direccion in _entidad.DIRECCION on individuo.INDIVIDUO_ID equals direccion.INDIVIDUO_ID
+                                     join telefono in _entidad.TELEFONO on individuo.INDIVIDUO_ID equals telefono.INDIVIDUO_ID
+                                     join email in _entidad.E_MAIL on individuo.INDIVIDUO_ID equals email.INDIVIDUO_ID
+                                     join puntoVenta in _entidad.PUNTO_VENTA on ordenTrabajo.PUNTO_VENTA_ID equals puntoVenta.PUNTO_VENTA_ID
+                                     join usuario in _entidad.USUARIO on ordenTrabajo.USUARIO_ID equals usuario.USUARIO_ID
+                                     where ordenTrabajo.NUMERO_ORDEN == numeroOrden && ordenTrabajo.PUNTO_VENTA_ID == puntoVentaId
+
+                                     select new ConsultaOrdenTrabajoDTOs
+                                     {
+                                         TipoLavado = tipoLavado.DESCRIPCION,
+                                         EstadoPago = estadoPago.DESCRIPCION,
+                                         NumeroOrden = ordenTrabajo.NUMERO_ORDEN,
+                                         FechaIngreso = ordenTrabajo.FECHA_INGRESO,
+                                         FechaEntrega = ordenTrabajo.FECHA_ENTREGA,
+                                         ValorUnitario = detalleOrdenTrabajo.VALOR_UNITARIO,
+                                         Cantidad = detalleOrdenTrabajo.CANTIDAD,
+                                         ValorTotal = detalleOrdenTrabajo.VALOR_TOTAL,
+                                         Prenda = producto.NOMBRE,
+                                         NombreCliente = individuo.PRIMER_CAMPO + " " + individuo.SEGUNDO_CAMPO + " " + individuo.TERCER_CAMPO + " " + individuo.CUARTO_CAMPO,
+                                         EstadoPagoId = ordenTrabajo.ESTADO_PAGO_ID,
+                                         OrdenTrabajoId = ordenTrabajo.ORDEN_TRABAJO_ID,
+                                         DetalleOrdenTrabajoId = detalleOrdenTrabajo.DETALLE_ORDEN_TRABAJO_ID,
+                                         Direccion = direccion.DESCRIPCION_DIRECCION,
+                                         CorreoElectronico = email.DIRECCION_CORREO_ELECTRONICO,
+                                         Telefono = telefono.NUMERO_TELEFONO,
+                                         NombrePuntoVenta = puntoVenta.DESCRIPCION,
+                                         NombreUsuario = usuario.NOMBRE_USUARIO,
+                                         EstaAnulada = detalleOrdenTrabajo.ESTA_ANULADA
+                                         
+                                         
+                                     };
+                return ordenesTrabajo;
+
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Obtiene  la orden de  trabajo por  numero de  orden
         /// </summary>
         /// <param name="numeroOrden"></param>
@@ -675,7 +856,8 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                                          NumeroInternoPrenda = detallePrendaOrdenTrabajo.NUMERO_INTERNO_PRENDA,
                                          DetallePrendaOrdenTrabajoId = detallePrendaOrdenTrabajo.DETALLE_PRENDA_ORDEN_TRABAJO_ID,
                                          EstadoPrenda = detallePrendaOrdenTrabajo.ESTADO_PRENDA,
-                                         InformacionVisual = detallePrendaOrdenTrabajo.INFORMACION_VISUAL
+                                         InformacionVisual = detallePrendaOrdenTrabajo.INFORMACION_VISUAL,
+                                         EstaAnulada = detalleOrdenTrabajo.ESTA_ANULADA
                                      };
                 return ordenesTrabajo;
 
@@ -710,7 +892,7 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
                 join marca in _entidad.MARCA on detallePrendaOrdenTrabajo.MARCA_ID equals marca.MARCA_ID
                 join estadoPago in _entidad.ESTADO_PAGO on ordenTrabajo.ESTADO_PAGO_ID equals estadoPago.ESTADO_PAGO_ID
                 where EntityFunctions.TruncateTime(ordenTrabajo.FECHA_INGRESO) == fechaDesde && ordenTrabajo.PUNTO_VENTA_ID==sucursalId   
-                select  new ConsultaOrdenTrabajoDTOs { TipoLavado = tipoLavado.DESCRIPCION,EstadoPago = estadoPago.DESCRIPCION,Marca = marca.DESCRIPCION,NumeroOrden = ordenTrabajo.NUMERO_ORDEN,FechaIngreso = ordenTrabajo.FECHA_INGRESO,FechaEntrega = ordenTrabajo.FECHA_ENTREGA,ValorUnitario = detalleOrdenTrabajo.VALOR_UNITARIO,Cantidad = detalleOrdenTrabajo.CANTIDAD,Color = color.DESCRIPCION,ValorTotal = detalleOrdenTrabajo.VALOR_TOTAL,Prenda = producto.NOMBRE,NombreCliente = individuo.PRIMER_CAMPO + " "+ individuo.SEGUNDO_CAMPO + " "+individuo.TERCER_CAMPO + " "+individuo.CUARTO_CAMPO,InformacionVisual = detallePrendaOrdenTrabajo.INFORMACION_VISUAL,EstadoPrenda = detallePrendaOrdenTrabajo.ESTADO_PRENDA,TratamientoEspecial = detallePrendaOrdenTrabajo.TRATAMIENTO_ESPECIAL,NumeroInternoPrenda = detallePrendaOrdenTrabajo.NUMERO_INTERNO_PRENDA};
+                select  new ConsultaOrdenTrabajoDTOs { TipoLavado = tipoLavado.DESCRIPCION,EstadoPago = estadoPago.DESCRIPCION,Marca = marca.DESCRIPCION,NumeroOrden = ordenTrabajo.NUMERO_ORDEN,FechaIngreso = ordenTrabajo.FECHA_INGRESO,FechaEntrega = ordenTrabajo.FECHA_ENTREGA,ValorUnitario = detalleOrdenTrabajo.VALOR_UNITARIO,Cantidad = detalleOrdenTrabajo.CANTIDAD,Color = color.DESCRIPCION,ValorTotal = detalleOrdenTrabajo.VALOR_TOTAL,Prenda = producto.NOMBRE,NombreCliente = individuo.PRIMER_CAMPO + " "+ individuo.SEGUNDO_CAMPO + " "+individuo.TERCER_CAMPO + " "+individuo.CUARTO_CAMPO,InformacionVisual = detallePrendaOrdenTrabajo.INFORMACION_VISUAL,EstadoPrenda = detallePrendaOrdenTrabajo.ESTADO_PRENDA,TratamientoEspecial = detallePrendaOrdenTrabajo.TRATAMIENTO_ESPECIAL,NumeroInternoPrenda = detallePrendaOrdenTrabajo.NUMERO_INTERNO_PRENDA,EstaAnulada = detalleOrdenTrabajo.ESTA_ANULADA};
 
           
             return ordenesTrabajo;
@@ -757,6 +939,77 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
 
         }
 
+        /// <summary>
+        /// Obtiene el valor de la venta de  industriales
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public IQueryable<VentaComisionIndustrialesDTOs> ObtenerComisionesIndustrialesPorPuntoVenta(int puntoVentaId)
+        {
+            try
+            {
+                var comisionIndustriales = from comisionIndustrial in _entidad.VENTA_COMISION_INDUSTRIALES
+                                           join detalleComisionIndustriales in _entidad.DETALLE_VENTA_COMISION_INDUSTRIALES on
+                                               comisionIndustrial.VENTA_COMISION_INDUSTRIALES_ID equals
+                                               detalleComisionIndustriales.VENTA_COMISION_INDUSTRIALES_ID
+                                           where comisionIndustrial.PUNTO_VENTA_ID == puntoVentaId
+                                           select new VentaComisionIndustrialesDTOs()
+                                           {
+                                               VentaComisionIndustriales = comisionIndustrial,
+                                               DetalleVentaComisionIndustriales = (List<DETALLE_VENTA_COMISION_INDUSTRIALES>)(comisionIndustrial.DETALLE_VENTA_COMISION_INDUSTRIALES)
+                                           };
+
+                return comisionIndustriales;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+
+
+        /// <summary>
+        /// Grabar promociones
+        /// </summary>
+        /// <param name="ventaComisionIndustrialesDtOs"></param>
+        public void GrabarVentaComisionIndustrialesCompleto(VentaComisionIndustrialesDTOs ventaComisionIndustrialesDtOs)
+        {
+            using (System.Transactions.TransactionScope transaction = new System.Transactions.TransactionScope())
+            {
+                try
+                {
+
+
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Actualizar promociones
+        /// </summary>
+        /// <param name="ventaComisionIndustrialesDtOs"></param>
+        public void ActualizarVentaComisionIndustrialesCompleto(VentaComisionIndustrialesDTOs ventaComisionIndustrialesDtOs)
+        {
+            using (System.Transactions.TransactionScope transaction = new System.Transactions.TransactionScope())
+            {
+                try
+                {
+
+
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+        }
         #endregion
 
         #endregion

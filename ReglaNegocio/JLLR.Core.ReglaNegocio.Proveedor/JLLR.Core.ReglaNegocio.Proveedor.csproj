@@ -39,6 +39,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,6 +53,7 @@
     <Compile Include="DAOs\TransaccionalDAOs.cs" />
     <Compile Include="DTOs\ParametroEntradaReglaNegocioDTOs.cs" />
     <Compile Include="DTOs\ParametroSalidaReglaNegocioDTOs.cs" />
+    <Compile Include="DTOs\ReglaCompletaDTOs.cs" />
     <Compile Include="DTOs\ReglaDTOs.cs" />
     <Compile Include="Negocio\ReglaNegocio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

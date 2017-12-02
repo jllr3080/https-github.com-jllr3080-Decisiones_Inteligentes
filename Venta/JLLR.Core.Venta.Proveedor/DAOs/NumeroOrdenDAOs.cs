@@ -77,6 +77,27 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
         }
 
 
+        /// <summary>
+        /// Graba el numero de  orden
+        /// </summary>
+        /// <param name="numeracionOrden"></param>
+        public void GrabarNumeroOrden(NUMERACION_ORDEN numeracionOrden)
+        {
+            try
+            {
+                _entidad.NUMERACION_ORDEN.Add(numeracionOrden);
+                _entidad.SaveChanges();
+                
+
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
+
 
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 using JLLR.Core.Base.Proveedor.DAOs;
@@ -77,5 +78,54 @@ namespace JLLR.Core.Venta.Proveedor.DAOs
         }
 
 
+        /// <summary>
+        /// Obtener las  comisiones  de las ordens
+        /// </summary>
+        /// <param name="detalleOrdenTrabajoId"></param>
+        /// <returns></returns>
+
+        public ORDEN_TRABAJO_COMISION ObtenerOrdenTrabajoComisionPorId(int detalleOrdenTrabajoId)
+        {
+            try
+            {
+                var ordenesTrabajoComision = from ordenTrabajoComision in _entidad.ORDEN_TRABAJO_COMISION
+                                            where ordenTrabajoComision.DETALLE_ORDEN_TRABAJO_ID == detalleOrdenTrabajoId
+                                            select ordenTrabajoComision;
+
+                return ordenesTrabajoComision.FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                    
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Obtener las  comisiones  de las ordens
+        /// </summary>
+        /// <param name="ordenTrabajoComision"></param>
+        /// <returns></returns>
+
+        public void ActualizarOrdenTrabajoComision(ORDEN_TRABAJO_COMISION ordenTrabajoComision)
+        {
+            try
+            {
+                var original = _entidad.ORDEN_TRABAJO_COMISION.Find(ordenTrabajoComision.ORDEN_TRABAJO_COMISION_ID);
+
+                if (original != null)
+                {
+                    _entidad.Entry(original).CurrentValues.SetValues(ordenTrabajoComision);
+                    _entidad.SaveChanges();
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

@@ -20,6 +20,7 @@ namespace Web
 
         #region DECLARACIONES  E INSTANCIAS
         private readonly ServicioDelegadoSeguridad servicioDelegadoSeguridad = new ServicioDelegadoSeguridad();
+        
         #endregion
         private const string AntiXsrfTokenKey = "__AntiXsrfToken";
         private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
@@ -143,6 +144,8 @@ namespace Web
                     //    inventario.ChildItems.Add(new MenuItem(usuarioAccesoDTO.SubModulo, usuarioAccesoDTO.SubModulo) { NavigateUrl = usuarioAccesoDTO.Url });
                     else if (usuarioAccesoDTO.Modulo == "FE")
                         fe.ChildItems.Add(new MenuItem(usuarioAccesoDTO.SubModulo, usuarioAccesoDTO.SubModulo) { NavigateUrl = usuarioAccesoDTO.Url });
+                    else if (usuarioAccesoDTO.Modulo == "?")
+                        manual.ChildItems.Add(new MenuItem(usuarioAccesoDTO.SubModulo, usuarioAccesoDTO.SubModulo) { NavigateUrl = usuarioAccesoDTO.Url });
 
 
 

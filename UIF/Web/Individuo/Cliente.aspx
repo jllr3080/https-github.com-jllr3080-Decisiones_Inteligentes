@@ -258,10 +258,10 @@
                         <asp:Label ID="_labelEmail" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Direccion_Correo%>"></asp:Label>
                     </div>
                      <div class="col-md-3">
-                        <asp:Label ID="_labelTipoTelefono" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Tipo_Telefono%>"></asp:Label>
-                    </div>
+                                            <asp:Label ID="_labelTipoTelefono" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Tipo_Telefono%>"></asp:Label>
+                     </div>
                     <div class="col-md-3">
-                        <asp:Label ID="_labelTelefono" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Numero_Telefono%>"></asp:Label>
+                                            <asp:Label ID="_labelTelefono" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Numero_Telefono%>"></asp:Label>
                     </div>
                     
             </div>
@@ -274,21 +274,52 @@
                          <asp:TextBox ID="_email" runat="server" ValidationGroup="CrearModificarCliente" CssClass="form-control" AutoCompleteType="Disabled" MaxLength="35" TextMode="Email" AutoPostBack="True" OnTextChanged="_email_TextChanged"></asp:TextBox>
                           <asp:RequiredFieldValidator ID="_emailValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CrearModificarCliente" ControlToValidate="_email" ></asp:RequiredFieldValidator>
                        </div>
-                    <div class="col-md-3">
-                         <asp:DropDownList ID="_tipoTelefono" runat="server" CssClass="form-control" ValidationGroup="CrearModificarCliente" DataTextField="Descripcion" DataValueField="TipoTelefonoId"></asp:DropDownList>
-                          <asp:RequiredFieldValidator ID="_tipoTelefonoValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CrearModificarCliente" ControlToValidate="_tipoTelefono" ></asp:RequiredFieldValidator>
-                    </div>
-                    <div class="col-md-3">
-                         <asp:TextBox ID="_telefono" runat="server" ValidationGroup="CrearModificarCliente" CssClass="form-control" AutoCompleteType="Disabled" MaxLength="10" TextMode="SingleLine"></asp:TextBox>
-                          <asp:RequiredFieldValidator ID="_telefonoValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="CrearModificarCliente" ControlToValidate="_telefono" ></asp:RequiredFieldValidator>
-                    </div>
+                 <div class="col-md-3">
+                                         <asp:DropDownList ID="_tipoTelefono" runat="server" CssClass="form-control" ValidationGroup="CrearModificarCliente" DataTextField="Descripcion" DataValueField="TipoTelefonoId"></asp:DropDownList>
+                                          <asp:RequiredFieldValidator ID="_tipoTelefonoValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="Telefono" ControlToValidate="_tipoTelefono" ></asp:RequiredFieldValidator>
+                                    </div>
+                                    <div class="col-md-3">
+                                         <asp:TextBox ID="_telefono" runat="server" ValidationGroup="CrearModificarCliente" CssClass="form-control" AutoCompleteType="Disabled" MaxLength="10" TextMode="SingleLine"></asp:TextBox>
+                                          <asp:RequiredFieldValidator ID="_telefonoValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="Telefono" ControlToValidate="_telefono" ></asp:RequiredFieldValidator>
+                                        <cc1:MaskedEditExtender ID="_telefonoExtensor" runat="server" TargetControlID="_telefono" Mask="9999999999" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus" OnInvalidCssClass="MaskedEditError" MaskType="None" InputDirection="RightToLeft" AcceptNegative="Left" DisplayMoney="Left" ErrorTooltipEnabled="True" /> 
+                                    </div>
+                   
             </div>
             <div class="row">
+                
+                <div class="col-md-9">
+                  </div>
                  <div class="col-md-3">
-                        <asp:Button ID="_btnAgregarTelefono" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Agregar_Telefono%>"  ValidationGroup="GrabaTelefono" class="btn btn-primary" OnClick="_btnAgregarTelefono_OnClick" />
+                        <asp:Button ID="_btnAgregarTelefono" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Agregar_Telefono%>"  ValidationGroup="Telefono" class="btn btn-primary" OnClick="_btnAgregarTelefono_OnClick" />
                   </div>
 
             </div>
+            <br />
+              <div class="row">
+                  <div class="col-md-6">
+                  </div>
+                  
+                                     <div class="col-md-6">
+                                          <asp:GridView ID="_datosTelefono" runat="server" AutoGenerateColumns="False" OnRowCommand="_datosTelefono_OnRowCommand" Width="100%"  >
+                            <Columns>
+                                
+                                <asp:BoundField DataField="TelefonoId" HeaderText="<%$ Resources:Web_es_Ec,Label_Codigo_Interno%>" />
+                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Tipo_Telefono%>" DataField="TipoTelefono.Descripcion" />
+                                <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Numero_Telefono%>" DataField="NumeroTelefono" />
+                                <asp:TemplateField HeaderText="<%$ Resources:Web_es_Ec,Label_Eliminar%>" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle">
+                                    <ItemTemplate>
+                                        <asp:ImageButton ID="_imgEliminar" runat="server" ImageUrl="~/Content/Imagen/Eliminar.jpg"  CommandName="Eliminar" CommandArgument="<%# ((GridViewRow)Container).RowIndex %>" />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                             <HeaderStyle CssClass="tableCabecera" ></HeaderStyle>
+                             <RowStyle CssClass="tableItem"></RowStyle>
+                             <FooterStyle CssClass="tablePiePagina"></FooterStyle>
+                        </asp:GridView>
+                                        </div>
+                                        
+                    
+                            </div>
             <br />
              <div class="row">
                  <div class="col-md-12">
@@ -422,4 +453,7 @@
                     </asp:Panel>
      </div>
         </div>
+    
+    
+ 
 </asp:Content>

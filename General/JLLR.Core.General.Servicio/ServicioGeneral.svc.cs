@@ -501,6 +501,23 @@ namespace JLLR.Core.General.Servicio
         #endregion
 
         #region PARAMETRO
+
+        /// <summary>
+        /// Actualiza  los parametros
+        /// </summary>
+        /// <param name="parametro"></param>
+        public void ActualizarParametro(ParametroModelo parametro)
+        {
+            try
+            {
+                _generalTransformadorParametrizacion.ActualizarParametro(parametro);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         /// <summary>
         /// Obtiene los  parametros por descripcion
         /// </summary>

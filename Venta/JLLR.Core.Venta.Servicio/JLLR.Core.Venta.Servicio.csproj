@@ -79,9 +79,11 @@
     <Compile Include="DTOs\DetalleOrdenTrabajoFotografiaDTOs.cs" />
     <Compile Include="DTOs\DetalleOrdenTrabajoObservacionDTOs.cs" />
     <Compile Include="DTOs\EstadoCuentaDTOs.cs" />
+    <Compile Include="DTOs\NumeracionOrdenDTOs.cs" />
     <Compile Include="DTOs\NumeroPrendaDTOs.cs" />
     <Compile Include="DTOs\OrdenTrabajoDescuentoDTO.cs" />
     <Compile Include="DTOs\OrdenTrabajoDTOs.cs" />
+    <Compile Include="DTOs\ParametroAnulacionDTOs.cs" />
     <Compile Include="DTOs\ParametroDescuentoDTOs.cs" />
     <Compile Include="DTOs\ParametroReversoDTOs.cs" />
     <Compile Include="DTOs\PrendaMarcaDTOs.cs" />

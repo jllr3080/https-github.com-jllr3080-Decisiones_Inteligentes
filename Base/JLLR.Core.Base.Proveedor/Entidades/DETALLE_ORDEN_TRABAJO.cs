@@ -42,6 +42,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<bool> SOLO_PLANCHADO { get; set; }
         public Nullable<bool> PORCENTAJE_ADICIONAL { get; set; }
         public Nullable<int> DETALLE_ORDEN_ANULADA_TRABAJO_ID { get; set; }
+        public Nullable<bool> ESTA_ANULADA { get; set; }
     
         public virtual PRODUCTO PRODUCTO { get; set; }
         public virtual ORDEN_TRABAJO ORDEN_TRABAJO { get; set; }

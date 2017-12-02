@@ -94,5 +94,87 @@ namespace JLLR.Core.ReglaNegocio.Servicio.Transformador
         }
 
         #endregion           
+
+        #region REGLA
+
+        /// <summary>
+        /// Obtiene la promocion por  Id
+        /// </summary>
+        /// <param name="reglaId"></param>
+        /// <returns></returns>
+        public ReglaModelo ObtenerReglaPorId(int reglaId)
+        {
+            try
+            {
+                return  _ensambladorModelo.CrearRegla( _reglaNegocio.ObtenerReglaPorId(reglaId));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion      
+
+        #region ADMINISTRACION PROMOCIONES
+
+        /// <summary>
+        /// Grabar promociones
+        /// </summary>
+        /// <param name="reglaCompletaDtOs"></param>
+        public void GrabarPromocionesCompleta(ReglaCompletaDTOs reglaCompletaDtOs)
+        {
+            try
+            {
+              _reglaNegocio.GrabarPromocionesCompleta(_ensambladorEntidadDtOs.CreaReglaCompletaDtOs(reglaCompletaDtOs));
+           }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Actualizar promociones
+        /// </summary>
+        /// <param name="reglaCompletaDtOs"></param>
+        public void ActualizarPromocionesCompleta(ReglaCompletaDTOs reglaCompletaDtOs)
+        {
+            try
+            {
+                _reglaNegocio.ActualizarPromocionesCompleta(_ensambladorEntidadDtOs.CreaReglaCompletaDtOs(reglaCompletaDtOs));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Obtiene las promociones
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+
+        public List<ReglaCompletaDTOs> ObtenerPromociones(int puntoVentaId)
+        {
+            try
+            {
+                return _ensambladorModeloDtOs.CreaReglasCompletaDtOs(_reglaNegocio.ObtenerPromociones(puntoVentaId));
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        #endregion
     }
 }

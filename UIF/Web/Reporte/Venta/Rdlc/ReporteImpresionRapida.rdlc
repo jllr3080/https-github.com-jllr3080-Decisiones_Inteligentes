@@ -9,10 +9,8 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Nota. Revisar  su correo tendra el detalle de las prendas  adicional  llegara  a su correo cuando la prenda  se  encuentre en la sucursal</Value>
-                <Style>
-                  <FontSize>8pt</FontSize>
-                </Style>
+                <Value>Nota. Por favor revisar su correo el cual tendra el detalle de las prendas.</Value>
+                <Style />
               </TextRun>
             </TextRuns>
             <Style />
@@ -777,8 +775,8 @@
         </Border>
       </Style>
     </PageHeader>
-    <PageHeight>29.7cm</PageHeight>
-    <PageWidth>21cm</PageWidth>
+    <PageHeight>27.94cm</PageHeight>
+    <PageWidth>21.59cm</PageWidth>
     <LeftMargin>2cm</LeftMargin>
     <RightMargin>2cm</RightMargin>
     <TopMargin>2cm</TopMargin>

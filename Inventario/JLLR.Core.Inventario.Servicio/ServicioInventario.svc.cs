@@ -21,9 +21,29 @@ namespace JLLR.Core.Inventario.Servicio
         private readonly  InventarioTransformadorParametrizacion _inventarioTransformadorParametrizacion= new InventarioTransformadorParametrizacion();
 
         #region PARAMETRIZACION
-      
+
 
         #region   PRODUCTO
+
+        /// <summary>
+        /// Obtiene el producto  
+        /// </summary>
+        /// <param name="productoId"></param>
+        /// <returns></returns>
+        public modeloParametrizacion.ProductoModelo ObtenerProductoPorId(int productoId)
+        {
+            try
+            {
+                return _inventarioTransformadorParametrizacion.ObtenerProductoPorId(productoId);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
         /// <summary>
         /// Obtener producto por  tipo de  producto servicio o produccion etc
         /// </summary>

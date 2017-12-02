@@ -1,8 +1,10 @@
 ﻿#region using
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
@@ -76,6 +78,59 @@ namespace JLLR.Core.ServicioDelegado.Proveedor.ServicioDelegado
                 throw;
             }
         }
+        #endregion
+
+
+        #region PARAMETRO
+        /// <summary>
+        /// Obtiene los  parametros por descripcion
+        /// </summary>
+        /// <param name="descripcion"></param>
+        /// <returns></returns>
+        public ParametroVistaModelo ObtenerParametroPorDescripcion(string descripcion)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerParametroPorDescripcion?descripcion=" + descripcion);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<ParametroVistaModelo>(json);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        /// <summary>
+        /// Actualiza  los parametros
+        /// </summary>
+        /// <param name="parametro"></param>
+        public void ActualizarParametro(ParametroVistaModelo parametro)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ParametroVistaModelo));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, parametro);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "ActualizarParametro ", "POST", datos);
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
         #endregion
     }
 }

@@ -194,6 +194,59 @@ namespace Web.ServicioDelegado
                 throw;
             }
         }
+
+        /// <summary>
+        /// Obtiene las cuentas opor  cobrar  por numero  de cedula 
+        /// </summary>
+        /// <param name="numeroIdentificacion"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <param name="sucursalId"></param>
+        /// <returns></returns>
+
+        public List<CuentaPorCobrarVistaDTOs> ObtenerCuentasPorCobrarCompleto(string numeroIdentificacion, int puntoVentaId, int sucursalId)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerCuentasPorCobrarCompleto?numeroIdentificacion=" + numeroIdentificacion + "&puntoVentaId=" + puntoVentaId + "&sucursalId=" + sucursalId);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<CuentaPorCobrarVistaDTOs>>(json);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene cuentas por cobrar por fechas
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <param name="sucursalId"></param>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechaHasta"></param>
+        /// <returns></returns>
+
+        public List<CuentaPorCobrarVistaDTOs> ObtenerCuentasPorCobrarCompletaPorFechas(int puntoVentaId, int sucursalId, string fechaDesde, string fechaHasta)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerCuentasPorCobrarCompletaPorFechas?puntoVentaId=" + puntoVentaId + "&sucursalId=" + sucursalId + "&fechaDesde=" + fechaDesde+ "&fechaHasta="+ fechaHasta);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<CuentaPorCobrarVistaDTOs>>(json);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
         #region CUENTA POR COBRAR
@@ -273,6 +326,45 @@ namespace Web.ServicioDelegado
                 var json = clienteWeb.DownloadString(direccionUrl + "ObtenerCuentasPorCobrarPorFecha?sucursalId=" + sucursalId + "&fechaDesde=" + fechaDesde + "&fechaHasta=" + fechaHasta);
                 var js = new JavaScriptSerializer();
                 return js.Deserialize<List<CuentaPorCobrarVistaModelo>>(json);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtener las cuentas  por  cobrar por  fecha
+        /// </summary>
+        /// <param name="sucursalId"></param>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechaHasta"></param>
+        /// <returns></returns>
+
+        public List<CuentaPorCobrarDetalleVistaDTOs> ObtenerCuentasPorCobrarPorFechas(int sucursalId, string fechaDesde,
+            string fechaHasta, int puntoVentaId)
+        {
+            try
+            {
+                var _lista = ObtenerCuentasPorCobrarCompletaPorFechas(puntoVentaId,sucursalId,fechaDesde,fechaHasta);
+
+                List< CuentaPorCobrarDetalleVistaDTOs > _listaCobrarDetalleVistaDtOses= new List<CuentaPorCobrarDetalleVistaDTOs>();
+                foreach (var objeto in _lista)
+                {
+                    CuentaPorCobrarDetalleVistaDTOs _cuentaPorCobrarDetalleVistaDtOs= new CuentaPorCobrarDetalleVistaDTOs();
+                    _cuentaPorCobrarDetalleVistaDtOs.Cliente = objeto.Cliente;
+                    _cuentaPorCobrarDetalleVistaDtOs.NumeroOrden = objeto.CuentaPorCobrar.NumeroOrden;
+                    _cuentaPorCobrarDetalleVistaDtOs.Direccion = objeto.Direccion;
+                    _cuentaPorCobrarDetalleVistaDtOs.NumeroTelefonos = objeto.NumeroTelefonos;
+                    _cuentaPorCobrarDetalleVistaDtOs.Valor = objeto.CuentaPorCobrar.Valor;
+                    _cuentaPorCobrarDetalleVistaDtOs.Saldo = objeto.CuentaPorCobrar.Saldo;
+                    _listaCobrarDetalleVistaDtOses.Add(_cuentaPorCobrarDetalleVistaDtOs);
+                }
+
+                return _listaCobrarDetalleVistaDtOses;
+
 
             }
             catch (Exception ex)

@@ -88,7 +88,8 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                 EntregaUrgencia = _entregaUrgencia,
                 EsTemporal = e.ES_TEMPORAL,
                 ObjetoOlvidado = e.OBJETO_OLVIDADO,
-                RevisionPrendaCliente = e.REVISO_PRENDA_CLIENTE
+                RevisionPrendaCliente = e.REVISO_PRENDA_CLIENTE,
+                EstaAulada = e.ESTA_ANULADA
 
             };
 
@@ -132,10 +133,11 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
             ProductoModelo producto = new ProductoModelo()
             {
                 ProductoId = Convert.ToInt32(e.PRODUCTO_ID)
+
             };
            
           
-
+            
             
             
             List<modelo.DetallePrendaOrdenTrabajoModelo> _detallePrendaOrdenTrabajoModelos = CrearDetallesPrendaOrdenTrabajo(e.DETALLE_PRENDA_ORDEN_TRABAJO);
@@ -158,7 +160,8 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                  ValorImpuesto = e.VALOR_IMPUESTO,
                  DetalleOrdenTrabajoAnuladaId = e.DETALLE_ORDEN_ANULADA_TRABAJO_ID,
                  PorcentajeAdicional = e.PORCENTAJE_ADICIONAL,
-               SoloPlanchado = e.SOLO_PLANCHADO
+               SoloPlanchado = e.SOLO_PLANCHADO,
+               EstaAulada = e.ESTA_ANULADA
                
                  
 
@@ -272,7 +275,7 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
 
             modelo.DetalleOrdenTrabajoModelo _detalleOrdenTrabajo = new modelo.DetalleOrdenTrabajoModelo
             {
-                DetalleOrdenTrabajoId = Convert.ToInt32(e.DETALLE_ORDEN_TRABAJO)
+                DetalleOrdenTrabajoId = Convert.ToInt32(e.DETALLE_ORDEN_TRABAJO_ID)
             }; 
 
             modeloParametrizacion.VentaComisionModelo _ventaComisionModelo= new modeloParametrizacion.VentaComisionModelo
@@ -306,8 +309,8 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
             List<modelo.OrdenTrabajoComisionModelo> listaModelo = new List<modelo.OrdenTrabajoComisionModelo>();
 
             foreach (var entidad in listadoEntidad)
-            {
-                listaModelo.Add(CrearOrdenTrabajoComision(entidad));
+                {
+                    listaModelo.Add(CrearOrdenTrabajoComision(entidad));
             }
             return listaModelo;
 

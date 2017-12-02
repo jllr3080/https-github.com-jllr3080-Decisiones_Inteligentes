@@ -194,6 +194,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Ayuda\ManualProcedimiento.aspx" />
     <Content Include="Contabilidad\AplicarPago.aspx" />
     <Content Include="Contabilidad\AprobarPago.aspx" />
     <Content Include="Contabilidad\ArqueoCaja.aspx" />
@@ -202,10 +203,12 @@
     <Content Include="Contabilidad\CuentasPorPagar.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Imagen\Anterior.png" />
     <Content Include="Content\Imagen\Ayuda.png" />
     <Content Include="Content\Imagen\Borrar.png" />
     <Content Include="Content\Imagen\CerrarSesion.png" />
     <Content Include="Content\Imagen\Editar.png" />
+    <Content Include="Content\Imagen\Eliminar.jpg" />
     <Content Include="Content\Imagen\F25_.gif" />
     <Content Include="Content\Imagen\Fotografia.png" />
     <Content Include="Content\Imagen\ImagenInicial.png" />
@@ -218,6 +221,7 @@
     <Content Include="Content\Imagen\ParroquiasQuito.png" />
     <Content Include="Content\Imagen\Reproceso.png" />
     <Content Include="Content\Imagen\Seleccionar.png" />
+    <Content Include="Content\Imagen\Siguiente.png" />
     <Content Include="Content\Imagen\usuario.png" />
     <Content Include="Content\Site.css" />
     <Content Include="FE\FacturaElectronica.aspx" />
@@ -232,6 +236,7 @@
     <Content Include="Inventario\Kardex.aspx" />
     <Content Include="Logistica\EntregaRecepcionPrendas.aspx" />
     <Content Include="PaginaMaestra\Login.Master" />
+    <Content Include="Content\Imagen\MANUAL_PROCEDIMIENTO.pdf" />
     <None Include="Properties\PublishProfiles\Administrador.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Parametrizacion\Color.aspx" />
@@ -242,6 +247,7 @@
     <Content Include="Parametrizacion\Prenda.aspx" />
     <Content Include="Parametrizacion\PrendaPrecio.aspx" />
     <Content Include="Parametrizacion\Promocion.aspx" />
+    <Content Include="Parametrizacion\Sucursal.aspx" />
     <Content Include="Reporte\ReporteCuentasPorCobrar.aspx" />
     <Content Include="Reporte\ReporteCuentasPorPagar.aspx" />
     <Content Include="Reporte\ReporteDiario.aspx" />
@@ -324,6 +330,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Ayuda\ManualProcedimiento.aspx.cs">
+      <DependentUpon>ManualProcedimiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ayuda\ManualProcedimiento.aspx.designer.cs">
+      <DependentUpon>ManualProcedimiento.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Base\BaseSeguridad.cs" />
     <Compile Include="Base\PaginaBase.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -373,6 +386,7 @@
     <Compile Include="Contabilidad\CuentasPorPagar.aspx.designer.cs">
       <DependentUpon>CuentasPorPagar.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DTOs\Contabilidad\CuentaPorCobrarDetalleVistaDTOs.cs" />
     <Compile Include="DTOs\Contabilidad\CuentaPorCobrarVistaDTOs .cs" />
     <Compile Include="DTOs\Contabilidad\CuentaPorPagarVistaDTOs .cs" />
     <Compile Include="DTOs\FlujoProceso\DetalleHistorialReprocesoVistaDTOs.cs" />
@@ -385,6 +399,7 @@
     <Compile Include="DTOs\Logistica\EntregaOrdenTrabajoVistaDTOs.cs" />
     <Compile Include="DTOs\ReglaNegocio\ParametroEntradaReglaNegocioVistaDTOs.cs" />
     <Compile Include="DTOs\ReglaNegocio\ParametroSalidaReglaNegocioVistaDTOs.cs" />
+    <Compile Include="DTOs\ReglaNegocio\ReglaCompletaVistaDTOs.cs" />
     <Compile Include="DTOs\ReglaNegocio\ReglaVistaDTOs.cs" />
     <Compile Include="DTOs\Seguridad\AccesoVistaDTOs.cs" />
     <Compile Include="DTOs\Seguridad\UsuarioVistaDTOs.cs" />
@@ -394,12 +409,15 @@
     <Compile Include="DTOs\Venta\CabeceraOrdenTrabajoVistaDTOs.cs" />
     <Compile Include="DTOs\Venta\EstadoCuentaVistaDTOs.cs" />
     <Compile Include="DTOs\Venta\HerenciaOrdenTrabajoVistaDTOs.cs" />
+    <Compile Include="DTOs\Venta\NumeracionOrdenVistaDTOs.cs" />
     <Compile Include="DTOs\Venta\NumeroPrendaVistaDTOs.cs" />
     <Compile Include="DTOs\Venta\OrdenTrabajoDescuentoVistaDTO.cs" />
     <Compile Include="DTOs\Venta\OrdenTrabajoVistaDTOs.cs" />
+    <Compile Include="DTOs\Venta\ParametroAnulacionVistaDTOs.cs" />
     <Compile Include="DTOs\Venta\ParametroDescuentoVistaDTOs.cs" />
     <Compile Include="DTOs\Venta\ParametroReversoVistaDTOs.cs" />
     <Compile Include="DTOs\Venta\PrendaMarcaVistaDTOs.cs" />
+    <Compile Include="DTOs\Venta\VentaComisionIndustrialesVistaDTOs.cs" />
     <Compile Include="FE\FacturaElectronica.aspx.cs">
       <DependentUpon>FacturaElectronica.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -522,7 +540,9 @@
     <Compile Include="Models\Venta\Negocio\OrdenTrabajoComisionVistaModelo.cs" />
     <Compile Include="Models\Venta\Negocio\OrdenTrabajoDescuentoVistaModelo.cs" />
     <Compile Include="Models\Venta\Negocio\OrdenTrabajoVistaModelo.cs" />
+    <Compile Include="Models\Venta\Parametrizacion\DetalleVentaComisionIndustrialesVistaModelo.cs" />
     <Compile Include="Models\Venta\Parametrizacion\NumeroOrdenVistaModelo.cs" />
+    <Compile Include="Models\Venta\Parametrizacion\VentaComisionIndustrialesVistaModelo.cs" />
     <Compile Include="Models\Venta\Parametrizacion\VentaComisionVistaModelo.cs" />
     <Compile Include="PaginaMaestra\Login.Master.cs">
       <DependentUpon>Login.Master</DependentUpon>
@@ -586,6 +606,13 @@
     </Compile>
     <Compile Include="Parametrizacion\Promocion.aspx.designer.cs">
       <DependentUpon>Promocion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametrizacion\Sucursal.aspx.cs">
+      <DependentUpon>Sucursal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametrizacion\Sucursal.aspx.designer.cs">
+      <DependentUpon>Sucursal.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reporte\ReporteCuentasPorCobrar.aspx.cs">

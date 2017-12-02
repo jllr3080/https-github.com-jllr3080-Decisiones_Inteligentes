@@ -30,9 +30,49 @@ namespace Web.Individuo
         private Validacion _validacion= new Validacion();
         private readonly  Util.Colecciones _colecciones= new Colecciones();
         private static List<ClienteGeneralVistaDTOs> listaClienteVistaDtOses = new List<ClienteGeneralVistaDTOs>();
+        private  static  List<TelefonoVistaModelo>  _listaTelfono= new List<TelefonoVistaModelo>();
         #endregion
 
         #region Eventos
+
+        /// <summary>
+        /// Elimina los telefonos  
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _datosTelefono_OnRowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            try
+            {
+                int indice= Convert.ToInt32(e.CommandArgument);
+                if (e.CommandName == "Eliminar")
+                {
+                    
+                    if (Convert.ToInt32(_datosTelefono.Rows[indice].Cells[0].Text) != 0)
+                    {
+                        TelefonoVistaModelo telefono = _listaTelfono.FirstOrDefault(a => a.TelefonoId.Equals(Convert.ToInt32(_datosTelefono.Rows[indice].Cells[0].Text)));
+                        _listaTelfono.Remove(telefono);
+                        _servicioDelegadoIndividuo.EliminaTelefono(telefono);
+                    }
+                    else
+                    {
+                        TelefonoVistaModelo telefono = _listaTelfono.FirstOrDefault(a => a.TelefonoId.Equals(Convert.ToInt32(_datosTelefono.Rows[indice].Cells[0].Text)));
+                        _listaTelfono.Remove(telefono);
+                    }
+
+                    _datosTelefono.DataSource = _listaTelfono;
+                    _datosTelefono.DataBind();
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_grabarCliente");
+            }
+        }
 
         /// <summary>
         /// Agreaga  los  telefonos
@@ -43,21 +83,22 @@ namespace Web.Individuo
         {
             try
             {
-                //TelefonoVistaModelo _telefonoVistaModelo = new TelefonoVistaModelo();
-                //CorreoElectronicoVistaModelo _correoElectronicoVistaModelo = new CorreoElectronicoVistaModelo();
-                //TipoTelefonoVistaModelo _tipoTelefonoVistaModelo = new TipoTelefonoVistaModelo();
-                //TipoCorreoElectronicoVistaModelo _tipoCorreoElectronicoVistaModelo =
-                //    new TipoCorreoElectronicoVistaModelo();
-
-                //_tipoTelefonoVistaModelo.TipoTelefonoId = Convert.ToInt32(_tipoTelefono.SelectedItem.Value);
-                //_tipoCorreoElectronicoVistaModelo.TipoCorreoElectronicoId =
-                //    Convert.ToInt32(_tipoCorreo.SelectedItem.Value);
 
 
-                //_telefonoVistaModelo.TipoTelefono = _tipoTelefonoVistaModelo;
-                //_telefonoVistaModelo.Individuo = _individuoVistaModelo;
-                //_telefonoVistaModelo.NumeroTelefono = _telefono.Text.ToUpper().TrimEnd();
-                //_clienteGeneralVistaDtOs.Telefono = _telefonoVistaModelo;
+                TelefonoVistaModelo _telefonoVistaModelo = new TelefonoVistaModelo();
+                TipoTelefonoVistaModelo _tipoTelefonoVistaModelo = new TipoTelefonoVistaModelo();
+                _tipoTelefonoVistaModelo.TipoTelefonoId = Convert.ToInt32(_tipoTelefono.SelectedItem.Value);
+                _tipoTelefonoVistaModelo.Descripcion = _tipoTelefono.SelectedItem.Text;
+                _telefonoVistaModelo.TipoTelefono = _tipoTelefonoVistaModelo;
+                _telefonoVistaModelo.NumeroTelefono = _telefono.Text.ToUpper().TrimEnd();
+                _listaTelfono.Add(_telefonoVistaModelo);
+                _datosTelefono.DataSource = _listaTelfono;
+                _datosTelefono.DataBind();
+                _telefono.Text=String.Empty;
+                _tipoTelefono.DataSource = _servicioDelegadoGeneral.ObtenerTiposTelefonos();
+                _tipoTelefono.DataBind();
+
+               
             }
             catch (Exception)
             {
@@ -221,6 +262,12 @@ namespace Web.Individuo
             }
         }
 
+
+        /// <summary>
+        /// Selecciona el tipo de dopcumento
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void _tipoBusqueda_OnSelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -387,7 +434,7 @@ namespace Web.Individuo
                     _numeroCasa.Text = _clienteGeneralVistaDtOs.Direccion.NumeroCasa;
                     _referencia.Text = _clienteGeneralVistaDtOs.Direccion.Referencia;
                     _email.Text = _clienteGeneralVistaDtOs.CorreoElectronico.DireccionCorreoElectronico;
-                    _telefono.Text = _clienteGeneralVistaDtOs.Telefono.NumeroTelefono;
+                   // _telefono.Text = _clienteGeneralVistaDtOs.Telefono.NumeroTelefono;
                     _tipoDocumento.SelectedIndex =
                         _tipoDocumento.Items.IndexOf(
                             _tipoDocumento.Items.FindByValue(
@@ -430,13 +477,19 @@ namespace Web.Individuo
                             _tipoCorreo.Items.FindByValue(
                                 _clienteGeneralVistaDtOs.CorreoElectronico.TipoCorreoElectronico.TipoCorreoElectronicoId
                                     .ToString()));
-                    _tipoTelefono.SelectedIndex =
-                        _tipoTelefono.Items.IndexOf(
-                            _tipoTelefono.Items.FindByValue(
-                                _clienteGeneralVistaDtOs.Telefono.TipoTelefono.TipoTelefonoId.ToString()));
+                    //_tipoTelefono.SelectedIndex =
+                    //    _tipoTelefono.Items.IndexOf(
+                    //        _tipoTelefono.Items.FindByValue(
+                    //            _clienteGeneralVistaDtOs.Telefono.TipoTelefono.TipoTelefonoId.ToString()));
                     _tipoDocumento.Enabled = false;
                     _numeroDocumento.Enabled = false;
                     _banderaActualizacion = true;
+                    _clienteGeneralVistaDtOs.Telefonos =
+                        _servicioDelegadoIndividuo.ObtenerTelefonosPorIndividuoId(
+                            _clienteGeneralVistaDtOs.Individuo.IndividuoId);
+                    _listaTelfono = _clienteGeneralVistaDtOs.Telefonos;
+                    _datosTelefono.DataSource = _listaTelfono;
+                    _datosTelefono.DataBind();
 
                 }
                 
@@ -529,285 +582,301 @@ namespace Web.Individuo
         {
             try
             {
-
-                if (_banderaActualizacion == false)
+                if (_listaTelfono.Any())
                 {
-                    _clienteGeneralVistaDtOs = new ClienteGeneralVistaDTOs();
+                    if (_banderaActualizacion == false)
+                    {
+                        _clienteGeneralVistaDtOs = new ClienteGeneralVistaDTOs();
 
 
-                    #region individuo 
+                        #region individuo 
 
-                    //Individuo
-                    IndividuoVistaModelo _individuoVistaModelo = new IndividuoVistaModelo();
+                        //Individuo
+                        IndividuoVistaModelo _individuoVistaModelo = new IndividuoVistaModelo();
 
-                    TipoIdentificacionVistaModelo _tipoIdentificacionVistaModelo = new TipoIdentificacionVistaModelo();
-                    _tipoIdentificacionVistaModelo.TipoIdentificacionId =
-                        Convert.ToInt32(_tipoDocumento.SelectedItem.Value);
-                    _individuoVistaModelo.TipoIdentificacion = _tipoIdentificacionVistaModelo;
+                        TipoIdentificacionVistaModelo _tipoIdentificacionVistaModelo =
+                            new TipoIdentificacionVistaModelo();
+                        _tipoIdentificacionVistaModelo.TipoIdentificacionId =
+                            Convert.ToInt32(_tipoDocumento.SelectedItem.Value);
+                        _individuoVistaModelo.TipoIdentificacion = _tipoIdentificacionVistaModelo;
 
-                    TipoIndividuoVistaModelo _tipoIndividuoVistaModelo = new TipoIndividuoVistaModelo();
-                    _tipoIndividuoVistaModelo.TipoIndividuoId = Convert.ToInt32(Util.TipoIndividuo.PersonaNatural);
-                    _individuoVistaModelo.TipoIndividuo = _tipoIndividuoVistaModelo;
-
-
-                    _individuoVistaModelo.PrimerCampo = _apellidoPaterno.Text.ToUpper().TrimEnd();
-                    _individuoVistaModelo.SegundoCampo = _apellidoMaterno.Text.ToUpper().TrimEnd();
-                    _individuoVistaModelo.TercerCampo = _primerNombre.Text.ToUpper().TrimEnd();
-                    _individuoVistaModelo.CuartoCampo = _segundoNombre.Text.ToUpper().TrimEnd();
-                    _individuoVistaModelo.NumeroIdentificacion = _numeroDocumento.Text.ToUpper().TrimEnd();
-                    _individuoVistaModelo.Habilitado = true;
-                    _individuoVistaModelo.FechaCreacion = DateTime.Now;
-                    _individuoVistaModelo.FechaModificacion = DateTime.Now;
-                    _individuoVistaModelo.UsuarioId = User.Id;
-
-                    _clienteGeneralVistaDtOs.Individuo = _individuoVistaModelo;
-
-                    #endregion
-
-                    #region Direccion
-
-                    //Direccion
-
-                    DireccionVistaModelo _direccionVistaModelo = new DireccionVistaModelo();
-
-                    PaisVistaModelo _paisVistaModelo = new PaisVistaModelo();
-                    _paisVistaModelo.PaisId = Convert.ToInt32(_pais.SelectedItem.Value);
-
-                    EstadoVistaModelo _estadoVistaModelo = new EstadoVistaModelo();
-                    _estadoVistaModelo.EstadoId = Convert.ToInt32(_provincia.SelectedItem.Value);
-
-                    CiudadVistaModelo _ciudadVistaModelo = new CiudadVistaModelo();
-                    _ciudadVistaModelo.CiudadId = Convert.ToInt32(_ciudad.SelectedItem.Value);
-
-                    ParroquiaVistaModelo _parroquiaVistaModelo= new ParroquiaVistaModelo();
-                    _parroquiaVistaModelo.ParroquiaId = Convert.ToInt32(_parroquia.SelectedItem.Value);
+                        TipoIndividuoVistaModelo _tipoIndividuoVistaModelo = new TipoIndividuoVistaModelo();
+                        _tipoIndividuoVistaModelo.TipoIndividuoId = Convert.ToInt32(Util.TipoIndividuo.PersonaNatural);
+                        _individuoVistaModelo.TipoIndividuo = _tipoIndividuoVistaModelo;
 
 
-                    TipoDireccionVistaModelo _tipoDireccionVistaModelo = new TipoDireccionVistaModelo();
-                    _tipoDireccionVistaModelo.TipoDireccionId = Convert.ToInt32(_tipoDireccion.SelectedItem.Value);
+                        _individuoVistaModelo.PrimerCampo = _apellidoPaterno.Text.ToUpper().TrimEnd();
+                        _individuoVistaModelo.SegundoCampo = _apellidoMaterno.Text.ToUpper().TrimEnd();
+                        _individuoVistaModelo.TercerCampo = _primerNombre.Text.ToUpper().TrimEnd();
+                        _individuoVistaModelo.CuartoCampo = _segundoNombre.Text.ToUpper().TrimEnd();
+                        _individuoVistaModelo.NumeroIdentificacion = _numeroDocumento.Text.ToUpper().TrimEnd();
+                        _individuoVistaModelo.Habilitado = true;
+                        _individuoVistaModelo.FechaCreacion = DateTime.Now;
+                        _individuoVistaModelo.FechaModificacion = DateTime.Now;
+                        _individuoVistaModelo.UsuarioId = User.Id;
 
-                    _direccionVistaModelo.Individuo = _individuoVistaModelo;
-                    _direccionVistaModelo.CallePrincipal = _callePrincipal.Text.ToUpper().TrimEnd();
-                    _direccionVistaModelo.CalleSecundaria = _calleSecundaria.Text.ToUpper().TrimEnd();
-                    _direccionVistaModelo.NumeroCasa = _numeroCasa.Text.ToUpper().TrimEnd();
-                    _direccionVistaModelo.Referencia = _referencia.Text.ToUpper().TrimEnd();
-                    _direccionVistaModelo.Pais = _paisVistaModelo;
-                    _direccionVistaModelo.Estado = _estadoVistaModelo;
-                    _direccionVistaModelo.Ciudad = _ciudadVistaModelo;
-                    _direccionVistaModelo.TipoDireccion = _tipoDireccionVistaModelo;
-                    _direccionVistaModelo.Parroquia = _parroquiaVistaModelo;
-                    _clienteGeneralVistaDtOs.Direccion = _direccionVistaModelo;
+                        _clienteGeneralVistaDtOs.Individuo = _individuoVistaModelo;
 
-                    #endregion
+                        #endregion
 
-                    #region  Telefono y Email
+                        #region Direccion
 
-                    TelefonoVistaModelo _telefonoVistaModelo = new TelefonoVistaModelo();
-                    CorreoElectronicoVistaModelo _correoElectronicoVistaModelo = new CorreoElectronicoVistaModelo();
-                    TipoTelefonoVistaModelo _tipoTelefonoVistaModelo = new TipoTelefonoVistaModelo();
-                    TipoCorreoElectronicoVistaModelo _tipoCorreoElectronicoVistaModelo =
-                        new TipoCorreoElectronicoVistaModelo();
+                        //Direccion
 
-                    _tipoTelefonoVistaModelo.TipoTelefonoId = Convert.ToInt32(_tipoTelefono.SelectedItem.Value);
-                    _tipoCorreoElectronicoVistaModelo.TipoCorreoElectronicoId =
-                        Convert.ToInt32(_tipoCorreo.SelectedItem.Value);
+                        DireccionVistaModelo _direccionVistaModelo = new DireccionVistaModelo();
 
+                        PaisVistaModelo _paisVistaModelo = new PaisVistaModelo();
+                        _paisVistaModelo.PaisId = Convert.ToInt32(_pais.SelectedItem.Value);
 
-                    _telefonoVistaModelo.TipoTelefono = _tipoTelefonoVistaModelo;
-                    _telefonoVistaModelo.Individuo = _individuoVistaModelo;
-                    _telefonoVistaModelo.NumeroTelefono = _telefono.Text.ToUpper().TrimEnd();
-                    _clienteGeneralVistaDtOs.Telefono = _telefonoVistaModelo;
+                        EstadoVistaModelo _estadoVistaModelo = new EstadoVistaModelo();
+                        _estadoVistaModelo.EstadoId = Convert.ToInt32(_provincia.SelectedItem.Value);
 
-                    _correoElectronicoVistaModelo.TipoCorreoElectronico = _tipoCorreoElectronicoVistaModelo;
-                    _correoElectronicoVistaModelo.Individuo = _individuoVistaModelo;
-                    _correoElectronicoVistaModelo.DireccionCorreoElectronico = _email.Text.ToUpper().TrimEnd();
-                    _clienteGeneralVistaDtOs.CorreoElectronico = _correoElectronicoVistaModelo;
+                        CiudadVistaModelo _ciudadVistaModelo = new CiudadVistaModelo();
+                        _ciudadVistaModelo.CiudadId = Convert.ToInt32(_ciudad.SelectedItem.Value);
+
+                        ParroquiaVistaModelo _parroquiaVistaModelo = new ParroquiaVistaModelo();
+                        _parroquiaVistaModelo.ParroquiaId = Convert.ToInt32(_parroquia.SelectedItem.Value);
 
 
+                        TipoDireccionVistaModelo _tipoDireccionVistaModelo = new TipoDireccionVistaModelo();
+                        _tipoDireccionVistaModelo.TipoDireccionId = Convert.ToInt32(_tipoDireccion.SelectedItem.Value);
 
-                    #endregion
+                        _direccionVistaModelo.Individuo = _individuoVistaModelo;
+                        _direccionVistaModelo.CallePrincipal = _callePrincipal.Text.ToUpper().TrimEnd();
+                        _direccionVistaModelo.CalleSecundaria = _calleSecundaria.Text.ToUpper().TrimEnd();
+                        _direccionVistaModelo.NumeroCasa = _numeroCasa.Text.ToUpper().TrimEnd();
+                        _direccionVistaModelo.Referencia = _referencia.Text.ToUpper().TrimEnd();
+                        _direccionVistaModelo.Pais = _paisVistaModelo;
+                        _direccionVistaModelo.Estado = _estadoVistaModelo;
+                        _direccionVistaModelo.Ciudad = _ciudadVistaModelo;
+                        _direccionVistaModelo.TipoDireccion = _tipoDireccionVistaModelo;
+                        _direccionVistaModelo.Parroquia = _parroquiaVistaModelo;
+                        _clienteGeneralVistaDtOs.Direccion = _direccionVistaModelo;
 
-                    #region Cliente
+                        #endregion
 
-                    ClienteVistaModelo _clienteVistaModelo = new ClienteVistaModelo();
-                    TipoGeneroVistaModelo _tipoGeneroVistaModelo = new TipoGeneroVistaModelo();
-                    _tipoGeneroVistaModelo.TipoGeneroId = Convert.ToInt32(_genero.SelectedItem.Value);
-                    _clienteVistaModelo.TipoGenero = _tipoGeneroVistaModelo;
-                    _clienteVistaModelo.Individuo = _individuoVistaModelo;
-                    _clienteVistaModelo.FechaNacimiento = Convert.ToDateTime(_fechaNacimiento.Text);
-                    _clienteGeneralVistaDtOs.Cliente = _clienteVistaModelo;
+                        #region  Telefono y Email
 
-                    #endregion
+                        TelefonoVistaModelo _telefonoVistaModelo = new TelefonoVistaModelo();
+                        CorreoElectronicoVistaModelo _correoElectronicoVistaModelo = new CorreoElectronicoVistaModelo();
+                        TipoTelefonoVistaModelo _tipoTelefonoVistaModelo = new TipoTelefonoVistaModelo();
+                        TipoCorreoElectronicoVistaModelo _tipoCorreoElectronicoVistaModelo =
+                            new TipoCorreoElectronicoVistaModelo();
 
-                    #region Individuo Rol
-
-                    IndividuoRolVistaModelo _individuoRolVistaModelo = new IndividuoRolVistaModelo();
-                    TipoRolIndividuoVistaModelo _tipoRolIndividuoVistaModelo = new TipoRolIndividuoVistaModelo();
-                    _tipoRolIndividuoVistaModelo.TipoRolIndividuoId = Convert.ToInt32(Util.TipoRolIndividuo.Cliente);
-                    _individuoRolVistaModelo.TipoRolIndividuo = _tipoRolIndividuoVistaModelo;
-                    _clienteGeneralVistaDtOs.IndividuoRol = _individuoRolVistaModelo;
-
-                    #endregion
-
-                    #region GRABA AL CLIENTE COMO USUARIO 
-                    ClienteVistaModelo _clienteVistaDtOs= _servicioDelegadoIndividuo.GrabarCliente(_clienteGeneralVistaDtOs);
-                    
-
-                    UsuarioVistaModelo _usuarioVistaModelo= new UsuarioVistaModelo();
-                    _usuarioVistaModelo.ClaveUsuario = _numeroDocumento.Text;
-                    _usuarioVistaModelo.NombreUsuario = _numeroDocumento.Text;
-                    _usuarioVistaModelo.DiasVigencia = 365;
-                    _usuarioVistaModelo.FechaCreacion = DateTime.Now;
-                    _usuarioVistaModelo.Habilitado = true;
-                    _usuarioVistaModelo.HabilitadoSeguridad = true;
-
-                    SucursalVistaModelo _sucursalVistaModelo = new SucursalVistaModelo();
-                    _sucursalVistaModelo.SucursalId = Convert.ToInt32(User.SucursalId);
-                    _usuarioVistaModelo.Sucursal = _sucursalVistaModelo;
-
-                    PuntoVentaVistaModelo _puntoVentaVistaModelo= new PuntoVentaVistaModelo();
-                    _puntoVentaVistaModelo.PuntoVentaId = Convert.ToInt32(User.PuntoVentaId);
-                    _usuarioVistaModelo.PuntoVenta = _puntoVentaVistaModelo;
-
-                    IndividuoVistaModelo _individuoVista= new IndividuoVistaModelo();
-                    _individuoVista.IndividuoId =Convert.ToInt32(_clienteVistaDtOs.Individuo.IndividuoId);
-                    _usuarioVistaModelo.Individuo = _individuoVista;
-
-                    _usuarioVistaModelo = _servicioDelegadoSeguridad.GrabarUsuario(_usuarioVistaModelo);
-
-                    UsuarioPerfilVistaModelo _usuarioPerfilVistaModelo= new UsuarioPerfilVistaModelo();
-                    _usuarioPerfilVistaModelo.Usuario = _usuarioVistaModelo;
-
-                   PerfilVistaModelo _perfilVista= new PerfilVistaModelo();
-                    _perfilVista.PerfilId = 5;
-                    _usuarioPerfilVistaModelo.Perfil = _perfilVista;
-                    _servicioDelegadoSeguridad.GrabarUsuarioPerfil(_usuarioPerfilVistaModelo);
-                #endregion
+                        _tipoTelefonoVistaModelo.TipoTelefonoId = Convert.ToInt32(_tipoTelefono.SelectedItem.Value);
+                        _tipoCorreoElectronicoVistaModelo.TipoCorreoElectronicoId =
+                            Convert.ToInt32(_tipoCorreo.SelectedItem.Value);
 
 
+                        _telefonoVistaModelo.TipoTelefono = _tipoTelefonoVistaModelo;
+                        _telefonoVistaModelo.Individuo = _individuoVistaModelo;
+                        _telefonoVistaModelo.NumeroTelefono = _telefono.Text.ToUpper().TrimEnd();
+                        _clienteGeneralVistaDtOs.Telefono = _telefonoVistaModelo;
+
+                        _correoElectronicoVistaModelo.TipoCorreoElectronico = _tipoCorreoElectronicoVistaModelo;
+                        _correoElectronicoVistaModelo.Individuo = _individuoVistaModelo;
+                        _correoElectronicoVistaModelo.DireccionCorreoElectronico = _email.Text.ToUpper().TrimEnd();
+                        _clienteGeneralVistaDtOs.CorreoElectronico = _correoElectronicoVistaModelo;
+
+
+                        foreach (var telefono in _listaTelfono)
+                        {
+                            telefono.Individuo = _individuoVistaModelo;
+                        }
+                        _clienteGeneralVistaDtOs.Telefonos = _listaTelfono;
+
+                        #endregion
+
+                        #region Cliente
+
+                        ClienteVistaModelo _clienteVistaModelo = new ClienteVistaModelo();
+                        TipoGeneroVistaModelo _tipoGeneroVistaModelo = new TipoGeneroVistaModelo();
+                        _tipoGeneroVistaModelo.TipoGeneroId = Convert.ToInt32(_genero.SelectedItem.Value);
+                        _clienteVistaModelo.TipoGenero = _tipoGeneroVistaModelo;
+                        _clienteVistaModelo.Individuo = _individuoVistaModelo;
+                        _clienteVistaModelo.FechaNacimiento = Convert.ToDateTime(_fechaNacimiento.Text);
+                        _clienteGeneralVistaDtOs.Cliente = _clienteVistaModelo;
+
+                        #endregion
+
+                        #region Individuo Rol
+
+                        IndividuoRolVistaModelo _individuoRolVistaModelo = new IndividuoRolVistaModelo();
+                        TipoRolIndividuoVistaModelo _tipoRolIndividuoVistaModelo = new TipoRolIndividuoVistaModelo();
+                        _tipoRolIndividuoVistaModelo.TipoRolIndividuoId = Convert.ToInt32(Util.TipoRolIndividuo.Cliente);
+                        _individuoRolVistaModelo.TipoRolIndividuo = _tipoRolIndividuoVistaModelo;
+                        _clienteGeneralVistaDtOs.IndividuoRol = _individuoRolVistaModelo;
+
+                        #endregion
+
+                        #region GRABA AL CLIENTE COMO USUARIO 
+
+                        ClienteVistaModelo _clienteVistaDtOs =
+                            _servicioDelegadoIndividuo.GrabarCliente(_clienteGeneralVistaDtOs);
+
+
+                        UsuarioVistaModelo _usuarioVistaModelo = new UsuarioVistaModelo();
+                        _usuarioVistaModelo.ClaveUsuario = _numeroDocumento.Text;
+                        _usuarioVistaModelo.NombreUsuario = _numeroDocumento.Text;
+                        _usuarioVistaModelo.DiasVigencia = 365;
+                        _usuarioVistaModelo.FechaCreacion = DateTime.Now;
+                        _usuarioVistaModelo.Habilitado = true;
+                        _usuarioVistaModelo.HabilitadoSeguridad = true;
+
+                        SucursalVistaModelo _sucursalVistaModelo = new SucursalVistaModelo();
+                        _sucursalVistaModelo.SucursalId = Convert.ToInt32(User.SucursalId);
+                        _usuarioVistaModelo.Sucursal = _sucursalVistaModelo;
+
+                        PuntoVentaVistaModelo _puntoVentaVistaModelo = new PuntoVentaVistaModelo();
+                        _puntoVentaVistaModelo.PuntoVentaId = Convert.ToInt32(User.PuntoVentaId);
+                        _usuarioVistaModelo.PuntoVenta = _puntoVentaVistaModelo;
+
+                        IndividuoVistaModelo _individuoVista = new IndividuoVistaModelo();
+                        _individuoVista.IndividuoId = Convert.ToInt32(_clienteVistaDtOs.Individuo.IndividuoId);
+                        _usuarioVistaModelo.Individuo = _individuoVista;
+
+                        _usuarioVistaModelo = _servicioDelegadoSeguridad.GrabarUsuario(_usuarioVistaModelo);
+
+                        UsuarioPerfilVistaModelo _usuarioPerfilVistaModelo = new UsuarioPerfilVistaModelo();
+                        _usuarioPerfilVistaModelo.Usuario = _usuarioVistaModelo;
+
+                        PerfilVistaModelo _perfilVista = new PerfilVistaModelo();
+                        _perfilVista.PerfilId = 5;
+                        _usuarioPerfilVistaModelo.Perfil = _perfilVista;
+                        _servicioDelegadoSeguridad.GrabarUsuarioPerfil(_usuarioPerfilVistaModelo);
+
+                        #endregion
 
 
 
+
+
+                    }
+                    else
+                    {
+                        #region individuo 
+
+                        //Individuo
+                        IndividuoVistaModelo _individuoVistaModelo = _clienteGeneralVistaDtOs.Individuo;
+
+                        TipoIdentificacionVistaModelo _tipoIdentificacionVistaModelo =
+                            new TipoIdentificacionVistaModelo();
+                        _tipoIdentificacionVistaModelo.TipoIdentificacionId =
+                            Convert.ToInt32(_tipoDocumento.SelectedItem.Value);
+                        _individuoVistaModelo.TipoIdentificacion = _tipoIdentificacionVistaModelo;
+
+                        TipoIndividuoVistaModelo _tipoIndividuoVistaModelo = new TipoIndividuoVistaModelo();
+                        _tipoIndividuoVistaModelo.TipoIndividuoId = Convert.ToInt32(Util.TipoIndividuo.PersonaNatural);
+                        _individuoVistaModelo.TipoIndividuo = _tipoIndividuoVistaModelo;
+
+
+                        _individuoVistaModelo.PrimerCampo = _apellidoPaterno.Text.ToUpper().Trim();
+                        _individuoVistaModelo.SegundoCampo = _apellidoMaterno.Text.ToUpper().Trim();
+                        _individuoVistaModelo.TercerCampo = _primerNombre.Text.ToUpper().Trim();
+                        _individuoVistaModelo.CuartoCampo = _segundoNombre.Text.ToUpper().Trim();
+                        _individuoVistaModelo.NumeroIdentificacion = _numeroDocumento.Text.ToUpper().Trim();
+                        _individuoVistaModelo.Habilitado = true;
+                        _individuoVistaModelo.FechaCreacion = DateTime.Now;
+                        _individuoVistaModelo.FechaModificacion = DateTime.Now;
+                        _individuoVistaModelo.UsuarioId = User.Id;
+
+                        _clienteGeneralVistaDtOs.Individuo = _individuoVistaModelo;
+
+                        #endregion
+
+                        #region Direccion
+
+                        //Direccion
+
+                        DireccionVistaModelo _direccionVistaModelo = _clienteGeneralVistaDtOs.Direccion;
+
+                        PaisVistaModelo _paisVistaModelo = new PaisVistaModelo();
+                        _paisVistaModelo.PaisId = Convert.ToInt32(_pais.SelectedItem.Value);
+
+                        EstadoVistaModelo _estadoVistaModelo = new EstadoVistaModelo();
+                        _estadoVistaModelo.EstadoId = Convert.ToInt32(_provincia.SelectedItem.Value);
+
+                        CiudadVistaModelo _ciudadVistaModelo = new CiudadVistaModelo();
+                        _ciudadVistaModelo.CiudadId = Convert.ToInt32(_ciudad.SelectedItem.Value);
+
+                        ParroquiaVistaModelo _parroquiaVistaModelo = new ParroquiaVistaModelo();
+                        _parroquiaVistaModelo.ParroquiaId = Convert.ToInt32(_parroquia.SelectedItem.Value);
+
+                        TipoDireccionVistaModelo _tipoDireccionVistaModelo = new TipoDireccionVistaModelo();
+                        _tipoDireccionVistaModelo.TipoDireccionId = Convert.ToInt32(_tipoDireccion.SelectedItem.Value);
+
+                        _direccionVistaModelo.Individuo = _individuoVistaModelo;
+                        _direccionVistaModelo.CallePrincipal = _callePrincipal.Text.ToUpper().TrimEnd();
+                        _direccionVistaModelo.CalleSecundaria = _calleSecundaria.Text.ToUpper().TrimEnd();
+                        _direccionVistaModelo.NumeroCasa = _numeroCasa.Text.ToUpper().TrimEnd();
+                        _direccionVistaModelo.Referencia = _referencia.Text.ToUpper().TrimEnd();
+                        _direccionVistaModelo.Pais = _paisVistaModelo;
+                        _direccionVistaModelo.Estado = _estadoVistaModelo;
+                        _direccionVistaModelo.Ciudad = _ciudadVistaModelo;
+                        _direccionVistaModelo.TipoDireccion = _tipoDireccionVistaModelo;
+                        _direccionVistaModelo.Parroquia = _parroquiaVistaModelo;
+                        _clienteGeneralVistaDtOs.Direccion = _direccionVistaModelo;
+                        foreach (var telefono in _listaTelfono)
+                        {
+                            telefono.Individuo = _individuoVistaModelo;
+                        }
+                        _clienteGeneralVistaDtOs.Telefonos = _listaTelfono;
+                        #endregion
+
+                        #region  Telefono y Email
+
+
+                        CorreoElectronicoVistaModelo _correoElectronicoVistaModelo =
+                            _clienteGeneralVistaDtOs.CorreoElectronico;
+                        
+                        TipoCorreoElectronicoVistaModelo _tipoCorreoElectronicoVistaModelo =
+                            new TipoCorreoElectronicoVistaModelo();
+
+                        _tipoCorreoElectronicoVistaModelo.TipoCorreoElectronicoId =
+                            Convert.ToInt32(_tipoCorreo.SelectedItem.Value);
+
+
+                        
+                        _correoElectronicoVistaModelo.TipoCorreoElectronico = _tipoCorreoElectronicoVistaModelo;
+                        _correoElectronicoVistaModelo.Individuo = _individuoVistaModelo;
+                        _correoElectronicoVistaModelo.DireccionCorreoElectronico = _email.Text.TrimEnd();
+                        _clienteGeneralVistaDtOs.CorreoElectronico = _correoElectronicoVistaModelo;
+
+
+
+
+                        #endregion
+
+                        #region Cliente
+
+                        ClienteVistaModelo _clienteVistaModelo = _clienteGeneralVistaDtOs.Cliente;
+                        TipoGeneroVistaModelo _tipoGeneroVistaModelo = new TipoGeneroVistaModelo();
+                        _tipoGeneroVistaModelo.TipoGeneroId = Convert.ToInt32(_genero.SelectedItem.Value);
+                        _clienteVistaModelo.TipoGenero = _tipoGeneroVistaModelo;
+                        _clienteVistaModelo.Individuo = _individuoVistaModelo;
+                        _clienteVistaModelo.FechaNacimiento = Convert.ToDateTime(_fechaNacimiento.Text);
+                        _clienteGeneralVistaDtOs.Cliente = _clienteVistaModelo;
+
+                        #endregion
+
+                        #region Individuo Rol
+
+                        IndividuoRolVistaModelo _individuoRolVistaModelo = _clienteGeneralVistaDtOs.IndividuoRol;
+                        TipoRolIndividuoVistaModelo _tipoRolIndividuoVistaModelo = new TipoRolIndividuoVistaModelo();
+                        _tipoRolIndividuoVistaModelo.TipoRolIndividuoId = Convert.ToInt32(Util.TipoRolIndividuo.Cliente);
+                        _individuoRolVistaModelo.TipoRolIndividuo = _tipoRolIndividuoVistaModelo;
+                        _clienteGeneralVistaDtOs.IndividuoRol = _individuoRolVistaModelo;
+
+                        #endregion
+
+                        _servicioDelegadoIndividuo.ActualizarCliente(_clienteGeneralVistaDtOs);
+                    }
+                    LimpiarControles();
+                    Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Exitoso").ToString(), "_grabarCliente");
                 }
                 else
-                {
-                    #region individuo 
+                    Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Numero_Telefono").ToString(), "_grabarCliente");
 
-                    //Individuo
-                    IndividuoVistaModelo _individuoVistaModelo = _clienteGeneralVistaDtOs.Individuo;
-
-                    TipoIdentificacionVistaModelo _tipoIdentificacionVistaModelo = new TipoIdentificacionVistaModelo();
-                    _tipoIdentificacionVistaModelo.TipoIdentificacionId =
-                        Convert.ToInt32(_tipoDocumento.SelectedItem.Value);
-                    _individuoVistaModelo.TipoIdentificacion = _tipoIdentificacionVistaModelo;
-
-                    TipoIndividuoVistaModelo _tipoIndividuoVistaModelo = new TipoIndividuoVistaModelo();
-                    _tipoIndividuoVistaModelo.TipoIndividuoId = Convert.ToInt32(Util.TipoIndividuo.PersonaNatural);
-                    _individuoVistaModelo.TipoIndividuo = _tipoIndividuoVistaModelo;
-
-
-                    _individuoVistaModelo.PrimerCampo = _apellidoPaterno.Text.ToUpper().Trim();
-                    _individuoVistaModelo.SegundoCampo = _apellidoMaterno.Text.ToUpper().Trim();
-                    _individuoVistaModelo.TercerCampo = _primerNombre.Text.ToUpper().Trim();
-                    _individuoVistaModelo.CuartoCampo = _segundoNombre.Text.ToUpper().Trim();
-                    _individuoVistaModelo.NumeroIdentificacion = _numeroDocumento.Text.ToUpper().Trim();
-                    _individuoVistaModelo.Habilitado = true;
-                    _individuoVistaModelo.FechaCreacion = DateTime.Now;
-                    _individuoVistaModelo.FechaModificacion = DateTime.Now;
-                    _individuoVistaModelo.UsuarioId = User.Id;
-
-                    _clienteGeneralVistaDtOs.Individuo = _individuoVistaModelo;
-
-                    #endregion
-
-                    #region Direccion
-
-                    //Direccion
-
-                    DireccionVistaModelo _direccionVistaModelo =_clienteGeneralVistaDtOs.Direccion;
-
-                    PaisVistaModelo _paisVistaModelo = new PaisVistaModelo();
-                    _paisVistaModelo.PaisId = Convert.ToInt32(_pais.SelectedItem.Value);
-
-                    EstadoVistaModelo _estadoVistaModelo = new EstadoVistaModelo();
-                    _estadoVistaModelo.EstadoId = Convert.ToInt32(_provincia.SelectedItem.Value);
-
-                    CiudadVistaModelo _ciudadVistaModelo = new CiudadVistaModelo();
-                    _ciudadVistaModelo.CiudadId = Convert.ToInt32(_ciudad.SelectedItem.Value);
-
-                    ParroquiaVistaModelo _parroquiaVistaModelo = new ParroquiaVistaModelo();
-                    _parroquiaVistaModelo.ParroquiaId = Convert.ToInt32(_parroquia.SelectedItem.Value);
-
-                    TipoDireccionVistaModelo _tipoDireccionVistaModelo = new TipoDireccionVistaModelo();
-                    _tipoDireccionVistaModelo.TipoDireccionId = Convert.ToInt32(_tipoDireccion.SelectedItem.Value);
-
-                    _direccionVistaModelo.Individuo = _individuoVistaModelo;
-                    _direccionVistaModelo.CallePrincipal = _callePrincipal.Text.ToUpper().TrimEnd();
-                    _direccionVistaModelo.CalleSecundaria = _calleSecundaria.Text.ToUpper().TrimEnd();
-                    _direccionVistaModelo.NumeroCasa = _numeroCasa.Text.ToUpper().TrimEnd();
-                    _direccionVistaModelo.Referencia = _referencia.Text.ToUpper().TrimEnd();
-                    _direccionVistaModelo.Pais = _paisVistaModelo;
-                    _direccionVistaModelo.Estado = _estadoVistaModelo;
-                    _direccionVistaModelo.Ciudad = _ciudadVistaModelo;
-                    _direccionVistaModelo.TipoDireccion = _tipoDireccionVistaModelo;
-                    _direccionVistaModelo.Parroquia = _parroquiaVistaModelo;
-                    _clienteGeneralVistaDtOs.Direccion = _direccionVistaModelo;
-
-                    #endregion
-
-                    #region  Telefono y Email
-
-                    TelefonoVistaModelo _telefonoVistaModelo = _clienteGeneralVistaDtOs.Telefono;
-                    CorreoElectronicoVistaModelo _correoElectronicoVistaModelo = _clienteGeneralVistaDtOs.CorreoElectronico;
-                    TipoTelefonoVistaModelo _tipoTelefonoVistaModelo = new TipoTelefonoVistaModelo();
-                    TipoCorreoElectronicoVistaModelo _tipoCorreoElectronicoVistaModelo =
-                        new TipoCorreoElectronicoVistaModelo();
-
-                    _tipoTelefonoVistaModelo.TipoTelefonoId = Convert.ToInt32(_tipoTelefono.SelectedItem.Value);
-                    _tipoCorreoElectronicoVistaModelo.TipoCorreoElectronicoId =
-                        Convert.ToInt32(_tipoCorreo.SelectedItem.Value);
-
-
-                    _telefonoVistaModelo.TipoTelefono = _tipoTelefonoVistaModelo;
-                    _telefonoVistaModelo.Individuo = _individuoVistaModelo;
-                    _telefonoVistaModelo.NumeroTelefono = _telefono.Text.ToUpper().TrimEnd();
-                    _clienteGeneralVistaDtOs.Telefono = _telefonoVistaModelo;
-
-                    _correoElectronicoVistaModelo.TipoCorreoElectronico = _tipoCorreoElectronicoVistaModelo;
-                    _correoElectronicoVistaModelo.Individuo = _individuoVistaModelo;
-                    _correoElectronicoVistaModelo.DireccionCorreoElectronico = _email.Text.TrimEnd();
-                    _clienteGeneralVistaDtOs.CorreoElectronico = _correoElectronicoVistaModelo;
-
-
-
-                    #endregion
-
-                    #region Cliente
-
-                    ClienteVistaModelo _clienteVistaModelo = _clienteGeneralVistaDtOs.Cliente;
-                    TipoGeneroVistaModelo _tipoGeneroVistaModelo = new TipoGeneroVistaModelo();
-                    _tipoGeneroVistaModelo.TipoGeneroId = Convert.ToInt32(_genero.SelectedItem.Value);
-                    _clienteVistaModelo.TipoGenero = _tipoGeneroVistaModelo;
-                    _clienteVistaModelo.Individuo = _individuoVistaModelo;
-                    _clienteVistaModelo.FechaNacimiento = Convert.ToDateTime(_fechaNacimiento.Text);
-                    _clienteGeneralVistaDtOs.Cliente = _clienteVistaModelo;
-
-                    #endregion
-
-                    #region Individuo Rol
-
-                    IndividuoRolVistaModelo _individuoRolVistaModelo = _clienteGeneralVistaDtOs.IndividuoRol;
-                    TipoRolIndividuoVistaModelo _tipoRolIndividuoVistaModelo = new TipoRolIndividuoVistaModelo();
-                    _tipoRolIndividuoVistaModelo.TipoRolIndividuoId = Convert.ToInt32(Util.TipoRolIndividuo.Cliente);
-                    _individuoRolVistaModelo.TipoRolIndividuo = _tipoRolIndividuoVistaModelo;
-                    _clienteGeneralVistaDtOs.IndividuoRol = _individuoRolVistaModelo;
-
-                    #endregion
-
-                    _servicioDelegadoIndividuo.ActualizarCliente(_clienteGeneralVistaDtOs);
-                }
-                LimpiarControles();
-                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Exitoso").ToString(), "_grabarCliente");
 
             }
             catch (Exception ex)
@@ -908,8 +977,6 @@ namespace Web.Individuo
                 _tipoDireccion.DataBind();
                 _tipoCorreo.DataSource = _servicioDelegadoGeneral.ObtenerTiposCorreoElectronico();
                 _tipoCorreo.DataBind();
-                _tipoTelefono.DataSource = _servicioDelegadoGeneral.ObtenerTiposTelefonos();
-                _tipoTelefono.DataBind();
                 _numeroDocumento.Enabled = true;
                 _tipoDocumento.Enabled = true;
                 _banderaActualizacion = false;
@@ -919,9 +986,13 @@ namespace Web.Individuo
                 _tipoBusqueda.SelectedIndex = _tipoBusqueda.Items.IndexOf(_tipoBusqueda.Items.FindByValue("-1"));
                 _numeroDocumentoBusqueda.Text = String.Empty;
                 _numeroDocumentoBusqueda.ReadOnly = true;
+                _tipoTelefono.DataSource = _servicioDelegadoGeneral.ObtenerTiposTelefonos();
+                _tipoTelefono.DataBind();
 
                 _parametroDos.Text = String.Empty;
                 _parametroDos.ReadOnly = true;
+                _listaTelfono= new List<TelefonoVistaModelo>();
+                
 
             }
             catch (Exception ex)
@@ -967,6 +1038,9 @@ namespace Web.Individuo
             _telefono.Text = string.Empty;
             _numeroDocumentoBusqueda.Text=String.Empty;
             _clienteGeneralVistaDtOs = null;
+            _listaTelfono=new List<TelefonoVistaModelo>();
+            _datosTelefono.DataSource = _listaTelfono;
+            _datosTelefono.DataBind();
             CargarDatos();
         }
 
@@ -977,6 +1051,8 @@ namespace Web.Individuo
 
 
         #endregion
+
+       
 
        
     }

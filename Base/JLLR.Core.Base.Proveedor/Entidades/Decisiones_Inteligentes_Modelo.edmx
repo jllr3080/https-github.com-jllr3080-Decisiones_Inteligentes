@@ -1040,6 +1040,7 @@
           <Property Name="SOLO_PLANCHADO" Type="bit" />
           <Property Name="PORCENTAJE_ADICIONAL" Type="bit" />
           <Property Name="DETALLE_ORDEN_ANULADA_TRABAJO_ID" Type="int" />
+          <Property Name="ESTA_ANULADA" Type="bit" />
         </EntityType>
         <EntityType Name="DETALLE_ORDEN_TRABAJO_OBSERVACION">
           <Key>
@@ -1140,6 +1141,7 @@
           <Property Name="ES_TEMPORAL" Type="bit" />
           <Property Name="OBJETO_OLVIDADO" Type="varchar" MaxLength="50" />
           <Property Name="REVISO_PRENDA_CLIENTE" Type="bit" />
+          <Property Name="ESTA_ANULADA" Type="bit" />
         </EntityType>
         <EntityType Name="ORDEN_TRABAJO_COMISION">
           <Key>
@@ -7325,6 +7327,7 @@
           <NavigationProperty Name="ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="ORDEN_TRABAJO" />
           <NavigationProperty Name="DETALLE_PRENDA_ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_PRENDA_VS_DETALLE_ORDEN_TRABAJO" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="DETALLE_PRENDA_ORDEN_TRABAJO" />
           <NavigationProperty Name="ORDEN_TRABAJO_COMISION" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_COMISION_VS_DOT" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="ORDEN_TRABAJO_COMISION" />
+          <Property Name="ESTA_ANULADA" Type="Boolean" />
         </EntityType>
         <EntityType Name="ORDEN_TRABAJO">
           <Key>
@@ -7357,6 +7360,7 @@
           <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="Decisiones_Inteligentes_Modelo.FK_DETALLE_ORDEN_TRABAJO_VS_ORDEN_TRABAJO" FromRole="ORDEN_TRABAJO" ToRole="DETALLE_ORDEN_TRABAJO" />
           <NavigationProperty Name="HISTORIAL_REGLA" Relationship="Decisiones_Inteligentes_Modelo.FK_HISTORIA_REGLA_VS_ORDEN_TRABAJO" FromRole="ORDEN_TRABAJO" ToRole="HISTORIAL_REGLA" />
           <NavigationProperty Name="ORDEN_TRABAJO_DESCUENTO" Relationship="Decisiones_Inteligentes_Modelo.FK_ORDEN_TRABAJO_DESCUENTO_VS_ORDEN_TRABAJO" FromRole="ORDEN_TRABAJO" ToRole="ORDEN_TRABAJO_DESCUENTO" />
+          <Property Name="ESTA_ANULADA" Type="Boolean" />
         </EntityType>
         <Association Name="FK_ORDEN_TRABAJO_VS_CLIENTE">
           <End Type="Decisiones_Inteligentes_Modelo.CLIENTE" Role="CLIENTE" Multiplicity="0..1" />
@@ -8798,6 +8802,7 @@
           <EntitySetMapping Name="DETALLE_ORDEN_TRABAJO">
             <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.DETALLE_ORDEN_TRABAJO">
               <MappingFragment StoreEntitySet="DETALLE_ORDEN_TRABAJO">
+                <ScalarProperty Name="ESTA_ANULADA" ColumnName="ESTA_ANULADA" />
                 <ScalarProperty Name="DETALLE_ORDEN_ANULADA_TRABAJO_ID" ColumnName="DETALLE_ORDEN_ANULADA_TRABAJO_ID" />
                 <ScalarProperty Name="PORCENTAJE_ADICIONAL" ColumnName="PORCENTAJE_ADICIONAL" />
                 <ScalarProperty Name="SOLO_PLANCHADO" ColumnName="SOLO_PLANCHADO" />
@@ -8825,6 +8830,7 @@
           <EntitySetMapping Name="ORDEN_TRABAJO">
             <EntityTypeMapping TypeName="Decisiones_Inteligentes_Modelo.ORDEN_TRABAJO">
               <MappingFragment StoreEntitySet="ORDEN_TRABAJO">
+                <ScalarProperty Name="ESTA_ANULADA" ColumnName="ESTA_ANULADA" />
                 <ScalarProperty Name="REVISO_PRENDA_CLIENTE" ColumnName="REVISO_PRENDA_CLIENTE" />
                 <ScalarProperty Name="OBJETO_OLVIDADO" ColumnName="OBJETO_OLVIDADO" />
                 <ScalarProperty Name="ES_TEMPORAL" ColumnName="ES_TEMPORAL" />

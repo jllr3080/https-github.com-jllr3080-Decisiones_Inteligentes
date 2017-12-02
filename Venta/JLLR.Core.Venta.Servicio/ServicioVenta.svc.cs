@@ -31,6 +31,59 @@ namespace JLLR.Core.Venta.Servicio
         #region NEGOCIO
 
         /// <summary>
+        /// Graba la operacion de descuento  
+        /// </summary>
+        /// <param name="parametroAnulacionDtOs"></param>
+        public void GrabarAnluacionPrenda(ParametroAnulacionDTOs parametroAnulacionDtOs)
+        {
+            try
+            {
+                _ventaNegocio.GrabarAnluacionPrenda(parametroAnulacionDtOs);
+            }
+            catch ( Exception ex)
+            {
+            }
+        }
+
+    /// <summary>
+    /// Grabar el detallde  de las prendas
+    /// </summary>
+    /// <param name="ordenTrabajoDtOs"></param>
+
+    public
+            void GrabarDetallePrendaCompleto(OrdenTrabajoDTOs ordenTrabajoDtOs)
+        {
+            try
+            {
+              _ventaTransformadorNegocio.GrabarDetallePrendaCompleto(ordenTrabajoDtOs);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        /// <summary>
+        /// Obtiene la impresion corta sin el detalle de las prensdas
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public List<ConsultaOrdenTrabajoDTOs> ObtenerOrdenTrabajoCortaPorNumeroOrdenYPuntoVenta(string numeroOrden,
+            int puntoVentaId)
+        {
+            try
+            {
+                return _ventaTransformadorNegocio.ObtenerOrdenTrabajoCortaPorNumeroOrdenYPuntoVenta(numeroOrden,
+                    puntoVentaId);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        /// <summary>
         /// Obtiene las  ordenes temporales
         /// </summary>
         /// <param name="puntoVentaId"></param>
@@ -329,6 +382,62 @@ namespace JLLR.Core.Venta.Servicio
                 throw;
             }
         }
+
+        /// <summary>
+        /// Graba la  venta de la ocmision
+        /// </summary>
+        /// <param name="ventaComision"></param>
+
+        public void GrabarVentaComision(VentaComisionModelo ventaComision)
+        {
+            try
+            {
+                _ventaTransformadorNegocio.GrabarVentaComision(ventaComision);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Actualizar  venta de  comision
+        /// </summary>
+        /// <param name="ventaComision"></param>
+        public void ActualizarVentaComision(VentaComisionModelo ventaComision)
+        {
+            try
+            {
+                _ventaTransformadorNegocio.ActualizarVentaComision(ventaComision);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Obtiene las  venta de las comisiones
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public List<VentaComisionModelo> ObtenerVentaComisiones(int puntoVentaId)
+        {
+            try
+            {
+                return _ventaTransformadorNegocio.ObtenerVentaComisiones(puntoVentaId);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
         #region HISTORIAL REGLA
@@ -614,6 +723,128 @@ namespace JLLR.Core.Venta.Servicio
             try
             {
               _ventaTransformadorNegocio.ActualizarDetallePrendaOrdenTrabajo(detallePrendaOrdenTrabajo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region NUMERACION ORDEN
+
+
+        /// <summary>
+        /// Obtiene  todas las sucursales 
+        /// </summary>
+        /// <returns></returns>
+        public List<NumeracionOrdenDTOs> ObtenerPuntosVentaCompleto()
+        {
+            try
+            {
+
+                return _ventaTransformadorNegocio.ObtenerPuntosVentaCompleto();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Grabar punto de  venta y numero de  orden
+        /// </summary>
+        /// <param name="numeracionOrdenDtOs"></param>
+        public void GrabarPuntoVentaCompleto(NumeracionOrdenDTOs numeracionOrdenDtOs)
+        {
+            try
+            {
+                _ventaTransformadorNegocio.GrabarPuntoVentaCompleto(numeracionOrdenDtOs);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Grabar punto de  venta y numero de  orden
+        /// </summary>
+        /// <param name="numeracionOrdenDtOs"></param>
+        public void ActualizarPuntoVentaCompleto(NumeracionOrdenDTOs numeracionOrdenDtOs)
+        {
+            try
+            {
+              _ventaTransformadorNegocio.ActualizarPuntoVentaCompleto(numeracionOrdenDtOs);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+
+        #endregion
+
+        #region VENTA COMISION  INDUSTRIALES
+
+        /// <summary>
+        /// Obtiene el valor de la venta de  industriales
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public List<VentaComisionIndustrialesDTOs> ObtenerComisionesIndustrialesPorPuntoVenta(int puntoVentaId)
+        {
+            try
+            {
+                return _ventaTransformadorNegocio.ObtenerComisionesIndustrialesPorPuntoVenta(puntoVentaId);
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        /// Grabar promociones
+        /// </summary>
+        /// <param name="ventaComisionIndustrialesDtOs"></param>
+        public void GrabarVentaComisionIndustrialesCompleto(VentaComisionIndustrialesDTOs ventaComisionIndustrialesDtOs)
+        {
+            try
+            {
+              _ventaTransformadorNegocio.GrabarVentaComisionIndustrialesCompleto(ventaComisionIndustrialesDtOs);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Actualizar promociones
+        /// </summary>
+        /// <param name="ventaComisionIndustrialesDtOs"></param>
+        public void ActualizarVentaComisionIndustrialesCompleto(VentaComisionIndustrialesDTOs ventaComisionIndustrialesDtOs)
+        {
+            try
+            {
+                _ventaTransformadorNegocio.ActualizarVentaComisionIndustrialesCompleto(ventaComisionIndustrialesDtOs);
             }
             catch (Exception)
             {

@@ -6,7 +6,7 @@ using System.Web;
 using entidadDTOs = JLLR.Core.Venta.Proveedor.DTOs;
 using modeloDTOs = JLLR.Core.Venta.Servicio.DTOs;
 using ensamblador = JLLR.Core.Venta.Servicio.Ensamblador;
-
+using ensambladorGeneral= JLLR.Core.General.Servicio.Ensamblador;
 #endregion
 
 namespace JLLR.Core.Venta.Servicio.EnsambladorDTOs
@@ -19,6 +19,7 @@ namespace JLLR.Core.Venta.Servicio.EnsambladorDTOs
         #region  DECLARACIONES  E INSTANCIAS
         private readonly ensamblador.EnsambladorEntidad _ensambladorEntidad = new ensamblador.EnsambladorEntidad();
         private readonly ensamblador.EnsambladorModelo _ensambladorModelo = new ensamblador.EnsambladorModelo();
+        private  readonly  ensambladorGeneral.EnsambladorModelo _ensambladorModeloGeneral= new ensambladorGeneral.EnsambladorModelo();
         #endregion
 
         #region DETALLE ORDEN TRABAJO  FOTOGRAFIA
@@ -279,7 +280,8 @@ namespace JLLR.Core.Venta.Servicio.EnsambladorDTOs
                 NumeroInternoPrenda = e.NumeroInternoPrenda,
                 DetallePrendaOrdenTrabajoId = e.DetallePrendaOrdenTrabajoId,
                 EstadoPrenda = e.EstadoPrenda,
-                InformacionVisual = e.InformacionVisual
+                InformacionVisual = e.InformacionVisual,
+                EstaAnulada = e.EstaAnulada
 
             };
 
@@ -372,6 +374,40 @@ namespace JLLR.Core.Venta.Servicio.EnsambladorDTOs
         }
         #endregion
 
+
+        #region NUMERACION ORDEN DTO    
+        /// <summary>
+        /// Convierte el modelo DTO en una entidad DTO
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public modeloDTOs.  NumeracionOrdenDTOs CrearNumeracionOrdenDtOs(entidadDTOs.NumeracionOrdenDTOs e)
+        {
+            return new modeloDTOs.NumeracionOrdenDTOs()
+            {
+                NumeracionOrden = _ensambladorModelo.CrearNumeroOrden(e.NumeracionOrden),
+                PuntoVenta = _ensambladorModeloGeneral.CrearPuntoVenta(e.PuntoVenta),
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos  Usuario en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<modeloDTOs.NumeracionOrdenDTOs> CrearNumeracionesOrdenDtOs(IQueryable<entidadDTOs.NumeracionOrdenDTOs> listadoModelo)
+        {
+            List<modeloDTOs.NumeracionOrdenDTOs> listaEntidad = new List<modeloDTOs.NumeracionOrdenDTOs>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearNumeracionOrdenDtOs(modelo));
+            }
+            return listaEntidad;
+
+        }
+        #endregion
 
 
     }

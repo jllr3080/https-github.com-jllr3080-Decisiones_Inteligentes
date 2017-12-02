@@ -40,6 +40,43 @@ namespace JLLR.Core.Venta.Servicio.Transformador
 
 
         #region TRANSACCIONAL
+
+        /// <summary>
+        /// Grabar el detallde  de las prendas
+        /// </summary>
+        /// <param name="ordenTrabajoDtOs"></param>
+
+        public void GrabarDetallePrendaCompleto(OrdenTrabajoDTOs ordenTrabajoDtOs)
+        {
+            try
+            {
+               _ventaNegocio.GrabarDetallePrendaCompleto(_ensambladorEntidadDTOs.CrearOrdenTrabajotOs(ordenTrabajoDtOs));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        /// <summary>
+        /// Obtiene la impresion corta sin el detalle de las prensdas
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public List<ConsultaOrdenTrabajoDTOs> ObtenerOrdenTrabajoCortaPorNumeroOrdenYPuntoVenta(string numeroOrden,
+            int puntoVentaId)
+        {
+            try
+            {
+                return _ensambladorModeloDTOs.CrearConsultaOrdenesTrabajoDtOs(_ventaNegocio.ObtenerOrdenTrabajoCortaPorNumeroOrdenYPuntoVenta(numeroOrden, puntoVentaId));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         /// <summary>
         /// Obtiene las  ordenes temporales
         /// </summary>
@@ -287,8 +324,29 @@ namespace JLLR.Core.Venta.Servicio.Transformador
             }
         }
         #endregion
-        
+
         #region ORDEN TRABAJO COMISION
+
+        /// <summary>
+        /// Obtener las  comisiones  de las ordens
+        /// </summary>
+        /// <param name="ordenTrabajoComision"></param>
+        /// <returns></returns>
+
+        public void ActualizarOrdenTrabajoComision(OrdenTrabajoComisionModelo ordenTrabajoComision)
+        {
+            try
+            {
+                _ventaNegocio.ActualizarOrdenTrabajoComision(_ensambladorEntidad.CrearOrdenTrabajoComision(ordenTrabajoComision));
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
 
         /// <summary>
         /// Graba la comision de la orden de  trabajo
@@ -305,6 +363,24 @@ namespace JLLR.Core.Venta.Servicio.Transformador
 
             }
             catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        /// <summary>
+        /// Obtener las  comisiones  de las ordens
+        /// </summary>
+        /// <param name="detalleOrdenTrabajoId"></param>
+        /// <returns></returns>
+
+        public OrdenTrabajoComisionModelo ObtenerOrdenTrabajoComisionPorId(int detalleOrdenTrabajoId)
+        {
+            try
+            {
+                return   _ensambladorModelo.CrearOrdenTrabajoComision(_ventaNegocio.ObtenerOrdenTrabajoComisionPorId(detalleOrdenTrabajoId));
+            }
+            catch (Exception)
             {
 
                 throw;
@@ -628,6 +704,189 @@ namespace JLLR.Core.Venta.Servicio.Transformador
         }
         #endregion
 
+
+        #region DETALLE  ORDEN  TRABAJO
+
+        /// <summary>
+        /// Graba el detalle de la orden de trabajo
+        /// </summary>
+        /// <param name="detalleOrdenTrabajo"></param>
+        /// <returns></returns>
+        public DetalleOrdenTrabajoModelo GrabarDetelleOrdenTrabajo(DetalleOrdenTrabajoModelo detalleOrdenTrabajo)
+        {
+            try
+            {
+                return _ensambladorModelo.CrearDetalleOrdenTrabajo(_ventaNegocio.GrabarDetelleOrdenTrabajo(_ensambladorEntidad.CrearDetalleOrdenTrabajo((detalleOrdenTrabajo))));
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Actualiza la orden de trabajo
+        /// </summary>
+        /// <param name=""></param>
+        public void ActualizarDetalleOrdenTrabajo(DetalleOrdenTrabajoModelo detalleOrdenTrabajo)
+        {
+            try
+            {
+                _ventaNegocio.ActualizarDetalleOrdenTrabajo(_ensambladorEntidad.CrearDetalleOrdenTrabajo(detalleOrdenTrabajo));
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Encontrar el detalle de la orden  de trabajo 
+        /// </summary>
+        /// <param name="detalleOrdenTrabajoId"></param>
+        public DetalleOrdenTrabajoModelo ObtenerDetalleOrdenTrabajoPorId(int detalleOrdenTrabajoId)
+        {
+            try
+            {
+                return
+                    _ensambladorModelo.CrearDetalleOrdenTrabajo(
+                        _ventaNegocio.ObtenerDetalleOrdenTrabajoPorId(detalleOrdenTrabajoId));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region NUMERACION ORDEN
+
+
+        /// <summary>
+        /// Obtiene  todas las sucursales 
+        /// </summary>
+        /// <returns></returns>
+        public List<NumeracionOrdenDTOs> ObtenerPuntosVentaCompleto()
+        {
+            try
+            {
+
+                return  _ensambladorModeloDTOs.CrearNumeracionesOrdenDtOs(_ventaNegocio.ObtenerPuntosVentaCompleto());
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Grabar punto de  venta y numero de  orden
+        /// </summary>
+        /// <param name="numeracionOrdenDtOs"></param>
+        public void GrabarPuntoVentaCompleto(NumeracionOrdenDTOs numeracionOrdenDtOs)
+        {
+            try
+            {
+                _ventaNegocio.GrabarPuntoVentaCompleto(_ensambladorEntidadDTOs.CrearNumeracionOrdenDtOs(numeracionOrdenDtOs));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Grabar punto de  venta y numero de  orden
+        /// </summary>
+        /// <param name="numeracionOrdenDtOs"></param>
+        public void ActualizarPuntoVentaCompleto(NumeracionOrdenDTOs numeracionOrdenDtOs)
+        {
+            try
+            {
+                _ventaNegocio.ActualizarPuntoVentaCompleto(_ensambladorEntidadDTOs.CrearNumeracionOrdenDtOs(numeracionOrdenDtOs));
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+
+        #endregion
+
+        #region VENTA COMISION  INDUSTRIALES
+
+        /// <summary>
+        /// Obtiene el valor de la venta de  industriales
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public List<VentaComisionIndustrialesDTOs> ObtenerComisionesIndustrialesPorPuntoVenta(int puntoVentaId)
+        {
+            try
+            {
+                return
+                    _ensambladorModeloDTOs.CrearVentaComisionesIndustrialesDtOs(
+                        _ventaNegocio.ObtenerComisionesIndustrialesPorPuntoVenta(puntoVentaId));
+
+                
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        /// Grabar promociones
+        /// </summary>
+        /// <param name="ventaComisionIndustrialesDtOs"></param>
+        public void GrabarVentaComisionIndustrialesCompleto(VentaComisionIndustrialesDTOs ventaComisionIndustrialesDtOs)
+        {
+            try
+            {
+                _ventaNegocio.GrabarVentaComisionIndustrialesCompleto(_ensambladorEntidadDTOs.CrearVentaComisionIndustrialesDtOs(ventaComisionIndustrialesDtOs));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Actualizar promociones
+        /// </summary>
+        /// <param name="ventaComisionIndustrialesDtOs"></param>
+        public void ActualizarVentaComisionIndustrialesCompleto(VentaComisionIndustrialesDTOs ventaComisionIndustrialesDtOs)
+        {
+            try
+            {
+                _ventaNegocio.ActualizarVentaComisionIndustrialesCompleto(_ensambladorEntidadDTOs.CrearVentaComisionIndustrialesDtOs(ventaComisionIndustrialesDtOs));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
         #endregion
 
         #region PARAMETRIZACION
@@ -646,6 +905,62 @@ namespace JLLR.Core.Venta.Servicio.Transformador
             try
             {
                 return _ensambladorModelo.CrearVentaComision(_ventaParametrizacion.ObtenerbVentaComisionPorVariosParametros(sucursalId,puntoVentaId,vieneRegla,tipoLavadoId,promocionAplicada));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Graba la  venta de la ocmision
+        /// </summary>
+        /// <param name="ventaComision"></param>
+
+        public void GrabarVentaComision(VentaComisionModelo ventaComision)
+        {
+            try
+            {
+                _ventaParametrizacion.GrabarVentaComision(_ensambladorEntidad.CrearVentaComision(ventaComision));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Actualizar  venta de  comision
+        /// </summary>
+        /// <param name="ventaComision"></param>
+        public void ActualizarVentaComision(VentaComisionModelo ventaComision)
+        {
+            try
+            {
+                _ventaParametrizacion.ActualizarVentaComision(_ensambladorEntidad.CrearVentaComision(ventaComision));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Obtiene las  venta de las comisiones
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public List<VentaComisionModelo> ObtenerVentaComisiones(int puntoVentaId)
+        {
+            try
+            {
+                return
+                    _ensambladorModelo.CrearVentaComisiones(_ventaParametrizacion.ObtenerVentaComisiones(puntoVentaId));
             }
             catch (Exception ex)
             {

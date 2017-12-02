@@ -351,5 +351,103 @@ namespace JLLR.Core.Venta.Servicio.Negocio
                 throw;
             }
         }
+
+        /// <summary>
+        /// Graba la operacion de descuento  
+        /// </summary>
+        /// <param name="parametroAnulacionDtOs"></param>
+        public void GrabarAnluacionPrenda(ParametroAnulacionDTOs parametroAnulacionDtOs )
+        {
+            try
+            {
+                
+
+                OrdenTrabajoDTOs ordenTrabajoDtOs = _ventaTransfomadorNegocio.ObtenerOrdenTrabajoPorOrdenTrabajoId(parametroAnulacionDtOs.OrdenTrabajoId);
+
+
+                List<CuentaPorCobrarDTOs> cuentaPorCobrarDtOs =
+                   _servicioDelegadoContabilidad.ObtenerHistorialCuentaPorCobrarPorVariosParametros(ordenTrabajoDtOs.OrdenTrabajo.NumeroOrden, ordenTrabajoDtOs.OrdenTrabajo.PuntoVenta.PuntoVentaId, ordenTrabajoDtOs.OrdenTrabajo.Sucursal.SucursalId);
+                List<CuentaPorPagarDTOs> cuentaPorPagarDtOses = _servicioDelegadoContabilidad.ObtenerHistorialCuentaPorPagarPorVariosParametros(ordenTrabajoDtOs.OrdenTrabajo.NumeroOrden, ordenTrabajoDtOs.OrdenTrabajo.PuntoVenta.PuntoVentaId, ordenTrabajoDtOs.OrdenTrabajo.Sucursal.SucursalId);
+
+                DetalleOrdenTrabajoModelo detalleOrdenTrabajo =
+                    _ventaTransfomadorNegocio.ObtenerDetalleOrdenTrabajoPorId(
+                        parametroAnulacionDtOs.DetalleOrdenTrabajoId);
+
+                detalleOrdenTrabajo.ValorTotalUnitario = detalleOrdenTrabajo.ValorTotalUnitario*-1;
+                detalleOrdenTrabajo.ValorDescuento = detalleOrdenTrabajo.ValorDescuento*-1;
+                detalleOrdenTrabajo.ValorImpuesto = detalleOrdenTrabajo.ValorImpuesto*-1;
+                detalleOrdenTrabajo.EstaAulada = true;
+                
+
+                OrdenTrabajoComisionModelo ordenTrabajoComision =
+                    _ventaTransfomadorNegocio.ObtenerOrdenTrabajoComisionPorId(
+                        parametroAnulacionDtOs.DetalleOrdenTrabajoId);
+
+                ordenTrabajoComision.Valor = ordenTrabajoComision.Valor*-1;
+                ordenTrabajoComision.ValorQuimica = ordenTrabajoComision.ValorQuimica*-1;
+                ordenTrabajoComision.ValorIndustriales = ordenTrabajoComision.ValorIndustriales*-1;
+                _ventaTransfomadorNegocio.ActualizarOrdenTrabajoComision(ordenTrabajoComision);
+                // _ventaTransfomadorNegocio.GrabarDescuentoComision(parametroAnulacionDtOs.OrdenTrabajoId, Convert.ToInt32(parametroDescuentoDtOs.UsuarioId), Convert.ToDecimal(parametroDescuentoDtOs.ValorDescuentoFranquicia));
+                AsientoDTOs _asientoDtOs = new AsientoDTOs();
+
+                CuentaPorCobrarModelo cuentaPorCobrar = new CuentaPorCobrarModelo();
+                cuentaPorCobrar.PuntoVentaId = cuentaPorCobrarDtOs.Select(m => m.CuentaPorCobrar.PuntoVentaId).FirstOrDefault();
+                cuentaPorCobrar.SucursalId = cuentaPorCobrarDtOs.Select(m => m.CuentaPorCobrar.SucursalId).FirstOrDefault();
+                cuentaPorCobrar.ClienteId = cuentaPorCobrarDtOs.Select(m => m.CuentaPorCobrar.ClienteId).FirstOrDefault();
+                cuentaPorCobrar.EstadoPagoId = cuentaPorCobrarDtOs.Select(m => m.CuentaPorCobrar.EstadoPagoId).FirstOrDefault();
+                cuentaPorCobrar.FechaCreacion = DateTime.Now;
+                cuentaPorCobrar.FechaModificacion = DateTime.Now;
+                cuentaPorCobrar.FechaVencimiento = DateTime.Now;
+                cuentaPorCobrar.NumeroFactura = cuentaPorCobrarDtOs.Select(m => m.CuentaPorCobrar.NumeroFactura).FirstOrDefault();
+                cuentaPorCobrar.NumeroOrden = cuentaPorCobrarDtOs.Select(m => m.CuentaPorCobrar.NumeroOrden).FirstOrDefault();
+                cuentaPorCobrar.UsuarioCreacionId = parametroAnulacionDtOs.UsuarioId;
+                cuentaPorCobrar.UsuarioModificacionId = parametroAnulacionDtOs.UsuarioId;
+                cuentaPorCobrar.Valor = (-1) * ((detalleOrdenTrabajo.ValorTotal));
+                cuentaPorCobrar.Saldo = (-1) * (detalleOrdenTrabajo.ValorTotal);
+                _asientoDtOs.CuentaPorCobrar = cuentaPorCobrar;
+
+                HistorialCuentaPorCobrarModelo historialCuentaPorCobrar = new HistorialCuentaPorCobrarModelo();
+                historialCuentaPorCobrar.FechaCobro = DateTime.Now;
+
+                FormaPagoModelo formaPago = new FormaPagoModelo();
+                formaPago.FormaPagoId = Convert.ToInt32(JLLR.Core.Venta.Servicio.Enums.Enum.FormaPago.Efectivo);
+                historialCuentaPorCobrar.FormaPago = formaPago;
+                historialCuentaPorCobrar.UsuarioId = parametroAnulacionDtOs.UsuarioId;
+                historialCuentaPorCobrar.ValorCobro = (detalleOrdenTrabajo.ValorTotalUnitario) * (-1);
+
+                _asientoDtOs.HistorialCuentaPorCobrar = historialCuentaPorCobrar;
+
+
+                CuentaPorPagarModelo cuentaPorPagar = new CuentaPorPagarModelo();
+
+                cuentaPorPagar.PuntoVentaId = cuentaPorPagarDtOses.Select(m => m.CuentaPorPagar.PuntoVentaId).FirstOrDefault();
+                cuentaPorPagar.FechaCreacion = DateTime.Now;
+                cuentaPorPagar.FechaModificacion = DateTime.Now;
+                cuentaPorPagar.ProveedorId = Convert.ToInt32(JLLR.Core.Venta.Servicio.Enums.Enum.Proveedor.Quimica);
+                cuentaPorPagar.UsuarioCreacionId = parametroAnulacionDtOs.UsuarioId;
+                cuentaPorPagar.UsuarioModificacionId = parametroAnulacionDtOs.UsuarioId;
+                cuentaPorPagar.FechaVencimiento = DateTime.Now;
+                cuentaPorPagar.SucursalId = cuentaPorPagarDtOses.Select(m => m.CuentaPorPagar.SucursalId).FirstOrDefault();
+                cuentaPorPagar.Saldo = 0;
+                cuentaPorPagar.Valor = (-1) * (detalleOrdenTrabajo.ValorTotalUnitario);
+                cuentaPorPagar.NumeroOrden = cuentaPorPagarDtOses.Select(m => m.CuentaPorPagar.NumeroOrden).FirstOrDefault();
+                cuentaPorPagar.NumeroFactura = "0";
+                _asientoDtOs.CuentaPorPagar = cuentaPorPagar;
+
+                HistorialCuentaPorPagarModelo historialCuentaPorPagar = new HistorialCuentaPorPagarModelo();
+                historialCuentaPorPagar.FechaPago = DateTime.Now;
+                historialCuentaPorPagar.UsuarioId = parametroAnulacionDtOs.UsuarioId;
+                historialCuentaPorPagar.ValorPago = 0;
+                _asientoDtOs.HistorialCuentaPorPagar = historialCuentaPorPagar;
+
+                _servicioDelegadoContabilidad.GrabarAsiento(_asientoDtOs);
+                _ventaTransfomadorNegocio.ActualizarDetalleOrdenTrabajo(detalleOrdenTrabajo);
+            }
+            catch (Exception exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

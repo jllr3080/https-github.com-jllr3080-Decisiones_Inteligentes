@@ -31,7 +31,10 @@ namespace JLLR.Core.Contabilidad.Servicio.EnsambladorDTOs
             {
                 CuentaPorCobrar = _ensambladorEntidad.CrearCuentaPorCobrar(m.CuentaPorCobrar),
                 Cliente = m.Cliente,
-                HistorialCuentaPorCobrar = _ensambladorEntidad.CrearHistorialCuentaPorCobrar(m.HistorialCuentaPorCobrar)
+                HistorialCuentaPorCobrar = _ensambladorEntidad.CrearHistorialCuentaPorCobrar(m.HistorialCuentaPorCobrar),
+                Direccion = m.Direccion,
+                IndividuoId = m.IndividuoId,
+                NumeroTelefonos = m.NumeroTelefonos
               
             };
         }

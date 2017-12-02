@@ -24,6 +24,7 @@ namespace JLLR.Core.Individuo.Proveedor.Negocio
 
         private readonly TransaccionalDAOs _transaccionalDaOs = new TransaccionalDAOs();
         private  readonly  ValidacionNegocioDAOs _validacionNegocioDaOs= new ValidacionNegocioDAOs();
+        private readonly  TelefonoDAOs _telefonoDaOs= new TelefonoDAOs();
         #endregion
 
         #region TRANSACCIONAL
@@ -204,6 +205,45 @@ namespace JLLR.Core.Individuo.Proveedor.Negocio
         }
         #endregion
 
+        #endregion
+
+        #region  TELEFONO
+
+        /// <summary>
+        /// Obtiene los numeros de  telefono 
+        /// </summary>
+        /// <param name="individuoId"></param>
+        /// <returns></returns>
+        public IQueryable<TELEFONO> ObtenerTelefonosPorIndividuoId(int individuoId)
+        {
+            try
+            {
+                return _telefonoDaOs.ObtenerTelefonosPorIndividuoId(individuoId);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Eliminar  los  telefonos
+        /// </summary>
+        /// <param name="telefono"></param>
+        public void EliminaTelefono(TELEFONO telefono)
+        {
+            try
+            {
+               _telefonoDaOs.EliminaTelefono(telefono);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
         #region VALIDACIONES

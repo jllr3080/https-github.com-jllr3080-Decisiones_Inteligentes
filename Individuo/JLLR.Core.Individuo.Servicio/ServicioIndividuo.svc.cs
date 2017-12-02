@@ -90,7 +90,7 @@ namespace JLLR.Core.Individuo.Servicio
         {
             try
             {
-                return _individuoTransformadorNegocio.GrabarCliente(clienteGeneralDtOs);
+                    return _individuoTransformadorNegocio.GrabarCliente(clienteGeneralDtOs);
             }
             catch (Exception ex)
             {
@@ -199,6 +199,46 @@ namespace JLLR.Core.Individuo.Servicio
         }
         #endregion
         #endregion
+
+        #region  TELEFONO
+
+        /// <summary>
+        /// Obtiene los numeros de  telefono 
+        /// </summary>
+        /// <param name="individuoId"></param>
+        /// <returns></returns>
+        public List<TelefonoModelo> ObtenerTelefonosPorIndividuoId(int individuoId)
+        {
+            try
+            {
+                return _individuoTransformadorNegocio.ObtenerTelefonosPorIndividuoId(individuoId);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Eliminar  los  telefonos
+        /// </summary>
+        /// <param name="telefono"></param>
+        public void EliminaTelefono(TelefonoModelo telefono)
+        {
+            try
+            {
+                _individuoTransformadorNegocio.EliminaTelefono(telefono);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
 
         #region VALIDACIONES
         #region CLIENTE

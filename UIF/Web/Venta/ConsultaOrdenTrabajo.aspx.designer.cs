@@ -121,6 +121,15 @@ namespace Web.Venta {
         protected global::System.Web.UI.WebControls.Label _labelCliente;
         
         /// <summary>
+        /// Control _labelTelefono.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label _labelTelefono;
+        
+        /// <summary>
         /// Control _labelTipoLavado.
         /// </summary>
         /// <remarks>
@@ -128,15 +137,6 @@ namespace Web.Venta {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label _labelTipoLavado;
-        
-        /// <summary>
-        /// Control _labelEstadoPago.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label _labelEstadoPago;
         
         /// <summary>
         /// Control _numeroOrdenResultado.
@@ -157,6 +157,15 @@ namespace Web.Venta {
         protected global::System.Web.UI.WebControls.TextBox _cliente;
         
         /// <summary>
+        /// Control _telefono.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox _telefono;
+        
+        /// <summary>
         /// Control _tipoLavado.
         /// </summary>
         /// <remarks>
@@ -166,13 +175,13 @@ namespace Web.Venta {
         protected global::System.Web.UI.WebControls.TextBox _tipoLavado;
         
         /// <summary>
-        /// Control _estadoPago.
+        /// Control _labelEstadoPago.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _estadoPago;
+        protected global::System.Web.UI.WebControls.Label _labelEstadoPago;
         
         /// <summary>
         /// Control _labelFechaIngreso.
@@ -200,6 +209,15 @@ namespace Web.Venta {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label _labelFechaEntregaEfectiva;
+        
+        /// <summary>
+        /// Control _estadoPago.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox _estadoPago;
         
         /// <summary>
         /// Control _fechaIngreso.
@@ -290,15 +308,6 @@ namespace Web.Venta {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button _anularOrden;
-        
-        /// <summary>
-        /// Control _anularPrenda.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button _anularPrenda;
         
         /// <summary>
         /// Control _abonar.

@@ -22,40 +22,85 @@ namespace Web.Contabilidad {
         protected global::System.Web.UI.WebControls.Literal _literalTitulo;
         
         /// <summary>
-        /// Control _literalEncabezado.
+        /// Control Literal4.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal _literalEncabezado;
+        protected global::System.Web.UI.WebControls.Literal Literal4;
         
         /// <summary>
-        /// Control _labelNumeroDocumento.
+        /// Control _labelTipoBusqueda.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label _labelNumeroDocumento;
+        protected global::System.Web.UI.WebControls.Label _labelTipoBusqueda;
         
         /// <summary>
-        /// Control _numeroDocumento.
+        /// Control _labelNumeroDocumentoBusqueda.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _numeroDocumento;
+        protected global::System.Web.UI.WebControls.Label _labelNumeroDocumentoBusqueda;
         
         /// <summary>
-        /// Control _numeroDocumentoValidador.
+        /// Control _labelParametroDos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator _numeroDocumentoValidador;
+        protected global::System.Web.UI.WebControls.Label _labelParametroDos;
+        
+        /// <summary>
+        /// Control _tipoBusqueda.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList _tipoBusqueda;
+        
+        /// <summary>
+        /// Control _tipoBusquedaValidador.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator _tipoBusquedaValidador;
+        
+        /// <summary>
+        /// Control _numeroDocumentoBusqueda.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox _numeroDocumentoBusqueda;
+        
+        /// <summary>
+        /// Control _numeroDocumentoBusquedaValidador.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator _numeroDocumentoBusquedaValidador;
+        
+        /// <summary>
+        /// Control _parametroDos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox _parametroDos;
         
         /// <summary>
         /// Control _btnBusquedaCliente.
@@ -65,6 +110,15 @@ namespace Web.Contabilidad {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button _btnBusquedaCliente;
+        
+        /// <summary>
+        /// Control _literalEncabezado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal _literalEncabezado;
         
         /// <summary>
         /// Control _datos.
@@ -182,5 +236,59 @@ namespace Web.Contabilidad {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button _aceptarHistorial;
+        
+        /// <summary>
+        /// Control _btnCliente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button _btnCliente;
+        
+        /// <summary>
+        /// Control _btnCliente_ModalPopupExtender.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ModalPopupExtender _btnCliente_ModalPopupExtender;
+        
+        /// <summary>
+        /// Control _panelCliente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel _panelCliente;
+        
+        /// <summary>
+        /// Control Literal3.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal Literal3;
+        
+        /// <summary>
+        /// Control _clientes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView _clientes;
+        
+        /// <summary>
+        /// Control _btnCerrarClientes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button _btnCerrarClientes;
     }
 }

@@ -57,7 +57,7 @@
             </div>
             <div class="row">
               <div class="col-md-12">
-                        <asp:GridView ID="_datos" runat="server" Width="100%" AutoGenerateColumns="False"  OnRowDataBound="_datos_RowDataBound" ShowFooter="True" >
+                        <asp:GridView ID="_datos" runat="server" Width="100%" AutoGenerateColumns="False"  OnRowDataBound="_datos_RowDataBound" ShowFooter="True" AllowPaging="True" PageSize="20" OnPageIndexChanging="_datos_OnPageIndexChanging" >
                             <Columns>
                              <asp:BoundField DataField="CuentaPorPagar.CuentaPorPagarId" HeaderText="<%$ Resources:Web_es_Ec,Label_Codigo_Interno%>" />
                             <asp:BoundField DataField="CuentaPorPagar.FechaCreacion" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Fecha_Creacion%>"  DataFormatString="{0:d}"/>

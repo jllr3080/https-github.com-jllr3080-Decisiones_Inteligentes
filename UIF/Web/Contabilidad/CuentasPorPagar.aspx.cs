@@ -23,6 +23,23 @@ namespace Web.Contabilidad
 
         #region Eventos
 
+        protected void _datos_OnPageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            try
+            {
+                _datos.PageIndex = e.NewPageIndex;
+                _datos.DataSource = _servicioDelegadoContabilidad.ObtenerCuentaPorPagarPorFechas(_fechaDesde.Text,
+                  _fechaHasta.Text, Convert.ToInt32(_sucursal.SelectedItem.Value));
+
+                _datos.DataBind();
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
         /// <summary>
         /// Carga  los totales  a  pagar
         /// </summary>
@@ -115,7 +132,7 @@ namespace Web.Contabilidad
         /// Despliega  los mensajes    de las diferentes acciones de las  pantallas
         /// </summary>
         /// <param name="texto"></param>
-        /// <param name="boton"></param>
+        /// <param name="bo+ton"></param>
         private void Mensajes(string texto, string boton)
         {
 
@@ -125,8 +142,6 @@ namespace Web.Contabilidad
         }
         #endregion
 
-       
-
-       
+      
     }
 }

@@ -96,6 +96,112 @@ namespace JLLR.Core.Contabilidad.Proveedor.DAOs
         }
 
 
+       /// <summary>
+       /// Obtiene las cuentas opor  cobrar  por numero  de cedula 
+       /// </summary>
+       /// <param name="numeroIdentificacion"></param>
+       /// <param name="puntoVentaId"></param>
+       /// <param name="sucursalId"></param>
+       /// <returns></returns>
+
+        public List<CuentaPorCobrarDTOs> ObtenerCuentasPorCobrarCompleto(string numeroIdentificacion, int puntoVentaId, int sucursalId)
+        {
+            try
+            {
+                var cuentasPorCobrar = from cuentaPorCobrar in _entidad.CUENTA_POR_COBRAR
+                                       join historialCuentaPorCobrar in _entidad.HISTORIAL_CUENTA_POR_COBRAR on
+                                           cuentaPorCobrar.CUENTA_POR_COBRAR_ID equals historialCuentaPorCobrar.CUENTA_POR_COBRAR_ID
+                                       join cliente in _entidad.CLIENTE on cuentaPorCobrar.CLIENTE_ID equals cliente.CLIENTE_ID
+                                       join individuo in _entidad.INDIVIDUO on cliente.INDIVIDUO_ID equals individuo.INDIVIDUO_ID
+                                       join direccion in _entidad.DIRECCION on individuo.INDIVIDUO_ID equals direccion.INDIVIDUO_ID
+                                       join ciudad in _entidad.CIUDAD on direccion.CIUDAD_ID equals ciudad.CIUDAD_ID
+                                       join parroquia in _entidad.PARROQUIA on direccion.PARROQUIA_ID equals parroquia.PARROQUIA_ID
+                                       where cuentaPorCobrar.PUNTO_VENTA_ID == puntoVentaId && cuentaPorCobrar.SUCURSAL_ID == sucursalId  && individuo.NUMERO_IDENTIFICACION==numeroIdentificacion
+                                       select new CuentaPorCobrarDTOs()
+                                       {
+                                           HistorialCuentaPorCobrar = historialCuentaPorCobrar,
+                                           CuentaPorCobrar = cuentaPorCobrar,
+                                           Cliente = individuo.PRIMER_CAMPO+ " " + individuo.SEGUNDO_CAMPO+ " " + individuo.TERCER_CAMPO+ " " + individuo.CUARTO_CAMPO,
+                                           Direccion = ciudad.DESCRIPCION + " " + parroquia.DESCRIPCION + " " + direccion.CALLE_PRINCIPAL + " " + direccion.CALLE_SECUNDARIA + " " + direccion.NUMERO_CASA + " " + direccion.REFERENCIA,
+                                           IndividuoId = individuo.INDIVIDUO_ID
+                                       };
+
+                List<CuentaPorCobrarDTOs> _listaCuentaPorCobrarDtOses = new List<CuentaPorCobrarDTOs>();
+
+                foreach (var objetoCuentaPorCobrar in cuentasPorCobrar)
+                {
+                    var telefonos = from telefono in _entidad.TELEFONO
+                                    where telefono.INDIVIDUO_ID == objetoCuentaPorCobrar.IndividuoId
+                                    select telefono;
+
+                    foreach (var objetoTelefono in telefonos)
+                    {
+                        objetoCuentaPorCobrar.NumeroTelefonos += "/" + objetoTelefono.NUMERO_TELEFONO;
+                    }
+                    _listaCuentaPorCobrarDtOses.Add(objetoCuentaPorCobrar);
+
+                }
+
+                return _listaCuentaPorCobrarDtOses;
+            }
+            catch (Exception ex)
+            {
+                    
+                throw;
+            }
+        }
+
+       /// <summary>
+       /// Obtiene cuentas por cobrar por fechas
+       /// </summary>
+       /// <param name="puntoVentaId"></param>
+       /// <param name="sucursalId"></param>
+       /// <param name="fechaDesde"></param>
+       /// <param name="fechaHasta"></param>
+       /// <returns></returns>
+
+        public List<CuentaPorCobrarDTOs> ObtenerCuentasPorCobrarCompletaPorFechas(int puntoVentaId, int sucursalId, DateTime fechaDesde, DateTime fechaHasta)
+        {
+            try
+            {
+                var cuentasPorCobrar = from cuentaPorCobrar in _entidad.CUENTA_POR_COBRAR
+                                       join historialCuentaPorCobrar in _entidad.HISTORIAL_CUENTA_POR_COBRAR on
+                                           cuentaPorCobrar.CUENTA_POR_COBRAR_ID equals historialCuentaPorCobrar.CUENTA_POR_COBRAR_ID
+                                       join cliente in _entidad.CLIENTE on cuentaPorCobrar.CLIENTE_ID equals cliente.CLIENTE_ID
+                                       join individuo in _entidad.INDIVIDUO on cliente.INDIVIDUO_ID equals individuo.INDIVIDUO_ID
+                                       join direccion in _entidad.DIRECCION on individuo.INDIVIDUO_ID equals  direccion.INDIVIDUO_ID
+                                       join  ciudad in _entidad.CIUDAD on   direccion.CIUDAD_ID equals  ciudad.CIUDAD_ID
+                                       join  parroquia in _entidad.PARROQUIA on direccion.PARROQUIA_ID  equals  parroquia.PARROQUIA_ID
+                                       where cuentaPorCobrar.PUNTO_VENTA_ID==puntoVentaId && cuentaPorCobrar.SUCURSAL_ID==sucursalId && EntityFunctions.TruncateTime(cuentaPorCobrar.FECHA_CREACION) >= fechaDesde && EntityFunctions.TruncateTime(cuentaPorCobrar.FECHA_CREACION) <= fechaHasta
+                                       select new CuentaPorCobrarDTOs() { HistorialCuentaPorCobrar = historialCuentaPorCobrar, CuentaPorCobrar = cuentaPorCobrar, Cliente = individuo.PRIMER_CAMPO + individuo.SEGUNDO_CAMPO + individuo.TERCER_CAMPO + individuo.CUARTO_CAMPO ,
+                                           Direccion = ciudad.DESCRIPCION + " " +parroquia.DESCRIPCION + " " + direccion.CALLE_PRINCIPAL + direccion.CALLE_SECUNDARIA + direccion.NUMERO_CASA+ direccion.REFERENCIA,IndividuoId = individuo.INDIVIDUO_ID};
+
+                List<CuentaPorCobrarDTOs> _listaCuentaPorCobrarDtOses = new List<CuentaPorCobrarDTOs>();
+
+                foreach (var objetoCuentaPorCobrar in cuentasPorCobrar)
+                {
+                    var telefonos = from telefono in _entidad.TELEFONO
+                        where telefono.INDIVIDUO_ID == objetoCuentaPorCobrar.IndividuoId
+                        select telefono;
+
+                    foreach (var objetoTelefono in telefonos)
+                    {
+                        objetoCuentaPorCobrar.NumeroTelefonos += objetoTelefono.NUMERO_TELEFONO;
+                    }
+                    _listaCuentaPorCobrarDtOses.Add(objetoCuentaPorCobrar);
+
+                }
+
+                return _listaCuentaPorCobrarDtOses;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
         /// <summary>
         /// Obtiene  el historial de cuenta por cobrar  por numero de identificacion
         /// </summary>
@@ -115,6 +221,8 @@ namespace JLLR.Core.Contabilidad.Proveedor.DAOs
 
                 foreach (var objetoCuentaPorCobrar in cuentasPorCobrar)
                 {
+
+                    
                     _listaCuentaPorCobrarDtOses.Add(objetoCuentaPorCobrar);
 
                 }

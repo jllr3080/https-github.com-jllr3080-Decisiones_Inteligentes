@@ -33,6 +33,26 @@ namespace JLLR.Core.Contabilidad.Servicio.DTOs
         [DataMember]
         public string Cliente { get; set; }
 
-        
+        /// <summary>
+        /// Direccion
+        /// </summary>
+        [DataMember]
+        public string Direccion { get; set; }
+
+        /// <summary>
+        /// NumeroTelefonos
+        /// </summary>
+        [DataMember]
+        public string NumeroTelefonos { get; set; }
+
+
+
+        /// <summary>
+        /// IndividuoId
+        /// </summary>
+        [DataMember]
+        public int? IndividuoId { get; set; }
+
+
     }
 }

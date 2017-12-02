@@ -53,6 +53,7 @@
     <Compile Include="VistaModelo\General\MaterialVistaModelo.cs" />
     <Compile Include="VistaModelo\General\MesVistaModelo.cs" />
     <Compile Include="VistaModelo\General\ModeloVistaModelo.cs" />
+    <Compile Include="VistaModelo\General\ParametroVistaModelo.cs" />
     <Compile Include="VistaModelo\General\PuntoVentaVistaModelo.cs" />
     <Compile Include="VistaModelo\General\SucursalVistaModelo.cs" />
     <Compile Include="VistaModelo\General\TipoIdentificacionVistaModelo.cs" />

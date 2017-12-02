@@ -296,5 +296,59 @@ namespace Web.ServicioDelegado
         #endregion
 
         #endregion
+
+
+        #region  TELEFONO
+
+        /// <summary>
+        /// Obtiene los numeros de  telefono 
+        /// </summary>
+        /// <param name="individuoId"></param>
+        /// <returns></returns>
+        public List<TelefonoVistaModelo> ObtenerTelefonosPorIndividuoId(int individuoId)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerTelefonosPorIndividuoId?individuoId=" + individuoId);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<TelefonoVistaModelo>>(json);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Eliminar  los  telefonos
+        /// </summary>
+        /// <param name="telefono"></param>
+        public void EliminaTelefono(TelefonoVistaModelo telefono)
+        {
+            try
+            {
+
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(TelefonoVistaModelo));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, telefono);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "EliminaTelefono", "POST", datos);
+                var js = new JavaScriptSerializer();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
     }
 }

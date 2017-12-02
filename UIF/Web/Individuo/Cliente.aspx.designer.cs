@@ -697,6 +697,15 @@ namespace Web.Individuo {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator _telefonoValidador;
         
         /// <summary>
+        /// Control _telefonoExtensor.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.MaskedEditExtender _telefonoExtensor;
+        
+        /// <summary>
         /// Control _btnAgregarTelefono.
         /// </summary>
         /// <remarks>
@@ -704,6 +713,15 @@ namespace Web.Individuo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button _btnAgregarTelefono;
+        
+        /// <summary>
+        /// Control _datosTelefono.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView _datosTelefono;
         
         /// <summary>
         /// Control _telefonos.

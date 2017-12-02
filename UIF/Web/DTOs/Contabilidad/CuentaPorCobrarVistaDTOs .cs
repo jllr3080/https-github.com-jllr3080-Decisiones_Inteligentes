@@ -26,5 +26,22 @@ namespace Web.DTOs.Contabilidad
         /// Cliente
         /// </summary>
         public string Cliente { get; set; }
+
+        /// <summary>
+        /// Direccion
+        /// </summary>
+        public string Direccion { get; set; }
+
+        /// <summary>
+        /// NumeroTelefonos
+        /// </summary>
+        public string NumeroTelefonos { get; set; }
+
+
+
+        /// <summary>
+        /// IndividuoId
+        /// </summary>
+        public int? IndividuoId { get; set; }
     }
 }

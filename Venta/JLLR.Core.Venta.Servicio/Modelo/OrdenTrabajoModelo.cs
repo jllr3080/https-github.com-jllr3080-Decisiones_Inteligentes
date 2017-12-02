@@ -123,5 +123,12 @@ namespace JLLR.Core.Venta.Servicio.Modelo
         [DataMember]
         public string ObjetoOlvidado { get; set; }
 
+
+        /// <summary>
+        /// EstaAulada
+        /// </summary>
+        [DataMember]
+        public bool? EstaAulada{ get; set; }
+
     }
 }

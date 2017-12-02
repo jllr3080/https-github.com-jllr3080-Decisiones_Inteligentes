@@ -539,6 +539,24 @@ namespace JLLR.Core.General.Proveedor.Negocio
                 throw;
             }
         }
+
+
+        /// <summary>
+        /// Actualiza  los parametros
+        /// </summary>
+        /// <param name="parametro"></param>
+        public void ActualizarParametro(PARAMETRO parametro)
+        {
+            try
+            {
+                _parametroDaOs.ActualizarParametro(parametro);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
         #region PARROQUIA

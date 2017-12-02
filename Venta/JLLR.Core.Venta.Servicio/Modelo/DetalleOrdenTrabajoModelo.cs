@@ -147,5 +147,12 @@ namespace JLLR.Core.Venta.Servicio.Modelo
         /// </summary>
         [DataMember]
         public int? DetalleOrdenTrabajoAnuladaId { get; set; }
+
+
+        /// <summary>
+        /// EstaAulada
+        /// </summary>
+        [DataMember]
+        public bool? EstaAulada { get; set; }
     }
 }

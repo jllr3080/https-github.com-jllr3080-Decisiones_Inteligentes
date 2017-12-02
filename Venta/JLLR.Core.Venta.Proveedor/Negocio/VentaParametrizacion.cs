@@ -88,8 +88,70 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
                 throw;
             }
         }
+
+
+        /// <summary>
+        /// Graba la  venta de la ocmision
+        /// </summary>
+        /// <param name="ventaComision"></param>
+
+        public void GrabarVentaComision(VENTA_COMISION ventaComision)
+        {
+            try
+            {
+               _ventaComisionDaOs.GrabarVentaComision(ventaComision);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Actualizar  venta de  comision
+        /// </summary>
+        /// <param name="ventaComision"></param>
+        public void ActualizarVentaComision(VENTA_COMISION ventaComision)
+        {
+            try
+            {
+              _ventaComisionDaOs.ActualizarVentaComision(ventaComision);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Obtiene las  venta de las comisiones
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public IQueryable<VENTA_COMISION> ObtenerVentaComisiones(int puntoVentaId)
+        {
+            try
+            {
+                return _ventaComisionDaOs.ObtenerVentaComisiones(puntoVentaId);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
+        #region VENTA COMISION INDUSTRIALES
 
+        #endregion
+
+        #region DETALLE VENTA COMISION INDUSTRIALES
+
+        #endregion
     }
 }

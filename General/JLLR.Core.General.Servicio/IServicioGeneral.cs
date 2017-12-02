@@ -301,6 +301,16 @@ namespace JLLR.Core.General.Servicio
         #region PARAMETRO
 
         /// <summary>
+        /// Actualiza  los parametros
+        /// </summary>
+        /// <param name="parametro"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "ActualizarParametro/*", RequestFormat = WebMessageFormat.Json,
+           ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void ActualizarParametro(ParametroModelo parametro);
+       
+
+        /// <summary>
         /// Obtiene los  parametros por descripcion
         /// </summary>
         /// <param name="descripcion"></param>

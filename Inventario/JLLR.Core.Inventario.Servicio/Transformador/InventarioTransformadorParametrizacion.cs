@@ -23,8 +23,27 @@ namespace JLLR.Core.Inventario.Servicio.Transformador
         private readonly InventarioParametrizacion _inventarioParametrizacion = new InventarioParametrizacion();
         private readonly EnsambladorEntidad _ensambladorEntidad= new EnsambladorEntidad();
         private readonly  EnsambladorModelo _ensambladorModelo = new EnsambladorModelo();
-        
+
         #region   PRODUCTO
+
+
+        /// <summary>
+        /// Obtiene el producto  
+        /// </summary>
+        /// <param name="productoId"></param>
+        /// <returns></returns>
+        public modeloParametrizacion.ProductoModelo ObtenerProductoPorId(int productoId)
+        {
+            try
+            {
+                return _ensambladorModelo.CrearProducto(_inventarioParametrizacion.ObtenerProductoPorId(productoId));
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         /// <summary>
         /// Obtener producto por  tipo de  producto servicio o produccion etc
         /// </summary>

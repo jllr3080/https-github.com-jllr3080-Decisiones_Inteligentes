@@ -42,6 +42,7 @@ namespace JLLR.Core.Base.Proveedor.Entidades
         public Nullable<bool> ES_TEMPORAL { get; set; }
         public string OBJETO_OLVIDADO { get; set; }
         public Nullable<bool> REVISO_PRENDA_CLIENTE { get; set; }
+        public Nullable<bool> ESTA_ANULADA { get; set; }
     
         public virtual CLIENTE CLIENTE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

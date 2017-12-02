@@ -38,7 +38,7 @@ namespace Web.Reporte
                     {
 
                         string numeroOrden = Session["OrdenTrabajoId"].ToString();
-                        List<ConsultaOrdenTrabajoVistaDTOs> _listaConsultaOrdenTrabajoVistaDtOses = _servicioDelegadoVenta.ObtenerOrdenTrabajoPorNumeroOrdenYPuntoVenta(numeroOrden, Convert.ToInt32(User.PuntoVentaId));
+                        List<ConsultaOrdenTrabajoVistaDTOs> _listaConsultaOrdenTrabajoVistaDtOses = _servicioDelegadoVenta.ObtenerOrdenTrabajoCortaPorNumeroOrdenYPuntoVenta(numeroOrden, Convert.ToInt32(User.PuntoVentaId));
                         List<DetalleOrdenTrabajoVistaModelo> _listaDetalleOrdenTrabajoVistaModelos =
                             _servicioDelegadoVenta.ObtenerDetalleOrdenTrabajoPorNumeroOrdenYPuntoVenta(numeroOrden,
                                 Convert.ToInt32(User.PuntoVentaId));

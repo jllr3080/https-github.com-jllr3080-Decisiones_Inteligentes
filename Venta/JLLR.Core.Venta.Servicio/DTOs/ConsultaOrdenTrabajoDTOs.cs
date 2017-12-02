@@ -173,5 +173,11 @@ namespace JLLR.Core.Venta.Servicio.DTOs
         /// </summary>
         [DataMember]
         public int DetallePrendaOrdenTrabajoId { get; set; }
+
+        /// <summary>
+        ///EstaAnulada
+        /// </summary>
+        [DataMember]
+        public bool? EstaAnulada { get; set; }
     }
 }

@@ -202,6 +202,50 @@ namespace JLLR.Core.Contabilidad.Proveedor.Negocio
 
         }
 
+
+        /// <summary>
+        /// Obtiene las cuentas opor  cobrar  por numero  de cedula 
+        /// </summary>
+        /// <param name="numeroIdentificacion"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <param name="sucursalId"></param>
+        /// <returns></returns>
+
+        public List<CuentaPorCobrarDTOs> ObtenerCuentasPorCobrarCompleto(string numeroIdentificacion, int puntoVentaId, int sucursalId)
+        {
+            try
+            {
+                return _transaccionalDaOs.ObtenerCuentasPorCobrarCompleto(numeroIdentificacion, puntoVentaId, sucursalId);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene cuentas por cobrar por fechas
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <param name="sucursalId"></param>
+        /// <param name="fechaDesde"></param>
+        /// <param name="fechaHasta"></param>
+        /// <returns></returns>
+
+        public List<CuentaPorCobrarDTOs> ObtenerCuentasPorCobrarCompletaPorFechas(int puntoVentaId, int sucursalId, DateTime fechaDesde, DateTime fechaHasta)
+        {
+            try
+            {
+             return _transaccionalDaOs.ObtenerCuentasPorCobrarCompletaPorFechas(puntoVentaId,sucursalId,fechaDesde,fechaHasta);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
         #endregion
 
         #region CUENTA POR COBRAR

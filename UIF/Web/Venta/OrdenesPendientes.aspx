@@ -44,7 +44,7 @@
                                       <div class="col-md-12">
                                         
                                                     <asp:HiddenField ID="_nombreMarca" runat="server" />
-                                                        <asp:GridView ID="_datos" runat="server" AutoGenerateColumns="False"   Width="100%"  ShowFooter="True" >
+                                                        <asp:GridView ID="_datos" runat="server" AutoGenerateColumns="False"   Width="100%" OnRowCommand="_datos_OnRowCommand" OnRowDataBound="_datos_OnRowDataBound">
                                 
                                                             <Columns>
                                                                
@@ -85,7 +85,7 @@
                                                                                      <tr>
                                                                                         <td colspan="100%" style="text-align: right">
                                                                                         <asp:Panel ID="Detalles" runat="server" Visible="False">
-                                                                                        <asp:GridView ID="_detalleCuotas" runat="server" AutoGenerateColumns="false" Width="100%">
+                                                                                        <asp:GridView ID="_detalleCuotas" runat="server" AutoGenerateColumns="false" Width="100%" OnRowCommand="_detalleCuotas_OnRowCommand">
                                                                                             <Columns>
                                                                                                   
                                                                                                    <asp:BoundField DataField="NombreColor" HeaderText="<%$ Resources:Web_es_Ec,Label_Color%>"  >
@@ -123,7 +123,12 @@
                                 
 							</div>
            </div> 
+        
     </section>
+    <nav>
+         <asp:Button ID="_grabarDetalleReal" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Guardar_Detalle%>" class="btn btn-primary" data-dismiss="modal" ValidationGroup="DetallePrenda" OnClick="_grabarDetalleReal_OnClick"/>
+                           
+    </nav>
     <div class="row" >
         <div class="col-md-12" >
             <asp:Button ID="_btnMensaje" runat="server" Text="" Visible="false" />
@@ -142,4 +147,94 @@
                 </asp:Panel>
             </div>
     </div>
+    
+      <%--PANTALLA  DE  DETALLE  DE  PRENDAS--%>
+    <div class="row" >
+                  <div class="col-md-12" >
+                <asp:Button ID="_btnDetalleOrden" runat="server" Text="" Visible="false" />
+                    <cc1:ModalPopupExtender ID="_btnDetalleOrden_ModalPopupExtender" PopupControlID="_panelDetalleOrden" runat="server" BehaviorID="_btnDetalleOrden_ModalPopupExtender" TargetControlID="_btnDetalleOrden" BackgroundCssClass="modal-Backgoround" X="250" OnOkScript="_grabarDetalle" OnCancelScript="_cancelarDetalle" Y="50" >
+                    </cc1:ModalPopupExtender>
+                    <asp:Panel ID="_panelDetalleOrden" runat="server" Style="display: none; background-color: white; width:60%; height: auto;align-content:center ">
+                        <div class="modal-header">
+                            <h4 class="modal-title">
+                                <asp:Literal ID="Literal3" runat="server"  Text="<%$ Resources:Web_es_Ec,Titulo_Detalle_Orden%>"></asp:Literal></h4>
+                        </div>
+                        <div class="modal-body">
+                            
+                              <div class="row">
+                               <div class="col-md-4">
+                                      <asp:Label ID="_labelTotalPrendas" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Numero_Prendas%>"></asp:Label>
+                               </div>
+                               <div class="col-md-4">
+                                        <asp:Label ID="_numeroPrendas" runat="server"  CssClass="text-danger"></asp:Label>
+                               </div>
+                                
+                            </div>
+                            <br />
+                            <div class="row">
+                               <div class="col-md-4">
+                                    <asp:Label ID="_labelColoDetalle" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Color%>"></asp:Label>
+                               </div>
+                               <div class="col-md-4">
+                                    <asp:Label ID="_labelMarcaDetalle" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Marca%>"></asp:Label>
+                               </div>
+                                <div class="col-md-4">
+                                    <asp:Label ID="_labelEstadoPrendaDetalle" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Estado_Prenda%>"></asp:Label>
+                               </div>
+                            </div>
+                             <div class="row">
+                               <div class="col-md-4">
+                                      <asp:DropDownList ID="_colorDetalle" runat="server" CssClass="form-control" ValidationGroup="DetallePrenda" DataTextField="Descripcion" DataValueField="ColorId" ></asp:DropDownList>
+                                      <asp:RequiredFieldValidator ID="_colorDetalleValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="DetallePrenda" ControlToValidate="_colorDetalle" ></asp:RequiredFieldValidator>       
+                               </div>
+                               <div class="col-md-4">
+                                    <asp:DropDownList ID="_marcaDetalle" runat="server" CssClass="form-control" ValidationGroup="DetallePrenda" DataTextField="Descripcion" DataValueField="MarcaId" ></asp:DropDownList>
+                                      <asp:RequiredFieldValidator ID="_marcaDetalleValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="DetallePrenda" ControlToValidate="_marcaDetalle" ></asp:RequiredFieldValidator>       
+                               </div>
+                                <div class="col-md-4">
+                                      <asp:TextBox ID="_estadoPrendaDetalle" runat="server" class="form-control" ValidationGroup="DetallePrenda"  AutoCompleteType="Disabled"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="_estadoPrendaDetalleValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="DetallePrenda" ControlToValidate="_estadoPrendaDetalle" ></asp:RequiredFieldValidator>
+                               </div>
+                            </div>
+                            <br/>
+                             <div class="row">
+                               <div class="col-md-4">
+                                    <asp:Label ID="_labelTratamientoEspecialPrenda" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Tratamiento_Especial%>"></asp:Label>
+                               </div>
+                             
+                                <div class="col-md-4">
+                                    <asp:Label ID="_labelinformacionVisualPrenda" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Informacion_Visual%>"></asp:Label>
+                               </div>
+                                 <div class="col-md-4">
+                                    <asp:Label ID="_labelObservaciones" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Observacion%>"></asp:Label>
+                               </div>
+                            </div>
+                             <div class="row">
+                               <div class="col-md-4">
+                                      <asp:TextBox ID="_tratamientoEspecialDetalle" runat="server" class="form-control" ValidationGroup="DetallePrenda"  AutoCompleteType="Disabled"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="_tratamientoEspecialDetalleValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="DetallePrenda" ControlToValidate="_tratamientoEspecialDetalle" ></asp:RequiredFieldValidator>
+                               </div>
+                              
+                                <div class="col-md-4">
+                                      <asp:TextBox ID="_informacionVisualDetalle" runat="server" class="form-control" ValidationGroup="DetallePrenda"  AutoCompleteType="Disabled"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="_informacionVisualDetalleValidador" runat="server" CssClass="text-danger" ErrorMessage="<%$ Resources:Web_es_Ec,Mensaje_Obligatorio%>" ValidationGroup="DetallePrenda" ControlToValidate="_informacionVisualDetalle" ></asp:RequiredFieldValidator>
+                               </div>
+                                  <div class="col-md-4">
+                                      <asp:TextBox ID="_observacion" runat="server" class="form-control" ValidationGroup="DetallePrenda"  AutoCompleteType="Disabled"></asp:TextBox>
+                                    
+                               </div>
+                            </div>
+                            
+                              
+                        <div class="modal-footer">
+
+                            <asp:Button ID="_grabarDetalle" runat="server" Text="Agregar Detalle Prenda" class="btn btn-primary" data-dismiss="modal" ValidationGroup="DetallePrenda" OnClick="_grabarDetalle_OnClick"/>
+                            <asp:Button ID="_cancelarDetalle" runat="server" Text="Cancelar" class="btn btn-primary" data-dismiss="modal" />
+                        </div>
+                             </div>
+                    </asp:Panel>
+                   
+        </div>
+      </div>
+     <%--FIN PANTALLA  DE  DETALLE  DE  PRENDAS--%>
 </asp:Content>

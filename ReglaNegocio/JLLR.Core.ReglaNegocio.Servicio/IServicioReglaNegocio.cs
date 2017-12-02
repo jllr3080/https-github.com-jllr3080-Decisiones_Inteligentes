@@ -54,6 +54,55 @@ namespace JLLR.Core.ReglaNegocio.Servicio
         ParametroSalidaReglaNegocioDTOs EjecucionReglaNegocio(ParametroEntradaReglaNegocioDTOs parametroEntradaReglaNegocio);
 
         #endregion
+
+        #region REGLA
+
+        /// <summary>
+        /// Obtiene la promocion por  Id
+        /// </summary>
+        /// <param name="reglaId"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(UriTemplate = "ObtenerReglaPorId?reglaId={reglaId}", ResponseFormat = WebMessageFormat.Json)]
+        ReglaModelo ObtenerReglaPorId(int reglaId);
+
+        #endregion
+
+        #region ADMINISTRACION PROMOCIONES
+
+        /// <summary>
+        /// Grabar promociones
+        /// </summary>
+        /// <param name="reglaCompletaDtOs"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "GrabarPromocionesCompleta/*", RequestFormat = WebMessageFormat.Json,
+           ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void GrabarPromocionesCompleta(ReglaCompletaDTOs reglaCompletaDtOs);
+
+
+
+        /// <summary>
+        /// Actualizar promociones
+        /// </summary>
+        /// <param name="reglaCompletaDtOs"></param>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "ActualizarPromocionesCompleta/*", RequestFormat = WebMessageFormat.Json,
+           ResponseFormat = WebMessageFormat.Json, Method = "POST")]
+        void ActualizarPromocionesCompleta(ReglaCompletaDTOs reglaCompletaDtOs);
+
+
+
+        /// <summary>
+        /// Obtiene las promociones
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+
+        [OperationContract]
+        [WebGet(UriTemplate = "ObtenerPromociones?puntoVentaId={puntoVentaId}", ResponseFormat = WebMessageFormat.Json)]
+        List<ReglaCompletaDTOs> ObtenerPromociones(int puntoVentaId);
+        
+        #endregion
     }
 
 

@@ -44,7 +44,7 @@
                 <div class="panel-body">
                   <div class="row">
                             <div class="col-md-12">
-                            <asp:GridView ID="_datos" runat="server" AutoGenerateColumns="False" OnRowCommand="_datos_RowCommand" Width="100%" OnRowDataBound="_datos_RowDataBound" ShowFooter="True" >
+                            <asp:GridView ID="_datos" runat="server" AutoGenerateColumns="False" OnRowCommand="_datos_RowCommand" Width="100%" OnRowDataBound="_datos_RowDataBound"  >
                             <Columns>
                                 <asp:BoundField DataField="DetallePrendaOrdenTrabajoId" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Codigo_Orden_Trabajo%>" />
                                 <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Prenda%>" DataField="Prenda" />
@@ -69,6 +69,7 @@
                                         <asp:ImageButton ID="_imgFotografias" runat="server" ImageUrl="~/Content/Imagen/Fotografia.png"  CommandName="Fotografia" CommandArgument="<%# ((GridViewRow)Container).RowIndex %>" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
+                                
                             </Columns>
                              <HeaderStyle CssClass="tableCabecera" ></HeaderStyle>
                              <FooterStyle CssClass="tablePiePagina"></FooterStyle>

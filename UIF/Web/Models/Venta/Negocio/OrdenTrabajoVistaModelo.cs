@@ -121,5 +121,12 @@ namespace Web.Models.Venta.Negocio
         /// </summary>
       
         public string ObjetoOlvidado { get; set; }
+
+
+        /// <summary>
+        /// EstaAulada
+        /// </summary>
+        
+        public bool? EstaAulada { get; set; }
     }
 }

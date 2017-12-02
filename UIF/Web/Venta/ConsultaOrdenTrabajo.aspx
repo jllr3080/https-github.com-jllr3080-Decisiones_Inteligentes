@@ -52,19 +52,21 @@
                         <asp:Label ID="_labelCliente" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Nombre_Cliente%>"></asp:Label>
                         
                     </div>
+                   <div class="col-md-3">
+                        <asp:Label ID="_labelTelefono" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Telefono_Cliente%>"></asp:Label>
+                        
+                    </div>
                   <div class="col-md-3">
                         <asp:Label ID="_labelTipoLavado" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Tipo_Lavado%>"></asp:Label>
                        
                     </div>
                     
-                    <div class="col-md-3">
-                        <asp:Label ID="_labelEstadoPago" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Estado_Pago%>"></asp:Label>
-                        
-                    </div>
+                   
                     
             </div>
            
             <div class="row">
+                   
                  <div class="col-md-3">
                         <asp:TextBox ID="_numeroOrdenResultado" runat="server"  CssClass="form-control" ReadOnly="True" ></asp:TextBox>
                         
@@ -73,18 +75,23 @@
                        <asp:TextBox ID="_cliente" runat="server"  CssClass="form-control" ReadOnly="True" ></asp:TextBox>
                        
                     </div>
+                 <div class="col-md-3">
+                        <asp:TextBox ID="_telefono" runat="server"  CssClass="form-control" ReadOnly="True" ></asp:TextBox>
+                        
+                    </div>
                 <div class="col-md-3">
                          <asp:TextBox ID="_tipoLavado" runat="server"  CssClass="form-control" ReadOnly="True" ></asp:TextBox>
                     </div>
-                 <div class="col-md-3">
-                        <asp:TextBox ID="_estadoPago" runat="server"  CssClass="form-control" ReadOnly="True" ></asp:TextBox>
-                        
-                    </div>
+              
                    
                     
                 </div>
              <br/>
              <div class="row">
+                  <div class="col-md-3">
+                        <asp:Label ID="_labelEstadoPago" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Estado_Pago%>"></asp:Label>
+                        
+                    </div>
                     <div class="col-md-3">
                         <asp:Label ID="_labelFechaIngreso" runat="server" Text="<%$ Resources:Web_es_Ec,Label_Fecha%>"></asp:Label>
                         
@@ -101,6 +108,10 @@
                     
             </div>
              <div class="row">
+                    <div class="col-md-3">
+                        <asp:TextBox ID="_estadoPago" runat="server"  CssClass="form-control" ReadOnly="True" ></asp:TextBox>
+                        
+                    </div>
                     <div class="col-md-3">
                         
                         <asp:TextBox ID="_fechaIngreso" runat="server"  CssClass="form-control" ReadOnly="True" ></asp:TextBox>
@@ -123,7 +134,7 @@
             <div class="row">
                     <div class="col-md-12">
                        
-                        <asp:GridView ID="_datos" runat="server" AutoGenerateColumns="False" OnRowCommand="_datos_RowCommand" Width="100%" OnRowDataBound="_datos_RowDataBound" ShowFooter="True" >
+                        <asp:GridView ID="_datos" runat="server" AutoGenerateColumns="False" OnRowCommand="_datos_RowCommand" Width="100%" OnRowDataBound="_datos_RowDataBound" >
                             <Columns>
                                 <asp:BoundField DataField="DetallePrendaOrdenTrabajoId" HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Codigo_Orden_Trabajo%>" />
                                 <asp:BoundField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Prenda%>" DataField="Prenda" />
@@ -149,6 +160,11 @@
                                  <asp:TemplateField HeaderText="<%$ Resources:Web_es_Ec,Label_Cabecera_Grid_Fotografias%>" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle">
                                     <ItemTemplate>
                                         <asp:ImageButton ID="_imgFotografias" runat="server" ImageUrl="~/Content/Imagen/Fotografia.png"  CommandName="Fotografia" CommandArgument="<%# ((GridViewRow)Container).RowIndex %>" />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                 <asp:TemplateField HeaderText="<%$ Resources:Web_es_Ec,Label_Anular_Prenda%>" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle">
+                                    <ItemTemplate>
+                                        <asp:ImageButton ID="_imgAnularPrenda" runat="server" ImageUrl="~/Content/Imagen/Eliminar.jpg"  CommandName="AnularPrenda" CommandArgument="<%# ((GridViewRow)Container).RowIndex %>" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
@@ -205,7 +221,6 @@
  <nav>
         <asp:Button ID="_cerrarOrdenTrabajo" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Cerrar_Orden_Trabajo%>"  ValidationGroup="GuardarOrden" class="btn btn-primary" OnClick="_cerrarOrdenTrabajo_Click" />
         <asp:Button ID="_anularOrden" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Anular_Orden_Trabajo%>"  ValidationGroup="GuardarOrden" class="btn btn-primary" OnClick="_anularOrden_Click"  />
-        <asp:Button ID="_anularPrenda" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Anular_Prenda%>"  ValidationGroup="AnularOrden" class="btn btn-primary" OnClick="_anularPrenda_OnClick"  />
         <asp:Button ID="_abonar" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Abonar%>"  ValidationGroup="AbonarOrden" class="btn btn-primary" OnClick="_abonar_Click"  />
 
         <asp:Button ID="_cancelar" runat="server" Text="<%$ Resources:Web_es_Ec,Boton_Cancelar%>"  class="btn btn-primary" OnClick="_cancelar_Click" />

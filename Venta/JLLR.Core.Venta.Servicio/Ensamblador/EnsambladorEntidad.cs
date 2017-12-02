@@ -47,7 +47,8 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                ENTREGA_URGENCIA_ID = m.EntregaUrgencia.EntregaUrgenciaId,
                ES_TEMPORAL = m.EsTemporal,
                REVISO_PRENDA_CLIENTE = m.RevisionPrendaCliente,
-               OBJETO_OLVIDADO = m.ObjetoOlvidado
+               OBJETO_OLVIDADO = m.ObjetoOlvidado,
+               ESTA_ANULADA = m.EstaAulada
             };
         }
 
@@ -79,8 +80,11 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
         public entidad.DETALLE_ORDEN_TRABAJO CrearDetalleOrdenTrabajo(modelo.DetalleOrdenTrabajoModelo m)
         {
             List<entidad.DETALLE_PRENDA_ORDEN_TRABAJO> _listaDetallePrendaOrdenTrabajos=new List<entidad.DETALLE_PRENDA_ORDEN_TRABAJO>();
-            if (m.DetallePrendaOrdenTrabajo!=null)
-                CrearDetallesPrendaOrdenTrabajo(m.DetallePrendaOrdenTrabajo);
+            if (m.DetallePrendaOrdenTrabajo != null)
+            {
+                _listaDetallePrendaOrdenTrabajos=CrearDetallesPrendaOrdenTrabajo(m.DetallePrendaOrdenTrabajo);
+            }
+
             return new entidad.DETALLE_ORDEN_TRABAJO()
             {
                 DETALLE_ORDEN_TRABAJO_ID = m.DetalleOrdenTrabajoId,
@@ -100,7 +104,8 @@ namespace JLLR.Core.Venta.Servicio.Ensamblador
                 VALOR_IMPUESTO = m.ValorImpuesto,
                 PORCENTAJE_ADICIONAL = m.PorcentajeAdicional,
                 SOLO_PLANCHADO = m.SoloPlanchado,
-                DETALLE_ORDEN_ANULADA_TRABAJO_ID = m.DetalleOrdenTrabajoAnuladaId
+                DETALLE_ORDEN_ANULADA_TRABAJO_ID = m.DetalleOrdenTrabajoAnuladaId,
+                ESTA_ANULADA = m.EstaAulada
                 
                 
 

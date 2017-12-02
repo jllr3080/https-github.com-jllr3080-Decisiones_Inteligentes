@@ -6,6 +6,7 @@ using System.Web;
 using entidadDTOs = JLLR.Core.Venta.Proveedor.DTOs;
 using modeloDTOs = JLLR.Core.Venta.Servicio.DTOs;
 using ensamblador= JLLR.Core.Venta.Servicio.Ensamblador; 
+using  ensambladorGeneral=JLLR.Core.General.Servicio.Ensamblador;
 
 #endregion
 
@@ -21,6 +22,7 @@ namespace JLLR.Core.Venta.Servicio.EnsambladorDTOs
         #region  DECLARACIONES  E INSTANCIAS
         private readonly ensamblador.EnsambladorEntidad _ensambladorEntidad= new ensamblador.EnsambladorEntidad();
         private readonly ensamblador.EnsambladorModelo _ensambladorModelo= new ensamblador.EnsambladorModelo();
+        private  readonly  ensambladorGeneral.EnsambladorEntidad _ensambladorEntidadGeneral= new ensambladorGeneral.EnsambladorEntidad();
         #endregion
 
         #region DETALLE ORDEN TRABAJO FOTOGRAFIA
@@ -132,7 +134,7 @@ namespace JLLR.Core.Venta.Servicio.EnsambladorDTOs
         }
 
         #endregion
-
+        
 
         #region NUMERO  PRENDA DTO
         /// <summary>
@@ -218,7 +220,7 @@ namespace JLLR.Core.Venta.Servicio.EnsambladorDTOs
         /// <param name="m"></param>
         /// <returns></returns>
         public entidadDTOs.OrdenTrabajoDTOs CrearOrdenTrabajotOs(modeloDTOs.OrdenTrabajoDTOs m)
-        {
+        {   
             return new entidadDTOs.OrdenTrabajoDTOs()
             {
                 OrdenTrabajo = _ensambladorEntidad.CrearOrdenTrabajo( m.OrdenTrabajo),
@@ -282,7 +284,8 @@ namespace JLLR.Core.Venta.Servicio.EnsambladorDTOs
                 NumeroInternoPrenda = m.NumeroInternoPrenda,
                 DetallePrendaOrdenTrabajoId = m.DetallePrendaOrdenTrabajoId,
                 EstadoPrenda = m.EstadoPrenda,
-                InformacionVisual = m.InformacionVisual
+                InformacionVisual = m.InformacionVisual,
+                EstaAnulada = m.EstaAnulada
                 
               
             };
@@ -373,6 +376,42 @@ namespace JLLR.Core.Venta.Servicio.EnsambladorDTOs
             return listaEntidad;
 
         }
+        #endregion
+
+        #region  NUMERACION  ORDEN
+
+        /// <summary>
+        /// Convierte el modelo DTO en una entidad DTO
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public entidadDTOs.NumeracionOrdenDTOs CrearNumeracionOrdenDtOs(modeloDTOs.NumeracionOrdenDTOs m)
+        {
+            return new entidadDTOs.NumeracionOrdenDTOs()
+            {
+                NumeracionOrden = _ensambladorEntidad.CrearNumeroOrden(m.NumeracionOrden),
+                PuntoVenta = _ensambladorEntidadGeneral.CrearPuntoVenta(m.PuntoVenta)
+            };
+        }
+
+
+        /// <summary>
+        /// Convierte un listado de modelos  Usuario en listado de entidades
+        /// </summary>
+        /// <param name="listadoModelo">Listado de Modelos</param>
+        /// <returns></returns>z|
+        public List<entidadDTOs.NumeracionOrdenDTOs> CrearNumeracionesOrdenDtOs(List<modeloDTOs.NumeracionOrdenDTOs> listadoModelo)
+        {
+            List<entidadDTOs.NumeracionOrdenDTOs> listaEntidad = new List<entidadDTOs.NumeracionOrdenDTOs>();
+
+            foreach (var modelo in listadoModelo)
+            {
+                listaEntidad.Add(CrearNumeracionOrdenDtOs(modelo));
+            }
+            return listaEntidad;
+
+        }
+
         #endregion
     }
 }

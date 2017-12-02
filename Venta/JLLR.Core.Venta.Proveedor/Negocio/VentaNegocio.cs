@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using JLLR.Core.Base.Proveedor.DAOs;
@@ -34,6 +35,48 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
         #region NEGOCIO
 
         #region  TRANSACCIONAL
+
+
+
+        /// <summary>
+        /// Grabar el detallde  de las prendas
+        /// </summary>
+        /// <param name="ordenTrabajoDtOs"></param>
+
+        public void GrabarDetallePrendaCompleto(OrdenTrabajoDTOs ordenTrabajoDtOs)
+        {
+            try
+            {
+                _transaccionalDaOs.GrabarDetallePrendaCompleto(ordenTrabajoDtOs);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Obtiene la impresion corta sin el detalle de las prensdas
+        /// </summary>
+        /// <param name="numeroOrden"></param>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public IQueryable<ConsultaOrdenTrabajoDTOs> ObtenerOrdenTrabajoCortaPorNumeroOrdenYPuntoVenta(string numeroOrden,
+            int puntoVentaId)
+        {
+            try
+            {
+                return _transaccionalDaOs.ObtenerOrdenTrabajoCortaPorNumeroOrdenYPuntoVenta(numeroOrden, puntoVentaId);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
         /// <summary>
         /// Obtiene las  ordenes temporales
         /// </summary>
@@ -294,6 +337,27 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
 
         #region ORDEN TRABAJO COMISION
 
+
+        /// <summary>
+        /// Obtener las  comisiones  de las ordens
+        /// </summary>
+        /// <param name="ordenTrabajoComision"></param>
+        /// <returns></returns>
+
+        public void ActualizarOrdenTrabajoComision(ORDEN_TRABAJO_COMISION ordenTrabajoComision)
+        {
+            try
+            {
+               _ordenTrabajoComisionDaOs.ActualizarOrdenTrabajoComision(ordenTrabajoComision);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         /// <summary>
         /// Graba la comision de la orden de  trabajo
         /// </summary>
@@ -306,6 +370,25 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
 
             }
             catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Obtener las  comisiones  de las ordens
+        /// </summary>
+        /// <param name="detalleOrdenTrabajoId"></param>
+        /// <returns></returns>
+
+        public ORDEN_TRABAJO_COMISION ObtenerOrdenTrabajoComisionPorId(int detalleOrdenTrabajoId)
+        {
+            try
+            {
+                return _ordenTrabajoComisionDaOs.ObtenerOrdenTrabajoComisionPorId(detalleOrdenTrabajoId);
+            }
+            catch (Exception)
             {
 
                 throw;
@@ -486,6 +569,182 @@ namespace JLLR.Core.Venta.Proveedor.Negocio
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+        #endregion
+
+        #region DETALLE  ORDEN  TRABAJO
+
+        /// <summary>
+        /// Graba el detalle de la orden de trabajo
+        /// </summary>
+        /// <param name="detalleOrdenTrabajo"></param>
+        /// <returns></returns>
+        public DETALLE_ORDEN_TRABAJO GrabarDetelleOrdenTrabajo(DETALLE_ORDEN_TRABAJO detalleOrdenTrabajo)
+        {
+            try
+            {
+                return _detalleOrdenTrabajoDaOs.GrabarDetelleOrdenTrabajo(detalleOrdenTrabajo);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Actualiza la orden de trabajo
+        /// </summary>
+        /// <param name=""></param>
+        public void ActualizarDetalleOrdenTrabajo(DETALLE_ORDEN_TRABAJO detalleOrdenTrabajo)
+        {
+            try
+            {
+                _detalleOrdenTrabajoDaOs.ActualizarDetalleOrdenTrabajo(detalleOrdenTrabajo);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Encontrar el detalle de la orden  de trabajo 
+        /// </summary>
+        /// <param name="detalleOrdenTrabajoId"></param>
+        public DETALLE_ORDEN_TRABAJO ObtenerDetalleOrdenTrabajoPorId(int detalleOrdenTrabajoId)
+        {
+            try
+            {
+             return   _detalleOrdenTrabajoDaOs.ObtenerDetalleOrdenTrabajoPorId(detalleOrdenTrabajoId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region NUMERACION ORDEN
+
+
+        /// <summary>
+        /// Obtiene  todas las sucursales 
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<NumeracionOrdenDTOs> ObtenerPuntosVentaCompleto()
+        {
+            try
+            {
+                
+                return _transaccionalDaOs.ObtenerPuntosVentaCompleto();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Grabar punto de  venta y numero de  orden
+        /// </summary>
+        /// <param name="numeracionOrdenDtOs"></param>
+        public void GrabarPuntoVentaCompleto(NumeracionOrdenDTOs numeracionOrdenDtOs)
+        {
+            try
+            {
+               _transaccionalDaOs.GrabarPuntoVentaCompleto(numeracionOrdenDtOs);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Grabar punto de  venta y numero de  orden
+        /// </summary>
+        /// <param name="numeracionOrdenDtOs"></param>
+        public void ActualizarPuntoVentaCompleto(NumeracionOrdenDTOs numeracionOrdenDtOs)
+        {
+            try
+            {
+                _transaccionalDaOs.ActualizarPuntoVentaCompleto(numeracionOrdenDtOs);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+
+        #endregion
+
+        #region VENTA COMISION  INDUSTRIALES
+
+        /// <summary>
+        /// Obtiene el valor de la venta de  industriales
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+        public IQueryable<VentaComisionIndustrialesDTOs> ObtenerComisionesIndustrialesPorPuntoVenta(int puntoVentaId)
+        {
+            try
+            {
+                return _transaccionalDaOs.ObtenerComisionesIndustrialesPorPuntoVenta(puntoVentaId);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        /// Grabar promociones
+        /// </summary>
+        /// <param name="ventaComisionIndustrialesDtOs"></param>
+        public void GrabarVentaComisionIndustrialesCompleto(VentaComisionIndustrialesDTOs ventaComisionIndustrialesDtOs)
+        {
+            try
+            {
+                _transaccionalDaOs.GrabarVentaComisionIndustrialesCompleto(ventaComisionIndustrialesDtOs);
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Actualizar promociones
+        /// </summary>
+        /// <param name="ventaComisionIndustrialesDtOs"></param>
+        public void ActualizarVentaComisionIndustrialesCompleto(VentaComisionIndustrialesDTOs ventaComisionIndustrialesDtOs)
+        {
+            try
+            {
+                _transaccionalDaOs.ActualizarVentaComisionIndustrialesCompleto(ventaComisionIndustrialesDtOs);
+            }
+            catch (Exception)
+            {
+                
                 throw;
             }
         }

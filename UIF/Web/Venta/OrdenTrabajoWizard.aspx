@@ -14,13 +14,9 @@
     <section>
          <div class="row">
              <div class="col-md-12">
-              <asp:Wizard ID="_emisionPrenda" runat="server" CssClass="col-md-12" DisplaySideBar="False" ActiveStepIndex="0" OnNextButtonClick="_emisionPrenda_NextButtonClick" OnPreviousButtonClick="_emisionPrenda_PreviousButtonClick" OnFinishButtonClick="_emisionPrenda_FinishButtonClick" >
+              <asp:Wizard ID="_emisionPrenda" runat="server" CssClass="col-md-12" DisplaySideBar="False" ActiveStepIndex="0" OnNextButtonClick="_emisionPrenda_NextButtonClick" OnPreviousButtonClick="_emisionPrenda_PreviousButtonClick" OnFinishButtonClick="_emisionPrenda_FinishButtonClick" FinishCompleteButtonType="Image" FinishPreviousButtonType="Image" StepNextButtonType="Image" StepPreviousButtonType="Image" StepNextButtonImageUrl="~/Content/Imagen/Siguiente.png" StepPreviousButtonImageUrl="~/Content/Imagen/Anterior.png" FinishCompleteButtonImageUrl="~/Content/Imagen/Siguiente.png" FinishPreviousButtonImageUrl="~/Content/Imagen/Anterior.png" StartNextButtonImageUrl="~/Content/Imagen/Siguiente.png" StartNextButtonType="Image" >
                   
-                     <NavigationButtonStyle CssClass="btn btn-primary" />
-                     <StartNextButtonStyle CssClass="btn btn-primary" />
-                     <StepNextButtonStyle CssClass="btn btn-primary" />
-                     <StepPreviousButtonStyle CssClass="btn btn-primary" />
-                  
+                
                      <WizardSteps>
                          
                       <asp:WizardStep runat="server"  StepType="Start" ID="_informacionPersonal"  >
@@ -408,7 +404,7 @@
                                                                                      <tr>
                                                                                         <td colspan="100%" style="text-align: right">
                                                                                         <asp:Panel ID="Detalles" runat="server" Visible="False">
-                                                                                        <asp:GridView ID="_detalleCuotas" runat="server" AutoGenerateColumns="false" Width="100%">
+                                                                                        <asp:GridView ID="_detalleCuotas" runat="server" AutoGenerateColumns="false" Width="100%" OnRowCommand="_detalleCuotas_OnRowCommand">
                                                                                             <Columns>
                                                                                                   
                                                                                                    <asp:BoundField DataField="NombreColor" HeaderText="<%$ Resources:Web_es_Ec,Label_Color%>"  >
@@ -690,7 +686,7 @@
     <div class="row" >
                   <div class="col-md-12" >
                 <asp:Button ID="_btnDetalleOrden" runat="server" Text="" Visible="false" />
-                    <cc1:ModalPopupExtender ID="_btnDetalleOrden_ModalPopupExtender" PopupControlID="_panelDetalleOrden" runat="server" BehaviorID="_btnDetalleOrden_ModalPopupExtender" TargetControlID="_btnRevisionPromociones" BackgroundCssClass="modal-Backgoround" X="250" OnOkScript="_grabarDetalle" OnCancelScript="_cancelarDetalle" Y="50" >
+                    <cc1:ModalPopupExtender ID="_btnDetalleOrden_ModalPopupExtender" PopupControlID="_panelDetalleOrden" runat="server" BehaviorID="_btnDetalleOrden_ModalPopupExtender" TargetControlID="_btnDetalleOrden" BackgroundCssClass="modal-Backgoround" X="250" OnOkScript="_grabarDetalle" OnCancelScript="_cancelarDetalle" Y="50" >
                     </cc1:ModalPopupExtender>
                     <asp:Panel ID="_panelDetalleOrden" runat="server" Style="display: none; background-color: white; width:60%; height: auto;align-content:center ">
                         <div class="modal-header">

@@ -112,5 +112,111 @@ namespace Web.ServicioDelegado
         }
 
         #endregion           
+
+        #region REGLA
+
+        /// <summary>
+        /// Obtiene la promocion por  Id
+        /// </summary>
+        /// <param name="reglaId"></param>
+        /// <returns></returns>
+        public ReglaVistaModelo ObtenerReglaPorId(int reglaId)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerReglaPorId?reglaId=" + reglaId);
+                var js = new JavaScriptSerializer();
+                return js.Deserialize< ReglaVistaModelo > (json);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+        #region ADMINISTRACION PROMOCIONES
+
+        /// <summary>
+        /// Grabar promociones
+        /// </summary>
+        /// <param name="reglaCompletaDtOs"></param>
+        public void GrabarPromocionesCompleta(ReglaCompletaVistaDTOs reglaCompletaDtOs)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ReglaCompletaVistaDTOs));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, reglaCompletaDtOs);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "GrabarPromocionesCompleta ", "POST", datos);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Actualizar promociones
+        /// </summary>
+        /// <param name="reglaCompletaDtOs"></param>
+        public void ActualizarPromocionesCompleta(ReglaCompletaVistaDTOs reglaCompletaDtOs)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ReglaCompletaVistaDTOs));
+                MemoryStream memoria = new MemoryStream();
+                serializer.WriteObject(memoria, reglaCompletaDtOs);
+                string datos = Encoding.UTF8.GetString(memoria.ToArray(), 0, (int)memoria.Length);
+                WebClient clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.UploadString(direccionUrl + "ActualizarPromocionesCompleta ", "POST", datos);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Obtiene las promociones
+        /// </summary>
+        /// <param name="puntoVentaId"></param>
+        /// <returns></returns>
+
+        public List<ReglaCompletaVistaDTOs> ObtenerPromociones(int puntoVentaId)
+        {
+            try
+            {
+                var clienteWeb = new WebClient();
+                clienteWeb.Headers["content-type"] = "application/json";
+                clienteWeb.Encoding = Encoding.UTF8;
+                var json = clienteWeb.DownloadString(direccionUrl + "ObtenerPromociones?puntoVentaId=" + puntoVentaId );
+                var js = new JavaScriptSerializer();
+                return js.Deserialize<List<ReglaCompletaVistaDTOs>>(json);
+            
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        #endregion
+
     }
 }

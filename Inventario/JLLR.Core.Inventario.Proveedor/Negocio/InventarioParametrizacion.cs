@@ -21,10 +21,30 @@ namespace JLLR.Core.Inventario.Proveedor.Negocio
         
         private readonly  ProductoDAOs _productoDaOs= new ProductoDAOs();
         private  readonly  ProductoPrecioDAOs _productoPrecioDaOs= new ProductoPrecioDAOs();
-        
+
         #endregion
-        
+
         #region   PRODUCTO
+
+        /// <summary>
+        /// Obtiene el producto  
+        /// </summary>
+        /// <param name="productoId"></param>
+        /// <returns></returns>
+        public PRODUCTO ObtenerProductoPorId(int productoId)
+        {
+            try
+            {
+                return _productoDaOs.ObtenerProductoPorId(productoId);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
         /// <summary>
         /// Obtener producto por  tipo de  producto servicio o produccion etc
         /// </summary>

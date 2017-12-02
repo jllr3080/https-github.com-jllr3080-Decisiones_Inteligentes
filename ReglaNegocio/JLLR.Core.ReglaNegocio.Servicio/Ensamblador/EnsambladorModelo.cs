@@ -6,6 +6,9 @@ using System.Web;
 using JLLR.Core.General.Servicio.Modelo;
 using entidad = JLLR.Core.Base.Proveedor.Entidades;
 using modelo = JLLR.Core.ReglaNegocio.Servicio.Modelo;
+using JLLR.Core.Inventario.Servicio.Modelo;
+using JLLR.Core.Inventario.Servicio.Modelo.Parametrizacion;
+
 #endregion
 
 namespace JLLR.Core.ReglaNegocio.Servicio.Ensamblador
@@ -62,6 +65,52 @@ namespace JLLR.Core.ReglaNegocio.Servicio.Ensamblador
             foreach (var entidad in listadoEntidad)
             {
                 listaModelo.Add(CrearRegla(entidad));
+            }
+            return listaModelo;
+
+        }
+
+        #endregion
+
+        #region  ACCION REGLA
+        /// <summary>
+        /// Convierte el DTO de entidad a modelo
+        /// </summary>
+        /// <param name="e">Entidad</param>
+        /// <returns></returns>
+        public modelo.AccionReglaModelo CrearAccionRegla(entidad.ACCION_REGLA e)
+        {
+
+          modelo.ReglaModelo _regla= new modelo.ReglaModelo
+          {
+              ReglaId = Convert.ToInt32(e.REGLA_ID)
+          };
+
+            
+            return new modelo.AccionReglaModelo
+            {
+               AccionreglaId = e.ACCION_REGLA_ID,
+               Valor = e.VALOR,
+               EstaHabilitado = e.ESTA_HABILITADO,
+               Regla = _regla,
+               ProductoId = Convert.ToInt32(e.PRODUCTO_ID)
+
+            };
+
+        }
+
+        /// <summary>
+        /// Convierte un listado de DTO en listado de  modelos de DTO
+        /// </summary>
+        /// <param name="listadoEntidad">Listado de Entidades</param>
+        /// <returns></returns>
+        public List<modelo.AccionReglaModelo> CrearAccionReglas(List<entidad.ACCION_REGLA> listadoEntidad)
+        {
+            List<modelo.AccionReglaModelo> listaModelo = new List<modelo.AccionReglaModelo>();
+
+            foreach (var entidad in listadoEntidad)
+            {
+                listaModelo.Add(CrearAccionRegla(entidad));
             }
             return listaModelo;
 

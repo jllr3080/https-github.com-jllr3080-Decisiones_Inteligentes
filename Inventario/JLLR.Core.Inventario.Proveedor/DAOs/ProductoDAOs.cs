@@ -89,5 +89,23 @@ namespace JLLR.Core.Inventario.Proveedor.DAOs
         }
 
 
+        /// <summary>
+        /// Obtiene el producto  
+        /// </summary>
+        /// <param name="productoId"></param>
+        /// <returns></returns>
+        public PRODUCTO ObtenerProductoPorId(int productoId)
+        {
+            try
+            {
+                return _entidad.PRODUCTO.Find(productoId);
+            }
+            catch (Exception ex)
+            {
+                    
+                throw;
+            }
+        }
+
     }
 }

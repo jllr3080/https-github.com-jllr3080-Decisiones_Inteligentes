@@ -78,11 +78,12 @@ namespace JLLR.Core.FlujoProceso.Proveedor.DAOs
             try
             {
                 var historialProcesos = from historialProceso in _entidad.HISTORIAL_PROCESO
-                    where
-                        historialProceso.ETAPA_PROCESO_ID == etapaProcesoId &&
-                        historialProceso.SUCURSAL_ID == sucursalId && historialProceso.PUNTO_VENTA_ID == puntoVentaId &&
-                        historialProceso.PASO_ESTA_ETAPA == false
-                                        select  historialProceso
+                                        join ordenTrabajo in _entidad.ORDEN_TRABAJO on historialProceso.ORDEN_TRABAJO_ID equals  ordenTrabajo.ORDEN_TRABAJO_ID
+                                        where
+                                            historialProceso.ETAPA_PROCESO_ID == etapaProcesoId &&
+                                            historialProceso.SUCURSAL_ID == sucursalId && historialProceso.PUNTO_VENTA_ID == puntoVentaId && 
+                                            historialProceso.PASO_ESTA_ETAPA == false && ordenTrabajo.ENVIO_MATRIZ==true && ordenTrabajo.ES_TEMPORAL!=true
+                                                            select  historialProceso
                 ;
 
                 return historialProcesos;

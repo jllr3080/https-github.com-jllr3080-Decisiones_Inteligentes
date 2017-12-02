@@ -43,6 +43,34 @@ namespace Web.Venta
         #region Eventos
 
         /// <summary>
+        /// Elimina 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void _detalleCuotas_OnRowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            try
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                if (e.CommandName == "Eliminar")
+                {
+                    _nombreMarca.Value = _datos.Rows[index].Cells[0].Text;
+                    DetalleOrdenTrabajoVistaModelo _detalleOrdenTrabajoVista = _listaTrabajoVistaDtOs.Find(m => m.Producto.Nombre == _nombreMarca.Value.ToString());
+                    _detalleOrdenTrabajoVista.DetallePrendaOrdenTrabajo.RemoveAt(index);
+                    CargarDetalleOrdenTrabajo();
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+                Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Error_Sistema").ToString(), "_emisionPrenda");
+            }
+         
+        }
+
+        /// <summary>
         /// Graba el  detalle de la prenda
         /// </summary>
         /// <param name="sender"></param>
@@ -57,6 +85,7 @@ namespace Web.Venta
                 DetalleOrdenTrabajoObservacionVistaModelo _detalleOrdenTrabajoObservacion = new DetalleOrdenTrabajoObservacionVistaModelo();
                 _detalleOrdenTrabajoObservacion.UsuarioId = User.Id;
                 _detalleOrdenTrabajoObservacion.FechaCreacionObservacion = DateTime.Now;
+                _detalleOrdenTrabajoObservacion.Observacion = _observacion.Text;
                 _listaDetalleOrdenTrabajoObservacion.Add(_detalleOrdenTrabajoObservacion);
 
                 DetalleOrdenTrabajoVistaModelo _detalleOrdenTrabajoVista = _listaTrabajoVistaDtOs.Find(m => m.Producto.Nombre == _nombreMarca.Value.ToString());
@@ -80,7 +109,7 @@ namespace Web.Venta
                 {
                     _detalleOrdenTrabajoVista.DetallePrendaOrdenTrabajo.Add(_detallePrendaOrdenTrabajo);
                 }
-
+                CargarDetalleOrdenTrabajo();
 
 
 
@@ -233,8 +262,8 @@ namespace Web.Venta
                     _valorPago.Visible = true;
                     _labelValorPago.Visible = true;
                     _valorPago.ReadOnly = false;
-                    _valorPago.Text = String.Empty;
-                    _valorPago.Focus();
+                    _valorPago.Text = String.Format("{0:0.00}", _ordenTrabajoVistaDtOs.DetalleOrdenTrabajo.Sum(m => m.ValorTotal));
+                    
                 }
 
             }
@@ -255,6 +284,22 @@ namespace Web.Venta
         {
             try
             {
+
+
+                //if (_emisionPrenda.ActiveStep.ID == "_informacionPersonal")
+                //{
+                //    Page.Validate("Form");
+                //    if (Page.IsValid==true)
+                //    e.Cancel = true;
+                //}
+
+                //            If wizRegistration.ActiveStep.ID = "wizSelectPostalCode" AndAlso e.NextStepIndex > e.CurrentStepIndex Then
+                //    Page.Validate("Form")
+                //    If Not Page.IsValid() Then
+                //        e.Cancel = True
+                //    End If
+                //End If
+                //                wizar
 
                 _revisionPrendas.Enabled = false;
             if (e.NextStepIndex == 1)
@@ -473,21 +518,45 @@ namespace Web.Venta
 
                     if (_ordenTrabajoVistaDtOs.OrdenTrabajo.EsTemporal != true)
                     {
-                    
-                    _btnDetalleOrden_ModalPopupExtender.TargetControlID = "_emisionPrenda";
-                    _btnDetalleOrden_ModalPopupExtender.Show();
-                    _colorDetalle.DataSource = _servicioDelegadoGeneral.ObetenerColores();
-                    _colorDetalle.DataBind();
-                    _marcaDetalle.DataSource = _servicioDelegadoGeneral.ObtenerMarcas();
-                    _marcaDetalle.DataBind();
-                    _estadoPrendaDetalle.Text = "BUENO";
-                    _tratamientoEspecialDetalle.Text = "NINGUNO";
-                    _informacionVisualDetalle.Text = String.Empty;
-                    _nombreMarca.Value = _datos.Rows[index].Cells[0].Text;
-                    DetalleOrdenTrabajoVistaModelo _detalleOrdenTrabajoVista = _listaTrabajoVistaDtOs.Find(m => m.Producto.Nombre == _nombreMarca.Value.ToString());
-                    _numeroPrendas.Text = (_productoVista.Find(m => m.ProductoId == _detalleOrdenTrabajoVista.Producto.ProductoId).NumeroPrendas * _detalleOrdenTrabajoVista.Cantidad).ToString();
-                 
-                    
+                        _nombreMarca.Value = _datos.Rows[index].Cells[0].Text;
+                        
+                        DetalleOrdenTrabajoVistaModelo _detalleOrdenTrabajoVista =
+                                _listaTrabajoVistaDtOs.Find(m => m.Producto.Nombre == _nombreMarca.Value.ToString());
+                        _numeroPrendas.Text =
+                            (_productoVista.Find(m => m.ProductoId == _detalleOrdenTrabajoVista.Producto.ProductoId)
+                                .NumeroPrendas * _detalleOrdenTrabajoVista.Cantidad).ToString();
+                        if (_detalleOrdenTrabajoVista.DetallePrendaOrdenTrabajo == null)
+                        {
+                            _btnDetalleOrden_ModalPopupExtender.TargetControlID = "_emisionPrenda";
+                            _btnDetalleOrden_ModalPopupExtender.Show();
+                            _colorDetalle.DataSource = _servicioDelegadoGeneral.ObetenerColores();
+                            _colorDetalle.DataBind();
+                            _marcaDetalle.DataSource = _servicioDelegadoGeneral.ObtenerMarcas();
+                            _marcaDetalle.DataBind();
+                            _estadoPrendaDetalle.Text = String.Empty;
+                            _tratamientoEspecialDetalle.Text = String.Empty;
+                            _observacion.Text = String.Empty;
+                            _informacionVisualDetalle.Text = String.Empty;
+                        }
+                       else if (_detalleOrdenTrabajoVista.DetallePrendaOrdenTrabajo.Count <
+                            Convert.ToInt32(_numeroPrendas.Text))
+                        {
+                            _btnDetalleOrden_ModalPopupExtender.TargetControlID = "_emisionPrenda";
+                            _btnDetalleOrden_ModalPopupExtender.Show();
+                            _colorDetalle.DataSource = _servicioDelegadoGeneral.ObetenerColores();
+                            _colorDetalle.DataBind();
+                            _marcaDetalle.DataSource = _servicioDelegadoGeneral.ObtenerMarcas();
+                            _marcaDetalle.DataBind();
+                            _estadoPrendaDetalle.Text = String.Empty;
+                            _tratamientoEspecialDetalle.Text = String.Empty;
+                            _observacion.Text = String.Empty;
+                            _informacionVisualDetalle.Text = String.Empty;
+                            
+                            
+
+                        }
+                        else
+                            Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Numero_Prenda_Igual")?.ToString(), "_emisionPrenda");
                     }
                     else
                         Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Emision_Rapida").ToString(), "_emisionPrenda");
@@ -546,10 +615,24 @@ namespace Web.Venta
                     _montoDescuento += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ValorDescuento"));
                     _cantidadTotal += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "Cantidad"));
                     _montoTotal += Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ValorTotal"));
-                    if (Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ValorDescuento")) > 0)
-                        e.Row.BackColor = System.Drawing.Color.Red;
-                   
-                    
+                    //if (Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ValorDescuento")) > 0)
+                    //    e.Row.BackColor = System.Drawing.Color.Red;
+                    DetalleOrdenTrabajoVistaModelo _detalleOrdenTrabajoVista =_listaTrabajoVistaDtOs.Find(a => a.Producto.Nombre == DataBinder.Eval(e.Row.DataItem, "Producto.Nombre").ToString());
+
+                    //DetalleOrdenTrabajoVistaModelo _detalleOrdenTrabajoVista = _listaTrabajoVistaDtOs.Find(m => m.Producto.Nombre == _nombreMarca.Value.ToString());
+                    if (_detalleOrdenTrabajoVista != null)
+                    {
+                        JLLR.Core.ServicioDelegado.Proveedor.ServicioDelegado.ServicioDelegadoInventario
+                            _servicioDelegadoInventario1 =
+                                new JLLR.Core.ServicioDelegado.Proveedor.ServicioDelegado.ServicioDelegadoInventario();
+                        ProductoVistaModelo _productoVista = _servicioDelegadoInventario1.ObtenerProductoPorId(_detalleOrdenTrabajoVista.Producto.ProductoId);
+                        _numeroPrendas.Text = String.Format("{0:0}", _productoVista.NumeroPrendas * _detalleOrdenTrabajoVista.Cantidad);
+                        if (_detalleOrdenTrabajoVista.DetallePrendaOrdenTrabajo!=null )
+                            if (Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Cantidad")) == _detalleOrdenTrabajoVista.DetallePrendaOrdenTrabajo.Count )
+                            e.Row.BackColor = System.Drawing.Color.Green;
+                    }
+
+
 
                 }
                 else if (e.Row.RowType == DataControlRowType.Footer)
@@ -590,9 +673,15 @@ namespace Web.Venta
         {
             try
             {
+                if(_soloPlanchado.Checked==true || _procentajeManchado.Checked==true)
+                    Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Solo_Planchado_Manchado").ToString(), "_emisionPrenda");
+                
                 AgregarOrdenTrabajo();
                 CargarDetalleOrdenTrabajo();
                 CargaInicialPaso1();
+                _soloPlanchado.Enabled = false;
+                _procentajeManchado.Enabled = false;
+                
             }
             catch (Exception ex)
             {
@@ -807,6 +896,11 @@ namespace Web.Venta
             _fijadorColor.Checked = false;
             if (_soloPlanchado.Checked != true || _procentajeManchado.Checked != true)
                 EjecutarPromociones();
+
+            if (_soloPlanchado.Checked == true)
+                _soloPlanchado_OnCheckedChanged(sender, e);
+            if (_procentajeManchado.Checked == true)
+                _procentajeManchado_OnCheckedChanged(sender, e);
         }
 
         /// <summary>
@@ -1157,13 +1251,36 @@ namespace Web.Venta
                 _tipoBusqueda.SelectedIndex = _tipoBusqueda.Items.IndexOf(_tipoBusqueda.Items.FindByValue("-1"));
                 _tipoEntrega.DataSource = _servicioDelegadoGeneral.ObtenerEntregaUrgencias();
                 _tipoEntrega.DataBind();
-                _estadoPago.DataSource = _servicioDelegadoGeneral.ObtenerEstadosPago();
+                
+                List<EstadoPagoVistaModelo> _listaEstadoPago= _servicioDelegadoGeneral.ObtenerEstadosPago();
+                EstadoPagoVistaModelo estadoPago= new EstadoPagoVistaModelo();
+	            estadoPago.EstadoPagoId = -1;
+	            estadoPago.Descripcion = "SELECIONE";
+                _listaEstadoPago.Add(estadoPago);
+
+                _estadoPago.DataSource = _listaEstadoPago;
                 _estadoPago.DataBind();
-	            _fechaEntrega.Text = DateTime.Now.ToShortDateString();
+                _estadoPago.SelectedIndex =
+                       _estadoPago.Items.IndexOf(
+                           _estadoPago.Items.FindByValue("-1"));
+
+                _fechaEntrega.Text = DateTime.Now.ToShortDateString();
 	            InicializarVariables();
 
+                bool fechaBloqueada =
+                 Convert.ToBoolean(_servicioDelegadoGeneral.ObtenerParametroPorDescripcion("BLOQUEAR_FECHA_ENTREGA").Boolenao);
 
-	        }
+	            if (fechaBloqueada == true)
+	            {
+                    _fechaEntrega.ReadOnly = false;
+                    Mensajes(GetGlobalResourceObject("Web_es_Ec", "Mensaje_Fecha_Habilitada").ToString(), "_emisionPrenda");
+                }
+	            
+                else
+                    _fechaEntrega.ReadOnly = true;
+
+
+            }
 	        catch (Exception)
 	        {
 	            
@@ -1332,8 +1449,8 @@ namespace Web.Venta
 
 	    #endregion
 
-       
-    }
+	   
+	}
 
 
 

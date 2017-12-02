@@ -135,15 +135,16 @@ namespace JLLR.Core.Individuo.Proveedor.DAOs
                     clienteGeneralDtOs.Direccion.INDIVIDUO_ID = individuo.INDIVIDUO_ID;
                     _direccionDaOs.GrabarDireccion(clienteGeneralDtOs.Direccion);
 
-
-                    foreach (var telefono in clienteGeneralDtOs.Telefonos)
-                    {
-                       telefono.INDIVIDUO_ID = individuo.INDIVIDUO_ID;
-                        _telefonoDaOs.GrabarTelefono(telefono);
-                    }
                     //Graba el telefono
-                   
-
+                    if (clienteGeneralDtOs.Telefonos != null)
+                    {
+                        foreach (var telefono in clienteGeneralDtOs.Telefonos)
+                        {
+                            telefono.INDIVIDUO_ID = individuo.INDIVIDUO_ID;
+                            _telefonoDaOs.GrabarTelefono(telefono);
+                        }
+                    }
+                    
 
                     //Graba el correo electronico
                     clienteGeneralDtOs.CorreoElectronico.INDIVIDUO_ID = individuo.INDIVIDUO_ID;
@@ -252,7 +253,7 @@ namespace JLLR.Core.Individuo.Proveedor.DAOs
                         Telefono = telefono,
                         NombreCompleto = individuo.PRIMER_CAMPO + " " + individuo.SEGUNDO_CAMPO + " " + individuo.TERCER_CAMPO +
                                            " " + individuo.CUARTO_CAMPO,
-                        DireccionCompleta = direccion.CALLE_PRINCIPAL + "-" + direccion.CALLE_SECUNDARIA + "-" + direccion.NUMERO_CASA + "-" + direccion.REFERENCIA,
+                        DireccionCompleta = direccion.CALLE_PRINCIPAL + "-" + direccion.CALLE_SECUNDARIA + "-" + direccion.NUMERO_CASA + "-" + direccion.REFERENCIA
                     };
 
                 return clientes.FirstOrDefault();
@@ -298,6 +299,8 @@ namespace JLLR.Core.Individuo.Proveedor.DAOs
                                    DireccionCompleta = direccion.CALLE_PRINCIPAL + "-" + direccion.CALLE_SECUNDARIA + "-" + direccion.NUMERO_CASA + "-" + direccion.REFERENCIA,
 
                                };
+
+                
 
                 return clientes.OrderBy(m=>m.Individuo.PRIMER_CAMPO);
             }

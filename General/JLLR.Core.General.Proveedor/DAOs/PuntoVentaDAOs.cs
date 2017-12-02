@@ -44,5 +44,59 @@ namespace JLLR.Core.General.Proveedor.DAOs
                 throw;
             }
         }
+
+
+        /// <summary>
+        /// Grabar el punto de  venta
+        /// </summary>
+        /// <param name="puntoVenta"></param>
+        public void GrabarPuntoVenta(PUNTO_VENTA puntoVenta)
+        {
+            try
+            {
+                try
+                {
+                    _entidad.PUNTO_VENTA.Add(puntoVenta);
+                    _entidad.SaveChanges();
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    throw;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Actualiza el punto de  venta
+        /// </summary>
+        /// <param name="puntoVenta"></param>
+
+        public void ActualizarPuntoVenta(PUNTO_VENTA puntoVenta)
+        {
+            try
+            {
+                var original = _entidad.PUNTO_VENTA.Find(puntoVenta.PUNTO_VENTA_ID);
+
+                if (original != null)
+                {
+                    _entidad.Entry(original).CurrentValues.SetValues(puntoVenta);
+                    _entidad.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                    
+                throw;
+            }
+        }
     }
 }

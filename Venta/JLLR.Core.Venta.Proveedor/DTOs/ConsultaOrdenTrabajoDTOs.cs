@@ -147,6 +147,12 @@ namespace JLLR.Core.Venta.Proveedor.DTOs
         public int DetallePrendaOrdenTrabajoId { get; set; }
 
 
+        /// <summary>
+        ///EstaAnulada
+        /// </summary>
+        public bool? EstaAnulada{ get; set; }
+
+
 
 
     }
